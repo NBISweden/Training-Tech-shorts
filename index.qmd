@@ -1,5 +1,17 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+This is a series of short lessons in various technologies useful to our work.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+## Quick start
+
+The first step is to read over the lesson Github Collaboration.
+
+1. Make a branch for your lesson.
+2. Create a Quarto markdown document with `## Objectives` and `## Key points` and add it to that branch.
+3. Add the document to the `_quarto.yml`.
+4. Teach your topic to your team for 30-45 mins.
+5. Each learner selects a key point to contribute material on. Make an issue for that topic and assign 
+yourself and another learner to review your contribution.
+6. Make a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you're both happy. 
+7. Mark the pull request as ready, and request the instructor to review.
+8. The instructor reviews and merges the lesson branch when all contributions have been received. 
