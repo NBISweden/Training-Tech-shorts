@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Training: Tech shorts",
+    "section": "",
+    "text": "Preface\nThis is a series of short lessons in various technologies useful to our work."
+  },
+  {
+    "objectID": "index.html#quick-start",
+    "href": "index.html#quick-start",
+    "title": "Training: Tech shorts",
+    "section": "Quick start",
+    "text": "Quick start\nThe first step is to read over the lesson Github Collaboration.\n\nMake a branch for your lesson.\nCreate a Quarto markdown document with ## Objectives and ## Key points and add it to that branch.\nAdd the document to the _quarto.yml.\nTeach your topic to your team for 30-45 mins.\nEach learner selects a key point to contribute material on. Make an issue for that topic and assign yourself and another learner to review your contribution.\nMake a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you’re both happy.\nMark the pull request as ready, and request the instructor to review.\nThe instructor reviews and merges the lesson branch when all contributions have been received."
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "3  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  }
+]
