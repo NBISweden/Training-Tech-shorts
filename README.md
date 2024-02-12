@@ -49,9 +49,10 @@ This would then be the first lesson to teach.
 ```mermaid
 sequenceDiagram
     box transparent Learners
-        participant Learner1
-        participant Learner2
+        actor Learner1
+        actor Learner2
     end
+    actor Teacher
     Teacher ->> GitHub: New branch for lesson
     Teacher ->> GitHub: New lesson file
     Teacher ->> GitHub: Add key points
