@@ -15,7 +15,8 @@ about 30 minutes in length, and is taught through demonstration.
 Learners are then asked to assign themselves to write up a part
 of the lesson. Another learner is assigned to be a reviewer of
 that text. This allows the notes to focus on what was important
-from the Learners' perspective, rather than the Teachers'. Once
+from the Learners' perspective, rather than the Teachers'
+(helping overcome the expert blind-spot problem). Once
 both learners agree on the text, the Teacher reviews it for
 accuracy. The text is then used as reference for recap lessons,
 and to guide future focus. For example if there was something
@@ -72,3 +73,7 @@ sequenceDiagram
     Teacher ->> GitHub: Merges lesson branch into main
     GitHub ->> GitHub: Automated website build
 ```
+
+## Literature
+
+- [10 things software developers should learn about learning](https://cacm.acm.org/magazines/2024/1/278891-10-things-software-developers-should-learn-about-learning/fulltext)
