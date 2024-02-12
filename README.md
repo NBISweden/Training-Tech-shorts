@@ -45,3 +45,29 @@ for the learners and teachers to review the content before merging
 it back into the branch. Github actions takes care of publishing
 the notes into a presentable website for future reference.
 This would then be the first lesson to teach.
+
+```mermaid
+sequenceDiagram
+    box transparent Learners
+        participant Learner1
+        participant Learner2
+    end
+    Teacher ->> GitHub: New branch for lesson
+    Teacher ->> GitHub: New lesson file
+    Teacher ->> GitHub: Add key points
+    Teacher ->> Learners: Demonstrates tool
+    Learner1 ->> Teacher: Volunteers to write up keypoint 2
+    Learner2 ->> Teacher: Volunteers to write up keypoint 1
+    Learners ->> GitHub: Make branch from lesson branch
+    Learner1 ->> GitHub: Add notes for keypoint 2
+    Learner2 ->> GitHub: Add notes for keypoint 1
+    Learner1 ->> GitHub: Request Learner2 to review text
+    Learner2 ->> GitHub: Request Learner1 to review text
+    Learners ->> GitHub: Provide code review
+    Learners ->> GitHub: Update notes from review
+    Learners ->> Teacher: Request code review
+    Learners ->> GitHub: Update notes
+    Teacher ->> GitHub: Merges notes into lesson branch
+    Teacher ->> GitHub: Merges lesson branch into main
+    GitHub ->> GitHub: Automated website build
+```
