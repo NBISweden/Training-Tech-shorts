@@ -4,6 +4,13 @@
 
 ## Making changes
 
+- Fork the whole target repository to your own account, by selecting "Fork" -> include all the branches (i.e., untick "Copy the main branch only") -> "Create fork".
+- On your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.
+- To edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode. 
+- If instead you need to make a new file in the branch, click the "Add file" drop down -> "create new file". Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., "github/myfile.qmd" will create the folder github also.
+- Add the file contents in edit mode.
+- When finished, click "Commit changes..."
+
 ## Making a draft pull request
 
 ## Making a ready for review pull request
