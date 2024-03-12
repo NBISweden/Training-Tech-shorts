@@ -15,7 +15,9 @@
 
 ## Making a ready for review pull request
 
-After commiting the changes to the file, the user creates a draft pull request by clicking in pull requests tab, create a pull request, clicking in the dropdown next to create pull request and clicking in create draft pull request. On the right side panel, you should invite a reviewer that has been assigned to your caption. The reviewer will go through the changes that you made on the original file and suggest changes, for example, clicking on the '+' icon. 
+-After commiting the changes to the file, the user creates a draft pull request by clicking in pull requests tab->create a pull request ->clicking in the dropdown next to create pull request and clicking in create draft pull request. 
+-On the right side panel, you should invite a reviewer that has been assigned to your caption. 
+-The reviewer will go through the changes that you made on the original file and suggest changes, for example, clicking on the '+' icon. 
 
 ## Code review
 
