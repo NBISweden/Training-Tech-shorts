@@ -2,6 +2,9 @@
 
 ## Making a branch
 
+Click on the main button and select the drop down menu.
+
+
 ## Making changes
 
 ## Making a draft pull request
