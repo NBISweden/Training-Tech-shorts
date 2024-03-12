@@ -1,6 +1,12 @@
 # How to collaborate on Github
 
 ## Making a branch
+- On the main page of the repository click on the branch dropdown menue.
+- View all branches
+- Click New branch, give it a name and select the branch source.
+- Click create branch
+
+You can also make a branch by clicking on the dropdown menue and give an unique name in the "Find or create branch..." field followed by clicking Create branch.
 
 ## Making changes
 
