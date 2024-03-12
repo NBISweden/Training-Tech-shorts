@@ -1,0 +1,15 @@
+# How to collaborate on Github
+
+## Making a branch
+
+## Making changes
+
+## Making a draft pull request
+
+## Making a ready for review pull request
+
+## Code review
+
+## Making changes
+
+## Merging
