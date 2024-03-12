@@ -8,6 +8,8 @@
 
 ## Making a ready for review pull request
 
+After creating a draft pull request, you should invite a reviewer that has been assigned to your caption. The reviewer will go through the changes that you made on the original file and suggest changes, for example, clicking on the '+' icon. 
+
 ## Code review
 
 ## Making changes
