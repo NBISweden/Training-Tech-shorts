@@ -24,3 +24,7 @@
 ## Making changes
 
 ## Merging
+
+- Once the changes are approved by the reviewer(s), and there are no conflicts of your branch with the base branch, you can merge the changes you've made on your branch into the main branch of the target repository.
+- To do that, you click on "Pull requests" in the header line of the target repository, and select your pull request. Here you click on "Merge pull request" to perform the merging.
+- A github workflow is planned that will automatically publish the updated text on the website.
