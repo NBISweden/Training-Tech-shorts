@@ -32,9 +32,12 @@
 - click on the `Files changed` tab and go through the files and changes
   * you can comment on a line by hovering over a line and click on the plus symbol 
   * in case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines
-  * those comments are marked as pending and are not visible to anybody until you click `Finish your review`
-  * when done with the review click on the `Finish your review` button on the top right corner of the page: 
-    - you can comment on your review and choose one of the following options `Comment`, `Approve`, `Request changes`. Select the approprate option and click on `Submit review`.
+  * afterwards you can either:
+   a) click on the `Add single comment` button which makes your comment or suggestion immediately visible
+   OR  
+   b) click on the `Start a review` button, which keeps your comment or suggestion in a pending state (unvisible to anybody). But this give you the chance to add further comments and suggestions.
+      * when done with the full review click on the `Finish your review` button on the top right corner of the page: 
+        - you can comment on your review and choose one of the following options `Comment`, `Approve`, `Request changes`. Select the approprate option and click on `Submit review`.
 
 ## Making changes
 
