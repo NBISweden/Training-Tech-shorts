@@ -35,7 +35,7 @@
   * afterwards you can either:
    a) click on the `Add single comment` button which makes your comment or suggestion immediately visible
    OR  
-   b) click on the `Start a review` button, which keeps your comment or suggestion in a pending state (unvisible to anybody). But this give you the chance to add further comments and suggestions.
+   b) click on the `Start a review` button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.
       * when done with the full review click on the `Finish your review` button on the top right corner of the page: 
         - you can comment on your review and choose one of the following options `Comment`, `Approve`, `Request changes`. Select the approprate option and click on `Submit review`.
 
