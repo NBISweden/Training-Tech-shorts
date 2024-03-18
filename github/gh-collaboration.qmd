@@ -21,6 +21,24 @@
 
 ## Code review
 
+- navigate to the top menu and click on `Pull requests`
+- by default all open pull requests are listed, you can further filter down the list. e.g. via clicking on `Reviews` and afterwards select `Awaiting review from you` in the drop down menu. This shows then only PRs where you are tagged as reviewer. 
+- click on a pull request of your choice 
+- the following window has 4 tabs: 
+  * Conversation: gives an overview about the PR
+  * Commits: list all commits of the PR
+  * Check:
+  * Files changed: lists all files which were modified 
+- click on the `Files changed` tab and go through the files and changes
+  * you can comment on a line by hovering over a line and click on the plus symbol 
+  * in case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines
+  * afterwards you can either:
+   a) click on the `Add single comment` button which makes your comment or suggestion immediately visible
+   OR  
+   b) click on the `Start a review` button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.
+      * when done with the full review click on the `Finish your review` button on the top right corner of the page: 
+        - you can comment on your review and choose one of the following options `Comment`, `Approve`, `Request changes`. Select the approprate option and click on `Submit review`.
+
 ## Making changes
 
 ## Merging
