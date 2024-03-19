@@ -1,0 +1,16 @@
+# Introduction to Git
+
+## What is git
+
+## What should git be used for
+
+## Git Repositories
+
+## Git branches
+
+## File staging and git commit
+
+## Git push/pull
+
+## Git merge and git rebase
+
