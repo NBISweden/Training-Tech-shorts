@@ -6,6 +6,19 @@
 
 ## Git Repositories
 
+- A git repository (repo) is any folder structure that is version-controlled by git.
+- A git repo can be initialized from a local folder, or cloned from a remote repo.
+  - To initialize a repo from a local folder:
+```bash
+cd myfolder
+git init
+```
+  - To clone a git repo from a remote source:
+```bash
+git clone https://github.com/user/repo
+```
+- Regardless of how you obtain it, your local copy of the git repo will contain a `.git` folder. That is where the change history of your project is stored and maintained by git.
+
 ## Git branches
 
 ## File staging and git commit
