@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="NBIS">
-<meta name="dcterms.date" content="2024-03-13">
+<meta name="dcterms.date" content="2024-03-26">
 
 <title>Training: Tech shorts</title>
 <style>
@@ -69,6 +69,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -160,7 +163,12 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
-  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick start</a></li>
+  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick start</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">summary</a></li>
+  <li><a href="#review-lessons" id="toc-review-lessons" class="nav-link" data-scroll-target="#review-lessons">Review lessons</a></li>
+  <li><a href="#sequence-diagram" id="toc-sequence-diagram" class="nav-link" data-scroll-target="#sequence-diagram">Sequence diagram</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -187,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 13, 2024</p>
+      <p class="date">March 26, 2024</p>
     </div>
   </div>
   
@@ -205,18 +213,64 @@ ul.task-list li input[type="checkbox"] {
 <section id="quick-start" class="level2">
 <h2 class="anchored" data-anchor-id="quick-start">Quick start</h2>
 <p>The first step is to read over the lesson Github Collaboration.</p>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">summary</h3>
 <ol type="1">
 <li>Make a branch for your lesson.</li>
 <li>Create a Quarto markdown document with <code>## Objectives</code> and <code>## Key points</code> and add it to that branch.</li>
 <li>Add the document to the <code>_quarto.yml</code>.</li>
-<li>Teach your topic to your team for 30-45 mins.</li>
-<li>Each learner selects a key point to contribute material on. Make an issue for that topic and assign yourself and another learner to review your contribution.</li>
+<li>Teach your topic to your team for 30-45 mins. Please remember to record the lesson.</li>
+<li>Each learner selects a key point to contribute material on. Use the lesson issue for that topic to assign yourself and another learner to review your contribution.</li>
 <li>Make a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you’re both happy.</li>
 <li>Mark the pull request as ready, and request the instructor to review.</li>
-<li>The instructor reviews and merges the lesson branch when all contributions have been received.</li>
+<li>When the instructor is happy with the changes they should merge the learners contribution back into their lesson branch.</li>
+<li>The instructor reviews and merges the lesson branch when all contributions have been received. It is the responsibility of the teacher to make sure contributions have been received after two weeks.</li>
 </ol>
+</section>
+<section id="review-lessons" class="level3">
+<h3 class="anchored" data-anchor-id="review-lessons">Review lessons</h3>
+<p>Each lesson should be followed up by a review lesson the following week. Here, the teacher should review and discuss points that they notice learners had difficulty with.</p>
+</section>
+<section id="sequence-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="sequence-diagram">Sequence diagram</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    box transparent Learners
+        actor Learner1
+        actor Learner2
+    end
+    actor Teacher
+    Teacher -&gt;&gt; GitHub: New branch for lesson
+    Teacher -&gt;&gt; GitHub: New lesson file
+    Teacher -&gt;&gt; GitHub: Add key points
+    Teacher -&gt;&gt; Learner1: Demonstrates tool
+    Learner1 -&gt;&gt; Teacher: Volunteers to write up keypoint 2
+    Learner2 -&gt;&gt; Teacher: Volunteers to write up keypoint 1
+    Learner1 -&gt;&gt; GitHub: Make branch from lesson branch
+    Learner1 -&gt;&gt; GitHub: Add notes for keypoint 2
+    Learner2 -&gt;&gt; GitHub: Add notes for keypoint 1
+    Learner1 -&gt;&gt; GitHub: Request Learner2 to review text
+    Learner2 -&gt;&gt; GitHub: Request Learner1 to review text
+    Learner1 -&gt;&gt; GitHub: Provide code review
+    Learner1 -&gt;&gt; GitHub: Update notes from review
+    Learner1 -&gt;&gt; Teacher: Request code review
+    Learner1 -&gt;&gt; GitHub: Update notes
+    Teacher -&gt;&gt; GitHub: Merges notes into lesson branch
+    Teacher -&gt;&gt; GitHub: Merges lesson branch into main
+    GitHub -&gt;&gt; GitHub: Automated website build
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 
