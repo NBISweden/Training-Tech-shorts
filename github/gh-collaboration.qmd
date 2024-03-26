@@ -6,7 +6,7 @@
 - Click New branch, give it a name and select the branch source.
 - Click create branch
 
-You can also make a branch by clicking on the dropdown menue and give an unique name in the "Find or create branch..." field followed by clicking Create branch.
+You can also make a branch by clicking on the drop-down menu and give an unique name in the "Find or create branch..." field followed by clicking Create branch.
 
 ## Making changes
 
