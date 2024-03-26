@@ -11,7 +11,7 @@ Once you have cloned a specific git repository locally on your computer, you can
 - To create a branch and switch to it type `git checkout -b branch_name` 
 - To push the newly created branch to the remote repository type `git push -u origin branch_name` 
 - To display all branches on the local and remote repository type `git branch -a` 
-- To switch to some of the displayed branches type `git ckeckout name_of_branch`. **Once a change is commited from that branch, pushing the committed change will be pushed into that specific branch.**
+- To switch to one of the displayed branches type `git ckeckout name_of_branch`. **Once a change is committed to that branch, pushing the committed change will be pushed to that specific branch on the remote repository.**
 - To delete a branch type `git branch -d name_of_branch_to_delete`
 
 
