@@ -23,6 +23,7 @@
 
 ## Making changes
 
-## Teacher merges the pull request
+## Teacher merges pull requests
 
-- Once both teacher and learner are satisfied with the updates, the teacher merges the pull request.
+- Once both teacher and learner are satisfied with the updates, the teacher merges the learner's pull request into their lesson branch.
+- Once the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch.
