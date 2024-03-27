@@ -20,6 +20,13 @@ git clone https://github.com/user/repo
 - Regardless of how you obtain it, your local copy of the git repo will contain a `.git` folder. That is where the change history of your project is stored and maintained by git.
 
 ## Git branches
+Once you have cloned a specific git repository locally on your computer, you can navigate and/or create new branches on it using git CLI. Here some examples:
+- To create a branch and switch to it type `git checkout -b branch_name` 
+- To push the newly created branch to the remote repository type `git push -u origin branch_name` 
+- To display all branches on the local and remote repository type `git branch -a` 
+- To switch to one of the displayed branches type `git checkout name_of_branch`. **Once a change is committed to that branch, pushing the committed change will be pushed to that specific branch on the remote repository.**
+- To delete a branch type `git branch -d name_of_branch_to_delete`
+
 
 ## File staging and git commit
 
