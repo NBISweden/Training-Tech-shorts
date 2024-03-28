@@ -23,6 +23,42 @@ git clone https://github.com/user/repo
 
 ## File staging and git commit
 
+Staging in Git involves adding new, modified, or deleted files to a staging area before committing them. This allows for flexibility in choosing the files to commit.
+
+1. Check status via `git status` You'll see what branch you are on and status of files (untracked, modified, or deleted).  
+2. Stage Files to Prepare for Commit
+ - Stage all files: `git add .`
+ - Stage a file: `git add example.html`
+ - Stage a folder: `git add myfolder`
+3. Check status again: `git status` You should see there are changes ready to be committed.
+4. Unstage a File
+  - If you accidental stage something, use the following command to unstage it: `git reset HEAD example.html`
+5. Deleting Files
+  - If you delete files they will appear in git status as deleted, and you must use git add to stage them. Another way to do this is using git rm command, which both deletes a file and stages it all with one command:
+  - `git rm example.html` to remove a file (and stage it)
+  - `git rm -r myfolder` to remove a folder (and stage it)
+6. Commit Files 
+  -  `git commit -m "Message that describes what this change does"`
+7. Check status again: `git status` If all changes have been committed, and there are no untracked files, it should say: nothing to commit, working tree clean. 
+8. View a List of Commits
+  - When viewing a list of commits, there are various commands depending on how much info you want to see.
+  - To see a simplified list of commits, run this command: `git log --oneline`
+  - To see a list of commits with more detail (such who made the commit and when), run this command: `git log` NOTE: If the list is long, use the Down/Up Arrow keys to scroll and hit Q to quit.
+  - To see a list of commits with even more detail (including which files changed), run this command: `git log --stat`
+9a). Fixing Your Last Commit Message
+  - `git commit --amend -m "Put your corrected message here"`: to correct a mistake in your last commit message
+9b). Changing committed files
+  - The `--no-edit` flag will allow you to make the amendment to your commit without changing its commit message. Example:
+  ```bash 
+   # Edit hello.py and main.py
+   git add hello.py
+   git commit 
+   # Realize you forgot to add the changes from main.py 
+   git add main.py 
+   git commit --amend --no-edit
+  ```
+  The resulting commit will replace the incomplete one, and it will look like we committed the changes to hello.py and main.py in a single snapshot.
+
 ## Git push/pull
 
 ## Git merge and git rebase
