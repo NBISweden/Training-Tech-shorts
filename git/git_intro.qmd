@@ -45,6 +45,19 @@ Staging in Git involves adding new, modified, or deleted files to a staging area
   - To see a simplified list of commits, run this command: `git log --oneline`
   - To see a list of commits with more detail (such who made the commit and when), run this command: `git log` NOTE: If the list is long, use the Down/Up Arrow keys to scroll and hit Q to quit.
   - To see a list of commits with even more detail (including which files changed), run this command: `git log --stat`
+9a). Fixing Your Last Commit Message
+  - `git commit --amend -m "Put your corrected message here"`: to correct a mistake in your last commit message
+9b). Changing committed files
+  - The `--no-edit` flag will allow you to make the amendment to your commit without changing its commit message. Example:
+  ```bash 
+   # Edit hello.py and main.py
+   git add hello.py
+   git commit 
+   # Realize you forgot to add the changes from main.py 
+   git add main.py 
+   git commit --amend --no-edit
+  ```
+  The resulting commit will replace the incomplete one, and it will look like we committed the changes to hello.py and main.py in a single snapshot.
 
 ## Git push/pull
 
