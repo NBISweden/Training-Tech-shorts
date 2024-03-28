@@ -25,7 +25,7 @@ git clone https://github.com/user/repo
 
 Staging in Git involves adding new, modified, or deleted files to a staging area before committing them. This allows for flexibility in choosing the files to commit.
 
-1. Check status via `git status` You'll see what branch you are on (which for new repos will be master) and status of files (untracked, modified, or deleted).  
+1. Check status via `git status` You'll see what branch you are on and status of files (untracked, modified, or deleted).  
 2. Stage Files to Prepare for Commit
  - Stage all files: `git add .`
  - Stage a file: `git add example.html`
