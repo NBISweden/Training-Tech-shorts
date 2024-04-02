@@ -1,4 +1,4 @@
-# Schedule
+# Schedule {.unnumbered}
 
 Dates for each lesson, listed in reverse chronological order.
 Meetings are over Zoom, Tuesdays at 13.00. Meeting links are
