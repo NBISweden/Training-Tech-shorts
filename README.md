@@ -1,7 +1,10 @@
 # Training-Tech-shorts
+
 Short lessons, training various technologies useful to our work.
 
-Lessons located at https://nbisweden.github.io/Training-Tech-shorts/.
+Lessons are located at https://nbisweden.github.io/Training-Tech-shorts/.
+
+The schedule is the [schedule page](https://nbisweden.github.io/Training-Tech-shorts/schedule.html).
 
 ## Background
 
