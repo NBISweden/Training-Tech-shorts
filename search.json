@@ -22,21 +22,21 @@
   {
     "objectID": "schedule.html",
     "href": "schedule.html",
-    "title": "1  Schedule",
+    "title": "Schedule",
     "section": "",
     "text": "Dates for each lesson, listed in reverse chronological order. Meetings are over Zoom, Tuesdays at 13.00. Meeting links are provided by the teacher.\n\n24/05/07: TBD\n24/04/30: No lesson - Reduced working day.\n24/04/23: Per - Review: Quarto\n24/04/16: Per - Quarto\n24/04/09: No lesson - NBIS retreat.\n24/04/02: Mahesh - Review: Introduction to Git.\n24/03/26: Mahesh - Review: Collaboration in Github.\n24/03/19: Mahesh - Introduction to Git.\n24/03/12: Mahesh - Collaboration in Github.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Schedule</span>"
+      "Schedule"
     ]
   },
   {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "3  Summary",
+    "title": "2  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Summary</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
     ]
   }
 ]
