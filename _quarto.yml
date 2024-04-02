@@ -11,7 +11,7 @@ book:
     search: true
   chapters:
     - index.qmd
-    - intro.qmd
+    - schedule.qmd
     - part: "Github"
       chapters:
         - github/gh-collaboration.qmd

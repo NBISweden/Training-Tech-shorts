@@ -1,0 +1,12 @@
+# Schedule
+
+Dates for each lesson, listed in reverse chronological order.
+Meetings are over Zoom, Tuesdays at 13.00. Meeting links are
+provided by the teacher.
+
+- 24/04/16: TBD
+- 24/04/09: No lesson - NBIS retreat.
+- 24/04/02: Mahesh - Review: Introduction to Git.
+- 24/03/26: Mahesh - Review: Collaboration in Github.
+- 24/03/19: Mahesh - Introduction to Git.
+- 24/03/12: Mahesh - Collaboration in Github.
