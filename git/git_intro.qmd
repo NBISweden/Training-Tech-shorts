@@ -2,7 +2,7 @@
 
 ## What is Git
 
-Git is nowadays the most widely used distributed version controle system, especially in software developement. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer's computer.
+Git is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer's computer.
 
 Git is the most popular tool, even though it might not be the most user-friendly one. It has a lot of options/commands and a specific jargon. Fortunately there are many "Git cheat sheets" (such as https://education.github.com/git-cheat-sheet-education.pdf).
 
