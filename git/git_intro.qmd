@@ -67,9 +67,12 @@ Similarly, if for example, someone else made changes to the remote and you want 
 ## Git merge and git rebase
 Git merge and git rebase can be said to be used to solve similar things.  
 When working on a feature in a separate branch while someone else updates the main branch you often want to incorporate the new changes from the main branch into your feature branch.  
-This could be done with merge like this: 
 
-`git checkout my_new_feature`   
+First you would probably like to use `git pull` as described above to make sure your local copy is up-to-date with changes made by others.  
+
+Then it could be done with merge like this: 
+
+`git checkout my_new_feature` followed by adding your new code/feature and then merge it:  
 `git merge main`  
 
 This will create what is called a "merge commit" and put the changes from main into your feature branch.
