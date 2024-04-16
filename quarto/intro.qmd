@@ -1,16 +1,16 @@
 # Introduction to Quarto
 
-## What is Quarto
+## What is Quarto (Tomas / André)
 
-### The Quarto CLI
+### The Quarto CLI (Martin / Tomas)
 
-## Authoring
+## Authoring (Estelle / Martin)
 
-### Render vs preview
+### Render vs preview (Guilherme / Estelle)
 
-## Computations
+## Computations (Mahesh / Guilherme)
 
-### Engines
+### Engines (André / Mahesh)
 
 ## Document types
 
