@@ -12,6 +12,9 @@ book:
   chapters:
     - index.qmd
     - schedule.qmd
+    - part: "Git"
+      chapters:
+        - git/git_intro.qmd
     - part: "Github"
       chapters:
         - github/gh-collaboration.qmd
@@ -23,8 +26,6 @@ bibliography: references.bib
 format:
   html:
     theme: minty
-  # pdf:
-  #   documentclass: scrreprt
 
 
 
