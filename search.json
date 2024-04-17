@@ -30,90 +30,167 @@
     ]
   },
   {
+    "objectID": "git/git_intro.html",
+    "href": "git/git_intro.html",
+    "title": "1  Introduction to Git",
+    "section": "",
+    "text": "1.1 What is Git\nGit is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer’s computer.\nGit is the most popular tool, even though it might not be the most user-friendly one. It has a lot of options/commands and specific jargon. Fortunately there are many “Git cheat sheets” (such as https://education.github.com/git-cheat-sheet-education.pdf).",
+    "crumbs": [
+      "Git",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#what-should-git-be-used-for",
+    "href": "git/git_intro.html#what-should-git-be-used-for",
+    "title": "1  Introduction to Git",
+    "section": "1.2 What should Git be used for",
+    "text": "1.2 What should Git be used for\nIn software development, Git is mostly used for version control of code. In our bioinformatics projects, we can also track our report files, environment files, and other small files.\nGit should NOT be used for storing data, particularly large data. Sensitive data (passwords, usernames, API keys…) should not be put in a Git repository, because they can be then exposed to the world. If one commits sensitive data by mistake, one can go back into the git history and remove it, but it is not a simple task.",
+    "crumbs": [
+      "Git",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#git-repositories",
+    "href": "git/git_intro.html#git-repositories",
+    "title": "1  Introduction to Git",
+    "section": "1.3 Git Repositories",
+    "text": "1.3 Git Repositories\n\nA git repository (repo) is any folder structure that is version-controlled by git.\nA git repo can be initialized from a local folder, or cloned from a remote repo.\n\nTo initialize a repo from a local folder:\n\ncd myfolder\ngit init\n\nTo clone a git repo from a remote source:\n\ngit clone https://github.com/user/repo\nRegardless of how you obtain it, your local copy of the git repo will contain a .git folder. That is where the change history of your project is stored and maintained by git.",
+    "crumbs": [
+      "Git",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#git-branches",
+    "href": "git/git_intro.html#git-branches",
+    "title": "1  Introduction to Git",
+    "section": "1.4 Git branches",
+    "text": "1.4 Git branches\nOnce you have cloned a specific git repository locally on your computer, you can navigate and/or create new branches on it using git CLI. Here some examples:\n\nTo create a branch and switch to it type git checkout -b branch_name\nTo push the newly created branch to the remote repository type git push -u origin branch_name\nTo display all branches on the local and remote repository type git branch -a\nTo switch to one of the displayed branches type git checkout name_of_branch. Once a change is committed to that branch, pushing the committed change will be pushed to that specific branch on the remote repository.\nTo delete a branch type git branch -d name_of_branch_to_delete",
+    "crumbs": [
+      "Git",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#file-staging-and-git-commit",
+    "href": "git/git_intro.html#file-staging-and-git-commit",
+    "title": "1  Introduction to Git",
+    "section": "1.5 File staging and git commit",
+    "text": "1.5 File staging and git commit\nStaging in Git involves adding new, modified, or deleted files to a staging area before committing them. This allows for flexibility in choosing the files to commit.\n\nCheck status via git status You’ll see what branch you are on and status of files (untracked, modified, or deleted).\n\nStage Files to Prepare for Commit\n\n\nStage all files: git add .\nStage a file: git add example.html\nStage a folder: git add myfolder\n\n\nCheck status again: git status You should see there are changes ready to be committed.\nUnstage a File\n\n\nIf you accidental stage something, use the following command to unstage it: git reset HEAD example.html\n\n\nDeleting Files\n\n\nIf you delete files they will appear in git status as deleted, and you must use git add to stage them. Another way to do this is using git rm command, which both deletes a file and stages it all with one command:\ngit rm example.html to remove a file (and stage it)\ngit rm -r myfolder to remove a folder (and stage it)\n\n\nCommit Files\n\n\ngit commit -m \"Message that describes what this change does\"\n\n\nCheck status again: git status If all changes have been committed, and there are no untracked files, it should say: nothing to commit, working tree clean.\nView a List of Commits\n\n\nWhen viewing a list of commits, there are various commands depending on how much info you want to see.\nTo see a simplified list of commits, run this command: git log --oneline\nTo see a list of commits with more detail (such who made the commit and when), run this command: git log NOTE: If the list is long, use the Down/Up Arrow keys to scroll and hit Q to quit.\nTo see a list of commits with even more detail (including which files changed), run this command: git log --stat\n\n\nFixing Your Last Commit Message\n\n\ngit commit --amend -m \"Put your corrected message here\": to correct a mistake in your last commit message\n\n\nChanging committed files\n\n\nThe --no-edit flag will allow you to make the amendment to your commit without changing its commit message. Example:\n\n# Edit hello.py and main.py\ngit add hello.py\ngit commit \n# Realize you forgot to add the changes from main.py \ngit add main.py \ngit commit --amend --no-edit\nThe resulting commit will replace the incomplete one, and it will look like we committed the changes to hello.py and main.py in a single snapshot.",
+    "crumbs": [
+      "Git",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#git-pushpull",
+    "href": "git/git_intro.html#git-pushpull",
+    "title": "1  Introduction to Git",
+    "section": "1.6 Git push/pull",
+    "text": "1.6 Git push/pull\nYou can use git push to sync a remote repository with the changes you’ve done locally. The most basic example would be that you’ve first cloned a repository with git clone then made some changes in that local copy and want to update the original remote repository.\nSimilarly, if for example, someone else made changes to the remote and you want to incorporate those changes into your local copy you will run git pull to make sure you are up to date with the changes in the remote repository before working on your local copy.",
+    "crumbs": [
+      "Git",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
+    ]
+  },
+  {
+    "objectID": "git/git_intro.html#git-merge-and-git-rebase",
+    "href": "git/git_intro.html#git-merge-and-git-rebase",
+    "title": "1  Introduction to Git",
+    "section": "1.7 Git merge and git rebase",
+    "text": "1.7 Git merge and git rebase\nGit merge and git rebase can be said to be used to solve similar things.\nWhen working on a feature in a separate branch while someone else updates the main branch you often want to incorporate the new changes from the main branch into your feature branch.\nFirst you would probably like to use git pull as described above to make sure your local copy is up-to-date with changes made by others.\nThen it could be done with merge like this:\ngit checkout my_new_feature\nfollowed by adding your new code/feature and then merge it:\ngit merge main\nThis will create what is called a “merge commit” and put the changes from main into your feature branch.\nThe alternative way would be to use rebase:\ngit checkout my_new_feature\ngit rebase main\nThis will sort of re-write the project history by moving the feature branch to the “tip” of the main and create new commits in the original branch.",
+    "crumbs": [
+      "Git",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
+    ]
+  },
+  {
     "objectID": "github/gh-collaboration.html",
     "href": "github/gh-collaboration.html",
-    "title": "1  How to collaborate on Github",
+    "title": "2  How to collaborate on Github",
     "section": "",
-    "text": "1.1 Making a branch (Teacher)\nYou also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.\nThis short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)",
+    "text": "2.1 Making a branch (Teacher)\nYou also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.\nThis short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)",
     "crumbs": [
       "Github",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
     ]
   },
   {
     "objectID": "github/gh-collaboration.html#making-a-branch-teacher",
     "href": "github/gh-collaboration.html#making-a-branch-teacher",
-    "title": "1  How to collaborate on Github",
+    "title": "2  How to collaborate on Github",
     "section": "",
     "text": "On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.\nClick on view all branches\nClick New branch, give it a name and select the branch source.\nFinally, click create branch",
     "crumbs": [
       "Github",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
     ]
   },
   {
     "objectID": "github/gh-collaboration.html#making-changes-learner",
     "href": "github/gh-collaboration.html#making-changes-learner",
-    "title": "1  How to collaborate on Github",
-    "section": "1.2 Making changes (Learner)",
-    "text": "1.2 Making changes (Learner)\n\nFork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.\nOn your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.\nTo edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.\nIf instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.\nAdd the file contents in edit mode.\nWhen finished, click “Commit changes…”",
+    "title": "2  How to collaborate on Github",
+    "section": "2.2 Making changes (Learner)",
+    "text": "2.2 Making changes (Learner)\n\nFork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.\nOn your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.\nTo edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.\nIf instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.\nAdd the file contents in edit mode.\nWhen finished, click “Commit changes…”",
     "crumbs": [
       "Github",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
     ]
   },
   {
     "objectID": "github/gh-collaboration.html#making-a-draft-pull-request-learner",
     "href": "github/gh-collaboration.html#making-a-draft-pull-request-learner",
-    "title": "1  How to collaborate on Github",
-    "section": "1.3 Making a draft pull request (Learner)",
-    "text": "1.3 Making a draft pull request (Learner)\nAfter making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.",
+    "title": "2  How to collaborate on Github",
+    "section": "2.3 Making a draft pull request (Learner)",
+    "text": "2.3 Making a draft pull request (Learner)\nAfter making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.",
     "crumbs": [
       "Github",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
     ]
   },
   {
     "objectID": "github/gh-collaboration.html#code-review-review-partner",
     "href": "github/gh-collaboration.html#code-review-review-partner",
-    "title": "1  How to collaborate on Github",
-    "section": "1.4 Code review (Review partner)",
-    "text": "1.4 Code review (Review partner)\n\nnavigate to the top menu and click on Pull requests\nby default all open pull requests are listed, you can further filter down the list. e.g. via clicking on Reviews and afterwards select Awaiting review from you in the drop down menu. This shows then only PRs where you are tagged as reviewer.\nclick on a pull request of your choice\nthe following window has 4 tabs:\n\nConversation: gives an overview about the PR\nCommits: list all commits of the PR\nCheck:\nFiles changed: lists all files which were modified\n\nclick on the Files changed tab and go through the files and changes\n\nyou can comment on a line by hovering over a line and click on the plus symbol\nin case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines\nafterwards you can either:\n\nclick on the Add single comment button which makes your comment or suggestion immediately visible OR\n\nclick on the Start a review button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.\n\nwhen done with the full review click on the Finish your review button on the top right corner of the page:\n\nyou can comment on your review and choose one of the following options Comment, Approve, Request changes. Select the approprate option and click on Submit review.",
+    "title": "2  How to collaborate on Github",
+    "section": "2.4 Code review (Review partner)",
+    "text": "2.4 Code review (Review partner)\n\nnavigate to the top menu and click on Pull requests\nby default all open pull requests are listed, you can further filter down the list. e.g. via clicking on Reviews and afterwards select Awaiting review from you in the drop down menu. This shows then only PRs where you are tagged as reviewer.\nclick on a pull request of your choice\nthe following window has 4 tabs:\n\nConversation: gives an overview about the PR\nCommits: list all commits of the PR\nCheck:\nFiles changed: lists all files which were modified\n\nclick on the Files changed tab and go through the files and changes\n\nyou can comment on a line by hovering over a line and click on the plus symbol\nin case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines\nafterwards you can either:\n\nclick on the Add single comment button which makes your comment or suggestion immediately visible OR\n\nclick on the Start a review button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.\n\nwhen done with the full review click on the Finish your review button on the top right corner of the page:\n\nyou can comment on your review and choose one of the following options Comment, Approve, Request changes. Select the approprate option and click on Submit review.",
     "crumbs": [
       "Github",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
     ]
   },
   {
     "objectID": "github/gh-collaboration.html#making-a-ready-for-review-pull-request-learner",
     "href": "github/gh-collaboration.html#making-a-ready-for-review-pull-request-learner",
-    "title": "1  How to collaborate on Github",
-    "section": "1.5 Making a ready for review pull request (Learner)",
-    "text": "1.5 Making a ready for review pull request (Learner)\n\nOnce you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.\nOn the right side panel, you should invite the teacher to review your pull request.\nThe teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.",
+    "title": "2  How to collaborate on Github",
+    "section": "2.5 Making a ready for review pull request (Learner)",
+    "text": "2.5 Making a ready for review pull request (Learner)\n\nOnce you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.\nOn the right side panel, you should invite the teacher to review your pull request.\nThe teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.",
     "crumbs": [
       "Github",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
     ]
   },
   {
     "objectID": "github/gh-collaboration.html#merges-pull-requests-teacher",
     "href": "github/gh-collaboration.html#merges-pull-requests-teacher",
-    "title": "1  How to collaborate on Github",
-    "section": "1.6 Merges pull requests (Teacher)",
-    "text": "1.6 Merges pull requests (Teacher)\n\nOnce both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.\nOnce the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.",
+    "title": "2  How to collaborate on Github",
+    "section": "2.6 Merges pull requests (Teacher)",
+    "text": "2.6 Merges pull requests (Teacher)\n\nOnce both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.\nOnce the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.",
     "crumbs": [
       "Github",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
     ]
   },
   {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "2  Summary",
+    "title": "3  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Summary</span>"
     ]
   }
 ]

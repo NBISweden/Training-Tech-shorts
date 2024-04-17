@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Training: Tech shorts - 2&nbsp; How to collaborate on Github</title>
+<title>Training: Tech shorts - 1&nbsp; Introduction to Git</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../summary.html" rel="next">
-<link href="../git/git_intro.html" rel="prev">
+<link href="../github/gh-collaboration.html" rel="next">
+<link href="../schedule.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../github/gh-collaboration.html">Github</a></li><li class="breadcrumb-item"><a href="../github/gh-collaboration.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../git/git_intro.html">Git</a></li><li class="breadcrumb-item"><a href="../git/git_intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -129,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../git/git_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../git/git_intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></span></a>
   </div>
 </li>
@@ -146,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../github/gh-collaboration.html" class="sidebar-item-text sidebar-link active">
+  <a href="../github/gh-collaboration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></span></a>
   </div>
 </li>
@@ -174,21 +208,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#making-a-branch-teacher" id="toc-making-a-branch-teacher" class="nav-link active" data-scroll-target="#making-a-branch-teacher"><span class="header-section-number">2.1</span> Making a branch (Teacher)</a></li>
-  <li><a href="#making-changes-learner" id="toc-making-changes-learner" class="nav-link" data-scroll-target="#making-changes-learner"><span class="header-section-number">2.2</span> Making changes (Learner)</a></li>
-  <li><a href="#making-a-draft-pull-request-learner" id="toc-making-a-draft-pull-request-learner" class="nav-link" data-scroll-target="#making-a-draft-pull-request-learner"><span class="header-section-number">2.3</span> Making a draft pull request (Learner)</a></li>
-  <li><a href="#code-review-review-partner" id="toc-code-review-review-partner" class="nav-link" data-scroll-target="#code-review-review-partner"><span class="header-section-number">2.4</span> Code review (Review partner)</a></li>
-  <li><a href="#making-a-ready-for-review-pull-request-learner" id="toc-making-a-ready-for-review-pull-request-learner" class="nav-link" data-scroll-target="#making-a-ready-for-review-pull-request-learner"><span class="header-section-number">2.5</span> Making a ready for review pull request (Learner)</a></li>
-  <li><a href="#merges-pull-requests-teacher" id="toc-merges-pull-requests-teacher" class="nav-link" data-scroll-target="#merges-pull-requests-teacher"><span class="header-section-number">2.6</span> Merges pull requests (Teacher)</a></li>
+  <li><a href="#what-is-git" id="toc-what-is-git" class="nav-link active" data-scroll-target="#what-is-git"><span class="header-section-number">1.1</span> What is Git</a></li>
+  <li><a href="#what-should-git-be-used-for" id="toc-what-should-git-be-used-for" class="nav-link" data-scroll-target="#what-should-git-be-used-for"><span class="header-section-number">1.2</span> What should Git be used for</a></li>
+  <li><a href="#git-repositories" id="toc-git-repositories" class="nav-link" data-scroll-target="#git-repositories"><span class="header-section-number">1.3</span> Git Repositories</a></li>
+  <li><a href="#git-branches" id="toc-git-branches" class="nav-link" data-scroll-target="#git-branches"><span class="header-section-number">1.4</span> Git branches</a></li>
+  <li><a href="#file-staging-and-git-commit" id="toc-file-staging-and-git-commit" class="nav-link" data-scroll-target="#file-staging-and-git-commit"><span class="header-section-number">1.5</span> File staging and git commit</a></li>
+  <li><a href="#git-pushpull" id="toc-git-pushpull" class="nav-link" data-scroll-target="#git-pushpull"><span class="header-section-number">1.6</span> Git push/pull</a></li>
+  <li><a href="#git-merge-and-git-rebase" id="toc-git-merge-and-git-rebase" class="nav-link" data-scroll-target="#git-merge-and-git-rebase"><span class="header-section-number">1.7</span> Git merge and git rebase</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../github/gh-collaboration.html">Github</a></li><li class="breadcrumb-item"><a href="../github/gh-collaboration.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../git/git_intro.html">Git</a></li><li class="breadcrumb-item"><a href="../git/git_intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></h1>
 </div>
 
 
@@ -205,77 +240,127 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This section is a guide describing one method of collaborating on Github. We focus on the framework that we use to make reference material for future us and others new to the team.</p>
-<section id="making-a-branch-teacher" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="making-a-branch-teacher"><span class="header-section-number">2.1</span> Making a branch (Teacher)</h2>
+<section id="what-is-git" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-is-git"><span class="header-section-number">1.1</span> What is Git</h2>
+<p>Git is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer’s computer.</p>
+<p>Git is the most popular tool, even though it might not be the most user-friendly one. It has a lot of options/commands and specific jargon. Fortunately there are many “Git cheat sheets” (such as https://education.github.com/git-cheat-sheet-education.pdf).</p>
+</section>
+<section id="what-should-git-be-used-for" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="what-should-git-be-used-for"><span class="header-section-number">1.2</span> What should Git be used for</h2>
+<p>In software development, Git is mostly used for version control of code. In our bioinformatics projects, we can also track our report files, environment files, and other small files.</p>
+<p>Git should NOT be used for storing data, particularly large data. Sensitive data (passwords, usernames, API keys…) should not be put in a Git repository, because they can be then exposed to the world. If one commits sensitive data by mistake, one can go back into the git history and remove it, but it is not a simple task.</p>
+</section>
+<section id="git-repositories" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="git-repositories"><span class="header-section-number">1.3</span> Git Repositories</h2>
 <ul>
-<li>On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.</li>
-<li>Click on view all branches</li>
-<li>Click New branch, give it a name and select the branch source.</li>
-<li>Finally, click create branch</li>
+<li>A git repository (repo) is any folder structure that is version-controlled by git.</li>
+<li>A git repo can be initialized from a local folder, or cloned from a remote repo.
+<ul>
+<li>To initialize a repo from a local folder:</li>
 </ul>
-<p>You also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.</p>
-<p>This short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)</p>
-</section>
-<section id="making-changes-learner" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="making-changes-learner"><span class="header-section-number">2.2</span> Making changes (Learner)</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> myfolder</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Fork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.</li>
-<li>On your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.</li>
-<li>To edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.</li>
-<li>If instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.</li>
-<li>Add the file contents in edit mode.</li>
-<li>When finished, click “Commit changes…”</li>
+<li>To clone a git repo from a remote source:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/user/repo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>Regardless of how you obtain it, your local copy of the git repo will contain a <code>.git</code> folder. That is where the change history of your project is stored and maintained by git.</li>
 </ul>
 </section>
-<section id="making-a-draft-pull-request-learner" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="making-a-draft-pull-request-learner"><span class="header-section-number">2.3</span> Making a draft pull request (Learner)</h2>
-<p>After making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.</p>
+<section id="git-branches" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="git-branches"><span class="header-section-number">1.4</span> Git branches</h2>
+<p>Once you have cloned a specific git repository locally on your computer, you can navigate and/or create new branches on it using git CLI. Here some examples:</p>
+<ul>
+<li>To create a branch and switch to it type <code>git checkout -b branch_name</code></li>
+<li>To push the newly created branch to the remote repository type <code>git push -u origin branch_name</code></li>
+<li>To display all branches on the local and remote repository type <code>git branch -a</code></li>
+<li>To switch to one of the displayed branches type <code>git checkout name_of_branch</code>. <strong>Once a change is committed to that branch, pushing the committed change will be pushed to that specific branch on the remote repository.</strong></li>
+<li>To delete a branch type <code>git branch -d name_of_branch_to_delete</code></li>
+</ul>
 </section>
-<section id="code-review-review-partner" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="code-review-review-partner"><span class="header-section-number">2.4</span> Code review (Review partner)</h2>
-<ul>
-<li>navigate to the top menu and click on <code>Pull requests</code></li>
-<li>by default all open pull requests are listed, you can further filter down the list. e.g.&nbsp;via clicking on <code>Reviews</code> and afterwards select <code>Awaiting review from you</code> in the drop down menu. This shows then only PRs where you are tagged as reviewer.</li>
-<li>click on a pull request of your choice</li>
-<li>the following window has 4 tabs:
-<ul>
-<li>Conversation: gives an overview about the PR</li>
-<li>Commits: list all commits of the PR</li>
-<li>Check:</li>
-<li>Files changed: lists all files which were modified</li>
-</ul></li>
-<li>click on the <code>Files changed</code> tab and go through the files and changes
-<ul>
-<li>you can comment on a line by hovering over a line and click on the plus symbol</li>
-<li>in case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines</li>
-<li>afterwards you can either:
-<ol type="a">
-<li>click on the <code>Add single comment</code> button which makes your comment or suggestion immediately visible OR<br>
+<section id="file-staging-and-git-commit" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="file-staging-and-git-commit"><span class="header-section-number">1.5</span> File staging and git commit</h2>
+<p>Staging in Git involves adding new, modified, or deleted files to a staging area before committing them. This allows for flexibility in choosing the files to commit.</p>
+<ol type="1">
+<li>Check status via <code>git status</code> You’ll see what branch you are on and status of files (untracked, modified, or deleted).<br>
 </li>
-<li>click on the <code>Start a review</code> button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.</li>
-</ol></li>
-<li>when done with the full review click on the <code>Finish your review</code> button on the top right corner of the page:
+<li>Stage Files to Prepare for Commit</li>
+</ol>
 <ul>
-<li>you can comment on your review and choose one of the following options <code>Comment</code>, <code>Approve</code>, <code>Request changes</code>. Select the approprate option and click on <code>Submit review</code>.</li>
-</ul></li>
-</ul></li>
+<li>Stage all files: <code>git add .</code></li>
+<li>Stage a file: <code>git add example.html</code></li>
+<li>Stage a folder: <code>git add myfolder</code></li>
 </ul>
+<ol start="3" type="1">
+<li>Check status again: <code>git status</code> You should see there are changes ready to be committed.</li>
+<li>Unstage a File</li>
+</ol>
+<ul>
+<li>If you accidental stage something, use the following command to unstage it: <code>git reset HEAD example.html</code></li>
+</ul>
+<ol start="5" type="1">
+<li>Deleting Files</li>
+</ol>
+<ul>
+<li>If you delete files they will appear in git status as deleted, and you must use git add to stage them. Another way to do this is using git rm command, which both deletes a file and stages it all with one command:</li>
+<li><code>git rm example.html</code> to remove a file (and stage it)</li>
+<li><code>git rm -r myfolder</code> to remove a folder (and stage it)</li>
+</ul>
+<ol start="6" type="1">
+<li>Commit Files</li>
+</ol>
+<ul>
+<li><code>git commit -m "Message that describes what this change does"</code></li>
+</ul>
+<ol start="7" type="1">
+<li>Check status again: <code>git status</code> If all changes have been committed, and there are no untracked files, it should say: nothing to commit, working tree clean.</li>
+<li>View a List of Commits</li>
+</ol>
+<ul>
+<li>When viewing a list of commits, there are various commands depending on how much info you want to see.</li>
+<li>To see a simplified list of commits, run this command: <code>git log --oneline</code></li>
+<li>To see a list of commits with more detail (such who made the commit and when), run this command: <code>git log</code> NOTE: If the list is long, use the Down/Up Arrow keys to scroll and hit Q to quit.</li>
+<li>To see a list of commits with even more detail (including which files changed), run this command: <code>git log --stat</code></li>
+</ul>
+<ol start="9" type="1">
+<li>Fixing Your Last Commit Message</li>
+</ol>
+<ul>
+<li><code>git commit --amend -m "Put your corrected message here"</code>: to correct a mistake in your last commit message</li>
+</ul>
+<ol start="10" type="1">
+<li>Changing committed files</li>
+</ol>
+<ul>
+<li>The <code>--no-edit</code> flag will allow you to make the amendment to your commit without changing its commit message. Example:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit hello.py and main.py</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add hello.py</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Realize you forgot to add the changes from main.py </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add main.py </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">--amend</span> <span class="at">--no-edit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The resulting commit will replace the incomplete one, and it will look like we committed the changes to hello.py and main.py in a single snapshot.</p>
 </section>
-<section id="making-a-ready-for-review-pull-request-learner" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="making-a-ready-for-review-pull-request-learner"><span class="header-section-number">2.5</span> Making a ready for review pull request (Learner)</h2>
-<ul>
-<li>Once you and your review partner have agreed on the code review (i.e.&nbsp;Your review partner has approved your draft pull request), covert your draft pull request to ready to review.</li>
-<li>On the right side panel, you should invite the teacher to review your pull request.</li>
-<li>The teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.</li>
-</ul>
+<section id="git-pushpull" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="git-pushpull"><span class="header-section-number">1.6</span> Git push/pull</h2>
+<p>You can use <code>git push</code> to sync a remote repository with the changes you’ve done locally. The most basic example would be that you’ve first cloned a repository with <code>git clone</code> then made some changes in that local copy and want to update the original remote repository.<br>
+Similarly, if for example, someone else made changes to the remote and you want to incorporate those changes into your local copy you will run <code>git pull</code> to make sure you are up to date with the changes in the remote repository before working on your local copy.</p>
 </section>
-<section id="merges-pull-requests-teacher" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="merges-pull-requests-teacher"><span class="header-section-number">2.6</span> Merges pull requests (Teacher)</h2>
-<ul>
-<li>Once both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.</li>
-<li>Once the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.</li>
-</ul>
+<section id="git-merge-and-git-rebase" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="git-merge-and-git-rebase"><span class="header-section-number">1.7</span> Git merge and git rebase</h2>
+<p>Git merge and git rebase can be said to be used to solve similar things.<br>
+When working on a feature in a separate branch while someone else updates the main branch you often want to incorporate the new changes from the main branch into your feature branch.</p>
+<p>First you would probably like to use <code>git pull</code> as described above to make sure your local copy is up-to-date with changes made by others.</p>
+<p>Then it could be done with merge like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout my_new_feature</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>followed by adding your new code/feature and then merge it:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will create what is called a “merge commit” and put the changes from main into your feature branch.</p>
+<p>The alternative way would be to use rebase:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout my_new_feature</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rebase main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will sort of re-write the project history by moving the feature branch to the “tip” of the main and create new commits in the original branch.</p>
 
 
 </section>
@@ -692,13 +777,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../git/git_intro.html" class="pagination-link" aria-label="Introduction to Git">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></span>
+      <a href="../schedule.html" class="pagination-link" aria-label="Schedule">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Schedule</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../summary.html" class="pagination-link" aria-label="Summary">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../github/gh-collaboration.html" class="pagination-link" aria-label="How to collaborate on Github">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
