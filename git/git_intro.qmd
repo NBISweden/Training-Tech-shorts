@@ -70,7 +70,7 @@ When working on a feature in a separate branch while someone else updates the ma
 
 First you would probably like to use `git pull` as described above to make sure your local copy is up-to-date with changes made by others.  
 
-Then it could be done with merge like this: 
+Then it could be done with merge like this:  
 
 `git checkout my_new_feature` followed by adding your new code/feature and then merge it:  
 `git merge main`  
