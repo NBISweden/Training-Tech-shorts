@@ -7,7 +7,10 @@
 - Finally, click create branch
 
 You also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the "Find or create branch..." field, followed by clicking Create branch. 
-This will give the exact same result as the steps above.  
+This will give the exact same result as the steps above.
+
+This short description might be confusing since there are more than one way of doing this.
+A step-by-step guide with pictures is available [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)
 
 ## Making changes
 
