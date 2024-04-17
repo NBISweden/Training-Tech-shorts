@@ -1,0 +1,74 @@
+# How to collaborate on Github
+
+This section is a guide describing one method of collaborating on Github. We focus on 
+the framework that we use to make reference material for future us and others new to the team. 
+
+## Making a branch (Teacher)
+
+- On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.
+- Click on view all branches
+- Click New branch, give it a name and select the branch source.
+- Finally, click create branch
+
+You also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the "Find or create branch..." field, followed by clicking Create branch. 
+This will give the exact same result as the steps above.
+
+This short description might be confusing since there are more than one way of doing this.
+A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)
+
+## Making changes (Learner)
+
+- Fork the whole target repository to your own account, by selecting "Fork" -> include all the branches (i.e., untick "Copy the main branch only") -> "Create fork".
+- On your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.
+- To edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode. 
+- If instead you need to make a new file in the branch, click the "Add file" drop down -> "create new file". Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., "github/myfile.qmd" will create the folder github also.
+- Add the file contents in edit mode.
+- When finished, click "Commit changes..."
+
+## Making a draft pull request (Learner)
+
+After making and committing changes as described above, navigate to
+the Pull requests tab. Click "New pull request" which will produce a
+"Comparing changes" page with four drop-down lists. The leftmost two
+drop-down lists refer to the target repository of the pull request and
+should be set to NBISweden/Training-Tech-shorts, followed by the
+target branch. The two rightmost drop-down lists refer to the pull
+request source and should point to your repository and, importantly,
+the branch that you are editing (and make sure it matches the target
+branch!). By default, only the branches of the target repository are
+shown. To find the updated branch from the forked repository, one has
+to click on "If you need to, you can also compare across forks.". Once
+done, change the green drop-down button "Create pull request" to
+"Create draft pull request". This will generate a draft pull request
+page where your review partner can make comments on your PR.
+
+## Code review (Review partner)
+
+- navigate to the top menu and click on `Pull requests`
+- by default all open pull requests are listed, you can further filter down the list. e.g. via clicking on `Reviews` and afterwards select `Awaiting review from you` in the drop down menu. This shows then only PRs where you are tagged as reviewer. 
+- click on a pull request of your choice 
+- the following window has 4 tabs: 
+  * Conversation: gives an overview about the PR
+  * Commits: list all commits of the PR
+  * Check:
+  * Files changed: lists all files which were modified 
+- click on the `Files changed` tab and go through the files and changes
+  * you can comment on a line by hovering over a line and click on the plus symbol 
+  * in case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines
+  * afterwards you can either:
+    a) click on the `Add single comment` button which makes your comment or suggestion immediately visible
+    OR  
+    b) click on the `Start a review` button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.
+  * when done with the full review click on the `Finish your review` button on the top right corner of the page: 
+    - you can comment on your review and choose one of the following options `Comment`, `Approve`, `Request changes`. Select the approprate option and click on `Submit review`.
+
+## Making a ready for review pull request (Learner)
+
+- Once you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.
+- On the right side panel, you should invite the teacher to review your pull request. 
+- The teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did. 
+
+## Merges pull requests (Teacher)
+
+- Once both teacher and learner are satisfied with the updates, the teacher merges the learner's pull request into their lesson branch.
+- Once the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.
