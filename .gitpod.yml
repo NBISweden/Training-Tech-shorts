@@ -1,0 +1,17 @@
+image: nfcore/gitpod:latest
+
+tasks:
+  - name: Update Nextflow
+    command: nextflow self-update
+  - name: Install Pixi
+    command: |
+      sudo chown gitpod -R /home/gitpod/
+      curl -fsSL https://pixi.sh/install.sh | bash
+      . /home/gitpod/.bash_profile
+  - name: Install Quarto
+    command: |
+      wget https://quarto.org/download/latest/quarto-linux-amd64.deb
+      # sudo apt-get install r-base r-base-dev
+      sudo dpkg -i quarto-linux-amd64.deb
+      rm quarto-linux-amd64.deb
+      quarto check all
