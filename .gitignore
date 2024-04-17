@@ -1,3 +1,15 @@
+# Quarto files
 /.quarto/
 _book/
 _site/
+
+# Nextflow files
+.nextflow*
+work/
+results/
+
+# Pixi files
+.pixi
+
+# Misc
+data/
