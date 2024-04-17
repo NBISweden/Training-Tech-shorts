@@ -30,6 +30,83 @@
     ]
   },
   {
+    "objectID": "github/gh-collaboration.html",
+    "href": "github/gh-collaboration.html",
+    "title": "1  How to collaborate on Github",
+    "section": "",
+    "text": "1.1 Making a branch (Teacher)\nYou also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.\nThis short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)",
+    "crumbs": [
+      "Github",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+    ]
+  },
+  {
+    "objectID": "github/gh-collaboration.html#making-a-branch-teacher",
+    "href": "github/gh-collaboration.html#making-a-branch-teacher",
+    "title": "1  How to collaborate on Github",
+    "section": "",
+    "text": "On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.\nClick on view all branches\nClick New branch, give it a name and select the branch source.\nFinally, click create branch",
+    "crumbs": [
+      "Github",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+    ]
+  },
+  {
+    "objectID": "github/gh-collaboration.html#making-changes-learner",
+    "href": "github/gh-collaboration.html#making-changes-learner",
+    "title": "1  How to collaborate on Github",
+    "section": "1.2 Making changes (Learner)",
+    "text": "1.2 Making changes (Learner)\n\nFork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.\nOn your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.\nTo edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.\nIf instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.\nAdd the file contents in edit mode.\nWhen finished, click “Commit changes…”",
+    "crumbs": [
+      "Github",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+    ]
+  },
+  {
+    "objectID": "github/gh-collaboration.html#making-a-draft-pull-request-learner",
+    "href": "github/gh-collaboration.html#making-a-draft-pull-request-learner",
+    "title": "1  How to collaborate on Github",
+    "section": "1.3 Making a draft pull request (Learner)",
+    "text": "1.3 Making a draft pull request (Learner)\nAfter making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.",
+    "crumbs": [
+      "Github",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+    ]
+  },
+  {
+    "objectID": "github/gh-collaboration.html#code-review-review-partner",
+    "href": "github/gh-collaboration.html#code-review-review-partner",
+    "title": "1  How to collaborate on Github",
+    "section": "1.4 Code review (Review partner)",
+    "text": "1.4 Code review (Review partner)\n\nnavigate to the top menu and click on Pull requests\nby default all open pull requests are listed, you can further filter down the list. e.g. via clicking on Reviews and afterwards select Awaiting review from you in the drop down menu. This shows then only PRs where you are tagged as reviewer.\nclick on a pull request of your choice\nthe following window has 4 tabs:\n\nConversation: gives an overview about the PR\nCommits: list all commits of the PR\nCheck:\nFiles changed: lists all files which were modified\n\nclick on the Files changed tab and go through the files and changes\n\nyou can comment on a line by hovering over a line and click on the plus symbol\nin case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines\nafterwards you can either:\n\nclick on the Add single comment button which makes your comment or suggestion immediately visible OR\n\nclick on the Start a review button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.\n\nwhen done with the full review click on the Finish your review button on the top right corner of the page:\n\nyou can comment on your review and choose one of the following options Comment, Approve, Request changes. Select the approprate option and click on Submit review.",
+    "crumbs": [
+      "Github",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+    ]
+  },
+  {
+    "objectID": "github/gh-collaboration.html#making-a-ready-for-review-pull-request-learner",
+    "href": "github/gh-collaboration.html#making-a-ready-for-review-pull-request-learner",
+    "title": "1  How to collaborate on Github",
+    "section": "1.5 Making a ready for review pull request (Learner)",
+    "text": "1.5 Making a ready for review pull request (Learner)\n\nOnce you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.\nOn the right side panel, you should invite the teacher to review your pull request.\nThe teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.",
+    "crumbs": [
+      "Github",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+    ]
+  },
+  {
+    "objectID": "github/gh-collaboration.html#merges-pull-requests-teacher",
+    "href": "github/gh-collaboration.html#merges-pull-requests-teacher",
+    "title": "1  How to collaborate on Github",
+    "section": "1.6 Merges pull requests (Teacher)",
+    "text": "1.6 Merges pull requests (Teacher)\n\nOnce both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.\nOnce the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.",
+    "crumbs": [
+      "Github",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>How to collaborate on Github</span>"
+    ]
+  },
+  {
     "objectID": "summary.html",
     "href": "summary.html",
     "title": "2  Summary",

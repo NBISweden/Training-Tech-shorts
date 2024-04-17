@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Training: Tech shorts</title>
+<title>Training: Tech shorts - 1&nbsp; How to collaborate on Github</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../github/gh-collaboration.html">Github</a></li><li class="breadcrumb-item"><a href="../github/gh-collaboration.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">gh-collaboration.html</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../github/gh-collaboration.html">Github</a></li><li class="breadcrumb-item"><a href="../github/gh-collaboration.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../github/gh-collaboration.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">gh-collaboration.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></span></a>
   </div>
 </li>
       </ul>
@@ -152,15 +152,116 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#making-a-branch-teacher" id="toc-making-a-branch-teacher" class="nav-link active" data-scroll-target="#making-a-branch-teacher"><span class="header-section-number">1.1</span> Making a branch (Teacher)</a></li>
+  <li><a href="#making-changes-learner" id="toc-making-changes-learner" class="nav-link" data-scroll-target="#making-changes-learner"><span class="header-section-number">1.2</span> Making changes (Learner)</a></li>
+  <li><a href="#making-a-draft-pull-request-learner" id="toc-making-a-draft-pull-request-learner" class="nav-link" data-scroll-target="#making-a-draft-pull-request-learner"><span class="header-section-number">1.3</span> Making a draft pull request (Learner)</a></li>
+  <li><a href="#code-review-review-partner" id="toc-code-review-review-partner" class="nav-link" data-scroll-target="#code-review-review-partner"><span class="header-section-number">1.4</span> Code review (Review partner)</a></li>
+  <li><a href="#making-a-ready-for-review-pull-request-learner" id="toc-making-a-ready-for-review-pull-request-learner" class="nav-link" data-scroll-target="#making-a-ready-for-review-pull-request-learner"><span class="header-section-number">1.5</span> Making a ready for review pull request (Learner)</a></li>
+  <li><a href="#merges-pull-requests-teacher" id="toc-merges-pull-requests-teacher" class="nav-link" data-scroll-target="#merges-pull-requests-teacher"><span class="header-section-number">1.6</span> Merges pull requests (Teacher)</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../github/gh-collaboration.html">Github</a></li><li class="breadcrumb-item"><a href="../github/gh-collaboration.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<p>This section is a guide describing one method of collaborating on Github. We focus on the framework that we use to make reference material for future us and others new to the team.</p>
+<section id="making-a-branch-teacher" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="making-a-branch-teacher"><span class="header-section-number">1.1</span> Making a branch (Teacher)</h2>
+<ul>
+<li>On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.</li>
+<li>Click on view all branches</li>
+<li>Click New branch, give it a name and select the branch source.</li>
+<li>Finally, click create branch</li>
+</ul>
+<p>You also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.</p>
+<p>This short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)</p>
+</section>
+<section id="making-changes-learner" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="making-changes-learner"><span class="header-section-number">1.2</span> Making changes (Learner)</h2>
+<ul>
+<li>Fork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.</li>
+<li>On your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.</li>
+<li>To edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.</li>
+<li>If instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.</li>
+<li>Add the file contents in edit mode.</li>
+<li>When finished, click “Commit changes…”</li>
+</ul>
+</section>
+<section id="making-a-draft-pull-request-learner" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="making-a-draft-pull-request-learner"><span class="header-section-number">1.3</span> Making a draft pull request (Learner)</h2>
+<p>After making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.</p>
+</section>
+<section id="code-review-review-partner" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="code-review-review-partner"><span class="header-section-number">1.4</span> Code review (Review partner)</h2>
+<ul>
+<li>navigate to the top menu and click on <code>Pull requests</code></li>
+<li>by default all open pull requests are listed, you can further filter down the list. e.g.&nbsp;via clicking on <code>Reviews</code> and afterwards select <code>Awaiting review from you</code> in the drop down menu. This shows then only PRs where you are tagged as reviewer.</li>
+<li>click on a pull request of your choice</li>
+<li>the following window has 4 tabs:
+<ul>
+<li>Conversation: gives an overview about the PR</li>
+<li>Commits: list all commits of the PR</li>
+<li>Check:</li>
+<li>Files changed: lists all files which were modified</li>
+</ul></li>
+<li>click on the <code>Files changed</code> tab and go through the files and changes
+<ul>
+<li>you can comment on a line by hovering over a line and click on the plus symbol</li>
+<li>in case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines</li>
+<li>afterwards you can either:
+<ol type="a">
+<li>click on the <code>Add single comment</code> button which makes your comment or suggestion immediately visible OR<br>
+</li>
+<li>click on the <code>Start a review</code> button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.</li>
+</ol></li>
+<li>when done with the full review click on the <code>Finish your review</code> button on the top right corner of the page:
+<ul>
+<li>you can comment on your review and choose one of the following options <code>Comment</code>, <code>Approve</code>, <code>Request changes</code>. Select the approprate option and click on <code>Submit review</code>.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="making-a-ready-for-review-pull-request-learner" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="making-a-ready-for-review-pull-request-learner"><span class="header-section-number">1.5</span> Making a ready for review pull request (Learner)</h2>
+<ul>
+<li>Once you and your review partner have agreed on the code review (i.e.&nbsp;Your review partner has approved your draft pull request), covert your draft pull request to ready to review.</li>
+<li>On the right side panel, you should invite the teacher to review your pull request.</li>
+<li>The teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.</li>
+</ul>
+</section>
+<section id="merges-pull-requests-teacher" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="merges-pull-requests-teacher"><span class="header-section-number">1.6</span> Merges pull requests (Teacher)</h2>
+<ul>
+<li>Once both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.</li>
+<li>Once the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.</li>
+</ul>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
