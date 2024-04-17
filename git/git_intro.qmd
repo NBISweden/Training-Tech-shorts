@@ -10,7 +10,7 @@ Git is the most popular tool, even though it might not be the most user-friendly
 
 In software development, Git is mostly used for version control of code. In our bioinformatics projects, we can also track our report files, environment files, and other small files.
 
-Git should NOT be used for storing data, particularly large data. Sensitive data (passwords, usernames, API keys...) should not be put in a Git repository, because they can be then exposed to the world. One can go back into the file history and extract data, so you should remove any problematic files from the Git history as well.
+Git should NOT be used for storing data, particularly large data. Sensitive data (passwords, usernames, API keys...) should not be put in a Git repository, because they can be then exposed to the world. If one commits sensitive data by mistake, one can go back into the git history and remove it, but it is not a simple task.
 
 ## Git Repositories
 
