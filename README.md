@@ -6,6 +6,10 @@ Lessons are located at https://nbisweden.github.io/Training-Tech-shorts/.
 
 The schedule is the [schedule page](https://nbisweden.github.io/Training-Tech-shorts/schedule.html).
 
+A gitpod environment is provided for convenience.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/NBISweden/Training-Tech-shorts)
+
 ## Background
 
 This repository is intended to be used as a training tool, which
