@@ -31,13 +31,14 @@ Quarto lets you perform computations within your notebook. This is typically
 done using code blocks denoted by three backticks followed by the language 
 you're using in curly brackets.
 
-```
+````{.markdown}
 ```{{python}}
 1 + 1
 ```
-```
+````
 
 Quarto supports computations in several languages:
+
 - [Python](https://quarto.org/docs/computations/python.html)
 - [R](https://quarto.org/docs/computations/r.html)
 - [Julia](https://quarto.org/docs/computations/julia.html)
@@ -52,11 +53,10 @@ are often installed through other means, for example using `conda` or a containe
 Packages and variables created within one code block are also accessible from other code blocks, including
 inline code blocks. For example, here we create a figure and reference the value in the caption.
 
-````
-
+````{.markdown}
 :::{#fig-plot-alt}
 
-```{r}
+```{{r}}
 x <- 1:10
 y <- x^2
 
@@ -65,13 +65,12 @@ plot(x, y)
 
 A plot of $x$ against it's square (n = `{r} length(x)`).
 :::
-
 ````
 
 The output of computations can be controlled using [execution options](https://quarto.org/docs/computations/execution-options.html).
 These can be set for the whole document in the yaml front-matter at the top of the document, e.g.,
 
-````
+````{.yml}
 ---
 title: My Experiment
 execute:
@@ -81,8 +80,8 @@ execute:
 
 Alternatively, execution options can be specified within each code block, e.g.,
 
-````
-```{python}
+````{.markdown}
+```{{python}}
 #| echo: false
 #| output: asis
 print("""
@@ -95,7 +94,7 @@ This is Markdown text.
 
 Computations can also be used to dynamically generate Markdown
 or HTML content by using the `output` format `asis`. For example, 
-document sections can by dynamically generated from an input file.
+document sections can be dynamically generated from an input file.
 
 ### Engines (André / Mahesh)
 
