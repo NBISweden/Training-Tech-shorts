@@ -110,5 +110,7 @@ git rebase main
 
 This will sort of re-write the project history by moving the feature branch to the "tip" of the main and create new commits in the original branch.
 
+## Git Cheetsheet
 
+![](https://cdn.masto.host/socialjvnsca/media_attachments/files/112/288/026/870/908/533/original/8cdf198fa52700f6.png){fig-alt="A Git cheetsheet by Julia Evans"}
 
