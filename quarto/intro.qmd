@@ -10,7 +10,7 @@
 
 The `quarto render` and `quarto preview` commands are used to generate output from a Quarto (.qmd) document. 
 
-The `quarto render` command generates output in all formats specified in your YAML header (e.g. pdf,html,word), while the `quarto preview` command only generates output in a format suitable for viewing in a web browser.
+The `quarto render` command generates output in all formats specified in your YAML header (e.g. pdf,html,word) or in your command line with the option --to, while the `quarto preview` command only generates output in a format suitable for viewing in a web browser.
 
 In a typical workflow, you would use the `quarto preview` command to view the output of your document as you are working on it.
 
