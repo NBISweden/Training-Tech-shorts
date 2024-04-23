@@ -2,7 +2,47 @@
 
 ## What is Quarto (Tomas / André)
 
-### The Quarto CLI (Martin / Tomas)
+### The Quarto CLI
+
+0. In order to use quarto you need to install quarto first. The easiest way is to get the package for your desired platform directly from [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/). If you need the most recent version you can also get the source code from the [quarto-cli](https://github.com/quarto-dev/quarto-cli) git repository.
+1. After quarto is installed on your system you can get an overview of all subcommonds when you type `quarto help` (followed by pressing ENTER) in a terminal: 
+```
+  Usage:   quarto 
+  Version: 1.4.553
+
+  Description:
+
+    Quarto CLI
+
+  Options:
+
+    -h, --help     - Show this help.                            
+    -V, --version  - Show the version number for this program.  
+
+  Commands:
+
+    render     [input] [args...]     - Render files or projects to various document types.
+    preview    [file] [args...]      - Render and preview a document or website project.  
+    serve      [input]               - Serve a Shiny interactive document.                
+    create     [type] [commands...]  - Create a Quarto project or extension               
+    use        <type> [target]       - Automate document or project setup tasks.          
+    add        <extension>           - Add an extension to this folder or project         
+    update     [target...]           - Updates an extension or global dependency.         
+    remove     [target...]           - Removes an extension.                              
+    convert    <input>               - Convert documents to alternate representations.    
+    pandoc     [args...]             - Run the version of Pandoc embedded within Quarto.  
+    typst      [args...]             - Run the version of Typst embedded within Quarto.   
+    run        [script] [args...]    - Run a TypeScript, R, Python, or Lua script.        
+    install    [target...]           - Installs a global dependency (TinyTex or Chromium).
+    uninstall  [tool]                - Removes an extension.                              
+    tools                            - Display the status of Quarto installed dependencies
+    publish    [provider] [path]     - Publish a document or project to a provider.       
+    check      [target]              - Verify correct functioning of Quarto installation. 
+    help       [command]             - Show this help or the help of a sub-command.       
+```
+There are many quarto subcommands available. You can get more details about each subcommand when you type `quarto <SUBCOMMAND> help` in the terminal: e.g. `quarto render help` provides detailed information about rendering files or projects to various document types - including some usage examples at the end.
+
+
 
 ## Authoring (Estelle / Martin)
 
