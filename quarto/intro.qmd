@@ -33,8 +33,9 @@ See this page for a list of [Jupyter kernels](https://gist.github.com/chronitis/
 The languages and packages used in your computations must be available in your `render` environment, and 
 are often installed through other means, for example using `conda` or a container platform.
 
-Packages and variables created within one code block are also accessible from other code blocks, including
-inline code blocks. For example, here we create a figure and reference the value in the caption.
+Loaded packages and variables defined within a code block are also accessible from other code blocks, including
+inline code blocks. For example, here we create a figure within a div (`:::`) and reference the `x` variable
+in both the figure caption and text body.
 
 ````{.markdown}
 :::{#fig-plot-alt}
@@ -48,6 +49,9 @@ plot(x, y)
 
 A plot of $x$ against it's square (n = `{r} length(x)`).
 :::
+
+This paragraph refers to @fig-plot-alt for a plot of $y=x^2$ 
+based on `{r} length(x)` points.
 ````
 
 The output of computations can be controlled using [execution options](https://quarto.org/docs/computations/execution-options.html).
