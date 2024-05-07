@@ -1,0 +1,11 @@
+# Gitpod
+
+## What is Gitpod (Estelle/ Cormac to review)
+
+## How to login to Gitpod (Cormac /Miguel to review)
+
+## How to start a Gitpod (Miguel /Guilherme to review)
+
+## How to configure Gitpod (Guilherme / Jason to review)
+
+## Uses for Gitpod (Jason / Estelle to review)
