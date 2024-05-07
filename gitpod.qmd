@@ -4,9 +4,9 @@
 
 ## How to login to Gitpod (Cormac /Miguel to review)
 
-- Go to the gitpod site [here](https://gitpod.io)
+- Go to the [Gitpod site](https://gitpod.io)
 
-- Select your Git hosting service (e.g. GitHub), and authenticate via them
+- Select your Git hosting service (e.g., GitHub), and authenticate
 
 - If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right
 
