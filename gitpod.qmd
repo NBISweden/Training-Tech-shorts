@@ -2,7 +2,7 @@
 
 ## What is Gitpod (Estelle/ Cormac to review)
 
-## How to login to Gitpod (Cormac /Miguel to review)
+## How to login to Gitpod
 
 - Go to the [Gitpod site](https://gitpod.io)
 
