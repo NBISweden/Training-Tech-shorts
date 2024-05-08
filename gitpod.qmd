@@ -2,7 +2,15 @@
 
 ## What is Gitpod (Estelle/ Cormac to review)
 
-## How to login to Gitpod (Cormac /Miguel to review)
+## How to login to Gitpod
+
+- Go to the [Gitpod site](https://gitpod.io)
+
+- Select your Git hosting service (e.g., GitHub), and authenticate
+
+- If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right
+
+- Now when you start a Gitpod environment you'll be connected to your version control system
 
 ## How to start a Gitpod (Miguel /Guilherme to review)
 
