@@ -1,0 +1,27 @@
+# Quarto to wiki introductions and examples
+Based on this page: https://quarto.org/docs/publishing/confluence.html
+
+## Short introduction on how to render quarto documents directly to the wiki (and how to to it on uppmax)
+Per (reviewer Mahesh) 
+
+## Whole projects 
+Mahesh (reviewer Cormac)
+
+Use this link when asked where to put you page:
+https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899836938/Quarto+examples
+
+Give the page a name on this format with your name to make it unique: "Quarto_example-Tomas"
+## Quarto document 
+Verena (reviewer Jason)
+
+## Quarto document 
+Cormac (reviewer Guilherme)
+
+## Quarto document  
+Jason (reviewer Martin)
+
+## Quarto document  
+Guilherme (reviewer Per)
+
+## Quarto document  
+Martin (reviewer Verena)
