@@ -12,7 +12,7 @@ https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899836938/Quarto+example
 
 Give the page a name on this format with your name to make it unique: "Quarto_example-Tomas"
 ## Quarto document 
-Verena (reviewer Jason)
+Verena (reviewer Jason): `Training-Tech-shorts/quarto-to-wiki/quarto-example-verena/quarto-example-verena.qmd`
 
 ## Quarto document 
 Cormac (reviewer Guilherme)
