@@ -14,7 +14,7 @@ Per (reviewer Mahesh)
 Pixi was used to create the quarto environment.
 ```{.bash}
 pixi init -c conda-forge -c bioconda
-pixi add quarto jupyter ipyleaflet plotly pandas statsmodels
+pixi add quarto jupyter ipyleaflet plotly pandas statsmodels jupyter-cache
 ```
 
 Quarto was then used to create a confluence project.
@@ -28,6 +28,7 @@ The quarto project created can be seen at https://github.com/mahesh-panchal/quar
 The aim was to add a varied selection of quarto markup and interactive elements as well as raw output.
 
 This was then published to Confluence using:
+
 ```{.bash}
 quarto publish confluence
 ```
@@ -43,7 +44,18 @@ I was also instructed by quarto to
 quarto install chromium
 ```
 
-At this point Quarto began rendering, but hung at the second page.
+At this point Quarto began rendering, but hung at the second page. The issue 
+was localised to creating the mermaid diagram. After converting the
+mermaid diagram to a code block `{{.mermaid}}` the project sucessfully published 
+to confluence.
+
+Several things didn't render although might be achievable in other ways:
+
+- Mermaid diagram rendering failed locally and didn't upload as an image.
+- Interactive plotting failed. Perhaps this needs to be embedded as an attachment.
+- Interactive map did not produce any kind of map, even a static image.
+- References did not work.
+- Column layout did not work.
 
 ## Quarto document 
 Verena (reviewer Jason)
