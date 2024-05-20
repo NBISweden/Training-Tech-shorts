@@ -1,6 +1,19 @@
 # Gitpod
 
-## What is Gitpod (Estelle/ Cormac to review)
+## What is Gitpod
+
+Gitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository.
+
+There are different pricing depending on your needs such as:  
+
+- Free plan (50 hours per month)
+
+- Pas-as-you-go  
+
+- Company plan (custom)
+
+NBIS does not have a Gitpod account. Mahesh has an open source plan (nammed NBIS).
+
 
 ## How to login to Gitpod
 
