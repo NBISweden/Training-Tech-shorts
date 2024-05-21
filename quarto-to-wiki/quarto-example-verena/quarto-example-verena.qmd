@@ -1,0 +1,207 @@
+---
+title: Quarto example - Verena
+subtitle: Some text, plots and tables from a NBIS user-fee project
+author: Verena Kutschera
+date: today
+format:
+    nbis-html: default
+engine: jupyter
+jupyter: python3
+bibliography: ../../references.bib
+---
+
+## Data
+
+### Library construction and sequencing (from NGI report)
+
+Libraries were construction using the Illumina TruSeq PCR-free
+library prep kit. Samples were sequenced on NovaSeq6000 in a 
+'S4' mode flowcell. Bcl to FastQ conversion was performed 
+using bcl2fastq_v2.20.0.422 from the CASAVA software suite. 
+
+- Raw data location on Rackham: 
+`/proj/snic2020-X-XXX/private/DataDelivery_2023-XX-XX_XX-XX-XX_ngisthlm00XXX/files/PXXXXX`  
+    - Please note that NBIS recommends to submit raw data to 
+    ENA as soon as possible
+
+| Sample_ID | NGI_ID     | Mreads | >=Q30 | Date  | Sex |
+|-----------|------------|--------|-------|-------|-----|
+| F34       | PXXXXX_113 | 109.65 | 90.04 | 2022  | F   |
+| F41       | PXXXXX_114 | 119.48 | 89.87 | 2022  | M   |
+| F42       | PXXXXX_115 | 91.88  | 89.91 | 2022  | F   |
+| F43       | PXXXXX_116 | 106.51 | 89.93 | 2022  | F   |
+| F44       | PXXXXX_117 | 112.15 | 89.75 | 2022  | M   |
+| O1        | PXXXXX_101 | 110.42 | 89.80 | 2022  | M   |
+| O11       | PXXXXX_203 | 136.61 | 90.22 | 2022  | M   |
+| O15       | PXXXXX_107 | 110.25 | 89.98 | 2022  | M   |
+| O16       | PXXXXX_108 | 102.67 | 89.62 | 2022  | F   |
+
+: Sample metadata {#tbl-metadata}
+
+*Sample_ID: sample identifier used for sampling and laboratory*
+*work. NGI_ID: NGI sample identifier, Mreads:total million*
+*read pairs for a sample,>=Q30: aggregated percentage of bases*
+*that have a quality score >= Q30, Longitude / Latitude:*
+*geographic sampling location, Date: sampling year,*
+*Sex: M=male, F=female*
+
+## Some methods
+
+### Whole-genome sequencing data processing
+
+Whole-genome sequencing data from nine individuals (@tbl-metadata) 
+were processed and analysed using GenErode v0.6.0 [@Kutschera2022] 
+with default settings if not otherwise described. 
+
+## Some results
+
+### Population structure
+
+F~ST~ was calculated in 50 kb windows between island and mainland 
+samples. The mean F~ST~ across all 50 kb windows (with zero 
+missing data allowed) was 0.036.
+
+```{python mean_fst}
+#| echo: True
+#| output: True
+
+import os
+import pandas as pd
+import numpy as np
+
+def mean_fst(fst_file):
+    fst_df = pd.read_table(fst_file, delim_whitespace=True, header=0)
+    mean_fst = fst_df['MEAN_FST'].mean()
+    print(mean_fst)
+
+fst = "windowed.weir.fst"
+
+mean_fst(fst)
+```
+
+### Genome-wide heterozygosity
+
+We estimated individual heterozygosity calculated as the 
+number of heterozygote sites (i.e., SNPs) per site (theta = 
+*4Neμ*) using mlRho. 
+
+```{python mlRho_stats}
+#| echo: True
+#| output: True
+
+import pandas as pd
+import scipy.stats as stats
+
+def mlRho_dataframe(inputfiles):
+    # define a function to get the input data
+    dataframes = []
+    for infile in inputfiles:
+        dataset = str(infile).split(".")[0]
+        with open(infile) as f:
+            for i in f: # create one dataframe per input file
+                path_list = i.split("/")
+                sample = path_list[-1].split(".")[0]
+                genomeregion = path_list[-1].split(".")[-3]
+                if genomeregion == "genome":
+                    genomeregion = "genomewide"
+                elif genomeregion == "autos":
+                    genomeregion = "autosomes"
+                elif genomeregion == "sexchr":
+                    genomeregion = "sexchromosomes"
+                sample_df=pd.read_table(i.strip(), delim_whitespace=True, comment='#')
+                sample_df.insert(0, 'dataset', [dataset]) 
+                sample_df.insert(1, 'sample', [sample])
+                sample_df.insert(2, 'genomeregion', [genomeregion])
+                dataframes.append(sample_df)
+    conc_df = pd.concat(dataframes) # concatenate all dataframes
+    conc_df.reset_index(drop=True, inplace=True)
+    conc_df = conc_df.sort_values(by = ['dataset', 'sample'], ascending = [True, True])
+    return conc_df
+
+def process_mlrho_dataframe(mlrho_df):
+    # function to read in and process the data
+    mlrho_df['lower_theta'] = mlrho_df['theta'].str.split('<').str[0].astype(float)
+    mlrho_df['theta_est'] = mlrho_df['theta'].str.split('<').str[1].astype(float)
+    mlrho_df['upper_theta'] = mlrho_df['theta'].str.split('<').str[2].astype(float)
+    grouped_df = mlrho_df.groupby('dataset')
+    return mlrho_df, grouped_df
+
+def mann_whitney_u(statistic, dataset1, list1, dataset2, list2):
+    # perform Wilcoxon rank-sum test (equivalent to Mann-Whitney U test)
+    print('**** Mann-Whitney U test of',statistic,'****\n')
+    stat, p_value = stats.mannwhitneyu(list1, list2) 
+    print('\tU=%.2f, p=%.2f' % (stat, p_value)) 
+
+    # Level of significance 
+    alpha = 0.05
+    # conclusion
+    if p_value < alpha: 
+        print('\tRejecting Null Hypothesis (Significant difference between the two samples)') 
+    else: 
+        print('\tCannot Reject Null Hypothesis (No significant difference between the two samples)')
+
+    print('\n\tSamples and sample sizes:\n\t', dataset1,'n =',len(list1), '\n\t', dataset2, 'n =', len(list2))
+
+# read in the data
+infiles = ['mainland.txt', 'island.txt']
+
+# apply the functions
+mlRho_df = mlRho_dataframe(infiles)
+tabledf, groupeddf = process_mlrho_dataframe(mlRho_df)
+
+listdf = tabledf.groupby('dataset')['theta_est'].apply(list)
+
+print('Mainland:')
+print('\tMedian heterozygosity %.6f' % (pd.Series(listdf['mainland']).median()))
+print('\tMinimum heterozygosity %.6f' % (pd.Series(listdf['mainland']).min()))
+print('\tMaximum heterozygosity %.6f' % (pd.Series(listdf['mainland']).max()), '\n')
+
+print('Island:')
+print('\tMedian heterozygosity %.6f' % (pd.Series(listdf['island']).median()))
+print('\tMinimum heterozygosity %.6f' % (pd.Series(listdf['island']).min()))
+print('\tMaximum heterozygosity %.6f' % (pd.Series(listdf['island']).max()), '\n')
+
+mann_whitney_u('Heterozygosity', 'Mainland', listdf['mainland'], 'Island', listdf['island'])
+```
+
+```{python mlRho-fig}
+#| label: fig-mlrho
+#| fig-cap: "Genome-wide autosomal individual heterozygosity of nine individuals. Theta = *4Neμ* = number of heterozygous sites per site. Error bars represent 95% confidence intervals."
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from matplotlib import cm
+from matplotlib.colors import ListedColormap, LinearSegmentedColormap
+
+def theta_plot(dataframe, grouped, dataset, ax, color):
+    # function for the subplots
+    data_df = grouped.get_group(dataset)
+    for lower,theta,upper,x in zip(data_df['lower_theta'],data_df['theta_est'],data_df['upper_theta'],range(len(data_df))):
+        ax.plot((x,x),(lower,upper),'-',color=color)
+        ax.plot((x),(theta),'o',color=color)
+    ax.set_xticks(range(len(data_df)))
+    ax.set_xticklabels(list(data_df['sample']), rotation = 45)
+
+def combine_theta_plots(dataframe, grouped):
+    # function to create the combined plot
+    cividis = cm.get_cmap('cividis', 256) # create the cividis colormap
+    fig, (ax1, ax2) = plt.subplots(ncols=2, sharey=True)
+    ax1.set_xlabel("Mainland", fontsize=12)
+    ax2.set_xlabel("Island", fontsize=12)
+    theta_plot(dataframe, grouped, "mainland", ax1, cividis.colors[200])
+    theta_plot(dataframe, grouped, "island", ax2, cividis.colors[80])
+    fig.supxlabel('samples') # x axis label
+
+    fig.supylabel('theta', fontsize=12) # common y axis label
+    fig.align_labels() # align axis labels
+
+    plt.tight_layout()
+    plt.show()
+
+combine_theta_plots(tabledf, groupeddf)
+```
+
+## References
+
+::: {#refs}
+:::
