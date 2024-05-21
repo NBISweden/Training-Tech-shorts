@@ -1,16 +1,62 @@
 # Quarto to wiki introductions and examples
 Based on this page: https://quarto.org/docs/publishing/confluence.html
 
-## Short introduction on how to render quarto documents directly to the wiki (and how to to it on uppmax)
-Per (reviewer Mahesh) 
-
-## Whole projects 
-Mahesh (reviewer Cormac)
-
 Use this link when asked where to put you page:
 https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899836938/Quarto+examples
 
 Give the page a name on this format with your name to make it unique: "Quarto_example-Tomas"
+
+## Short introduction on how to render quarto documents directly to the wiki (and how to to it on uppmax)
+Per (reviewer Mahesh) 
+
+## Whole projects 
+
+Pixi was used to create the quarto environment.
+```{.bash}
+pixi init -c conda-forge -c bioconda
+pixi add quarto jupyter ipyleaflet plotly pandas statsmodels jupyter-cache
+```
+
+Quarto was then used to create a confluence project.
+
+```{.bash}
+pixi shell
+quarto create project confluence .
+```
+
+The quarto project created can be seen at https://github.com/mahesh-panchal/quarto-confluence-project.
+The aim was to add a varied selection of quarto markup and interactive elements as well as raw output.
+
+This was then published to Confluence using:
+
+```{.bash}
+quarto publish confluence
+```
+
+where I was asked to provide the domain `https://scilifelab.atlassian.net`, followed by
+my username, an API token (A link to the page was provided to create one), and finally
+the url path to where I wanted to publish `https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh`.
+As I was unsure if I would overwrite the work of others I created this page first after 
+quarto indicated the folder didn't exist.
+
+I was also instructed by quarto to 
+```{.bash}
+quarto install chromium
+```
+
+At this point Quarto began rendering, but hung at the second page. The issue 
+was localised to creating the mermaid diagram. After converting the
+mermaid diagram to a code block `{{.mermaid}}` the project sucessfully published 
+to confluence.
+
+Several things didn't render although might be achievable in other ways:
+
+- Mermaid diagram rendering failed locally and didn't upload as an image.
+- Interactive plotting failed. Perhaps this needs to be embedded as an attachment.
+- Interactive map did not produce any kind of map, even a static image.
+- References did not work.
+- Column layout did not work.
+
 ## Quarto document 
 Verena (reviewer Jason)
 
