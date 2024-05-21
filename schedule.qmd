@@ -4,8 +4,14 @@ Dates for each lesson, listed in reverse chronological order.
 Meetings are over Zoom, Tuesdays at 13.00. Meeting links are
 provided by the teacher.
 
-- 24/05/14: Tomas - Review: Quarto to Confluence.
-- 24/05/07: Tomas - Quarto to Confluence.
+- 24/06/25: Mahesh - Review: Pixi
+- 24/06/18: Mahesh - Pixi
+- 24/06/11: Cormac - Review: Singuarity
+- 24/06/04: Cormac - Singularity
+- 24/05/28: Mahesh - Review: Introduction to Gitpod.
+- 24/05/21: Tomas - Review: Quarto to Confluence.
+- 24/05/14: Tomas - Quarto to Confluence.
+- 24/05/07: Mahesh - Introduction to Gitpod.
 - 24/04/30: No lesson - Reduced working day.
 - 24/04/23: Per - Review: Quarto Introduction.
 - 24/04/16: Per - Quarto Introduction.
