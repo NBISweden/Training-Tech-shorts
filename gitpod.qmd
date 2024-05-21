@@ -17,3 +17,11 @@
 ## How to configure Gitpod (Guilherme / Jason to review)
 
 ## Uses for Gitpod (Jason / Estelle to review)
+
+- Demonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.
+
+- Development: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.
+
+- Experimentation: The ephemeral nature of the environment, and its standardizeed tools make gitpod excellent for testing code and sandbox experimentation.
+
+- Training: A pre-built environment can be provided which can be very useful if, for example, Rackham is down during a course. 
