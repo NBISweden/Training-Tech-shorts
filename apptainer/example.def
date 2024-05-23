@@ -1,0 +1,13 @@
+Bootstrap: docker
+From: debian:12.5-slim
+
+%environment
+        export PATH=$PATH:/root/.pixi/bin
+
+%post
+        export PATH=$PATH:/root/.pixi/bin
+        apt-get update && \
+        apt-get install -y curl && \
+	curl -fsSL https://pixi.sh/install.sh | bash && \
+	apt-get clean && \
+	pixi global install -c bioconda -c conda-forge  minigraph
