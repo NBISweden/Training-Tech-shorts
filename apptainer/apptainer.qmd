@@ -1,0 +1,18 @@
+# Introduction to Apptainer (i.e. Singularity)
+
+Lesson plan based around materials from [CodeRefinery](https://coderefinery.github.io/ttt4hpc_containers/basics_running_containers)
+
+## What are containers (and their difference from VMs)?
+
+## Docker vs Apptainer containers: layers, root privileges, relevance for HPC
+
+## Apptainer vs Singularity history and the .sif format
+
+## Structure of an apptainer command: pulling from registry, and running in 3 ways
+
+## Building from a definition file, .def: example with pixi
+
+## Portability to HPC systems, & reproducibilty note: .sif files vs rebuilding from a .def
+
+## Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?
+
