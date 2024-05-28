@@ -27,7 +27,70 @@ NBIS does not have a Gitpod account. Mahesh has an open source plan (nammed NBIS
 
 ## How to start a Gitpod (Miguel /Guilherme to review)
 
-## How to configure Gitpod (Guilherme / Jason to review)
+## How to configure Gitpod
+
+- A gitpod workspace is configured mainly through the `.gitpod.yml` file at the root of your repository (e.g. github.com/user/repo/.gitpod.yml). 
+
+- This file is read by Gitpod when the workspace is started, and can be used to specify the base workspace image, and a list of tasks that will be run when the workspace is started.
+
+- Below is the yml file we use in the Training-tech-shorts repo.
+
+```yml
+image: nfcore/gitpod:latest
+
+tasks:
+  - name: Update Nextflow
+    command: nextflow self-update
+  - name: Install Pixi
+    command: |
+      sudo chown gitpod -R /home/gitpod/
+      curl -fsSL https://pixi.sh/install.sh | bash
+      . /home/gitpod/.bash_profile
+  - name: Install Quarto
+    command: |
+      wget https://quarto.org/download/latest/quarto-linux-amd64.deb
+      # sudo apt-get install r-base r-base-dev
+      sudo dpkg -i quarto-linux-amd64.deb
+      rm quarto-linux-amd64.deb
+      quarto check all
+```
+- The `image:` section of the `.gitpod.yml` is used to specify the base workspace image, this can be a public or private docker image, or a Dockerfile (in this case the base image must be public).
+
+```yml
+# public image
+image: nfcore/gitpod:latest
+
+# local Dockerfile
+image:
+    file: .gitpod.Dockerfile
+```
+
+- The `tasks:` section of the `.gitpod.yml` is used to specify a list of tasks that will be run when the workspace is started. Each task should have a `name:` and a `command:` section. The `command:` section specifies one or more shell commands that will be run in the workspace.
+
+```yml
+tasks:
+  - name: Update Nextflow
+    command: nextflow self-update
+```
+
+- In order to execute multiple commands in a single task, you can use the `|` operator to specify a block of shell commands, each in one line.
+
+```yml
+tasks:
+  - name: Install Pixi
+    command: |
+      sudo chown gitpod -R /home/gitpod/
+      curl -fsSL https://pixi.sh/install.sh | bash
+      . /home/gitpod/.bash_profile
+```
+
+- Optionally, you can also add a `ports:` section to the `.gitpod.yml` file to specify a list of ports that should be opened by the workspace. This can be useful when hosting a web server or anything that needs to be accessed from outside the workspace.
+
+```yml
+ports:
+  - port: 8080
+    onOpen: open-preview
+```
 
 ## Uses for Gitpod (Jason / Estelle to review)
 
