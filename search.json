@@ -107,6 +107,17 @@
     ]
   },
   {
+    "objectID": "git/git_intro.html#git-cheetsheet",
+    "href": "git/git_intro.html#git-cheetsheet",
+    "title": "1  Introduction to Git",
+    "section": "1.8 Git Cheetsheet",
+    "text": "1.8 Git Cheetsheet",
+    "crumbs": [
+      "Git",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
+    ]
+  },
+  {
     "objectID": "github/gh-collaboration.html",
     "href": "github/gh-collaboration.html",
     "title": "2  How to collaborate on Github",
