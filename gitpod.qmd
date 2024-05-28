@@ -2,7 +2,7 @@
 
 ## What is Gitpod
 
-Gitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository.
+Gitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository. This container is built from the file ".gitpod.yml" present in the repository.   
 
 There are different pricing depending on your needs such as:  
 
