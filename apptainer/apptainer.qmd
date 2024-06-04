@@ -14,5 +14,7 @@ Lesson plan based around materials from [CodeRefinery](https://coderefinery.gith
 
 ## Portability to HPC systems, & reproducibilty note: .sif files vs rebuilding from a .def
 
+## Seqera containers resource
+
 ## Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?
 
