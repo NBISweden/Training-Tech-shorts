@@ -1,0 +1,130 @@
+# Introduction to Apptainer (i.e. Singularity)
+
+Lesson plan based around materials from [CodeRefinery](https://coderefinery.github.io/ttt4hpc_containers/basics_running_containers)
+
+## What are containers?
+
+- Containers isolate software, dependencies, configurations, and system libraries from the host system
+- The naming came from shipping containers (which are portable & standardized)
+- Virtual machines are a similar concept, but these virtualise hardware, contain complete operating systems (including the kernel), and are managed by software known as a hypervisor
+- Containers on the other hand share the host OS kernel, so they don't contain complete operating systems, just user space system libraries
+- This makes them lightweight, portable, and fast to start up
+ 
+## Docker vs Apptainer containers
+
+- Apptainer (i.e. Singularity) is intended to run reproducibly across many system types, including HPC systems
+- Docker is rarely allowed on clusters, requires root access
+- Their images are somewhat different - Docker images are made up of layers (Base image -> launched as container -> edited -> used as new base layer -> launched -> edited -> etc.). Apptainer images squash layers into one file (.sif format)
+- These files are easily shared and can be run on any system with Apptainer installed
+
+## Apptainer vs Singularity history & the .sif format
+
+- Singularity was the original name of the open source project from 2015, but this turned partly commercial in 2018
+- The open source part forked and joined the Linux foundation in 2021, becoming Apptainer
+- The singularity image format (.sif) remains in Apptainer as a legacy of that
+- Similarly when you install Apptainer, there are symlinks, so you can use `singularity pull` rather than `apptainer pull`
+- For practical purposes, they are the same
+
+## Structure of an apptainer command
+
+- `apptainer [subcommand] [image] [additional commands]` 
+
+- Example of `pull` and `shell`
+
+```
+apptainer pull docker://alpine
+apptainer shell alpine_latest.sif
+cat /etc/alpine-release
+exit
+cat /etc/alpine-release
+cat /etc/debian_version
+```
+
+- Interact with the container from the host system:
+
+```
+apptainer exec alpine_latest.sif cat /etc/alpine-release
+cat /etc/alpine-release
+```
+## Building .sif from a definition file (.def)
+
+- Building a custom container requires a .def file, specifying the registry and image for the base image, and [various options for the container](https://apptainer.org/documentation/)
+
+```default{filename="example.def"}
+
+Bootstrap: docker
+From: debian:12.5-slim
+
+%environment
+	export PATH=$PATH:/root/.pixi/bin
+
+%runscript
+	cat /etc/debian_version
+
+%post
+	export PATH=$PATH:/root/.pixi/bin
+	apt-get update && \
+	apt-get install -y curl && \
+	curl -fsSL https://pixi.sh/install.sh | bash && \
+	apt-get clean && \
+	pixi global install -c bioconda -c conda-forge  minigraph
+
+```
+
+- Then build the container: `apptainer build minigraph.sif example.def`
+
+- `apptainer run` executes the runscript inside the container:
+
+`apptainer run minigraph.sif`
+
+## Portability to HPC systems, & note on reproducibilty (.sif files vs rebuilding from a .def)
+
+- .sif files are portable and will be highly reproducible
+
+- You can also share a .def file, however consider that some tags on docker hub refer to rolling releases, e.g. `latest`. If you want future builds of the container to be identical, try to find a static tag, e.g. a github commit tag
+
+- In addition, using commands from package managers like `apt-get update` in the .def will make the container less reproducible, as the package versions will change over time
+
+- By default Apptainer/Singularity loads certain directories such as `$HOME` (see below), and this means local packages (e.g. Python, R, etc.) can be picked up and loaded instead of the ones in the container. To prevent this, do [something like this](https://github.com/nf-core/tools/blob/930ece572bf23b68c7a7c5259e918a878ba6499e/nf_core/pipeline-template/nextflow.config#L212-L221).
+
+## Other useful things to know:
+
+### Mount binding
+
+- Some folders are automatically bound from the host system (e.g., `$HOME`, `$CWD`, `/tmp`)
+- Therefore don't install software to those locations - they'll install on your host system too
+- Use an unmounted folder like `/opt` or `/usr/local` instead
+- If you need to mount a directory to the container, e.g. a data directory, this is possible, e.g.:
+
+`apptainer exec --bind /scratch example.sif ls /scratch`
+
+### Conversion from docker
+- It's possible to convert from docker images to singularity images - not covered today
+
+### Sandbox containers
+
+- Singularity containers are basically uneditable - no so fun if you need to keep rebuilding from scatch during development
+- There is a "sandbox container" feature which is editable, and it works like a file system within your file system
+- When you are ready for a production container, you can convert the sandbox container to a regular container, though it would be preferable to rebuild from a definition file, so that there is a record of what was done
+
+::: {.callout-tip}
+It's advisable to use many small containers (minimal container for a single process/tool) rather than large inclusive containers.
+:::
+
+## Seqera containers resource
+
+- [Seqera containers resource](https://seqera.io/containers)
+- Can build a container in seconds on the cloud and have it hosted by AWS
+- Select `Singularity` or `Docker`, `linux-amd64` or `linux-arm64`
+- Pick the packages you need in the container and click `Get Container`
+- Doesn't support mac yet, though most python packages "should" work
+- Once built, images are hosted by AWS and can be pulled by anyone (will last at least 5 years from creation)
+- Seqera pays for the build compute, hosting of the containers is by Seqera on AWS and paid for by AWS donated credits
+- To pull the built container:
+`apptainer pull oras://community.wave.seqera.io/library/bwa_minigraph_pixi:c4c589e18eae6698`
+
+```
+bwa
+apptainer shell bwa_minigraph_pixi_c4c589e18eae6698.sif
+bwa
+```
