@@ -83,6 +83,10 @@ From: debian:12.5-slim
 
 - You can also share a .def file, however consider that some tags on docker hub refer to rolling releases, e.g. `latest`. If you want future builds of the container to be identical, try to find a static tag, e.g. a github commit tag
 
+- In addition, using commands from package managers like `apt-get update` in the .def will make the container less reproducible, as the package versions will change over time
+
+- By default Apptainer/Singularity loads certain directories such as `$HOME` (see below), and this means local packages (e.g. Python, R, etc.) can be picked up and loaded instead of the ones in the container. To prevent this, do [something like this](https://github.com/nf-core/tools/blob/930ece572bf23b68c7a7c5259e918a878ba6499e/nf_core/pipeline-template/nextflow.config#L212-L221).
+
 ## Other useful things to know:
 
 ### Mount binding
@@ -102,6 +106,10 @@ From: debian:12.5-slim
 - Singularity containers are basically uneditable - no so fun if you need to keep rebuilding from scatch during development
 - There is a "sandbox container" feature which is editable, and it works like a file system within your file system
 - When you are ready for a production container, you can convert the sandbox container to a regular container, though it would be preferable to rebuild from a definition file, so that there is a record of what was done
+
+::: {.callout-tip}
+It's advisable to use many small containers (minimal container for a single process/tool) rather than large inclusive containers.
+:::
 
 ## Seqera containers resource
 
