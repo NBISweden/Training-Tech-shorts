@@ -1,11 +1,22 @@
 # Introduction to Quarto
 
-## What is Quarto (Tomas / André)
+## What is Quarto
 
 ### The Quarto CLI
 
-0. In order to use quarto you need to install quarto first. The easiest way is to get the package for your desired platform directly from [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/). If you need the most recent version you can also get the source code from the [quarto-cli](https://github.com/quarto-dev/quarto-cli) git repository.
-1. After quarto is installed on your system you can get an overview of all subcommonds when you type `quarto help` (followed by pressing ENTER) in a terminal: 
+0. In order to use Quarto you need to install Quarto first. The
+   easiest way is to get the package for your desired platform
+   directly from
+   [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/).
+   If you need the most recent version you can also get the source
+   code from the
+   [quarto-cli](https://github.com/quarto-dev/quarto-cli) git
+   repository.
+
+1. After Quarto is installed on your system you can get an overview of
+   all subcommonds when you type `quarto help` (followed by pressing
+   ENTER) in a terminal:
+
 ```
   Usage:   quarto 
   Version: 1.4.553
@@ -40,26 +51,38 @@
     check      [target]              - Verify correct functioning of Quarto installation. 
     help       [command]             - Show this help or the help of a sub-command.       
 ```
-There are many quarto subcommands available. You can get more details about each subcommand when you type `quarto <SUBCOMMAND> help` in the terminal: e.g. `quarto render help` provides detailed information about rendering files or projects to various document types - including some usage examples at the end.
 
+There are many Quarto subcommands available. You can get more details
+about each subcommand when you type `quarto <SUBCOMMAND> help` in the
+terminal: e.g. `quarto render help` provides detailed information
+about rendering files or projects to various document types -
+including some usage examples at the end.
 
-
-## Authoring (Estelle / Martin)
+## Authoring
 
 ### Render vs preview
 
-The `quarto render` and `quarto preview` commands are used to generate output from a Quarto (.qmd) document. 
+The `quarto render` and `quarto preview` commands are used to generate
+output from a Quarto (.qmd) document.
 
-The `quarto render` command generates output in all formats specified in your YAML header (e.g. pdf,html,word) or in your command line with the option --to, while the `quarto preview` command only generates output in a format suitable for viewing in a web browser.
+The `quarto render` command generates output in all formats specified
+in your YAML header (e.g. pdf,html,word) or in your command line with
+the option --to, while the `quarto preview` command only generates
+output in a format suitable for viewing in a web browser.
 
-In a typical workflow, you would use the `quarto preview` command to view the output of your document as you are working on it.
+In a typical workflow, you would use the `quarto preview` command to
+view the output of your document as you are working on it.
 
 ```bash
 quarto preview my.qmd
 ```
-This command will start a local web server and open a web browser to view the output of the document. The web server will automatically update the output as you make changes to the document.
 
-Once you are ready to produce your final output you can use the `quarto render` command.
+This command will start a local web server and open a web browser to
+view the output of the document. The web server will automatically
+update the output as you make changes to the document.
+
+Once you are ready to produce your final output you can use the
+`quarto render` command.
 
 ```bash
 quarto render my.qmd
@@ -67,9 +90,9 @@ quarto render my.qmd
 
 ## Computations
 
-Quarto lets you perform computations within your notebook. This is typically
-done using code blocks denoted by three backticks followed by the language 
-you're using in curly brackets.
+Quarto lets you perform computations within your notebook. This is
+typically done using code blocks denoted by three backticks followed
+by the language you're using in curly brackets.
 
 ````{.markdown}
 ```{{python}}
@@ -84,15 +107,18 @@ Quarto supports computations in several languages:
 - [Julia](https://quarto.org/docs/computations/julia.html)
 - [Observable](https://quarto.org/docs/computations/ojs.html)
 
-Additional languages can also be supported through other Jupyter kernels (see Engines below).
-See this page for a list of [Jupyter kernels](https://gist.github.com/chronitis/682c4e0d9f663e85e3d87e97cd7d1624).
+Additional languages can also be supported through other Jupyter
+kernels (see Engines below). See this page for a list of [Jupyter
+kernels](https://gist.github.com/chronitis/682c4e0d9f663e85e3d87e97cd7d1624).
 
-The languages and packages used in your computations must be available in your `render` environment, and 
-are often installed through other means, for example using `conda` or a container platform.
+The languages and packages used in your computations must be available
+in your `render` environment, and are often installed through other
+means, for example using `conda` or a container platform.
 
-Loaded packages and variables defined within a code block are also accessible from other code blocks, including
-inline code blocks. For example, here we create a figure within a div (`:::`) and reference the `x` variable
-in both the figure caption and text body.
+Loaded packages and variables defined within a code block are also
+accessible from other code blocks, including inline code blocks. For
+example, here we create a figure within a div (`:::`) and reference
+the `x` variable in both the figure caption and text body.
 
 ````{.markdown}
 :::{#fig-plot-alt}
@@ -111,8 +137,10 @@ This paragraph refers to @fig-plot-alt for a plot of $y=x^2$
 based on `{r} length(x)` points.
 ````
 
-The output of computations can be controlled using [execution options](https://quarto.org/docs/computations/execution-options.html).
-These can be set for the whole document in the yaml front-matter at the top of the document, e.g.,
+The output of computations can be controlled using [execution
+options](https://quarto.org/docs/computations/execution-options.html).
+These can be set for the whole document in the yaml front-matter at
+the top of the document, e.g.,
 
 ````{.yml}
 ---
@@ -122,7 +150,8 @@ execute:
 ---
 ````
 
-Alternatively, execution options can be specified within each code block, e.g.,
+Alternatively, execution options can be specified within each code
+block, e.g.,
 
 ````{.markdown}
 ```{{python}}
@@ -136,20 +165,26 @@ This is Markdown text.
 ```
 ````
 
-Computations can also be used to dynamically generate Markdown
-or HTML content by using the `output` format `asis`. For example, 
-document sections can be dynamically generated from an input file.
-
-### Engines (André / Mahesh)
+Computations can also be used to dynamically generate Markdown or HTML
+content by using the `output` format `asis`. For example, document
+sections can be dynamically generated from an input file.
 
 ## Document types
 
-## Presentations
+Quarto can generate a number of document output types, including PDF,
+HTML, and MS Word. The output format can be set on the command line
+via the `--to` option, or by setting the `format` option in the yaml
+configuration. For instance, the following header configuration will
+generate PDF output:
 
-## Projects
+````{.yml}
+---
+format: pdf
+---
+````
 
-### Configuration
+### Presentation
 
-### Website
-
-### Practical example on UPPMAX
+In addition to regular document formats, there is support for formats
+that will generate presentations, including `revealjs` (HTML), `pptx`
+(PowerPoint) and `beamer` (LaTeX/PDF).
