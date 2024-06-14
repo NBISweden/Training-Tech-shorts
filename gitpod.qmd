@@ -1,0 +1,40 @@
+# Gitpod
+
+## What is Gitpod
+
+Gitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository. This container is built from the file ".gitpod.yml" present in the repository.   
+
+There are different pricing depending on your needs such as:  
+
+- Free plan (50 hours per month)
+
+- Pas-as-you-go  
+
+- Company plan (custom)
+
+NBIS does not have a Gitpod account. Mahesh has an open source plan (nammed NBIS).
+
+
+## How to login to Gitpod
+
+- Go to the [Gitpod site](https://gitpod.io)
+
+- Select your Git hosting service (e.g., GitHub), and authenticate
+
+- If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right
+
+- Now when you start a Gitpod environment you'll be connected to your version control system
+
+## How to start a Gitpod (Miguel /Guilherme to review)
+
+## How to configure Gitpod (Guilherme / Jason to review)
+
+## Uses for Gitpod (Jason / Estelle to review)
+
+- Demonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.
+
+- Development: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.
+
+- Experimentation: The ephemeral nature of the environment, and its standardizeed tools make gitpod excellent for testing code and sandbox experimentation.
+
+- Training: A pre-built environment can be provided which can be very useful if, for example, Rackham is down during a course. 
