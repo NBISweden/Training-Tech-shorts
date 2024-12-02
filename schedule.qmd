@@ -4,20 +4,23 @@ Dates for each lesson, listed in reverse chronological order.
 Meetings are over Zoom, Tuesdays at 13.00. Meeting links are
 provided by the teacher.
 
-- 24/07/02: Mahesh - Review: Pixi
-- 24/06/25: Mahesh - Pixi
-- 24/06/18: No lesson - SciLifeLab Facility Forum
-- 24/06/11: Cormac - Review: Singuarity
-- 24/06/04: Cormac - Singularity
-- 24/05/28: Mahesh - Review: Introduction to Gitpod.
-- 24/05/21: Tomas - Review: Quarto to Confluence.
-- 24/05/14: Tomas - Quarto to Confluence.
-- 24/05/07: Mahesh - Introduction to Gitpod.
-- 24/04/30: No lesson - Reduced working day.
-- 24/04/23: Per - Review: Quarto Introduction.
-- 24/04/16: Per - Quarto Introduction.
-- 24/04/09: No lesson - NBIS retreat.
-- 24/04/02: Mahesh - Review: Introduction to Git.
-- 24/03/26: Mahesh - Review: Collaboration in Github.
-- 24/03/19: Mahesh - Introduction to Git.
-- 24/03/12: Mahesh - Collaboration in Github.
+- 2025/03/04: Cormac - Review: VSCode
+- 2025/02/18: Cormac - VSCode
+- 2025/02/04: Mahesh - Review: Pixi
+- 2025/01/21: Mahesh - Pixi
+- **Break**
+- 2024/06/18: No lesson - SciLifeLab Facility Forum
+- 2024/06/11: Cormac - Review: Singuarity
+- 2024/06/04: Cormac - Singularity
+- 2024/05/28: Mahesh - Review: Introduction to Gitpod.
+- 2024/05/21: Tomas - Review: Quarto to Confluence.
+- 2024/05/14: Tomas - Quarto to Confluence.
+- 2024/05/07: Mahesh - Introduction to Gitpod.
+- 2024/04/30: No lesson - Reduced working day.
+- 2024/04/23: Per - Review: Quarto Introduction.
+- 2024/04/16: Per - Quarto Introduction.
+- 2024/04/09: No lesson - NBIS retreat.
+- 2024/04/02: Mahesh - Review: Introduction to Git.
+- 2024/03/26: Mahesh - Review: Collaboration in Github.
+- 2024/03/19: Mahesh - Introduction to Git.
+- 2024/03/12: Mahesh - Collaboration in Github.
