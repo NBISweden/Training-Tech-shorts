@@ -4,7 +4,7 @@ This section is a brief summary of the concepts discussed in the meeting.
 
 ## Why Pixi?
 
-Pixi is a package management tool that serves as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Unlike Conda, Pixi environments are not isolated, which allows you to:
+Pixi is a package management tool that serves as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to:
 
 - Interact with third-party tools that are available in your system's PATH.
 - Benefit from faster installation of packages.
