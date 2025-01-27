@@ -43,7 +43,13 @@ Here:
 
 By default, Pixi will set the environment for your platform (e.g., `linux-64`), but you can specify additional platforms as needed. 
 
-The `pixi init`command will create a `pixi.toml`file, as well as a `pixi.lock`file. Both should be committed into the git repository. The Pixi environments are tied to these two files and thus the project directory.
+The `pixi init`command will create two files:
+
+- `.pixi.toml`: Specifies the environment configuration.
+- `.pixi.lock`: Locks down the specific package versions for reproducibility.
+
+You should commit both files to your version control system to share the exact environment setup with collaborators and increase `reproducibility`. 
+
 
 ### Adding Packages
 
@@ -60,7 +66,9 @@ pixi add python
 pixi add --pypi multiqc
 ```
 
-Alternatively, you can directly modify the `.pixi.toml` file in your project directory.
+Alternatively, you can directly modify the `.pixi.toml` file in your project directory: 
+
+Under `[dependencies]`, or platform specific dependencies (such as `[target.linux-64.dependencies]` you can add a line for each package you want to include `nextflow = "24.10.4.*"`for example. 
 
 ---
 
@@ -68,22 +76,8 @@ Alternatively, you can directly modify the `.pixi.toml` file in your project dir
 
 ### Files in the Directory
 
-When you use Pixi, it creates a `.pixi` folder in your project directory. This folder contains cached files and other data. If needed, you can safely delete this folder or configure the cache to use a scratch directory.
+When you use Pixi, it creates a `.pixi` folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder.
 
-To clean the cache:
-
-```{.bash}
-pixi clean cache
-```
-
-### Reproducibility
-
-Pixi uses two key files for environment management:
-
-- `.pixi.toml`: Specifies the environment configuration.
-- `.pixi.lock`: Locks down the specific package versions for reproducibility.
-
-You should commit both files to your version control system to share the exact environment setup with collaborators.
 
 ---
 
@@ -104,8 +98,7 @@ pixi task add hello python hello_world.py
 
 ### Task Features
 
-- Tasks can be combined or run conditionally using `depends-on`.
-- You can chain tasks for complex workflows.
+Tasks can be combined or run conditionally. The example in the [documentation](https://pixi.sh/latest/features/advanced_tasks/) is to specify that an application should be complied before being run. The command `depends-on`can be used here. With this one can chain tasks for complex workflows.
 
 ---
 
@@ -157,6 +150,8 @@ To update Pixi:
 ```{.bash}
 pixi self-update
 ```
+
+### Cleaning the cache
 
 To clean the cache: 
 
