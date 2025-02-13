@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; How to collaborate on Github – Training: Tech shorts</title>
+<title>3&nbsp; Introduction to Pixi – Training: Tech shorts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pixi/pixi-intro.html" rel="next">
-<link href="../git/git-intro.html" rel="prev">
+<link href="../apptainer/apptainer-intro.html" rel="next">
+<link href="../github/gh-collaboration.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../github/gh-collaboration.html">Github</a></li><li class="breadcrumb-item"><a href="../github/gh-collaboration.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pixi/pixi-intro.html">Pixi</a></li><li class="breadcrumb-item"><a href="../pixi/pixi-intro.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../github/gh-collaboration.html" class="sidebar-item-text sidebar-link active">
+  <a href="../github/gh-collaboration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></span></a>
   </div>
 </li>
@@ -163,7 +197,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pixi/pixi-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../pixi/pixi-intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></span></a>
   </div>
 </li>
@@ -236,21 +270,49 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#making-a-branch-teacher" id="toc-making-a-branch-teacher" class="nav-link active" data-scroll-target="#making-a-branch-teacher"><span class="header-section-number">2.1</span> Making a branch (Teacher)</a></li>
-  <li><a href="#making-changes-learner" id="toc-making-changes-learner" class="nav-link" data-scroll-target="#making-changes-learner"><span class="header-section-number">2.2</span> Making changes (Learner)</a></li>
-  <li><a href="#making-a-draft-pull-request-learner" id="toc-making-a-draft-pull-request-learner" class="nav-link" data-scroll-target="#making-a-draft-pull-request-learner"><span class="header-section-number">2.3</span> Making a draft pull request (Learner)</a></li>
-  <li><a href="#code-review-review-partner" id="toc-code-review-review-partner" class="nav-link" data-scroll-target="#code-review-review-partner"><span class="header-section-number">2.4</span> Code review (Review partner)</a></li>
-  <li><a href="#making-a-ready-for-review-pull-request-learner" id="toc-making-a-ready-for-review-pull-request-learner" class="nav-link" data-scroll-target="#making-a-ready-for-review-pull-request-learner"><span class="header-section-number">2.5</span> Making a ready for review pull request (Learner)</a></li>
-  <li><a href="#merges-pull-requests-teacher" id="toc-merges-pull-requests-teacher" class="nav-link" data-scroll-target="#merges-pull-requests-teacher"><span class="header-section-number">2.6</span> Merges pull requests (Teacher)</a></li>
+  <li><a href="#why-pixi" id="toc-why-pixi" class="nav-link active" data-scroll-target="#why-pixi"><span class="header-section-number">3.1</span> Why Pixi?</a>
+  <ul class="collapse">
+  <li><a href="#compatibility" id="toc-compatibility" class="nav-link" data-scroll-target="#compatibility"><span class="header-section-number">3.1.1</span> Compatibility</a></li>
+  <li><a href="#key-difference" id="toc-key-difference" class="nav-link" data-scroll-target="#key-difference"><span class="header-section-number">3.1.2</span> Key Difference</a></li>
+  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">3.2</span> Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">3.2.1</span> Installation</a></li>
+  <li><a href="#adding-packages" id="toc-adding-packages" class="nav-link" data-scroll-target="#adding-packages"><span class="header-section-number">3.2.2</span> Adding Packages</a></li>
+  </ul></li>
+  <li><a href="#managing-environments" id="toc-managing-environments" class="nav-link" data-scroll-target="#managing-environments"><span class="header-section-number">3.3</span> Managing Environments</a>
+  <ul class="collapse">
+  <li><a href="#files-in-the-directory" id="toc-files-in-the-directory" class="nav-link" data-scroll-target="#files-in-the-directory"><span class="header-section-number">3.3.1</span> Files in the Directory</a></li>
+  <li><a href="#environment-features" id="toc-environment-features" class="nav-link" data-scroll-target="#environment-features"><span class="header-section-number">3.3.2</span> Environment features</a></li>
+  </ul></li>
+  <li><a href="#tasks-in-pixi" id="toc-tasks-in-pixi" class="nav-link" data-scroll-target="#tasks-in-pixi"><span class="header-section-number">3.4</span> Tasks in Pixi</a>
+  <ul class="collapse">
+  <li><a href="#task-features" id="toc-task-features" class="nav-link" data-scroll-target="#task-features"><span class="header-section-number">3.4.1</span> Task Features</a></li>
+  </ul></li>
+  <li><a href="#working-with-the-shell" id="toc-working-with-the-shell" class="nav-link" data-scroll-target="#working-with-the-shell"><span class="header-section-number">3.5</span> Working with the Shell</a>
+  <ul class="collapse">
+  <li><a href="#activating-the-environment" id="toc-activating-the-environment" class="nav-link" data-scroll-target="#activating-the-environment"><span class="header-section-number">3.5.1</span> Activating the Environment</a></li>
+  </ul></li>
+  <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features"><span class="header-section-number">3.6</span> Advanced Features</a>
+  <ul class="collapse">
+  <li><a href="#intel-emulation-on-arm-macs" id="toc-intel-emulation-on-arm-macs" class="nav-link" data-scroll-target="#intel-emulation-on-arm-macs"><span class="header-section-number">3.6.1</span> Intel emulation on ARM Macs</a></li>
+  </ul></li>
+  <li><a href="#additional-commands" id="toc-additional-commands" class="nav-link" data-scroll-target="#additional-commands"><span class="header-section-number">3.7</span> Additional Commands</a>
+  <ul class="collapse">
+  <li><a href="#updating-pixi" id="toc-updating-pixi" class="nav-link" data-scroll-target="#updating-pixi"><span class="header-section-number">3.7.1</span> Updating Pixi</a></li>
+  <li><a href="#cleaning-the-cache" id="toc-cleaning-the-cache" class="nav-link" data-scroll-target="#cleaning-the-cache"><span class="header-section-number">3.7.2</span> Cleaning the cache</a></li>
+  <li><a href="#package-search" id="toc-package-search" class="nav-link" data-scroll-target="#package-search"><span class="header-section-number">3.7.3</span> Package search</a></li>
+  <li><a href="#command-help" id="toc-command-help" class="nav-link" data-scroll-target="#command-help"><span class="header-section-number">3.7.4</span> Command help</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../github/gh-collaboration.html">Github</a></li><li class="breadcrumb-item"><a href="../github/gh-collaboration.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pixi/pixi-intro.html">Pixi</a></li><li class="breadcrumb-item"><a href="../pixi/pixi-intro.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></h1>
 </div>
 
 
@@ -267,79 +329,150 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This section is a guide describing one method of collaborating on Github. We focus on the framework that we use to make reference material for future us and others new to the team.</p>
-<section id="making-a-branch-teacher" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="making-a-branch-teacher"><span class="header-section-number">2.1</span> Making a branch (Teacher)</h2>
+<section id="why-pixi" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="why-pixi"><span class="header-section-number">3.1</span> Why Pixi?</h2>
+<p><a href="https://pixi.sh/">Pixi</a> is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.</p>
+<section id="compatibility" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="compatibility"><span class="header-section-number">3.1.1</span> Compatibility</h3>
+<p>Pixi is somehwat compatible with Conda. You can:</p>
 <ul>
-<li>On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.</li>
-<li>Click on view all branches</li>
-<li>Click New branch, give it a name and select the branch source.</li>
-<li>Finally, click create branch</li>
+<li>Install packages using the same Conda channels (e.g., <code>conda-forge</code>, <code>bioconda</code>).</li>
+<li>Initialise project environments using existing Conda environment files.</li>
 </ul>
-<p>You also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.</p>
-<p>This short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)</p>
+<p>However, you cannot activate a conda environment using Pixi, or vice-versa.</p>
 </section>
-<section id="making-changes-learner" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="making-changes-learner"><span class="header-section-number">2.2</span> Making changes (Learner)</h2>
+<section id="key-difference" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="key-difference"><span class="header-section-number">3.1.2</span> Key Difference</h3>
+<p>In Pixi, the environment configuration file (<code>.pixi.toml</code>) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a <code>pixi.lock</code> file is also written. This should also be commited to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command.</p>
+<hr>
+</section>
+</section>
+<section id="getting-started" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">3.2</span> Getting Started</h2>
+<section id="installation" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">3.2.1</span> Installation</h3>
+<ol type="1">
+<li>Install Pixi and add it to your shell’s configuration (e.g., <code>.bashrc</code> or <code>.zshrc</code>).</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://pixi.sh/install.sh <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Initialize a Pixi environment in your project:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-p</span> linux-64 <span class="at">-p</span> osx-arm64 <span class="at">-p</span> osx-64</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here:</p>
 <ul>
-<li>Fork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.</li>
-<li>On your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.</li>
-<li>To edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.</li>
-<li>If instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.</li>
-<li>Add the file contents in edit mode.</li>
-<li>When finished, click “Commit changes…”</li>
+<li><code>-c</code> specifies the channels to use (e.g., <code>conda-forge</code>, <code>bioconda</code>)</li>
+<li><code>-p</code> sets the platforms (<code>linux-64</code>: Intel Linux, <code>osx-64</code>: Intel MacOS, <code>osx-arm64</code>: ARM MacOS)</li>
 </ul>
-</section>
-<section id="making-a-draft-pull-request-learner" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="making-a-draft-pull-request-learner"><span class="header-section-number">2.3</span> Making a draft pull request (Learner)</h2>
-<p>After making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.</p>
-</section>
-<section id="code-review-review-partner" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="code-review-review-partner"><span class="header-section-number">2.4</span> Code review (Review partner)</h2>
+<p>By default, Pixi will set the environment for your platform (e.g., <code>linux-64</code>), but you can specify additional platforms as needed.</p>
+<p>The <code>pixi init</code>command will create two files:</p>
 <ul>
-<li>navigate to the top menu and click on <code>Pull requests</code></li>
-<li>by default all open pull requests are listed, you can further filter down the list. e.g.&nbsp;via clicking on <code>Reviews</code> and afterwards select <code>Awaiting review from you</code> in the drop down menu. This shows then only PRs where you are tagged as reviewer.</li>
-<li>click on a pull request of your choice</li>
-<li>the following window has 4 tabs:
-<ul>
-<li>Conversation: gives an overview about the PR</li>
-<li>Commits: list all commits of the PR</li>
-<li>Check:</li>
-<li>Files changed: lists all files which were modified</li>
-</ul></li>
-<li>click on the <code>Files changed</code> tab and go through the files and changes
-<ul>
-<li>you can comment on a line by hovering over a line and click on the plus symbol</li>
-<li>in case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines</li>
-<li>afterwards you can either:
-<ol type="a">
-<li>click on the <code>Add single comment</code> button which makes your comment or suggestion immediately visible OR<br>
-</li>
-<li>click on the <code>Start a review</code> button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.</li>
-</ol></li>
-<li>when done with the full review click on the <code>Finish your review</code> button on the top right corner of the page:
-<ul>
-<li>you can comment on your review and choose one of the following options <code>Comment</code>, <code>Approve</code>, <code>Request changes</code>. Select the approprate option and click on <code>Submit review</code>.</li>
-</ul></li>
-</ul></li>
+<li><code>.pixi.toml</code>: Specifies the environment configuration.</li>
+<li><code>.pixi.lock</code>: Locks down the specific package versions for reproducibility.</li>
 </ul>
+<p>You should commit both files to your version control system to share the exact environment setup with collaborators and increase reproducibility.</p>
 </section>
-<section id="making-a-ready-for-review-pull-request-learner" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="making-a-ready-for-review-pull-request-learner"><span class="header-section-number">2.5</span> Making a ready for review pull request (Learner)</h2>
-<ul>
-<li>Once you and your review partner have agreed on the code review (i.e.&nbsp;Your review partner has approved your draft pull request), covert your draft pull request to ready to review.</li>
-<li>On the right side panel, you should invite the teacher to review your pull request.</li>
-<li>The teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.</li>
-</ul>
+<section id="adding-packages" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="adding-packages"><span class="header-section-number">3.2.2</span> Adding Packages</h3>
+<p>You can add packages to your environment using the <code>pixi add</code> command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add bwa samtools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can add Python packages from PyPI using Pixi:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add python</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add <span class="at">--pypi</span> multiqc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Alternatively, you can directly modify the <code>.pixi.toml</code> file in your project directory:</p>
+<p>Under <code>[dependencies]</code>, or platform specific dependencies (such as <code>[target.linux-64.dependencies]</code>) you can add a line for each package you want to include <code>nextflow = "24.10.4.*"</code>for example.</p>
+<hr>
 </section>
-<section id="merges-pull-requests-teacher" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="merges-pull-requests-teacher"><span class="header-section-number">2.6</span> Merges pull requests (Teacher)</h2>
+</section>
+<section id="managing-environments" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="managing-environments"><span class="header-section-number">3.3</span> Managing Environments</h2>
+<section id="files-in-the-directory" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="files-in-the-directory"><span class="header-section-number">3.3.1</span> Files in the Directory</h3>
+<p>When you use Pixi, it creates a <code>.pixi</code> folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder, and it will be recreated from the <code>pixi.lock</code> file in your project, the next time you use the environment.</p>
+<p>The command</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>deletes the pixi environment binaries, and the command</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean cache</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>deletes the package archives that were downloaded and unpacked to create the environment.</p>
+</section>
+<section id="environment-features" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="environment-features"><span class="header-section-number">3.3.2</span> Environment features</h3>
+<p>Unlike Conda, in which you can define multiple global environments, Pixi handles multi-environment projects in a different way. Packages are installed into Features, which in turn define an Environment. Features are isolated from each other, helping to avoid version clashes between tools. See <a href="https://pixi.sh/latest/features/multi_environment/">Pixi docs - Multi Environment</a> for more on defining multiple environments in a TOML.</p>
+<hr>
+</section>
+</section>
+<section id="tasks-in-pixi" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="tasks-in-pixi"><span class="header-section-number">3.4</span> Tasks in Pixi</h2>
+<p>In addtion to being a package manager, Pixi allows you to define and run tasks directly in the <code>.pixi.toml</code> file. For example:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tasks]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name-of-task</span> <span class="op">=</span> <span class="st">"nextflow run main.nf -profile PDC"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>One can also add tasks via the command line:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task add hello python hello_world.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See <a href="https://pixi.sh/latest/features/advanced_tasks/">Pixi Tasks</a> for more information</p>
+<section id="task-features" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="task-features"><span class="header-section-number">3.4.1</span> Task Features</h3>
+<p>Tasks can be combined or run conditionally. The example in the <a href="https://pixi.sh/latest/features/advanced_tasks/">documentation</a> is to specify that an application should be complied before being run. The command <code>depends-on</code>can be used here. With this one can chain tasks for complex workflows.</p>
+<hr>
+</section>
+</section>
+<section id="working-with-the-shell" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="working-with-the-shell"><span class="header-section-number">3.5</span> Working with the Shell</h2>
+<p>Pixi provides a shell environment based on the Deno shell. Many basic Bash commands still work, allowing for:</p>
 <ul>
-<li>Once both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.</li>
-<li>Once the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.</li>
+<li>Chaining tools.</li>
+<li>Command substitution.</li>
 </ul>
+<p>See <a href="https://pixi.sh/latest/features/advanced_tasks/#our-task-runner-deno_task_shell">Advanced Tasks</a> for a more detailed description about the Deno shell supported features.</p>
+<section id="activating-the-environment" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="activating-the-environment"><span class="header-section-number">3.5.1</span> Activating the Environment</h3>
+<p>To activate the environment:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> shell</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To exit an environment, use <code>exit</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which also saves your command history.</p>
+<hr>
+</section>
+</section>
+<section id="advanced-features" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="advanced-features"><span class="header-section-number">3.6</span> Advanced Features</h2>
+<section id="intel-emulation-on-arm-macs" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="intel-emulation-on-arm-macs"><span class="header-section-number">3.6.1</span> Intel emulation on ARM Macs</h3>
+<p>Although packages are increasingly being built for ARM architecture CPUS, not all tools are built for <code>osx-arm64</code>. However, they may have been built for <code>osx-64</code> (i.e., intel architecture CPUS), in addition to <code>linux-64</code>. MacOS includes the tool Rosetta, which can be used to emulate intel on arm Macs, at the cost of performance.</p>
+<p>By supporting only <code>linux-64</code> and <code>osx-64</code> as platforms, Pixi will automatically run the tools using Rosetta emulation on Mac ARM computers.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--channel</span> <span class="st">"conda-forge"</span> <span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--channel</span> <span class="st">"bioconda"</span> <span class="dt">\</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> <span class="st">"linux-64"</span> <span class="dt">\</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> <span class="st">"osx-64"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="additional-commands" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="additional-commands"><span class="header-section-number">3.7</span> Additional Commands</h2>
+<section id="updating-pixi" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="updating-pixi"><span class="header-section-number">3.7.1</span> Updating Pixi</h3>
+<p>To update Pixi:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> self-update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cleaning-the-cache" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="cleaning-the-cache"><span class="header-section-number">3.7.2</span> Cleaning the cache</h3>
+<p>To clean the cache:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean cache</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="package-search" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="package-search"><span class="header-section-number">3.7.3</span> Package search</h3>
+<p>Pixi can search for the latest version of a package, and provide detailed information about using:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> search <span class="op">&lt;</span>package_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, unlike Conda, it does not list all available versions of a package. For this purpose, <code>conda search &lt;package_name&gt;</code> is the better option.</p>
+</section>
+<section id="command-help" class="level3" data-number="3.7.4">
+<h3 data-number="3.7.4" class="anchored" data-anchor-id="command-help"><span class="header-section-number">3.7.4</span> Command help</h3>
+<p>Use</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> help</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to get more detailed help on various commands.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -762,13 +895,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../git/git-intro.html" class="pagination-link" aria-label="Introduction to Git">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></span>
+      <a href="../github/gh-collaboration.html" class="pagination-link" aria-label="How to collaborate on Github">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pixi/pixi-intro.html" class="pagination-link" aria-label="Introduction to Pixi">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../apptainer/apptainer-intro.html" class="pagination-link" aria-label="Introduction to Apptainer (i.e. Singularity)">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Apptainer (i.e.&nbsp;Singularity)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="NBIS">
-<meta name="dcterms.date" content="2025-02-13">
 
-<title>Training: Tech shorts</title>
+<title>5&nbsp; Gitpod – Training: Tech shorts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./schedule.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ef64dfc38f3c32ba3316c26596eb5070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../quarto/quarto-intro.html" rel="next">
+<link href="../apptainer/apptainer-intro.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ef64dfc38f3c32ba3316c26596eb5070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,9 +102,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -85,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gitpod/gitpod-intro.html">Gitpod</a></li><li class="breadcrumb-item"><a href="../gitpod/gitpod-intro.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gitpod</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Content:</a> 
+      <a href="../">Content:</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,13 +142,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
@@ -133,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git/git-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../git/git-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></span></a>
   </div>
 </li>
@@ -150,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./github/gh-collaboration.html" class="sidebar-item-text sidebar-link">
+  <a href="../github/gh-collaboration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></span></a>
   </div>
 </li>
@@ -167,7 +197,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pixi/pixi-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../pixi/pixi-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></span></a>
   </div>
 </li>
@@ -184,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./apptainer/apptainer-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../apptainer/apptainer-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Apptainer (i.e.&nbsp;Singularity)</span></span></a>
   </div>
 </li>
@@ -201,7 +231,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./gitpod/gitpod-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../gitpod/gitpod-intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gitpod</span></span></a>
   </div>
 </li>
@@ -218,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Quarto</span></span></a>
   </div>
 </li>
@@ -226,7 +256,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -240,43 +270,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
-  <ul class="collapse">
-  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick start</a>
-  <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#review-lessons" id="toc-review-lessons" class="nav-link" data-scroll-target="#review-lessons">Review lessons</a></li>
-  <li><a href="#sequence-diagram" id="toc-sequence-diagram" class="nav-link" data-scroll-target="#sequence-diagram">Sequence diagram</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#what-is-gitpod" id="toc-what-is-gitpod" class="nav-link active" data-scroll-target="#what-is-gitpod"><span class="header-section-number">5.1</span> What is Gitpod</a></li>
+  <li><a href="#how-to-login-to-gitpod" id="toc-how-to-login-to-gitpod" class="nav-link" data-scroll-target="#how-to-login-to-gitpod"><span class="header-section-number">5.2</span> How to login to Gitpod</a></li>
+  <li><a href="#how-to-configure-gitpod" id="toc-how-to-configure-gitpod" class="nav-link" data-scroll-target="#how-to-configure-gitpod"><span class="header-section-number">5.3</span> How to configure Gitpod</a></li>
+  <li><a href="#uses-for-gitpod" id="toc-uses-for-gitpod" class="nav-link" data-scroll-target="#uses-for-gitpod"><span class="header-section-number">5.4</span> Uses for Gitpod</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gitpod/gitpod-intro.html">Gitpod</a></li><li class="breadcrumb-item"><a href="../gitpod/gitpod-intro.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gitpod</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Training: Tech shorts</h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gitpod</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>NBIS </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">February 13, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -286,71 +299,117 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>This is a series of short lessons in various technologies useful to our work.</p>
-<section id="quick-start" class="level2">
-<h2 class="anchored" data-anchor-id="quick-start">Quick start</h2>
-<p>The first step is to read over the lesson Github Collaboration.</p>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<section id="what-is-gitpod" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="what-is-gitpod"><span class="header-section-number">5.1</span> What is Gitpod</h2>
+<p><a href="https://gitpod.io">Gitpod</a> is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file <code>.gitpod.yml</code> present in the repository.</p>
+<p>There are two offerings of Gitpod, Gitpod Flex, and Gitpod Enterprise. Gitpod Flex is designed to run a container on your laptop, cloud, or on-premises architecture. Gitpod Enterprise, which we discuss here, runs on a cloud environment hosted by Gitpod.</p>
+<p>There are different pricing depending on your needs such as:</p>
+<ul>
+<li>Free plan (50 hours per month)</li>
+<li>Pay-as-you-go</li>
+<li>Company plan (custom)</li>
+</ul>
+<p>Mahesh is on an open source plan (nammed NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication.</p>
+</section>
+<section id="how-to-login-to-gitpod" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="how-to-login-to-gitpod"><span class="header-section-number">5.2</span> How to login to Gitpod</h2>
+<ul>
+<li>Go to the <a href="https://gitpod.io">Gitpod site</a>.</li>
+<li>Select your Git hosting service (e.g., GitHub), and authenticate.</li>
+<li>If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right.</li>
+<li>Now when you start a Gitpod environment you’ll be connected to your version control system.</li>
+</ul>
+<p>##&nbsp;How to start a Gitpod</p>
+<p>To start a workspace, follow these steps:</p>
+<ul>
+<li>Navigate to your repository on GitHub, GitLab or Bitbucket.</li>
+<li>Add <code>gitpod.io/#</code> before the URL address of your repository. This will create a new URL address that directs you to the Gitpod workspace setup page. On that page, you can make the following choices:
 <ol type="1">
-<li>Make a branch for your lesson.</li>
-<li>Create a Quarto markdown document with <code>## Objectives</code> and <code>## Key points</code> and add it to that branch.</li>
-<li>Add the document to the <code>_quarto.yml</code>.</li>
-<li>Teach your topic to your team for 30-45 mins. Please remember to record the lesson.</li>
-<li>Each learner selects a key point to contribute material on. Use the lesson issue for that topic to assign yourself and another learner to review your contribution.</li>
-<li>Make a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you’re both happy.</li>
-<li>Mark the pull request as ready, and request the instructor to review.</li>
-<li>When the instructor is happy with the changes they should merge the learners contribution back into their lesson branch.</li>
-<li>The instructor reviews and merges the lesson branch when all contributions have been received. It is the responsibility of the teacher to make sure contributions have been received after two weeks.</li>
+<li>The source repository for which the gitpod workspace will be created.</li>
+<li>The code editor.</li>
+<li>The computing resources required for the workspace.</li>
+</ol></li>
+<li>After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user’s working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer.</li>
+<li>Any changes to the files within that folder can be pushed to the repository using Git commands.</li>
+</ul>
+<p><strong>Note</strong>: If you are editing a public Github public repository, Gitpod requires the “public_repo” permission to push changes. To do it, follow these steps:</p>
+<ol type="1">
+<li>Navigate to gitpod.io.</li>
+<li>Click on your user icon</li>
+<li>Click “user settings”</li>
+<li>Navigate to “Git Providers”</li>
+<li>Click the actions icon on the GitHub provider</li>
+<li>Click “edit permissions”</li>
+<li>Check “public_repo”</li>
+<li>Click “Update permissions”</li>
+<li>You will be redirected to Github for authentication.</li>
 </ol>
+<p>After granting permissions, the user can push changes to the repository.</p>
 </section>
-<section id="review-lessons" class="level3">
-<h3 class="anchored" data-anchor-id="review-lessons">Review lessons</h3>
-<p>Each lesson should be followed up by a review lesson the following week. Here, the teacher should review and discuss points that they notice learners had difficulty with.</p>
+<section id="how-to-configure-gitpod" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="how-to-configure-gitpod"><span class="header-section-number">5.3</span> How to configure Gitpod</h2>
+<ul>
+<li><p>A gitpod workspace is configured mainly through the <code>.gitpod.yml</code> file at the root of your repository (e.g.&nbsp;github.com/user/repo/.gitpod.yml).</p></li>
+<li><p>This file is read by Gitpod when the workspace is started, and can be used to specify the base workspace image, and a list of tasks that will be run when the workspace is started.</p></li>
+<li><p>Below is the yml file we use in the Training-tech-shorts repo.</p></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span><span class="at"> nfcore/gitpod:latest</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Update Nextflow</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> nextflow self-update</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Pixi</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">    command</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      sudo chown gitpod -R /home/gitpod/</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      curl -fsSL https://pixi.sh/install.sh | bash</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      . /home/gitpod/.bash_profile</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Quarto</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">    command</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      wget https://quarto.org/download/latest/quarto-linux-amd64.deb</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      sudo dpkg -i quarto-linux-amd64.deb</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      rm quarto-linux-amd64.deb</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      quarto check all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The <code>image:</code> section of the <code>.gitpod.yml</code> is used to specify the base workspace image, this can be a public or private docker image, or a Dockerfile (in this case the base image must be public).</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># public image</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span><span class="at"> nfcore/gitpod:latest</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># local Dockerfile</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">file</span><span class="kw">:</span><span class="at"> .gitpod.Dockerfile</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The <code>tasks:</code> section of the <code>.gitpod.yml</code> is used to specify a list of tasks that will be run when the workspace is started. Each task should have a <code>name:</code> and a <code>command:</code> section. The <code>command:</code> section specifies one or more shell commands that will be run in the workspace.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Update Nextflow</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> nextflow self-update</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>In order to execute multiple commands in a single task, you can use the <code>|</code> syntax to specify a block of shell commands, each in one line.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Pixi</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">    command</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      sudo chown gitpod -R /home/gitpod/</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      curl -fsSL https://pixi.sh/install.sh | bash</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      . /home/gitpod/.bash_profile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Optionally, you can also add a <code>ports:</code> section to the <code>.gitpod.yml</code> file to specify a list of ports that should be opened by the workspace. This can be useful when hosting a web server or anything that needs to be accessed from outside the workspace.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">onOpen</span><span class="kw">:</span><span class="at"> open-preview</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="sequence-diagram" class="level3">
-<h3 class="anchored" data-anchor-id="sequence-diagram">Sequence diagram</h3>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">sequenceDiagram
-    box transparent Learners
-        actor Learner1
-        actor Learner2
-    end
-    actor Teacher
-    Teacher -&gt;&gt; GitHub: New branch for lesson
-    Teacher -&gt;&gt; GitHub: New lesson file
-    Teacher -&gt;&gt; GitHub: Add key points
-    Teacher -&gt;&gt; Learner1: Demonstrates tool
-    Learner1 -&gt;&gt; Teacher: Volunteers to write up keypoint 2
-    Learner2 -&gt;&gt; Teacher: Volunteers to write up keypoint 1
-    Learner1 -&gt;&gt; GitHub: Make branch from lesson branch
-    Learner1 -&gt;&gt; GitHub: Add notes for keypoint 2
-    Learner2 -&gt;&gt; GitHub: Add notes for keypoint 1
-    Learner1 -&gt;&gt; GitHub: Request Learner2 to review text
-    Learner2 -&gt;&gt; GitHub: Request Learner1 to review text
-    Learner1 -&gt;&gt; GitHub: Provide code review
-    Learner1 -&gt;&gt; GitHub: Update notes from review
-    Learner1 -&gt;&gt; Teacher: Request code review
-    Learner1 -&gt;&gt; GitHub: Update notes
-    Teacher -&gt;&gt; GitHub: Merges notes into lesson branch
-    Teacher -&gt;&gt; GitHub: Merges lesson branch into main
-    GitHub -&gt;&gt; GitHub: Automated website build
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
+<section id="uses-for-gitpod" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="uses-for-gitpod"><span class="header-section-number">5.4</span> Uses for Gitpod</h2>
+<ul>
+<li>Demonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.</li>
+<li>Development: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.</li>
+<li>Experimentation: The ephemeral nature of the environment, and its standardized tools make Gitpod excellent for testing code and sandbox experimentation.</li>
+<li>Training: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements.</li>
+</ul>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -773,10 +832,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../apptainer/apptainer-intro.html" class="pagination-link" aria-label="Introduction to Apptainer (i.e. Singularity)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Apptainer (i.e.&nbsp;Singularity)</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./schedule.html" class="pagination-link" aria-label="Schedule">
-        <span class="nav-page-text">Schedule</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../quarto/quarto-intro.html" class="pagination-link" aria-label="Introduction to Quarto">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Quarto</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
