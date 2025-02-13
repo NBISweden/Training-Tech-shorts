@@ -1,0 +1,18 @@
+# Test qmd file for publishing to confluence
+
+```{python}
+# Code block
+
+import numpy as np
+
+a = np.array([1, 2, 3])
+
+print(a)
+```
+
+- See section [below](#heading2)
+
+## Heading 2 {#heading2}
+
+- Some more things
+- A **very important point**
