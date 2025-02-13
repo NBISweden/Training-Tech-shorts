@@ -18,9 +18,12 @@ book:
     - part: "Github"
       chapters:
         - github/gh-collaboration.qmd
-    - part: "pixi"
+    - part: "Pixi"
       chapters:
         - pixi/pixi.qmd
+    - part: "Gitpod"
+      chapters:
+        - gitpod/gitpod.qmd
     - summary.qmd
     - references.qmd
 
