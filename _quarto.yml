@@ -14,14 +14,22 @@ book:
     - schedule.qmd
     - part: "Git"
       chapters:
-        - git/git_intro.qmd
+        - git/git-intro.qmd
     - part: "Github"
       chapters:
         - github/gh-collaboration.qmd
-    - part: "pixi"
+    - part: "Pixi"
       chapters:
-        - pixi/pixi.qmd
-    - summary.qmd
+        - pixi/pixi-intro.qmd
+    - part: "Apptainer"
+      chapters:
+        - apptainer/apptainer-intro.qmd
+    - part: "Gitpod"
+      chapters:
+        - gitpod/gitpod-intro.qmd
+    - part: "Quarto"
+      chapters:
+        - quarto/quarto-intro.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -29,6 +37,3 @@ bibliography: references.bib
 format:
   html:
     theme: minty
-
-
-

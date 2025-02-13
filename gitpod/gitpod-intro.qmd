@@ -1,0 +1,119 @@
+# Gitpod
+
+## What is Gitpod
+
+[Gitpod](https://gitpod.io) is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file `.gitpod.yml` present in the repository.
+
+There are two offerings of Gitpod, Gitpod Flex, and Gitpod Enterprise. Gitpod Flex is designed to run a container on your laptop, cloud, or on-premises architecture. Gitpod Enterprise, which we discuss here, runs on a cloud environment hosted by Gitpod.
+
+There are different pricing depending on your needs such as:
+
+- Free plan (50 hours per month)
+- Pay-as-you-go
+- Company plan (custom)
+
+Mahesh is on an open source plan (nammed NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication.
+
+## How to login to Gitpod
+
+- Go to the [Gitpod site](https://gitpod.io).
+- Select your Git hosting service (e.g., GitHub), and authenticate.
+- If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right.
+- Now when you start a Gitpod environment you'll be connected to your version control system.
+
+## How to start a Gitpod 
+
+To start a workspace, follow these steps:
+
+- Navigate to your repository on GitHub, GitLab or Bitbucket. 
+- Add `gitpod.io/#` before the URL address of your repository. This will create a new URL address that directs you to the Gitpod workspace setup page. On that page, you can make the following choices:
+    1. The source repository for which the gitpod workspace will be created.
+    2. The code editor. 
+    3. The computing resources required for the workspace. 
+- After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user's working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer. 
+- Any changes to the files within that folder can be pushed to the repository using Git commands. 
+
+**Note**: If you are editing a public Github public repository, Gitpod requires the "public_repo" permission to push changes. To do it, follow these steps:
+
+1. Navigate to gitpod.io.
+2. Click on your user icon
+3. Click "user settings"
+4. Navigate to "Git Providers"
+5. Click the actions icon on the GitHub provider
+6. Click "edit permissions"
+7. Check "public_repo"
+8. Click "Update permissions"
+9. You will be redirected to Github for authentication.
+
+After granting permissions, the user can push changes to the repository. 
+
+## How to configure Gitpod
+
+- A gitpod workspace is configured mainly through the `.gitpod.yml` file at the root of your repository (e.g. github.com/user/repo/.gitpod.yml). 
+
+- This file is read by Gitpod when the workspace is started, and can be used to specify the base workspace image, and a list of tasks that will be run when the workspace is started.
+
+- Below is the yml file we use in the Training-tech-shorts repo.
+
+```yml
+image: nfcore/gitpod:latest
+
+tasks:
+  - name: Update Nextflow
+    command: nextflow self-update
+  - name: Install Pixi
+    command: |
+      sudo chown gitpod -R /home/gitpod/
+      curl -fsSL https://pixi.sh/install.sh | bash
+      . /home/gitpod/.bash_profile
+  - name: Install Quarto
+    command: |
+      wget https://quarto.org/download/latest/quarto-linux-amd64.deb
+      sudo dpkg -i quarto-linux-amd64.deb
+      rm quarto-linux-amd64.deb
+      quarto check all
+```
+- The `image:` section of the `.gitpod.yml` is used to specify the base workspace image, this can be a public or private docker image, or a Dockerfile (in this case the base image must be public).
+
+```yml
+# public image
+image: nfcore/gitpod:latest
+
+# local Dockerfile
+image:
+    file: .gitpod.Dockerfile
+```
+
+- The `tasks:` section of the `.gitpod.yml` is used to specify a list of tasks that will be run when the workspace is started. Each task should have a `name:` and a `command:` section. The `command:` section specifies one or more shell commands that will be run in the workspace.
+
+```yml
+tasks:
+  - name: Update Nextflow
+    command: nextflow self-update
+```
+
+- In order to execute multiple commands in a single task, you can use the `|` syntax to specify a block of shell commands, each in one line.
+
+```yml
+tasks:
+  - name: Install Pixi
+    command: |
+      sudo chown gitpod -R /home/gitpod/
+      curl -fsSL https://pixi.sh/install.sh | bash
+      . /home/gitpod/.bash_profile
+```
+
+- Optionally, you can also add a `ports:` section to the `.gitpod.yml` file to specify a list of ports that should be opened by the workspace. This can be useful when hosting a web server or anything that needs to be accessed from outside the workspace.
+
+```yml
+ports:
+  - port: 8080
+    onOpen: open-preview
+```
+
+## Uses for Gitpod
+
+- Demonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.
+- Development: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.
+- Experimentation: The ephemeral nature of the environment, and its standardized tools make Gitpod excellent for testing code and sandbox experimentation.
+- Training: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements. 
