@@ -58,7 +58,7 @@ Several things didn't render although might be achievable in other ways:
 - Column layout did not work.
 
 ## Quarto document 
-Verena (reviewer Jason)
+Verena (reviewer Jason): `Training-Tech-shorts/quarto-to-wiki/quarto-example-verena/quarto-example-verena.qmd`
 
 ## Quarto document 
 Cormac (reviewer Guilherme)
