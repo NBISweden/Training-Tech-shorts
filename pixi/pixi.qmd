@@ -1,23 +1,29 @@
-## Intro to Pixi
-
-This section is a brief summary of the concepts discussed in the meeting. 
+## Introduction to Pixi
 
 ## Why Pixi?
 
-Pixi is a package management tool that serves as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system's PATH.
+[Pixi](https://pixi.sh/) is a package management tool that can serve as a replacement for Conda or 
+Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are 
+not isolated, which allows you to interact with third-party tools that are available in your 
+system's PATH, for example, job submission managers like slurm, or container platforms.
 
 ### Compatibility
 
 Pixi is somehwat compatible with Conda. You can:
 
-- Use the same Conda channels (e.g., `conda-forge`, `bioconda`).
-- Use existing Conda environment files with Pixi.
+- Install packages using the same Conda channels (e.g., `conda-forge`, `bioconda`).
+- Initialise project environments using existing Conda environment files.
 
 However, you cannot activate a conda environment using Pixi, or vice-versa. 
 
 ### Key Difference
 
-In Pixi, the environment configuration file (`.pixi.toml`) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility.
+In Pixi, the environment configuration file (`.pixi.toml`) lives in the project directory. 
+This ensures that the environment is tied to the project and simplifies reproducibility.
+When an environment is first created, a `pixi.lock` file is also written. This should also
+be commited to the git repository, just like the toml file. This records every package used
+to make the environment for each platform that should be supported. This differs from Conda,
+in which lock files must be explicitly generated with a separate command. 
 
 ---
 
@@ -34,22 +40,24 @@ curl -fsSL https://pixi.sh/install.sh | bash
 2. Initialize a Pixi environment in your project:
 
 ```{.bash}
-pixi init -c conda-forge -c bioconda -p linux-64 -p osx-arm64
+pixi init -c conda-forge -c bioconda -p linux-64 -p osx-arm64 -p osx-64
 ```
 
 Here:
-- `-c` specifies the channels to use (e.g., `conda-forge`, `bioconda`)
-- `-p` sets the platforms 
 
-By default, Pixi will set the environment for your platform (e.g., `linux-64`), but you can specify additional platforms as needed. 
+- `-c` specifies the channels to use (e.g., `conda-forge`, `bioconda`)
+- `-p` sets the platforms (`linux-64`: Intel Linux, `osx-64`: Intel MacOS, `osx-arm64`: ARM MacOS)
+
+By default, Pixi will set the environment for your platform (e.g., `linux-64`), but you can specify 
+additional platforms as needed. 
 
 The `pixi init`command will create two files:
 
 - `.pixi.toml`: Specifies the environment configuration.
 - `.pixi.lock`: Locks down the specific package versions for reproducibility.
 
-You should commit both files to your version control system to share the exact environment setup with collaborators and increase `reproducibility`. 
-
+You should commit both files to your version control system to share the exact environment setup 
+with collaborators and increase reproducibility. 
 
 ### Adding Packages
 
@@ -68,7 +76,8 @@ pixi add --pypi multiqc
 
 Alternatively, you can directly modify the `.pixi.toml` file in your project directory: 
 
-Under `[dependencies]`, or platform specific dependencies (such as `[target.linux-64.dependencies]` you can add a line for each package you want to include `nextflow = "24.10.4.*"`for example. 
+Under `[dependencies]`, or platform specific dependencies (such as `[target.linux-64.dependencies]`) 
+you can add a line for each package you want to include `nextflow = "24.10.4.*"`for example. 
 
 ---
 
@@ -76,16 +85,36 @@ Under `[dependencies]`, or platform specific dependencies (such as `[target.linu
 
 ### Files in the Directory
 
-When you use Pixi, it creates a `.pixi` folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder.
+When you use Pixi, it creates a `.pixi` folder in your project directory. This folder contains the 
+libraries and binaries needed for the environment. If needed, you can safely delete this folder, and
+it will be recreated from the `pixi.lock` file in your project, the next time you use the environment.
 
+The command
+```{.bash}
+pixi clean
+```
+deletes the pixi environment binaries, and the command
+```{.bash}
+pixi clean cache
+```
+deletes the package archives that were downloaded and unpacked to create the environment.
+
+### Environment features
+
+Unlike Conda, in which you can define multiple global environments, Pixi handles multi-environment 
+projects in a different way. Packages are installed into Features, which in turn define an
+Environment. Features are isolated from each other, helping to avoid version clashes between tools. 
+See [Pixi docs - Multi Environment](https://pixi.sh/latest/features/multi_environment/)
+for more on defining multiple environments in a TOML. 
 
 ---
 
 ## Tasks in Pixi
 
+In addtion to being a package manager, 
 Pixi allows you to define and run tasks directly in the `.pixi.toml` file. For example:
 
-```toml
+```{.toml}
 [tasks]
 name-of-task = "nextflow run main.nf -profile PDC"
 ```
@@ -96,9 +125,13 @@ One can also add tasks via the command line:
 pixi task add hello python hello_world.py
 ```
 
+See [Pixi Tasks](https://pixi.sh/latest/features/advanced_tasks/) for more information
+
 ### Task Features
 
-Tasks can be combined or run conditionally. The example in the [documentation](https://pixi.sh/latest/features/advanced_tasks/) is to specify that an application should be complied before being run. The command `depends-on`can be used here. With this one can chain tasks for complex workflows.
+Tasks can be combined or run conditionally. The example in the [documentation](https://pixi.sh/latest/features/advanced_tasks/) 
+is to specify that an application should be complied before being run. The command `depends-on`can 
+be used here. With this one can chain tasks for complex workflows.
 
 ---
 
@@ -109,6 +142,9 @@ Pixi provides a shell environment based on the Deno shell. Many basic Bash comma
 - Chaining tools.
 - Command substitution.
 
+See [Advanced Tasks](https://pixi.sh/latest/features/advanced_tasks/#our-task-runner-deno_task_shell) for a 
+more detailed description about the Deno shell supported features.
+
 ### Activating the Environment
 
 To activate the environment:
@@ -117,13 +153,18 @@ To activate the environment:
 pixi shell
 ```
 
+To exit an environment, use `exit`:
+
+```{.bash}
+exit
+```
+
+which also saves your command history.
+
 ---
 
 ## Advanced Features
 
-### Features
-
-PIXI allows multiple "features" in a single project. Features are isolated from each other, helping to avoid version clashes between tools.
 
 ### Intel emulation on ARM Macs
 
@@ -158,3 +199,25 @@ To clean the cache:
 ```{.bash}
 pixi clean cache
 ```
+
+### Package search
+
+Pixi can search for the latest version of a package, and provide detailed information
+about using:
+
+```{.bash}
+pixi search <package_name>
+```
+
+However, unlike Conda, it does not list all available versions of a package. For this purpose,
+`conda search <package_name>` is the better option.
+
+### Command help
+
+Use
+
+```{.bash}
+pixi help
+```
+
+to get more detailed help on various commands.
