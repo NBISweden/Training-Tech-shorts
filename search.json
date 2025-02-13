@@ -197,89 +197,89 @@
   {
     "objectID": "pixi/pixi.html",
     "href": "pixi/pixi.html",
-    "title": "3  Intro to Pixi",
+    "title": "3  Introduction to Pixi",
     "section": "",
-    "text": "3.1 Why Pixi?\nThis section is a brief summary of the concepts discussed in the meeting.\nPixi is a package management tool that serves as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH.",
+    "text": "3.1 Why Pixi?\nPixi is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.",
     "crumbs": [
       "pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Intro to Pixi</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
     ]
   },
   {
     "objectID": "pixi/pixi.html#why-pixi",
     "href": "pixi/pixi.html#why-pixi",
-    "title": "3  Intro to Pixi",
+    "title": "3  Introduction to Pixi",
     "section": "",
-    "text": "3.1.1 Compatibility\nPixi is somehwat compatible with Conda. You can:\n\nUse the same Conda channels (e.g., conda-forge, bioconda).\nUse existing Conda environment files with Pixi.\n\nHowever, you cannot activate a conda environment using Pixi, or vice-versa.\n\n\n3.1.2 Key Difference\nIn Pixi, the environment configuration file (.pixi.toml) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility.",
+    "text": "3.1.1 Compatibility\nPixi is somehwat compatible with Conda. You can:\n\nInstall packages using the same Conda channels (e.g., conda-forge, bioconda).\nInitialise project environments using existing Conda environment files.\n\nHowever, you cannot activate a conda environment using Pixi, or vice-versa.\n\n\n3.1.2 Key Difference\nIn Pixi, the environment configuration file (.pixi.toml) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a pixi.lock file is also written. This should also be commited to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command.",
     "crumbs": [
       "pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Intro to Pixi</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
     ]
   },
   {
     "objectID": "pixi/pixi.html#getting-started",
     "href": "pixi/pixi.html#getting-started",
-    "title": "3  Intro to Pixi",
+    "title": "3  Introduction to Pixi",
     "section": "3.2 Getting Started",
-    "text": "3.2 Getting Started\n\n3.2.1 Installation\n\nInstall Pixi and add it to your shell’s configuration (e.g., .bashrc or .zshrc).\n\ncurl -fsSL https://pixi.sh/install.sh | bash\n\nInitialize a Pixi environment in your project:\n\npixi init -c conda-forge -c bioconda -p linux-64 -p osx-arm64\nHere: - -c specifies the channels to use (e.g., conda-forge, bioconda) - -p sets the platforms\nBy default, Pixi will set the environment for your platform (e.g., linux-64), but you can specify additional platforms as needed.\nThe pixi initcommand will create two files:\n\n.pixi.toml: Specifies the environment configuration.\n.pixi.lock: Locks down the specific package versions for reproducibility.\n\nYou should commit both files to your version control system to share the exact environment setup with collaborators and increase reproducibility.\n\n\n3.2.2 Adding Packages\nYou can add packages to your environment using the pixi add command:\npixi add bwa samtools\nYou can add Python packages from PyPI using Pixi:\npixi add python\npixi add --pypi multiqc\nAlternatively, you can directly modify the .pixi.toml file in your project directory:\nUnder [dependencies], or platform specific dependencies (such as [target.linux-64.dependencies] you can add a line for each package you want to include nextflow = \"24.10.4.*\"for example.",
+    "text": "3.2 Getting Started\n\n3.2.1 Installation\n\nInstall Pixi and add it to your shell’s configuration (e.g., .bashrc or .zshrc).\n\ncurl -fsSL https://pixi.sh/install.sh | bash\n\nInitialize a Pixi environment in your project:\n\npixi init -c conda-forge -c bioconda -p linux-64 -p osx-arm64 -p osx-64\nHere:\n\n-c specifies the channels to use (e.g., conda-forge, bioconda)\n-p sets the platforms (linux-64: Intel Linux, osx-64: Intel MacOS, osx-arm64: ARM MacOS)\n\nBy default, Pixi will set the environment for your platform (e.g., linux-64), but you can specify additional platforms as needed.\nThe pixi initcommand will create two files:\n\n.pixi.toml: Specifies the environment configuration.\n.pixi.lock: Locks down the specific package versions for reproducibility.\n\nYou should commit both files to your version control system to share the exact environment setup with collaborators and increase reproducibility.\n\n\n3.2.2 Adding Packages\nYou can add packages to your environment using the pixi add command:\npixi add bwa samtools\nYou can add Python packages from PyPI using Pixi:\npixi add python\npixi add --pypi multiqc\nAlternatively, you can directly modify the .pixi.toml file in your project directory:\nUnder [dependencies], or platform specific dependencies (such as [target.linux-64.dependencies]) you can add a line for each package you want to include nextflow = \"24.10.4.*\"for example.",
     "crumbs": [
       "pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Intro to Pixi</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
     ]
   },
   {
     "objectID": "pixi/pixi.html#managing-environments",
     "href": "pixi/pixi.html#managing-environments",
-    "title": "3  Intro to Pixi",
+    "title": "3  Introduction to Pixi",
     "section": "3.3 Managing Environments",
-    "text": "3.3 Managing Environments\n\n3.3.1 Files in the Directory\nWhen you use Pixi, it creates a .pixi folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder.",
+    "text": "3.3 Managing Environments\n\n3.3.1 Files in the Directory\nWhen you use Pixi, it creates a .pixi folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder, and it will be recreated from the pixi.lock file in your project, the next time you use the environment.\nThe command\npixi clean\ndeletes the pixi environment binaries, and the command\npixi clean cache\ndeletes the package archives that were downloaded and unpacked to create the environment.\n\n\n3.3.2 Environment features\nUnlike Conda, in which you can define multiple global environments, Pixi handles multi-environment projects in a different way. Packages are installed into Features, which in turn define an Environment. Features are isolated from each other, helping to avoid version clashes between tools. See Pixi docs - Multi Environment for more on defining multiple environments in a TOML.",
     "crumbs": [
       "pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Intro to Pixi</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
     ]
   },
   {
     "objectID": "pixi/pixi.html#tasks-in-pixi",
     "href": "pixi/pixi.html#tasks-in-pixi",
-    "title": "3  Intro to Pixi",
+    "title": "3  Introduction to Pixi",
     "section": "3.4 Tasks in Pixi",
-    "text": "3.4 Tasks in Pixi\nPixi allows you to define and run tasks directly in the .pixi.toml file. For example:\n[tasks]\nname-of-task = \"nextflow run main.nf -profile PDC\"\nOne can also add tasks via the command line:\npixi task add hello python hello_world.py\n\n3.4.1 Task Features\nTasks can be combined or run conditionally. The example in the documentation is to specify that an application should be complied before being run. The command depends-oncan be used here. With this one can chain tasks for complex workflows.",
+    "text": "3.4 Tasks in Pixi\nIn addtion to being a package manager, Pixi allows you to define and run tasks directly in the .pixi.toml file. For example:\n[tasks]\nname-of-task = \"nextflow run main.nf -profile PDC\"\nOne can also add tasks via the command line:\npixi task add hello python hello_world.py\nSee Pixi Tasks for more information\n\n3.4.1 Task Features\nTasks can be combined or run conditionally. The example in the documentation is to specify that an application should be complied before being run. The command depends-oncan be used here. With this one can chain tasks for complex workflows.",
     "crumbs": [
       "pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Intro to Pixi</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
     ]
   },
   {
     "objectID": "pixi/pixi.html#working-with-the-shell",
     "href": "pixi/pixi.html#working-with-the-shell",
-    "title": "3  Intro to Pixi",
+    "title": "3  Introduction to Pixi",
     "section": "3.5 Working with the Shell",
-    "text": "3.5 Working with the Shell\nPixi provides a shell environment based on the Deno shell. Many basic Bash commands still work, allowing for:\n\nChaining tools.\nCommand substitution.\n\n\n3.5.1 Activating the Environment\nTo activate the environment:\npixi shell",
+    "text": "3.5 Working with the Shell\nPixi provides a shell environment based on the Deno shell. Many basic Bash commands still work, allowing for:\n\nChaining tools.\nCommand substitution.\n\nSee Advanced Tasks for a more detailed description about the Deno shell supported features.\n\n3.5.1 Activating the Environment\nTo activate the environment:\npixi shell\nTo exit an environment, use exit:\nexit\nwhich also saves your command history.",
     "crumbs": [
       "pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Intro to Pixi</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
     ]
   },
   {
     "objectID": "pixi/pixi.html#advanced-features",
     "href": "pixi/pixi.html#advanced-features",
-    "title": "3  Intro to Pixi",
+    "title": "3  Introduction to Pixi",
     "section": "3.6 Advanced Features",
-    "text": "3.6 Advanced Features\n\n3.6.1 Features\nPIXI allows multiple “features” in a single project. Features are isolated from each other, helping to avoid version clashes between tools.\n\n\n3.6.2 Intel emulation on ARM Macs\nAlthough packages are increasingly being built for ARM architecture CPUS, not all tools are built for osx-arm64. However, they may have been built for osx-64 (i.e., intel architecture CPUS), in addition to linux-64. MacOS includes the tool Rosetta, which can be used to emulate intel on arm Macs, at the cost of performance.\nBy supporting only linux-64 and osx-64 as platforms, Pixi will automatically run the tools using Rosetta emulation on Mac ARM computers.\npixi init \\\n  --channel \"conda-forge\" \\\n  --channel \"bioconda\" \\\n  --platform \"linux-64\" \\\n  --platform \"osx-64\"",
+    "text": "3.6 Advanced Features\n\n3.6.1 Intel emulation on ARM Macs\nAlthough packages are increasingly being built for ARM architecture CPUS, not all tools are built for osx-arm64. However, they may have been built for osx-64 (i.e., intel architecture CPUS), in addition to linux-64. MacOS includes the tool Rosetta, which can be used to emulate intel on arm Macs, at the cost of performance.\nBy supporting only linux-64 and osx-64 as platforms, Pixi will automatically run the tools using Rosetta emulation on Mac ARM computers.\npixi init \\\n  --channel \"conda-forge\" \\\n  --channel \"bioconda\" \\\n  --platform \"linux-64\" \\\n  --platform \"osx-64\"",
     "crumbs": [
       "pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Intro to Pixi</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
     ]
   },
   {
     "objectID": "pixi/pixi.html#additional-commands",
     "href": "pixi/pixi.html#additional-commands",
-    "title": "3  Intro to Pixi",
+    "title": "3  Introduction to Pixi",
     "section": "3.7 Additional Commands",
-    "text": "3.7 Additional Commands\n\n3.7.1 Updating Pixi\nTo update Pixi:\npixi self-update\n\n\n3.7.2 Cleaning the cache\nTo clean the cache:\npixi clean cache",
+    "text": "3.7 Additional Commands\n\n3.7.1 Updating Pixi\nTo update Pixi:\npixi self-update\n\n\n3.7.2 Cleaning the cache\nTo clean the cache:\npixi clean cache\n\n\n3.7.3 Package search\nPixi can search for the latest version of a package, and provide detailed information about using:\npixi search &lt;package_name&gt;\nHowever, unlike Conda, it does not list all available versions of a package. For this purpose, conda search &lt;package_name&gt; is the better option.\n\n\n3.7.4 Command help\nUse\npixi help\nto get more detailed help on various commands.",
     "crumbs": [
       "pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Intro to Pixi</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
     ]
   },
   {

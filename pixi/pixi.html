@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Intro to Pixi – Training: Tech shorts</title>
+<title>3&nbsp; Introduction to Pixi – Training: Tech shorts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pixi/pixi.html">pixi</a></li><li class="breadcrumb-item"><a href="../pixi/pixi.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Intro to Pixi</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pixi/pixi.html">pixi</a></li><li class="breadcrumb-item"><a href="../pixi/pixi.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../pixi/pixi.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Intro to Pixi</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></span></a>
   </div>
 </li>
       </ul>
@@ -238,6 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#managing-environments" id="toc-managing-environments" class="nav-link" data-scroll-target="#managing-environments"><span class="header-section-number">3.3</span> Managing Environments</a>
   <ul class="collapse">
   <li><a href="#files-in-the-directory" id="toc-files-in-the-directory" class="nav-link" data-scroll-target="#files-in-the-directory"><span class="header-section-number">3.3.1</span> Files in the Directory</a></li>
+  <li><a href="#environment-features" id="toc-environment-features" class="nav-link" data-scroll-target="#environment-features"><span class="header-section-number">3.3.2</span> Environment features</a></li>
   </ul></li>
   <li><a href="#tasks-in-pixi" id="toc-tasks-in-pixi" class="nav-link" data-scroll-target="#tasks-in-pixi"><span class="header-section-number">3.4</span> Tasks in Pixi</a>
   <ul class="collapse">
@@ -249,13 +250,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#advanced-features" id="toc-advanced-features" class="nav-link" data-scroll-target="#advanced-features"><span class="header-section-number">3.6</span> Advanced Features</a>
   <ul class="collapse">
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features"><span class="header-section-number">3.6.1</span> Features</a></li>
-  <li><a href="#intel-emulation-on-arm-macs" id="toc-intel-emulation-on-arm-macs" class="nav-link" data-scroll-target="#intel-emulation-on-arm-macs"><span class="header-section-number">3.6.2</span> Intel emulation on ARM Macs</a></li>
+  <li><a href="#intel-emulation-on-arm-macs" id="toc-intel-emulation-on-arm-macs" class="nav-link" data-scroll-target="#intel-emulation-on-arm-macs"><span class="header-section-number">3.6.1</span> Intel emulation on ARM Macs</a></li>
   </ul></li>
   <li><a href="#additional-commands" id="toc-additional-commands" class="nav-link" data-scroll-target="#additional-commands"><span class="header-section-number">3.7</span> Additional Commands</a>
   <ul class="collapse">
   <li><a href="#updating-pixi" id="toc-updating-pixi" class="nav-link" data-scroll-target="#updating-pixi"><span class="header-section-number">3.7.1</span> Updating Pixi</a></li>
   <li><a href="#cleaning-the-cache" id="toc-cleaning-the-cache" class="nav-link" data-scroll-target="#cleaning-the-cache"><span class="header-section-number">3.7.2</span> Cleaning the cache</a></li>
+  <li><a href="#package-search" id="toc-package-search" class="nav-link" data-scroll-target="#package-search"><span class="header-section-number">3.7.3</span> Package search</a></li>
+  <li><a href="#command-help" id="toc-command-help" class="nav-link" data-scroll-target="#command-help"><span class="header-section-number">3.7.4</span> Command help</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -263,9 +265,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pixi/pixi.html">pixi</a></li><li class="breadcrumb-item"><a href="../pixi/pixi.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Intro to Pixi</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pixi/pixi.html">pixi</a></li><li class="breadcrumb-item"><a href="../pixi/pixi.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Intro to Pixi</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></h1>
 </div>
 
 
@@ -282,22 +284,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This section is a brief summary of the concepts discussed in the meeting.</p>
 <section id="why-pixi" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="why-pixi"><span class="header-section-number">3.1</span> Why Pixi?</h2>
-<p>Pixi is a package management tool that serves as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH.</p>
+<p><a href="https://pixi.sh/">Pixi</a> is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.</p>
 <section id="compatibility" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="compatibility"><span class="header-section-number">3.1.1</span> Compatibility</h3>
 <p>Pixi is somehwat compatible with Conda. You can:</p>
 <ul>
-<li>Use the same Conda channels (e.g., <code>conda-forge</code>, <code>bioconda</code>).</li>
-<li>Use existing Conda environment files with Pixi.</li>
+<li>Install packages using the same Conda channels (e.g., <code>conda-forge</code>, <code>bioconda</code>).</li>
+<li>Initialise project environments using existing Conda environment files.</li>
 </ul>
 <p>However, you cannot activate a conda environment using Pixi, or vice-versa.</p>
 </section>
 <section id="key-difference" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="key-difference"><span class="header-section-number">3.1.2</span> Key Difference</h3>
-<p>In Pixi, the environment configuration file (<code>.pixi.toml</code>) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility.</p>
+<p>In Pixi, the environment configuration file (<code>.pixi.toml</code>) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a <code>pixi.lock</code> file is also written. This should also be commited to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command.</p>
 <hr>
 </section>
 </section>
@@ -312,15 +313,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="2" type="1">
 <li>Initialize a Pixi environment in your project:</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-p</span> linux-64 <span class="at">-p</span> osx-arm64</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Here: - <code>-c</code> specifies the channels to use (e.g., <code>conda-forge</code>, <code>bioconda</code>) - <code>-p</code> sets the platforms</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-p</span> linux-64 <span class="at">-p</span> osx-arm64 <span class="at">-p</span> osx-64</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here:</p>
+<ul>
+<li><code>-c</code> specifies the channels to use (e.g., <code>conda-forge</code>, <code>bioconda</code>)</li>
+<li><code>-p</code> sets the platforms (<code>linux-64</code>: Intel Linux, <code>osx-64</code>: Intel MacOS, <code>osx-arm64</code>: ARM MacOS)</li>
+</ul>
 <p>By default, Pixi will set the environment for your platform (e.g., <code>linux-64</code>), but you can specify additional platforms as needed.</p>
 <p>The <code>pixi init</code>command will create two files:</p>
 <ul>
 <li><code>.pixi.toml</code>: Specifies the environment configuration.</li>
 <li><code>.pixi.lock</code>: Locks down the specific package versions for reproducibility.</li>
 </ul>
-<p>You should commit both files to your version control system to share the exact environment setup with collaborators and increase <code>reproducibility</code>.</p>
+<p>You should commit both files to your version control system to share the exact environment setup with collaborators and increase reproducibility.</p>
 </section>
 <section id="adding-packages" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="adding-packages"><span class="header-section-number">3.2.2</span> Adding Packages</h3>
@@ -330,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add python</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add <span class="at">--pypi</span> multiqc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Alternatively, you can directly modify the <code>.pixi.toml</code> file in your project directory:</p>
-<p>Under <code>[dependencies]</code>, or platform specific dependencies (such as <code>[target.linux-64.dependencies]</code> you can add a line for each package you want to include <code>nextflow = "24.10.4.*"</code>for example.</p>
+<p>Under <code>[dependencies]</code>, or platform specific dependencies (such as <code>[target.linux-64.dependencies]</code>) you can add a line for each package you want to include <code>nextflow = "24.10.4.*"</code>for example.</p>
 <hr>
 </section>
 </section>
@@ -338,17 +343,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.3" class="anchored" data-anchor-id="managing-environments"><span class="header-section-number">3.3</span> Managing Environments</h2>
 <section id="files-in-the-directory" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="files-in-the-directory"><span class="header-section-number">3.3.1</span> Files in the Directory</h3>
-<p>When you use Pixi, it creates a <code>.pixi</code> folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder.</p>
+<p>When you use Pixi, it creates a <code>.pixi</code> folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder, and it will be recreated from the <code>pixi.lock</code> file in your project, the next time you use the environment.</p>
+<p>The command</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>deletes the pixi environment binaries, and the command</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean cache</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>deletes the package archives that were downloaded and unpacked to create the environment.</p>
+</section>
+<section id="environment-features" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="environment-features"><span class="header-section-number">3.3.2</span> Environment features</h3>
+<p>Unlike Conda, in which you can define multiple global environments, Pixi handles multi-environment projects in a different way. Packages are installed into Features, which in turn define an Environment. Features are isolated from each other, helping to avoid version clashes between tools. See <a href="https://pixi.sh/latest/features/multi_environment/">Pixi docs - Multi Environment</a> for more on defining multiple environments in a TOML.</p>
 <hr>
 </section>
 </section>
 <section id="tasks-in-pixi" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="tasks-in-pixi"><span class="header-section-number">3.4</span> Tasks in Pixi</h2>
-<p>Pixi allows you to define and run tasks directly in the <code>.pixi.toml</code> file. For example:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tasks]</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name-of-task</span> <span class="op">=</span> <span class="st">"nextflow run main.nf -profile PDC"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In addtion to being a package manager, Pixi allows you to define and run tasks directly in the <code>.pixi.toml</code> file. For example:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tasks]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name-of-task</span> <span class="op">=</span> <span class="st">"nextflow run main.nf -profile PDC"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>One can also add tasks via the command line:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task add hello python hello_world.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task add hello python hello_world.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See <a href="https://pixi.sh/latest/features/advanced_tasks/">Pixi Tasks</a> for more information</p>
 <section id="task-features" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="task-features"><span class="header-section-number">3.4.1</span> Task Features</h3>
 <p>Tasks can be combined or run conditionally. The example in the <a href="https://pixi.sh/latest/features/advanced_tasks/">documentation</a> is to specify that an application should be complied before being run. The command <code>depends-on</code>can be used here. With this one can chain tasks for complex workflows.</p>
@@ -362,28 +377,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Chaining tools.</li>
 <li>Command substitution.</li>
 </ul>
+<p>See <a href="https://pixi.sh/latest/features/advanced_tasks/#our-task-runner-deno_task_shell">Advanced Tasks</a> for a more detailed description about the Deno shell supported features.</p>
 <section id="activating-the-environment" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="activating-the-environment"><span class="header-section-number">3.5.1</span> Activating the Environment</h3>
 <p>To activate the environment:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> shell</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> shell</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To exit an environment, use <code>exit</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>which also saves your command history.</p>
 <hr>
 </section>
 </section>
 <section id="advanced-features" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="advanced-features"><span class="header-section-number">3.6</span> Advanced Features</h2>
-<section id="features" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="features"><span class="header-section-number">3.6.1</span> Features</h3>
-<p>PIXI allows multiple “features” in a single project. Features are isolated from each other, helping to avoid version clashes between tools.</p>
-</section>
-<section id="intel-emulation-on-arm-macs" class="level3" data-number="3.6.2">
-<h3 data-number="3.6.2" class="anchored" data-anchor-id="intel-emulation-on-arm-macs"><span class="header-section-number">3.6.2</span> Intel emulation on ARM Macs</h3>
+<section id="intel-emulation-on-arm-macs" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="intel-emulation-on-arm-macs"><span class="header-section-number">3.6.1</span> Intel emulation on ARM Macs</h3>
 <p>Although packages are increasingly being built for ARM architecture CPUS, not all tools are built for <code>osx-arm64</code>. However, they may have been built for <code>osx-64</code> (i.e., intel architecture CPUS), in addition to <code>linux-64</code>. MacOS includes the tool Rosetta, which can be used to emulate intel on arm Macs, at the cost of performance.</p>
 <p>By supporting only <code>linux-64</code> and <code>osx-64</code> as platforms, Pixi will automatically run the tools using Rosetta emulation on Mac ARM computers.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="dt">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--channel</span> <span class="st">"conda-forge"</span> <span class="dt">\</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--channel</span> <span class="st">"bioconda"</span> <span class="dt">\</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> <span class="st">"linux-64"</span> <span class="dt">\</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> <span class="st">"osx-64"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--channel</span> <span class="st">"conda-forge"</span> <span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--channel</span> <span class="st">"bioconda"</span> <span class="dt">\</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> <span class="st">"linux-64"</span> <span class="dt">\</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> <span class="st">"osx-64"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 </section>
@@ -392,12 +407,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="updating-pixi" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="updating-pixi"><span class="header-section-number">3.7.1</span> Updating Pixi</h3>
 <p>To update Pixi:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> self-update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> self-update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="cleaning-the-cache" class="level3" data-number="3.7.2">
 <h3 data-number="3.7.2" class="anchored" data-anchor-id="cleaning-the-cache"><span class="header-section-number">3.7.2</span> Cleaning the cache</h3>
 <p>To clean the cache:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean cache</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean cache</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="package-search" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="package-search"><span class="header-section-number">3.7.3</span> Package search</h3>
+<p>Pixi can search for the latest version of a package, and provide detailed information about using:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> search <span class="op">&lt;</span>package_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, unlike Conda, it does not list all available versions of a package. For this purpose, <code>conda search &lt;package_name&gt;</code> is the better option.</p>
+</section>
+<section id="command-help" class="level3" data-number="3.7.4">
+<h3 data-number="3.7.4" class="anchored" data-anchor-id="command-help"><span class="header-section-number">3.7.4</span> Command help</h3>
+<p>Use</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> help</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to get more detailed help on various commands.</p>
 
 
 </section>
