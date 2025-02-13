@@ -30,6 +30,7 @@ book:
     - part: "Quarto"
       chapters:
         - quarto/quarto-intro.qmd
+        - quarto/quarto-confluence.qmd
     - references.qmd
 
 bibliography: references.bib
