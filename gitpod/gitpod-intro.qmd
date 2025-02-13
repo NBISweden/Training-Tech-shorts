@@ -2,28 +2,24 @@
 
 ## What is Gitpod
 
-Gitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository. This container is built from the file ".gitpod.yml" present in the repository.   
+[Gitpod](https://gitpod.io) is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file `.gitpod.yml` present in the repository.
 
-There are different pricing depending on your needs such as:  
+There are two offerings of Gitpod, Gitpod Flex, and Gitpod Enterprise. Gitpod Flex is designed to run a container on your laptop, cloud, or on-premises architecture. Gitpod Enterprise, which we discuss here, runs on a cloud environment hosted by Gitpod.
+
+There are different pricing depending on your needs such as:
 
 - Free plan (50 hours per month)
-
-- Pas-as-you-go  
-
+- Pay-as-you-go
 - Company plan (custom)
 
-NBIS does not have a Gitpod account. Mahesh has an open source plan (nammed NBIS).
-
+Mahesh is on an open source plan (nammed NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication.
 
 ## How to login to Gitpod
 
-- Go to the [Gitpod site](https://gitpod.io)
-
-- Select your Git hosting service (e.g., GitHub), and authenticate
-
-- If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right
-
-- Now when you start a Gitpod environment you'll be connected to your version control system
+- Go to the [Gitpod site](https://gitpod.io).
+- Select your Git hosting service (e.g., GitHub), and authenticate.
+- If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right.
+- Now when you start a Gitpod environment you'll be connected to your version control system.
 
 ## How to start a Gitpod 
 
@@ -34,7 +30,7 @@ To start a workspace, follow these steps:
     1. The source repository for which the gitpod workspace will be created.
     2. The code editor. 
     3. The computing resources required for the workspace. 
-- After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user's working directory is a cloned folder of the Github repository located on the Gitpod server, not lcoally on the computer. 
+- After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user's working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer. 
 - Any changes to the files within that folder can be pushed to the repository using Git commands. 
 
 **Note**: If you are editing a public Github public repository, Gitpod requires the "public_repo" permission to push changes. To do it, follow these steps:
@@ -73,7 +69,6 @@ tasks:
   - name: Install Quarto
     command: |
       wget https://quarto.org/download/latest/quarto-linux-amd64.deb
-      # sudo apt-get install r-base r-base-dev
       sudo dpkg -i quarto-linux-amd64.deb
       rm quarto-linux-amd64.deb
       quarto check all
@@ -97,7 +92,7 @@ tasks:
     command: nextflow self-update
 ```
 
-- In order to execute multiple commands in a single task, you can use the `|` operator to specify a block of shell commands, each in one line.
+- In order to execute multiple commands in a single task, you can use the `|` syntax to specify a block of shell commands, each in one line.
 
 ```yml
 tasks:
@@ -116,12 +111,9 @@ ports:
     onOpen: open-preview
 ```
 
-## Uses for Gitpod (Jason / Estelle to review)
+## Uses for Gitpod
 
 - Demonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.
-
 - Development: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.
-
-- Experimentation: The ephemeral nature of the environment, and its standardizeed tools make gitpod excellent for testing code and sandbox experimentation.
-
-- Training: A pre-built environment can be provided which can be very useful if, for example, Rackham is down during a course. 
+- Experimentation: The ephemeral nature of the environment, and its standardized tools make Gitpod excellent for testing code and sandbox experimentation.
+- Training: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements. 
