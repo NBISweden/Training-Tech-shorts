@@ -10,6 +10,7 @@ results/
 
 # Pixi files
 .pixi
+*.egg-info
 
 # Misc
 data/
