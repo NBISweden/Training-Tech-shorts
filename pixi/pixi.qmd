@@ -1,0 +1,160 @@
+## Intro to Pixi
+
+This section is a brief summary of the concepts discussed in the meeting. 
+
+## Why Pixi?
+
+Pixi is a package management tool that serves as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system's PATH.
+
+### Compatibility
+
+Pixi is somehwat compatible with Conda. You can:
+
+- Use the same Conda channels (e.g., `conda-forge`, `bioconda`).
+- Use existing Conda environment files with Pixi.
+
+However, you cannot activate a conda environment using Pixi, or vice-versa. 
+
+### Key Difference
+
+In Pixi, the environment configuration file (`.pixi.toml`) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility.
+
+---
+
+## Getting Started
+
+### Installation
+
+1. Install Pixi and add it to your shell's configuration (e.g., `.bashrc` or `.zshrc`).
+
+```{.bash}
+curl -fsSL https://pixi.sh/install.sh | bash
+```
+
+2. Initialize a Pixi environment in your project:
+
+```{.bash}
+pixi init -c conda-forge -c bioconda -p linux-64 -p osx-arm64
+```
+
+Here:
+- `-c` specifies the channels to use (e.g., `conda-forge`, `bioconda`)
+- `-p` sets the platforms 
+
+By default, Pixi will set the environment for your platform (e.g., `linux-64`), but you can specify additional platforms as needed. 
+
+The `pixi init`command will create two files:
+
+- `.pixi.toml`: Specifies the environment configuration.
+- `.pixi.lock`: Locks down the specific package versions for reproducibility.
+
+You should commit both files to your version control system to share the exact environment setup with collaborators and increase `reproducibility`. 
+
+
+### Adding Packages
+
+You can add packages to your environment using the `pixi add` command:
+
+```{.bash}
+pixi add bwa samtools
+```
+
+You can add Python packages from PyPI using Pixi:
+
+```{.bash}
+pixi add python
+pixi add --pypi multiqc
+```
+
+Alternatively, you can directly modify the `.pixi.toml` file in your project directory: 
+
+Under `[dependencies]`, or platform specific dependencies (such as `[target.linux-64.dependencies]` you can add a line for each package you want to include `nextflow = "24.10.4.*"`for example. 
+
+---
+
+## Managing Environments
+
+### Files in the Directory
+
+When you use Pixi, it creates a `.pixi` folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder.
+
+
+---
+
+## Tasks in Pixi
+
+Pixi allows you to define and run tasks directly in the `.pixi.toml` file. For example:
+
+```toml
+[tasks]
+name-of-task = "nextflow run main.nf -profile PDC"
+```
+
+One can also add tasks via the command line: 
+
+```{.bash}
+pixi task add hello python hello_world.py
+```
+
+### Task Features
+
+Tasks can be combined or run conditionally. The example in the [documentation](https://pixi.sh/latest/features/advanced_tasks/) is to specify that an application should be complied before being run. The command `depends-on`can be used here. With this one can chain tasks for complex workflows.
+
+---
+
+## Working with the Shell
+
+Pixi provides a shell environment based on the Deno shell. Many basic Bash commands still work, allowing for:
+
+- Chaining tools.
+- Command substitution.
+
+### Activating the Environment
+
+To activate the environment:
+
+```{.bash}
+pixi shell
+```
+
+---
+
+## Advanced Features
+
+### Features
+
+PIXI allows multiple "features" in a single project. Features are isolated from each other, helping to avoid version clashes between tools.
+
+### Intel emulation on ARM Macs
+
+Although packages are increasingly being built for ARM architecture CPUS, not all tools are built for `osx-arm64`. However, they may have been built for `osx-64` (i.e., intel architecture CPUS), in addition to `linux-64`. MacOS includes the tool Rosetta, which can be used to emulate intel on arm Macs, at the cost of performance. 
+
+By supporting only `linux-64` and `osx-64` as platforms, Pixi will automatically run the tools using Rosetta emulation on Mac ARM computers. 
+
+```bash
+pixi init \
+  --channel "conda-forge" \
+  --channel "bioconda" \
+  --platform "linux-64" \
+  --platform "osx-64"
+```
+
+---
+
+## Additional Commands
+
+### Updating Pixi
+
+To update Pixi:
+
+```{.bash}
+pixi self-update
+```
+
+### Cleaning the cache
+
+To clean the cache: 
+
+```{.bash}
+pixi clean cache
+```
