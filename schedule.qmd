@@ -4,6 +4,10 @@ Dates for each lesson, listed in reverse chronological order.
 Meetings are over Zoom, Tuesdays at 13.00. Meeting links are
 provided by the teacher.
 
+- 2025/04/29: Mahesh - SSH config
+- 2025/04/15: Mahesh - SSH config
+- 2025/04/01: Amrei - Review: Github profile README
+- 2025/03/18: Amrei - Github profile README 
 - 2025/03/04: Cormac - Review: VSCode
 - 2025/02/18: Cormac - VSCode
 - 2025/02/04: Mahesh - Review: Pixi
