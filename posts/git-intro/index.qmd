@@ -1,4 +1,10 @@
-# Introduction to Git
+---
+title: "Introduction to Git"
+author: "Mahesh"
+date: "2024-03-19"
+date-modified: last-modified
+categories: [ Git, "Version control" ]
+---
 
 ## What is Git
 

@@ -1,3 +1,11 @@
+---
+title: "Introduction to Pixi"
+author: "Amrei"
+date: "2025-01-21"
+date-modified: last-modified
+categories: [ Pixi, "Package managment", "Command runner" ]
+---
+
 ## Introduction to Pixi
 
 ## Why Pixi?

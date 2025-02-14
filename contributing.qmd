@@ -1,0 +1,56 @@
+# Contributing
+
+## Quick start
+
+The first step is to read over the lesson Github Collaboration.
+
+### Summary
+
+1. Make a branch for your lesson.
+2. Create a Quarto markdown document with `## Objectives` and `## Key points` and add it to that branch.
+3. Add the document to the `_quarto.yml`.
+4. Teach your topic to your team for 30-45 mins. Please remember to record the lesson.
+5. Each learner selects a key point to contribute material on. Use the lesson issue for that topic to assign
+yourself and another learner to review your contribution.
+6. Make a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you're both happy.
+7. Mark the pull request as ready, and request the instructor to review.
+8. When the instructor is happy with the changes they should merge the learners
+contribution back into their lesson branch.
+9. The instructor reviews and merges the lesson branch when all contributions
+have been received. It is the responsibility of the teacher to make sure
+contributions have been received after two weeks.
+
+### Review lessons
+
+Each lesson should be followed up by a review lesson the following week.
+Here, the teacher should review and discuss points that they notice
+learners had difficulty with.
+
+### Sequence diagram
+
+```{mermaid}
+sequenceDiagram
+    box transparent Learners
+        actor Learner1
+        actor Learner2
+    end
+    actor Teacher
+    Teacher ->> GitHub: New branch for lesson
+    Teacher ->> GitHub: New lesson file
+    Teacher ->> GitHub: Add key points
+    Teacher ->> Learner1: Demonstrates tool
+    Learner1 ->> Teacher: Volunteers to write up keypoint 2
+    Learner2 ->> Teacher: Volunteers to write up keypoint 1
+    Learner1 ->> GitHub: Make branch from lesson branch
+    Learner1 ->> GitHub: Add notes for keypoint 2
+    Learner2 ->> GitHub: Add notes for keypoint 1
+    Learner1 ->> GitHub: Request Learner2 to review text
+    Learner2 ->> GitHub: Request Learner1 to review text
+    Learner1 ->> GitHub: Provide code review
+    Learner1 ->> GitHub: Update notes from review
+    Learner1 ->> Teacher: Request code review
+    Learner1 ->> GitHub: Update notes
+    Teacher ->> GitHub: Merges notes into lesson branch
+    Teacher ->> GitHub: Merges lesson branch into main
+    GitHub ->> GitHub: Automated website build
+```

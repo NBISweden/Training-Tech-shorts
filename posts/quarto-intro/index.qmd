@@ -1,4 +1,10 @@
-# Introduction to Quarto
+---
+title: "Introduction to Quarto"
+author: "Per"
+date: "2024-04-16"
+date-modified: last-modified
+categories: [ Quarto, "Literate programming" ]
+---
 
 ## What is Quarto
 

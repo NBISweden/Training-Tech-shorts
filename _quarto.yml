@@ -1,40 +1,23 @@
 project:
-  type: book
+  type: website
+  render:
+    - "*.qmd"
+    - "!posts/quarto-to-confluence/quarto-example*/"
 
-book:
-  title: "Training: Tech shorts"
-  author: "NBIS"
-  date: last-modified
+website:
+  title: "Training Tech Shorts"
   page-navigation: true
-  sidebar:
-    title: "Content:"
+  navbar:
     search: true
-  chapters:
-    - index.qmd
-    - schedule.qmd
-    - part: "Git"
-      chapters:
-        - git/git-intro.qmd
-    - part: "Github"
-      chapters:
-        - github/gh-collaboration.qmd
-    - part: "Pixi"
-      chapters:
-        - pixi/pixi-intro.qmd
-    - part: "Apptainer"
-      chapters:
-        - apptainer/apptainer-intro.qmd
-    - part: "Gitpod"
-      chapters:
-        - gitpod/gitpod-intro.qmd
-    - part: "Quarto"
-      chapters:
-        - quarto/quarto-intro.qmd
-        - quarto/quarto-confluence.qmd
-    - references.qmd
-
-bibliography: references.bib
-
+    left:
+      - schedule.qmd
+      - contributing.qmd
+    right:
+      - icon: github
+        href: https://github.com/
 format:
   html:
-    theme: minty
+    theme: 
+      - minty
+      - cosmo
+      - brand

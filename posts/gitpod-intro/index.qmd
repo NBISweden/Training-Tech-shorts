@@ -1,4 +1,10 @@
-# Gitpod
+---
+title: "Introduction to Gitpod"
+author: "Mahesh"
+date: "2024-05-07"
+date-modified: last-modified
+categories: [ Git, Github, "Version control", Gitpod ]
+---
 
 ## What is Gitpod
 
