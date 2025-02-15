@@ -2,7 +2,7 @@ project:
   type: website
   render:
     - "*.qmd"
-    - "!posts/quarto-to-confluence/quarto-example*/"
+    - "!posts/2024-05-14-quarto-to-confluence/quarto-example*/"
 
 website:
   title: "Training Tech Shorts"
@@ -19,5 +19,3 @@ format:
   html:
     theme: 
       - minty
-      - cosmo
-      - brand

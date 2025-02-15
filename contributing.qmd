@@ -2,21 +2,33 @@
 
 ## Quick start
 
-The first step is to read over the lesson Github Collaboration.
+The first step is to read over the lesson [Collaboration on Github](posts/2024-03-12-github-collaboration/index.qmd).
 
 ### Summary
 
 1. Make a branch for your lesson.
-2. Create a Quarto markdown document with `## Objectives` and `## Key points` and add it to that branch.
-3. Add the document to the `_quarto.yml`.
-4. Teach your topic to your team for 30-45 mins. Please remember to record the lesson.
-5. Each learner selects a key point to contribute material on. Use the lesson issue for that topic to assign
-yourself and another learner to review your contribution.
-6. Make a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you're both happy.
-7. Mark the pull request as ready, and request the instructor to review.
-8. When the instructor is happy with the changes they should merge the learners
+2. Under `posts`, make a folder for your lesson named based on the date and topic, e.g., `2024-03-12-github-collaboration`.
+3. Create an `index.qmd` with a header in that folder.
+  ```{.markdown}
+  ---
+  title: "Lesson title"
+  author: "Lesson instructor"
+  date: "YYYY-MM-DD"
+  date-modified: last-modified
+  categories: [ keywords ]
+  ---
+  ```
+4. The first paragraph should summarise the lesson. This appears on the front page too.
+5. In the `index.qmd`, add headers for key points to cover.
+6. Teach your topic to your team for 30-45 mins. Please remember to record the lesson.
+7. Each learner selects a key point to contribute material on. The person responsible for a section 
+can be added to the `index.qmd` on the instructors branch.
+8. Make a draft pull request to the lesson branch and ask the other learner assigned to review.
+Make changes until you're both happy.
+9. Mark the pull request as ready, and request the instructor to review.
+10. When the instructor is happy with the changes they should merge the learners
 contribution back into their lesson branch.
-9. The instructor reviews and merges the lesson branch when all contributions
+11. The instructor reviews and merges the lesson branch when all contributions
 have been received. It is the responsibility of the teacher to make sure
 contributions have been received after two weeks.
 
@@ -54,3 +66,92 @@ sequenceDiagram
     Teacher ->> GitHub: Merges lesson branch into main
     GitHub ->> GitHub: Automated website build
 ```
+
+## Detailed instructions
+
+### Making a branch (Teacher)
+
+- On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.
+- Click on view all branches
+- Click New branch, give it a name and select the branch source.
+- Finally, click create branch
+
+You also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the "Find or create branch..." field, followed by clicking Create branch. 
+This will give the exact same result as the steps above.
+
+This short description might be confusing since there are more than one way of doing this.
+A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)
+
+The teacher should create a folder under `posts` named using the date and topic, e.g., `2024-03-12-github-collaboration`.
+Then inside that folder create an `index.qmd` with the following header.
+
+```{.markdown}
+---
+title: "Lesson title"
+author: "Lesson instructor"
+date: "YYYY-MM-DD"
+date-modified: last-modified
+categories: [ keywords ]
+---
+```
+
+Include a summary of the subject as the first paragraph. Then add level 2 headers of the key points to be taught.
+After the instructor has delivered the lesson, assign each key point to a person, and include their name in the document,
+and which learner will review.
+
+### Making changes (Learner)
+
+- Fork the whole target repository to your own account, by selecting "Fork" -> include all the branches (i.e., untick "Copy the main branch only") -> "Create fork".
+- On your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.
+- To edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode. 
+- If instead you need to make a new file in the branch, click the "Add file" drop down -> "create new file". Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., "github/myfile.qmd" will create the folder github also.
+- Add the file contents in edit mode.
+- When finished, click "Commit changes..."
+
+### Making a draft pull request (Learner)
+
+After making and committing changes as described above, navigate to
+the Pull requests tab. Click "New pull request" which will produce a
+"Comparing changes" page with four drop-down lists. The leftmost two
+drop-down lists refer to the target repository of the pull request and
+should be set to NBISweden/Training-Tech-shorts, followed by the
+target branch. The two rightmost drop-down lists refer to the pull
+request source and should point to your repository and, importantly,
+the branch that you are editing (and make sure it matches the target
+branch!). By default, only the branches of the target repository are
+shown. To find the updated branch from the forked repository, one has
+to click on "If you need to, you can also compare across forks.". Once
+done, change the green drop-down button "Create pull request" to
+"Create draft pull request". This will generate a draft pull request
+page where your review partner can make comments on your PR.
+
+### Code review (Review partner)
+
+- navigate to the top menu and click on `Pull requests`
+- by default all open pull requests are listed, you can further filter down the list. e.g. via clicking on `Reviews` and afterwards select `Awaiting review from you` in the drop down menu. This shows then only PRs where you are tagged as reviewer. 
+- click on a pull request of your choice 
+- the following window has 4 tabs: 
+  * Conversation: gives an overview about the PR
+  * Commits: list all commits of the PR
+  * Check:
+  * Files changed: lists all files which were modified 
+- click on the `Files changed` tab and go through the files and changes
+  * you can comment on a line by hovering over a line and click on the plus symbol 
+  * in case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines
+  * afterwards you can either:
+    a) click on the `Add single comment` button which makes your comment or suggestion immediately visible
+    OR  
+    b) click on the `Start a review` button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.
+  * when done with the full review click on the `Finish your review` button on the top right corner of the page: 
+    - you can comment on your review and choose one of the following options `Comment`, `Approve`, `Request changes`. Select the approprate option and click on `Submit review`.
+
+### Making a ready for review pull request (Learner)
+
+- Once you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.
+- On the right side panel, you should invite the teacher to review your pull request. 
+- The teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did. 
+
+### Merges pull requests (Teacher)
+
+- Once both teacher and learner are satisfied with the updates, the teacher merges the learner's pull request into their lesson branch.
+- Once the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.
