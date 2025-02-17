@@ -1,6 +1,14 @@
-# Introduction to Apptainer (i.e. Singularity)
+---
+title: "Introduction to Apptainer"
+author: "Cormac"
+date: "2024-06-04"
+date-modified: last-modified
+categories: [ Apptainer, Singularity, Containers, "Package managment" ]
+---
 
 Lesson plan based around materials from [CodeRefinery](https://coderefinery.github.io/ttt4hpc_containers/basics_running_containers)
+
+Apptainer is the open source version of Singularity.
 
 ## What are containers?
 
@@ -114,4 +122,3 @@ It's advisable to use many small containers (minimal container for a single proc
 ## Seqera containers resource
 
 ## Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?
-
