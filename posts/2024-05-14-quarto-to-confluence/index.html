@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Tomas">
+<meta name="dcterms.date" content="2024-05-14">
 
-<title>7&nbsp; Quarto to Confluence introduction and examples – Training: Tech shorts</title>
+<title>Quarto to Confluence – Training Tech Shorts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,30 +59,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../references.html" rel="next">
-<link href="../quarto/quarto-intro.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ef64dfc38f3c32ba3316c26596eb5070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-928fa4af2dc24fbb17b891c352b65331.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -106,228 +106,108 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto/quarto-intro.html">Quarto</a></li><li class="breadcrumb-item"><a href="../quarto/quarto-confluence.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto to Confluence introduction and examples</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Training Tech Shorts</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contributing.html"> 
+<span class="menu-text">Contributing</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Quarto to Confluence</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Quarto</div>
+                <div class="quarto-category">Literate programming</div>
+                <div class="quarto-category">Confluence</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Tomas </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 14, 2024</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">February 17, 2025</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">Content:</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Schedule</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Git</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../git/git-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Github</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../github/gh-collaboration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Pixi</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../pixi/pixi-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Apptainer</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../apptainer/apptainer-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Apptainer (i.e.&nbsp;Singularity)</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Gitpod</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../gitpod/gitpod-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gitpod</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Quarto</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Quarto</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../quarto/quarto-confluence.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto to Confluence introduction and examples</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a>
-  <ul class="collapse">
-  <li><a href="#preparations" id="toc-preparations" class="nav-link" data-scroll-target="#preparations"><span class="header-section-number">7.1.1</span> Preparations</a></li>
-  <li><a href="#the-quarto-document" id="toc-the-quarto-document" class="nav-link" data-scroll-target="#the-quarto-document"><span class="header-section-number">7.1.2</span> The Quarto document</a></li>
-  <li><a href="#publication-from-local-client" id="toc-publication-from-local-client" class="nav-link" data-scroll-target="#publication-from-local-client"><span class="header-section-number">7.1.3</span> Publication from local client</a></li>
-  <li><a href="#publishing-from-uppmax" id="toc-publishing-from-uppmax" class="nav-link" data-scroll-target="#publishing-from-uppmax"><span class="header-section-number">7.1.4</span> Publishing from UPPMAX</a></li>
-  </ul></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">7.2</span> Examples</a>
-  <ul class="collapse">
-  <li><a href="#publishing-quarto-projects-as-confluence-pages" id="toc-publishing-quarto-projects-as-confluence-pages" class="nav-link" data-scroll-target="#publishing-quarto-projects-as-confluence-pages"><span class="header-section-number">7.2.1</span> Publishing Quarto projects as Confluence pages</a></li>
-  <li><a href="#quarto-document" id="toc-quarto-document" class="nav-link" data-scroll-target="#quarto-document"><span class="header-section-number">7.2.2</span> Quarto document</a></li>
-  <li><a href="#quarto-document-1" id="toc-quarto-document-1" class="nav-link" data-scroll-target="#quarto-document-1"><span class="header-section-number">7.2.3</span> Quarto document</a></li>
-  <li><a href="#quarto-document-2" id="toc-quarto-document-2" class="nav-link" data-scroll-target="#quarto-document-2"><span class="header-section-number">7.2.4</span> Quarto document</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../quarto/quarto-intro.html">Quarto</a></li><li class="breadcrumb-item"><a href="../quarto/quarto-confluence.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto to Confluence introduction and examples</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto to Confluence introduction and examples</span></h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<p>Quarto can be used to publish single pages or entire Quarto projects to Confluence.</p>
-<section id="introduction" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1</span> Introduction</h2>
-<p>As of Quarto version 1.3 there is support for <a href="https://quarto.org/docs/publishing/confluence.html">publishing documents to Confluence</a>. This brief introduction outlines the basic procedure.</p>
-<section id="preparations" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="preparations"><span class="header-section-number">7.1.1</span> Preparations</h3>
-<section id="atlassian-token" class="level4" data-number="7.1.1.1">
-<h4 data-number="7.1.1.1" class="anchored" data-anchor-id="atlassian-token"><span class="header-section-number">7.1.1.1</span> Atlassian token</h4>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>As of Quarto version 1.3 there is support for <a href="https://quarto.org/docs/publishing/confluence.html">publishing documents to Confluence</a>. Quarto can be used to publish single pages or entire Quarto projects to Confluence.</p>
+<section id="preparations" class="level3">
+<h3 class="anchored" data-anchor-id="preparations">Preparations</h3>
+<section id="atlassian-token" class="level4">
+<h4 class="anchored" data-anchor-id="atlassian-token">Atlassian token</h4>
 <p>Before publishing a document, you need to <a href="https://id.atlassian.com/manage-profile/security/api-tokens">create an atlassian wiki token</a>. Save the token as you will be prompted for it upon publication.</p>
 </section>
 </section>
-<section id="the-quarto-document" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="the-quarto-document"><span class="header-section-number">7.1.2</span> The Quarto document</h3>
+<section id="the-quarto-document" class="level3">
+<h3 class="anchored" data-anchor-id="the-quarto-document">The Quarto document</h3>
 <p>To make a document a target for publication in confluence, add the <code>confluence-html</code> document format to the header:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Confluence Demo</span></span>
@@ -338,35 +218,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Write your content in Quarto documents and publish to Confluence.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="publication-from-local-client" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="publication-from-local-client"><span class="header-section-number">7.1.3</span> Publication from local client</h3>
+<section id="publication-from-local-client" class="level3">
+<h3 class="anchored" data-anchor-id="publication-from-local-client">Publication from local client</h3>
 <p>This section describes how to render and publish documents from your local client.</p>
-<section id="render-and-preview" class="level4" data-number="7.1.3.1">
-<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="render-and-preview"><span class="header-section-number">7.1.3.1</span> Render and preview</h4>
+<section id="render-and-preview" class="level4">
+<h4 class="anchored" data-anchor-id="render-and-preview">Render and preview</h4>
 <p>Assuming the document name is <code>index.qmd</code>, you can first <strong>render</strong> the document locally to make sure everything looks ok.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <strong>preview</strong> command lets you modify the document and view re-rendered changes in real time:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview index.qmd <span class="at">--port</span> 8888</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It is recommended you manually assign a port number, else Quarto will pick a random number for you.</p>
 </section>
-<section id="publish" class="level4" data-number="7.1.3.2">
-<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="publish"><span class="header-section-number">7.1.3.2</span> Publish</h4>
+<section id="publish" class="level4">
+<h4 class="anchored" data-anchor-id="publish">Publish</h4>
 <p>To <strong>publish</strong> simply run</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Upon first publication, you will be prompted for your Confluence domain, email, login token and publication destination. For SciLifeLab, the domain is <code>https://scilifelab.atlassian.net</code>. The destination is chosen by navigating to the wiki page of interest and pasting it in at the prompt. The document will then be published relative to the chosen wiki page.</p>
 </section>
 </section>
-<section id="publishing-from-uppmax" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="publishing-from-uppmax"><span class="header-section-number">7.1.4</span> Publishing from UPPMAX</h3>
+<section id="publishing-from-uppmax" class="level3">
+<h3 class="anchored" data-anchor-id="publishing-from-uppmax">Publishing from UPPMAX</h3>
 <p>Technically, it should be possible to install Quarto on Uppmax from a <a href="https://quarto.org/docs/download/">Quarto package file</a>. However, Quarto relies on GLIBC version&gt;=2.18 which is currently unavailable on UPPMAX. A workaround is to generate an Apptainer image from which to run Quarto. This requires packaging Quarto with necessary dependencies, including R packages and a recent TeX distribution.</p>
-<section id="render" class="level4" data-number="7.1.4.1">
-<h4 data-number="7.1.4.1" class="anchored" data-anchor-id="render"><span class="header-section-number">7.1.4.1</span> Render</h4>
+<section id="render" class="level4">
+<h4 class="anchored" data-anchor-id="render">Render</h4>
 <p>With an Apptainer image <code>/path/to/quarto.simg</code>, the following code will render the document, optionally setting the execution directory:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">QUARTO_IMAGE</span><span class="op">=</span>/path/to/quarto.simg</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> exec <span class="at">--home</span> <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="va">${QUARTO_IMAGE}</span> bash <span class="at">-c</span> <span class="st">'set -euo pipefail;  quarto render index.qmd --execute-dir $(pwd)'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="preview" class="level4" data-number="7.1.4.2">
-<h4 data-number="7.1.4.2" class="anchored" data-anchor-id="preview"><span class="header-section-number">7.1.4.2</span> Preview</h4>
+<section id="preview" class="level4">
+<h4 class="anchored" data-anchor-id="preview">Preview</h4>
 <p>Previewing could be done by firing up a browser on UPPMAX, but a better alternative is to employ port forwarding to display the output on your client. Run preview as follows:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> exec <span class="at">--env</span> PATH=/conda_env/bin/:<span class="va">$PATH</span> <span class="dt">\</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>          <span class="va">$QUARTO_IMAGE</span> quarto preview <span class="at">--no-browser</span> <span class="at">--port</span> 8888 <span class="dt">\</span></span>
@@ -375,8 +255,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-f</span> <span class="at">-N</span> <span class="at">-L</span> 8888:localhost:8888 rackham1.uppmax.uu.se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>to setup port forwarding. Now you can preview your Quarto document by navigating to <code>https://localhost:8888</code>.</p>
 </section>
-<section id="previewing-from-a-compute-node" class="level4" data-number="7.1.4.3">
-<h4 data-number="7.1.4.3" class="anchored" data-anchor-id="previewing-from-a-compute-node"><span class="header-section-number">7.1.4.3</span> Previewing from a compute node</h4>
+<section id="previewing-from-a-compute-node" class="level4">
+<h4 class="anchored" data-anchor-id="previewing-from-a-compute-node">Previewing from a compute node</h4>
 <p>Some Quarto documents run heavy computations and should in these cases be rendered/previewed from a compute node. However, this would require setting up a double port forward. Fortunately, there exists an SSH configuration called <a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts">JumpHost</a> that eliminates this step.</p>
 <p>Edit your <code>.ssh/config</code> file to contain the following:</p>
 <pre class="ssh-config"><code>Host r*.uppmax.uu.se
@@ -385,16 +265,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This allows you to access a compute node directly from your client. For instance, if you are running a job on <code>r111</code>, run the preview command as above, and change the port forward command to</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-f</span> <span class="at">-N</span> <span class="at">-L</span> 8888:localhost:8888 r111.uppmax.uu.se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="publish-1" class="level4" data-number="7.1.4.4">
-<h4 data-number="7.1.4.4" class="anchored" data-anchor-id="publish-1"><span class="header-section-number">7.1.4.4</span> Publish</h4>
+<section id="publish-1" class="level4">
+<h4 class="anchored" data-anchor-id="publish-1">Publish</h4>
 <p>Publishing from UPPMAX is done by running</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">QUARTO_IMAGE</span><span class="op">=</span>/path/to/quarto.simg</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> exec <span class="at">--home</span> <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="va">${QUARTO_IMAGE}</span> bash <span class="at">-c</span> <span class="st">'set -euo pipefail;  quarto publish index.qmd --execute-dir $(pwd)'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 </section>
-<section id="examples" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="examples"><span class="header-section-number">7.2</span> Examples</h2>
+<section id="examples" class="level2">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
 <details>
 <summary>
 Example upload instructions
@@ -402,8 +282,8 @@ Example upload instructions
 <p>Use this link when asked where to put you page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899836938/Quarto+examples</p>
 <p>Give the page a name on this format with your name to make it unique: “Quarto_example-Tomas”</p>
 </details>
-<section id="publishing-quarto-projects-as-confluence-pages" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="publishing-quarto-projects-as-confluence-pages"><span class="header-section-number">7.2.1</span> Publishing Quarto projects as Confluence pages</h3>
+<section id="publishing-quarto-projects-as-confluence-pages" class="level3">
+<h3 class="anchored" data-anchor-id="publishing-quarto-projects-as-confluence-pages">Publishing Quarto projects as Confluence pages</h3>
 <ul>
 <li>Confluence page: <a href="https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh">https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh</a></li>
 <li>Quarto project code: <a href="https://github.com/mahesh-panchal/quarto-confluence-project">https://github.com/mahesh-panchal/quarto-confluence-project</a></li>
@@ -430,22 +310,22 @@ Example upload instructions
 <li>Column layout did not work.</li>
 </ul>
 </section>
-<section id="quarto-document" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="quarto-document"><span class="header-section-number">7.2.2</span> Quarto document</h3>
+<section id="quarto-document" class="level3">
+<h3 class="anchored" data-anchor-id="quarto-document">Quarto document</h3>
 <ul>
 <li>Confluence page: <a href="https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2901409802/Quarto+example+-+Verena">https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2901409802/Quarto+example+-+Verena</a></li>
-<li>Quarto code: <a href="https://github.com/NBISweden/Training-Tech-shorts/quarto/quarto-to-confluence/quarto-example-verena">quarto/quarto-to-confluence/quarto-example-verena</a></li>
+<li>Quarto code: <a href="https://github.com/NBISweden/Training-Tech-shorts/posts/quarto-to-confluence/quarto-example-verena">quarto-to-confluence/quarto-example-verena</a></li>
 </ul>
 </section>
-<section id="quarto-document-1" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="quarto-document-1"><span class="header-section-number">7.2.3</span> Quarto document</h3>
+<section id="quarto-document-1" class="level3">
+<h3 class="anchored" data-anchor-id="quarto-document-1">Quarto document</h3>
 <ul>
 <li>Confluence page: <a href="https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2900295730/cormac">https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2900295730/cormac</a></li>
-<li>Quarto code: <a href="https://github.com/NBISweden/Training-Tech-shorts/quarto/quarto-to-confluence/quarto-example-cormac">quarto/quarto-to-confluence/quarto-example-cormac</a></li>
+<li>Quarto code: <a href="https://github.com/NBISweden/Training-Tech-shorts/posts/quarto-to-confluence/quarto-example-cormac">quarto-to-confluence/quarto-example-cormac</a></li>
 </ul>
 </section>
-<section id="quarto-document-2" class="level3" data-number="7.2.4">
-<h3 data-number="7.2.4" class="anchored" data-anchor-id="quarto-document-2"><span class="header-section-number">7.2.4</span> Quarto document</h3>
+<section id="quarto-document-2" class="level3">
+<h3 class="anchored" data-anchor-id="quarto-document-2">Quarto document</h3>
 <ul>
 <li>Confluence page: <a href="https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899869712/Quarto+example+-+Tomas">https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899869712/Quarto+example+-+Tomas</a></li>
 <li>Quarto code:</li>
@@ -546,7 +426,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/NBISweden\.github\.io\/Training-Tech-shorts\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -873,18 +753,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../quarto/quarto-intro.html" class="pagination-link" aria-label="Introduction to Quarto">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Quarto</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

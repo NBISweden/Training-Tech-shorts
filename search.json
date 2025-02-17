@@ -1,538 +1,366 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Training: Tech shorts",
-    "section": "",
-    "text": "Preface\nThis is a series of short lessons in various technologies useful to our work.",
-    "crumbs": [
-      "Preface"
-    ]
-  },
-  {
-    "objectID": "index.html#quick-start",
-    "href": "index.html#quick-start",
-    "title": "Training: Tech shorts",
-    "section": "Quick start",
-    "text": "Quick start\nThe first step is to read over the lesson Github Collaboration.\n\nSummary\n\nMake a branch for your lesson.\nCreate a Quarto markdown document with ## Objectives and ## Key points and add it to that branch.\nAdd the document to the _quarto.yml.\nTeach your topic to your team for 30-45 mins. Please remember to record the lesson.\nEach learner selects a key point to contribute material on. Use the lesson issue for that topic to assign yourself and another learner to review your contribution.\nMake a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you’re both happy.\nMark the pull request as ready, and request the instructor to review.\nWhen the instructor is happy with the changes they should merge the learners contribution back into their lesson branch.\nThe instructor reviews and merges the lesson branch when all contributions have been received. It is the responsibility of the teacher to make sure contributions have been received after two weeks.\n\n\n\nReview lessons\nEach lesson should be followed up by a review lesson the following week. Here, the teacher should review and discuss points that they notice learners had difficulty with.\n\n\nSequence diagram\n\n\n\n\n\nsequenceDiagram\n    box transparent Learners\n        actor Learner1\n        actor Learner2\n    end\n    actor Teacher\n    Teacher -&gt;&gt; GitHub: New branch for lesson\n    Teacher -&gt;&gt; GitHub: New lesson file\n    Teacher -&gt;&gt; GitHub: Add key points\n    Teacher -&gt;&gt; Learner1: Demonstrates tool\n    Learner1 -&gt;&gt; Teacher: Volunteers to write up keypoint 2\n    Learner2 -&gt;&gt; Teacher: Volunteers to write up keypoint 1\n    Learner1 -&gt;&gt; GitHub: Make branch from lesson branch\n    Learner1 -&gt;&gt; GitHub: Add notes for keypoint 2\n    Learner2 -&gt;&gt; GitHub: Add notes for keypoint 1\n    Learner1 -&gt;&gt; GitHub: Request Learner2 to review text\n    Learner2 -&gt;&gt; GitHub: Request Learner1 to review text\n    Learner1 -&gt;&gt; GitHub: Provide code review\n    Learner1 -&gt;&gt; GitHub: Update notes from review\n    Learner1 -&gt;&gt; Teacher: Request code review\n    Learner1 -&gt;&gt; GitHub: Update notes\n    Teacher -&gt;&gt; GitHub: Merges notes into lesson branch\n    Teacher -&gt;&gt; GitHub: Merges lesson branch into main\n    GitHub -&gt;&gt; GitHub: Automated website build",
-    "crumbs": [
-      "Preface"
-    ]
-  },
-  {
     "objectID": "schedule.html",
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Dates for each lesson, listed in reverse chronological order. Meetings are over Zoom, Tuesdays at 13.00. Meeting links are provided by the teacher.\n\n2025/04/29: Mahesh - Review: SSH config\n2025/04/15: Mahesh - SSH config\n2025/04/01: Amrei - Review: Github profile README\n2025/03/18: Amrei - Github profile README\n2025/03/04: Cormac - Review: VSCode\n2025/02/18: Cormac - VSCode\n2025/02/04: Mahesh - Review: Pixi\n2025/01/21: Mahesh - Pixi\nBreak\n2024/06/18: No lesson - SciLifeLab Facility Forum\n2024/06/11: Cormac - Review: Singuarity\n2024/06/04: Cormac - Singularity\n2024/05/28: Mahesh - Review: Introduction to Gitpod.\n2024/05/21: Tomas - Review: Quarto to Confluence.\n2024/05/14: Tomas - Quarto to Confluence.\n2024/05/07: Mahesh - Introduction to Gitpod.\n2024/04/30: No lesson - Reduced working day.\n2024/04/23: Per - Review: Quarto Introduction.\n2024/04/16: Per - Quarto Introduction.\n2024/04/09: No lesson - NBIS retreat.\n2024/04/02: Mahesh - Review: Introduction to Git.\n2024/03/26: Mahesh - Review: Collaboration in Github.\n2024/03/19: Mahesh - Introduction to Git.\n2024/03/12: Mahesh - Collaboration in Github.",
-    "crumbs": [
-      "Schedule"
-    ]
+    "text": "Schedule\nDates for each lesson, listed in reverse chronological order. Meetings are over Zoom, Tuesdays at 13.00. Meeting links are provided by the teacher.\n\n2025/04/29: Mahesh - Review: SSH config\n2025/04/15: Mahesh - SSH config\n2025/04/01: Amrei - Review: Github profile README\n2025/03/18: Amrei - Github profile README\n2025/03/04: Cormac - Review: VSCode\n2025/02/18: Cormac - VSCode\n2025/02/04: Mahesh - Review: Pixi\n2025/01/21: Mahesh - Pixi\nBreak\n2024/06/18: No lesson - SciLifeLab Facility Forum\n2024/06/11: Cormac - Review: Singuarity\n2024/06/04: Cormac - Singularity\n2024/05/28: Mahesh - Review: Introduction to Gitpod.\n2024/05/21: Tomas - Review: Quarto to Confluence.\n2024/05/14: Tomas - Quarto to Confluence.\n2024/05/07: Mahesh - Introduction to Gitpod.\n2024/04/30: No lesson - Reduced working day.\n2024/04/23: Per - Review: Quarto Introduction.\n2024/04/16: Per - Quarto Introduction.\n2024/04/09: No lesson - NBIS retreat.\n2024/04/02: Mahesh - Review: Introduction to Git.\n2024/03/26: Mahesh - Review: Collaboration in Github.\n2024/03/19: Mahesh - Introduction to Git.\n2024/03/12: Mahesh - Collaboration in Github."
   },
   {
-    "objectID": "git/git-intro.html",
-    "href": "git/git-intro.html",
-    "title": "1  Introduction to Git",
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html",
+    "href": "posts/2024-06-04-apptainer-intro/index.html",
+    "title": "Introduction to Apptainer",
     "section": "",
-    "text": "1.1 What is Git\nGit is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer’s computer.\nGit is the most popular tool, even though it might not be the most user-friendly one. It has a lot of options/commands and specific jargon. Fortunately there are many “Git cheat sheets” (such as https://education.github.com/git-cheat-sheet-education.pdf).",
-    "crumbs": [
-      "Git",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
-    ]
+    "text": "Lesson plan based around materials from CodeRefinery\nApptainer is the open source version of Singularity."
   },
   {
-    "objectID": "git/git-intro.html#what-should-git-be-used-for",
-    "href": "git/git-intro.html#what-should-git-be-used-for",
-    "title": "1  Introduction to Git",
-    "section": "1.2 What should Git be used for",
-    "text": "1.2 What should Git be used for\nIn software development, Git is mostly used for version control of code. In our bioinformatics projects, we can also track our report files, environment files, and other small files.\nGit should NOT be used for storing data, particularly large data. Sensitive data (passwords, usernames, API keys…) should not be put in a Git repository, because they can be then exposed to the world. If one commits sensitive data by mistake, one can go back into the git history and remove it, but it is not a simple task.",
-    "crumbs": [
-      "Git",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
-    ]
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#what-are-containers",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#what-are-containers",
+    "title": "Introduction to Apptainer",
+    "section": "What are containers?",
+    "text": "What are containers?\n\nContainers isolate software, dependencies, configurations, and system libraries from the host system\nThe naming came from the idea of shipping containers (which are portable & standardized)\nVirtual machines are a similar concept, but these virtualise hardware, contain complete operating systems (including the kernel), and are managed by software known as a hypervisor\nContainers on the other hand share the host OS kernel, so they don’t contain complete operating systems, just user space system libraries\nThis makes them lightweight, portable, and fast to start up"
   },
   {
-    "objectID": "git/git-intro.html#git-repositories",
-    "href": "git/git-intro.html#git-repositories",
-    "title": "1  Introduction to Git",
-    "section": "1.3 Git Repositories",
-    "text": "1.3 Git Repositories\n\nA git repository (repo) is any folder structure that is version-controlled by git.\nA git repo can be initialized from a local folder, or cloned from a remote repo.\n\nTo initialize a repo from a local folder:\n\ncd myfolder\ngit init\n\nTo clone a git repo from a remote source:\n\ngit clone https://github.com/user/repo\nRegardless of how you obtain it, your local copy of the git repo will contain a .git folder. That is where the change history of your project is stored and maintained by git.",
-    "crumbs": [
-      "Git",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
-    ]
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#docker-vs-apptainer-containers",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#docker-vs-apptainer-containers",
+    "title": "Introduction to Apptainer",
+    "section": "Docker vs Apptainer containers",
+    "text": "Docker vs Apptainer containers\n\nApptainer (i.e. Singularity) is intended to run reproducibly across many system types, including HPC systems\nDocker is rarely allowed on clusters, requires root access\nTheir images are somewhat different - Docker images are made up of layers (Base image -&gt; launched as container -&gt; edited -&gt; used as new base layer -&gt; launched -&gt; edited -&gt; etc.). Apptainer images squash layers into one file (.sif format)\nThese files are easily shared and can be run on any system with Apptainer installed"
   },
   {
-    "objectID": "git/git-intro.html#git-branches",
-    "href": "git/git-intro.html#git-branches",
-    "title": "1  Introduction to Git",
-    "section": "1.4 Git branches",
-    "text": "1.4 Git branches\nOnce you have cloned a specific git repository locally on your computer, you can navigate and/or create new branches on it using git CLI. Here some examples:\n\nTo create a branch and switch to it type git checkout -b branch_name\nTo push the newly created branch to the remote repository type git push -u origin branch_name\nTo display all branches on the local and remote repository type git branch -a\nTo switch to one of the displayed branches type git checkout name_of_branch. Once a change is committed to that branch, pushing the committed change will be pushed to that specific branch on the remote repository.\nTo delete a branch type git branch -d name_of_branch_to_delete",
-    "crumbs": [
-      "Git",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
-    ]
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#apptainer-vs-singularity-history-the-.sif-format",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#apptainer-vs-singularity-history-the-.sif-format",
+    "title": "Introduction to Apptainer",
+    "section": "Apptainer vs Singularity history & the .sif format",
+    "text": "Apptainer vs Singularity history & the .sif format\n\nSingularity was the original name of the open source project from 2015, but this turned partly commercial in 2018\nThe open source part forked and joined the Linux foundation in 2021, becoming Apptainer\nThe singularity image format (.sif) remains in Apptainer as a legacy of that\nSimilarly when you install Apptainer, there are symlinks, so you can use singularity pull rather than apptainer pull\nFor practical purposes, they are the same"
   },
   {
-    "objectID": "git/git-intro.html#file-staging-and-git-commit",
-    "href": "git/git-intro.html#file-staging-and-git-commit",
-    "title": "1  Introduction to Git",
-    "section": "1.5 File staging and git commit",
-    "text": "1.5 File staging and git commit\nStaging in Git involves adding new, modified, or deleted files to a staging area before committing them. This allows for flexibility in choosing the files to commit.\n\nCheck status via git status You’ll see what branch you are on and status of files (untracked, modified, or deleted).\n\nStage Files to Prepare for Commit\n\n\nStage all files: git add .\nStage a file: git add example.html\nStage a folder: git add myfolder\n\n\nCheck status again: git status You should see there are changes ready to be committed.\nUnstage a File\n\n\nIf you accidental stage something, use the following command to unstage it: git reset HEAD example.html\n\n\nDeleting Files\n\n\nIf you delete files they will appear in git status as deleted, and you must use git add to stage them. Another way to do this is using git rm command, which both deletes a file and stages it all with one command:\ngit rm example.html to remove a file (and stage it)\ngit rm -r myfolder to remove a folder (and stage it)\n\n\nCommit Files\n\n\ngit commit -m \"Message that describes what this change does\"\n\n\nCheck status again: git status If all changes have been committed, and there are no untracked files, it should say: nothing to commit, working tree clean.\nView a List of Commits\n\n\nWhen viewing a list of commits, there are various commands depending on how much info you want to see.\nTo see a simplified list of commits, run this command: git log --oneline\nTo see a list of commits with more detail (such who made the commit and when), run this command: git log NOTE: If the list is long, use the Down/Up Arrow keys to scroll and hit Q to quit.\nTo see a list of commits with even more detail (including which files changed), run this command: git log --stat\n\n\nFixing Your Last Commit Message\n\n\ngit commit --amend -m \"Put your corrected message here\": to correct a mistake in your last commit message\n\n\nChanging committed files\n\n\nThe --no-edit flag will allow you to make the amendment to your commit without changing its commit message. Example:\n\n# Edit hello.py and main.py\ngit add hello.py\ngit commit \n# Realize you forgot to add the changes from main.py \ngit add main.py \ngit commit --amend --no-edit\nThe resulting commit will replace the incomplete one, and it will look like we committed the changes to hello.py and main.py in a single snapshot.",
-    "crumbs": [
-      "Git",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
-    ]
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#structure-of-an-apptainer-command",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#structure-of-an-apptainer-command",
+    "title": "Introduction to Apptainer",
+    "section": "Structure of an apptainer command",
+    "text": "Structure of an apptainer command\n\napptainer [subcommand] [image] [additional commands]\nExample of pull and shell\n\napptainer pull docker://alpine\napptainer shell alpine_latest.sif\ncat /etc/alpine-release\nexit\ncat /etc/alpine-release\ncat /etc/debian_version\n\nInteract with the container from the host system:\n\napptainer exec alpine_latest.sif cat /etc/alpine-release\ncat /etc/alpine-release"
   },
   {
-    "objectID": "git/git-intro.html#git-pushpull",
-    "href": "git/git-intro.html#git-pushpull",
-    "title": "1  Introduction to Git",
-    "section": "1.6 Git push/pull",
-    "text": "1.6 Git push/pull\nYou can use git push to sync a remote repository with the changes you’ve done locally. The most basic example would be that you’ve first cloned a repository with git clone then made some changes in that local copy and want to update the original remote repository.\nSimilarly, if for example, someone else made changes to the remote and you want to incorporate those changes into your local copy you will run git pull to make sure you are up to date with the changes in the remote repository before working on your local copy.",
-    "crumbs": [
-      "Git",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
-    ]
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#building-.sif-from-a-definition-file-.def",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#building-.sif-from-a-definition-file-.def",
+    "title": "Introduction to Apptainer",
+    "section": "Building .sif from a definition file (.def)",
+    "text": "Building .sif from a definition file (.def)\n\nBuilding a custom container requires a .def file, specifying the registry and image for the base image, and various options for the container\n\n\n\nexample.def\n\n\nBootstrap: docker\nFrom: debian:12.5-slim\n\n%environment\n        export PATH=$PATH:/root/.pixi/bin\n\n%runscript\n                cat /etc/debian_version\n\n%post\n        export PATH=$PATH:/root/.pixi/bin\n        apt-get update && \\\n        apt-get install -y curl && \\\n        curl -fsSL https://pixi.sh/install.sh | bash && \\\n        apt-get clean && \\\n        pixi global install -c bioconda -c conda-forge  minigraph\n\n\nThen build the container: apptainer build minigraph.sif example.def\napptainer run executes the runscript inside the container:\n\napptainer run minigraph.sif"
   },
   {
-    "objectID": "git/git-intro.html#git-merge-and-git-rebase",
-    "href": "git/git-intro.html#git-merge-and-git-rebase",
-    "title": "1  Introduction to Git",
-    "section": "1.7 Git merge and git rebase",
-    "text": "1.7 Git merge and git rebase\nGit merge and git rebase can be said to be used to solve similar things.\nWhen working on a feature in a separate branch while someone else updates the main branch you often want to incorporate the new changes from the main branch into your feature branch.\nFirst you would probably like to use git pull as described above to make sure your local copy is up-to-date with changes made by others.\nThen it could be done with merge like this:\ngit checkout my_new_feature\nfollowed by adding your new code/feature and then merge it:\ngit merge main\nThis will create what is called a “merge commit” and put the changes from main into your feature branch.\nThe alternative way would be to use rebase:\ngit checkout my_new_feature\ngit rebase main\nThis will sort of re-write the project history by moving the feature branch to the “tip” of the main and create new commits in the original branch.",
-    "crumbs": [
-      "Git",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
-    ]
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def",
+    "title": "Introduction to Apptainer",
+    "section": "Portability to HPC systems, & note on reproducibilty (.sif files vs rebuilding from a .def)",
+    "text": "Portability to HPC systems, & note on reproducibilty (.sif files vs rebuilding from a .def)\n\n.sif files are portable and will be highly reproducible\nYou can also share a .def file, however consider that some tags on docker hub refer to rolling releases, e.g. latest. If you want future builds of the container to be identical, try to find a static tag, e.g. a github commit tag\nIn addition, using commands from package managers like apt-get update in the .def will make the container less reproducible, as the package versions will change over time\nBy default Apptainer/Singularity loads certain directories such as $HOME (see below), and this means local packages (e.g. Python, R, etc.) can be picked up and loaded instead of the ones in the container. To prevent this, do something like this."
   },
   {
-    "objectID": "git/git-intro.html#git-cheetsheet",
-    "href": "git/git-intro.html#git-cheetsheet",
-    "title": "1  Introduction to Git",
-    "section": "1.8 Git Cheetsheet",
-    "text": "1.8 Git Cheetsheet",
-    "crumbs": [
-      "Git",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Git</span>"
-    ]
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#other-useful-things-to-know",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#other-useful-things-to-know",
+    "title": "Introduction to Apptainer",
+    "section": "Other useful things to know:",
+    "text": "Other useful things to know:\n\nMount binding\n\nSome folders are automatically bound from the host system (e.g., $HOME, $CWD, /tmp)\nTherefore don’t install software to those locations - they’ll install on your host system too\nUse an unmounted folder like /opt or /usr/local instead\nIf you need to mount a directory to the container, e.g. a data directory, this is possible, e.g.:\n\napptainer exec --bind /scratch example.sif ls /scratch\n\n\nConversion from docker\n\nIt’s possible to convert from docker images to singularity images - not covered today\n\n\n\nSandbox containers\n\nSingularity containers are basically uneditable - no so fun if you need to keep rebuilding from scatch during development\nThere is a “sandbox container” feature which is editable, and it works like a file system within your file system\nWhen you are ready for a production container, you can convert the sandbox container to a regular container, though it would be preferable to rebuild from a definition file, so that there is a record of what was done\n\n\n\n\n\n\n\nTip\n\n\n\nIt’s advisable to use many small containers (minimal container for a single process/tool) rather than large inclusive containers."
   },
   {
-    "objectID": "github/gh-collaboration.html",
-    "href": "github/gh-collaboration.html",
-    "title": "2  How to collaborate on Github",
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#seqera-containers-resource",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#seqera-containers-resource",
+    "title": "Introduction to Apptainer",
+    "section": "Seqera containers resource",
+    "text": "Seqera containers resource"
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example",
+    "title": "Introduction to Apptainer",
+    "section": "Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?",
+    "text": "Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?"
+  },
+  {
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html",
+    "href": "posts/2024-05-07-gitpod-intro/index.html",
+    "title": "Introduction to Gitpod",
     "section": "",
-    "text": "2.1 Making a branch (Teacher)\nThis section is a guide describing one method of collaborating on Github. We focus on the framework that we use to make reference material for future us and others new to the team.\nYou also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.\nThis short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)",
-    "crumbs": [
-      "Github",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
-    ]
+    "text": "Gitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file .gitpod.yml present in the repository.\nThere are two offerings of Gitpod, Gitpod Flex, and Gitpod Enterprise. Gitpod Flex is designed to run a container on your laptop, cloud, or on-premises architecture. Gitpod Enterprise, which we discuss here, runs on a cloud environment hosted by Gitpod.\nThere are different pricing depending on your needs such as:\n\nFree plan (50 hours per month)\nPay-as-you-go\nCompany plan (custom)\n\nMahesh is on an open source plan (nammed NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication."
   },
   {
-    "objectID": "github/gh-collaboration.html#making-a-branch-teacher",
-    "href": "github/gh-collaboration.html#making-a-branch-teacher",
-    "title": "2  How to collaborate on Github",
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#what-is-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#what-is-gitpod",
+    "title": "Introduction to Gitpod",
     "section": "",
-    "text": "On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.\nClick on view all branches\nClick New branch, give it a name and select the branch source.\nFinally, click create branch",
-    "crumbs": [
-      "Github",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
-    ]
+    "text": "Gitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file .gitpod.yml present in the repository.\nThere are two offerings of Gitpod, Gitpod Flex, and Gitpod Enterprise. Gitpod Flex is designed to run a container on your laptop, cloud, or on-premises architecture. Gitpod Enterprise, which we discuss here, runs on a cloud environment hosted by Gitpod.\nThere are different pricing depending on your needs such as:\n\nFree plan (50 hours per month)\nPay-as-you-go\nCompany plan (custom)\n\nMahesh is on an open source plan (nammed NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication."
   },
   {
-    "objectID": "github/gh-collaboration.html#making-changes-learner",
-    "href": "github/gh-collaboration.html#making-changes-learner",
-    "title": "2  How to collaborate on Github",
-    "section": "2.2 Making changes (Learner)",
-    "text": "2.2 Making changes (Learner)\n\nFork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.\nOn your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.\nTo edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.\nIf instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.\nAdd the file contents in edit mode.\nWhen finished, click “Commit changes…”",
-    "crumbs": [
-      "Github",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
-    ]
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#how-to-login-to-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#how-to-login-to-gitpod",
+    "title": "Introduction to Gitpod",
+    "section": "How to login to Gitpod",
+    "text": "How to login to Gitpod\n\nGo to the Gitpod site.\nSelect your Git hosting service (e.g., GitHub), and authenticate.\nIf successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right.\nNow when you start a Gitpod environment you’ll be connected to your version control system.\n\n## How to start a Gitpod\nTo start a workspace, follow these steps:\n\nNavigate to your repository on GitHub, GitLab or Bitbucket.\nAdd gitpod.io/# before the URL address of your repository. This will create a new URL address that directs you to the Gitpod workspace setup page. On that page, you can make the following choices:\n\nThe source repository for which the gitpod workspace will be created.\nThe code editor.\nThe computing resources required for the workspace.\n\nAfter making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user’s working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer.\nAny changes to the files within that folder can be pushed to the repository using Git commands.\n\nNote: If you are editing a public Github public repository, Gitpod requires the “public_repo” permission to push changes. To do it, follow these steps:\n\nNavigate to gitpod.io.\nClick on your user icon\nClick “user settings”\nNavigate to “Git Providers”\nClick the actions icon on the GitHub provider\nClick “edit permissions”\nCheck “public_repo”\nClick “Update permissions”\nYou will be redirected to Github for authentication.\n\nAfter granting permissions, the user can push changes to the repository."
   },
   {
-    "objectID": "github/gh-collaboration.html#making-a-draft-pull-request-learner",
-    "href": "github/gh-collaboration.html#making-a-draft-pull-request-learner",
-    "title": "2  How to collaborate on Github",
-    "section": "2.3 Making a draft pull request (Learner)",
-    "text": "2.3 Making a draft pull request (Learner)\nAfter making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.",
-    "crumbs": [
-      "Github",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
-    ]
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#how-to-configure-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#how-to-configure-gitpod",
+    "title": "Introduction to Gitpod",
+    "section": "How to configure Gitpod",
+    "text": "How to configure Gitpod\n\nA gitpod workspace is configured mainly through the .gitpod.yml file at the root of your repository (e.g. github.com/user/repo/.gitpod.yml).\nThis file is read by Gitpod when the workspace is started, and can be used to specify the base workspace image, and a list of tasks that will be run when the workspace is started.\nBelow is the yml file we use in the Training-tech-shorts repo.\n\nimage: nfcore/gitpod:latest\n\ntasks:\n  - name: Update Nextflow\n    command: nextflow self-update\n  - name: Install Pixi\n    command: |\n      sudo chown gitpod -R /home/gitpod/\n      curl -fsSL https://pixi.sh/install.sh | bash\n      . /home/gitpod/.bash_profile\n  - name: Install Quarto\n    command: |\n      wget https://quarto.org/download/latest/quarto-linux-amd64.deb\n      sudo dpkg -i quarto-linux-amd64.deb\n      rm quarto-linux-amd64.deb\n      quarto check all\n\nThe image: section of the .gitpod.yml is used to specify the base workspace image, this can be a public or private docker image, or a Dockerfile (in this case the base image must be public).\n\n# public image\nimage: nfcore/gitpod:latest\n\n# local Dockerfile\nimage:\n    file: .gitpod.Dockerfile\n\nThe tasks: section of the .gitpod.yml is used to specify a list of tasks that will be run when the workspace is started. Each task should have a name: and a command: section. The command: section specifies one or more shell commands that will be run in the workspace.\n\ntasks:\n  - name: Update Nextflow\n    command: nextflow self-update\n\nIn order to execute multiple commands in a single task, you can use the | syntax to specify a block of shell commands, each in one line.\n\ntasks:\n  - name: Install Pixi\n    command: |\n      sudo chown gitpod -R /home/gitpod/\n      curl -fsSL https://pixi.sh/install.sh | bash\n      . /home/gitpod/.bash_profile\n\nOptionally, you can also add a ports: section to the .gitpod.yml file to specify a list of ports that should be opened by the workspace. This can be useful when hosting a web server or anything that needs to be accessed from outside the workspace.\n\nports:\n  - port: 8080\n    onOpen: open-preview"
   },
   {
-    "objectID": "github/gh-collaboration.html#code-review-review-partner",
-    "href": "github/gh-collaboration.html#code-review-review-partner",
-    "title": "2  How to collaborate on Github",
-    "section": "2.4 Code review (Review partner)",
-    "text": "2.4 Code review (Review partner)\n\nnavigate to the top menu and click on Pull requests\nby default all open pull requests are listed, you can further filter down the list. e.g. via clicking on Reviews and afterwards select Awaiting review from you in the drop down menu. This shows then only PRs where you are tagged as reviewer.\nclick on a pull request of your choice\nthe following window has 4 tabs:\n\nConversation: gives an overview about the PR\nCommits: list all commits of the PR\nCheck:\nFiles changed: lists all files which were modified\n\nclick on the Files changed tab and go through the files and changes\n\nyou can comment on a line by hovering over a line and click on the plus symbol\nin case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines\nafterwards you can either:\n\nclick on the Add single comment button which makes your comment or suggestion immediately visible OR\n\nclick on the Start a review button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.\n\nwhen done with the full review click on the Finish your review button on the top right corner of the page:\n\nyou can comment on your review and choose one of the following options Comment, Approve, Request changes. Select the approprate option and click on Submit review.",
-    "crumbs": [
-      "Github",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
-    ]
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#uses-for-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#uses-for-gitpod",
+    "title": "Introduction to Gitpod",
+    "section": "Uses for Gitpod",
+    "text": "Uses for Gitpod\n\nDemonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.\nDevelopment: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.\nExperimentation: The ephemeral nature of the environment, and its standardized tools make Gitpod excellent for testing code and sandbox experimentation.\nTraining: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements."
   },
   {
-    "objectID": "github/gh-collaboration.html#making-a-ready-for-review-pull-request-learner",
-    "href": "github/gh-collaboration.html#making-a-ready-for-review-pull-request-learner",
-    "title": "2  How to collaborate on Github",
-    "section": "2.5 Making a ready for review pull request (Learner)",
-    "text": "2.5 Making a ready for review pull request (Learner)\n\nOnce you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.\nOn the right side panel, you should invite the teacher to review your pull request.\nThe teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.",
-    "crumbs": [
-      "Github",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
-    ]
-  },
-  {
-    "objectID": "github/gh-collaboration.html#merges-pull-requests-teacher",
-    "href": "github/gh-collaboration.html#merges-pull-requests-teacher",
-    "title": "2  How to collaborate on Github",
-    "section": "2.6 Merges pull requests (Teacher)",
-    "text": "2.6 Merges pull requests (Teacher)\n\nOnce both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.\nOnce the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.",
-    "crumbs": [
-      "Github",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to collaborate on Github</span>"
-    ]
-  },
-  {
-    "objectID": "pixi/pixi-intro.html",
-    "href": "pixi/pixi-intro.html",
-    "title": "3  Introduction to Pixi",
+    "objectID": "posts/2024-03-19-git-intro/index.html",
+    "href": "posts/2024-03-19-git-intro/index.html",
+    "title": "Introduction to Git",
     "section": "",
-    "text": "3.1 Why Pixi?\nPixi is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.",
-    "crumbs": [
-      "Pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
-    ]
+    "text": "Git is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer’s computer.\nGit is the most popular tool, even though it might not be the most user-friendly one. It has a lot of options/commands and specific jargon. Fortunately there are many “Git cheat sheets” (such as https://education.github.com/git-cheat-sheet-education.pdf)."
   },
   {
-    "objectID": "pixi/pixi-intro.html#why-pixi",
-    "href": "pixi/pixi-intro.html#why-pixi",
-    "title": "3  Introduction to Pixi",
+    "objectID": "posts/2024-03-19-git-intro/index.html#what-is-git",
+    "href": "posts/2024-03-19-git-intro/index.html#what-is-git",
+    "title": "Introduction to Git",
     "section": "",
-    "text": "3.1.1 Compatibility\nPixi is somehwat compatible with Conda. You can:\n\nInstall packages using the same Conda channels (e.g., conda-forge, bioconda).\nInitialise project environments using existing Conda environment files.\n\nHowever, you cannot activate a conda environment using Pixi, or vice-versa.\n\n\n3.1.2 Key Difference\nIn Pixi, the environment configuration file (.pixi.toml) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a pixi.lock file is also written. This should also be commited to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command.",
-    "crumbs": [
-      "Pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
-    ]
+    "text": "Git is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer’s computer.\nGit is the most popular tool, even though it might not be the most user-friendly one. It has a lot of options/commands and specific jargon. Fortunately there are many “Git cheat sheets” (such as https://education.github.com/git-cheat-sheet-education.pdf)."
   },
   {
-    "objectID": "pixi/pixi-intro.html#getting-started",
-    "href": "pixi/pixi-intro.html#getting-started",
-    "title": "3  Introduction to Pixi",
-    "section": "3.2 Getting Started",
-    "text": "3.2 Getting Started\n\n3.2.1 Installation\n\nInstall Pixi and add it to your shell’s configuration (e.g., .bashrc or .zshrc).\n\ncurl -fsSL https://pixi.sh/install.sh | bash\n\nInitialize a Pixi environment in your project:\n\npixi init -c conda-forge -c bioconda -p linux-64 -p osx-arm64 -p osx-64\nHere:\n\n-c specifies the channels to use (e.g., conda-forge, bioconda)\n-p sets the platforms (linux-64: Intel Linux, osx-64: Intel MacOS, osx-arm64: ARM MacOS)\n\nBy default, Pixi will set the environment for your platform (e.g., linux-64), but you can specify additional platforms as needed.\nThe pixi initcommand will create two files:\n\n.pixi.toml: Specifies the environment configuration.\n.pixi.lock: Locks down the specific package versions for reproducibility.\n\nYou should commit both files to your version control system to share the exact environment setup with collaborators and increase reproducibility.\n\n\n3.2.2 Adding Packages\nYou can add packages to your environment using the pixi add command:\npixi add bwa samtools\nYou can add Python packages from PyPI using Pixi:\npixi add python\npixi add --pypi multiqc\nAlternatively, you can directly modify the .pixi.toml file in your project directory:\nUnder [dependencies], or platform specific dependencies (such as [target.linux-64.dependencies]) you can add a line for each package you want to include nextflow = \"24.10.4.*\"for example.",
-    "crumbs": [
-      "Pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
-    ]
+    "objectID": "posts/2024-03-19-git-intro/index.html#what-should-git-be-used-for",
+    "href": "posts/2024-03-19-git-intro/index.html#what-should-git-be-used-for",
+    "title": "Introduction to Git",
+    "section": "What should Git be used for",
+    "text": "What should Git be used for\nIn software development, Git is mostly used for version control of code. In our bioinformatics projects, we can also track our report files, environment files, and other small files.\nGit should NOT be used for storing data, particularly large data. Sensitive data (passwords, usernames, API keys…) should not be put in a Git repository, because they can be then exposed to the world. If one commits sensitive data by mistake, one can go back into the git history and remove it, but it is not a simple task."
   },
   {
-    "objectID": "pixi/pixi-intro.html#managing-environments",
-    "href": "pixi/pixi-intro.html#managing-environments",
-    "title": "3  Introduction to Pixi",
-    "section": "3.3 Managing Environments",
-    "text": "3.3 Managing Environments\n\n3.3.1 Files in the Directory\nWhen you use Pixi, it creates a .pixi folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder, and it will be recreated from the pixi.lock file in your project, the next time you use the environment.\nThe command\npixi clean\ndeletes the pixi environment binaries, and the command\npixi clean cache\ndeletes the package archives that were downloaded and unpacked to create the environment.\n\n\n3.3.2 Environment features\nUnlike Conda, in which you can define multiple global environments, Pixi handles multi-environment projects in a different way. Packages are installed into Features, which in turn define an Environment. Features are isolated from each other, helping to avoid version clashes between tools. See Pixi docs - Multi Environment for more on defining multiple environments in a TOML.",
-    "crumbs": [
-      "Pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
-    ]
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-repositories",
+    "href": "posts/2024-03-19-git-intro/index.html#git-repositories",
+    "title": "Introduction to Git",
+    "section": "Git Repositories",
+    "text": "Git Repositories\n\nA git repository (repo) is any folder structure that is version-controlled by git.\nA git repo can be initialized from a local folder, or cloned from a remote repo.\n\nTo initialize a repo from a local folder:\n\ncd myfolder\ngit init\n\nTo clone a git repo from a remote source:\n\ngit clone https://github.com/user/repo\nRegardless of how you obtain it, your local copy of the git repo will contain a .git folder. That is where the change history of your project is stored and maintained by git."
   },
   {
-    "objectID": "pixi/pixi-intro.html#tasks-in-pixi",
-    "href": "pixi/pixi-intro.html#tasks-in-pixi",
-    "title": "3  Introduction to Pixi",
-    "section": "3.4 Tasks in Pixi",
-    "text": "3.4 Tasks in Pixi\nIn addtion to being a package manager, Pixi allows you to define and run tasks directly in the .pixi.toml file. For example:\n[tasks]\nname-of-task = \"nextflow run main.nf -profile PDC\"\nOne can also add tasks via the command line:\npixi task add hello python hello_world.py\nSee Pixi Tasks for more information\n\n3.4.1 Task Features\nTasks can be combined or run conditionally. The example in the documentation is to specify that an application should be complied before being run. The command depends-oncan be used here. With this one can chain tasks for complex workflows.",
-    "crumbs": [
-      "Pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
-    ]
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-branches",
+    "href": "posts/2024-03-19-git-intro/index.html#git-branches",
+    "title": "Introduction to Git",
+    "section": "Git branches",
+    "text": "Git branches\nOnce you have cloned a specific git repository locally on your computer, you can navigate and/or create new branches on it using git CLI. Here some examples:\n\nTo create a branch and switch to it type git checkout -b branch_name\nTo push the newly created branch to the remote repository type git push -u origin branch_name\nTo display all branches on the local and remote repository type git branch -a\nTo switch to one of the displayed branches type git checkout name_of_branch. Once a change is committed to that branch, pushing the committed change will be pushed to that specific branch on the remote repository.\nTo delete a branch type git branch -d name_of_branch_to_delete"
   },
   {
-    "objectID": "pixi/pixi-intro.html#working-with-the-shell",
-    "href": "pixi/pixi-intro.html#working-with-the-shell",
-    "title": "3  Introduction to Pixi",
-    "section": "3.5 Working with the Shell",
-    "text": "3.5 Working with the Shell\nPixi provides a shell environment based on the Deno shell. Many basic Bash commands still work, allowing for:\n\nChaining tools.\nCommand substitution.\n\nSee Advanced Tasks for a more detailed description about the Deno shell supported features.\n\n3.5.1 Activating the Environment\nTo activate the environment:\npixi shell\nTo exit an environment, use exit:\nexit\nwhich also saves your command history.",
-    "crumbs": [
-      "Pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
-    ]
+    "objectID": "posts/2024-03-19-git-intro/index.html#file-staging-and-git-commit",
+    "href": "posts/2024-03-19-git-intro/index.html#file-staging-and-git-commit",
+    "title": "Introduction to Git",
+    "section": "File staging and git commit",
+    "text": "File staging and git commit\nStaging in Git involves adding new, modified, or deleted files to a staging area before committing them. This allows for flexibility in choosing the files to commit.\n\nCheck status via git status You’ll see what branch you are on and status of files (untracked, modified, or deleted).\n\nStage Files to Prepare for Commit\n\n\nStage all files: git add .\nStage a file: git add example.html\nStage a folder: git add myfolder\n\n\nCheck status again: git status You should see there are changes ready to be committed.\nUnstage a File\n\n\nIf you accidental stage something, use the following command to unstage it: git reset HEAD example.html\n\n\nDeleting Files\n\n\nIf you delete files they will appear in git status as deleted, and you must use git add to stage them. Another way to do this is using git rm command, which both deletes a file and stages it all with one command:\ngit rm example.html to remove a file (and stage it)\ngit rm -r myfolder to remove a folder (and stage it)\n\n\nCommit Files\n\n\ngit commit -m \"Message that describes what this change does\"\n\n\nCheck status again: git status If all changes have been committed, and there are no untracked files, it should say: nothing to commit, working tree clean.\nView a List of Commits\n\n\nWhen viewing a list of commits, there are various commands depending on how much info you want to see.\nTo see a simplified list of commits, run this command: git log --oneline\nTo see a list of commits with more detail (such who made the commit and when), run this command: git log NOTE: If the list is long, use the Down/Up Arrow keys to scroll and hit Q to quit.\nTo see a list of commits with even more detail (including which files changed), run this command: git log --stat\n\n\nFixing Your Last Commit Message\n\n\ngit commit --amend -m \"Put your corrected message here\": to correct a mistake in your last commit message\n\n\nChanging committed files\n\n\nThe --no-edit flag will allow you to make the amendment to your commit without changing its commit message. Example:\n\n# Edit hello.py and main.py\ngit add hello.py\ngit commit \n# Realize you forgot to add the changes from main.py \ngit add main.py \ngit commit --amend --no-edit\nThe resulting commit will replace the incomplete one, and it will look like we committed the changes to hello.py and main.py in a single snapshot."
   },
   {
-    "objectID": "pixi/pixi-intro.html#advanced-features",
-    "href": "pixi/pixi-intro.html#advanced-features",
-    "title": "3  Introduction to Pixi",
-    "section": "3.6 Advanced Features",
-    "text": "3.6 Advanced Features\n\n3.6.1 Intel emulation on ARM Macs\nAlthough packages are increasingly being built for ARM architecture CPUS, not all tools are built for osx-arm64. However, they may have been built for osx-64 (i.e., intel architecture CPUS), in addition to linux-64. MacOS includes the tool Rosetta, which can be used to emulate intel on arm Macs, at the cost of performance.\nBy supporting only linux-64 and osx-64 as platforms, Pixi will automatically run the tools using Rosetta emulation on Mac ARM computers.\npixi init \\\n  --channel \"conda-forge\" \\\n  --channel \"bioconda\" \\\n  --platform \"linux-64\" \\\n  --platform \"osx-64\"",
-    "crumbs": [
-      "Pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
-    ]
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-pushpull",
+    "href": "posts/2024-03-19-git-intro/index.html#git-pushpull",
+    "title": "Introduction to Git",
+    "section": "Git push/pull",
+    "text": "Git push/pull\nYou can use git push to sync a remote repository with the changes you’ve done locally. The most basic example would be that you’ve first cloned a repository with git clone then made some changes in that local copy and want to update the original remote repository.\nSimilarly, if for example, someone else made changes to the remote and you want to incorporate those changes into your local copy you will run git pull to make sure you are up to date with the changes in the remote repository before working on your local copy."
   },
   {
-    "objectID": "pixi/pixi-intro.html#additional-commands",
-    "href": "pixi/pixi-intro.html#additional-commands",
-    "title": "3  Introduction to Pixi",
-    "section": "3.7 Additional Commands",
-    "text": "3.7 Additional Commands\n\n3.7.1 Updating Pixi\nTo update Pixi:\npixi self-update\n\n\n3.7.2 Cleaning the cache\nTo clean the cache:\npixi clean cache\n\n\n3.7.3 Package search\nPixi can search for the latest version of a package, and provide detailed information about using:\npixi search &lt;package_name&gt;\nHowever, unlike Conda, it does not list all available versions of a package. For this purpose, conda search &lt;package_name&gt; is the better option.\n\n\n3.7.4 Command help\nUse\npixi help\nto get more detailed help on various commands.",
-    "crumbs": [
-      "Pixi",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Introduction to Pixi</span>"
-    ]
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-merge-and-git-rebase",
+    "href": "posts/2024-03-19-git-intro/index.html#git-merge-and-git-rebase",
+    "title": "Introduction to Git",
+    "section": "Git merge and git rebase",
+    "text": "Git merge and git rebase\nGit merge and git rebase can be said to be used to solve similar things.\nWhen working on a feature in a separate branch while someone else updates the main branch you often want to incorporate the new changes from the main branch into your feature branch.\nFirst you would probably like to use git pull as described above to make sure your local copy is up-to-date with changes made by others.\nThen it could be done with merge like this:\ngit checkout my_new_feature\nfollowed by adding your new code/feature and then merge it:\ngit merge main\nThis will create what is called a “merge commit” and put the changes from main into your feature branch.\nThe alternative way would be to use rebase:\ngit checkout my_new_feature\ngit rebase main\nThis will sort of re-write the project history by moving the feature branch to the “tip” of the main and create new commits in the original branch."
   },
   {
-    "objectID": "apptainer/apptainer-intro.html",
-    "href": "apptainer/apptainer-intro.html",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-cheetsheet",
+    "href": "posts/2024-03-19-git-intro/index.html#git-cheetsheet",
+    "title": "Introduction to Git",
+    "section": "Git Cheetsheet",
+    "text": "Git Cheetsheet"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Training Tech Shorts",
     "section": "",
-    "text": "4.1 What are containers?\nLesson plan based around materials from CodeRefinery",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
+    "text": "This is a series of short lessons in various technologies useful to our work.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Pixi\n\n\n\n\n\n\nPixi\n\n\nPackage managment\n\n\nCommand runner\n\n\n\n\n\n\n\n\n\nJan 21, 2025\n\n\nMahesh\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Apptainer\n\n\n\n\n\n\nApptainer\n\n\nSingularity\n\n\nContainers\n\n\nPackage managment\n\n\n\n\n\n\n\n\n\nJun 4, 2024\n\n\nCormac\n\n\n\n\n\n\n\n\n\n\n\n\nQuarto to Confluence\n\n\n\n\n\n\nQuarto\n\n\nLiterate programming\n\n\nConfluence\n\n\n\n\n\n\n\n\n\nMay 14, 2024\n\n\nTomas\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Gitpod\n\n\n\n\n\n\nGit\n\n\nGithub\n\n\nVersion control\n\n\nGitpod\n\n\n\n\n\n\n\n\n\nMay 7, 2024\n\n\nMahesh\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Quarto\n\n\n\n\n\n\nQuarto\n\n\nLiterate programming\n\n\n\n\n\n\n\n\n\nApr 16, 2024\n\n\nPer\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to Git\n\n\n\n\n\n\nGit\n\n\nVersion control\n\n\n\n\n\n\n\n\n\nMar 19, 2024\n\n\nMahesh\n\n\n\n\n\n\n\n\n\n\n\n\nCollaboration on Github\n\n\n\n\n\n\nGit\n\n\nGithub\n\n\nVersion control\n\n\nCollaboration\n\n\n\n\n\n\n\n\n\nMar 12, 2024\n\n\nMahesh\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "apptainer/apptainer-intro.html#what-are-containers",
-    "href": "apptainer/apptainer-intro.html#what-are-containers",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
+    "objectID": "contributing.html",
+    "href": "contributing.html",
+    "title": "Contributing",
     "section": "",
-    "text": "Containers isolate software, dependencies, configurations, and system libraries from the host system\nThe naming came from the idea of shipping containers (which are portable & standardized)\nVirtual machines are a similar concept, but these virtualise hardware, contain complete operating systems (including the kernel), and are managed by software known as a hypervisor\nContainers on the other hand share the host OS kernel, so they don’t contain complete operating systems, just user space system libraries\nThis makes them lightweight, portable, and fast to start up",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
+    "text": "The first step is to read over the lesson Collaboration on Github.\n\n\n\nMake a branch for your lesson.\nUnder posts, make a folder for your lesson named based on the date and topic, e.g., 2024-03-12-github-collaboration.\nCreate an index.qmd with a header in that folder.\n\n---\ntitle: \"Lesson title\"\nauthor: \"Lesson instructor\"\ndate: \"YYYY-MM-DD\"\ndate-modified: last-modified\ncategories: [ keywords ]\n---\n\nThe first paragraph should summarise the lesson. This appears on the front page too.\nIn the index.qmd, add headers for key points to cover.\nTeach your topic to your team for 30-45 mins. Please remember to record the lesson.\nEach learner selects a key point to contribute material on. The person responsible for a section can be added to the index.qmd on the instructors branch.\nMake a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you’re both happy.\nMark the pull request as ready, and request the instructor to review.\nWhen the instructor is happy with the changes they should merge the learners contribution back into their lesson branch.\nThe instructor reviews and merges the lesson branch when all contributions have been received. It is the responsibility of the teacher to make sure contributions have been received after two weeks.\n\n\n\n\nEach lesson should be followed up by a review lesson the following week. Here, the teacher should review and discuss points that they notice learners had difficulty with.\n\n\n\n\n\n\n\n\nsequenceDiagram\n    box transparent Learners\n        actor Learner1\n        actor Learner2\n    end\n    actor Teacher\n    Teacher -&gt;&gt; GitHub: New branch for lesson\n    Teacher -&gt;&gt; GitHub: New lesson file\n    Teacher -&gt;&gt; GitHub: Add key points\n    Teacher -&gt;&gt; Learner1: Demonstrates tool\n    Learner1 -&gt;&gt; Teacher: Volunteers to write up keypoint 2\n    Learner2 -&gt;&gt; Teacher: Volunteers to write up keypoint 1\n    Learner1 -&gt;&gt; GitHub: Make branch from lesson branch\n    Learner1 -&gt;&gt; GitHub: Add notes for keypoint 2\n    Learner2 -&gt;&gt; GitHub: Add notes for keypoint 1\n    Learner1 -&gt;&gt; GitHub: Request Learner2 to review text\n    Learner2 -&gt;&gt; GitHub: Request Learner1 to review text\n    Learner1 -&gt;&gt; GitHub: Provide code review\n    Learner1 -&gt;&gt; GitHub: Update notes from review\n    Learner1 -&gt;&gt; Teacher: Request code review\n    Learner1 -&gt;&gt; GitHub: Update notes\n    Teacher -&gt;&gt; GitHub: Merges notes into lesson branch\n    Teacher -&gt;&gt; GitHub: Merges lesson branch into main\n    GitHub -&gt;&gt; GitHub: Automated website build\n\n\n\n\n\n\n\n\n\n\n\n\n\nOn the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.\nClick on view all branches\nClick New branch, give it a name and select the branch source.\nFinally, click create branch\n\nYou also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.\nThis short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)\nThe teacher should create a folder under posts named using the date and topic, e.g., 2024-03-12-github-collaboration. Then inside that folder create an index.qmd with the following header.\n---\ntitle: \"Lesson title\"\nauthor: \"Lesson instructor\"\ndate: \"YYYY-MM-DD\"\ndate-modified: last-modified\ncategories: [ keywords ]\n---\nInclude a summary of the subject as the first paragraph. Then add level 2 headers of the key points to be taught. After the instructor has delivered the lesson, assign each key point to a person, and include their name in the document, and which learner will review.\n\n\n\n\nFork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.\nOn your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.\nTo edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.\nIf instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.\nAdd the file contents in edit mode.\nWhen finished, click “Commit changes…”\n\n\n\n\nAfter making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.\n\n\n\n\nnavigate to the top menu and click on Pull requests\nby default all open pull requests are listed, you can further filter down the list. e.g. via clicking on Reviews and afterwards select Awaiting review from you in the drop down menu. This shows then only PRs where you are tagged as reviewer.\nclick on a pull request of your choice\nthe following window has 4 tabs:\n\nConversation: gives an overview about the PR\nCommits: list all commits of the PR\nCheck:\nFiles changed: lists all files which were modified\n\nclick on the Files changed tab and go through the files and changes\n\nyou can comment on a line by hovering over a line and click on the plus symbol\nin case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines\nafterwards you can either:\n\nclick on the Add single comment button which makes your comment or suggestion immediately visible OR\n\nclick on the Start a review button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.\n\nwhen done with the full review click on the Finish your review button on the top right corner of the page:\n\nyou can comment on your review and choose one of the following options Comment, Approve, Request changes. Select the approprate option and click on Submit review.\n\n\n\n\n\n\n\nOnce you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.\nOn the right side panel, you should invite the teacher to review your pull request.\nThe teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.\n\n\n\n\n\nOnce both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.\nOnce the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues."
   },
   {
-    "objectID": "apptainer/apptainer-intro.html#docker-vs-apptainer-containers",
-    "href": "apptainer/apptainer-intro.html#docker-vs-apptainer-containers",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
-    "section": "4.2 Docker vs Apptainer containers",
-    "text": "4.2 Docker vs Apptainer containers\n\nApptainer (i.e. Singularity) is intended to run reproducibly across many system types, including HPC systems\nDocker is rarely allowed on clusters, requires root access\nTheir images are somewhat different - Docker images are made up of layers (Base image -&gt; launched as container -&gt; edited -&gt; used as new base layer -&gt; launched -&gt; edited -&gt; etc.). Apptainer images squash layers into one file (.sif format)\nThese files are easily shared and can be run on any system with Apptainer installed",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
-  },
-  {
-    "objectID": "apptainer/apptainer-intro.html#apptainer-vs-singularity-history-the-.sif-format",
-    "href": "apptainer/apptainer-intro.html#apptainer-vs-singularity-history-the-.sif-format",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
-    "section": "4.3 Apptainer vs Singularity history & the .sif format",
-    "text": "4.3 Apptainer vs Singularity history & the .sif format\n\nSingularity was the original name of the open source project from 2015, but this turned partly commercial in 2018\nThe open source part forked and joined the Linux foundation in 2021, becoming Apptainer\nThe singularity image format (.sif) remains in Apptainer as a legacy of that\nSimilarly when you install Apptainer, there are symlinks, so you can use singularity pull rather than apptainer pull\nFor practical purposes, they are the same",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
-  },
-  {
-    "objectID": "apptainer/apptainer-intro.html#structure-of-an-apptainer-command",
-    "href": "apptainer/apptainer-intro.html#structure-of-an-apptainer-command",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
-    "section": "4.4 Structure of an apptainer command",
-    "text": "4.4 Structure of an apptainer command\n\napptainer [subcommand] [image] [additional commands]\nExample of pull and shell\n\napptainer pull docker://alpine\napptainer shell alpine_latest.sif\ncat /etc/alpine-release\nexit\ncat /etc/alpine-release\ncat /etc/debian_version\n\nInteract with the container from the host system:\n\napptainer exec alpine_latest.sif cat /etc/alpine-release\ncat /etc/alpine-release",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
-  },
-  {
-    "objectID": "apptainer/apptainer-intro.html#building-.sif-from-a-definition-file-.def",
-    "href": "apptainer/apptainer-intro.html#building-.sif-from-a-definition-file-.def",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
-    "section": "4.5 Building .sif from a definition file (.def)",
-    "text": "4.5 Building .sif from a definition file (.def)\n\nBuilding a custom container requires a .def file, specifying the registry and image for the base image, and various options for the container\n\n\n\nexample.def\n\n\nBootstrap: docker\nFrom: debian:12.5-slim\n\n%environment\n        export PATH=$PATH:/root/.pixi/bin\n\n%runscript\n                cat /etc/debian_version\n\n%post\n        export PATH=$PATH:/root/.pixi/bin\n        apt-get update && \\\n        apt-get install -y curl && \\\n        curl -fsSL https://pixi.sh/install.sh | bash && \\\n        apt-get clean && \\\n        pixi global install -c bioconda -c conda-forge  minigraph\n\n\nThen build the container: apptainer build minigraph.sif example.def\napptainer run executes the runscript inside the container:\n\napptainer run minigraph.sif",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
-  },
-  {
-    "objectID": "apptainer/apptainer-intro.html#portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def",
-    "href": "apptainer/apptainer-intro.html#portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
-    "section": "4.6 Portability to HPC systems, & note on reproducibilty (.sif files vs rebuilding from a .def)",
-    "text": "4.6 Portability to HPC systems, & note on reproducibilty (.sif files vs rebuilding from a .def)\n\n.sif files are portable and will be highly reproducible\nYou can also share a .def file, however consider that some tags on docker hub refer to rolling releases, e.g. latest. If you want future builds of the container to be identical, try to find a static tag, e.g. a github commit tag\nIn addition, using commands from package managers like apt-get update in the .def will make the container less reproducible, as the package versions will change over time\nBy default Apptainer/Singularity loads certain directories such as $HOME (see below), and this means local packages (e.g. Python, R, etc.) can be picked up and loaded instead of the ones in the container. To prevent this, do something like this.",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
-  },
-  {
-    "objectID": "apptainer/apptainer-intro.html#other-useful-things-to-know",
-    "href": "apptainer/apptainer-intro.html#other-useful-things-to-know",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
-    "section": "4.7 Other useful things to know:",
-    "text": "4.7 Other useful things to know:\n\n4.7.1 Mount binding\n\nSome folders are automatically bound from the host system (e.g., $HOME, $CWD, /tmp)\nTherefore don’t install software to those locations - they’ll install on your host system too\nUse an unmounted folder like /opt or /usr/local instead\nIf you need to mount a directory to the container, e.g. a data directory, this is possible, e.g.:\n\napptainer exec --bind /scratch example.sif ls /scratch\n\n\n4.7.2 Conversion from docker\n\nIt’s possible to convert from docker images to singularity images - not covered today\n\n\n\n4.7.3 Sandbox containers\n\nSingularity containers are basically uneditable - no so fun if you need to keep rebuilding from scatch during development\nThere is a “sandbox container” feature which is editable, and it works like a file system within your file system\nWhen you are ready for a production container, you can convert the sandbox container to a regular container, though it would be preferable to rebuild from a definition file, so that there is a record of what was done\n\n\n\n\n\n\n\nTip\n\n\n\nIt’s advisable to use many small containers (minimal container for a single process/tool) rather than large inclusive containers.",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
-  },
-  {
-    "objectID": "apptainer/apptainer-intro.html#seqera-containers-resource",
-    "href": "apptainer/apptainer-intro.html#seqera-containers-resource",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
-    "section": "4.8 Seqera containers resource",
-    "text": "4.8 Seqera containers resource",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
-  },
-  {
-    "objectID": "apptainer/apptainer-intro.html#converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example",
-    "href": "apptainer/apptainer-intro.html#converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example",
-    "title": "4  Introduction to Apptainer (i.e. Singularity)",
-    "section": "4.9 Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?",
-    "text": "4.9 Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?",
-    "crumbs": [
-      "Apptainer",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Introduction to Apptainer (i.e. Singularity)</span>"
-    ]
-  },
-  {
-    "objectID": "gitpod/gitpod-intro.html",
-    "href": "gitpod/gitpod-intro.html",
-    "title": "5  Gitpod",
+    "objectID": "contributing.html#quick-start",
+    "href": "contributing.html#quick-start",
+    "title": "Contributing",
     "section": "",
-    "text": "5.1 What is Gitpod\nGitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file .gitpod.yml present in the repository.\nThere are two offerings of Gitpod, Gitpod Flex, and Gitpod Enterprise. Gitpod Flex is designed to run a container on your laptop, cloud, or on-premises architecture. Gitpod Enterprise, which we discuss here, runs on a cloud environment hosted by Gitpod.\nThere are different pricing depending on your needs such as:\nMahesh is on an open source plan (nammed NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication.",
-    "crumbs": [
-      "Gitpod",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gitpod</span>"
-    ]
+    "text": "The first step is to read over the lesson Collaboration on Github.\n\n\n\nMake a branch for your lesson.\nUnder posts, make a folder for your lesson named based on the date and topic, e.g., 2024-03-12-github-collaboration.\nCreate an index.qmd with a header in that folder.\n\n---\ntitle: \"Lesson title\"\nauthor: \"Lesson instructor\"\ndate: \"YYYY-MM-DD\"\ndate-modified: last-modified\ncategories: [ keywords ]\n---\n\nThe first paragraph should summarise the lesson. This appears on the front page too.\nIn the index.qmd, add headers for key points to cover.\nTeach your topic to your team for 30-45 mins. Please remember to record the lesson.\nEach learner selects a key point to contribute material on. The person responsible for a section can be added to the index.qmd on the instructors branch.\nMake a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you’re both happy.\nMark the pull request as ready, and request the instructor to review.\nWhen the instructor is happy with the changes they should merge the learners contribution back into their lesson branch.\nThe instructor reviews and merges the lesson branch when all contributions have been received. It is the responsibility of the teacher to make sure contributions have been received after two weeks.\n\n\n\n\nEach lesson should be followed up by a review lesson the following week. Here, the teacher should review and discuss points that they notice learners had difficulty with.\n\n\n\n\n\n\n\n\nsequenceDiagram\n    box transparent Learners\n        actor Learner1\n        actor Learner2\n    end\n    actor Teacher\n    Teacher -&gt;&gt; GitHub: New branch for lesson\n    Teacher -&gt;&gt; GitHub: New lesson file\n    Teacher -&gt;&gt; GitHub: Add key points\n    Teacher -&gt;&gt; Learner1: Demonstrates tool\n    Learner1 -&gt;&gt; Teacher: Volunteers to write up keypoint 2\n    Learner2 -&gt;&gt; Teacher: Volunteers to write up keypoint 1\n    Learner1 -&gt;&gt; GitHub: Make branch from lesson branch\n    Learner1 -&gt;&gt; GitHub: Add notes for keypoint 2\n    Learner2 -&gt;&gt; GitHub: Add notes for keypoint 1\n    Learner1 -&gt;&gt; GitHub: Request Learner2 to review text\n    Learner2 -&gt;&gt; GitHub: Request Learner1 to review text\n    Learner1 -&gt;&gt; GitHub: Provide code review\n    Learner1 -&gt;&gt; GitHub: Update notes from review\n    Learner1 -&gt;&gt; Teacher: Request code review\n    Learner1 -&gt;&gt; GitHub: Update notes\n    Teacher -&gt;&gt; GitHub: Merges notes into lesson branch\n    Teacher -&gt;&gt; GitHub: Merges lesson branch into main\n    GitHub -&gt;&gt; GitHub: Automated website build"
   },
   {
-    "objectID": "gitpod/gitpod-intro.html#what-is-gitpod",
-    "href": "gitpod/gitpod-intro.html#what-is-gitpod",
-    "title": "5  Gitpod",
+    "objectID": "contributing.html#detailed-instructions",
+    "href": "contributing.html#detailed-instructions",
+    "title": "Contributing",
     "section": "",
-    "text": "Free plan (50 hours per month)\nPay-as-you-go\nCompany plan (custom)",
-    "crumbs": [
-      "Gitpod",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gitpod</span>"
-    ]
+    "text": "On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.\nClick on view all branches\nClick New branch, give it a name and select the branch source.\nFinally, click create branch\n\nYou also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.\nThis short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)\nThe teacher should create a folder under posts named using the date and topic, e.g., 2024-03-12-github-collaboration. Then inside that folder create an index.qmd with the following header.\n---\ntitle: \"Lesson title\"\nauthor: \"Lesson instructor\"\ndate: \"YYYY-MM-DD\"\ndate-modified: last-modified\ncategories: [ keywords ]\n---\nInclude a summary of the subject as the first paragraph. Then add level 2 headers of the key points to be taught. After the instructor has delivered the lesson, assign each key point to a person, and include their name in the document, and which learner will review.\n\n\n\n\nFork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.\nOn your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.\nTo edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.\nIf instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.\nAdd the file contents in edit mode.\nWhen finished, click “Commit changes…”\n\n\n\n\nAfter making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.\n\n\n\n\nnavigate to the top menu and click on Pull requests\nby default all open pull requests are listed, you can further filter down the list. e.g. via clicking on Reviews and afterwards select Awaiting review from you in the drop down menu. This shows then only PRs where you are tagged as reviewer.\nclick on a pull request of your choice\nthe following window has 4 tabs:\n\nConversation: gives an overview about the PR\nCommits: list all commits of the PR\nCheck:\nFiles changed: lists all files which were modified\n\nclick on the Files changed tab and go through the files and changes\n\nyou can comment on a line by hovering over a line and click on the plus symbol\nin case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines\nafterwards you can either:\n\nclick on the Add single comment button which makes your comment or suggestion immediately visible OR\n\nclick on the Start a review button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.\n\nwhen done with the full review click on the Finish your review button on the top right corner of the page:\n\nyou can comment on your review and choose one of the following options Comment, Approve, Request changes. Select the approprate option and click on Submit review.\n\n\n\n\n\n\n\nOnce you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.\nOn the right side panel, you should invite the teacher to review your pull request.\nThe teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.\n\n\n\n\n\nOnce both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.\nOnce the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues."
   },
   {
-    "objectID": "gitpod/gitpod-intro.html#how-to-login-to-gitpod",
-    "href": "gitpod/gitpod-intro.html#how-to-login-to-gitpod",
-    "title": "5  Gitpod",
-    "section": "5.2 How to login to Gitpod",
-    "text": "5.2 How to login to Gitpod\n\nGo to the Gitpod site.\nSelect your Git hosting service (e.g., GitHub), and authenticate.\nIf successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right.\nNow when you start a Gitpod environment you’ll be connected to your version control system.\n\n## How to start a Gitpod\nTo start a workspace, follow these steps:\n\nNavigate to your repository on GitHub, GitLab or Bitbucket.\nAdd gitpod.io/# before the URL address of your repository. This will create a new URL address that directs you to the Gitpod workspace setup page. On that page, you can make the following choices:\n\nThe source repository for which the gitpod workspace will be created.\nThe code editor.\nThe computing resources required for the workspace.\n\nAfter making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user’s working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer.\nAny changes to the files within that folder can be pushed to the repository using Git commands.\n\nNote: If you are editing a public Github public repository, Gitpod requires the “public_repo” permission to push changes. To do it, follow these steps:\n\nNavigate to gitpod.io.\nClick on your user icon\nClick “user settings”\nNavigate to “Git Providers”\nClick the actions icon on the GitHub provider\nClick “edit permissions”\nCheck “public_repo”\nClick “Update permissions”\nYou will be redirected to Github for authentication.\n\nAfter granting permissions, the user can push changes to the repository.",
-    "crumbs": [
-      "Gitpod",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gitpod</span>"
-    ]
-  },
-  {
-    "objectID": "gitpod/gitpod-intro.html#how-to-configure-gitpod",
-    "href": "gitpod/gitpod-intro.html#how-to-configure-gitpod",
-    "title": "5  Gitpod",
-    "section": "5.3 How to configure Gitpod",
-    "text": "5.3 How to configure Gitpod\n\nA gitpod workspace is configured mainly through the .gitpod.yml file at the root of your repository (e.g. github.com/user/repo/.gitpod.yml).\nThis file is read by Gitpod when the workspace is started, and can be used to specify the base workspace image, and a list of tasks that will be run when the workspace is started.\nBelow is the yml file we use in the Training-tech-shorts repo.\n\nimage: nfcore/gitpod:latest\n\ntasks:\n  - name: Update Nextflow\n    command: nextflow self-update\n  - name: Install Pixi\n    command: |\n      sudo chown gitpod -R /home/gitpod/\n      curl -fsSL https://pixi.sh/install.sh | bash\n      . /home/gitpod/.bash_profile\n  - name: Install Quarto\n    command: |\n      wget https://quarto.org/download/latest/quarto-linux-amd64.deb\n      sudo dpkg -i quarto-linux-amd64.deb\n      rm quarto-linux-amd64.deb\n      quarto check all\n\nThe image: section of the .gitpod.yml is used to specify the base workspace image, this can be a public or private docker image, or a Dockerfile (in this case the base image must be public).\n\n# public image\nimage: nfcore/gitpod:latest\n\n# local Dockerfile\nimage:\n    file: .gitpod.Dockerfile\n\nThe tasks: section of the .gitpod.yml is used to specify a list of tasks that will be run when the workspace is started. Each task should have a name: and a command: section. The command: section specifies one or more shell commands that will be run in the workspace.\n\ntasks:\n  - name: Update Nextflow\n    command: nextflow self-update\n\nIn order to execute multiple commands in a single task, you can use the | syntax to specify a block of shell commands, each in one line.\n\ntasks:\n  - name: Install Pixi\n    command: |\n      sudo chown gitpod -R /home/gitpod/\n      curl -fsSL https://pixi.sh/install.sh | bash\n      . /home/gitpod/.bash_profile\n\nOptionally, you can also add a ports: section to the .gitpod.yml file to specify a list of ports that should be opened by the workspace. This can be useful when hosting a web server or anything that needs to be accessed from outside the workspace.\n\nports:\n  - port: 8080\n    onOpen: open-preview",
-    "crumbs": [
-      "Gitpod",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gitpod</span>"
-    ]
-  },
-  {
-    "objectID": "gitpod/gitpod-intro.html#uses-for-gitpod",
-    "href": "gitpod/gitpod-intro.html#uses-for-gitpod",
-    "title": "5  Gitpod",
-    "section": "5.4 Uses for Gitpod",
-    "text": "5.4 Uses for Gitpod\n\nDemonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.\nDevelopment: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.\nExperimentation: The ephemeral nature of the environment, and its standardized tools make Gitpod excellent for testing code and sandbox experimentation.\nTraining: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements.",
-    "crumbs": [
-      "Gitpod",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Gitpod</span>"
-    ]
-  },
-  {
-    "objectID": "quarto/quarto-intro.html",
-    "href": "quarto/quarto-intro.html",
-    "title": "6  Introduction to Quarto",
+    "objectID": "posts/2024-03-12-github-collaboration/index.html",
+    "href": "posts/2024-03-12-github-collaboration/index.html",
+    "title": "Collaboration on Github",
     "section": "",
-    "text": "6.1 What is Quarto",
-    "crumbs": [
-      "Quarto",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Introduction to Quarto</span>"
-    ]
+    "text": "This section is a guide describing one method of collaborating on Github. We focus on the framework that we use to make reference material for future us and others new to the team."
   },
   {
-    "objectID": "quarto/quarto-intro.html#what-is-quarto",
-    "href": "quarto/quarto-intro.html#what-is-quarto",
-    "title": "6  Introduction to Quarto",
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#making-a-branch-teacher",
+    "href": "posts/2024-03-12-github-collaboration/index.html#making-a-branch-teacher",
+    "title": "Collaboration on Github",
+    "section": "Making a branch (Teacher)",
+    "text": "Making a branch (Teacher)\n\nOn the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.\nClick on view all branches\nClick New branch, give it a name and select the branch source.\nFinally, click create branch\n\nYou also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.\nThis short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)"
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#making-changes-learner",
+    "href": "posts/2024-03-12-github-collaboration/index.html#making-changes-learner",
+    "title": "Collaboration on Github",
+    "section": "Making changes (Learner)",
+    "text": "Making changes (Learner)\n\nFork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.\nOn your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.\nTo edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.\nIf instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.\nAdd the file contents in edit mode.\nWhen finished, click “Commit changes…”"
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#making-a-draft-pull-request-learner",
+    "href": "posts/2024-03-12-github-collaboration/index.html#making-a-draft-pull-request-learner",
+    "title": "Collaboration on Github",
+    "section": "Making a draft pull request (Learner)",
+    "text": "Making a draft pull request (Learner)\nAfter making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR."
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#code-review-review-partner",
+    "href": "posts/2024-03-12-github-collaboration/index.html#code-review-review-partner",
+    "title": "Collaboration on Github",
+    "section": "Code review (Review partner)",
+    "text": "Code review (Review partner)\n\nnavigate to the top menu and click on Pull requests\nby default all open pull requests are listed, you can further filter down the list. e.g. via clicking on Reviews and afterwards select Awaiting review from you in the drop down menu. This shows then only PRs where you are tagged as reviewer.\nclick on a pull request of your choice\nthe following window has 4 tabs:\n\nConversation: gives an overview about the PR\nCommits: list all commits of the PR\nCheck:\nFiles changed: lists all files which were modified\n\nclick on the Files changed tab and go through the files and changes\n\nyou can comment on a line by hovering over a line and click on the plus symbol\nin case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines\nafterwards you can either:\n\nclick on the Add single comment button which makes your comment or suggestion immediately visible OR\n\nclick on the Start a review button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.\n\nwhen done with the full review click on the Finish your review button on the top right corner of the page:\n\nyou can comment on your review and choose one of the following options Comment, Approve, Request changes. Select the approprate option and click on Submit review."
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#making-a-ready-for-review-pull-request-learner",
+    "href": "posts/2024-03-12-github-collaboration/index.html#making-a-ready-for-review-pull-request-learner",
+    "title": "Collaboration on Github",
+    "section": "Making a ready for review pull request (Learner)",
+    "text": "Making a ready for review pull request (Learner)\n\nOnce you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.\nOn the right side panel, you should invite the teacher to review your pull request.\nThe teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did."
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#merges-pull-requests-teacher",
+    "href": "posts/2024-03-12-github-collaboration/index.html#merges-pull-requests-teacher",
+    "title": "Collaboration on Github",
+    "section": "Merges pull requests (Teacher)",
+    "text": "Merges pull requests (Teacher)\n\nOnce both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.\nOnce the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues."
+  },
+  {
+    "objectID": "posts/2024-04-16-quarto-intro/index.html",
+    "href": "posts/2024-04-16-quarto-intro/index.html",
+    "title": "Introduction to Quarto",
     "section": "",
-    "text": "6.1.1 The Quarto CLI\n\nIn order to use Quarto you need to install Quarto first. The easiest way is to get the package for your desired platform directly from https://quarto.org/docs/get-started/. If you need the most recent version you can also get the source code from the quarto-cli git repository.\nAfter Quarto is installed on your system you can get an overview of all subcommonds when you type quarto help (followed by pressing ENTER) in a terminal:\n\n  Usage:   quarto \n  Version: 1.4.553\n\n  Description:\n\n    Quarto CLI\n\n  Options:\n\n    -h, --help     - Show this help.                            \n    -V, --version  - Show the version number for this program.  \n\n  Commands:\n\n    render     [input] [args...]     - Render files or projects to various document types.\n    preview    [file] [args...]      - Render and preview a document or website project.  \n    serve      [input]               - Serve a Shiny interactive document.                \n    create     [type] [commands...]  - Create a Quarto project or extension               \n    use        &lt;type&gt; [target]       - Automate document or project setup tasks.          \n    add        &lt;extension&gt;           - Add an extension to this folder or project         \n    update     [target...]           - Updates an extension or global dependency.         \n    remove     [target...]           - Removes an extension.                              \n    convert    &lt;input&gt;               - Convert documents to alternate representations.    \n    pandoc     [args...]             - Run the version of Pandoc embedded within Quarto.  \n    typst      [args...]             - Run the version of Typst embedded within Quarto.   \n    run        [script] [args...]    - Run a TypeScript, R, Python, or Lua script.        \n    install    [target...]           - Installs a global dependency (TinyTex or Chromium).\n    uninstall  [tool]                - Removes an extension.                              \n    tools                            - Display the status of Quarto installed dependencies\n    publish    [provider] [path]     - Publish a document or project to a provider.       \n    check      [target]              - Verify correct functioning of Quarto installation. \n    help       [command]             - Show this help or the help of a sub-command.       \nThere are many Quarto subcommands available. You can get more details about each subcommand when you type quarto &lt;SUBCOMMAND&gt; help in the terminal: e.g. quarto render help provides detailed information about rendering files or projects to various document types - including some usage examples at the end.",
-    "crumbs": [
-      "Quarto",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Introduction to Quarto</span>"
-    ]
+    "text": "In order to use Quarto you need to install Quarto first. The easiest way is to get the package for your desired platform directly from https://quarto.org/docs/get-started/. If you need the most recent version you can also get the source code from the quarto-cli git repository.\nAfter Quarto is installed on your system you can get an overview of all subcommonds when you type quarto help (followed by pressing ENTER) in a terminal:\n\n  Usage:   quarto \n  Version: 1.4.553\n\n  Description:\n\n    Quarto CLI\n\n  Options:\n\n    -h, --help     - Show this help.                            \n    -V, --version  - Show the version number for this program.  \n\n  Commands:\n\n    render     [input] [args...]     - Render files or projects to various document types.\n    preview    [file] [args...]      - Render and preview a document or website project.  \n    serve      [input]               - Serve a Shiny interactive document.                \n    create     [type] [commands...]  - Create a Quarto project or extension               \n    use        &lt;type&gt; [target]       - Automate document or project setup tasks.          \n    add        &lt;extension&gt;           - Add an extension to this folder or project         \n    update     [target...]           - Updates an extension or global dependency.         \n    remove     [target...]           - Removes an extension.                              \n    convert    &lt;input&gt;               - Convert documents to alternate representations.    \n    pandoc     [args...]             - Run the version of Pandoc embedded within Quarto.  \n    typst      [args...]             - Run the version of Typst embedded within Quarto.   \n    run        [script] [args...]    - Run a TypeScript, R, Python, or Lua script.        \n    install    [target...]           - Installs a global dependency (TinyTex or Chromium).\n    uninstall  [tool]                - Removes an extension.                              \n    tools                            - Display the status of Quarto installed dependencies\n    publish    [provider] [path]     - Publish a document or project to a provider.       \n    check      [target]              - Verify correct functioning of Quarto installation. \n    help       [command]             - Show this help or the help of a sub-command.       \nThere are many Quarto subcommands available. You can get more details about each subcommand when you type quarto &lt;SUBCOMMAND&gt; help in the terminal: e.g. quarto render help provides detailed information about rendering files or projects to various document types - including some usage examples at the end."
   },
   {
-    "objectID": "quarto/quarto-intro.html#authoring",
-    "href": "quarto/quarto-intro.html#authoring",
-    "title": "6  Introduction to Quarto",
-    "section": "6.2 Authoring",
-    "text": "6.2 Authoring\n\n6.2.1 Render vs preview\nThe quarto render and quarto preview commands are used to generate output from a Quarto (.qmd) document.\nThe quarto render command generates output in all formats specified in your YAML header (e.g., pdf, html, word) or in your command line with the option --to, while the quarto preview command only generates output in a format suitable for viewing in a web browser.\nIn a typical workflow, you would use the quarto preview command to view the output of your document as you are working on it.\nquarto preview my.qmd\nThis command will start a local web server and open a web browser to view the output of the document. The web server will automatically update the output as you make changes to the document.\nOnce you are ready to produce your final output you can use the quarto render command.\nquarto render my.qmd",
-    "crumbs": [
-      "Quarto",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Introduction to Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "quarto/quarto-intro.html#computations",
-    "href": "quarto/quarto-intro.html#computations",
-    "title": "6  Introduction to Quarto",
-    "section": "6.3 Computations",
-    "text": "6.3 Computations\nQuarto lets you perform computations within your notebook. This is typically done using code blocks denoted by three backticks followed by the language you’re using in curly brackets.\n```{python}\n1 + 1\n```\nQuarto supports computations in several languages:\n\nPython\nR\nJulia\nObservable\n\nAdditional languages can also be supported through other Jupyter kernels (see Engines below). See this page for a list of Jupyter kernels.\nThe languages and packages used in your computations must be available in your render environment, and are often installed through other means, for example using conda or a container platform.\nLoaded packages and variables defined within a code block are also accessible from other code blocks, including inline code blocks. For example, here we create a figure within a div (:::) and reference the x variable in both the figure caption and text body.\n:::{#fig-plot-alt}\n\n```{r}\nx &lt;- 1:10\ny &lt;- x^2\n\nplot(x, y)\n```\n\nA plot of $x$ against it's square (n = `{r} length(x)`).\n:::\n\nThis paragraph refers to @fig-plot-alt for a plot of $y=x^2$ \nbased on `{r} length(x)` points.\nThe output of computations can be controlled using execution options. These can be set for the whole document in the yaml front-matter at the top of the document, e.g.,\n---\ntitle: My Experiment\nexecute:\n  echo: false\n---\nAlternatively, execution options can be specified within each code block, e.g.,\n```{python}\n#| echo: false\n#| output: asis\nprint(\"\"\"\n## Introduction\n\nThis is Markdown text.\n\"\"\")\n```\nComputations can also be used to dynamically generate Markdown or HTML content by using the output format asis. For example, document sections can be dynamically generated from an input file.",
-    "crumbs": [
-      "Quarto",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Introduction to Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "quarto/quarto-intro.html#document-types",
-    "href": "quarto/quarto-intro.html#document-types",
-    "title": "6  Introduction to Quarto",
-    "section": "6.4 Document types",
-    "text": "6.4 Document types\nQuarto can generate a number of document output types, including PDF, HTML, and MS Word. The output format can be set on the command line via the --to option, or by setting the format option in the yaml configuration. For instance, the following header configuration will generate PDF output:\n---\nformat: pdf\n---\n\n6.4.1 Presentation\nIn addition to regular document formats, there is support for formats that will generate presentations, including revealjs (HTML), pptx (PowerPoint) and beamer (LaTeX/PDF).",
-    "crumbs": [
-      "Quarto",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Introduction to Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "quarto/quarto-confluence.html",
-    "href": "quarto/quarto-confluence.html",
-    "title": "7  Quarto to Confluence introduction and examples",
+    "objectID": "posts/2024-04-16-quarto-intro/index.html#what-is-quarto",
+    "href": "posts/2024-04-16-quarto-intro/index.html#what-is-quarto",
+    "title": "Introduction to Quarto",
     "section": "",
-    "text": "7.1 Introduction\nQuarto can be used to publish single pages or entire Quarto projects to Confluence.\nAs of Quarto version 1.3 there is support for publishing documents to Confluence. This brief introduction outlines the basic procedure.",
-    "crumbs": [
-      "Quarto",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto to Confluence introduction and examples</span>"
-    ]
+    "text": "In order to use Quarto you need to install Quarto first. The easiest way is to get the package for your desired platform directly from https://quarto.org/docs/get-started/. If you need the most recent version you can also get the source code from the quarto-cli git repository.\nAfter Quarto is installed on your system you can get an overview of all subcommonds when you type quarto help (followed by pressing ENTER) in a terminal:\n\n  Usage:   quarto \n  Version: 1.4.553\n\n  Description:\n\n    Quarto CLI\n\n  Options:\n\n    -h, --help     - Show this help.                            \n    -V, --version  - Show the version number for this program.  \n\n  Commands:\n\n    render     [input] [args...]     - Render files or projects to various document types.\n    preview    [file] [args...]      - Render and preview a document or website project.  \n    serve      [input]               - Serve a Shiny interactive document.                \n    create     [type] [commands...]  - Create a Quarto project or extension               \n    use        &lt;type&gt; [target]       - Automate document or project setup tasks.          \n    add        &lt;extension&gt;           - Add an extension to this folder or project         \n    update     [target...]           - Updates an extension or global dependency.         \n    remove     [target...]           - Removes an extension.                              \n    convert    &lt;input&gt;               - Convert documents to alternate representations.    \n    pandoc     [args...]             - Run the version of Pandoc embedded within Quarto.  \n    typst      [args...]             - Run the version of Typst embedded within Quarto.   \n    run        [script] [args...]    - Run a TypeScript, R, Python, or Lua script.        \n    install    [target...]           - Installs a global dependency (TinyTex or Chromium).\n    uninstall  [tool]                - Removes an extension.                              \n    tools                            - Display the status of Quarto installed dependencies\n    publish    [provider] [path]     - Publish a document or project to a provider.       \n    check      [target]              - Verify correct functioning of Quarto installation. \n    help       [command]             - Show this help or the help of a sub-command.       \nThere are many Quarto subcommands available. You can get more details about each subcommand when you type quarto &lt;SUBCOMMAND&gt; help in the terminal: e.g. quarto render help provides detailed information about rendering files or projects to various document types - including some usage examples at the end."
   },
   {
-    "objectID": "quarto/quarto-confluence.html#introduction",
-    "href": "quarto/quarto-confluence.html#introduction",
-    "title": "7  Quarto to Confluence introduction and examples",
+    "objectID": "posts/2024-04-16-quarto-intro/index.html#authoring",
+    "href": "posts/2024-04-16-quarto-intro/index.html#authoring",
+    "title": "Introduction to Quarto",
+    "section": "Authoring",
+    "text": "Authoring\n\nRender vs preview\nThe quarto render and quarto preview commands are used to generate output from a Quarto (.qmd) document.\nThe quarto render command generates output in all formats specified in your YAML header (e.g., pdf, html, word) or in your command line with the option --to, while the quarto preview command only generates output in a format suitable for viewing in a web browser.\nIn a typical workflow, you would use the quarto preview command to view the output of your document as you are working on it.\nquarto preview my.qmd\nThis command will start a local web server and open a web browser to view the output of the document. The web server will automatically update the output as you make changes to the document.\nOnce you are ready to produce your final output you can use the quarto render command.\nquarto render my.qmd"
+  },
+  {
+    "objectID": "posts/2024-04-16-quarto-intro/index.html#computations",
+    "href": "posts/2024-04-16-quarto-intro/index.html#computations",
+    "title": "Introduction to Quarto",
+    "section": "Computations",
+    "text": "Computations\nQuarto lets you perform computations within your notebook. This is typically done using code blocks denoted by three backticks followed by the language you’re using in curly brackets.\n```{python}\n1 + 1\n```\nQuarto supports computations in several languages:\n\nPython\nR\nJulia\nObservable\n\nAdditional languages can also be supported through other Jupyter kernels (see Engines below). See this page for a list of Jupyter kernels.\nThe languages and packages used in your computations must be available in your render environment, and are often installed through other means, for example using conda or a container platform.\nLoaded packages and variables defined within a code block are also accessible from other code blocks, including inline code blocks. For example, here we create a figure within a div (:::) and reference the x variable in both the figure caption and text body.\n:::{#fig-plot-alt}\n\n```{r}\nx &lt;- 1:10\ny &lt;- x^2\n\nplot(x, y)\n```\n\nA plot of $x$ against it's square (n = `{r} length(x)`).\n:::\n\nThis paragraph refers to @fig-plot-alt for a plot of $y=x^2$ \nbased on `{r} length(x)` points.\nThe output of computations can be controlled using execution options. These can be set for the whole document in the yaml front-matter at the top of the document, e.g.,\n---\ntitle: My Experiment\nexecute:\n  echo: false\n---\nAlternatively, execution options can be specified within each code block, e.g.,\n```{python}\n#| echo: false\n#| output: asis\nprint(\"\"\"\n## Introduction\n\nThis is Markdown text.\n\"\"\")\n```\nComputations can also be used to dynamically generate Markdown or HTML content by using the output format asis. For example, document sections can be dynamically generated from an input file."
+  },
+  {
+    "objectID": "posts/2024-04-16-quarto-intro/index.html#document-types",
+    "href": "posts/2024-04-16-quarto-intro/index.html#document-types",
+    "title": "Introduction to Quarto",
+    "section": "Document types",
+    "text": "Document types\nQuarto can generate a number of document output types, including PDF, HTML, and MS Word. The output format can be set on the command line via the --to option, or by setting the format option in the yaml configuration. For instance, the following header configuration will generate PDF output:\n---\nformat: pdf\n---\n\nPresentation\nIn addition to regular document formats, there is support for formats that will generate presentations, including revealjs (HTML), pptx (PowerPoint) and beamer (LaTeX/PDF)."
+  },
+  {
+    "objectID": "posts/2024-05-14-quarto-to-confluence/index.html",
+    "href": "posts/2024-05-14-quarto-to-confluence/index.html",
+    "title": "Quarto to Confluence",
     "section": "",
-    "text": "7.1.1 Preparations\n\n7.1.1.1 Atlassian token\nBefore publishing a document, you need to create an atlassian wiki token. Save the token as you will be prompted for it upon publication.\n\n\n\n7.1.2 The Quarto document\nTo make a document a target for publication in confluence, add the confluence-html document format to the header:\n---\ntitle: Confluence Demo\nformat: confluence-html\n---\n\n## Overview\n\nWrite your content in Quarto documents and publish to Confluence.\n\n\n7.1.3 Publication from local client\nThis section describes how to render and publish documents from your local client.\n\n7.1.3.1 Render and preview\nAssuming the document name is index.qmd, you can first render the document locally to make sure everything looks ok.\nquarto render index.qmd\nThe preview command lets you modify the document and view re-rendered changes in real time:\nquarto preview index.qmd --port 8888\nIt is recommended you manually assign a port number, else Quarto will pick a random number for you.\n\n\n7.1.3.2 Publish\nTo publish simply run\nquarto publish index.qmd\nUpon first publication, you will be prompted for your Confluence domain, email, login token and publication destination. For SciLifeLab, the domain is https://scilifelab.atlassian.net. The destination is chosen by navigating to the wiki page of interest and pasting it in at the prompt. The document will then be published relative to the chosen wiki page.\n\n\n\n7.1.4 Publishing from UPPMAX\nTechnically, it should be possible to install Quarto on Uppmax from a Quarto package file. However, Quarto relies on GLIBC version&gt;=2.18 which is currently unavailable on UPPMAX. A workaround is to generate an Apptainer image from which to run Quarto. This requires packaging Quarto with necessary dependencies, including R packages and a recent TeX distribution.\n\n7.1.4.1 Render\nWith an Apptainer image /path/to/quarto.simg, the following code will render the document, optionally setting the execution directory:\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto render index.qmd --execute-dir $(pwd)'\n\n\n7.1.4.2 Preview\nPreviewing could be done by firing up a browser on UPPMAX, but a better alternative is to employ port forwarding to display the output on your client. Run preview as follows:\napptainer exec --env PATH=/conda_env/bin/:$PATH \\\n          $QUARTO_IMAGE quarto preview --no-browser --port 8888 \\\n          --execute-dir $(pwd)/..\nAssuming you are on rackham1, on your client run\nssh -f -N -L 8888:localhost:8888 rackham1.uppmax.uu.se\nto setup port forwarding. Now you can preview your Quarto document by navigating to https://localhost:8888.\n\n\n7.1.4.3 Previewing from a compute node\nSome Quarto documents run heavy computations and should in these cases be rendered/previewed from a compute node. However, this would require setting up a double port forward. Fortunately, there exists an SSH configuration called JumpHost that eliminates this step.\nEdit your .ssh/config file to contain the following:\nHost r*.uppmax.uu.se\n    User username\n    ProxyJump rackham1.uppmax.uu.se\nThis allows you to access a compute node directly from your client. For instance, if you are running a job on r111, run the preview command as above, and change the port forward command to\nssh -f -N -L 8888:localhost:8888 r111.uppmax.uu.se\n\n\n7.1.4.4 Publish\nPublishing from UPPMAX is done by running\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto publish index.qmd --execute-dir $(pwd)'",
-    "crumbs": [
-      "Quarto",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto to Confluence introduction and examples</span>"
-    ]
+    "text": "As of Quarto version 1.3 there is support for publishing documents to Confluence. Quarto can be used to publish single pages or entire Quarto projects to Confluence.\n\n\n\n\nBefore publishing a document, you need to create an atlassian wiki token. Save the token as you will be prompted for it upon publication.\n\n\n\n\nTo make a document a target for publication in confluence, add the confluence-html document format to the header:\n---\ntitle: Confluence Demo\nformat: confluence-html\n---\n\n## Overview\n\nWrite your content in Quarto documents and publish to Confluence.\n\n\n\nThis section describes how to render and publish documents from your local client.\n\n\nAssuming the document name is index.qmd, you can first render the document locally to make sure everything looks ok.\nquarto render index.qmd\nThe preview command lets you modify the document and view re-rendered changes in real time:\nquarto preview index.qmd --port 8888\nIt is recommended you manually assign a port number, else Quarto will pick a random number for you.\n\n\n\nTo publish simply run\nquarto publish index.qmd\nUpon first publication, you will be prompted for your Confluence domain, email, login token and publication destination. For SciLifeLab, the domain is https://scilifelab.atlassian.net. The destination is chosen by navigating to the wiki page of interest and pasting it in at the prompt. The document will then be published relative to the chosen wiki page.\n\n\n\n\nTechnically, it should be possible to install Quarto on Uppmax from a Quarto package file. However, Quarto relies on GLIBC version&gt;=2.18 which is currently unavailable on UPPMAX. A workaround is to generate an Apptainer image from which to run Quarto. This requires packaging Quarto with necessary dependencies, including R packages and a recent TeX distribution.\n\n\nWith an Apptainer image /path/to/quarto.simg, the following code will render the document, optionally setting the execution directory:\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto render index.qmd --execute-dir $(pwd)'\n\n\n\nPreviewing could be done by firing up a browser on UPPMAX, but a better alternative is to employ port forwarding to display the output on your client. Run preview as follows:\napptainer exec --env PATH=/conda_env/bin/:$PATH \\\n          $QUARTO_IMAGE quarto preview --no-browser --port 8888 \\\n          --execute-dir $(pwd)/..\nAssuming you are on rackham1, on your client run\nssh -f -N -L 8888:localhost:8888 rackham1.uppmax.uu.se\nto setup port forwarding. Now you can preview your Quarto document by navigating to https://localhost:8888.\n\n\n\nSome Quarto documents run heavy computations and should in these cases be rendered/previewed from a compute node. However, this would require setting up a double port forward. Fortunately, there exists an SSH configuration called JumpHost that eliminates this step.\nEdit your .ssh/config file to contain the following:\nHost r*.uppmax.uu.se\n    User username\n    ProxyJump rackham1.uppmax.uu.se\nThis allows you to access a compute node directly from your client. For instance, if you are running a job on r111, run the preview command as above, and change the port forward command to\nssh -f -N -L 8888:localhost:8888 r111.uppmax.uu.se\n\n\n\nPublishing from UPPMAX is done by running\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto publish index.qmd --execute-dir $(pwd)'"
   },
   {
-    "objectID": "quarto/quarto-confluence.html#examples",
-    "href": "quarto/quarto-confluence.html#examples",
-    "title": "7  Quarto to Confluence introduction and examples",
-    "section": "7.2 Examples",
-    "text": "7.2 Examples\n\n\nExample upload instructions\n\nUse this link when asked where to put you page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899836938/Quarto+examples\nGive the page a name on this format with your name to make it unique: “Quarto_example-Tomas”\n\n\n7.2.1 Publishing Quarto projects as Confluence pages\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh\nQuarto project code: https://github.com/mahesh-panchal/quarto-confluence-project\n\nThe aim was to test a varied selection of quarto markup and interactive elements as well as raw output to and see what is supported by the Quarto to Confluence conversion.\nPixi was used to create the quarto environment.\npixi init -c conda-forge -c bioconda\npixi add quarto jupyter ipyleaflet plotly pandas statsmodels jupyter-cache\nQuarto was then used to create a confluence project.\npixi shell\nquarto create project confluence .\nThis was then published to Confluence using:\nquarto publish confluence\nwhere I was asked to provide the domain https://scilifelab.atlassian.net, followed by my username, an API token (A link to the page was provided to create one), and finally the url path to where I wanted to publish https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh. As I was unsure if I would overwrite the work of others I created this page first after quarto indicated the folder didn’t exist.\nI was also instructed by quarto to\nquarto install chromium\nAt this point Quarto began rendering, but hung at the second page. The issue was localized to creating the mermaid diagram. After converting the mermaid diagram to a code block {.mermaid} the project successfully published to confluence.\nSeveral things didn’t render although might be achievable in other ways:\n\nMermaid diagram rendering failed locally and didn’t upload as an image.\nInteractive plotting failed. Perhaps this needs to be embedded as an attachment.\nInteractive map did not produce any kind of map, even a static image.\nReferences did not work.\nColumn layout did not work.\n\n\n\n7.2.2 Quarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2901409802/Quarto+example+-+Verena\nQuarto code: quarto/quarto-to-confluence/quarto-example-verena\n\n\n\n7.2.3 Quarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2900295730/cormac\nQuarto code: quarto/quarto-to-confluence/quarto-example-cormac\n\n\n\n7.2.4 Quarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899869712/Quarto+example+-+Tomas\nQuarto code:",
-    "crumbs": [
-      "Quarto",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto to Confluence introduction and examples</span>"
-    ]
+    "objectID": "posts/2024-05-14-quarto-to-confluence/index.html#introduction",
+    "href": "posts/2024-05-14-quarto-to-confluence/index.html#introduction",
+    "title": "Quarto to Confluence",
+    "section": "",
+    "text": "As of Quarto version 1.3 there is support for publishing documents to Confluence. Quarto can be used to publish single pages or entire Quarto projects to Confluence.\n\n\n\n\nBefore publishing a document, you need to create an atlassian wiki token. Save the token as you will be prompted for it upon publication.\n\n\n\n\nTo make a document a target for publication in confluence, add the confluence-html document format to the header:\n---\ntitle: Confluence Demo\nformat: confluence-html\n---\n\n## Overview\n\nWrite your content in Quarto documents and publish to Confluence.\n\n\n\nThis section describes how to render and publish documents from your local client.\n\n\nAssuming the document name is index.qmd, you can first render the document locally to make sure everything looks ok.\nquarto render index.qmd\nThe preview command lets you modify the document and view re-rendered changes in real time:\nquarto preview index.qmd --port 8888\nIt is recommended you manually assign a port number, else Quarto will pick a random number for you.\n\n\n\nTo publish simply run\nquarto publish index.qmd\nUpon first publication, you will be prompted for your Confluence domain, email, login token and publication destination. For SciLifeLab, the domain is https://scilifelab.atlassian.net. The destination is chosen by navigating to the wiki page of interest and pasting it in at the prompt. The document will then be published relative to the chosen wiki page.\n\n\n\n\nTechnically, it should be possible to install Quarto on Uppmax from a Quarto package file. However, Quarto relies on GLIBC version&gt;=2.18 which is currently unavailable on UPPMAX. A workaround is to generate an Apptainer image from which to run Quarto. This requires packaging Quarto with necessary dependencies, including R packages and a recent TeX distribution.\n\n\nWith an Apptainer image /path/to/quarto.simg, the following code will render the document, optionally setting the execution directory:\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto render index.qmd --execute-dir $(pwd)'\n\n\n\nPreviewing could be done by firing up a browser on UPPMAX, but a better alternative is to employ port forwarding to display the output on your client. Run preview as follows:\napptainer exec --env PATH=/conda_env/bin/:$PATH \\\n          $QUARTO_IMAGE quarto preview --no-browser --port 8888 \\\n          --execute-dir $(pwd)/..\nAssuming you are on rackham1, on your client run\nssh -f -N -L 8888:localhost:8888 rackham1.uppmax.uu.se\nto setup port forwarding. Now you can preview your Quarto document by navigating to https://localhost:8888.\n\n\n\nSome Quarto documents run heavy computations and should in these cases be rendered/previewed from a compute node. However, this would require setting up a double port forward. Fortunately, there exists an SSH configuration called JumpHost that eliminates this step.\nEdit your .ssh/config file to contain the following:\nHost r*.uppmax.uu.se\n    User username\n    ProxyJump rackham1.uppmax.uu.se\nThis allows you to access a compute node directly from your client. For instance, if you are running a job on r111, run the preview command as above, and change the port forward command to\nssh -f -N -L 8888:localhost:8888 r111.uppmax.uu.se\n\n\n\nPublishing from UPPMAX is done by running\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto publish index.qmd --execute-dir $(pwd)'"
+  },
+  {
+    "objectID": "posts/2024-05-14-quarto-to-confluence/index.html#examples",
+    "href": "posts/2024-05-14-quarto-to-confluence/index.html#examples",
+    "title": "Quarto to Confluence",
+    "section": "Examples",
+    "text": "Examples\n\n\nExample upload instructions\n\nUse this link when asked where to put you page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899836938/Quarto+examples\nGive the page a name on this format with your name to make it unique: “Quarto_example-Tomas”\n\n\nPublishing Quarto projects as Confluence pages\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh\nQuarto project code: https://github.com/mahesh-panchal/quarto-confluence-project\n\nThe aim was to test a varied selection of quarto markup and interactive elements as well as raw output to and see what is supported by the Quarto to Confluence conversion.\nPixi was used to create the quarto environment.\npixi init -c conda-forge -c bioconda\npixi add quarto jupyter ipyleaflet plotly pandas statsmodels jupyter-cache\nQuarto was then used to create a confluence project.\npixi shell\nquarto create project confluence .\nThis was then published to Confluence using:\nquarto publish confluence\nwhere I was asked to provide the domain https://scilifelab.atlassian.net, followed by my username, an API token (A link to the page was provided to create one), and finally the url path to where I wanted to publish https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh. As I was unsure if I would overwrite the work of others I created this page first after quarto indicated the folder didn’t exist.\nI was also instructed by quarto to\nquarto install chromium\nAt this point Quarto began rendering, but hung at the second page. The issue was localized to creating the mermaid diagram. After converting the mermaid diagram to a code block {.mermaid} the project successfully published to confluence.\nSeveral things didn’t render although might be achievable in other ways:\n\nMermaid diagram rendering failed locally and didn’t upload as an image.\nInteractive plotting failed. Perhaps this needs to be embedded as an attachment.\nInteractive map did not produce any kind of map, even a static image.\nReferences did not work.\nColumn layout did not work.\n\n\n\nQuarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2901409802/Quarto+example+-+Verena\nQuarto code: quarto-to-confluence/quarto-example-verena\n\n\n\nQuarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2900295730/cormac\nQuarto code: quarto-to-confluence/quarto-example-cormac\n\n\n\nQuarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899869712/Quarto+example+-+Tomas\nQuarto code:"
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html",
+    "href": "posts/2025-01-21-pixi-intro/index.html",
+    "title": "Introduction to Pixi",
+    "section": "",
+    "text": "Pixi is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.\n\n\nPixi is somehwat compatible with Conda. You can:\n\nInstall packages using the same Conda channels (e.g., conda-forge, bioconda).\nInitialise project environments using existing Conda environment files.\n\nHowever, you cannot activate a conda environment using Pixi, or vice-versa.\n\n\n\nIn Pixi, the environment configuration file (.pixi.toml) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a pixi.lock file is also written. This should also be commited to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#why-pixi",
+    "href": "posts/2025-01-21-pixi-intro/index.html#why-pixi",
+    "title": "Introduction to Pixi",
+    "section": "",
+    "text": "Pixi is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.\n\n\nPixi is somehwat compatible with Conda. You can:\n\nInstall packages using the same Conda channels (e.g., conda-forge, bioconda).\nInitialise project environments using existing Conda environment files.\n\nHowever, you cannot activate a conda environment using Pixi, or vice-versa.\n\n\n\nIn Pixi, the environment configuration file (.pixi.toml) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a pixi.lock file is also written. This should also be commited to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#getting-started",
+    "href": "posts/2025-01-21-pixi-intro/index.html#getting-started",
+    "title": "Introduction to Pixi",
+    "section": "Getting Started",
+    "text": "Getting Started\n\nInstallation\n\nInstall Pixi and add it to your shell’s configuration (e.g., .bashrc or .zshrc).\n\ncurl -fsSL https://pixi.sh/install.sh | bash\n\nInitialize a Pixi environment in your project:\n\npixi init -c conda-forge -c bioconda -p linux-64 -p osx-arm64 -p osx-64\nHere:\n\n-c specifies the channels to use (e.g., conda-forge, bioconda)\n-p sets the platforms (linux-64: Intel Linux, osx-64: Intel MacOS, osx-arm64: ARM MacOS)\n\nBy default, Pixi will set the environment for your platform (e.g., linux-64), but you can specify additional platforms as needed.\nThe pixi initcommand will create two files:\n\n.pixi.toml: Specifies the environment configuration.\n.pixi.lock: Locks down the specific package versions for reproducibility.\n\nYou should commit both files to your version control system to share the exact environment setup with collaborators and increase reproducibility.\n\n\nAdding Packages\nYou can add packages to your environment using the pixi add command:\npixi add bwa samtools\nYou can add Python packages from PyPI using Pixi:\npixi add python\npixi add --pypi multiqc\nAlternatively, you can directly modify the .pixi.toml file in your project directory:\nUnder [dependencies], or platform specific dependencies (such as [target.linux-64.dependencies]) you can add a line for each package you want to include nextflow = \"24.10.4.*\"for example."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#managing-environments",
+    "href": "posts/2025-01-21-pixi-intro/index.html#managing-environments",
+    "title": "Introduction to Pixi",
+    "section": "Managing Environments",
+    "text": "Managing Environments\n\nFiles in the Directory\nWhen you use Pixi, it creates a .pixi folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder, and it will be recreated from the pixi.lock file in your project, the next time you use the environment.\nThe command\npixi clean\ndeletes the pixi environment binaries, and the command\npixi clean cache\ndeletes the package archives that were downloaded and unpacked to create the environment.\n\n\nEnvironment features\nUnlike Conda, in which you can define multiple global environments, Pixi handles multi-environment projects in a different way. Packages are installed into Features, which in turn define an Environment. Features are isolated from each other, helping to avoid version clashes between tools. See Pixi docs - Multi Environment for more on defining multiple environments in a TOML."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#tasks-in-pixi",
+    "href": "posts/2025-01-21-pixi-intro/index.html#tasks-in-pixi",
+    "title": "Introduction to Pixi",
+    "section": "Tasks in Pixi",
+    "text": "Tasks in Pixi\nIn addtion to being a package manager, Pixi allows you to define and run tasks directly in the .pixi.toml file. For example:\n[tasks]\nname-of-task = \"nextflow run main.nf -profile PDC\"\nOne can also add tasks via the command line:\npixi task add hello python hello_world.py\nSee Pixi Tasks for more information\n\nTask Features\nTasks can be combined or run conditionally. The example in the documentation is to specify that an application should be complied before being run. The command depends-oncan be used here. With this one can chain tasks for complex workflows."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#working-with-the-shell",
+    "href": "posts/2025-01-21-pixi-intro/index.html#working-with-the-shell",
+    "title": "Introduction to Pixi",
+    "section": "Working with the Shell",
+    "text": "Working with the Shell\nPixi provides a shell environment based on the Deno shell. Many basic Bash commands still work, allowing for:\n\nChaining tools.\nCommand substitution.\n\nSee Advanced Tasks for a more detailed description about the Deno shell supported features.\n\nActivating the Environment\nTo activate the environment:\npixi shell\nTo exit an environment, use exit:\nexit\nwhich also saves your command history."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#advanced-features",
+    "href": "posts/2025-01-21-pixi-intro/index.html#advanced-features",
+    "title": "Introduction to Pixi",
+    "section": "Advanced Features",
+    "text": "Advanced Features\n\nIntel emulation on ARM Macs\nAlthough packages are increasingly being built for ARM architecture CPUS, not all tools are built for osx-arm64. However, they may have been built for osx-64 (i.e., intel architecture CPUS), in addition to linux-64. MacOS includes the tool Rosetta, which can be used to emulate intel on arm Macs, at the cost of performance.\nBy supporting only linux-64 and osx-64 as platforms, Pixi will automatically run the tools using Rosetta emulation on Mac ARM computers.\npixi init \\\n  --channel \"conda-forge\" \\\n  --channel \"bioconda\" \\\n  --platform \"linux-64\" \\\n  --platform \"osx-64\""
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#additional-commands",
+    "href": "posts/2025-01-21-pixi-intro/index.html#additional-commands",
+    "title": "Introduction to Pixi",
+    "section": "Additional Commands",
+    "text": "Additional Commands\n\nUpdating Pixi\nTo update Pixi:\npixi self-update\n\n\nCleaning the cache\nTo clean the cache:\npixi clean cache\n\n\nPackage search\nPixi can search for the latest version of a package, and provide detailed information about using:\npixi search &lt;package_name&gt;\nHowever, unlike Conda, it does not list all available versions of a package. For this purpose, conda search &lt;package_name&gt; is the better option.\n\n\nCommand help\nUse\npixi help\nto get more detailed help on various commands."
   }
 ]

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="NBIS">
-<meta name="dcterms.date" content="2025-02-14">
 
-<title>Training: Tech shorts</title>
+<title>Training Tech Shorts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./schedule.html" rel="next">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -41,13 +40,13 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ef64dfc38f3c32ba3316c26596eb5070.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-928fa4af2dc24fbb17b891c352b65331.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -69,220 +68,127 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Training Tech Shorts</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./contributing.html"> 
+<span class="menu-text">Contributing</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Content:</a> 
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Preface</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Schedule</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Git</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git/git-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Git</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Github</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./github/gh-collaboration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to collaborate on Github</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Pixi</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./pixi/pixi-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Pixi</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Apptainer</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./apptainer/apptainer-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to Apptainer (i.e.&nbsp;Singularity)</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Gitpod</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./gitpod/gitpod-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gitpod</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Quarto</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to Quarto</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./quarto/quarto-confluence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto to Confluence introduction and examples</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
-  <ul class="collapse">
-  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick start</a>
-  <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#review-lessons" id="toc-review-lessons" class="nav-link" data-scroll-target="#review-lessons">Review lessons</a></li>
-  <li><a href="#sequence-diagram" id="toc-sequence-diagram" class="nav-link" data-scroll-target="#sequence-diagram">Sequence diagram</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="QXBwdGFpbmVy">Apptainer <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29sbGFib3JhdGlvbg==">Collaboration <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29tbWFuZCUyMHJ1bm5lcg==">Command runner <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29uZmx1ZW5jZQ==">Confluence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29udGFpbmVycw==">Containers <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R2l0">Git <span class="quarto-category-count">(3)</span></div><div class="category" data-category="R2l0aHVi">Github <span class="quarto-category-count">(2)</span></div><div class="category" data-category="R2l0cG9k">Gitpod <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGl0ZXJhdGUlMjBwcm9ncmFtbWluZw==">Literate programming <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UGFja2FnZSUyMG1hbmFnbWVudA==">Package managment <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UGl4aQ==">Pixi <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UXVhcnRv">Quarto <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U2luZ3VsYXJpdHk=">Singularity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VmVyc2lvbiUyMGNvbnRyb2w=">Version control <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Training: Tech shorts</h1>
+<h1 class="title">Training Tech Shorts</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>NBIS </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">February 14, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -292,74 +198,294 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
 <p>This is a series of short lessons in various technologies useful to our work.</p>
-<section id="quick-start" class="level2">
-<h2 class="anchored" data-anchor-id="quick-start">Quick start</h2>
-<p>The first step is to read over the lesson Github Collaboration.</p>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<ol type="1">
-<li>Make a branch for your lesson.</li>
-<li>Create a Quarto markdown document with <code>## Objectives</code> and <code>## Key points</code> and add it to that branch.</li>
-<li>Add the document to the <code>_quarto.yml</code>.</li>
-<li>Teach your topic to your team for 30-45 mins. Please remember to record the lesson.</li>
-<li>Each learner selects a key point to contribute material on. Use the lesson issue for that topic to assign yourself and another learner to review your contribution.</li>
-<li>Make a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you’re both happy.</li>
-<li>Mark the pull request as ready, and request the instructor to review.</li>
-<li>When the instructor is happy with the changes they should merge the learners contribution back into their lesson branch.</li>
-<li>The instructor reviews and merges the lesson branch when all contributions have been received. It is the responsibility of the teacher to make sure contributions have been received after two weeks.</li>
-</ol>
-</section>
-<section id="review-lessons" class="level3">
-<h3 class="anchored" data-anchor-id="review-lessons">Review lessons</h3>
-<p>Each lesson should be followed up by a review lesson the following week. Here, the teacher should review and discuss points that they notice learners had difficulty with.</p>
-</section>
-<section id="sequence-diagram" class="level3">
-<h3 class="anchored" data-anchor-id="sequence-diagram">Sequence diagram</h3>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">sequenceDiagram
-    box transparent Learners
-        actor Learner1
-        actor Learner2
-    end
-    actor Teacher
-    Teacher -&gt;&gt; GitHub: New branch for lesson
-    Teacher -&gt;&gt; GitHub: New lesson file
-    Teacher -&gt;&gt; GitHub: Add key points
-    Teacher -&gt;&gt; Learner1: Demonstrates tool
-    Learner1 -&gt;&gt; Teacher: Volunteers to write up keypoint 2
-    Learner2 -&gt;&gt; Teacher: Volunteers to write up keypoint 1
-    Learner1 -&gt;&gt; GitHub: Make branch from lesson branch
-    Learner1 -&gt;&gt; GitHub: Add notes for keypoint 2
-    Learner2 -&gt;&gt; GitHub: Add notes for keypoint 1
-    Learner1 -&gt;&gt; GitHub: Request Learner2 to review text
-    Learner2 -&gt;&gt; GitHub: Request Learner1 to review text
-    Learner1 -&gt;&gt; GitHub: Provide code review
-    Learner1 -&gt;&gt; GitHub: Update notes from review
-    Learner1 -&gt;&gt; Teacher: Request code review
-    Learner1 -&gt;&gt; GitHub: Update notes
-    Teacher -&gt;&gt; GitHub: Merges notes into lesson branch
-    Teacher -&gt;&gt; GitHub: Merges lesson branch into main
-    GitHub -&gt;&gt; GitHub: Automated website build
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
 
 
-</section>
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="UGl4aSUyQ1BhY2thZ2UlMjBtYW5hZ21lbnQlMkNDb21tYW5kJTIwcnVubmVy" data-listing-date-sort="1737417600000" data-listing-file-modified-sort="1739786632975" data-listing-date-modified-sort="1739786632000" data-listing-reading-time-sort="5" data-listing-word-count-sort="804">
+<div class="thumbnail">
+<p><a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external"></a></p><a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external">Introduction to Pixi</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('UGl4aQ=='); return false;">
+Pixi
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('UGFja2FnZSUyMG1hbmFnbWVudA=='); return false;">
+Package managment
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Q29tbWFuZCUyMHJ1bm5lcg=='); return false;">
+Command runner
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external">Pixi is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external">
+<div class="listing-date">
+Jan 21, 2025
+</div>
+<div class="listing-author">
+Mahesh
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="QXBwdGFpbmVyJTJDU2luZ3VsYXJpdHklMkNDb250YWluZXJzJTJDUGFja2FnZSUyMG1hbmFnbWVudA==" data-listing-date-sort="1717459200000" data-listing-file-modified-sort="1739786632975" data-listing-date-modified-sort="1739786632000" data-listing-reading-time-sort="4" data-listing-word-count-sort="779">
+<div class="thumbnail">
+<p><a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external"></a></p><a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external">Introduction to Apptainer</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('QXBwdGFpbmVy'); return false;">
+Apptainer
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('U2luZ3VsYXJpdHk='); return false;">
+Singularity
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Q29udGFpbmVycw=='); return false;">
+Containers
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('UGFja2FnZSUyMG1hbmFnbWVudA=='); return false;">
+Package managment
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external">Lesson plan based around materials from CodeRefinery</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external">
+<div class="listing-date">
+Jun 4, 2024
+</div>
+<div class="listing-author">
+Cormac
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZyUyQ0NvbmZsdWVuY2U=" data-listing-date-sort="1715644800000" data-listing-file-modified-sort="1739786632966" data-listing-date-modified-sort="1739786632000" data-listing-reading-time-sort="4" data-listing-word-count-sort="788">
+<div class="thumbnail">
+<p><a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external"></a></p><a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external">Quarto to Confluence</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('UXVhcnRv'); return false;">
+Quarto
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('TGl0ZXJhdGUlMjBwcm9ncmFtbWluZw=='); return false;">
+Literate programming
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Q29uZmx1ZW5jZQ=='); return false;">
+Confluence
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external">As of Quarto version 1.3 there is support for publishing documents to Confluence. Quarto can be used to publish single pages or entire Quarto projects to Confluence.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external">
+<div class="listing-date">
+May 14, 2024
+</div>
+<div class="listing-author">
+Tomas
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="R2l0JTJDR2l0aHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNHaXRwb2Q=" data-listing-date-sort="1715040000000" data-listing-file-modified-sort="1739786632966" data-listing-date-modified-sort="1739786632000" data-listing-reading-time-sort="5" data-listing-word-count-sort="928">
+<div class="thumbnail">
+<p><a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external"></a></p><a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external">Introduction to Gitpod</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R2l0'); return false;">
+Git
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R2l0aHVi'); return false;">
+Github
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('VmVyc2lvbiUyMGNvbnRyb2w='); return false;">
+Version control
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R2l0cG9k'); return false;">
+Gitpod
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external">Gitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a…<code></code></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external">
+<div class="listing-date">
+May 7, 2024
+</div>
+<div class="listing-author">
+Mahesh
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZw==" data-listing-date-sort="1713225600000" data-listing-file-modified-sort="1739786632966" data-listing-date-modified-sort="1739786632000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1281">
+<div class="thumbnail">
+<p><a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external"></a></p><a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external">Introduction to Quarto</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('UXVhcnRv'); return false;">
+Quarto
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('TGl0ZXJhdGUlMjBwcm9ncmFtbWluZw=='); return false;">
+Literate programming
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external">In order to use Quarto you need to install Quarto first. The easiest way is to get the package for your desired platform directly from https://quarto.org/docs/get-started/.…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external">
+<div class="listing-date">
+Apr 16, 2024
+</div>
+<div class="listing-author">
+Per
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="R2l0JTJDVmVyc2lvbiUyMGNvbnRyb2w=" data-listing-date-sort="1710806400000" data-listing-file-modified-sort="1739786632965" data-listing-date-modified-sort="1739786632000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
+<div class="thumbnail">
+<p><a href="./posts/2024-03-19-git-intro/index.html" class="no-external"></a></p><a href="./posts/2024-03-19-git-intro/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2024-03-19-git-intro/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2024-03-19-git-intro/index.html" class="no-external">Introduction to Git</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2024-03-19-git-intro/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R2l0'); return false;">
+Git
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('VmVyc2lvbiUyMGNvbnRyb2w='); return false;">
+Version control
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/2024-03-19-git-intro/index.html" class="no-external">Git is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/2024-03-19-git-intro/index.html" class="no-external">
+<div class="listing-date">
+Mar 19, 2024
+</div>
+<div class="listing-author">
+Mahesh
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="R2l0JTJDR2l0aHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNDb2xsYWJvcmF0aW9u" data-listing-date-sort="1710201600000" data-listing-file-modified-sort="1739786632965" data-listing-date-modified-sort="1739786632000" data-listing-reading-time-sort="5" data-listing-word-count-sort="883">
+<div class="thumbnail">
+<p><a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external"></a></p><a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external">Collaboration on Github</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R2l0'); return false;">
+Git
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R2l0aHVi'); return false;">
+Github
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('VmVyc2lvbiUyMGNvbnRyb2w='); return false;">
+Version control
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Q29sbGFib3JhdGlvbg=='); return false;">
+Collaboration
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external">This section is a guide describing one method of collaborating on Github. We focus on the framework that we use to make reference material for future us and others new to…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external">
+<div class="listing-date">
+Mar 12, 2024
+</div>
+<div class="listing-author">
+Mahesh
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -450,7 +576,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/NBISweden\.github\.io\/Training-Tech-shorts\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -777,15 +903,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./schedule.html" class="pagination-link" aria-label="Schedule">
-        <span class="nav-page-text">Schedule</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
