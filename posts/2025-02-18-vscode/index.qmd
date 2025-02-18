@@ -1,0 +1,97 @@
+---
+title: "Introduction to VSCode"
+author: "Cormac"
+date: "2025-02-18"
+date-modified: last-modified
+categories: [ VSCode, "Remote development", "IDE" ]
+---
+
+# Background
+
+- VSCode is owned by Microsoft, who also own GitHub and Copilot
+- What this means for users: regularly updated, and tight integration of GitHub/Copilot features, large community
+- Open Source
+
+# Opening VSCode in WSL2
+
+- If VSCode is installed in Windows, typing `code` in the terminal launches a new window in WSL2
+
+# Basic help for new users
+
+- Help -> editor playground
+- Help -> keyboard shortcuts reference
+
+# Basic tips
+
+- Use settings sync to easily transfer configurations between machines (N.B. GitPod uses a different settings sync server, so VSCode instances on GitPod need to be configured separately, but only once if you turn on sync there also)
+- Use user profiles to switch between different configurations
+- Set editors to auto-save
+- Customise and use keybindings (see the cheatsheet for the commonly used defaults)
+- Settings can be changed either via default/user json files or the preferences interface
+- Use the command palette with `Ctrl+Shift+P` (Windows), `Cmd+Shift+P` (Mac) 
+- Explore extensions for additional functionality, e.g.:
+	- Language support
+	- GitHub Copilot & Chat
+	- Remote SSH
+	- Todo highlight
+	- Rainbow CSV
+
+# Remote development (VSCode environment on a remote server) 
+
+- Get the extension: `Remote - SSH`
+- Configure the `~/.ssh` config file on your local machine, e.g.:
+
+```
+Host dardel
+        Hostname dardel.pdc.kth.se
+        User myname
+        IdentityFile /home/myname/.ssh/id-ed25519-dardel
+```
+
+- If using Mac/Linux installation of VSCode, that's all for setup. If using WSL2 within Windows, you need to copy the the config file and ssh keys over to `C:\Users\myname\.ssh`, and update the IdentityFile paths (ssh key)
+
+- Open the command palette, type `ssh`, and select `Remote-SSH: Connect to Host...`
+
+- The hostnames you configured should now appear and you can connect
+
+# Copilot
+
+- Get the Copilot extensions (`GitHub Copilot` & `GitHub Copilot Chat`)
+- Link up your GitHub account - ensure you have signed up for the GitHub education program that offers free copilot (https://github.com/education)
+- Main features are:
+	- Inline suggestions
+	- Inline prompt
+	- Copilot Chat -> similar to ChatGPT interface and use cases
+	- Copilot Edit -> large scale direct code editing with AI
+
+# Other tips
+
+## Useful starter set of shortcuts & keybindings to customise or learn
+
+*NAVIGATION*
+
+- Jumping from editor to terminal
+- Opening/closing editors/terminal
+- Navigation between open editors or open terminals
+- VSCode breadcrumbs
+- Fuzzy find to open specific files
+
+*CODE*
+
+- Moving lines
+- Deleting lines
+- Duplicate lines
+- Comment out a line
+- Cut/copy lines
+- Multi line cursor
+- Selecting the whole word, or all occurences of a word
+- Converting word case
+- Jump to specific code line
+- Jump to matching brackets
+
+*FEATURES*
+
+- Opening the command palette
+- Opening copilot chat or prompt
+- Hiding/showing sidebars/activity bar
+- Toggle word wrap for editors
