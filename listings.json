@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025-02-18-vscode-intro/index.html",
       "/posts/2025-01-21-pixi-intro/index.html",
       "/posts/2024-06-04-apptainer-intro/index.html",
       "/posts/2024-05-14-quarto-to-confluence/index.html",

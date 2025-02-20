@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Tomas">
-<meta name="dcterms.date" content="2024-05-14">
+<meta name="author" content="Cormac">
+<meta name="dcterms.date" content="2025-02-18">
 
-<title>Quarto to Confluence – Training Tech Shorts</title>
+<title>Introduction to VSCode – Training Tech Shorts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -149,11 +115,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Quarto to Confluence</h1>
+      <h1 class="title">Introduction to VSCode</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Quarto</div>
-                <div class="quarto-category">Literate programming</div>
-                <div class="quarto-category">Confluence</div>
+                <div class="quarto-category">VSCode</div>
+                <div class="quarto-category">Remote development</div>
+                <div class="quarto-category">IDE</div>
               </div>
                   </div>
   </div>
@@ -164,14 +130,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Tomas </p>
+               <p>Cormac </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 14, 2024</p>
+        <p class="date">February 18, 2025</p>
       </div>
     </div>
     
@@ -196,139 +162,108 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>As of Quarto version 1.3 there is support for <a href="https://quarto.org/docs/publishing/confluence.html">publishing documents to Confluence</a>. Quarto can be used to publish single pages or entire Quarto projects to Confluence.</p>
-<section id="preparations" class="level3">
-<h3 class="anchored" data-anchor-id="preparations">Preparations</h3>
-<section id="atlassian-token" class="level4">
-<h4 class="anchored" data-anchor-id="atlassian-token">Atlassian token</h4>
-<p>Before publishing a document, you need to <a href="https://id.atlassian.com/manage-profile/security/api-tokens">create an atlassian wiki token</a>. Save the token as you will be prompted for it upon publication.</p>
-</section>
-</section>
-<section id="the-quarto-document" class="level3">
-<h3 class="anchored" data-anchor-id="the-quarto-document">The Quarto document</h3>
-<p>To make a document a target for publication in confluence, add the <code>confluence-html</code> document format to the header:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Confluence Demo</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> confluence-html</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Write your content in Quarto documents and publish to Confluence.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="publication-from-local-client" class="level3">
-<h3 class="anchored" data-anchor-id="publication-from-local-client">Publication from local client</h3>
-<p>This section describes how to render and publish documents from your local client.</p>
-<section id="render-and-preview" class="level4">
-<h4 class="anchored" data-anchor-id="render-and-preview">Render and preview</h4>
-<p>Assuming the document name is <code>index.qmd</code>, you can first <strong>render</strong> the document locally to make sure everything looks ok.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <strong>preview</strong> command lets you modify the document and view re-rendered changes in real time:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview index.qmd <span class="at">--port</span> 8888</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It is recommended you manually assign a port number, else Quarto will pick a random number for you.</p>
-</section>
-<section id="publish" class="level4">
-<h4 class="anchored" data-anchor-id="publish">Publish</h4>
-<p>To <strong>publish</strong> simply run</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish index.qmd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Upon first publication, you will be prompted for your Confluence domain, email, login token and publication destination. For SciLifeLab, the domain is <code>https://scilifelab.atlassian.net</code>. The destination is chosen by navigating to the wiki page of interest and pasting it in at the prompt. The document will then be published relative to the chosen wiki page.</p>
-</section>
-</section>
-<section id="publishing-from-uppmax" class="level3">
-<h3 class="anchored" data-anchor-id="publishing-from-uppmax">Publishing from UPPMAX</h3>
-<p>Technically, it should be possible to install Quarto on Uppmax from a <a href="https://quarto.org/docs/download/">Quarto package file</a>. However, Quarto relies on GLIBC version&gt;=2.18 which is currently unavailable on UPPMAX. A workaround is to generate an Apptainer image from which to run Quarto. This requires packaging Quarto with necessary dependencies, including R packages and a recent TeX distribution.</p>
-<section id="render" class="level4">
-<h4 class="anchored" data-anchor-id="render">Render</h4>
-<p>With an Apptainer image <code>/path/to/quarto.simg</code>, the following code will render the document, optionally setting the execution directory:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">QUARTO_IMAGE</span><span class="op">=</span>/path/to/quarto.simg</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> exec <span class="at">--home</span> <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="va">${QUARTO_IMAGE}</span> bash <span class="at">-c</span> <span class="st">'set -euo pipefail;  quarto render index.qmd --execute-dir $(pwd)'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="preview" class="level4">
-<h4 class="anchored" data-anchor-id="preview">Preview</h4>
-<p>Previewing could be done by firing up a browser on UPPMAX, but a better alternative is to employ port forwarding to display the output on your client. Run preview as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> exec <span class="at">--env</span> PATH=/conda_env/bin/:<span class="va">$PATH</span> <span class="dt">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>          <span class="va">$QUARTO_IMAGE</span> quarto preview <span class="at">--no-browser</span> <span class="at">--port</span> 8888 <span class="dt">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">--execute-dir</span> <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Assuming you are on <code>rackham1</code>, on your client run</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-f</span> <span class="at">-N</span> <span class="at">-L</span> 8888:localhost:8888 rackham1.uppmax.uu.se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>to setup port forwarding. Now you can preview your Quarto document by navigating to <code>https://localhost:8888</code>.</p>
-</section>
-<section id="previewing-from-a-compute-node" class="level4">
-<h4 class="anchored" data-anchor-id="previewing-from-a-compute-node">Previewing from a compute node</h4>
-<p>Some Quarto documents run heavy computations and should in these cases be rendered/previewed from a compute node. However, this would require setting up a double port forward. Fortunately, there exists an SSH configuration called <a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts">JumpHost</a> that eliminates this step.</p>
-<p>Edit your <code>.ssh/config</code> file to contain the following:</p>
-<pre class="ssh-config"><code>Host r*.uppmax.uu.se
-    User username
-    ProxyJump rackham1.uppmax.uu.se</code></pre>
-<p>This allows you to access a compute node directly from your client. For instance, if you are running a job on <code>r111</code>, run the preview command as above, and change the port forward command to</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-f</span> <span class="at">-N</span> <span class="at">-L</span> 8888:localhost:8888 r111.uppmax.uu.se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="publish-1" class="level4">
-<h4 class="anchored" data-anchor-id="publish-1">Publish</h4>
-<p>Publishing from UPPMAX is done by running</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">QUARTO_IMAGE</span><span class="op">=</span>/path/to/quarto.simg</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">apptainer</span> exec <span class="at">--home</span> <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span> <span class="va">${QUARTO_IMAGE}</span> bash <span class="at">-c</span> <span class="st">'set -euo pipefail;  quarto publish index.qmd --execute-dir $(pwd)'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-</section>
-<section id="examples" class="level2">
-<h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<details>
-<summary>
-Example upload instructions
-</summary>
-<p>Use this link when asked where to put you page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899836938/Quarto+examples</p>
-<p>Give the page a name on this format with your name to make it unique: “Quarto_example-Tomas”</p>
-</details>
-<section id="publishing-quarto-projects-as-confluence-pages" class="level3">
-<h3 class="anchored" data-anchor-id="publishing-quarto-projects-as-confluence-pages">Publishing Quarto projects as Confluence pages</h3>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
 <ul>
-<li>Confluence page: <a href="https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh">https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh</a></li>
-<li>Quarto project code: <a href="https://github.com/mahesh-panchal/quarto-confluence-project">https://github.com/mahesh-panchal/quarto-confluence-project</a></li>
-</ul>
-<p>The aim was to test a varied selection of quarto markup and interactive elements as well as raw output to and see what is supported by the Quarto to Confluence conversion.</p>
-<p>Pixi was used to create the quarto environment.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add quarto jupyter ipyleaflet plotly pandas statsmodels jupyter-cache</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Quarto was then used to create a confluence project.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> shell</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create project confluence .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This was then published to Confluence using:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish confluence</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>where I was asked to provide the domain <code>https://scilifelab.atlassian.net</code>, followed by my username, an API token (A link to the page was provided to create one), and finally the url path to where I wanted to publish <code>https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh</code>. As I was unsure if I would overwrite the work of others I created this page first after quarto indicated the folder didn’t exist.</p>
-<p>I was also instructed by quarto to</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> install chromium</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>At this point Quarto began rendering, but hung at the second page. The issue was localized to creating the mermaid diagram. After converting the mermaid diagram to a code block <code>{.mermaid}</code> the project successfully published to confluence.</p>
-<p>Several things didn’t render although might be achievable in other ways:</p>
-<ul>
-<li>Mermaid diagram rendering failed locally and didn’t upload as an image.</li>
-<li>Interactive plotting failed. Perhaps this needs to be embedded as an attachment.</li>
-<li>Interactive map did not produce any kind of map, even a static image.</li>
-<li>References did not work.</li>
-<li>Column layout did not work.</li>
+<li>VSCode is owned by Microsoft, who also own GitHub and Copilot</li>
+<li>What this means for users: regularly updated, and tight integration of GitHub/Copilot features, large community</li>
+<li>Open Source</li>
 </ul>
 </section>
-<section id="quarto-document" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-document">Quarto document</h3>
+<section id="opening-vscode-in-wsl2" class="level2">
+<h2 class="anchored" data-anchor-id="opening-vscode-in-wsl2">Opening VSCode in WSL2</h2>
 <ul>
-<li>Confluence page: <a href="https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2901409802/Quarto+example+-+Verena">https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2901409802/Quarto+example+-+Verena</a></li>
-<li>Quarto code: <a href="https://github.com/NBISweden/Training-Tech-shorts/posts/quarto-to-confluence/quarto-example-verena">quarto-to-confluence/quarto-example-verena</a></li>
+<li>If VSCode is installed in Windows, typing <code>code</code> in the terminal launches a new window in WSL2</li>
 </ul>
 </section>
-<section id="quarto-document-1" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-document-1">Quarto document</h3>
+<section id="basic-help-for-new-users" class="level2">
+<h2 class="anchored" data-anchor-id="basic-help-for-new-users">Basic help for new users</h2>
 <ul>
-<li>Confluence page: <a href="https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2900295730/cormac">https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2900295730/cormac</a></li>
-<li>Quarto code: <a href="https://github.com/NBISweden/Training-Tech-shorts/posts/quarto-to-confluence/quarto-example-cormac">quarto-to-confluence/quarto-example-cormac</a></li>
+<li>Help -&gt; editor playground</li>
+<li>Help -&gt; keyboard shortcuts reference</li>
 </ul>
 </section>
-<section id="quarto-document-2" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-document-2">Quarto document</h3>
+<section id="basic-tips" class="level2">
+<h2 class="anchored" data-anchor-id="basic-tips">Basic tips</h2>
 <ul>
-<li>Confluence page: <a href="https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899869712/Quarto+example+-+Tomas">https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899869712/Quarto+example+-+Tomas</a></li>
-<li>Quarto code:</li>
+<li>Use settings sync to easily transfer configurations between machines (N.B. GitPod uses a different settings sync server, so VSCode instances on GitPod need to be configured separately, but only once if you turn on sync there also)</li>
+<li>Use user profiles to switch between different configurations</li>
+<li>Set editors to auto-save</li>
+<li>Customise and use keybindings (see the cheatsheet for the commonly used defaults)</li>
+<li>Settings can be changed either via default/user json files or the preferences interface</li>
+<li>Use the command palette with <code>Ctrl+Shift+P</code> (Windows), <code>Cmd+Shift+P</code> (Mac)</li>
+<li>Explore extensions for additional functionality, e.g.:
+<ul>
+<li>Language support</li>
+<li>GitHub Copilot &amp; Chat</li>
+<li>Remote SSH</li>
+<li>Todo highlight</li>
+<li>Rainbow CSV</li>
+</ul></li>
+</ul>
+</section>
+<section id="remote-development-vscode-environment-on-a-remote-server" class="level2">
+<h2 class="anchored" data-anchor-id="remote-development-vscode-environment-on-a-remote-server">Remote development (VSCode environment on a remote server)</h2>
+<ul>
+<li>Get the extension: <code>Remote - SSH</code></li>
+<li>Configure the <code>~/.ssh</code> config file on your local machine, e.g.:</li>
+</ul>
+<pre><code>Host dardel
+        Hostname dardel.pdc.kth.se
+        User myname
+        IdentityFile /home/myname/.ssh/id-ed25519-dardel</code></pre>
+<ul>
+<li><p>If using Mac/Linux installation of VSCode, that’s all for setup</p></li>
+<li><p>If using WSL2 within Windows, you also need to copy the contents of the <code>~/.ssh</code> folder (config file and public + private keys) over to <code>C:\Users\myname\.ssh</code>. You additionally must update the Windows <code>config</code> file IdentityFile paths to point to the respective keys, e.g.: <code>IdentityFile C:\Users\myname\.ssh\id-ed25519-dardel</code>. Permissions on this folder are usually automatic, but if necessary ensure the folder and contents are readable (right click -&gt; show more… -&gt; properties -&gt; security)</p></li>
+<li><p>Back in VSCode, open the command palette, type <code>ssh</code>, and select <code>Remote-SSH: Connect to Host...</code></p></li>
+<li><p>The hostnames you configured should now appear and you can connect</p></li>
+</ul>
+</section>
+<section id="copilot" class="level2">
+<h2 class="anchored" data-anchor-id="copilot">Copilot</h2>
+<ul>
+<li>Get the Copilot extensions (<code>GitHub Copilot</code> &amp; <code>GitHub Copilot Chat</code>)</li>
+<li>Link up your GitHub account - ensure you have signed up for the GitHub education program that offers free copilot (https://github.com/education)</li>
+<li>Main features are:
+<ul>
+<li>Inline suggestions</li>
+<li>Inline prompt</li>
+<li>Copilot Chat -&gt; similar to ChatGPT interface and use cases</li>
+<li>Copilot Edit -&gt; large scale direct code editing with AI</li>
+</ul></li>
+</ul>
+</section>
+<section id="other-tips" class="level2">
+<h2 class="anchored" data-anchor-id="other-tips">Other tips</h2>
+<section id="useful-starter-set-of-shortcuts-keybindings-to-customise-or-learn" class="level3">
+<h3 class="anchored" data-anchor-id="useful-starter-set-of-shortcuts-keybindings-to-customise-or-learn">Useful starter set of shortcuts &amp; keybindings to customise or learn</h3>
+<p><em>NAVIGATION</em></p>
+<ul>
+<li>Jumping from editor to terminal</li>
+<li>Opening/closing editors/terminal</li>
+<li>Navigation between open editors or open terminals</li>
+<li>VSCode breadcrumbs</li>
+<li>Fuzzy find to open specific files</li>
+</ul>
+<p><em>CODE</em></p>
+<ul>
+<li>Moving lines</li>
+<li>Deleting lines</li>
+<li>Duplicate lines</li>
+<li>Comment out a line</li>
+<li>Cut/copy lines</li>
+<li>Multi line cursor</li>
+<li>Selecting the whole word, or all occurences of a word</li>
+<li>Converting word case</li>
+<li>Jump to specific code line</li>
+<li>Jump to matching brackets</li>
+</ul>
+<p><em>FEATURES</em></p>
+<ul>
+<li>Opening the command palette</li>
+<li>Opening copilot chat or prompt</li>
+<li>Hiding/showing sidebars/activity bar</li>
+<li>Toggle word wrap for editors</li>
 </ul>
 
 
