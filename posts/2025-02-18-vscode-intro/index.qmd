@@ -48,9 +48,11 @@ Host dardel
         IdentityFile /home/myname/.ssh/id-ed25519-dardel
 ```
 
-- If using Mac/Linux installation of VSCode, that's all for setup. If using WSL2 within Windows, you need to copy the the config file and ssh keys over to `C:\Users\myname\.ssh`, and update the IdentityFile paths (ssh key)
+- If using Mac/Linux installation of VSCode, that's all for setup
 
-- Open the command palette, type `ssh`, and select `Remote-SSH: Connect to Host...`
+- If using WSL2 within Windows, you also need to copy the contents of the `~/.ssh` folder (config file and public + private keys) over to `C:\Users\myname\.ssh`. You additionally must update the Windows `config` file IdentityFile paths to point to the respective keys, e.g.: `IdentityFile C:\Users\myname\.ssh\id-ed25519-dardel`. Permissions on this folder are usually automatic, but if necessary ensure the folder and contents are readable (right click -> show more... -> properties -> security)
+
+- Back in VSCode, open the command palette, type `ssh`, and select `Remote-SSH: Connect to Host...`
 
 - The hostnames you configured should now appear and you can connect
 
