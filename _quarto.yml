@@ -8,6 +8,8 @@ website:
   title: "Training Tech Shorts"
   page-navigation: true
   reader-mode: true
+  repo-url: https://github.com/NBISweden/Training-Tech-shorts
+  repo-actions: [edit, source, issue]
   navbar:
     search: true
     left:
