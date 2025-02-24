@@ -7,6 +7,9 @@ project:
 website:
   title: "Training Tech Shorts"
   page-navigation: true
+  reader-mode: true
+  repo-url: https://github.com/NBISweden/Training-Tech-shorts
+  repo-actions: [edit, source, issue]
   navbar:
     search: true
     left:
@@ -14,8 +17,16 @@ website:
       - contributing.qmd
     right:
       - icon: github
-        href: https://github.com/
+        menu:
+          - text: Source Code
+            href: https://github.com/NBISweden/Training-Tech-shorts
+          - text: Report an issue
+            href: https://github.com/NBISweden/Training-Tech-shorts/issues
+          - text: Suggest a lesson
+            href: https://github.com/NBISweden/Training-Tech-shorts/issues
+          - text: Discuss a post
+            href: https://github.com/NBISweden/Training-Tech-shorts/discussions
 format:
   html:
-    theme: 
+    theme:
       - minty
