@@ -150,7 +150,7 @@ Below is an example on how to display skill icons in dark and light mode, depend
 
 There are several different ways to display your github stats (if you want to). By default, they will take information off your public repositories, but it is possible to gather information from the private ones too. They come pre-defined for several statistics, but some are customizable.
 
-The [Github Profile Summary Cards](https://github-profile-summary-cards.vercel.app/demo.html), for example, come in a lot of different [themes](https://github.com/vn7n24fzkq/github-profile-summary-cards/blob/main/README.md) and are easily incorporated. Let's have a look at Mahesh's statistics in slateorange:
+The [Github Profile Summary Cards](https://github-profile-summary-cards.vercel.app/demo.html), for example, come in a lot of different [themes](https://github.com/vn7n24fzkq/github-profile-summary-cards/blob/main/README.md) and are easily incorporated. Let's have a look at Mahesh's statistics in slate-orange:
 
 ```html
 <div class='container'>
