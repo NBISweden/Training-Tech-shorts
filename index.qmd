@@ -5,6 +5,13 @@ listing:
   sort: "date desc"
   type: default
   categories: true
+  fields: 
+    - title
+    - subtitle
+    - author
+    - date
+    - description
+    - categories
 ---
 
 This is a series of short lessons in various technologies useful to our work.
