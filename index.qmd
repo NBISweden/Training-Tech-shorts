@@ -10,7 +10,6 @@ listing:
     - subtitle
     - author
     - date
-    - description
     - categories
 ---
 
