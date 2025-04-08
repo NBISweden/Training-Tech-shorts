@@ -3,8 +3,9 @@ title: "README's in GitHub"
 author: "Amrei"
 date: "2025-03-18"
 date-modified: last-modified
-categories: [ Github, documentation, self-promotion ]
+categories: [Github, documentation, self-promotion]
 ---
+
 
 # GitHub README's
 
@@ -14,7 +15,7 @@ README's can be initialized at the creation of the repository, or added later. T
 
 ## profile README
 
-Every personal account can have it's own README, which is displayed on top of the profile page. This is a place to share information about you and the work you are doing. 
+Every personal account can have its own README, which is displayed on top of the profile page. This is a place to share information about you and the work you are doing. 
 
 To initialize the profile README 
 
@@ -34,28 +35,27 @@ Regardless of which type of README, there are some things that can be used to ma
 
 You can use emojis in the readme to clarify points (and even add them to commits, as I have just learned, use cases are to be determined). 
 
-- ⏱ You can point out deadlines
+- 🕰 You can point out deadlines
 
-- [📙](https://www.webfx.com/tools/emoji-cheat-sheet/) Link to documentation
+- [📕](https://www.webfx.com/tools/emoji-cheat-sheet/) Link to documentation
 
 - ✏ Or invite them to contribute
 
 Here is a [cheat-sheet](https://www.webfx.com/tools/emoji-cheat-sheet/).
 ---
 
-## Display top contributors:
+## Display Top Contributors
 
-You can  add the top contributors of your repo to the README. 
+You can add the top contributors of your repo to the README:
 
-```
+```html
 <a href="https://github.com/NBISweden/Training-Tech-shorts/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=NBISweden/Training-Tech-shorts" alt="contrib.rocks image" />
+  <img src="https://contrib.rocks/image?repo=NBISweden/Training-Tech-shorts" />
 </a>
 ```
 
-
 <a href="https://github.com/NBISweden/Training-Tech-shorts/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=NBISweden/Training-Tech-shorts" alt="contrib.rocks image" />
+  <img src="https://contrib.rocks/image?repo=NBISweden/Training-Tech-shorts" />
 </a>
 
 ---
@@ -64,7 +64,7 @@ You can  add the top contributors of your repo to the README.
 
 Make it easy for others to know what they can do with your code and add license information into your readme. Often these are placed at the top of the readme for even easier accessibility. They link to the text of the license (not in your repository, but on the web). 
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Here are some [markdown license badges](https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba) you can use.
 
@@ -113,35 +113,122 @@ also in light mode:
 
 <p align="center">
   <a href="https://go-skill-icons.vercel.app/">
-    <img
-      src="https://go-skill-icons.vercel.app/api/icons?i=git,github,apptainer,docker,nextflow,cpp,R&theme=light&titles=true"
-    />
+    <img src="https://go-skill-icons.vercel.app/api/icons?i=git,github,apptainer,docker,nextflow,cpp,R&theme=light&titles=true" />
   </a>
 </p>
 
+Check out my personal README for an example on how to set skill icons in dark and light mode, depending on the system settings: 
 
-### WidgetBox
+```verbatim
 
-[WidgetBox](https://github.com/Jurredr/github-widgetbox?tab=readme-ov-file) is another way to display skills. However, the boxes are rather large: 
+<div align="center">
+  
+  <!-- Dark Mode -->
+  [![My skills](https://go-skill-icons.vercel.app/api/icons?i=linux,git,apptainer,anaconda,nextflow,md,vscode,latex,r,bash,cpp&theme=dark#gh-dark-mode-only)](https://github.com/LelouchFR/skill-icons#gh-dark-mode-only)
+  <!-- Light Mode -->
+  [![My skills](https://go-skill-icons.vercel.app/api/icons?i=linux,git,apptainer,anaconda,nextflow,md,vscode,latex,r,bash,cpp&theme=light#gh-light-mode-only)](https://github.com/LelouchFR/skill-icons#gh-light-mode-only)
+
+</div>
+
+```
 
 
-[![](https://github-widgetbox.vercel.app/api/skills?libraries=r,bash,cpp,markdown&includeNames=true)](https://github.com/Jurredr/github-widgetbox)
 
 ---
 
 ## Add Github statistics
 
-There are several different ways to display your github stats (if you want to). By default, they will take information off your public repositories, but it is possible to gather information from the private ones too. 
+There are several different ways to display your github stats (if you want to). By default, they will take information off your public repositories, but it is possible to gather information from the private ones too. They come pre-defined for several statistics, but some are customizable.
 
 The [Github Profile Summary Cards](https://github-profile-summary-cards.vercel.app/demo.html), for example, come in a lot of different [themes](https://github.com/vn7n24fzkq/github-profile-summary-cards/blob/main/README.md) and are easily incorporated:
 
-![](http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=amrei-bp&theme=slateorange) 
-
 <div class='container'>
-<img style="height: auto; width: 45%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=amrei-bp&theme=slateorange" />
-&nbsp;
-&nbsp;
-<img style="height: auto; width: 45%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=amrei-bp&theme=slateorange" /></div>
+<img style="height: auto; width: 93%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=mahesh-panchal&theme=slateorange" />
 </div>
 
+These cards can visualize the programming languages by repository, or even commit:
 
+<div class='container'>
+<img style="height: auto; width: 45%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=mahesh-panchal&theme=slateorange" />
+&nbsp;
+&nbsp;
+<img style="height: auto; width: 45%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=
+mahesh-panchal&theme=slateorange" />
+</div>
+
+Or summarize your stats, plus the timing of your commits: 
+
+<div class='container'>
+<img style="height: auto; width: 45%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=mahesh-panchal&theme=slateorange" />
+&nbsp;
+&nbsp;
+<img style="height: auto; width: 45%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=mahesh-panchal&theme=slateorange&utcOffset=1" /></div>
+
+## Github stats with rank
+
+You can also display your [Github readme stats](https://github.com/anuraghazra/github-readme-stats) with a rank: 
+
+<div class='container'>
+<img style="height: auto; width: 45%;" class="img" src="https://github-readme-stats.vercel.app/api?username=amrei-bp&show_icons=true&locale=en" />
+&nbsp;
+&nbsp;
+<img style="height: auto; width: 45%;" class="img" src="https://github-readme-stats.vercel.app/api?username=mahesh-panchal&show_icons=true&locale=en" /></div>
+
+Here we had a discussion of how including statistics makes sense if they highlight whatever you want to come across in your README (of course the same is true for anything you include). Above, it probably makes sense for Mahesh to include his stats, whereas I might not do it. 
+
+---
+
+
+## Pin repositories
+
+Github restricts the number of repositories you can pin to six. Using the [Readme Cards](https://github.com/anuraghazra/github-readme-stats) you can pin as many repositories as you wish. Those can be any repositories, your own, from you organization, or from someone else. I have not tried private repositories, though. These here render nicer in the actual GitHub repository. 
+
+[![](https://github-readme-stats.vercel.app/api/pin/?username=amrei-bp&repo=readme_playground&show_owner=true)](https://github.com/amrei-bp/github-readme-stats)
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=SLUBioinformaticsInfrastructure&repo=Three_Bees_Workshop_Series&description_lines_count=3&show_owner=false)](https://github.com/SLUBioinformaticsInfrastructure/Three_Bees_Workshop_Series)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=NBISweden&repo=Training-Tech-shorts&description_lines_count=3&show_owner=true)](https://github.com/NBISweden/Training-Tech-shorts)
+
+
+
+---
+
+## make your own badge
+
+If you like badges you can make your own [here](https://shields.io/badges). When testing this within a repository README the left side of the badges does not show the .png. 
+
+An example of a static badge:
+
+![](https://img.shields.io/badge/this_is_a_test-badge-blue)
+
+
+An example of a dynamic badge: 
+
+![](https://img.shields.io/github/directory-file-count/amrei-bp/readme_playground?label=Number%20of%20files%20in%20repository%3A)
+
+And another one: 
+
+![](https://img.shields.io/github/last-commit/amrei-bp/readme_playground?label=Date%20of%20last%20commit%20to%20the%20repository%3A%20)
+
+And another one:
+
+This counts the number of times a Github profile has been accessed since the tracker was installed:
+
+[![](https://komarev.com/ghpvc/?username=amrei-bp&color=blue&label=GitHub+Profile+Views+Amrei)](https://github.com/amrei-bp)
+
+[![](https://komarev.com/ghpvc/?username=NBISweden&color=blue&label=GitHub+Profile+Views+NBIS)](https://github.com/NBISweden)
+
+---
+
+## Animated text
+
+You can have text appear on your page, as if it was typed on the spot:
+
+[![](https://readme-typing-svg.demolab.com/?lines=First+line+of+text;Second+line+of+text)](https://git.io/typing-svg)
+
+Customizable [here](https://readme-typing-svg.demolab.com/demo/).
+
+---
+
+## Link to the readme_playground repository
+
+Here is my [README playground repository](https://github.com/amrei-bp/readme_playground) which contains a few more things that do not render easily in quarto. 
