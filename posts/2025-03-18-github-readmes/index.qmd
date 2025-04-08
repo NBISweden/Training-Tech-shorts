@@ -62,7 +62,11 @@ You can add the top contributors of your repo to the README:
 
 ## License
 
-Make it easy for others to know what they can do with your code and add license information into your readme. Often these are placed at the top of the readme for even easier accessibility. They link to the text of the license (not in your repository, but on the web). 
+Make it easy for others to know what they can do with your code and add license information into your readme. Often these are placed at the top of the readme for even easier accessibility. They link to the text of the license (not in your repository, but on the web). The badge can be inserted to your repository using basic markdown syntax:
+
+```md
+[![](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+```
 
 [![](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -76,14 +80,22 @@ You can add images to break up the text in your README.
 
 ### Title banner
 
-These you can use for projects, but also for your very own user readme. They are easily generated [here](https://leviarista.github.io/github-profile-header-generator/). 
+These you can use for projects, but also for your very own user readme. They are easily generated [here](https://leviarista.github.io/github-profile-header-generator/). You can then copy them into your repository and add them from their relative position using markdown: 
+
+```md
+![](/posts/2025-03-18-github-readmes/github-header-image.png)
+```
 
 ![](/posts/2025-03-18-github-readmes/github-header-image.png)
 
 
 ### Octocat
 
-You can [design your very own octocat](https://myoctocat.com/), or [choose an existing one](https://octodex.github.com/),  and display it in your readme: 
+You can [design your very own octocat](https://myoctocat.com/), or [choose an existing one](https://octodex.github.com/),  and display it in your readme. Again, you need to add the file to your repository. As an alternative to the markdown approach above you can also use HTML to embed the image:
+
+```html
+<img align="middle" src="/posts/2025-03-18-github-readmes/octocat-1740776211964.png" width="280">
+```
 
 <img align="middle" src="/posts/2025-03-18-github-readmes/octocat-1740776211964.png" width="280">
 
@@ -117,10 +129,9 @@ also in light mode:
   </a>
 </p>
 
-Check out my personal README for an example on how to set skill icons in dark and light mode, depending on the system settings: 
+Below is an example on how to display skill icons in dark and light mode, depending on the system settings: 
 
-```verbatim
-
+```html
 <div align="center">
   
   <!-- Dark Mode -->
@@ -129,7 +140,6 @@ Check out my personal README for an example on how to set skill icons in dark an
   [![My skills](https://go-skill-icons.vercel.app/api/icons?i=linux,git,apptainer,anaconda,nextflow,md,vscode,latex,r,bash,cpp&theme=light#gh-light-mode-only)](https://github.com/LelouchFR/skill-icons#gh-light-mode-only)
 
 </div>
-
 ```
 
 
@@ -140,11 +150,19 @@ Check out my personal README for an example on how to set skill icons in dark an
 
 There are several different ways to display your github stats (if you want to). By default, they will take information off your public repositories, but it is possible to gather information from the private ones too. They come pre-defined for several statistics, but some are customizable.
 
-The [Github Profile Summary Cards](https://github-profile-summary-cards.vercel.app/demo.html), for example, come in a lot of different [themes](https://github.com/vn7n24fzkq/github-profile-summary-cards/blob/main/README.md) and are easily incorporated:
+The [Github Profile Summary Cards](https://github-profile-summary-cards.vercel.app/demo.html), for example, come in a lot of different [themes](https://github.com/vn7n24fzkq/github-profile-summary-cards/blob/main/README.md) and are easily incorporated. Let's have a look at Mahesh's statistics in slateorange:
+
+```html
+<div class='container'>
+<img style="height: auto; width: 93%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=mahesh-panchal&theme=slateorange" />
+</div>
+```
 
 <div class='container'>
 <img style="height: auto; width: 93%;" class="img" src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=mahesh-panchal&theme=slateorange" />
 </div>
+
+To display your stats you only need to exchange his user name with yours. 
 
 These cards can visualize the programming languages by repository, or even commit:
 
@@ -174,7 +192,7 @@ You can also display your [Github readme stats](https://github.com/anuraghazra/g
 &nbsp;
 <img style="height: auto; width: 45%;" class="img" src="https://github-readme-stats.vercel.app/api?username=mahesh-panchal&show_icons=true&locale=en" /></div>
 
-Here we had a discussion of how including statistics makes sense if they highlight whatever you want to come across in your README (of course the same is true for anything you include). Above, it probably makes sense for Mahesh to include his stats, whereas I might not do it. 
+At this point we had a discussion on how including statistics makes sense if they highlight whatever you want to come across in your README (of course the same is true for anything you include). Above, it probably makes sense for Mahesh to include his stats, whereas I might not do it. 
 
 ---
 
@@ -183,7 +201,21 @@ Here we had a discussion of how including statistics makes sense if they highlig
 
 Github restricts the number of repositories you can pin to six. Using the [Readme Cards](https://github.com/anuraghazra/github-readme-stats) you can pin as many repositories as you wish. Those can be any repositories, your own, from you organization, or from someone else. I have not tried private repositories, though. These here render nicer in the actual GitHub repository. 
 
+Again, they can be added using the markdown syntax: 
+
+```md
 [![](https://github-readme-stats.vercel.app/api/pin/?username=amrei-bp&repo=readme_playground&show_owner=true)](https://github.com/amrei-bp/github-readme-stats)
+```
+
+[![](https://github-readme-stats.vercel.app/api/pin/?username=amrei-bp&repo=readme_playground&show_owner=true)](https://github.com/amrei-bp/github-readme-stats)
+
+You can specify the information you want to display with `description_lines_count`, or add the owner of the repository with "show_owner". The two pinned repositories will render side by side in your repository on Github, and the Training-Tech-shorts will show the owner of the repository. 
+
+```md
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=SLUBioinformaticsInfrastructure&repo=Three_Bees_Workshop_Series&description_lines_count=3&show_owner=false)](https://github.com/SLUBioinformaticsInfrastructure/Three_Bees_Workshop_Series)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=NBISweden&repo=Training-Tech-shorts&description_lines_count=3&show_owner=true)](https://github.com/NBISweden/Training-Tech-shorts)
+
+```
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=SLUBioinformaticsInfrastructure&repo=Three_Bees_Workshop_Series&description_lines_count=3&show_owner=false)](https://github.com/SLUBioinformaticsInfrastructure/Three_Bees_Workshop_Series)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=NBISweden&repo=Training-Tech-shorts&description_lines_count=3&show_owner=true)](https://github.com/NBISweden/Training-Tech-shorts)
@@ -198,22 +230,34 @@ If you like badges you can make your own [here](https://shields.io/badges). When
 
 An example of a static badge:
 
+```md
+![](https://img.shields.io/badge/this_is_a_test-badge-blue)
+```
+
 ![](https://img.shields.io/badge/this_is_a_test-badge-blue)
 
 
-An example of a dynamic badge: 
+An example of a dynamic badge (will be rendered without the .png on the GitHub README). Counting the number of files in the repository:
 
-![](https://img.shields.io/github/directory-file-count/amrei-bp/readme_playground?label=Number%20of%20files%20in%20repository%3A)
+```md
+![](https://img.shields.io/github/directory-file-count/NBISweden/Training-Tech-shorts?label=Number%20of%20files%20in%20repository%3A)
+```
 
-And another one: 
+![](https://img.shields.io/github/directory-file-count/NBISweden/Training-Tech-shorts?label=Number%20of%20files%20in%20repository%3A)
 
-![](https://img.shields.io/github/last-commit/amrei-bp/readme_playground?label=Date%20of%20last%20commit%20to%20the%20repository%3A%20)
+And another one, specifying the date of the last commit to the repository:
 
-And another one:
+```md
+![](https://img.shields.io/github/last-commit/NBISweden/Training-Tech-shorts?label=Date%20of%20last%20commit%20to%20the%20repository%3A%20)
+```
 
-This counts the number of times a Github profile has been accessed since the tracker was installed:
+![](https://img.shields.io/github/last-commit/NBISweden/Training-Tech-shorts?label=Date%20of%20last%20commit%20to%20the%20repository%3A%20)
 
-[![](https://komarev.com/ghpvc/?username=amrei-bp&color=blue&label=GitHub+Profile+Views+Amrei)](https://github.com/amrei-bp)
+And another one, counting the number of times a Github profile has been accessed since the tracker was installed:
+
+```md
+[![](https://komarev.com/ghpvc/?username=NBISweden&color=blue&label=GitHub+Profile+Views+NBIS)](https://github.com/NBISweden)
+```
 
 [![](https://komarev.com/ghpvc/?username=NBISweden&color=blue&label=GitHub+Profile+Views+NBIS)](https://github.com/NBISweden)
 
@@ -223,12 +267,12 @@ This counts the number of times a Github profile has been accessed since the tra
 
 You can have text appear on your page, as if it was typed on the spot:
 
+```md
+[![](https://readme-typing-svg.demolab.com/?lines=First+line+of+text;Second+line+of+text)](https://git.io/typing-svg)
+```
+
 [![](https://readme-typing-svg.demolab.com/?lines=First+line+of+text;Second+line+of+text)](https://git.io/typing-svg)
 
 Customizable [here](https://readme-typing-svg.demolab.com/demo/).
 
 ---
-
-## Link to the readme_playground repository
-
-Here is my [README playground repository](https://github.com/amrei-bp/readme_playground) which contains a few more things that do not render easily in quarto. 
