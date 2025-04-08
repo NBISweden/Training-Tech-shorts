@@ -37,7 +37,7 @@ You can use emojis in the readme to clarify points (and even add them to commits
 
 - 🕰 You can point out deadlines
 
-- [📕](https://www.webfx.com/tools/emoji-cheat-sheet/) Link to documentation
+- [📕 Link to documentation](https://www.webfx.com/tools/emoji-cheat-sheet/)
 
 - ✏ Or invite them to contribute
 
