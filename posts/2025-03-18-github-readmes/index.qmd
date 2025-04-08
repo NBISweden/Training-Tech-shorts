@@ -3,7 +3,7 @@ title: "README's in GitHub"
 author: "Amrei"
 date: "2025-03-18"
 date-modified: last-modified
-categories: [Github, documentation, self-promotion]
+categories: [Github, Documentation, Self-promotion]
 ---
 
 
