@@ -4,10 +4,14 @@ Dates for each lesson, listed in reverse chronological order.
 Meetings are over Zoom, Tuesdays at 13.00. Meeting links are
 provided by the teacher.
 
+- **Break**
+- 2025/06/10: Mahesh - Github Container Registry and Seqera Container Registry
+- 2025/05/27: Everyone - Personal tips and tricks
+- 2025/05/13: Mahesh - When is Nextflow suitable
 - 2025/04/29: Mahesh - Review: SSH config
 - 2025/04/15: Mahesh - SSH config
 - 2025/04/01: Amrei - Review: Github profile README
-- 2025/03/18: Amrei - Github profile README 
+- 2025/03/18: Amrei - Github profile README
 - 2025/03/04: Cormac - Review: VSCode
 - 2025/02/18: Cormac - VSCode
 - 2025/02/04: Mahesh - Review: Pixi
