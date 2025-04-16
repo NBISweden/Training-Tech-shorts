@@ -108,7 +108,7 @@ ForwardAgent yes
 
 ### Proxy Jump
 
-One can also use ssh to automatically connect to one host via another host.  This can be on
+You can use SSH to automatically connect to one host via another. This can be on
 demand with `-J <hostname>`, or it can be added permanently to a host using `ProxyJump`.
 
 ```{.bash}
@@ -192,7 +192,7 @@ Where -L enables port forwarding, the first `8080` is the local port, and the `<
 If you only want to forward from the login node for example, then you might use `-L 8080:localhost:8080` instead.
 
 :::{.callout-caution}
-It's easy to start running commands in the wrong location.
+It's easy to accidentally run commands in the wrong location.
 Use your prompt to identify where you are, e.g. `username@login1` means you're still on the login node, and
 `username@node_id` means you're on the allocated worker node.
 :::
@@ -236,6 +236,21 @@ $ marimo edit --headless --host 0.0.0.0 --port 8080
         ➜  Network: http://10.253.5.60:8080?access_token=kXxlpkz81MXl9fWF65VFqA
 
 ```
+
+:::{.callout-tip}
+If you get an error message such as,
+
+```{.console}
+channel 4: open failed: connect failed: No route to host
+channel 5: open failed: connect failed: No route to host
+channel 4: open failed: connect failed: No route to host
+channel 5: open failed: connect failed: No route to host
+```
+
+there may already be a service running on the port you chose, e.g. 8080.
+In this case, select another port and try again, for example, changing ports to
+8081.
+:::
 
 #### Quick play with Marimo
 
