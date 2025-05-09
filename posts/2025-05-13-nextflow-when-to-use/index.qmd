@@ -169,6 +169,35 @@ be used to take user input and pass it into a `process`.
 </details>
 
 <details>
+<summary>How to implement the `for` control structure in Nextflow</summary>
+
+Iteration (`for`/`while` loops) is built into Nextflow. Tasks automatically
+iterate over any input provided in a channel. In this example, the workflow iterates over
+the numbers 1 to 5. If a channel is empty, the task does not execute.
+
+```{.groovy filename="example.nf"}
+workflow {
+    TASK_A( Channel.of(1..5) )
+        .view()
+}
+
+process TASK_A {
+    input:
+    val num
+
+    script:
+    """
+    echo ${num}
+    """
+
+    output:
+    stdout
+}
+```
+
+</details>
+
+<details>
 <summary>How to implement the `if` control structure in Nextflow</summary>
 
 Although one can use `if` statements in Nextflow code, often you want to decide the action
@@ -230,34 +259,8 @@ process TASK_C {
 }
 ```
 
-</details>
-
-<details>
-<summary>How to implement the `for` control structure in Nextflow</summary>
-
-Iteration (`for`/`while` loops) is built into Nextflow. Tasks automatically
-iterate over any input provided in a channel. In this example, the workflow iterates over
-the numbers 1 to 5. If a channel is empty, the task does not execute.
-
-```{.groovy filename="example.nf"}
-workflow {
-    TASK_A( Channel.of(1..5) )
-        .view()
-}
-
-process TASK_A {
-    input:
-    val num
-
-    script:
-    """
-    echo ${num}
-    """
-
-    output:
-    stdout
-}
-```
+This is effectively like using an `if` within `while` loop. If the channel only has
+a single entry, then you're effectively using just an `if` statement.
 
 </details>
 
