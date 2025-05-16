@@ -22,7 +22,7 @@ Each lesson should be about 30 minutes in length, and is taught through demonstr
 
 There are 2 lessons of 1h per months, the first one is a demonstration by the teacher on a spceific tool or technology and the second one is a follow-up lesson where anyone can ask questions on what they have tried to implement during the two weeks between the lessons or just show what they have done with the tool/technology. 
 
-The target is the whole NBIS and affiliates, including the managers, as well
+The target audience is NBIS and their affiliates, including the managers, as well
 as the bioinformaticians. Having the managers there firstly highlights
 the importance of the regular training, but also informs them of the
 teams capabilities with the core technology stack (some of which may
