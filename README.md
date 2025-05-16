@@ -1,6 +1,6 @@
 # Training-Tech-shorts
 
-Short lessons, training various technologies useful to our work (not team specific such as pixi, quarto, vscode...).
+Learn to use research software engineering tools essential for our work through these short training lessons
 
 Lessons are located at https://nbisweden.github.io/Training-Tech-shorts/.
 
