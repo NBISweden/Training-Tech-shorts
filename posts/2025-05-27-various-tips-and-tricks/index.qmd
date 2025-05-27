@@ -14,11 +14,13 @@ date-modified: last-modified
 categories: [ Terminal, Quarto, Nano, MacOS, Nextflow, Conda, PacMan, R, Dardel, VSCode, "Tips and Tricks" ]
 ---
 
-Here are some 5min Tips and Tricks we covered in todays training.
+Here are some 5-minute tips and tricks we covered in todays training.
 
 ## Setting the terminal prompt using Liquid Screen
 
-You can customize your terminal prompt by modifying the `PS1` variable in your shell configuration file (e.g., `.bashrc` or `.zshrc`) using a tool called [Liquid Screen](https://liquidprompt.readthedocs.io/en/stable/install.html).
+You can customize your terminal prompt by modifying the `PS1` variable in your shell configuration file (e.g., `.bashrc` or `.zshrc`) using a tool called [Liquid Screen](https://liquidprompt.readthedocs.io/en/stable/install.html). This tool provides useful status information, such as your username, active Conda environment, current path, and Git branch status.
+
+To use Liquid Prompt, clone the Liquid Prompt repository, source it in your `.bashrc` or `.zshrc`, and select the a theme for a visually appealing prompt.
 
 ```{.bash}
 if [[ $- == *i* ]]; then
@@ -28,6 +30,12 @@ if [[ $- == *i* ]]; then
     lp_theme powerline
 fi
 ```
+
+:::{.callout-tip}
+
+Some terminal fonts may not be compatible with a theme, so you may need to adjust your terminal settings.
+
+:::
 
 ## Edit Quarto Markdown tables in VSCode visual mode
 
