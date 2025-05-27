@@ -1,0 +1,73 @@
+---
+title: "Various Tips and Tricks"
+author:
+  - "Miguel"
+  - "Lucile"
+  - "Lizel"
+  - "Abu"
+  - "Amrei"
+  - "André"
+  - "Matilda"
+  - "Mahesh"
+date: "2025-05-27"
+date-modified: last-modified
+categories: [ Terminal, Quarto, Nano, MacOS, Nextflow, Conda, PacMan, R, Dardel, VSCode, "Tips and Tricks" ]
+---
+
+Here are some 5min Tips and Tricks we covered in todays training.
+
+## Setting the terminal prompt using Liquid Screen
+
+You can customize your terminal prompt by modifying the `PS1` variable in your shell configuration file (e.g., `.bashrc` or `.zshrc`) using a tool called [Liquid Screen](https://liquidprompt.readthedocs.io/en/stable/install.html).
+
+```{.bash}
+if [[ $- == *i* ]]; then
+    # Only load Liquidprompt in interactive shells
+    source ~/liquidprompt/liquidprompt
+    source ~/liquidprompt/themes/powerline/powerline.theme
+    lp_theme powerline
+fi
+```
+
+## Edit Quarto Markdown tables in VSCode visual mode
+
+The VSCode Quarto extension allows you to edit markdown visually.
+
+## Adding captions to Quarto figures and tables
+
+Here are three methods to add captions to figures and tables in Quarto.
+
+## The Here package in R
+
+The `here` package in R helps you set paths.
+
+## Managing R packages using PacMan
+
+PacMan is a R package manager.
+
+## The Nano editor
+
+Nano is an editor you can use in the Terminal.
+
+It's loaded on Dardel using `ml nano`.
+
+## Setting group permissions on Dardel
+
+Dardel doesn't automatically set group permissions on files. You can update them using
+
+```{.bash}
+    # change permissions so all members of the project can access the files
+    # thanks to Karl Johan from PDC support for this useful tidbit!
+    # change the file ownership to group:
+    chgrp --no-dereference --silent --recursive ${GRP} ${PWD}
+    # change permission: group gets user's permissions
+    chmod --silent --recursive g=u ${PWD}
+```
+
+This can be added to launch scripts like [this `run_nextflow.sh` example](https://github.com/SLUBioinformaticsInfrastructure/nf-core_on_dardel/blob/main/runscript.sh).
+
+## MacOS shortcuts
+
+## Step through code from a Pixi environment in Quarto
+
+## Using a Conda lock file in Nextflow
