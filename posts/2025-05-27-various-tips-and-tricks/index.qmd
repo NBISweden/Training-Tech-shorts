@@ -76,6 +76,13 @@ This can be added to launch scripts like [this `run_nextflow.sh` example](https:
 
 ## MacOS shortcuts
 
+- Use the `ditto` command to copy directories while preserving permissions and timestamps.
+- Use `history 15` to view your last 15 commands.
+- The `banner` command prints large text banners in the terminal.
+- Drag and drop files or folders into the terminal to paste their paths.
+- Use `Option+Click` to move the cursor anywhere in the command line.
+- In Finder, `Cmd+I` opens the info panel, where you can copy file paths or customize folder icons.
+
 ## Step through code from a Pixi environment in Quarto
 
 ## Using a Conda lock file in Nextflow
