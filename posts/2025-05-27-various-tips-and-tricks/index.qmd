@@ -89,4 +89,22 @@ This can be added to launch scripts like [this `run_nextflow.sh` example](https:
 
 ## Step through code from a Pixi environment in Quarto
 
+R packages can easily be installed in pixi environments to help resolve version incompatibilities or to ensure that others working in your project can replicate your environment.
+
+```{.bash}
+pixi init -c bioconda -c conda-forge -p linux-64
+pixi add r-base
+pixi add r-tidyverse
+pixi add bioconductor-phyloseq
+pixi install
+```
+
+You can then knit your Quarto report by first activating your pixi environment containing your R installation. However, if you want to be able to view objects in your session in vs code (requires the R extension) and execute code line by line when writing your Quarto report, you can do so by including the following line in your report:
+
+```{.r}
+.libPaths("/path/to/pixi/directory/.pixi/envs/default/lib/R/library")
+```
+
+This prevents the need for activating your pixi environment before knitting the report and enables interactive coding in your Quarto report.
+
 ## Using a Conda lock file in Nextflow
