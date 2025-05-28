@@ -16,11 +16,13 @@ categories: [ Terminal, Quarto, Nano, MacOS, Nextflow, Conda, PacMan, R, Dardel,
 
 Here are some 5-minute tips and tricks we covered in todays training.
 
-## Setting the terminal prompt using Liquid Screen
+## Setting the terminal prompt using Liquid Prompt
 
-You can customize your terminal prompt by modifying the `PS1` variable in your shell configuration file (e.g., `.bashrc` or `.zshrc`) using a tool called [Liquid Screen](https://liquidprompt.readthedocs.io/en/stable/install.html). This tool provides useful status information, such as your username, active Conda environment, current path, and Git branch status.
+You can customize your terminal prompt by modifying the `PS1` variable in your shell configuration file (e.g., `.bashrc` or `.zshrc`) using a tool called [Liquid prompt](https://liquidprompt.readthedocs.io/en/stable/install.html). This tool dynamically updates the prompt to provide useful status information, such as your username, active Conda environment, current path, and Git branch status.
 
-To use Liquid Prompt, clone the Liquid Prompt repository, source it in your `.bashrc` or `.zshrc`, and select the a theme for a visually appealing prompt.
+To use Liquid Prompt, clone the Liquid Prompt repository in your home directory (or another location), then source it in your `.bashrc` or `.zshrc`, and select the theme for a visually appealing prompt.
+
+Here there is an example of the lines to include in your `.zshrc` file to set the powerline theme, assuming you have cloned the Liquid prompt repository to your home directory:
 
 ```{.bash}
 if [[ $- == *i* ]]; then
@@ -33,13 +35,15 @@ fi
 
 :::{.callout-tip}
 
-Some terminal fonts may not be compatible with a theme, so you may need to adjust your terminal settings.
+Some terminal fonts may not be compatible with a theme. If the prompt looks misaligned or includes strange characters, try switching to a compatible font in the terminal settings. 
 
 :::
 
 ## Edit Quarto Markdown tables in VSCode visual mode
 
-The VSCode Quarto extension allows you to edit markdown visually.
+The VSCode Quarto extension allows you to edit quarto files in visual mode, which is quite useful when working with tables. Visual mode provides a better interface for creating and editing tables without manually writing the table in markdown syntax. 
+
+One can easily switch between Source and Visual mode of quarto edition using VS code keyboard shortcuts. 
 
 ## Adding captions to Quarto figures and tables
 
