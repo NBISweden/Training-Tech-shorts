@@ -18,7 +18,7 @@ Here are some 5-minute tips and tricks we covered in todays training.
 
 ## Setting the terminal prompt using Liquid Prompt
 
-You can customize your terminal prompt by modifying the `PS1` variable in your shell configuration file (e.g., `.bashrc` or `.zshrc`) using a tool called [Liquid prompt](https://liquidprompt.readthedocs.io/en/stable/install.html). This tool dynamically updates the prompt to provide useful status information, such as your username, active Conda environment, current path, and Git branch status.
+You can customize your terminal prompt by modifying the `PS1` variable in your shell configuration file (e.g., `.bashrc` or `.zshrc`) using a tool called [Liquid Prompt](https://liquidprompt.readthedocs.io/en/stable/install.html). This tool dynamically updates the prompt to provide useful status information, such as your username, active Conda environment, current path, and Git branch status.
 
 To use Liquid Prompt, clone the Liquid Prompt repository in your home directory (or another location), then source it in your `.bashrc` or `.zshrc`, and select the theme for a visually appealing prompt.
 
