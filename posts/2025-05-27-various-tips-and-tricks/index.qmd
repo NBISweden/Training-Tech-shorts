@@ -108,3 +108,56 @@ You can then knit your Quarto report by first activating your pixi environment c
 This prevents the need for activating your pixi environment before knitting the report and enables interactive coding in your Quarto report.
 
 ## Using a Conda lock file in Nextflow
+
+Managing package drift is a key challenge for reproducibility when using Conda. Typically, users create environments from an `environment.yml` file, sometimes pinning specific package versions. However, indirect dependencies (dependencies of dependencies) are not always pinned, which means your environment may become unresolvable or behave differently over time as upstream packages change.
+
+To address this, it's best practice to generate a Conda lock file, which captures the exact versions of all packages (including dependencies) in your environment. This ensures that others can recreate the environment exactly as you had it, even months later. You can generate a lock file using the `--explicit` flag with `conda list`:
+
+```{.bash}
+# In an activated environment
+conda list --explicit > spec-file.txt
+```
+Alternatively, you can use:
+
+```{.bash}
+conda env export --name <env> --explicit > spec-file.txt
+```
+
+To recreate the environment from this lock file, use:
+
+```{.bash}
+conda create --name <env> --file spec-file.txt
+```
+
+While this approach is helpful for reproducibility, it can become unwieldy if you need to manage many environments. Fortunately, Nextflow supports using Conda lock files (which must have a `.txt` extension). Simply reference your lock file in the `conda` directive within your process definition, and enable Conda in your Nextflow configuration:
+
+```{.groovy filename="my_process.nf"}
+process MY_PROCESS {
+  conda "${moduleDir}/spec-file.txt"
+
+  input:
+  ...
+}
+```
+
+```{.groovy filename="nextflow.config"}
+conda.enabled = true
+```
+
+Place `spec-file.txt` in the same directory as your process script.
+
+:::{.callout-tip}
+
+When building pipelines with nf-core modules, you'll find that they often come with prebuilt containers and Conda environment files, but not with lock files. You can use [Seqera Containers](https://seqera.io/containers/) to build or pull a prebuilt container and extract its lock file.
+
+For example, MultiQC has a [prebuilt container](https://wave.seqera.io/view/builds/bd-e3ef3b42c5f9f0da_1). The build log shows that an `environment.lock` file is included inside the container. To extract this lock file, run:
+
+To extract the lock file from the container we can use:
+
+```{.bash}
+docker run --rm -it community.wave.seqera.io/library/multiqc:1.29--e3ef3b42c5f9f0da cat environment.lock > multiqc-1.29-spec-file.txt
+```
+
+You can now use this lock file with the `conda` directive in Nextflow to recreate the same environment as the Docker container.
+
+:::
