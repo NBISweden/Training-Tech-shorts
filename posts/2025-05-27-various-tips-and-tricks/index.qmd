@@ -150,7 +150,7 @@ Place `spec-file.txt` in the same directory as your process script.
 
 When building pipelines with nf-core modules, you'll find that they often come with prebuilt containers and Conda environment files, but not with lock files. You can use [Seqera Containers](https://seqera.io/containers/) to build or pull a prebuilt container and extract its lock file.
 
-For example, MultiQC has a [prebuilt container](https://wave.seqera.io/view/builds/bd-e3ef3b42c5f9f0da_1). The build log shows that an `environment.lock` file is included inside the container. To extract this lock file, run:
+For example, MultiQC has a [prebuilt container](https://wave.seqera.io/view/builds/bd-e3ef3b42c5f9f0da_1). The build log shows that an `environment.lock` file is included inside the container.
 
 To extract the lock file from the container we can use:
 
