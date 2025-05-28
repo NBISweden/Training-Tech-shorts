@@ -65,10 +65,13 @@ It's loaded on Dardel using `ml nano`.
 
 ## Setting group permissions on Dardel
 
-Dardel doesn't automatically set group permissions on files. You can update them using
+Dardel doesn't automatically set group permissions on files. So you might run into problems where group members cannot access files you have created. 
+
+### Retroactively change permissions
+
+You can update group permissions by changing file ownership to the group, and then setting the group's permission equal to the user's permissions:
 
 ```{.bash}
-    # change permissions so all members of the project can access the files
     # thanks to Karl Johan from PDC support for this useful tidbit!
     # change the file ownership to group:
     chgrp --no-dereference --silent --recursive ${GRP} ${PWD}
@@ -77,6 +80,21 @@ Dardel doesn't automatically set group permissions on files. You can update them
 ```
 
 This can be added to launch scripts like [this `run_nextflow.sh` example](https://github.com/SLUBioinformaticsInfrastructure/nf-core_on_dardel/blob/main/runscript.sh).
+
+
+### Set permissions at creation
+
+Alternatively, you can add 
+
+```{.bash}
+umask 0002
+```
+
+to your `.bahsrc`, to set a file mode creation mask. Here, the last three digits encode the user, group and others classes, respectively, while the first one is ignored. 
+
+The number `0` sets read, write and execute permissions, while `2` is not granting write permission, only read and execute permission. 
+
+More information in the [umask man pages](https://man7.org/linux/man-pages/man2/umask.2.html) and on [Wikipedia](https://en.wikipedia.org/wiki/Umask). 
 
 ## MacOS shortcuts
 
