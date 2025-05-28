@@ -18,15 +18,13 @@ Here are some 5-minute tips and tricks we covered in todays training.
 
 ## Setting the terminal prompt using Liquid Prompt
 
-You can customize your terminal prompt by modifying the `PS1` variable in your shell configuration file (e.g., `.bashrc` or `.zshrc`) using a tool called [Liquid Prompt](https://liquidprompt.readthedocs.io/en/stable/install.html). This tool dynamically updates the prompt to provide useful status information, such as your username, active Conda environment, current path, and Git branch status.
+You can enhance your terminal experience by customizing your prompt with [Liquid Prompt](https://liquidprompt.readthedocs.io/en/stable/install.html). Liquid Prompt provides dynamic, context-aware information such as your username, active Conda environment, current directory, and Git branch directly in your prompt.
 
-To use Liquid Prompt, clone the Liquid Prompt repository in your home directory (or another location), then source it in your `.bashrc` or `.zshrc`, and select the theme for a visually appealing prompt.
-
-Here there is an example of the lines to include in your `.zshrc` file to set the powerline theme, assuming you have cloned the Liquid prompt repository to your home directory:
+To get started, clone the Liquid Prompt repository to your home directory (or another location), then source it in your `.bashrc` or `.zshrc`. You can also enable the Powerline theme for a modern look. Here's an example of what to add to your `.zshrc`:
 
 ```{.bash}
 if [[ $- == *i* ]]; then
-    # Only load Liquidprompt in interactive shells
+    # Only load Liquid Prompt in interactive shells
     source ~/liquidprompt/liquidprompt
     source ~/liquidprompt/themes/powerline/powerline.theme
     lp_theme powerline
@@ -35,15 +33,17 @@ fi
 
 :::{.callout-tip}
 
-Some terminal fonts may not be compatible with a theme. If the prompt looks misaligned or includes strange characters, try switching to a compatible font in the terminal settings. 
+If your prompt looks misaligned or displays odd characters, try switching to a Powerline-compatible font in your terminal settings.
 
 :::
 
+There are many prompt customization tools available. For a comparison of popular options, see [this article](https://github.com/liquidprompt/liquidprompt/wiki/why) by the author of Liquid Prompt.
+
 ## Edit Quarto Markdown tables in VSCode visual mode
 
-The VSCode Quarto extension allows you to edit quarto files in visual mode, which is quite useful when working with tables. Visual mode provides a better interface for creating and editing tables without manually writing the table in markdown syntax. 
+The VSCode Quarto extension allows you to edit quarto files in visual mode, which is quite useful when working with tables. Visual mode provides a better interface for creating and editing tables without manually writing the table in markdown syntax.
 
-One can easily switch between Source and Visual mode of quarto edition using VS code keyboard shortcuts. 
+One can easily switch between Source and Visual mode of quarto edition using VS code keyboard shortcuts.
 
 ## Adding captions to Quarto figures and tables
 
