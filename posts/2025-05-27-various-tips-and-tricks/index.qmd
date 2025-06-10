@@ -49,6 +49,147 @@ One can easily switch between Source and Visual mode of quarto edition using VS 
 
 Here are three methods to add captions to figures and tables in Quarto.
 
+````
+---
+title: "NBIS Report"
+subtitle: "`r format(Sys.Date(),format='%d-%b-%Y')`"
+format: html
+toc: true
+toc-depth: 4
+number-sections: true
+theme: flatly
+highlight: tango
+df-print: paged
+code-folding: none
+self-contained: true
+keep-md: false
+css: assets/report.css
+bibliography: bibliography_library.bib
+csl: nature.csl
+citations-hover: true
+footnotes-hover: true
+crossrefs-hover: true
+lightbox: true
+fig-cap-location: bottom
+---
+
+```{r,include=FALSE,cache=FALSE,eval=TRUE}
+## REPORT OPTIONS
+## code relating to the report creation
+## default working directory is the location of this document
+## all code is run in the working directory as the root
+
+# remove all variables
+rm(list=ls())
+
+# load libraries for document creation
+library(knitr) # runs pandoc
+
+# set knit options
+opts_knit$set(progress=TRUE,verbose=TRUE)
+opts_chunk$set(dev="svg",results="hold",fig.show="hold",fig.align="left",echo=FALSE,warning=FALSE,message=FALSE,accordion=NULL,
+block.title=NULL)
+#options(knitr.table.format = "html")
+```
+
+
+
+<!-- ----------------------- Do not edit above this ----------------------- -->
+
+```{r,eval=TRUE,include=FALSE}
+
+```
+
+```{r,echo=FALSE,include=FALSE}
+
+#species variable
+my_species_name <- "*Coregonus albula*"
+yourspecies_odb10 <- "actinopterygii_odb10"
+
+```
+
+## First way to have a caption
+
+```{r}
+#| label: tbl-buscoassembly
+
+
+library(knitr)
+# Create a clean formatted character vector for each line of the summary
+busco_lines <- c(
+  "C: 95.4% [S: 52.2%, D: 43.2%]",                 # Summary line
+  "1901 Complete and single-copy BUSCOs (S)",
+  "1574 Complete and duplicated BUSCOs (D)",
+  "3475 Complete BUSCOs (C)",
+  "35 Fragmented BUSCOs (F) (1.0%)",
+  "130 Missing BUSCOs (M) (3.6%)",
+  "3640 Total BUSCO groups searched (n)"
+)
+
+# Create a data frame for kable (as a single-column table)
+busco_df <- data.frame(busco_lines, stringsAsFactors = FALSE)
+
+# Render it with knitr::kable in markdown format
+knitr::kable(
+  busco_df,
+  format = "markdown",
+  col.names = NULL,
+  caption = paste("BUSCO results of the assembly with the dataset", yourspecies_odb10)
+)
+```
+
+## Second way to have a caption
+
+BUSCO results :
+```{css}
+table, th, td {
+  text-align: left;
+}
+```
+|     `r my_species_name`                                        |
+|--------------------------------------------------------|
+| C:88.9%[S:53.0%,D:35.9%],F:3.3%,M:7.8%,n:3640          |
+| 3235 Complete BUSCOs (C)                                |
+| 1928 Complete and single-copy BUSCOs (S)                |
+| 1307 Complete and duplicated BUSCOs (D)                 |
+| 120 Fragmented BUSCOs (F)                               |
+| 285 Missing BUSCOs (M)                                  |
+| 3640 Total BUSCO groups searched                        |         
+
+: Complete BUSCO results of the evidence gene build (rc1) using `r yourspecies_odb10` {#tbl-rc1busco}
+
+## Third way to have a caption
+```{r}
+#| label: tbl-interprotableresults
+#| tbl-cap: "Complete BUSCO results of the evidence gene build using `r yourspecies_odb10` "
+#|
+
+# Create a clean formatted character vector for each line of the summary
+busco_lines <- c(
+  "C: 95.4% [S: 52.2%, D: 43.2%]",                 # Summary line
+  "1901 Complete and single-copy BUSCOs (S)",
+  "1574 Complete and duplicated BUSCOs (D)",
+  "3475 Complete BUSCOs (C)",
+  "35 Fragmented BUSCOs (F) (1.0%)",
+  "130 Missing BUSCOs (M) (3.6%)",
+  "3640 Total BUSCO groups searched (n)"
+)
+
+# Create a data frame for kable (as a single-column table)
+busco_df <- data.frame(busco_lines, stringsAsFactors = FALSE)
+
+# Render it with knitr::kable in markdown format
+kable(busco_df, format = "markdown",col.names = NULL,align = c("l", "c", "c", "c"))
+
+
+```
+
+**They are all compatible with each others**
+````
+
+
+
+
 ## The Here package in R
 
 The `here` package in R helps you set paths.
