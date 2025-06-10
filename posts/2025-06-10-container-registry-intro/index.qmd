@@ -90,7 +90,8 @@ could use Github Actions to automatically update the image and version, so write
 
 ## Publishing to Seqera Container Public Registry
 
-Seqera provides a public registry for sharing containers, especially for bioinformatics workflows.
+Seqera provides [a public registry for building and sharing containers](https://seqera.io/containers/), especially for bioinformatics workflows.
+While the web interface is relatively powerful and easy to use, one can build custom packages and upload them through the wave cli tool.
 
 1. Install the [wave cli](https://github.com/seqeralabs/wave-cli). Make sure the downloaded file is executable.
 
