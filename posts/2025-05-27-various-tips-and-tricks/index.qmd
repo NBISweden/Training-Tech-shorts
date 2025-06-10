@@ -49,10 +49,10 @@ One can easily switch between Source and Visual mode of quarto edition using VS 
 
 Here are three methods to add captions to figures and tables in Quarto.
 
-````
+````{.markdown}
 ---
 title: "NBIS Report"
-subtitle: "`r format(Sys.Date(),format='%d-%b-%Y')`"
+subtitle: "`{{r}} format(Sys.Date(),format='%d-%b-%Y')`"
 format: html
 toc: true
 toc-depth: 4
@@ -73,7 +73,7 @@ lightbox: true
 fig-cap-location: bottom
 ---
 
-```{r,include=FALSE,cache=FALSE,eval=TRUE}
+```{{r,include=FALSE,cache=FALSE,eval=TRUE}}
 ## REPORT OPTIONS
 ## code relating to the report creation
 ## default working directory is the location of this document
@@ -92,16 +92,9 @@ block.title=NULL)
 #options(knitr.table.format = "html")
 ```
 
-
-
 <!-- ----------------------- Do not edit above this ----------------------- -->
 
-```{r,eval=TRUE,include=FALSE}
-
-```
-
-```{r,echo=FALSE,include=FALSE}
-
+```{{r,echo=FALSE,include=FALSE}}
 #species variable
 my_species_name <- "*Coregonus albula*"
 yourspecies_odb10 <- "actinopterygii_odb10"
@@ -110,7 +103,7 @@ yourspecies_odb10 <- "actinopterygii_odb10"
 
 ## First way to have a caption
 
-```{r}
+```{{r}}
 #| label: tbl-buscoassembly
 
 
@@ -141,12 +134,12 @@ knitr::kable(
 ## Second way to have a caption
 
 BUSCO results :
-```{css}
+```{.css}
 table, th, td {
   text-align: left;
 }
 ```
-|     `r my_species_name`                                        |
+|     `{{r}} my_species_name`                                        |
 |--------------------------------------------------------|
 | C:88.9%[S:53.0%,D:35.9%],F:3.3%,M:7.8%,n:3640          |
 | 3235 Complete BUSCOs (C)                                |
@@ -154,14 +147,14 @@ table, th, td {
 | 1307 Complete and duplicated BUSCOs (D)                 |
 | 120 Fragmented BUSCOs (F)                               |
 | 285 Missing BUSCOs (M)                                  |
-| 3640 Total BUSCO groups searched                        |         
+| 3640 Total BUSCO groups searched                        |
 
-: Complete BUSCO results of the evidence gene build (rc1) using `r yourspecies_odb10` {#tbl-rc1busco}
+: Complete BUSCO results of the evidence gene build (rc1) using `{{r}} yourspecies_odb10` {#tbl-rc1busco}
 
 ## Third way to have a caption
-```{r}
+```{{r}}
 #| label: tbl-interprotableresults
-#| tbl-cap: "Complete BUSCO results of the evidence gene build using `r yourspecies_odb10` "
+#| tbl-cap: "Complete BUSCO results of the evidence gene build using `{{r}} yourspecies_odb10` "
 #|
 
 # Create a clean formatted character vector for each line of the summary
@@ -180,15 +173,10 @@ busco_df <- data.frame(busco_lines, stringsAsFactors = FALSE)
 
 # Render it with knitr::kable in markdown format
 kable(busco_df, format = "markdown",col.names = NULL,align = c("l", "c", "c", "c"))
-
-
 ```
 
 **They are all compatible with each others**
 ````
-
-
-
 
 ## The Here package in R
 
@@ -206,7 +194,7 @@ It's loaded on Dardel using `ml nano`.
 
 ## Setting group permissions on Dardel
 
-Dardel doesn't automatically set group permissions on files. So you might run into problems where group members cannot access files you have created. 
+Dardel doesn't automatically set group permissions on files. So you might run into problems where group members cannot access files you have created.
 
 ### Retroactively change permissions
 
@@ -225,17 +213,17 @@ This can be added to launch scripts like [this `run_nextflow.sh` example](https:
 
 ### Set permissions at creation
 
-Alternatively, you can add 
+Alternatively, you can add
 
 ```{.bash}
 umask 0002
 ```
 
-to your `.bahsrc`, to set a file mode creation mask. Here, the last three digits encode the user, group and others classes, respectively, while the first one is ignored. 
+to your `.bahsrc`, to set a file mode creation mask. Here, the last three digits encode the user, group and others classes, respectively, while the first one is ignored.
 
-The number `0` sets read, write and execute permissions, while `2` is not granting write permission, only read and execute permission. 
+The number `0` sets read, write and execute permissions, while `2` is not granting write permission, only read and execute permission.
 
-More information in the [umask man pages](https://man7.org/linux/man-pages/man2/umask.2.html) and on [Wikipedia](https://en.wikipedia.org/wiki/Umask). 
+More information in the [umask man pages](https://man7.org/linux/man-pages/man2/umask.2.html) and on [Wikipedia](https://en.wikipedia.org/wiki/Umask).
 
 ## MacOS shortcuts
 
