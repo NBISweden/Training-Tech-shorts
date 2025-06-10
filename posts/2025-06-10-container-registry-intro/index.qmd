@@ -1,0 +1,112 @@
+---
+title: "Introduction to Container Registries"
+author:
+  - "Mahesh"
+date: "2025-05-13"
+date-modified: last-modified
+categories: [ "Docker", "Github", "Seqera" ]
+---
+
+## What is a Container Registry?
+
+Container registries are services for storing and distributing container images. They enable reproducible, portable, and scalable workflows by allowing users to share pre-built environments and applications. Popular registries include [Docker Hub](https://hub.docker.com/), [GitHub Container Registry (GHCR)](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry), and [Quay.io](https://quay.io/).
+
+Images are typically docker images that follow the [open container image format](https://github.com/opencontainers/image-spec) as they are the most interoperable (i.e. useable with multiple container platforms, e.g. `docker`, `singularity`/`apptainer`, `podman`, `charliecloud`, `shifter`, etc). These images can be pulled and run on any compatible system, ensuring consistent environments across development, testing, and production.
+
+**Key benefits:**
+- Centralized storage for container images
+- Versioning and access control
+- Integration with CI/CD pipelines
+
+## Bioinformatic specific registries
+
+- Biocontainers: https://quay.io/organization/biocontainers, typically accessed through https://biocontainers.pro/. These
+are automatically built from bioconda packages as stand-alone containers. Custom images and multi-tool containers (mulled containers) are also buildable, but require learning the system.
+- Seqera Container Registry: https://seqera.io/containers/, is a much more stream-lined experience to build multi-tool images where images are quickly built and stored in a public registry.
+
+## Uploading Images to GitHub Container Registry
+
+GitHub Container Registry (GHCR) allows you to store Docker images alongside your code repositories.
+
+### 1. Authenticate with GHCR
+
+```{.bash}
+echo $GITHUB_TOKEN | docker login ghcr.io -u <your-github-username> --password-stdin
+```
+
+### 2. Build Your Docker Image
+
+```{.bash}
+docker build -t ghcr.io/<your-github-username>/<image-name>:<tag> .
+```
+
+### 3. Push the Image
+
+```{.bash}
+docker push ghcr.io/<your-github-username>/<image-name>:<tag>
+```
+
+:::{callout-tip}
+Use repository or organization names to organize your images.
+:::
+
+## Building Containers with Custom Conda Environments
+
+You can create containers with custom Conda environments by specifying a environment.yml file.
+
+Example `environment.yml`:
+
+```{.yaml}
+name: myenv
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+```
+
+Example `Dockerfile`:
+
+```{.dockerfile}
+FROM mambaorg/micromamba:1.4.9
+
+COPY environment.yml /tmp/environment.yml
+RUN micromamba create -y -n myenv -f /tmp/environment.yml
+ENV PATH=/opt/conda/envs/myenv/bin:$PATH
+```
+
+Build and Tag the Image:
+
+```{.bash}
+docker build -t ghcr.io/<your-github-username>/<image-name>:<tag> .
+```
+
+## Publishing to Seqera Container Public Registry
+
+Seqera provides a public registry for sharing containers, especially for bioinformatics workflows.
+
+1. Install the [wave cli](https://github.com/seqeralabs/wave-cli).
+
+2. Build the image and store on Seqera's Registry using `--freeze`. If successful, the CLI will return an image path.
+
+```{.bash}
+wave --conda-file conda-env.yml --freeze --await
+```
+
+3. Using in Nextflow
+Reference your container in your Nextflow process:
+
+```{.groovy}
+process MY_PROCESS {
+    container 'registry.seqera.io/<namespace>/<image>:<tag>'
+    ...
+}
+```
+
+## Summary
+
+- Container registries enable sharing and reuse of container images.
+- GHCR and Seqera Container Public Registry are popular options for storing and distributing images.
+- Custom Conda environments can be built into containers for reproducible workflows.
+- Use these registries to streamline your bioinformatics pipelines and ensure reproducibility.
