@@ -180,7 +180,7 @@ kable(busco_df, format = "markdown",col.names = NULL,align = c("l", "c", "c", "c
 
 ## The Here package in R
 
-The `here` package in R helps you set paths.
+The `here` package in R helps you set paths. [here](https://here.r-lib.org) can be used with `here::i_am("$file") to set the working directory to the path where the file is hosted.
 
 ## Managing R packages using PacMan
 
