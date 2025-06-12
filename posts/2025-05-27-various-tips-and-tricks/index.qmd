@@ -184,7 +184,7 @@ The `here` package in R helps you set paths. [here](https://here.r-lib.org) can 
 
 ## Managing R packages using PacMan
 
-PacMan is a R package manager.
+PacMan is a R package manager. [PacMan](https://cran.r-project.org/web/packages/pacman/index.html) is essentially a combination of the ìnstall.packages` and `library` commands. `pacman::p_load(tidyverse)`, for instance, sees whether you you have tidyverse installed. If you do, it loads tidyverse. If you don't, it installs tidyverse and all dependencies, and loads tidyverse. With `p_install_version` you can install particular versions of the packages you are interested in. In a teaching scenario, this makes it much easier to have all students install everything that you need for your session.
 
 ## The Nano editor
 
