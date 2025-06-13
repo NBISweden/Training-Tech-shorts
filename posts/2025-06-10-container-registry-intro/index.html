@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Cormac">
-<meta name="dcterms.date" content="2024-06-04">
+<meta name="author" content="Mahesh">
+<meta name="dcterms.date" content="2025-06-10">
 
-<title>Introduction to Apptainer – Training Tech Shorts</title>
+<title>Introduction to Container Registries – Training Tech Shorts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -176,12 +176,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Introduction to Apptainer</h1>
+      <h1 class="title">Introduction to Container Registries</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Apptainer</div>
-                <div class="quarto-category">Singularity</div>
-                <div class="quarto-category">Containers</div>
-                <div class="quarto-category">Package managment</div>
+                <div class="quarto-category">Docker</div>
+                <div class="quarto-category">Github</div>
+                <div class="quarto-category">Seqera</div>
               </div>
                   </div>
   </div>
@@ -192,14 +191,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Cormac </p>
+               <p>Mahesh </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 4, 2024</p>
+        <p class="date">June 10, 2025</p>
       </div>
     </div>
     
@@ -224,122 +223,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>Lesson plan based around materials from <a href="https://coderefinery.github.io/ttt4hpc_containers/basics_running_containers">CodeRefinery</a></p>
-<p>Apptainer is the open source version of Singularity.</p>
-<section id="what-are-containers" class="level2">
-<h2 class="anchored" data-anchor-id="what-are-containers">What are containers?</h2>
+<section id="what-is-a-container-registry" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-container-registry">What is a Container Registry?</h2>
+<p>Container registries are services for storing and distributing container images. They enable reproducible, portable, and scalable workflows by allowing users to share pre-built environments and applications. Popular registries include <a href="https://hub.docker.com/">Docker Hub</a>, <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry (GHCR)</a>, and <a href="https://quay.io/">Quay.io</a>.</p>
+<p>Images are typically docker images that follow the <a href="https://github.com/opencontainers/image-spec">open container image format</a> as they are the most interoperable (i.e.&nbsp;useable with multiple container platforms, e.g.&nbsp;<code>docker</code>, <code>singularity</code>/<code>apptainer</code>, <code>podman</code>, <code>charliecloud</code>, <code>shifter</code>, etc). These images can be pulled and run on any compatible system, ensuring consistent environments across development, testing, and production.</p>
+<p><strong>Key benefits:</strong></p>
 <ul>
-<li>Containers isolate software, dependencies, configurations, and system libraries from the host system</li>
-<li>The naming came from the idea of shipping containers (which are portable &amp; standardized)</li>
-<li>Virtual machines are a similar concept, but these virtualise hardware, contain complete operating systems (including the kernel), and are managed by software known as a hypervisor</li>
-<li>Containers on the other hand share the host OS kernel, so they don’t contain complete operating systems, just user space system libraries</li>
-<li>This makes them lightweight, portable, and fast to start up</li>
+<li>Centralized storage for container images</li>
+<li>Versioning and access control</li>
+<li>Integration with CI/CD pipelines</li>
 </ul>
 </section>
-<section id="docker-vs-apptainer-containers" class="level2">
-<h2 class="anchored" data-anchor-id="docker-vs-apptainer-containers">Docker vs Apptainer containers</h2>
+<section id="bioinformatic-specific-registries" class="level2">
+<h2 class="anchored" data-anchor-id="bioinformatic-specific-registries">Bioinformatic specific registries</h2>
 <ul>
-<li>Apptainer (i.e.&nbsp;Singularity) is intended to run reproducibly across many system types, including HPC systems</li>
-<li>Docker is rarely allowed on clusters, requires root access</li>
-<li>Their images are somewhat different - Docker images are made up of layers (Base image -&gt; launched as container -&gt; edited -&gt; used as new base layer -&gt; launched -&gt; edited -&gt; etc.). Apptainer images squash layers into one file (.sif format)</li>
-<li>These files are easily shared and can be run on any system with Apptainer installed</li>
+<li><a href="https://biocontainers.pro/">Biocontainers</a>: These are automatically built from bioconda packages as stand-alone containers. Custom images and multi-tool containers (mulled containers) are also buildable, but require learning the system.</li>
+<li><a href="https://seqera.io/containers/">Seqera Container Registry</a>: A much more stream-lined experience to build multi-tool images where images are quickly built and stored in a public registry.</li>
 </ul>
 </section>
-<section id="apptainer-vs-singularity-history-the-.sif-format" class="level2">
-<h2 class="anchored" data-anchor-id="apptainer-vs-singularity-history-the-.sif-format">Apptainer vs Singularity history &amp; the .sif format</h2>
-<ul>
-<li>Singularity was the original name of the open source project from 2015, but this turned partly commercial in 2018</li>
-<li>The open source part forked and joined the Linux foundation in 2021, becoming Apptainer</li>
-<li>The singularity image format (.sif) remains in Apptainer as a legacy of that</li>
-<li>Similarly when you install Apptainer, there are symlinks, so you can use <code>singularity pull</code> rather than <code>apptainer pull</code></li>
-<li>For practical purposes, they are the same</li>
-</ul>
-</section>
-<section id="structure-of-an-apptainer-command" class="level2">
-<h2 class="anchored" data-anchor-id="structure-of-an-apptainer-command">Structure of an apptainer command</h2>
-<ul>
-<li><p><code>apptainer [subcommand] [image] [additional commands]</code></p></li>
-<li><p>Example of <code>pull</code> and <code>shell</code></p></li>
-</ul>
-<pre><code>apptainer pull docker://alpine
-apptainer shell alpine_latest.sif
-cat /etc/alpine-release
-exit
-cat /etc/alpine-release
-cat /etc/debian_version</code></pre>
-<ul>
-<li>Interact with the container from the host system:</li>
-</ul>
-<pre><code>apptainer exec alpine_latest.sif cat /etc/alpine-release
-cat /etc/alpine-release</code></pre>
-</section>
-<section id="building-.sif-from-a-definition-file-.def" class="level2">
-<h2 class="anchored" data-anchor-id="building-.sif-from-a-definition-file-.def">Building .sif from a definition file (.def)</h2>
-<ul>
-<li>Building a custom container requires a .def file, specifying the registry and image for the base image, and <a href="https://apptainer.org/documentation/">various options for the container</a></li>
-</ul>
+<section id="building-a-docker-image-from-a-conda-environment." class="level2">
+<h2 class="anchored" data-anchor-id="building-a-docker-image-from-a-conda-environment.">Building a docker image from a conda environment.</h2>
+<p>You can create containers with custom Conda environments by specifying a <code>environment.yml</code> file.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>example.def</strong></pre>
+<pre><strong>environment.yml</strong></pre>
 </div>
-<div class="sourceCode" id="cb3" data-filename="example.def"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Bootstrap: docker</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>From: debian:12.5-slim</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>%environment</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        export PATH=$PATH:/root/.pixi/bin</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>%runscript</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                cat /etc/debian_version</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>%post</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        export PATH=$PATH:/root/.pixi/bin</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        apt-get update &amp;&amp; \</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        apt-get install -y curl &amp;&amp; \</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        curl -fsSL https://pixi.sh/install.sh | bash &amp;&amp; \</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        apt-get clean &amp;&amp; \</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        pixi global install -c bioconda -c conda-forge  minigraph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="environment.yml"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> myenv</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.10</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> numpy</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pandas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ul>
-<li><p>Then build the container: <code>apptainer build minigraph.sif example.def</code></p></li>
-<li><p><code>apptainer run</code> executes the runscript inside the container:</p></li>
-</ul>
-<p><code>apptainer run minigraph.sif</code></p>
-</section>
-<section id="portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def" class="level2">
-<h2 class="anchored" data-anchor-id="portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def">Portability to HPC systems, &amp; note on reproducibilty (.sif files vs rebuilding from a .def)</h2>
-<ul>
-<li><p>.sif files are portable and will be highly reproducible</p></li>
-<li><p>You can also share a .def file, however consider that some tags on docker hub refer to rolling releases, e.g.&nbsp;<code>latest</code>. If you want future builds of the container to be identical, try to find a static tag, e.g.&nbsp;a github commit tag</p></li>
-<li><p>In addition, using commands from package managers like <code>apt-get update</code> in the .def will make the container less reproducible, as the package versions will change over time</p></li>
-<li><p>By default Apptainer/Singularity loads certain directories such as <code>$HOME</code> (see below), and this means local packages (e.g.&nbsp;Python, R, etc.) can be picked up and loaded instead of the ones in the container. To prevent this, do <a href="https://github.com/nf-core/tools/blob/930ece572bf23b68c7a7c5259e918a878ba6499e/nf_core/pipeline-template/nextflow.config#L212-L221">something like this</a>.</p></li>
-</ul>
-</section>
-<section id="other-useful-things-to-know" class="level2">
-<h2 class="anchored" data-anchor-id="other-useful-things-to-know">Other useful things to know:</h2>
-<section id="mount-binding" class="level3">
-<h3 class="anchored" data-anchor-id="mount-binding">Mount binding</h3>
-<ul>
-<li>Some folders are automatically bound from the host system (e.g., <code>$HOME</code>, <code>$CWD</code>, <code>/tmp</code>)</li>
-<li>Therefore don’t install software to those locations - they’ll install on your host system too</li>
-<li>Use an unmounted folder like <code>/opt</code> or <code>/usr/local</code> instead</li>
-<li>If you need to mount a directory to the container, e.g.&nbsp;a data directory, this is possible, e.g.:</li>
-</ul>
-<p><code>apptainer exec --bind /scratch example.sif ls /scratch</code></p>
-</section>
-<section id="conversion-from-docker" class="level3">
-<h3 class="anchored" data-anchor-id="conversion-from-docker">Conversion from docker</h3>
-<ul>
-<li>It’s possible to convert from docker images to singularity images - not covered today</li>
-</ul>
-</section>
-<section id="sandbox-containers" class="level3">
-<h3 class="anchored" data-anchor-id="sandbox-containers">Sandbox containers</h3>
-<ul>
-<li>Singularity containers are basically uneditable - no so fun if you need to keep rebuilding from scatch during development</li>
-<li>There is a “sandbox container” feature which is editable, and it works like a file system within your file system</li>
-<li>When you are ready for a production container, you can convert the sandbox container to a regular container, though it would be preferable to rebuild from a definition file, so that there is a record of what was done</li>
-</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Dockerfile</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="Dockerfile"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> mambaorg/micromamba:1.4.9</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> environment.yml /tmp/environment.yml</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">micromamba</span> create <span class="at">-y</span> <span class="at">-n</span> myenv <span class="at">-f</span> /tmp/environment.yml</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> PATH=/opt/conda/envs/myenv/bin:$PATH</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -350,16 +276,67 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It’s advisable to use many small containers (minimal container for a single process/tool) rather than large inclusive containers.</p>
+<p>Extract the conda lock file from this environment and save it alongside your <code>environment.yml</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-it</span> <span class="op">&lt;</span>image<span class="op">&gt;</span> micromamba env export <span class="at">--explicit</span> <span class="at">-n</span> myenv <span class="op">&gt;</span> myenv-conda.lock</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
+<section id="uploading-images-to-github-container-registry" class="level2">
+<h2 class="anchored" data-anchor-id="uploading-images-to-github-container-registry">Uploading Images to GitHub Container Registry</h2>
+<p>GitHub Container Registry (GHCR) allows you to store Docker images alongside your code repositories.</p>
+<ol type="1">
+<li><p>Authenticate with GHCR. First get a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">Github token</a>. Ensure that your token has permission to write and manage packages on Github.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$GITHUB_TOKEN</span> <span class="kw">|</span> <span class="ex">docker</span> login ghcr.io <span class="at">-u</span> <span class="op">&lt;</span>your-github-username<span class="op">&gt;</span> --password-stdin</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Build Your Docker Image</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> ghcr.io/<span class="op">&lt;</span>your-github-username<span class="op">&gt;</span>/<span class="op">&lt;</span>image-name<span class="op">&gt;</span>:<span class="op">&lt;</span>tag<span class="op">&gt;</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Push the Image</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> push ghcr.io/<span class="op">&lt;</span>your-github-username<span class="op">&gt;</span>/<span class="op">&lt;</span>image-name<span class="op">&gt;</span>:<span class="op">&lt;</span>tag<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use repository or organization names to organize your images.</p>
+</div>
+</div>
+<ol start="4" type="1">
+<li><p>Update package attributes. When you push an image, it will initially be private. Find the image under the packages tab in your Github profile and select it. Here you can attach the container image to a repository, and what permissions that repository has on the image (for example one could use Github Actions to automatically update the image and version, so write permission is needed).</p>
+<p>Select “Package settings” in the bottom right, to change the package visibility from private to public (anyone can pull the image).</p></li>
+</ol>
 </section>
-<section id="seqera-containers-resource" class="level2">
-<h2 class="anchored" data-anchor-id="seqera-containers-resource">Seqera containers resource</h2>
+<section id="publishing-to-seqera-container-public-registry" class="level2">
+<h2 class="anchored" data-anchor-id="publishing-to-seqera-container-public-registry">Publishing to Seqera Container Public Registry</h2>
+<p>Seqera provides <a href="https://seqera.io/containers/">a public registry for building and sharing containers</a>, especially for bioinformatics workflows. While the web interface is relatively powerful and easy to use, one can build custom packages and upload them through the wave cli tool.</p>
+<ol type="1">
+<li><p>Install the <a href="https://github.com/seqeralabs/wave-cli">wave cli</a>. Make sure the downloaded file is executable.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 wave-1.6.1-macos-arm64</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./wave-1.6.1-macos-arm64</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Build and upload your container image to the Seqera Container Public Registry using the Wave CLI. The <code>--freeze</code> flag uploads to the public registry, and <code>--await</code> waits for the build to complete. If successful, the CLI will output the image URI.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./wave-1.6.1-macos-arm64</span> <span class="at">--conda-file</span> conda-env.yml <span class="at">--freeze</span> <span class="at">--await</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Example output:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">community.wave.seqera.io/library/myenv:70473abb25330df7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Use the generated container image in your Nextflow process by specifying the image URI in the <code>container</code> directive:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>process MY_PROCESS <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    container <span class="st">'community.wave.seqera.io/library/myenv:70473abb25330df7'</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... rest of process definition ...</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
 </section>
-<section id="converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example" class="level2">
-<h2 class="anchored" data-anchor-id="converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example">Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?</h2>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li>Container registries enable sharing and reuse of container images.</li>
+<li>GHCR and Seqera Container Public Registry are popular options for storing and distributing images.</li>
+<li>Custom Conda environments can be built into containers for reproducible workflows.</li>
+<li>Use these registries to streamline your bioinformatics pipelines and ensure reproducibility.</li>
+</ul>
 
 
 </section>
@@ -769,4 +746,4 @@ Tip
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2024-06-04-apptainer-intro/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2024-06-04-apptainer-intro/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2025-06-10-container-registry-intro/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2025-06-10-container-registry-intro/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
