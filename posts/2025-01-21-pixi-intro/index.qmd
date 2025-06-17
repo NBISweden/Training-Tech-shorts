@@ -17,7 +17,7 @@ system's PATH, for example, job submission managers like slurm, or container pla
 
 ### Compatibility
 
-Pixi is somehwhat compatible with Conda. You can:
+Pixi is somewhat compatible with Conda. You can:
 
 - Install packages using the same Conda channels (e.g., `conda-forge`, `bioconda`).
 - Initialise project environments using existing Conda environment files.
@@ -59,7 +59,7 @@ Here:
 By default, Pixi will set the environment for your platform (e.g., `linux-64`), but you can specify
 additional platforms as needed.
 
-The `pixi init`command will create a file, `.pixi.toml`, which specifies the environment configuration.
+The `pixi init` command will create a file, `pixi.toml`, which specifies the environment configuration.
 
 Later, when using `pixi add`, `pixi run`, or `pixi shell`(explanations below) a second file will be created, the `pixi.lock`. This file locks down the specific package versions for reproducibility. 
 
