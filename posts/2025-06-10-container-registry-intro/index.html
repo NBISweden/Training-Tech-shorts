@@ -309,24 +309,41 @@ Tip
 <li><p>Update package attributes. When you push an image, it will initially be private. Find the image under the packages tab in your Github profile and select it. Here you can attach the container image to a repository, and what permissions that repository has on the image (for example one could use Github Actions to automatically update the image and version, so write permission is needed).</p>
 <p>Select “Package settings” in the bottom right, to change the package visibility from private to public (anyone can pull the image).</p></li>
 </ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Docker stores your credentials after logging in. If your token expires or is deleted and you receive an error trying to pull a public image like:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> pull ghcr.io/nbisweden/fastk_genescopefk_merquryfk:1.2</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Error</span> response from daemon: Head <span class="st">"https://ghcr.io/v2/nbisweden/fastk_genescopefk_merquryfk/manifests/1.2"</span>: denied: denied</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>then you need to logout again from the ghcr.io registry.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> logout ghcr.io</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
 <section id="publishing-to-seqera-container-public-registry" class="level2">
 <h2 class="anchored" data-anchor-id="publishing-to-seqera-container-public-registry">Publishing to Seqera Container Public Registry</h2>
 <p>Seqera provides <a href="https://seqera.io/containers/">a public registry for building and sharing containers</a>, especially for bioinformatics workflows. While the web interface is relatively powerful and easy to use, one can build custom packages and upload them through the wave cli tool.</p>
 <ol type="1">
 <li><p>Install the <a href="https://github.com/seqeralabs/wave-cli">wave cli</a>. Make sure the downloaded file is executable.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 wave-1.6.1-macos-arm64</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./wave-1.6.1-macos-arm64</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 wave-1.6.1-macos-arm64</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./wave-1.6.1-macos-arm64</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Build and upload your container image to the Seqera Container Public Registry using the Wave CLI. The <code>--freeze</code> flag uploads to the public registry, and <code>--await</code> waits for the build to complete. If successful, the CLI will output the image URI.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./wave-1.6.1-macos-arm64</span> <span class="at">--conda-file</span> conda-env.yml <span class="at">--freeze</span> <span class="at">--await</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./wave-1.6.1-macos-arm64</span> <span class="at">--conda-file</span> conda-env.yml <span class="at">--freeze</span> <span class="at">--await</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Example output:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">community.wave.seqera.io/library/myenv:70473abb25330df7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">community.wave.seqera.io/library/myenv:70473abb25330df7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Use the generated container image in your Nextflow process by specifying the image URI in the <code>container</code> directive:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>process MY_PROCESS <span class="op">{</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    container <span class="st">'community.wave.seqera.io/library/myenv:70473abb25330df7'</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... rest of process definition ...</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb12"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>process MY_PROCESS <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    container <span class="st">'community.wave.seqera.io/library/myenv:70473abb25330df7'</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... rest of process definition ...</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 </section>
 <section id="summary" class="level2">
