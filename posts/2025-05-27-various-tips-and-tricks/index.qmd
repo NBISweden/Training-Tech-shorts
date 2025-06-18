@@ -1,0 +1,312 @@
+---
+title: "Various Tips and Tricks"
+author:
+  - "Miguel"
+  - "Lucile"
+  - "Lizel"
+  - "Abu"
+  - "Amrei"
+  - "André"
+  - "Matilda"
+  - "Mahesh"
+date: "2025-05-27"
+date-modified: last-modified
+categories: [ Terminal, Quarto, Nano, MacOS, Nextflow, Conda, PacMan, R, Dardel, VSCode, "Tips and Tricks" ]
+---
+
+Here are some 5-minute tips and tricks we covered in today's training.
+
+## Setting the terminal prompt using Liquid Prompt
+
+You can enhance your terminal experience by customizing your prompt with [Liquid Prompt](https://liquidprompt.readthedocs.io/en/stable/install.html). Liquid Prompt provides dynamic, context-aware information such as your username, active Conda environment, current directory, and Git branch directly in your prompt.
+
+To get started, clone the Liquid Prompt repository to your home directory (or another location), then source it in your `.bashrc` or `.zshrc`. You can also enable the Powerline theme for a modern look. Here's an example of what to add to your `.zshrc`:
+
+```{.bash}
+if [[ $- == *i* ]]; then
+    # Only load Liquid Prompt in interactive shells
+    source ~/liquidprompt/liquidprompt
+    source ~/liquidprompt/themes/powerline/powerline.theme
+    lp_theme powerline
+fi
+```
+
+:::{.callout-tip}
+
+If your prompt looks misaligned or displays odd characters, try switching to a Powerline-compatible font in your terminal settings.
+
+:::
+
+There are many prompt customization tools available. For a comparison of popular options, see [this article](https://github.com/liquidprompt/liquidprompt/wiki/why) by the author of Liquid Prompt.
+
+## Edit Quarto Markdown tables in VSCode visual mode
+
+The VSCode Quarto extension allows you to create and edit tables using visual mode. Visual mode provides a better interface for creating and
+editing tables without manually writing the table in markdown syntax.
+
+One can switch between Source and Visual mode of Quarto extension using VS code keyboard shortcuts
+({{< kbd mac=Shift-Command-F4 win=Shift-Control-F4 linux=Shift-Control-F4 >}}) or by selecting the mode from the command palette.
+
+## Adding captions to Quarto figures and tables
+
+Here are three methods to add captions to figures and tables in Quarto.
+
+````{.markdown}
+---
+title: "NBIS Report"
+subtitle: "`{{r}} format(Sys.Date(),format='%d-%b-%Y')`"
+format: html
+toc: true
+toc-depth: 4
+number-sections: true
+theme: flatly
+highlight: tango
+df-print: paged
+code-folding: none
+self-contained: true
+keep-md: false
+css: assets/report.css
+bibliography: bibliography_library.bib
+csl: nature.csl
+citations-hover: true
+footnotes-hover: true
+crossrefs-hover: true
+lightbox: true
+fig-cap-location: bottom
+---
+
+```{{r,include=FALSE,cache=FALSE,eval=TRUE}}
+## REPORT OPTIONS
+## code relating to the report creation
+## default working directory is the location of this document
+## all code is run in the working directory as the root
+
+# remove all variables
+rm(list=ls())
+
+# load libraries for document creation
+library(knitr) # runs pandoc
+
+# set knit options
+opts_knit$set(progress=TRUE,verbose=TRUE)
+opts_chunk$set(dev="svg",results="hold",fig.show="hold",fig.align="left",echo=FALSE,warning=FALSE,message=FALSE,accordion=NULL,
+block.title=NULL)
+#options(knitr.table.format = "html")
+```
+
+<!-- ----------------------- Do not edit above this ----------------------- -->
+
+```{{r,echo=FALSE,include=FALSE}}
+#species variable
+my_species_name <- "*Coregonus albula*"
+yourspecies_odb10 <- "actinopterygii_odb10"
+
+```
+
+## First way to have a caption
+
+```{{r}}
+#| label: tbl-buscoassembly
+
+
+library(knitr)
+# Create a clean formatted character vector for each line of the summary
+busco_lines <- c(
+  "C: 95.4% [S: 52.2%, D: 43.2%]",                 # Summary line
+  "1901 Complete and single-copy BUSCOs (S)",
+  "1574 Complete and duplicated BUSCOs (D)",
+  "3475 Complete BUSCOs (C)",
+  "35 Fragmented BUSCOs (F) (1.0%)",
+  "130 Missing BUSCOs (M) (3.6%)",
+  "3640 Total BUSCO groups searched (n)"
+)
+
+# Create a data frame for kable (as a single-column table)
+busco_df <- data.frame(busco_lines, stringsAsFactors = FALSE)
+
+# Render it with knitr::kable in markdown format
+knitr::kable(
+  busco_df,
+  format = "markdown",
+  col.names = NULL,
+  caption = paste("BUSCO results of the assembly with the dataset", yourspecies_odb10)
+)
+```
+
+## Second way to have a caption
+
+BUSCO results :
+```{.css}
+table, th, td {
+  text-align: left;
+}
+```
+|     `{{r}} my_species_name`                                        |
+|--------------------------------------------------------|
+| C:88.9%[S:53.0%,D:35.9%],F:3.3%,M:7.8%,n:3640          |
+| 3235 Complete BUSCOs (C)                                |
+| 1928 Complete and single-copy BUSCOs (S)                |
+| 1307 Complete and duplicated BUSCOs (D)                 |
+| 120 Fragmented BUSCOs (F)                               |
+| 285 Missing BUSCOs (M)                                  |
+| 3640 Total BUSCO groups searched                        |
+
+: Complete BUSCO results of the evidence gene build (rc1) using `{{r}} yourspecies_odb10` {#tbl-rc1busco}
+
+## Third way to have a caption
+```{{r}}
+#| label: tbl-interprotableresults
+#| tbl-cap: "Complete BUSCO results of the evidence gene build using `{{r}} yourspecies_odb10` "
+#|
+
+# Create a clean formatted character vector for each line of the summary
+busco_lines <- c(
+  "C: 95.4% [S: 52.2%, D: 43.2%]",                 # Summary line
+  "1901 Complete and single-copy BUSCOs (S)",
+  "1574 Complete and duplicated BUSCOs (D)",
+  "3475 Complete BUSCOs (C)",
+  "35 Fragmented BUSCOs (F) (1.0%)",
+  "130 Missing BUSCOs (M) (3.6%)",
+  "3640 Total BUSCO groups searched (n)"
+)
+
+# Create a data frame for kable (as a single-column table)
+busco_df <- data.frame(busco_lines, stringsAsFactors = FALSE)
+
+# Render it with knitr::kable in markdown format
+kable(busco_df, format = "markdown",col.names = NULL,align = c("l", "c", "c", "c"))
+```
+
+**They are all compatible with each others**
+````
+
+## The Here package in R
+
+The `here` package in R helps you set paths. [here](https://here.r-lib.org) can be used with `here::i_am("$file")` to set the working directory to the path where the file is hosted.
+
+## Managing R packages using PacMan
+
+PacMan is a R package manager. [PacMan](https://cran.r-project.org/web/packages/pacman/index.html) is essentially a combination of the `install.packages` and `library` commands. `pacman::p_load(tidyverse)`, for instance, sees whether you you have tidyverse installed. If you do, it loads tidyverse. If you don't, it installs tidyverse and all dependencies, and loads tidyverse. With `p_install_version` you can install particular versions of the packages you are interested in. In a teaching scenario, this makes it much easier to have all students install everything that you need for your session.
+
+## The Nano editor
+
+Nano is an editor you can use in the Terminal.
+
+It's loaded on Dardel using `ml nano`.
+
+## Setting group permissions on Dardel
+
+Dardel doesn't automatically set group permissions on files. So you might run into problems where group members cannot access files you have created.
+
+### Retroactively change permissions
+
+You can update group permissions by changing file ownership to the group, and then setting the group's permission equal to the user's permissions:
+
+```{.bash}
+    # thanks to Karl Johan from PDC support for this useful tidbit!
+    # change the file ownership to group:
+    chgrp --no-dereference --silent --recursive ${GRP} ${PWD}
+    # change permission: group gets user's permissions
+    chmod --silent --recursive g=u ${PWD}
+```
+
+This can be added to launch scripts like [this `run_nextflow.sh` example](https://github.com/SLUBioinformaticsInfrastructure/nf-core_on_dardel/blob/main/runscript.sh).
+
+
+### Set permissions at creation
+
+Alternatively, you can add
+
+```{.bash}
+umask 0002
+```
+
+to your `.bashrc`, to set a file mode creation mask. Here, the last three digits encode the user, group and others classes, respectively, while the first one is ignored.
+
+The number `0` sets read, write and execute permissions, while `2` is not granting write permission, only read and execute permission.
+
+More information in the [umask man pages](https://man7.org/linux/man-pages/man2/umask.2.html) and on [Wikipedia](https://en.wikipedia.org/wiki/Umask).
+
+## MacOS shortcuts
+
+- Use the `ditto` command to copy directories while preserving permissions and timestamps.
+- Use `history 15` to view your last 15 commands.
+- The `banner` command prints large text banners in the terminal.
+- Drag and drop files or folders into the terminal to paste their paths.
+- Use `Option+Click` to move the cursor anywhere in the command line.
+- In Finder, `Cmd+I` opens the info panel, where you can copy file paths or customize folder icons.
+
+## Step through code from a Pixi environment in Quarto
+
+R packages can easily be installed in pixi environments to help resolve version incompatibilities or to ensure that others working in your project can replicate your environment.
+
+```{.bash}
+pixi init -c bioconda -c conda-forge -p linux-64
+pixi add r-base
+pixi add r-tidyverse
+pixi add bioconductor-phyloseq
+pixi install
+```
+
+You can then knit your Quarto report by first activating your pixi environment containing your R installation. However, if you want to be able to view objects in your session in vs code (requires the R extension) and execute code line by line when writing your Quarto report, you can do so by including the following line in your report:
+
+```{.r}
+.libPaths("/path/to/pixi/directory/.pixi/envs/default/lib/R/library")
+```
+
+This prevents the need for activating your pixi environment before knitting the report and enables interactive coding in your Quarto report.
+
+## Using a Conda lock file in Nextflow
+
+Managing package drift is a key challenge for reproducibility when using Conda. Typically, users create environments from an `environment.yml` file, sometimes pinning specific package versions. However, indirect dependencies (dependencies of dependencies) are not always pinned, which means your environment may become unresolvable or behave differently over time as upstream packages change.
+
+To address this, it's best practice to generate a Conda lock file, which captures the exact versions of all packages (including dependencies) in your environment. This ensures that others can recreate the environment exactly as you had it, even months later. You can generate a lock file using the `--explicit` flag with `conda list`:
+
+```{.bash}
+# In an activated environment
+conda list --explicit > spec-file.txt
+```
+Alternatively, you can use:
+
+```{.bash}
+conda env export --name <env> --explicit > spec-file.txt
+```
+
+To recreate the environment from this lock file, use:
+
+```{.bash}
+conda create --name <env> --file spec-file.txt
+```
+
+While this approach is helpful for reproducibility, it can become unwieldy if you need to manage many environments. Fortunately, Nextflow supports using Conda lock files (which must have a `.txt` extension). Simply reference your lock file in the `conda` directive within your process definition, and enable Conda in your Nextflow configuration:
+
+```{.groovy filename="my_process.nf"}
+process MY_PROCESS {
+  conda "${moduleDir}/spec-file.txt"
+
+  input:
+  ...
+}
+```
+
+```{.groovy filename="nextflow.config"}
+conda.enabled = true
+```
+
+Place `spec-file.txt` in the same directory as your process script.
+
+:::{.callout-tip}
+
+When building pipelines with nf-core modules, you'll find that they often come with prebuilt containers and Conda environment files, but not with lock files. You can use [Seqera Containers](https://seqera.io/containers/) to build or pull a prebuilt container and extract its lock file.
+
+For example, MultiQC has a [prebuilt container](https://wave.seqera.io/view/builds/bd-e3ef3b42c5f9f0da_1). The build log shows that an `environment.lock` file is included inside the container.
+
+To extract the lock file from the container we can use:
+
+```{.bash}
+docker run --rm -it community.wave.seqera.io/library/multiqc:1.29--e3ef3b42c5f9f0da cat environment.lock > multiqc-1.29-spec-file.txt
+```
+
+You can now use this lock file with the `conda` directive in Nextflow to recreate the same environment as the Docker container.
+
+:::
