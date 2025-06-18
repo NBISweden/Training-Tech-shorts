@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="key-difference" class="level3">
 <h3 class="anchored" data-anchor-id="key-difference">Key Difference</h3>
-<p>In Pixi, the environment configuration file (<code>.pixi.toml</code>) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a <code>pixi.lock</code> file is also written. This should also be commited to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command.</p>
+<p>In Pixi, the environment configuration file (<code>pixi.toml</code>) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a <code>pixi.lock</code> file is also written. This should also be committed to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command.</p>
 <hr>
 </section>
 </section>
@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You can add Python packages from PyPI using Pixi:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add python</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add <span class="at">--pypi</span> multiqc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Alternatively, you can directly modify the <code>.pixi.toml</code> file in your project directory:</p>
+<p>Alternatively, you can directly modify the <code>pixi.toml</code> file in your project directory:</p>
 <p>Under <code>[dependencies]</code>, or platform specific dependencies (such as <code>[target.linux-64.dependencies]</code>) you can add a line for each package you want to include <code>nextflow = "24.10.4.*"</code>for example.</p>
 <hr>
 </section>
@@ -296,12 +296,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="tasks-in-pixi" class="level2">
 <h2 class="anchored" data-anchor-id="tasks-in-pixi">Tasks in Pixi</h2>
-<p>In addtion to being a package manager, Pixi allows you to define and run tasks directly in the <code>.pixi.toml</code> file. For example:</p>
+<p>In addition to being a package manager, Pixi allows you to define and run tasks directly in the <code>.pixi.toml</code> file. For example:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tasks]</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name-of-task</span> <span class="op">=</span> <span class="st">"nextflow run main.nf -profile PDC"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>One can also add tasks via the command line:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task add hello python hello_world.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>See <a href="https://pixi.sh/latest/features/advanced_tasks/">Pixi Tasks</a> for more information</p>
+<p>See <a href="https://pixi.sh/latest/features/advanced_tasks/">Pixi Tasks</a> for more information.</p>
 <section id="task-features" class="level3">
 <h3 class="anchored" data-anchor-id="task-features">Task Features</h3>
 <p>Tasks can be combined or run conditionally. The example in the <a href="https://pixi.sh/latest/features/advanced_tasks/">documentation</a> is to specify that an application should be complied before being run. The command <code>depends-on</code>can be used here. With this one can chain tasks for complex workflows.</p>
