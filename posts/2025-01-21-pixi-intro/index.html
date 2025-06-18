@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-b91c67fa4b5af78359063df39734c13f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">June 13, 2025</p>
+        <p class="date-modified">June 18, 2025</p>
       </div>
     </div>
       
@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://pixi.sh/">Pixi</a> is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.</p>
 <section id="compatibility" class="level3">
 <h3 class="anchored" data-anchor-id="compatibility">Compatibility</h3>
-<p>Pixi is somehwat compatible with Conda. You can:</p>
+<p>Pixi is somewhat compatible with Conda. You can:</p>
 <ul>
 <li>Install packages using the same Conda channels (e.g., <code>conda-forge</code>, <code>bioconda</code>).</li>
 <li>Initialise project environments using existing Conda environment files.</li>
@@ -261,11 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>-p</code> sets the platforms (<code>linux-64</code>: Intel Linux, <code>osx-64</code>: Intel MacOS, <code>osx-arm64</code>: ARM MacOS)</li>
 </ul>
 <p>By default, Pixi will set the environment for your platform (e.g., <code>linux-64</code>), but you can specify additional platforms as needed.</p>
-<p>The <code>pixi init</code>command will create two files:</p>
-<ul>
-<li><code>.pixi.toml</code>: Specifies the environment configuration.</li>
-<li><code>.pixi.lock</code>: Locks down the specific package versions for reproducibility.</li>
-</ul>
+<p>The <code>pixi init</code> command will create a file, <code>pixi.toml</code>, which specifies the environment configuration.</p>
+<p>Later, when using <code>pixi add</code>, <code>pixi run</code>, or <code>pixi shell</code>(explanations below) a second file will be created, the <code>pixi.lock</code>. This file locks down the specific package versions for reproducibility.</p>
 <p>You should commit both files to your version control system to share the exact environment setup with collaborators and increase reproducibility.</p>
 </section>
 <section id="adding-packages" class="level3">
