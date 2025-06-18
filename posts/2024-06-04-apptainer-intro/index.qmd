@@ -3,7 +3,7 @@ title: "Introduction to Apptainer"
 author: "Cormac"
 date: "2024-06-04"
 date-modified: last-modified
-categories: [ Apptainer, Singularity, Containers, "Package managment" ]
+categories: [ Apptainer, Singularity, Containers, "Package management" ]
 ---
 
 Lesson plan based around materials from [CodeRefinery](https://coderefinery.github.io/ttt4hpc_containers/basics_running_containers)
@@ -17,7 +17,7 @@ Apptainer is the open source version of Singularity.
 - Virtual machines are a similar concept, but these virtualise hardware, contain complete operating systems (including the kernel), and are managed by software known as a hypervisor
 - Containers on the other hand share the host OS kernel, so they don't contain complete operating systems, just user space system libraries
 - This makes them lightweight, portable, and fast to start up
- 
+
 ## Docker vs Apptainer containers
 
 - Apptainer (i.e. Singularity) is intended to run reproducibly across many system types, including HPC systems
@@ -35,7 +35,7 @@ Apptainer is the open source version of Singularity.
 
 ## Structure of an apptainer command
 
-- `apptainer [subcommand] [image] [additional commands]` 
+- `apptainer [subcommand] [image] [additional commands]`
 
 - Example of `pull` and `shell`
 
@@ -75,7 +75,7 @@ From: debian:12.5-slim
         apt-get install -y curl && \
 		curl -fsSL https://pixi.sh/install.sh | bash && \
         apt-get clean && \
-        pixi global install -c bioconda -c conda-forge  minigraph
+        pixi global install -c bioconda -c conda-forge minigraph
 
 ```
 
