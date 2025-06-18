@@ -88,6 +88,21 @@ could use Github Actions to automatically update the image and version, so write
 
     Select "Package settings" in the bottom right, to change the package visibility from private to public (anyone can pull the image).
 
+:::{.callout-warning}
+Docker stores your credentials after logging in. If your token expires or is deleted and you receive an error trying to pull a public image like:
+
+```{.bash}
+docker pull ghcr.io/nbisweden/fastk_genescopefk_merquryfk:1.2
+Error response from daemon: Head "https://ghcr.io/v2/nbisweden/fastk_genescopefk_merquryfk/manifests/1.2": denied: denied
+```
+
+then you need to logout again from the ghcr.io registry.
+
+```{.bash}
+docker logout ghcr.io
+```
+:::
+
 ## Publishing to Seqera Container Public Registry
 
 Seqera provides [a public registry for building and sharing containers](https://seqera.io/containers/), especially for bioinformatics workflows.
