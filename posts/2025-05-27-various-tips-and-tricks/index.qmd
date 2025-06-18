@@ -14,7 +14,7 @@ date-modified: last-modified
 categories: [ Terminal, Quarto, Nano, MacOS, Nextflow, Conda, PacMan, R, Dardel, VSCode, "Tips and Tricks" ]
 ---
 
-Here are some 5-minute tips and tricks we covered in todays training.
+Here are some 5-minute tips and tricks we covered in today's training.
 
 ## Setting the terminal prompt using Liquid Prompt
 
@@ -41,9 +41,11 @@ There are many prompt customization tools available. For a comparison of popular
 
 ## Edit Quarto Markdown tables in VSCode visual mode
 
-The VSCode Quarto extension allows you to edit quarto files in visual mode, which is quite useful when working with tables. Visual mode provides a better interface for creating and editing tables without manually writing the table in markdown syntax.
+The VSCode Quarto extension allows you to create and edit tables using visual mode. Visual mode provides a better interface for creating and
+editing tables without manually writing the table in markdown syntax.
 
-One can easily switch between Source and Visual mode of quarto edition using VS code keyboard shortcuts.
+One can switch between Source and Visual mode of Quarto extension using VS code keyboard shortcuts
+({{< kbd mac=Shift-Command-F4 win=Shift-Control-F4 linux=Shift-Control-F4 >}}) or by selecting the mode from the command palette.
 
 ## Adding captions to Quarto figures and tables
 
