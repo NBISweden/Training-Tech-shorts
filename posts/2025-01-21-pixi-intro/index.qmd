@@ -5,7 +5,7 @@ author:
   - "Amrei"
 date: "2025-01-21"
 date-modified: last-modified
-categories: [ Pixi, "Package managment", "Command runner" ]
+categories: [ Pixi, "Package management", "Command runner" ]
 ---
 
 ## Why Pixi?
@@ -26,10 +26,10 @@ However, you cannot activate a conda environment using Pixi, or vice-versa.
 
 ### Key Difference
 
-In Pixi, the environment configuration file (`.pixi.toml`) lives in the project directory.
+In Pixi, the environment configuration file (`pixi.toml`) lives in the project directory.
 This ensures that the environment is tied to the project and simplifies reproducibility.
 When an environment is first created, a `pixi.lock` file is also written. This should also
-be commited to the git repository, just like the toml file. This records every package used
+be committed to the git repository, just like the toml file. This records every package used
 to make the environment for each platform that should be supported. This differs from Conda,
 in which lock files must be explicitly generated with a separate command.
 
@@ -61,7 +61,7 @@ additional platforms as needed.
 
 The `pixi init` command will create a file, `pixi.toml`, which specifies the environment configuration.
 
-Later, when using `pixi add`, `pixi run`, or `pixi shell`(explanations below) a second file will be created, the `pixi.lock`. This file locks down the specific package versions for reproducibility. 
+Later, when using `pixi add`, `pixi run`, or `pixi shell`(explanations below) a second file will be created, the `pixi.lock`. This file locks down the specific package versions for reproducibility.
 
 You should commit both files to your version control system to share the exact environment setup
 with collaborators and increase reproducibility.
@@ -81,7 +81,7 @@ pixi add python
 pixi add --pypi multiqc
 ```
 
-Alternatively, you can directly modify the `.pixi.toml` file in your project directory:
+Alternatively, you can directly modify the `pixi.toml` file in your project directory:
 
 Under `[dependencies]`, or platform specific dependencies (such as `[target.linux-64.dependencies]`)
 you can add a line for each package you want to include `nextflow = "24.10.4.*"`for example.
@@ -118,7 +118,7 @@ for more on defining multiple environments in a TOML.
 
 ## Tasks in Pixi
 
-In addtion to being a package manager,
+In addition to being a package manager,
 Pixi allows you to define and run tasks directly in the `.pixi.toml` file. For example:
 
 ```{.toml}
@@ -132,7 +132,7 @@ One can also add tasks via the command line:
 pixi task add hello python hello_world.py
 ```
 
-See [Pixi Tasks](https://pixi.sh/latest/features/advanced_tasks/) for more information
+See [Pixi Tasks](https://pixi.sh/latest/features/advanced_tasks/) for more information.
 
 ### Task Features
 
