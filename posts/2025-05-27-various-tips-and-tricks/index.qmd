@@ -182,7 +182,7 @@ kable(busco_df, format = "markdown",col.names = NULL,align = c("l", "c", "c", "c
 
 ## The Here package in R
 
-The `here` package in R helps you set paths. [here](https://here.r-lib.org) can be used with `here::i_am("$file") to set the working directory to the path where the file is hosted.
+The `here` package in R helps you set paths. [here](https://here.r-lib.org) can be used with `here::i_am("$file")` to set the working directory to the path where the file is hosted.
 
 ## Managing R packages using PacMan
 
@@ -221,7 +221,7 @@ Alternatively, you can add
 umask 0002
 ```
 
-to your `.bahsrc`, to set a file mode creation mask. Here, the last three digits encode the user, group and others classes, respectively, while the first one is ignored.
+to your `.bashrc`, to set a file mode creation mask. Here, the last three digits encode the user, group and others classes, respectively, while the first one is ignored.
 
 The number `0` sets read, write and execute permissions, while `2` is not granting write permission, only read and execute permission.
 
