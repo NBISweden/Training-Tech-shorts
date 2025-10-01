@@ -19,6 +19,7 @@ These lessons are designed to be hands-on demonstrations, helping to build a sha
 ## How It Works
 
 Lessons are short (~30 minutes) demonstrations, taught by volunteers from within the Tech group.
+The sessions are then written up and shared here for future reference as blog posts.
 
 ### Target Audience
 
@@ -33,6 +34,7 @@ We use **GitHub Issues** to manage the lesson pipeline:
 1. **Suggest a Topic:** Create a new Issue to propose a tool or topic you'd like to see covered.
 2. **Vote on Topics:** Use the reactions feature 👍 to upvote topics you're interested in.
 3. **Volunteer to Teach:** Anyone can volunteer to prepare and teach a lesson. You don't need to be an expert - just be willing to learn and share!
+4. **Write it Up:** After teaching, the lesson should be written up as a blog post, which will be reviewed and published here. Anyone can contribute to the write-up.
 
 ### Further Discussion
 
