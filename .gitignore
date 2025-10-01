@@ -2,6 +2,7 @@
 /.quarto/
 _book/
 _site/
+**/*.quarto_ipynb
 
 # Nextflow files
 .nextflow*
