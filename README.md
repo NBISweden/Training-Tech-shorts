@@ -6,6 +6,13 @@ This repository compiles short, practical training lessons on **Research Softwar
 
 These lessons are designed to be hands-on demonstrations, helping to build a shared foundation of knowledge and foster collaboration across all teams and affiliates. We aim to publish a new lesson every two weeks.
 
+### Tech Group Leaders
+
+These people are responsible for organizing the sessions and maintaining this repository:
+
+- **Mahesh Binzer-Panchal**
+- **Martin Dahlö**
+
 ---
 
 ## Where to Find the Lessons
