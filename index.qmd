@@ -1,11 +1,11 @@
 ---
-title: "Training Tech Shorts"
+title: "RSE Tools Tech Group"
 listing:
   contents: posts
   sort: "date desc"
   type: default
   categories: true
-  fields: 
+  fields:
     - title
     - subtitle
     - author
@@ -13,5 +13,10 @@ listing:
     - categories
 ---
 
-This is a series of short lessons in various technologies useful to our work.
+👋 Welcome to the NBIS RSE Tools Tech Group!
 
+These blog posts are short lessons on various **Research Software Engineering (RSE) tools** useful in bioinformatics, born from our internal tech groups aiming to foster cross-team collaboration with NBIS and among NBIS affiliates. We aim to share a demonstration of a tool every two weeks.
+
+**Want to discuss or need help?** Start a discussion on our **Discussions page** (https://github.com/NBISweden/Training-Tech-shorts/discussions) or reach out on the `#tech-group-rse-tools` channel on NBIS Slack.
+
+## Short lessons
