@@ -4,7 +4,7 @@ author:
   - "Pavlin"
 date: "2025-10-10"
 date-modified: last-modified
-categories: [ pixi, HPC ]
+categories: [ Pixi, HPC ]
 ---
 
 ## [Pixi](https://pixi.sh/) 
