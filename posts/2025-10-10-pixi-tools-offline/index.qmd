@@ -1,0 +1,119 @@
+---
+title: "Pixi tools on HPC centers"
+author:
+  - "Pavlin"
+date: "2025-10-10"
+date-modified: last-modified
+categories: [ pixi, HPC ]
+---
+
+## [Pixi](https://pixi.sh/) 
+Pixi is a package management tool for developers.
+It allows the developer to install libraries and applications in a reproducible way.
+Use pixi cross-platform, on Windows, Mac and Linux.
+
+On HPC centers, the default setup should be altered to reflect the particular storage allocation.
+The setup bellow is for personal use. Setting `pixi` for shared use in a project will be covered in a separate topic.
+
+### Install and configure pixi
+
+```bash
+# Install pixi
+curl -fsSL https://pixi.sh/install.sh | bash
+
+# Redirect cache and globals in project folder
+export PIXI_CACHE_DIR=/crex/proj/uppmax-xxx/user/nobackup/.PIXI_CACHE_DIR
+export PIXI_HOME=/crex/proj/uppmax-xxx/user/nobackup/.PIXI_HOME
+# make the folders
+mkdir -p $PIXI_CACHE_DIR $PIXI_HOME
+
+# add global bin to $PATH
+export PATH=$PATH:$PIXI_HOME/bin
+```
+
+### Install global tools
+Pixi can install packages (usually tools) in a separate environment and expose them like any common command-line tool.
+Each tool will be isolated and independent from any other tool installation. 
+
+**Install `samtools` as a global tool** - example
+```bash
+pixi global install -c bioconda -c conda-forge samtools
+Global environments as specified in '/crex/proj/uppmax-xxx/user/nobackup/.PIXI_HOME/manifests/pixi-global.toml'
+└── samtools: 1.9 (installed)
+    └─ exposes: ace2sam, blast2sam, bowtie2sam, export2sam, interpolate_sam, maq2sam-long, maq2sam-short, md5fa, md5sum-lite, novo2sam, plot-bamstats, psl2sam, sam2vcf, samtools, seq_cache_populate, soap2sam, wgsim, wgsim_eval, zoom2sam
+```
+
+**List all globally installed tools**
+```bash
+pixi global list
+Global environments as specified in '/crex/proj/uppmax-xxx/user/nobackup/.PIXI_HOME/manifests/pixi-global.toml'
+├── samtools: 1.9 
+│   └─ exposes: ace2sam, blast2sam, bowtie2sam, export2sam, interpolate_sam, maq2sam-long, maq2sam-short, md5fa, md5sum-lite, novo2sam, plot-bamstats, psl2sam, sam2vcf, samtools, seq_cache_populate, soap2sam, wgsim, wgsim_eval, zoom2sam
+├── ipython: 9.6.0 
+│   └─ exposes: ipython, ipython3
+├── julia: 1.10.4 
+│   └─ exposes: .julia-post-link, julia
+├── lazydocker: 0.24.1 
+│   └─ exposes: lazydocker
+...
+```
+    
+
+
+### Maintaining pixi
+```bash
+# Update pixi
+pixi self-update
+
+# Update single global tool
+pixi global update samtools
+
+# Update all tools 
+pixi global update
+
+# clean cache
+pixi clean cache
+```
+
+
+## [pixi-pack](https://pixi.sh/latest/deployment/pixi_pack/)
+There is a convenient way to pack whole environment/project (*download all necessary packages and wrap them in a single file*) and unpack it on another machine into a new environment (*even without conda or pixi available on that machine*).
+
+
+### Example - CellTrek
+```bash
+# Install pixi-pack as global tool
+pixi global install pixi-pack pixi-unpack
+
+# Init new project
+pixi init --platform linux-64 -c conda-forge -c bioturing -c bioconda CellTrek
+
+# Add packages
+cd CellTrek
+pixi add bioturing::r-celltrek "r-seurat<5.0" "r-seuratobject<5.0" bioconda::bioconductor-consensusclusterplus
+
+# create executable that can unpack itself
+pixi-pack --create-executable --use-cache ./cache
+
+# on the other machine create folder and run to unpack
+./environment.sh
+
+# One can use conda to activate the environment as well
+conda activate /full/path_to_env
+```
+
+### Example - gsMap
+```bash
+pixi init --platform linux-64 -c conda-forge -c bioconda gsMap
+cd gsMap
+pixi add "python>=3.10" bioconda::gsmap
+
+# Test the setup
+pixi shell
+
+(gsMap) gsmap -v
+gsMap version 1.73.5
+
+exit 
+# then pixi-pack ... and so on...
+```
