@@ -13,6 +13,7 @@ These people are responsible for organizing the sessions and maintaining this re
 - **Mahesh Binzer-Panchal**
 - **Martin Dahlö**
 - **Lucile Soler**
+- **Cormac Kinsella**
 
 ---
 
