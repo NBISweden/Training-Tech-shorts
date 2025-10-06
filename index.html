@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Training Tech Shorts</title>
+<title>RSE Tools Tech Group – RSE Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,14 +34,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b91c67fa4b5af78359063df39734c13f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1db3f541d99483cdc7a0d9cf38862b2c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,7 +114,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -138,8 +139,10 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Training Tech Shorts</span>
+    <span class="navbar-title">RSE Tools</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -175,7 +178,7 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/issues">
- <span class="dropdown-text">Suggest a lesson</span></a>
+ <span class="dropdown-text">Suggest a walkthrough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/discussions">
@@ -207,7 +210,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Training Tech Shorts</h1>
+<h1 class="title">RSE Tools Tech Group</h1>
 </div>
 
 
@@ -224,14 +227,19 @@ window.Quarto = {
 </header>
 
 
-<p>This is a series of short lessons in various technologies useful to our work.</p>
+<p>👋 Welcome to the NBIS RSE Tools Tech Group!</p>
+<p>These blog posts are short walkthroughs on various <strong>Research Software Engineering (RSE) tools</strong> useful in bioinformatics. We aim to share a demonstration of a tool every two weeks.</p>
+<p><strong>Want to discuss or need help?</strong> Start a discussion on our <strong><a href="https://github.com/NBISweden/Training-Tech-shorts/discussions">Discussions page</a></strong> or reach out on the <code>#tech-group-rse-tools</code> channel on NBIS Slack.</p>
+<section id="walkthroughs" class="level2">
+<h2 class="anchored" data-anchor-id="walkthroughs">Walkthroughs</h2>
 
 
 
+</section>
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="RG9ja2VyJTJDR2l0aHViJTJDU2VxZXJh" data-listing-date-sort="1749513600000" data-listing-file-modified-sort="1750257371333" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="4" data-listing-word-count-sort="709">
+<div class="quarto-post image-right" data-index="0" data-categories="RG9ja2VyJTJDR2l0aHViJTJDU2VxZXJh" data-listing-date-sort="1749513600000" data-listing-file-modified-sort="1759737231325" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="4" data-listing-word-count-sort="709">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-06-10-container-registry-intro/index.html" class="no-external">Introduction to Container Registries</a>
@@ -260,7 +268,7 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="VGVybWluYWwlMkNRdWFydG8lMkNOYW5vJTJDTWFjT1MlMkNOZXh0ZmxvdyUyQ0NvbmRhJTJDUGFjTWFuJTJDUiUyQ0RhcmRlbCUyQ1ZTQ29kZSUyQ1RpcHMlMjBhbmQlMjBUcmlja3M=" data-listing-date-sort="1748304000000" data-listing-file-modified-sort="1750257371332" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1687">
+<div class="quarto-post image-right" data-index="1" data-categories="VGVybWluYWwlMkNRdWFydG8lMkNOYW5vJTJDTWFjT1MlMkNOZXh0ZmxvdyUyQ0NvbmRhJTJDUGFjTWFuJTJDUiUyQ0RhcmRlbCUyQ1ZTQ29kZSUyQ1RpcHMlMjBhbmQlMjBUcmlja3M=" data-listing-date-sort="1748304000000" data-listing-file-modified-sort="1759737231325" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1687">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-05-27-various-tips-and-tricks/index.html" class="no-external">Various Tips and Tricks</a>
@@ -305,7 +313,7 @@ Miguel , Lucile , Lizel , Abu , Amrei , André , Matilda , Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="TmV4dGZsb3c=" data-listing-date-sort="1747094400000" data-listing-file-modified-sort="1750257371332" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1532">
+<div class="quarto-post image-right" data-index="2" data-categories="TmV4dGZsb3c=" data-listing-date-sort="1747094400000" data-listing-file-modified-sort="1759737231325" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1532">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-05-13-nextflow-when-to-use/index.html" class="no-external">When to use Nextflow?</a>
@@ -330,7 +338,7 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="U1NI" data-listing-date-sort="1744675200000" data-listing-file-modified-sort="1750257371332" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1106">
+<div class="quarto-post image-right" data-index="3" data-categories="U1NI" data-listing-date-sort="1744675200000" data-listing-file-modified-sort="1759737231324" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1106">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-04-15-ssh-config-intro/index.html" class="no-external">Introduction to SSH Config and Tunneling</a>
@@ -355,7 +363,7 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="R2l0aHViJTJDRG9jdW1lbnRhdGlvbiUyQ1NlbGYtcHJvbW90aW9u" data-listing-date-sort="1742256000000" data-listing-file-modified-sort="1750257371330" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1014">
+<div class="quarto-post image-right" data-index="4" data-categories="R2l0aHViJTJDRG9jdW1lbnRhdGlvbiUyQ1NlbGYtcHJvbW90aW9u" data-listing-date-sort="1742256000000" data-listing-file-modified-sort="1759737231322" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1014">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-03-18-github-readmes/index.html" class="no-external">README’s in GitHub</a>
@@ -384,7 +392,7 @@ Amrei
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="VlNDb2RlJTJDUmVtb3RlJTIwZGV2ZWxvcG1lbnQlMkNJREU=" data-listing-date-sort="1739836800000" data-listing-file-modified-sort="1750257371329" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="3" data-listing-word-count-sort="476">
+<div class="quarto-post image-right" data-index="5" data-categories="VlNDb2RlJTJDUmVtb3RlJTIwZGV2ZWxvcG1lbnQlMkNJREU=" data-listing-date-sort="1739836800000" data-listing-file-modified-sort="1759737231322" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="3" data-listing-word-count-sort="476">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-02-18-vscode-intro/index.html" class="no-external">Introduction to VSCode</a>
@@ -413,7 +421,7 @@ Cormac
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="UGl4aSUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50JTJDQ29tbWFuZCUyMHJ1bm5lcg==" data-listing-date-sort="1737417600000" data-listing-file-modified-sort="1750257371329" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="4" data-listing-word-count-sort="800">
+<div class="quarto-post image-right" data-index="6" data-categories="UGl4aSUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50JTJDQ29tbWFuZCUyMHJ1bm5lcg==" data-listing-date-sort="1737417600000" data-listing-file-modified-sort="1759737231322" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="4" data-listing-word-count-sort="800">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external">Introduction to Pixi</a>
@@ -442,7 +450,7 @@ Mahesh , Amrei
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="QXBwdGFpbmVyJTJDU2luZ3VsYXJpdHklMkNDb250YWluZXJzJTJDUGFja2FnZSUyMG1hbmFnZW1lbnQ=" data-listing-date-sort="1717459200000" data-listing-file-modified-sort="1750257371329" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="4" data-listing-word-count-sort="776">
+<div class="quarto-post image-right" data-index="7" data-categories="QXBwdGFpbmVyJTJDU2luZ3VsYXJpdHklMkNDb250YWluZXJzJTJDUGFja2FnZSUyMG1hbmFnZW1lbnQ=" data-listing-date-sort="1717459200000" data-listing-file-modified-sort="1759737231322" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="4" data-listing-word-count-sort="776">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external">Introduction to Apptainer</a>
@@ -473,7 +481,7 @@ Cormac
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZyUyQ0NvbmZsdWVuY2U=" data-listing-date-sort="1715644800000" data-listing-file-modified-sort="1750257371320" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="4" data-listing-word-count-sort="788">
+<div class="quarto-post image-right" data-index="8" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZyUyQ0NvbmZsdWVuY2U=" data-listing-date-sort="1715644800000" data-listing-file-modified-sort="1759737231313" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="4" data-listing-word-count-sort="788">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external">Quarto to Confluence</a>
@@ -502,7 +510,7 @@ Tomas
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="R2l0JTJDR2l0aHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNHaXRwb2Q=" data-listing-date-sort="1715040000000" data-listing-file-modified-sort="1750257371320" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="5" data-listing-word-count-sort="928">
+<div class="quarto-post image-right" data-index="9" data-categories="R2l0JTJDR2l0aHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNHaXRwb2Q=" data-listing-date-sort="1715040000000" data-listing-file-modified-sort="1759737231313" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="5" data-listing-word-count-sort="977">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external">Introduction to Gitpod</a>
@@ -533,7 +541,7 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZw==" data-listing-date-sort="1713225600000" data-listing-file-modified-sort="1750257371320" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1281">
+<div class="quarto-post image-right" data-index="10" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZw==" data-listing-date-sort="1713225600000" data-listing-file-modified-sort="1759737231313" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1281">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external">Introduction to Quarto</a>
@@ -560,7 +568,7 @@ Per
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="R2l0JTJDVmVyc2lvbiUyMGNvbnRyb2w=" data-listing-date-sort="1710806400000" data-listing-file-modified-sort="1750257371320" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
+<div class="quarto-post image-right" data-index="11" data-categories="R2l0JTJDVmVyc2lvbiUyMGNvbnRyb2w=" data-listing-date-sort="1710806400000" data-listing-file-modified-sort="1759737231313" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2024-03-19-git-intro/index.html" class="no-external">Introduction to Git</a>
@@ -587,7 +595,7 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="R2l0JTJDR2l0aHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNDb2xsYWJvcmF0aW9u" data-listing-date-sort="1710201600000" data-listing-file-modified-sort="1750257371320" data-listing-date-modified-sort="1750257371000" data-listing-reading-time-sort="5" data-listing-word-count-sort="883">
+<div class="quarto-post image-right" data-index="12" data-categories="R2l0JTJDR2l0aHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNDb2xsYWJvcmF0aW9u" data-listing-date-sort="1710201600000" data-listing-file-modified-sort="1759737231312" data-listing-date-modified-sort="1759737231000" data-listing-reading-time-sort="5" data-listing-word-count-sort="883">
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external">Collaboration on Github</a>
@@ -672,13 +680,14 @@ Mahesh
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

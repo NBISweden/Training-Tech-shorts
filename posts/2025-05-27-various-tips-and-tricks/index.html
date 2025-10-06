@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -16,7 +16,7 @@
 <meta name="author" content="Mahesh">
 <meta name="dcterms.date" content="2025-05-27">
 
-<title>Various Tips and Tricks – Training Tech Shorts</title>
+<title>Various Tips and Tricks – RSE Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,14 +76,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b91c67fa4b5af78359063df39734c13f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-1db3f541d99483cdc7a0d9cf38862b2c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -124,8 +125,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Training Tech Shorts</span>
+    <span class="navbar-title">RSE Tools</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -161,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/issues">
- <span class="dropdown-text">Suggest a lesson</span></a>
+ <span class="dropdown-text">Suggest a walkthrough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/discussions">
@@ -229,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">June 18, 2025</p>
+        <p class="date-modified">October 6, 2025</p>
       </div>
     </div>
       
@@ -252,12 +255,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="setting-the-terminal-prompt-using-liquid-prompt">Setting the terminal prompt using Liquid Prompt</h2>
 <p>You can enhance your terminal experience by customizing your prompt with <a href="https://liquidprompt.readthedocs.io/en/stable/install.html">Liquid Prompt</a>. Liquid Prompt provides dynamic, context-aware information such as your username, active Conda environment, current directory, and Git branch directly in your prompt.</p>
 <p>To get started, clone the Liquid Prompt repository to your home directory (or another location), then source it in your <code>.bashrc</code> or <code>.zshrc</code>. You can also enable the Powerline theme for a modern look. Here’s an example of what to add to your <code>.zshrc</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="va">$-</span> <span class="ot">==</span> <span class="pp">*</span>i<span class="pp">*</span> <span class="kw">]];</span> <span class="cf">then</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">[[</span> <span class="va">$-</span> <span class="ot">==</span> <span class="pp">*</span>i<span class="pp">*</span> <span class="kw">]];</span> <span class="cf">then</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Only load Liquid Prompt in interactive shells</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">source</span> ~/liquidprompt/liquidprompt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">source</span> ~/liquidprompt/themes/powerline/powerline.theme</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">lp_theme</span> powerline</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -276,12 +279,12 @@ Tip
 <section id="edit-quarto-markdown-tables-in-vscode-visual-mode" class="level2">
 <h2 class="anchored" data-anchor-id="edit-quarto-markdown-tables-in-vscode-visual-mode">Edit Quarto Markdown tables in VSCode visual mode</h2>
 <p>The VSCode Quarto extension allows you to create and edit tables using visual mode. Visual mode provides a better interface for creating and editing tables without manually writing the table in markdown syntax.</p>
-<p>One can switch between Source and Visual mode of Quarto extension using VS code keyboard shortcuts (<kbd aria-hidden="true" data-linux="Shift-Control-F4" data-mac="Shift-Command-F4" data-windows="Shift-Control-F4"></kbd><span class="visually-hidden"></span>) or by selecting the mode from the command palette.</p>
+<p>One can switch between Source and Visual mode of Quarto extension using VS code keyboard shortcuts (<kbd title="linux: Shift-Control-F4, mac: Shift-Command-F4, windows: Shift-Control-F4" aria-hidden="true" data-linux="Shift-Control-F4" data-mac="Shift-Command-F4" data-windows="Shift-Control-F4"></kbd><span class="visually-hidden"></span>) or by selecting the mode from the command palette.</p>
 </section>
 <section id="adding-captions-to-quarto-figures-and-tables" class="level2">
 <h2 class="anchored" data-anchor-id="adding-captions-to-quarto-figures-and-tables">Adding captions to Quarto figures and tables</h2>
 <p>Here are three methods to add captions to figures and tables in Quarto.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "NBIS Report"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "`{r} format(Sys.Date(),format='%d-%b-%Y')`"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
@@ -406,7 +409,7 @@ Tip
 <span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(busco_df, <span class="at">format =</span> <span class="st">"markdown"</span>,<span class="at">col.names =</span> <span class="cn">NULL</span>,<span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>))</span>
 <span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>**They are all compatible with each others**</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>**They are all compatible with each others**</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="the-here-package-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="the-here-package-in-r">The Here package in R</h2>
@@ -427,17 +430,17 @@ Tip
 <section id="retroactively-change-permissions" class="level3">
 <h3 class="anchored" data-anchor-id="retroactively-change-permissions">Retroactively change permissions</h3>
 <p>You can update group permissions by changing file ownership to the group, and then setting the group’s permission equal to the user’s permissions:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># thanks to Karl Johan from PDC support for this useful tidbit!</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># thanks to Karl Johan from PDC support for this useful tidbit!</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># change the file ownership to group:</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">chgrp</span> <span class="at">--no-dereference</span> <span class="at">--silent</span> <span class="at">--recursive</span> <span class="va">${GRP}</span> <span class="va">${PWD}</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># change permission: group gets user's permissions</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">chmod</span> <span class="at">--silent</span> <span class="at">--recursive</span> g=u <span class="va">${PWD}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">chmod</span> <span class="at">--silent</span> <span class="at">--recursive</span> g=u <span class="va">${PWD}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This can be added to launch scripts like <a href="https://github.com/SLUBioinformaticsInfrastructure/nf-core_on_dardel/blob/main/runscript.sh">this <code>run_nextflow.sh</code> example</a>.</p>
 </section>
 <section id="set-permissions-at-creation" class="level3">
 <h3 class="anchored" data-anchor-id="set-permissions-at-creation">Set permissions at creation</h3>
 <p>Alternatively, you can add</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">umask</span> 0002</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">umask</span> 0002</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>to your <code>.bashrc</code>, to set a file mode creation mask. Here, the last three digits encode the user, group and others classes, respectively, while the first one is ignored.</p>
 <p>The number <code>0</code> sets read, write and execute permissions, while <code>2</code> is not granting write permission, only read and execute permission.</p>
 <p>More information in the <a href="https://man7.org/linux/man-pages/man2/umask.2.html">umask man pages</a> and on <a href="https://en.wikipedia.org/wiki/Umask">Wikipedia</a>.</p>
@@ -457,42 +460,42 @@ Tip
 <section id="step-through-code-from-a-pixi-environment-in-quarto" class="level2">
 <h2 class="anchored" data-anchor-id="step-through-code-from-a-pixi-environment-in-quarto">Step through code from a Pixi environment in Quarto</h2>
 <p>R packages can easily be installed in pixi environments to help resolve version incompatibilities or to ensure that others working in your project can replicate your environment.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> bioconda <span class="at">-c</span> conda-forge <span class="at">-p</span> linux-64</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> bioconda <span class="at">-c</span> conda-forge <span class="at">-p</span> linux-64</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add r-base</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add r-tidyverse</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add bioconductor-phyloseq</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> install</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You can then knit your Quarto report by first activating your pixi environment containing your R installation. However, if you want to be able to view objects in your session in vs code (requires the R extension) and execute code line by line when writing your Quarto report, you can do so by including the following line in your report:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>(<span class="st">"/path/to/pixi/directory/.pixi/envs/default/lib/R/library"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>(<span class="st">"/path/to/pixi/directory/.pixi/envs/default/lib/R/library"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This prevents the need for activating your pixi environment before knitting the report and enables interactive coding in your Quarto report.</p>
 </section>
 <section id="using-a-conda-lock-file-in-nextflow" class="level2">
 <h2 class="anchored" data-anchor-id="using-a-conda-lock-file-in-nextflow">Using a Conda lock file in Nextflow</h2>
 <p>Managing package drift is a key challenge for reproducibility when using Conda. Typically, users create environments from an <code>environment.yml</code> file, sometimes pinning specific package versions. However, indirect dependencies (dependencies of dependencies) are not always pinned, which means your environment may become unresolvable or behave differently over time as upstream packages change.</p>
 <p>To address this, it’s best practice to generate a Conda lock file, which captures the exact versions of all packages (including dependencies) in your environment. This ensures that others can recreate the environment exactly as you had it, even months later. You can generate a lock file using the <code>--explicit</code> flag with <code>conda list</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In an activated environment</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="at">--explicit</span> <span class="op">&gt;</span> spec-file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In an activated environment</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list <span class="at">--explicit</span> <span class="op">&gt;</span> spec-file.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Alternatively, you can use:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--name</span> <span class="op">&lt;</span>env<span class="op">&gt;</span> --explicit <span class="op">&gt;</span> spec-file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--name</span> <span class="op">&lt;</span>env<span class="op">&gt;</span> --explicit <span class="op">&gt;</span> spec-file.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To recreate the environment from this lock file, use:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> <span class="op">&lt;</span>env<span class="op">&gt;</span> --file spec-file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> <span class="op">&lt;</span>env<span class="op">&gt;</span> --file spec-file.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>While this approach is helpful for reproducibility, it can become unwieldy if you need to manage many environments. Fortunately, Nextflow supports using Conda lock files (which must have a <code>.txt</code> extension). Simply reference your lock file in the <code>conda</code> directive within your process definition, and enable Conda in your Nextflow configuration:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>my_process.nf</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="my_process.nf"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>process MY_PROCESS <span class="op">{</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-filename="my_process.nf"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>process MY_PROCESS <span class="op">{</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  conda <span class="st">"</span><span class="ss">${</span>moduleDir<span class="ss">}</span><span class="st">/spec-file.txt"</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  input<span class="op">:</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>nextflow.config</strong></pre>
 </div>
-<div class="sourceCode" id="cb11" data-filename="nextflow.config"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>conda<span class="op">.</span>enabled <span class="op">=</span> <span class="kw">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-filename="nextflow.config"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>conda<span class="op">.</span>enabled <span class="op">=</span> <span class="kw">true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Place <code>spec-file.txt</code> in the same directory as your process script.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -508,7 +511,7 @@ Tip
 <p>When building pipelines with nf-core modules, you’ll find that they often come with prebuilt containers and Conda environment files, but not with lock files. You can use <a href="https://seqera.io/containers/">Seqera Containers</a> to build or pull a prebuilt container and extract its lock file.</p>
 <p>For example, MultiQC has a <a href="https://wave.seqera.io/view/builds/bd-e3ef3b42c5f9f0da_1">prebuilt container</a>. The build log shows that an <code>environment.lock</code> file is included inside the container.</p>
 <p>To extract the lock file from the container we can use:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-it</span> community.wave.seqera.io/library/multiqc:1.29--e3ef3b42c5f9f0da cat environment.lock <span class="op">&gt;</span> multiqc-1.29-spec-file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-it</span> community.wave.seqera.io/library/multiqc:1.29--e3ef3b42c5f9f0da cat environment.lock <span class="op">&gt;</span> multiqc-1.29-spec-file.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You can now use this lock file with the <code>conda</code> directive in Nextflow to recreate the same environment as the Docker container.</p>
 </div>
 </div>
@@ -568,13 +571,14 @@ Tip
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

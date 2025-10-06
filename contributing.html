@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>contributing – Training Tech Shorts</title>
+<title>contributing – RSE Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,14 +32,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b91c67fa4b5af78359063df39734c13f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1db3f541d99483cdc7a0d9cf38862b2c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,9 +68,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -116,8 +79,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Training Tech Shorts</span>
+    <span class="navbar-title">RSE Tools</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -153,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/issues">
- <span class="dropdown-text">Suggest a lesson</span></a>
+ <span class="dropdown-text">Suggest a walkthrough</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/discussions">
@@ -186,158 +151,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="contributing" class="level1">
 <h1>Contributing</h1>
-<section id="quick-start" class="level2">
-<h2 class="anchored" data-anchor-id="quick-start">Quick start</h2>
-<p>The first step is to read over the lesson <a href="./posts/2024-03-12-github-collaboration/index.html">Collaboration on Github</a>.</p>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">How It Works</h2>
+<p>Walkthroughs are short (~30 minutes) demonstrations, taught by volunteers from within the Tech group. The sessions are then written up and shared here for future reference as blog posts.</p>
+<section id="target-audience" class="level3">
+<h3 class="anchored" data-anchor-id="target-audience">Target Audience</h3>
+<p>Our primary audience is <strong>NBIS staff and affiliates</strong>, both <strong>bioinformaticians and managers</strong>.</p>
+<ul>
+<li><strong>For Learners:</strong> Provides regular, practical training on our core technology stack.</li>
+<li><strong>For Managers:</strong> Highlights the importance of regular training and informs them of the teams’ collective capabilities.</li>
+</ul>
+</section>
+<section id="contributing-suggesting-walkthroughs" class="level3">
+<h3 class="anchored" data-anchor-id="contributing-suggesting-walkthroughs">Contributing &amp; Suggesting Walkthroughs</h3>
+<p>We use <strong><a href="https://github.com/NBISweden/Training-Tech-shorts/issues">GitHub Issues</a></strong> to manage the walkthrough pipeline:</p>
 <ol type="1">
-<li>Make a branch for your lesson.</li>
-<li>Under <code>posts</code>, make a folder for your lesson named based on the date and topic, e.g., <code>2024-03-12-github-collaboration</code>.</li>
-<li>Create an <code>index.qmd</code> with a header in that folder.</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Lesson title"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Lesson instructor"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "YYYY-MM-DD"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [ keywords ]</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ol start="4" type="1">
-<li>The first paragraph should summarise the lesson. This appears on the front page too.</li>
-<li>In the <code>index.qmd</code>, add headers for key points to cover.</li>
-<li>Teach your topic to your team for 30-45 mins. Please remember to record the lesson.</li>
-<li>Each learner selects a key point to contribute material on. The person responsible for a section can be added to the <code>index.qmd</code> on the instructors branch.</li>
-<li>Make a draft pull request to the lesson branch and ask the other learner assigned to review. Make changes until you’re both happy.</li>
-<li>Mark the pull request as ready, and request the instructor to review.</li>
-<li>When the instructor is happy with the changes they should merge the learners contribution back into their lesson branch.</li>
-<li>The instructor reviews and merges the lesson branch when all contributions have been received. It is the responsibility of the teacher to make sure contributions have been received after two weeks.</li>
+<li><strong>Suggest a Topic:</strong> Create a new Issue to propose a tool or topic you’d like to see covered.</li>
+<li><strong>Vote on Topics:</strong> Use the reactions feature 👍 to upvote topics you’re interested in.</li>
+<li><strong>Volunteer to Teach:</strong> Anyone can volunteer to prepare and demonstrate a walkthrough. You don’t need to be an expert - just be willing to learn and share!</li>
+<li><strong>Write it Up:</strong> After the demo, the walkthrough should be written up as a blog post, which will be reviewed and published here. Anyone can contribute to the write-up.</li>
 </ol>
 </section>
-<section id="review-lessons" class="level3">
-<h3 class="anchored" data-anchor-id="review-lessons">Review lessons</h3>
-<p>Each lesson should be followed up by a review lesson the following week. Here, the teacher should review and discuss points that they notice learners had difficulty with.</p>
-</section>
-<section id="sequence-diagram" class="level3">
-<h3 class="anchored" data-anchor-id="sequence-diagram">Sequence diagram</h3>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">sequenceDiagram
-    box transparent Learners
-        actor Learner1
-        actor Learner2
-    end
-    actor Teacher
-    Teacher -&gt;&gt; GitHub: New branch for lesson
-    Teacher -&gt;&gt; GitHub: New lesson file
-    Teacher -&gt;&gt; GitHub: Add key points
-    Teacher -&gt;&gt; Learner1: Demonstrates tool
-    Learner1 -&gt;&gt; Teacher: Volunteers to write up keypoint 2
-    Learner2 -&gt;&gt; Teacher: Volunteers to write up keypoint 1
-    Learner1 -&gt;&gt; GitHub: Make branch from lesson branch
-    Learner1 -&gt;&gt; GitHub: Add notes for keypoint 2
-    Learner2 -&gt;&gt; GitHub: Add notes for keypoint 1
-    Learner1 -&gt;&gt; GitHub: Request Learner2 to review text
-    Learner2 -&gt;&gt; GitHub: Request Learner1 to review text
-    Learner1 -&gt;&gt; GitHub: Provide code review
-    Learner1 -&gt;&gt; GitHub: Update notes from review
-    Learner1 -&gt;&gt; Teacher: Request code review
-    Learner1 -&gt;&gt; GitHub: Update notes
-    Teacher -&gt;&gt; GitHub: Merges notes into lesson branch
-    Teacher -&gt;&gt; GitHub: Merges lesson branch into main
-    GitHub -&gt;&gt; GitHub: Automated website build
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="detailed-instructions" class="level2">
-<h2 class="anchored" data-anchor-id="detailed-instructions">Detailed instructions</h2>
-<section id="making-a-branch-teacher" class="level3">
-<h3 class="anchored" data-anchor-id="making-a-branch-teacher">Making a branch (Teacher)</h3>
-<ul>
-<li>On the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.</li>
-<li>Click on view all branches</li>
-<li>Click New branch, give it a name and select the branch source.</li>
-<li>Finally, click create branch</li>
-</ul>
-<p>You also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.</p>
-<p>This short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)</p>
-<p>The teacher should create a folder under <code>posts</code> named using the date and topic, e.g., <code>2024-03-12-github-collaboration</code>. Then inside that folder create an <code>index.qmd</code> with the following header.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Lesson title"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Lesson instructor"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "YYYY-MM-DD"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [ keywords ]</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Include a summary of the subject as the first paragraph. Then add level 2 headers of the key points to be taught. After the instructor has delivered the lesson, assign each key point to a person, and include their name in the document, and which learner will review.</p>
-</section>
-<section id="making-changes-learner" class="level3">
-<h3 class="anchored" data-anchor-id="making-changes-learner">Making changes (Learner)</h3>
-<ul>
-<li>Fork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.</li>
-<li>On your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.</li>
-<li>To edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.</li>
-<li>If instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.</li>
-<li>Add the file contents in edit mode.</li>
-<li>When finished, click “Commit changes…”</li>
-</ul>
-</section>
-<section id="making-a-draft-pull-request-learner" class="level3">
-<h3 class="anchored" data-anchor-id="making-a-draft-pull-request-learner">Making a draft pull request (Learner)</h3>
-<p>After making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR.</p>
-</section>
-<section id="code-review-review-partner" class="level3">
-<h3 class="anchored" data-anchor-id="code-review-review-partner">Code review (Review partner)</h3>
-<ul>
-<li>navigate to the top menu and click on <code>Pull requests</code></li>
-<li>by default all open pull requests are listed, you can further filter down the list. e.g.&nbsp;via clicking on <code>Reviews</code> and afterwards select <code>Awaiting review from you</code> in the drop down menu. This shows then only PRs where you are tagged as reviewer.</li>
-<li>click on a pull request of your choice</li>
-<li>the following window has 4 tabs:
-<ul>
-<li>Conversation: gives an overview about the PR</li>
-<li>Commits: list all commits of the PR</li>
-<li>Check:</li>
-<li>Files changed: lists all files which were modified</li>
-</ul></li>
-<li>click on the <code>Files changed</code> tab and go through the files and changes
-<ul>
-<li>you can comment on a line by hovering over a line and click on the plus symbol</li>
-<li>in case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines</li>
-<li>afterwards you can either:
-<ol type="a">
-<li>click on the <code>Add single comment</code> button which makes your comment or suggestion immediately visible OR<br>
-</li>
-<li>click on the <code>Start a review</code> button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.</li>
-</ol></li>
-<li>when done with the full review click on the <code>Finish your review</code> button on the top right corner of the page:
-<ul>
-<li>you can comment on your review and choose one of the following options <code>Comment</code>, <code>Approve</code>, <code>Request changes</code>. Select the approprate option and click on <code>Submit review</code>.</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="making-a-ready-for-review-pull-request-learner" class="level3">
-<h3 class="anchored" data-anchor-id="making-a-ready-for-review-pull-request-learner">Making a ready for review pull request (Learner)</h3>
-<ul>
-<li>Once you and your review partner have agreed on the code review (i.e.&nbsp;Your review partner has approved your draft pull request), covert your draft pull request to ready to review.</li>
-<li>On the right side panel, you should invite the teacher to review your pull request.</li>
-<li>The teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did.</li>
-</ul>
-</section>
-<section id="merges-pull-requests-teacher" class="level3">
-<h3 class="anchored" data-anchor-id="merges-pull-requests-teacher">Merges pull requests (Teacher)</h3>
-<ul>
-<li>Once both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.</li>
-<li>Once the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues.</li>
-</ul>
+<section id="further-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="further-discussion">Further Discussion</h3>
+<p>Start a discussion on our <strong><a href="https://github.com/NBISweden/Training-Tech-shorts/discussions">Discussions page</a></strong> or reach out on the <code>#tech-group-rse-tools</code> channel on NBIS Slack.</p>
 
 
 </section>
@@ -396,13 +233,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
