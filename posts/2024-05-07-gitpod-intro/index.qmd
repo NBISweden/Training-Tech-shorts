@@ -11,7 +11,7 @@ categories: [ Git, Github, "Version control", Gitpod ]
 
 We recommend using **GitHub Codespaces** as a web-based alternative, as it still offers a useful free tier for individual users.
 
-For local or self-hosted developer environments, please see lessons covering tools like **Pixi** for environment creation.
+For local or self-hosted developer environments, please see walkthroughs covering tools like **Pixi** for environment creation.
 :::
 
 ## What is Gitpod

@@ -2,7 +2,7 @@
 
 ## How It Works
 
-Lessons are short (~30 minutes) demonstrations, taught by volunteers from within the Tech group.
+Walkthroughs are short (~30 minutes) demonstrations, taught by volunteers from within the Tech group.
 The sessions are then written up and shared here for future reference as blog posts.
 
 ### Target Audience
@@ -12,14 +12,14 @@ Our primary audience is **NBIS staff and affiliates**, both **bioinformaticians 
 * **For Learners:** Provides regular, practical training on our core technology stack.
 * **For Managers:** Highlights the importance of regular training and informs them of the teams' collective capabilities.
 
-### Contributing & Suggesting Lessons
+### Contributing & Suggesting Walkthroughs
 
-We use **[GitHub Issues](https://github.com/NBISweden/Training-Tech-shorts/issues)** to manage the lesson pipeline:
+We use **[GitHub Issues](https://github.com/NBISweden/Training-Tech-shorts/issues)** to manage the walkthrough pipeline:
 
 1. **Suggest a Topic:** Create a new Issue to propose a tool or topic you'd like to see covered.
 2. **Vote on Topics:** Use the reactions feature 👍 to upvote topics you're interested in.
-3. **Volunteer to Teach:** Anyone can volunteer to prepare and teach a lesson. You don't need to be an expert - just be willing to learn and share!
-4. **Write it Up:** After teaching, the lesson should be written up as a blog post, which will be reviewed and published here. Anyone can contribute to the write-up.
+3. **Volunteer to Teach:** Anyone can volunteer to prepare and demonstrate a walkthrough. You don't need to be an expert - just be willing to learn and share!
+4. **Write it Up:** After the demo, the walkthrough should be written up as a blog post, which will be reviewed and published here. Anyone can contribute to the write-up.
 
 ### Further Discussion
 

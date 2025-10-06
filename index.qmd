@@ -15,8 +15,8 @@ listing:
 
 👋 Welcome to the NBIS RSE Tools Tech Group!
 
-These blog posts are short lessons on various **Research Software Engineering (RSE) tools** useful in bioinformatics. We aim to share a demonstration of a tool every two weeks.
+These blog posts are short walkthroughs on various **Research Software Engineering (RSE) tools** useful in bioinformatics. We aim to share a demonstration of a tool every two weeks.
 
 **Want to discuss or need help?** Start a discussion on our **[Discussions page](https://github.com/NBISweden/Training-Tech-shorts/discussions)** or reach out on the `#tech-group-rse-tools` channel on NBIS Slack.
 
-## Short lessons
+## Walkthroughs
