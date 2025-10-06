@@ -1,46 +1,58 @@
-# Training-Tech-shorts
+# NBIS Tech Group: RSE Tools
 
-Learn to use research software engineering tools essential for our work through these short training lessons
+## About
 
-Lessons are located at https://nbisweden.github.io/Training-Tech-shorts/.
+This repository compiles short walkthroughs on **Research Software Engineering (RSE) tools** useful for bioinformatics work at NBIS.
 
-The schedule is the [schedule page](https://nbisweden.github.io/Training-Tech-shorts/schedule.html).
+These walkthroughs are designed to be hands-on demonstrations, helping to build a shared foundation of knowledge and foster collaboration across all teams and affiliates. We aim to publish a new walkthrough every two weeks.
 
-A gitpod environment is provided for convenience.
+### Tech Group Leaders
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/NBISweden/Training-Tech-shorts)
+These people are responsible for organizing the sessions and maintaining this repository:
 
-## Background
+- **Mahesh Binzer-Panchal**
+- **Martin Dahlö**
+- **Lucile Soler**
+- **Cormac Kinsella**
 
-This repository is intended to be used as a training tool, which
-compiles knowledge over time.
+---
 
-Issues are made for a core set of tools to be taught, and what
-the scope of those lessons should be. 
-Anyone can suggest a lesson and anyone can volunteer to teach it.
-Each lesson should be about 30 minutes in length, and is taught through demonstration.
+## Where to Find the Walkthroughs
 
-There are 2 lessons of 1h per months, the first one is a demonstration by the teacher on a spceific tool or technology and the second one is a follow-up lesson where anyone can ask questions on what they have tried to implement during the two weeks between the lessons or just show what they have done with the tool/technology. 
+* **View Walkthroughs:** All walkthroughs are hosted on our dedicated website:
+**[https://nbisweden.github.io/Training-Tech-shorts/](https://nbisweden.github.io/Training-Tech-shorts/)**
+* **Check the Schedule:** See what's coming up next on the **[schedule page](https://nbisweden.github.io/Training-Tech-shorts/schedule.html)**.
 
-The target audience is NBIS and their affiliates, including the managers, as well
-as the bioinformaticians. Having the managers there firstly highlights
-the importance of the regular training, but also informs them of the
-teams capabilities with the core technology stack (some of which may
-be useful to the manager too). Regular communication through this
-learning track is also meant to foster better collaboration and
-provide an environment where people feel comfortable asking questions.
+---
 
-The features provided by Github are useful to enable these actions.
-Issues are used to decide lessons. Branches are used to draft
-an outline with key points by the teacher. 
-Optional : Learners can (if they want their code to be reviewed) make a draft pull request to the lesson branch, where they can set themselves
-as assignee, and request reviewers. The code review panel allows
-for the learners and teachers to review the content before merging
-it back into the branch. Github actions takes care of publishing
-the notes into a presentable website for future reference.
-This would then be the first lesson to teach.
+## How It Works
 
+Walkthroughs are short (~30 minutes) demonstrations, taught by volunteers from within the Tech group.
+The sessions are then written up and shared here for future reference as blog posts.
 
-## Literature
+### Target Audience
 
-- [10 things software developers should learn about learning](https://cacm.acm.org/magazines/2024/1/278891-10-things-software-developers-should-learn-about-learning/fulltext)
+Our primary audience is **NBIS staff and affiliates**, both **bioinformaticians and managers**.
+
+* **For Learners:** Provides regular, practical training on our core technology stack.
+* **For Managers:** Highlights the importance of regular training and informs them of the teams' collective capabilities.
+
+### Contributing & Suggesting Walkthroughs
+
+We use **[GitHub Issues](https://github.com/NBISweden/Training-Tech-shorts/issues)** to manage the walkthrough pipeline:
+
+1. **Suggest a Topic:** Create a new Issue to propose a tool or topic you'd like to see covered.
+2. **Vote on Topics:** Use the reactions feature 👍 to upvote topics you're interested in.
+3. **Volunteer to Teach:** Anyone can volunteer to prepare and demonstrate a walkthrough. You don't need to be an expert - just be willing to learn and share!
+4. **Write it Up:** After the demo, the walkthrough should be written up as a blog post, which will be reviewed and published here. Anyone can contribute to the write-up.
+
+### Further Discussion
+
+Start a discussion on our **[Discussions page](https://github.com/NBISweden/Training-Tech-shorts/discussions)**
+or reach out on the `#tech-group-rse-tools` channel on NBIS Slack.
+
+---
+
+## Further Reading
+
+* [10 things software developers should learn about learning](https://cacm.acm.org/magazines/2024/1/278891-10-things-software-developers-should-learn-about-learning/fulltext)

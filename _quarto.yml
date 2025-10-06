@@ -5,7 +5,7 @@ project:
     - "!posts/2024-05-14-quarto-to-confluence/quarto-example*/"
 
 website:
-  title: "Training Tech Shorts"
+  title: "RSE Tools"
   page-navigation: true
   reader-mode: true
   repo-url: https://github.com/NBISweden/Training-Tech-shorts
@@ -22,7 +22,7 @@ website:
             href: https://github.com/NBISweden/Training-Tech-shorts
           - text: Report an issue
             href: https://github.com/NBISweden/Training-Tech-shorts/issues
-          - text: Suggest a lesson
+          - text: Suggest a walkthrough
             href: https://github.com/NBISweden/Training-Tech-shorts/issues
           - text: Discuss a post
             href: https://github.com/NBISweden/Training-Tech-shorts/discussions

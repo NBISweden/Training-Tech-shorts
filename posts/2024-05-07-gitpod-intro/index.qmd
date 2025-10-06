@@ -6,6 +6,14 @@ date-modified: last-modified
 categories: [ Git, Github, "Version control", Gitpod ]
 ---
 
+:::{.callout-important title="Important Note on Cloud Development Environments"}
+**Gitpod** has rebranded to **Ona** and has a very limited free tier. Usage now requires a paid subscription.
+
+We recommend using **GitHub Codespaces** as a web-based alternative, as it still offers a useful free tier for individual users.
+
+For local or self-hosted developer environments, please see walkthroughs covering tools like **Pixi** for environment creation.
+:::
+
 ## What is Gitpod
 
 [Gitpod](https://gitpod.io) is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file `.gitpod.yml` present in the repository.
@@ -18,7 +26,7 @@ There are different pricing depending on your needs such as:
 - Pay-as-you-go
 - Company plan (custom)
 
-Mahesh is on an open source plan (nammed NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication.
+Mahesh is on an open source plan (named NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication.
 
 ## How to login to Gitpod
 
@@ -27,17 +35,17 @@ Mahesh is on an open source plan (nammed NBIS). NBIS does not pay for a Gitpod p
 - If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right.
 - Now when you start a Gitpod environment you'll be connected to your version control system.
 
-## How to start a Gitpod 
+## How to start a Gitpod
 
 To start a workspace, follow these steps:
 
-- Navigate to your repository on GitHub, GitLab or Bitbucket. 
+- Navigate to your repository on GitHub, GitLab or Bitbucket.
 - Add `gitpod.io/#` before the URL address of your repository. This will create a new URL address that directs you to the Gitpod workspace setup page. On that page, you can make the following choices:
     1. The source repository for which the gitpod workspace will be created.
-    2. The code editor. 
-    3. The computing resources required for the workspace. 
-- After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user's working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer. 
-- Any changes to the files within that folder can be pushed to the repository using Git commands. 
+    2. The code editor.
+    3. The computing resources required for the workspace.
+- After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user's working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer.
+- Any changes to the files within that folder can be pushed to the repository using Git commands.
 
 **Note**: If you are editing a public Github public repository, Gitpod requires the "public_repo" permission to push changes. To do it, follow these steps:
 
@@ -51,11 +59,11 @@ To start a workspace, follow these steps:
 8. Click "Update permissions"
 9. You will be redirected to Github for authentication.
 
-After granting permissions, the user can push changes to the repository. 
+After granting permissions, the user can push changes to the repository.
 
 ## How to configure Gitpod
 
-- A gitpod workspace is configured mainly through the `.gitpod.yml` file at the root of your repository (e.g. github.com/user/repo/.gitpod.yml). 
+- A gitpod workspace is configured mainly through the `.gitpod.yml` file at the root of your repository (e.g. github.com/user/repo/.gitpod.yml).
 
 - This file is read by Gitpod when the workspace is started, and can be used to specify the base workspace image, and a list of tasks that will be run when the workspace is started.
 
@@ -122,4 +130,4 @@ ports:
 - Demonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.
 - Development: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.
 - Experimentation: The ephemeral nature of the environment, and its standardized tools make Gitpod excellent for testing code and sandbox experimentation.
-- Training: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements. 
+- Training: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements.
