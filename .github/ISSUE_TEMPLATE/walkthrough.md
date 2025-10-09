@@ -4,9 +4,21 @@ about: Propose a walkthrough
 title: 'Walkthrough: '
 ---
 
-Description
+## Tool or concept
 
-Content:
-- ...
+**What specific tool or concept are you proposing a walkthrough for?**
 
-If applicable, also mention related issues (e.g. related walkthroughs, previous iterations), potential presenters, prerequisites for following the walkthrough hands-on, etc.
+## The why
+
+**Briefly describe the problem this solves**
+
+## Proposed outline
+
+- [Topic 1]
+- [Topic 2]
+- [Topic 3]
+
+## Additional information
+
+* **Prerequisites**
+* **Related issues/links**
