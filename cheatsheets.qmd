@@ -1,0 +1,55 @@
+# Cheatsheets
+
+Quick reference resources for tools related to research software development and bioinformatics.
+
+::: {.callout-tip title="Template for contributing" collapse="true"}
+
+## Name of the tool
+
+**Category:** Type of tool
+
+**About:** One line introduction about the tool
+
+**Links:** [Official cheatsheet](url) | [Official documentation](url) | [Other relevant link](url)
+
+:::
+
+## Apptainer
+
+**Category:** Container platform
+
+**About:** Open-source fork of Singularity, used to package applications with their dependencies for HPC environments
+
+**Links:** [Official documentation](https://apptainer.org/docs/user/latest/) | [Coderefinery tutorial](https://coderefinery.github.io/hpc-containers/)
+
+## Docker
+
+**Category:** Container platform
+
+**About:** Package applications with their dependencies
+
+**Links:** [Official cheatsheet](https://docs.docker.com/get-started/docker_cheatsheet.pdf) | [Official documentation](https://docs.docker.com/)
+
+## Git
+
+**Category:** Version control
+
+**About:** Make and manage git repositories for version control of code, documentation, and other projects
+
+**Links:** [Official cheatsheet](https://git-scm.com/cheat-sheet) | [Official documentation](https://git-scm.com/book/en/v2) | [Cheatsheet from GitHub](https://education.github.com/git-cheat-sheet-education.pdf)
+
+## Pixi
+
+**Category:** Package management
+
+**About:** Powerful and fast software environment creator, package manager, and task runner
+
+**Links:** [Official quick start guide](https://pixi.sh/latest/getting_started/) | [Official documentation](https://pixi.sh/latest/)
+
+## VSCode
+
+**Category:** Development environment
+
+**About:** Powerful and customizable code editor owned and supported by Microsoft
+
+**Links:** [Official cheatsheet Windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) | [Official cheatsheet MacOS](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf) | [Official documentation](https://code.visualstudio.com/docs)
