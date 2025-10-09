@@ -1,0 +1,31 @@
+name: Deploy PR previews
+on:
+  pull_request:
+    # By default, a workflow only runs when a pull_request event's activity type is opened, synchronize, or reopened.
+    # https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request
+    # To remove deployed previews, we also need to add the activity type closed.
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+concurrency: preview-${{ github.ref }}
+jobs:
+  deploy-preview:
+    # only run if PR is from the same repo (not from a fork), see https://github.com/rossjrw/pr-preview-action/pull/6
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write  # required by https://github.com/marocchino/sticky-pull-request-comment
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./_site/
