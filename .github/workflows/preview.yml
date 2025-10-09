@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write  # required by https://github.com/marocchino/sticky-pull-request-comment
     steps:
       - name: Checkout
         uses: actions/checkout@v5
