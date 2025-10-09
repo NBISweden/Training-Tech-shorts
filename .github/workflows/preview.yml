@@ -12,6 +12,8 @@ on:
 concurrency: preview-${{ github.ref }}
 jobs:
   deploy-preview:
+    # only run if PR is from the same repo (not from a fork), see https://github.com/rossjrw/pr-preview-action/pull/6
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
