@@ -2,7 +2,7 @@
 
 Quick reference resources for tools related to research software development and bioinformatics.
 
-::::: {.callout-tip title="Template for contributing" collapse="true}
+::::: {.callout-tip title="Template for contributing" collapse="true"}
 :::: {.card .mb-4}
 ::: {.card-body}
 ### Name of the tool
