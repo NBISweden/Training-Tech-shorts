@@ -371,6 +371,13 @@
     "text": "Walkthroughs"
   },
   {
+    "objectID": "cheatsheets.html",
+    "href": "cheatsheets.html",
+    "title": "Cheatsheets",
+    "section": "",
+    "text": "Cheatsheets\nQuick reference resources for tools related to research software development and bioinformatics.\n\n\n\n\n\n\nTipTemplate for contributing\n\n\n\n\n\n\n\nName of the tool\nCategory: Type of tool\n\nAbout\n\nOne line introduction about the tool\n\nLinks\n\nOfficial cheatsheet | Official documentation | Other relevant link\n\nRSE tools sessions\n\nSession title\n\n\n\n\n\n\n\n\n\nApptainer 📦\nCategory: Container platform\n\nAbout\n\nOpen-source fork of Singularity, used to package applications with their dependencies for HPC environments\n\nLinks\n\nOfficial documentation | Coderefinery tutorial\n\nRSE tools sessions\n\nIntroduction to Apptainer\n\n\n\n\n\n\nDocker 🐳\nCategory: Container platform\n\nAbout\n\nPackage applications with their dependencies\n\nLinks\n\nOfficial cheatsheet | Official documentation\n\nRSE tools sessions\n\nNone recorded yet.\n\n\n\n\n\n\nGit 🌲\nCategory: Version control\n\nAbout\n\nMake and manage git repositories for version control of code, documentation, and other projects\n\nLinks\n\nOfficial cheatsheet | Official documentation | Cheatsheet from GitHub\n\nRSE tools sessions\n\nIntroduction to Git\n\n\n\n\n\n\nPixi ✨\nCategory: Package management\n\nAbout\n\nPowerful and fast software environment creator, package manager, and task runner\n\nLinks\n\nOfficial quick start guide | Official documentation\n\nRSE tools sessions\n\nIntroduction to Pixi\n\n\n\n\n\n\nVSCode 💻\nCategory: Development environment\n\nAbout\n\nPowerful and customizable code editor owned and supported by Microsoft\n\nLinks\n\nOfficial cheatsheet Windows | Official cheatsheet MacOS | Official documentation\n\nRSE tools sessions\n\nIntroduction to VSCode"
+  },
+  {
     "objectID": "contributing.html",
     "href": "contributing.html",
     "title": "Contributing",
