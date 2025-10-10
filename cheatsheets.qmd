@@ -2,64 +2,106 @@
 
 Quick reference resources for tools related to research software development and bioinformatics.
 
-::: {.callout-tip title="Template for contributing" collapse="true"}
+::::: {.callout-tip title="Template for contributing" collapse="true}
+:::: {.card .mb-4}
+::: {.card-body}
+### Name of the tool
 
-## Name of the tool
+**Category**: [Type of tool](https://nbisweden.github.io/Training-Tech-shorts/<MAIN_CATEGORY>)
 
-**Category:** [Type of tool](https://nbisweden.github.io/Training-Tech-shorts/<MAIN_CATEGORY>)
+**About**
+: One line introduction about the tool
 
-**About:** One line introduction about the tool
+**Links**
+: [Official cheatsheet](url) | [Official documentation](url) | [Other relevant link](url)
 
-**Links:** [Official cheatsheet](url) | [Official documentation](url) | [Other relevant link](url)
-
-**RSE tools sessions:** [Session title](https://nbisweden.github.io/Training-Tech-shorts/posts/<FILENAME>)
-
+**RSE tools sessions**
+: [Session title](https://nbisweden.github.io/Training-Tech-shorts/posts/<FILENAME>)
 :::
+::::
+:::::
 
-## Apptainer
+:::: {.card .mb-4}
+::: {.card-body}
+### Apptainer 📦
 
-**Category:** [Container platform](https://nbisweden.github.io/Training-Tech-shorts/#category=Containers)
+**Category**: [Container platform](https://nbisweden.github.io/Training-Tech-shorts/#category=Containers)
 
-**About:** Open-source fork of Singularity, used to package applications with their dependencies for HPC environments
+**About**
+: Open-source fork of Singularity, used to package applications with their dependencies for HPC environments
 
-**Links:** [Official documentation](https://apptainer.org/docs/user/latest/) | [Coderefinery tutorial](https://coderefinery.github.io/hpc-containers/)
+**Links**
+: [Official documentation](https://apptainer.org/docs/user/latest/) | [Coderefinery tutorial](https://coderefinery.github.io/hpc-containers/)
 
-**RSE tools sessions:** [Introduction to Apptainer](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/)
+**RSE tools sessions**
+: [Introduction to Apptainer](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/)
+:::
+::::
 
-## Docker
+:::: {.card .mb-4}
+::: {.card-body}
+### Docker 🐳
 
-**Category:** [Container platform](https://nbisweden.github.io/Training-Tech-shorts/#category=Containers)
+**Category**: [Container platform](https://nbisweden.github.io/Training-Tech-shorts/#category=Containers)
 
-**About:** Package applications with their dependencies
+**About**
+: Package applications with their dependencies
 
-**Links:** [Official cheatsheet](https://docs.docker.com/get-started/docker_cheatsheet.pdf) | [Official documentation](https://docs.docker.com/)
+**Links**
+: [Official cheatsheet](https://docs.docker.com/get-started/docker_cheatsheet.pdf) | [Official documentation](https://docs.docker.com/)
 
-## Git
+**RSE tools sessions**
+: *None recorded yet.*
+:::
+::::
 
-**Category:** [Version control](https://nbisweden.github.io/Training-Tech-shorts/#category=Version%20control)
+:::: {.card .mb-4}
+::: {.card-body}
+### Git 🌲
 
-**About:** Make and manage git repositories for version control of code, documentation, and other projects
+**Category**: [Version control](https://nbisweden.github.io/Training-Tech-shorts/#category=Version%20control)
 
-**Links:** [Official cheatsheet](https://git-scm.com/cheat-sheet) | [Official documentation](https://git-scm.com/book/en/v2) | [Cheatsheet from GitHub](https://education.github.com/git-cheat-sheet-education.pdf)
+**About**
+: Make and manage git repositories for version control of code, documentation, and other projects
 
-**RSE tools sessions:** [Introduction to Git](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-03-19-git-intro/)
+**Links**
+: [Official cheatsheet](https://git-scm.com/cheat-sheet) | [Official documentation](https://git-scm.com/book/en/v2) | [Cheatsheet from GitHub](https://education.github.com/git-cheat-sheet-education.pdf)
 
-## Pixi
+**RSE tools sessions**
+: [Introduction to Git](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-03-19-git-intro/)
+:::
+::::
 
-**Category:** [Package management](https://nbisweden.github.io/Training-Tech-shorts/#category=Package%20management)
+:::: {.card .mb-4}
+::: {.card-body}
+### Pixi ✨
 
-**About:** Powerful and fast software environment creator, package manager, and task runner
+**Category**: [Package management](https://nbisweden.github.io/Training-Tech-shorts/#category=Package%20management)
 
-**Links:** [Official quick start guide](https://pixi.sh/latest/getting_started/) | [Official documentation](https://pixi.sh/latest/)
+**About**
+: Powerful and fast software environment creator, package manager, and task runner
 
-**RSE tools sessions:** [Introduction to Pixi](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-01-21-pixi-intro/)
+**Links**
+: [Official quick start guide](https://pixi.sh/latest/getting_started/) | [Official documentation](https://pixi.sh/latest/)
 
-## VSCode
+**RSE tools sessions**
+: [Introduction to Pixi](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-01-21-pixi-intro/)
+:::
+::::
 
-**Category:** [Development environment](https://nbisweden.github.io/Training-Tech-shorts/#category=IDE)
+:::: {.card .mb-4}
+::: {.card-body}
+### VSCode 💻
 
-**About:** Powerful and customizable code editor owned and supported by Microsoft
+**Category**: [Development environment](https://nbisweden.github.io/Training-Tech-shorts/#category=IDE)
 
-**Links:** [Official cheatsheet Windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) | [Official cheatsheet MacOS](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf) | [Official documentation](https://code.visualstudio.com/docs)
+**About**
+: Powerful and customizable code editor owned and supported by Microsoft
 
-**RSE tools sessions:** [Introduction to VSCode](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-02-18-vscode-intro/)
+**Links**
+: [Official cheatsheet Windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) | [Official cheatsheet MacOS](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf) | [Official documentation](https://code.visualstudio.com/docs)
+
+**RSE tools sessions**
+: [Introduction to VSCode](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-02-18-vscode-intro/)
+:::
+::::
