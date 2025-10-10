@@ -6,7 +6,7 @@ Quick reference resources for tools related to research software development and
 
 ## Name of the tool
 
-**Category:** Type of tool
+**Category:** [Type of tool](https://nbisweden.github.io/Training-Tech-shorts/<MAIN_CATEGORY>)
 
 **About:** One line introduction about the tool
 
@@ -18,7 +18,7 @@ Quick reference resources for tools related to research software development and
 
 ## Apptainer
 
-**Category:** Container platform
+**Category:** [Container platform](https://nbisweden.github.io/Training-Tech-shorts/#category=Containers)
 
 **About:** Open-source fork of Singularity, used to package applications with their dependencies for HPC environments
 
@@ -28,7 +28,7 @@ Quick reference resources for tools related to research software development and
 
 ## Docker
 
-**Category:** Container platform
+**Category:** [Container platform](https://nbisweden.github.io/Training-Tech-shorts/#category=Containers)
 
 **About:** Package applications with their dependencies
 
@@ -36,7 +36,7 @@ Quick reference resources for tools related to research software development and
 
 ## Git
 
-**Category:** Version control
+**Category:** [Version control](https://nbisweden.github.io/Training-Tech-shorts/#category=Version%20control)
 
 **About:** Make and manage git repositories for version control of code, documentation, and other projects
 
@@ -46,7 +46,7 @@ Quick reference resources for tools related to research software development and
 
 ## Pixi
 
-**Category:** Package management
+**Category:** [Package management](https://nbisweden.github.io/Training-Tech-shorts/#category=Package%20management)
 
 **About:** Powerful and fast software environment creator, package manager, and task runner
 
@@ -56,7 +56,7 @@ Quick reference resources for tools related to research software development and
 
 ## VSCode
 
-**Category:** Development environment
+**Category:** [Development environment](https://nbisweden.github.io/Training-Tech-shorts/#category=IDE)
 
 **About:** Powerful and customizable code editor owned and supported by Microsoft
 
