@@ -1,0 +1,765 @@
+[
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Schedule\nDates for each walkthrough, listed in reverse chronological order. Meetings are over Zoom, Thursdays at 10.00. Meeting links are provided by the teacher.\n\n2025/10/23: TBD\n2025/10/09: Mahesh - Introduction to RSE Tools Tech Group\nRenamed to RSE Tools Tech Group\nBreak\n2025/06/10: Mahesh - Github Container Registry and Seqera Container Registry\n2025/05/27: Everyone - Personal tips and tricks\n2025/05/13: Mahesh - When is Nextflow suitable\n2025/04/29: Mahesh - Review: SSH config\n2025/04/15: Mahesh - SSH config\n2025/04/01: Amrei - Review: Github profile README\n2025/03/18: Amrei - Github profile README\n2025/03/04: Cormac - Review: VSCode\n2025/02/18: Cormac - VSCode\n2025/02/04: Mahesh - Review: Pixi\n2025/01/21: Mahesh - Pixi\nBreak\n2024/06/18: No lesson - SciLifeLab Facility Forum\n2024/06/11: Cormac - Review: Singuarity\n2024/06/04: Cormac - Singularity\n2024/05/28: Mahesh - Review: Introduction to Gitpod.\n2024/05/21: Tomas - Review: Quarto to Confluence.\n2024/05/14: Tomas - Quarto to Confluence.\n2024/05/07: Mahesh - Introduction to Gitpod.\n2024/04/30: No lesson - Reduced working day.\n2024/04/23: Per - Review: Quarto Introduction.\n2024/04/16: Per - Quarto Introduction.\n2024/04/09: No lesson - NBIS retreat.\n2024/04/02: Mahesh - Review: Introduction to Git.\n2024/03/26: Mahesh - Review: Collaboration in Github.\n2024/03/19: Mahesh - Introduction to Git.\n2024/03/12: Mahesh - Collaboration in Github."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html",
+    "title": "Various Tips and Tricks",
+    "section": "",
+    "text": "Here are some 5-minute tips and tricks we covered in today’s training."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#setting-the-terminal-prompt-using-liquid-prompt",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#setting-the-terminal-prompt-using-liquid-prompt",
+    "title": "Various Tips and Tricks",
+    "section": "Setting the terminal prompt using Liquid Prompt",
+    "text": "Setting the terminal prompt using Liquid Prompt\nYou can enhance your terminal experience by customizing your prompt with Liquid Prompt. Liquid Prompt provides dynamic, context-aware information such as your username, active Conda environment, current directory, and Git branch directly in your prompt.\nTo get started, clone the Liquid Prompt repository to your home directory (or another location), then source it in your .bashrc or .zshrc. You can also enable the Powerline theme for a modern look. Here’s an example of what to add to your .zshrc:\nif [[ $- == *i* ]]; then\n    # Only load Liquid Prompt in interactive shells\n    source ~/liquidprompt/liquidprompt\n    source ~/liquidprompt/themes/powerline/powerline.theme\n    lp_theme powerline\nfi\n\n\n\n\n\n\nTip\n\n\n\nIf your prompt looks misaligned or displays odd characters, try switching to a Powerline-compatible font in your terminal settings.\n\n\nThere are many prompt customization tools available. For a comparison of popular options, see this article by the author of Liquid Prompt."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#edit-quarto-markdown-tables-in-vscode-visual-mode",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#edit-quarto-markdown-tables-in-vscode-visual-mode",
+    "title": "Various Tips and Tricks",
+    "section": "Edit Quarto Markdown tables in VSCode visual mode",
+    "text": "Edit Quarto Markdown tables in VSCode visual mode\nThe VSCode Quarto extension allows you to create and edit tables using visual mode. Visual mode provides a better interface for creating and editing tables without manually writing the table in markdown syntax.\nOne can switch between Source and Visual mode of Quarto extension using VS code keyboard shortcuts () or by selecting the mode from the command palette."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#adding-captions-to-quarto-figures-and-tables",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#adding-captions-to-quarto-figures-and-tables",
+    "title": "Various Tips and Tricks",
+    "section": "Adding captions to Quarto figures and tables",
+    "text": "Adding captions to Quarto figures and tables\nHere are three methods to add captions to figures and tables in Quarto.\n---\ntitle: \"NBIS Report\"\nsubtitle: \"`{r} format(Sys.Date(),format='%d-%b-%Y')`\"\nformat: html\ntoc: true\ntoc-depth: 4\nnumber-sections: true\ntheme: flatly\nhighlight: tango\ndf-print: paged\ncode-folding: none\nself-contained: true\nkeep-md: false\ncss: assets/report.css\nbibliography: bibliography_library.bib\ncsl: nature.csl\ncitations-hover: true\nfootnotes-hover: true\ncrossrefs-hover: true\nlightbox: true\nfig-cap-location: bottom\n---\n\n```{r,include=FALSE,cache=FALSE,eval=TRUE}\n## REPORT OPTIONS\n## code relating to the report creation\n## default working directory is the location of this document\n## all code is run in the working directory as the root\n\n# remove all variables\nrm(list=ls())\n\n# load libraries for document creation\nlibrary(knitr) # runs pandoc\n\n# set knit options\nopts_knit$set(progress=TRUE,verbose=TRUE)\nopts_chunk$set(dev=\"svg\",results=\"hold\",fig.show=\"hold\",fig.align=\"left\",echo=FALSE,warning=FALSE,message=FALSE,accordion=NULL,\nblock.title=NULL)\n#options(knitr.table.format = \"html\")\n```\n\n&lt;!-- ----------------------- Do not edit above this ----------------------- --&gt;\n\n```{r,echo=FALSE,include=FALSE}\n#species variable\nmy_species_name &lt;- \"*Coregonus albula*\"\nyourspecies_odb10 &lt;- \"actinopterygii_odb10\"\n\n```\n\n## First way to have a caption\n\n```{r}\n#| label: tbl-buscoassembly\n\n\nlibrary(knitr)\n# Create a clean formatted character vector for each line of the summary\nbusco_lines &lt;- c(\n  \"C: 95.4% [S: 52.2%, D: 43.2%]\",                 # Summary line\n  \"1901 Complete and single-copy BUSCOs (S)\",\n  \"1574 Complete and duplicated BUSCOs (D)\",\n  \"3475 Complete BUSCOs (C)\",\n  \"35 Fragmented BUSCOs (F) (1.0%)\",\n  \"130 Missing BUSCOs (M) (3.6%)\",\n  \"3640 Total BUSCO groups searched (n)\"\n)\n\n# Create a data frame for kable (as a single-column table)\nbusco_df &lt;- data.frame(busco_lines, stringsAsFactors = FALSE)\n\n# Render it with knitr::kable in markdown format\nknitr::kable(\n  busco_df,\n  format = \"markdown\",\n  col.names = NULL,\n  caption = paste(\"BUSCO results of the assembly with the dataset\", yourspecies_odb10)\n)\n```\n\n## Second way to have a caption\n\nBUSCO results :\n```{.css}\ntable, th, td {\n  text-align: left;\n}\n```\n|     `{r} my_species_name`                                        |\n|--------------------------------------------------------|\n| C:88.9%[S:53.0%,D:35.9%],F:3.3%,M:7.8%,n:3640          |\n| 3235 Complete BUSCOs (C)                                |\n| 1928 Complete and single-copy BUSCOs (S)                |\n| 1307 Complete and duplicated BUSCOs (D)                 |\n| 120 Fragmented BUSCOs (F)                               |\n| 285 Missing BUSCOs (M)                                  |\n| 3640 Total BUSCO groups searched                        |\n\n: Complete BUSCO results of the evidence gene build (rc1) using `{r} yourspecies_odb10` {#tbl-rc1busco}\n\n## Third way to have a caption\n```{r}\n#| label: tbl-interprotableresults\n#| tbl-cap: \"Complete BUSCO results of the evidence gene build using `{r} yourspecies_odb10` \"\n#|\n\n# Create a clean formatted character vector for each line of the summary\nbusco_lines &lt;- c(\n  \"C: 95.4% [S: 52.2%, D: 43.2%]\",                 # Summary line\n  \"1901 Complete and single-copy BUSCOs (S)\",\n  \"1574 Complete and duplicated BUSCOs (D)\",\n  \"3475 Complete BUSCOs (C)\",\n  \"35 Fragmented BUSCOs (F) (1.0%)\",\n  \"130 Missing BUSCOs (M) (3.6%)\",\n  \"3640 Total BUSCO groups searched (n)\"\n)\n\n# Create a data frame for kable (as a single-column table)\nbusco_df &lt;- data.frame(busco_lines, stringsAsFactors = FALSE)\n\n# Render it with knitr::kable in markdown format\nkable(busco_df, format = \"markdown\",col.names = NULL,align = c(\"l\", \"c\", \"c\", \"c\"))\n```\n\n**They are all compatible with each others**"
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#the-here-package-in-r",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#the-here-package-in-r",
+    "title": "Various Tips and Tricks",
+    "section": "The Here package in R",
+    "text": "The Here package in R\nThe here package in R helps you set paths. here can be used with here::i_am(\"$file\") to set the working directory to the path where the file is hosted."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#managing-r-packages-using-pacman",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#managing-r-packages-using-pacman",
+    "title": "Various Tips and Tricks",
+    "section": "Managing R packages using PacMan",
+    "text": "Managing R packages using PacMan\nPacMan is a R package manager. PacMan is essentially a combination of the install.packages and library commands. pacman::p_load(tidyverse), for instance, sees whether you you have tidyverse installed. If you do, it loads tidyverse. If you don’t, it installs tidyverse and all dependencies, and loads tidyverse. With p_install_version you can install particular versions of the packages you are interested in. In a teaching scenario, this makes it much easier to have all students install everything that you need for your session."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#the-nano-editor",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#the-nano-editor",
+    "title": "Various Tips and Tricks",
+    "section": "The Nano editor",
+    "text": "The Nano editor\nNano is an editor you can use in the Terminal.\nIt’s loaded on Dardel using ml nano."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#setting-group-permissions-on-dardel",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#setting-group-permissions-on-dardel",
+    "title": "Various Tips and Tricks",
+    "section": "Setting group permissions on Dardel",
+    "text": "Setting group permissions on Dardel\nDardel doesn’t automatically set group permissions on files. So you might run into problems where group members cannot access files you have created.\n\nRetroactively change permissions\nYou can update group permissions by changing file ownership to the group, and then setting the group’s permission equal to the user’s permissions:\n    # thanks to Karl Johan from PDC support for this useful tidbit!\n    # change the file ownership to group:\n    chgrp --no-dereference --silent --recursive ${GRP} ${PWD}\n    # change permission: group gets user's permissions\n    chmod --silent --recursive g=u ${PWD}\nThis can be added to launch scripts like this run_nextflow.sh example.\n\n\nSet permissions at creation\nAlternatively, you can add\numask 0002\nto your .bashrc, to set a file mode creation mask. Here, the last three digits encode the user, group and others classes, respectively, while the first one is ignored.\nThe number 0 sets read, write and execute permissions, while 2 is not granting write permission, only read and execute permission.\nMore information in the umask man pages and on Wikipedia."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#macos-shortcuts",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#macos-shortcuts",
+    "title": "Various Tips and Tricks",
+    "section": "MacOS shortcuts",
+    "text": "MacOS shortcuts\n\nUse the ditto command to copy directories while preserving permissions and timestamps.\nUse history 15 to view your last 15 commands.\nThe banner command prints large text banners in the terminal.\nDrag and drop files or folders into the terminal to paste their paths.\nUse Option+Click to move the cursor anywhere in the command line.\nIn Finder, Cmd+I opens the info panel, where you can copy file paths or customize folder icons."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#step-through-code-from-a-pixi-environment-in-quarto",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#step-through-code-from-a-pixi-environment-in-quarto",
+    "title": "Various Tips and Tricks",
+    "section": "Step through code from a Pixi environment in Quarto",
+    "text": "Step through code from a Pixi environment in Quarto\nR packages can easily be installed in pixi environments to help resolve version incompatibilities or to ensure that others working in your project can replicate your environment.\npixi init -c bioconda -c conda-forge -p linux-64\npixi add r-base\npixi add r-tidyverse\npixi add bioconductor-phyloseq\npixi install\nYou can then knit your Quarto report by first activating your pixi environment containing your R installation. However, if you want to be able to view objects in your session in vs code (requires the R extension) and execute code line by line when writing your Quarto report, you can do so by including the following line in your report:\n.libPaths(\"/path/to/pixi/directory/.pixi/envs/default/lib/R/library\")\nThis prevents the need for activating your pixi environment before knitting the report and enables interactive coding in your Quarto report."
+  },
+  {
+    "objectID": "posts/2025-05-27-various-tips-and-tricks/index.html#using-a-conda-lock-file-in-nextflow",
+    "href": "posts/2025-05-27-various-tips-and-tricks/index.html#using-a-conda-lock-file-in-nextflow",
+    "title": "Various Tips and Tricks",
+    "section": "Using a Conda lock file in Nextflow",
+    "text": "Using a Conda lock file in Nextflow\nManaging package drift is a key challenge for reproducibility when using Conda. Typically, users create environments from an environment.yml file, sometimes pinning specific package versions. However, indirect dependencies (dependencies of dependencies) are not always pinned, which means your environment may become unresolvable or behave differently over time as upstream packages change.\nTo address this, it’s best practice to generate a Conda lock file, which captures the exact versions of all packages (including dependencies) in your environment. This ensures that others can recreate the environment exactly as you had it, even months later. You can generate a lock file using the --explicit flag with conda list:\n# In an activated environment\nconda list --explicit &gt; spec-file.txt\nAlternatively, you can use:\nconda env export --name &lt;env&gt; --explicit &gt; spec-file.txt\nTo recreate the environment from this lock file, use:\nconda create --name &lt;env&gt; --file spec-file.txt\nWhile this approach is helpful for reproducibility, it can become unwieldy if you need to manage many environments. Fortunately, Nextflow supports using Conda lock files (which must have a .txt extension). Simply reference your lock file in the conda directive within your process definition, and enable Conda in your Nextflow configuration:\n\n\nmy_process.nf\n\nprocess MY_PROCESS {\n  conda \"${moduleDir}/spec-file.txt\"\n\n  input:\n  ...\n}\n\n\n\nnextflow.config\n\nconda.enabled = true\n\nPlace spec-file.txt in the same directory as your process script.\n\n\n\n\n\n\nTip\n\n\n\nWhen building pipelines with nf-core modules, you’ll find that they often come with prebuilt containers and Conda environment files, but not with lock files. You can use Seqera Containers to build or pull a prebuilt container and extract its lock file.\nFor example, MultiQC has a prebuilt container. The build log shows that an environment.lock file is included inside the container.\nTo extract the lock file from the container we can use:\ndocker run --rm -it community.wave.seqera.io/library/multiqc:1.29--e3ef3b42c5f9f0da cat environment.lock &gt; multiqc-1.29-spec-file.txt\nYou can now use this lock file with the conda directive in Nextflow to recreate the same environment as the Docker container."
+  },
+  {
+    "objectID": "posts/2025-04-15-ssh-config-intro/index.html",
+    "href": "posts/2025-04-15-ssh-config-intro/index.html",
+    "title": "Introduction to SSH Config and Tunneling",
+    "section": "",
+    "text": "This introduction will cover the basics of SSH config, explaining how it works and how you can use it to simplify your SSH connections. SSH config is a file that allows you to store settings for your SSH connections, providing a flexible system for defining and reusing connection parameters, and significantly simplifying server management."
+  },
+  {
+    "objectID": "posts/2025-04-15-ssh-config-intro/index.html#the-config-file",
+    "href": "posts/2025-04-15-ssh-config-intro/index.html#the-config-file",
+    "title": "Introduction to SSH Config and Tunneling",
+    "section": "The config file",
+    "text": "The config file\nThe ssh program on a host receives its configuration from either the command line or from configuration files ~/.ssh/config and /etc/ssh/ssh_config 1.\nCommand-line options take precedence over configuration files. The user-specific configuration file ~/.ssh/config is used next. Finally, the global /etc/ssh/ssh_config file is used. The first obtained value for each configuration parameter will be used.\nThe ssh_config client configuration file has the following format. Both the global /etc/ssh/ssh_config and per-user ~/ssh/config have the same format.\n\nEmpty lines and lines starting with ‘#’ are comments.\nEach line begins with a keyword, followed by argument(s).\nConfiguration options may be separated by whitespace or optional whitespace and exactly one =.\nArguments may be enclosed in double quotes (“) in order to specify arguments that contain spaces.\n\nExample:\nHost github.com\n  AddKeysToAgent yes\n  IdentityFile ~/.ssh/id_ed25519\n\nHost rackham rackham1 rackham2 rackham3 rackham4\n  User rackham_username\n  Hostname %h.uppmax.uu.se\n  IdentityFile ~/.ssh/id_ed25519\n  ForwardAgent yes\n  # ForwardX11 yes\n\nHost nac\n  User nac_username\n  Hostname nac-login.nbis.se\n  ForwardAgent yes\n  IdentityFile ~/.ssh/id_ed25519\n\nHost dardel\n  User dardel_username\n  Hostname dardel.pdc.kth.se\n  ForwardAgent yes\n  IdentityFile ~/.ssh/id_ed25519\n\n# XAuthLocation added by XQuartz (https://www.xquartz.org)\nHost *\n  XAuthLocation /opt/X11/bin/xauth\nIn your config you’ll find blocks that start with Host &lt;label&gt;. When the Hostname is not supplied, the label provides the default hostname. AddKeysToAgent yes tells your SSH client to automatically add the private key supplied by IdentityFile."
+  },
+  {
+    "objectID": "posts/2025-04-15-ssh-config-intro/index.html#common-configuration-options",
+    "href": "posts/2025-04-15-ssh-config-intro/index.html#common-configuration-options",
+    "title": "Introduction to SSH Config and Tunneling",
+    "section": "Common configuration options",
+    "text": "Common configuration options\n\nThe identity file\nThis supplies the path to the SSH key file that should be used for authenticating when connecting to a host. There are several types of keys, and the example below uses an EdDSA key which is the default 2. Github has a very nice guide to generating keys 3.\nIdentityFile ~/.ssh/id_ed25519\n\n\nUser and Hostname\nIf your user and hostname is not the same as your local user you can also supply your username when connecting to the host\nHost nac\n  User nac_username\n  Hostname nac-login.nbis.se\n\n\nX11 Forwarding\nX11 forwarding (ssh -X) is a technique that allows you to run graphical applications on a remote server but display them on your local machine. This can however be slow. An alternative is port forwarding (see below).\nForwardX11 yes\n\n\n\n\n\n\nTip\n\n\n\nIt’s not recommended to enable this by default as it might start the X Server locally each time you log in, which could be a significant delay\n\n\n\n\nAgent forwarding\nAgent forwarding (ssh -A) in SSH allows you to use your local SSH keys to authenticate to further servers that the server you’ve connected to needs to access, without having to copy your private keys to that intermediate server.\nForwardAgent yes\n\n\nProxy Jump\nYou can use SSH to automatically connect to one host via another. This can be on demand with -J &lt;hostname&gt;, or it can be added permanently to a host using ProxyJump.\nssh dardel -J rackham\nHost dardel\n  User dardel_username\n  Hostname dardel.pdc.kth.se\n  ForwardAgent yes\n  ProxyJump rackham\n  IdentityFile ~/.ssh/id_ed25519\nMultiple proxies can be chained in this way."
+  },
+  {
+    "objectID": "posts/2025-04-15-ssh-config-intro/index.html#ssh-tunneling",
+    "href": "posts/2025-04-15-ssh-config-intro/index.html#ssh-tunneling",
+    "title": "Introduction to SSH Config and Tunneling",
+    "section": "SSH tunneling",
+    "text": "SSH tunneling\n\nPort forwarding\nPort forwarding, also known as SSH tunneling, is a technique that allows you to redirect network traffic through an SSH connection. For example, you can access remote databases, connect to Jupyter/Posit notebooks/servers, and forward web applications locally.\nIn this example, we’ll:\n\nConnect from our Laptop to Dardel.\nGet an allocation.\nConnect again from our Laptop to Dardel, but this time specify the port.\nConnect from Dardel to our allocation.\nStart Marimo in headless mode\nOpen the connection on our browser.\n\n\nRequest an interactive allocation\n\n\n\n\n\n\nTipRunning interactive jobs on Dardel\n\n\n\nPDC Documentation\n\n\nFirst connect to dardel\nssh dardel\nThen request an allocation\n# Request 4 cpus because of the low memory per core allocation.\nsalloc -c 4 -t 1:00:00 -A naiss2024-22-1346 -p shared\nNormally you would then\nssh $SLURM_NODELIST\nand start with your command-line operations, but not just yet.\n\n\n\n\n\n\nTip\n\n\n\nSLURM_NODELIST contains the list of nodes you just reserved. If you’ve reserved more than one node, then echo $SLURM_NODELIST followed by ssh &lt;NODE_ID&gt; of the node you want to ssh into.\n\n\n\n\nEnable SSH tunneling\nDecide the port you’re going to use to tunnel. We’ll use 8080, which is a standard in webserver testing, as we’ll be using Marimo which starts a web-service and runs in the browser.\nIn a new terminal on your local machine:\nssh -L 8080:&lt;node_id&gt;:8080 dardel\nssh &lt;node_id&gt;\nWhere -L enables port forwarding, the first 8080 is the local port, and the &lt;node_id&gt;:8080 is the host:hostport. If you only want to forward from the login node for example, then you might use -L 8080:localhost:8080 instead.\n\n\n\n\n\n\nCaution\n\n\n\nIt’s easy to accidentally run commands in the wrong location. Use your prompt to identify where you are, e.g. username@login1 means you’re still on the login node, and username@node_id means you’re on the allocated worker node.\n\n\n\n\nRun Marimo using Pixi\nOnce you’ve ssh’ed in, you’ll be put in your home directory. Let’s make an environment using Pixi.\n\n\n\n\n\n\nTipInstall Pixi\n\n\n\n\n\ncurl -fsSL https://pixi.sh/install.sh | sh\n\n\n\nMake a directory to start a Marimo server, and start one.\nmkdir marimo_test\ncd marimo_test\npixi init -c conda-forge -c bioconda\npixi add marimo\npixi shell\nmarimo edit --headless --host 0.0.0.0 --port 8080\nWe use --headless so marimo doesn’t try to open a browser on the worker node. The --host listens on all ports, and the --port is set to 8080.\nWhen Marimo starts up, it will display a URL to copy-and-paste into your local browser.\n$ marimo edit --headless --host 0.0.0.0 --port 8080\n\n        Create or edit notebooks in your browser 📝\n\n        ➜  URL: http://0.0.0.0:8080?access_token=kXxlpkz81MXl9fWF65VFqA\n        ➜  Network: http://10.253.5.60:8080?access_token=kXxlpkz81MXl9fWF65VFqA\n\n\n\n\n\n\n\nTip\n\n\n\nIf you get an error message such as,\nchannel 4: open failed: connect failed: No route to host\nchannel 5: open failed: connect failed: No route to host\nchannel 4: open failed: connect failed: No route to host\nchannel 5: open failed: connect failed: No route to host\nthere may already be a service running on the port you chose, e.g. 8080. In this case, select another port and try again, for example, changing ports to 8081.\n\n\n\n\nQuick play with Marimo\nCreate a new notebook, and then in the first cell add.\nimport marimo as mo\nAdd a new Python cell, and then add the following quick mermaid diagram.\ndiagram = '''\ngraph LR\n    A --&gt; B --&gt; C\n    A --&gt; C\n'''\nmo.mermaid(diagram)\nand run it.\n\n\nCleaning up\n\nUse Ctrl + C to shutdown the marimo webserver.\nUse exit to exit the Pixi shell.\nUse exit to exit the worker allocation.\nUse exit to exit the login node.\n\n\n\nPermanently configure\nTo configure services permanently, one can add the LocalForward to their config.\nHost nac\n  User nac_username\n  Hostname nac-login.nbis.se\n  # Blobtools service on port 8001 on login node\n  LocalForward 8001 localhost:8001"
+  },
+  {
+    "objectID": "posts/2025-04-15-ssh-config-intro/index.html#references",
+    "href": "posts/2025-04-15-ssh-config-intro/index.html#references",
+    "title": "Introduction to SSH Config and Tunneling",
+    "section": "References",
+    "text": "References"
+  },
+  {
+    "objectID": "posts/2025-04-15-ssh-config-intro/index.html#footnotes",
+    "href": "posts/2025-04-15-ssh-config-intro/index.html#footnotes",
+    "title": "Introduction to SSH Config and Tunneling",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://www.ssh.com/academy/ssh/config↩︎\nhttps://learning.lpi.org/en/learning-materials/102-500/110/110.3/110.3_01/↩︎\nhttps://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent↩︎"
+  },
+  {
+    "objectID": "posts/2025-02-18-vscode-intro/index.html",
+    "href": "posts/2025-02-18-vscode-intro/index.html",
+    "title": "Introduction to VSCode",
+    "section": "",
+    "text": "VSCode is owned by Microsoft, who also own GitHub and Copilot\nWhat this means for users: regularly updated, and tight integration of GitHub/Copilot features, large community\nOpen Source"
+  },
+  {
+    "objectID": "posts/2025-02-18-vscode-intro/index.html#background",
+    "href": "posts/2025-02-18-vscode-intro/index.html#background",
+    "title": "Introduction to VSCode",
+    "section": "",
+    "text": "VSCode is owned by Microsoft, who also own GitHub and Copilot\nWhat this means for users: regularly updated, and tight integration of GitHub/Copilot features, large community\nOpen Source"
+  },
+  {
+    "objectID": "posts/2025-02-18-vscode-intro/index.html#opening-vscode-in-wsl2",
+    "href": "posts/2025-02-18-vscode-intro/index.html#opening-vscode-in-wsl2",
+    "title": "Introduction to VSCode",
+    "section": "Opening VSCode in WSL2",
+    "text": "Opening VSCode in WSL2\n\nIf VSCode is installed in Windows, typing code in the terminal launches a new window in WSL2"
+  },
+  {
+    "objectID": "posts/2025-02-18-vscode-intro/index.html#basic-help-for-new-users",
+    "href": "posts/2025-02-18-vscode-intro/index.html#basic-help-for-new-users",
+    "title": "Introduction to VSCode",
+    "section": "Basic help for new users",
+    "text": "Basic help for new users\n\nHelp -&gt; editor playground\nHelp -&gt; keyboard shortcuts reference"
+  },
+  {
+    "objectID": "posts/2025-02-18-vscode-intro/index.html#basic-tips",
+    "href": "posts/2025-02-18-vscode-intro/index.html#basic-tips",
+    "title": "Introduction to VSCode",
+    "section": "Basic tips",
+    "text": "Basic tips\n\nUse settings sync to easily transfer configurations between machines (N.B. GitPod uses a different settings sync server, so VSCode instances on GitPod need to be configured separately, but only once if you turn on sync there also)\nUse user profiles to switch between different configurations\nSet editors to auto-save\nCustomise and use keybindings (see the cheatsheet for the commonly used defaults)\nSettings can be changed either via default/user json files or the preferences interface\nUse the command palette with Ctrl+Shift+P (Windows), Cmd+Shift+P (Mac)\nExplore extensions for additional functionality, e.g.:\n\nLanguage support\nGitHub Copilot & Chat\nRemote SSH\nTodo highlight\nRainbow CSV"
+  },
+  {
+    "objectID": "posts/2025-02-18-vscode-intro/index.html#remote-development-vscode-environment-on-a-remote-server",
+    "href": "posts/2025-02-18-vscode-intro/index.html#remote-development-vscode-environment-on-a-remote-server",
+    "title": "Introduction to VSCode",
+    "section": "Remote development (VSCode environment on a remote server)",
+    "text": "Remote development (VSCode environment on a remote server)\n\nGet the extension: Remote - SSH\nConfigure the ~/.ssh config file on your local machine, e.g.:\n\nHost dardel\n        Hostname dardel.pdc.kth.se\n        User myname\n        IdentityFile /home/myname/.ssh/id-ed25519-dardel\n\nIf using Mac/Linux installation of VSCode, that’s all for setup\nIf using WSL2 within Windows, you also need to copy the contents of the ~/.ssh folder (config file and public + private keys) over to C:\\Users\\myname\\.ssh. You additionally must update the Windows config file IdentityFile paths to point to the respective keys, e.g.: IdentityFile C:\\Users\\myname\\.ssh\\id-ed25519-dardel. Permissions on this folder are usually automatic, but if necessary ensure the folder and contents are readable (right click -&gt; show more… -&gt; properties -&gt; security)\nBack in VSCode, open the command palette, type ssh, and select Remote-SSH: Connect to Host...\nThe hostnames you configured should now appear and you can connect"
+  },
+  {
+    "objectID": "posts/2025-02-18-vscode-intro/index.html#copilot",
+    "href": "posts/2025-02-18-vscode-intro/index.html#copilot",
+    "title": "Introduction to VSCode",
+    "section": "Copilot",
+    "text": "Copilot\n\nGet the Copilot extensions (GitHub Copilot & GitHub Copilot Chat)\nLink up your GitHub account - ensure you have signed up for the GitHub education program that offers free copilot (https://github.com/education)\nMain features are:\n\nInline suggestions\nInline prompt\nCopilot Chat -&gt; similar to ChatGPT interface and use cases\nCopilot Edit -&gt; large scale direct code editing with AI"
+  },
+  {
+    "objectID": "posts/2025-02-18-vscode-intro/index.html#other-tips",
+    "href": "posts/2025-02-18-vscode-intro/index.html#other-tips",
+    "title": "Introduction to VSCode",
+    "section": "Other tips",
+    "text": "Other tips\n\nUseful starter set of shortcuts & keybindings to customise or learn\nNAVIGATION\n\nJumping from editor to terminal\nOpening/closing editors/terminal\nNavigation between open editors or open terminals\nVSCode breadcrumbs\nFuzzy find to open specific files\n\nCODE\n\nMoving lines\nDeleting lines\nDuplicate lines\nComment out a line\nCut/copy lines\nMulti line cursor\nSelecting the whole word, or all occurences of a word\nConverting word case\nJump to specific code line\nJump to matching brackets\n\nFEATURES\n\nOpening the command palette\nOpening copilot chat or prompt\nHiding/showing sidebars/activity bar\nToggle word wrap for editors"
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html",
+    "href": "posts/2024-06-04-apptainer-intro/index.html",
+    "title": "Introduction to Apptainer",
+    "section": "",
+    "text": "Lesson plan based around materials from CodeRefinery\nApptainer is the open source version of Singularity."
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#what-are-containers",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#what-are-containers",
+    "title": "Introduction to Apptainer",
+    "section": "What are containers?",
+    "text": "What are containers?\n\nContainers isolate software, dependencies, configurations, and system libraries from the host system\nThe naming came from the idea of shipping containers (which are portable & standardized)\nVirtual machines are a similar concept, but these virtualise hardware, contain complete operating systems (including the kernel), and are managed by software known as a hypervisor\nContainers on the other hand share the host OS kernel, so they don’t contain complete operating systems, just user space system libraries\nThis makes them lightweight, portable, and fast to start up"
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#docker-vs-apptainer-containers",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#docker-vs-apptainer-containers",
+    "title": "Introduction to Apptainer",
+    "section": "Docker vs Apptainer containers",
+    "text": "Docker vs Apptainer containers\n\nApptainer (i.e. Singularity) is intended to run reproducibly across many system types, including HPC systems\nDocker is rarely allowed on clusters, requires root access\nTheir images are somewhat different - Docker images are made up of layers (Base image -&gt; launched as container -&gt; edited -&gt; used as new base layer -&gt; launched -&gt; edited -&gt; etc.). Apptainer images squash layers into one file (.sif format)\nThese files are easily shared and can be run on any system with Apptainer installed"
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#apptainer-vs-singularity-history-the-.sif-format",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#apptainer-vs-singularity-history-the-.sif-format",
+    "title": "Introduction to Apptainer",
+    "section": "Apptainer vs Singularity history & the .sif format",
+    "text": "Apptainer vs Singularity history & the .sif format\n\nSingularity was the original name of the open source project from 2015, but this turned partly commercial in 2018\nThe open source part forked and joined the Linux foundation in 2021, becoming Apptainer\nThe singularity image format (.sif) remains in Apptainer as a legacy of that\nSimilarly when you install Apptainer, there are symlinks, so you can use singularity pull rather than apptainer pull\nFor practical purposes, they are the same"
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#structure-of-an-apptainer-command",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#structure-of-an-apptainer-command",
+    "title": "Introduction to Apptainer",
+    "section": "Structure of an apptainer command",
+    "text": "Structure of an apptainer command\n\napptainer [subcommand] [image] [additional commands]\nExample of pull and shell\n\napptainer pull docker://alpine\napptainer shell alpine_latest.sif\ncat /etc/alpine-release\nexit\ncat /etc/alpine-release\ncat /etc/debian_version\n\nInteract with the container from the host system:\n\napptainer exec alpine_latest.sif cat /etc/alpine-release\ncat /etc/alpine-release"
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#building-.sif-from-a-definition-file-.def",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#building-.sif-from-a-definition-file-.def",
+    "title": "Introduction to Apptainer",
+    "section": "Building .sif from a definition file (.def)",
+    "text": "Building .sif from a definition file (.def)\n\nBuilding a custom container requires a .def file, specifying the registry and image for the base image, and various options for the container\n\n\n\nexample.def\n\n\nBootstrap: docker\nFrom: debian:12.5-slim\n\n%environment\n        export PATH=$PATH:/root/.pixi/bin\n\n%runscript\n                cat /etc/debian_version\n\n%post\n        export PATH=$PATH:/root/.pixi/bin\n        apt-get update && \\\n        apt-get install -y curl && \\\n        curl -fsSL https://pixi.sh/install.sh | bash && \\\n        apt-get clean && \\\n        pixi global install -c bioconda -c conda-forge minigraph\n\n\nThen build the container: apptainer build minigraph.sif example.def\napptainer run executes the runscript inside the container:\n\napptainer run minigraph.sif"
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def",
+    "title": "Introduction to Apptainer",
+    "section": "Portability to HPC systems, & note on reproducibilty (.sif files vs rebuilding from a .def)",
+    "text": "Portability to HPC systems, & note on reproducibilty (.sif files vs rebuilding from a .def)\n\n.sif files are portable and will be highly reproducible\nYou can also share a .def file, however consider that some tags on docker hub refer to rolling releases, e.g. latest. If you want future builds of the container to be identical, try to find a static tag, e.g. a github commit tag\nIn addition, using commands from package managers like apt-get update in the .def will make the container less reproducible, as the package versions will change over time\nBy default Apptainer/Singularity loads certain directories such as $HOME (see below), and this means local packages (e.g. Python, R, etc.) can be picked up and loaded instead of the ones in the container. To prevent this, do something like this."
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#other-useful-things-to-know",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#other-useful-things-to-know",
+    "title": "Introduction to Apptainer",
+    "section": "Other useful things to know:",
+    "text": "Other useful things to know:\n\nMount binding\n\nSome folders are automatically bound from the host system (e.g., $HOME, $CWD, /tmp)\nTherefore don’t install software to those locations - they’ll install on your host system too\nUse an unmounted folder like /opt or /usr/local instead\nIf you need to mount a directory to the container, e.g. a data directory, this is possible, e.g.:\n\napptainer exec --bind /scratch example.sif ls /scratch\n\n\nConversion from docker\n\nIt’s possible to convert from docker images to singularity images - not covered today\n\n\n\nSandbox containers\n\nSingularity containers are basically uneditable - no so fun if you need to keep rebuilding from scatch during development\nThere is a “sandbox container” feature which is editable, and it works like a file system within your file system\nWhen you are ready for a production container, you can convert the sandbox container to a regular container, though it would be preferable to rebuild from a definition file, so that there is a record of what was done\n\n\n\n\n\n\n\nTip\n\n\n\nIt’s advisable to use many small containers (minimal container for a single process/tool) rather than large inclusive containers."
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#seqera-containers-resource",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#seqera-containers-resource",
+    "title": "Introduction to Apptainer",
+    "section": "Seqera containers resource",
+    "text": "Seqera containers resource"
+  },
+  {
+    "objectID": "posts/2024-06-04-apptainer-intro/index.html#converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example",
+    "href": "posts/2024-06-04-apptainer-intro/index.html#converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example",
+    "title": "Introduction to Apptainer",
+    "section": "Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?",
+    "text": "Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?"
+  },
+  {
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html",
+    "href": "posts/2024-05-07-gitpod-intro/index.html",
+    "title": "Introduction to Gitpod",
+    "section": "",
+    "text": "ImportantImportant Note on Cloud Development Environments\n\n\n\nGitpod has rebranded to Ona and has a very limited free tier. Usage now requires a paid subscription.\nWe recommend using GitHub Codespaces as a web-based alternative, as it still offers a useful free tier for individual users.\nFor local or self-hosted developer environments, please see walkthroughs covering tools like Pixi for environment creation."
+  },
+  {
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#what-is-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#what-is-gitpod",
+    "title": "Introduction to Gitpod",
+    "section": "What is Gitpod",
+    "text": "What is Gitpod\nGitpod is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file .gitpod.yml present in the repository.\nThere are two offerings of Gitpod, Gitpod Flex, and Gitpod Enterprise. Gitpod Flex is designed to run a container on your laptop, cloud, or on-premises architecture. Gitpod Enterprise, which we discuss here, runs on a cloud environment hosted by Gitpod.\nThere are different pricing depending on your needs such as:\n\nFree plan (50 hours per month)\nPay-as-you-go\nCompany plan (custom)\n\nMahesh is on an open source plan (named NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication."
+  },
+  {
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#how-to-login-to-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#how-to-login-to-gitpod",
+    "title": "Introduction to Gitpod",
+    "section": "How to login to Gitpod",
+    "text": "How to login to Gitpod\n\nGo to the Gitpod site.\nSelect your Git hosting service (e.g., GitHub), and authenticate.\nIf successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right.\nNow when you start a Gitpod environment you’ll be connected to your version control system."
+  },
+  {
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#how-to-start-a-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#how-to-start-a-gitpod",
+    "title": "Introduction to Gitpod",
+    "section": "How to start a Gitpod",
+    "text": "How to start a Gitpod\nTo start a workspace, follow these steps:\n\nNavigate to your repository on GitHub, GitLab or Bitbucket.\nAdd gitpod.io/# before the URL address of your repository. This will create a new URL address that directs you to the Gitpod workspace setup page. On that page, you can make the following choices:\n\nThe source repository for which the gitpod workspace will be created.\nThe code editor.\nThe computing resources required for the workspace.\n\nAfter making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user’s working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer.\nAny changes to the files within that folder can be pushed to the repository using Git commands.\n\nNote: If you are editing a public Github public repository, Gitpod requires the “public_repo” permission to push changes. To do it, follow these steps:\n\nNavigate to gitpod.io.\nClick on your user icon\nClick “user settings”\nNavigate to “Git Providers”\nClick the actions icon on the GitHub provider\nClick “edit permissions”\nCheck “public_repo”\nClick “Update permissions”\nYou will be redirected to Github for authentication.\n\nAfter granting permissions, the user can push changes to the repository."
+  },
+  {
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#how-to-configure-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#how-to-configure-gitpod",
+    "title": "Introduction to Gitpod",
+    "section": "How to configure Gitpod",
+    "text": "How to configure Gitpod\n\nA gitpod workspace is configured mainly through the .gitpod.yml file at the root of your repository (e.g. github.com/user/repo/.gitpod.yml).\nThis file is read by Gitpod when the workspace is started, and can be used to specify the base workspace image, and a list of tasks that will be run when the workspace is started.\nBelow is the yml file we use in the Training-tech-shorts repo.\n\nimage: nfcore/gitpod:latest\n\ntasks:\n  - name: Update Nextflow\n    command: nextflow self-update\n  - name: Install Pixi\n    command: |\n      sudo chown gitpod -R /home/gitpod/\n      curl -fsSL https://pixi.sh/install.sh | bash\n      . /home/gitpod/.bash_profile\n  - name: Install Quarto\n    command: |\n      wget https://quarto.org/download/latest/quarto-linux-amd64.deb\n      sudo dpkg -i quarto-linux-amd64.deb\n      rm quarto-linux-amd64.deb\n      quarto check all\n\nThe image: section of the .gitpod.yml is used to specify the base workspace image, this can be a public or private docker image, or a Dockerfile (in this case the base image must be public).\n\n# public image\nimage: nfcore/gitpod:latest\n\n# local Dockerfile\nimage:\n    file: .gitpod.Dockerfile\n\nThe tasks: section of the .gitpod.yml is used to specify a list of tasks that will be run when the workspace is started. Each task should have a name: and a command: section. The command: section specifies one or more shell commands that will be run in the workspace.\n\ntasks:\n  - name: Update Nextflow\n    command: nextflow self-update\n\nIn order to execute multiple commands in a single task, you can use the | syntax to specify a block of shell commands, each in one line.\n\ntasks:\n  - name: Install Pixi\n    command: |\n      sudo chown gitpod -R /home/gitpod/\n      curl -fsSL https://pixi.sh/install.sh | bash\n      . /home/gitpod/.bash_profile\n\nOptionally, you can also add a ports: section to the .gitpod.yml file to specify a list of ports that should be opened by the workspace. This can be useful when hosting a web server or anything that needs to be accessed from outside the workspace.\n\nports:\n  - port: 8080\n    onOpen: open-preview"
+  },
+  {
+    "objectID": "posts/2024-05-07-gitpod-intro/index.html#uses-for-gitpod",
+    "href": "posts/2024-05-07-gitpod-intro/index.html#uses-for-gitpod",
+    "title": "Introduction to Gitpod",
+    "section": "Uses for Gitpod",
+    "text": "Uses for Gitpod\n\nDemonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.\nDevelopment: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.\nExperimentation: The ephemeral nature of the environment, and its standardized tools make Gitpod excellent for testing code and sandbox experimentation.\nTraining: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements."
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html",
+    "href": "posts/2024-03-19-git-intro/index.html",
+    "title": "Introduction to Git",
+    "section": "",
+    "text": "Git is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer’s computer.\nGit is the most popular tool, even though it might not be the most user-friendly one. It has a lot of options/commands and specific jargon. Fortunately there are many “Git cheat sheets” (such as https://education.github.com/git-cheat-sheet-education.pdf)."
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html#what-is-git",
+    "href": "posts/2024-03-19-git-intro/index.html#what-is-git",
+    "title": "Introduction to Git",
+    "section": "",
+    "text": "Git is nowadays the most widely used distributed version control system, especially in software development. By opposition to centralized version control systems, with Git, the code source, including its full history, is mirrored on every developer’s computer.\nGit is the most popular tool, even though it might not be the most user-friendly one. It has a lot of options/commands and specific jargon. Fortunately there are many “Git cheat sheets” (such as https://education.github.com/git-cheat-sheet-education.pdf)."
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html#what-should-git-be-used-for",
+    "href": "posts/2024-03-19-git-intro/index.html#what-should-git-be-used-for",
+    "title": "Introduction to Git",
+    "section": "What should Git be used for",
+    "text": "What should Git be used for\nIn software development, Git is mostly used for version control of code. In our bioinformatics projects, we can also track our report files, environment files, and other small files.\nGit should NOT be used for storing data, particularly large data. Sensitive data (passwords, usernames, API keys…) should not be put in a Git repository, because they can be then exposed to the world. If one commits sensitive data by mistake, one can go back into the git history and remove it, but it is not a simple task."
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-repositories",
+    "href": "posts/2024-03-19-git-intro/index.html#git-repositories",
+    "title": "Introduction to Git",
+    "section": "Git Repositories",
+    "text": "Git Repositories\n\nA git repository (repo) is any folder structure that is version-controlled by git.\nA git repo can be initialized from a local folder, or cloned from a remote repo.\n\nTo initialize a repo from a local folder:\n\ncd myfolder\ngit init\n\nTo clone a git repo from a remote source:\n\ngit clone https://github.com/user/repo\nRegardless of how you obtain it, your local copy of the git repo will contain a .git folder. That is where the change history of your project is stored and maintained by git."
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-branches",
+    "href": "posts/2024-03-19-git-intro/index.html#git-branches",
+    "title": "Introduction to Git",
+    "section": "Git branches",
+    "text": "Git branches\nOnce you have cloned a specific git repository locally on your computer, you can navigate and/or create new branches on it using git CLI. Here some examples:\n\nTo create a branch and switch to it type git checkout -b branch_name\nTo push the newly created branch to the remote repository type git push -u origin branch_name\nTo display all branches on the local and remote repository type git branch -a\nTo switch to one of the displayed branches type git checkout name_of_branch. Once a change is committed to that branch, pushing the committed change will be pushed to that specific branch on the remote repository.\nTo delete a branch type git branch -d name_of_branch_to_delete"
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html#file-staging-and-git-commit",
+    "href": "posts/2024-03-19-git-intro/index.html#file-staging-and-git-commit",
+    "title": "Introduction to Git",
+    "section": "File staging and git commit",
+    "text": "File staging and git commit\nStaging in Git involves adding new, modified, or deleted files to a staging area before committing them. This allows for flexibility in choosing the files to commit.\n\nCheck status via git status You’ll see what branch you are on and status of files (untracked, modified, or deleted).\n\nStage Files to Prepare for Commit\n\n\nStage all files: git add .\nStage a file: git add example.html\nStage a folder: git add myfolder\n\n\nCheck status again: git status You should see there are changes ready to be committed.\nUnstage a File\n\n\nIf you accidental stage something, use the following command to unstage it: git reset HEAD example.html\n\n\nDeleting Files\n\n\nIf you delete files they will appear in git status as deleted, and you must use git add to stage them. Another way to do this is using git rm command, which both deletes a file and stages it all with one command:\ngit rm example.html to remove a file (and stage it)\ngit rm -r myfolder to remove a folder (and stage it)\n\n\nCommit Files\n\n\ngit commit -m \"Message that describes what this change does\"\n\n\nCheck status again: git status If all changes have been committed, and there are no untracked files, it should say: nothing to commit, working tree clean.\nView a List of Commits\n\n\nWhen viewing a list of commits, there are various commands depending on how much info you want to see.\nTo see a simplified list of commits, run this command: git log --oneline\nTo see a list of commits with more detail (such who made the commit and when), run this command: git log NOTE: If the list is long, use the Down/Up Arrow keys to scroll and hit Q to quit.\nTo see a list of commits with even more detail (including which files changed), run this command: git log --stat\n\n\nFixing Your Last Commit Message\n\n\ngit commit --amend -m \"Put your corrected message here\": to correct a mistake in your last commit message\n\n\nChanging committed files\n\n\nThe --no-edit flag will allow you to make the amendment to your commit without changing its commit message. Example:\n\n# Edit hello.py and main.py\ngit add hello.py\ngit commit \n# Realize you forgot to add the changes from main.py \ngit add main.py \ngit commit --amend --no-edit\nThe resulting commit will replace the incomplete one, and it will look like we committed the changes to hello.py and main.py in a single snapshot."
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-pushpull",
+    "href": "posts/2024-03-19-git-intro/index.html#git-pushpull",
+    "title": "Introduction to Git",
+    "section": "Git push/pull",
+    "text": "Git push/pull\nYou can use git push to sync a remote repository with the changes you’ve done locally. The most basic example would be that you’ve first cloned a repository with git clone then made some changes in that local copy and want to update the original remote repository.\nSimilarly, if for example, someone else made changes to the remote and you want to incorporate those changes into your local copy you will run git pull to make sure you are up to date with the changes in the remote repository before working on your local copy."
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-merge-and-git-rebase",
+    "href": "posts/2024-03-19-git-intro/index.html#git-merge-and-git-rebase",
+    "title": "Introduction to Git",
+    "section": "Git merge and git rebase",
+    "text": "Git merge and git rebase\nGit merge and git rebase can be said to be used to solve similar things.\nWhen working on a feature in a separate branch while someone else updates the main branch you often want to incorporate the new changes from the main branch into your feature branch.\nFirst you would probably like to use git pull as described above to make sure your local copy is up-to-date with changes made by others.\nThen it could be done with merge like this:\ngit checkout my_new_feature\nfollowed by adding your new code/feature and then merge it:\ngit merge main\nThis will create what is called a “merge commit” and put the changes from main into your feature branch.\nThe alternative way would be to use rebase:\ngit checkout my_new_feature\ngit rebase main\nThis will sort of re-write the project history by moving the feature branch to the “tip” of the main and create new commits in the original branch."
+  },
+  {
+    "objectID": "posts/2024-03-19-git-intro/index.html#git-cheetsheet",
+    "href": "posts/2024-03-19-git-intro/index.html#git-cheetsheet",
+    "title": "Introduction to Git",
+    "section": "Git Cheetsheet",
+    "text": "Git Cheetsheet"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "RSE Tools Tech Group",
+    "section": "",
+    "text": "👋 Welcome to the NBIS RSE Tools Tech Group!\nThese blog posts are short walkthroughs on various Research Software Engineering (RSE) tools useful in bioinformatics. We aim to share a demonstration of a tool every two weeks.\nWant to discuss or need help? Start a discussion on our Discussions page or reach out on the #tech-group-rse-tools channel on NBIS Slack."
+  },
+  {
+    "objectID": "index.html#walkthroughs",
+    "href": "index.html#walkthroughs",
+    "title": "RSE Tools Tech Group",
+    "section": "Walkthroughs",
+    "text": "Walkthroughs"
+  },
+  {
+    "objectID": "cheatsheets.html",
+    "href": "cheatsheets.html",
+    "title": "Cheatsheets",
+    "section": "",
+    "text": "Quick reference resources for tools related to research software development and bioinformatics.\n\n\n\n\n\n\nTipTemplate for contributing\n\n\n\n\n\n\nCategory: Type of tool\nAbout: One line introduction about the tool\nLinks: Official cheatsheet | Official documentation | Other relevant link\nRSE tools sessions: Session title\n\n\n\n\n\nCategory: Container platform\nAbout: Open-source fork of Singularity, used to package applications with their dependencies for HPC environments\nLinks: Official documentation | Coderefinery tutorial\nRSE tools sessions: Introduction to Apptainer\n\n\n\nCategory: Container platform\nAbout: Package applications with their dependencies\nLinks: Official cheatsheet | Official documentation\n\n\n\nCategory: Version control\nAbout: Make and manage git repositories for version control of code, documentation, and other projects\nLinks: Official cheatsheet | Official documentation | Cheatsheet from GitHub\nRSE tools sessions: Introduction to Git\n\n\n\nCategory: Package management\nAbout: Powerful and fast software environment creator, package manager, and task runner\nLinks: Official quick start guide | Official documentation\nRSE tools sessions: Introduction to Pixi\n\n\n\nCategory: Development environment\nAbout: Powerful and customizable code editor owned and supported by Microsoft\nLinks: Official cheatsheet Windows | Official cheatsheet MacOS | Official documentation\nRSE tools sessions: Introduction to VSCode"
+  },
+  {
+    "objectID": "cheatsheets.html#name-of-the-tool",
+    "href": "cheatsheets.html#name-of-the-tool",
+    "title": "Cheatsheets",
+    "section": "",
+    "text": "Category: Type of tool\nAbout: One line introduction about the tool\nLinks: Official cheatsheet | Official documentation | Other relevant link\nRSE tools sessions: Session title"
+  },
+  {
+    "objectID": "cheatsheets.html#apptainer",
+    "href": "cheatsheets.html#apptainer",
+    "title": "Cheatsheets",
+    "section": "",
+    "text": "Category: Container platform\nAbout: Open-source fork of Singularity, used to package applications with their dependencies for HPC environments\nLinks: Official documentation | Coderefinery tutorial\nRSE tools sessions: Introduction to Apptainer"
+  },
+  {
+    "objectID": "cheatsheets.html#docker",
+    "href": "cheatsheets.html#docker",
+    "title": "Cheatsheets",
+    "section": "",
+    "text": "Category: Container platform\nAbout: Package applications with their dependencies\nLinks: Official cheatsheet | Official documentation"
+  },
+  {
+    "objectID": "cheatsheets.html#git",
+    "href": "cheatsheets.html#git",
+    "title": "Cheatsheets",
+    "section": "",
+    "text": "Category: Version control\nAbout: Make and manage git repositories for version control of code, documentation, and other projects\nLinks: Official cheatsheet | Official documentation | Cheatsheet from GitHub\nRSE tools sessions: Introduction to Git"
+  },
+  {
+    "objectID": "cheatsheets.html#pixi",
+    "href": "cheatsheets.html#pixi",
+    "title": "Cheatsheets",
+    "section": "",
+    "text": "Category: Package management\nAbout: Powerful and fast software environment creator, package manager, and task runner\nLinks: Official quick start guide | Official documentation\nRSE tools sessions: Introduction to Pixi"
+  },
+  {
+    "objectID": "cheatsheets.html#vscode",
+    "href": "cheatsheets.html#vscode",
+    "title": "Cheatsheets",
+    "section": "",
+    "text": "Category: Development environment\nAbout: Powerful and customizable code editor owned and supported by Microsoft\nLinks: Official cheatsheet Windows | Official cheatsheet MacOS | Official documentation\nRSE tools sessions: Introduction to VSCode"
+  },
+  {
+    "objectID": "contributing.html",
+    "href": "contributing.html",
+    "title": "Contributing",
+    "section": "",
+    "text": "Walkthroughs are short (~30 minutes) demonstrations, taught by volunteers from within the Tech group. The sessions are then written up and shared here for future reference as blog posts.\n\n\nOur primary audience is NBIS staff and affiliates, both bioinformaticians and managers.\n\nFor Learners: Provides regular, practical training on our core technology stack.\nFor Managers: Highlights the importance of regular training and informs them of the teams’ collective capabilities.\n\n\n\n\nWe use GitHub Issues to manage the walkthrough pipeline:\n\nSuggest a Topic: Create a new Issue to propose a tool or topic you’d like to see covered.\nVote on Topics: Use the reactions feature 👍 to upvote topics you’re interested in.\nVolunteer to Teach: Anyone can volunteer to prepare and demonstrate a walkthrough. You don’t need to be an expert - just be willing to learn and share!\nWrite it Up: After the demo, the walkthrough should be written up as a blog post, which will be reviewed and published here. Anyone can contribute to the write-up.\n\n\n\n\nStart a discussion on our Discussions page or reach out on the #tech-group-rse-tools channel on NBIS Slack."
+  },
+  {
+    "objectID": "contributing.html#how-it-works",
+    "href": "contributing.html#how-it-works",
+    "title": "Contributing",
+    "section": "",
+    "text": "Walkthroughs are short (~30 minutes) demonstrations, taught by volunteers from within the Tech group. The sessions are then written up and shared here for future reference as blog posts.\n\n\nOur primary audience is NBIS staff and affiliates, both bioinformaticians and managers.\n\nFor Learners: Provides regular, practical training on our core technology stack.\nFor Managers: Highlights the importance of regular training and informs them of the teams’ collective capabilities.\n\n\n\n\nWe use GitHub Issues to manage the walkthrough pipeline:\n\nSuggest a Topic: Create a new Issue to propose a tool or topic you’d like to see covered.\nVote on Topics: Use the reactions feature 👍 to upvote topics you’re interested in.\nVolunteer to Teach: Anyone can volunteer to prepare and demonstrate a walkthrough. You don’t need to be an expert - just be willing to learn and share!\nWrite it Up: After the demo, the walkthrough should be written up as a blog post, which will be reviewed and published here. Anyone can contribute to the write-up.\n\n\n\n\nStart a discussion on our Discussions page or reach out on the #tech-group-rse-tools channel on NBIS Slack."
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html",
+    "href": "posts/2024-03-12-github-collaboration/index.html",
+    "title": "Collaboration on Github",
+    "section": "",
+    "text": "This section is a guide describing one method of collaborating on Github. We focus on the framework that we use to make reference material for future us and others new to the team."
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#making-a-branch-teacher",
+    "href": "posts/2024-03-12-github-collaboration/index.html#making-a-branch-teacher",
+    "title": "Collaboration on Github",
+    "section": "Making a branch (Teacher)",
+    "text": "Making a branch (Teacher)\n\nOn the main page of the repository go to the file tree view on the left and click on the branch dropdown menu.\nClick on view all branches\nClick New branch, give it a name and select the branch source.\nFinally, click create branch\n\nYou also have the possibility to directly make a branch by clicking on the drop-down menu and give a unique name in the “Find or create branch…” field, followed by clicking Create branch. This will give the exact same result as the steps above.\nThis short description might be confusing since there are more than one way of doing this. A step-by-step guide with pictures is available here (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)"
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#making-changes-learner",
+    "href": "posts/2024-03-12-github-collaboration/index.html#making-changes-learner",
+    "title": "Collaboration on Github",
+    "section": "Making changes (Learner)",
+    "text": "Making changes (Learner)\n\nFork the whole target repository to your own account, by selecting “Fork” -&gt; include all the branches (i.e., untick “Copy the main branch only”) -&gt; “Create fork”.\nOn your fork, first go into the correct branch for making edits by clicking the branch drop down menu and selecting it.\nTo edit a file that already exists, navigate to it then click the pencil symbol to go into edit mode.\nIf instead you need to make a new file in the branch, click the “Add file” drop down -&gt; “create new file”. Give the file a meaningful name and extension. When naming files you can make new directories by adding forward slashes in the title, e.g., “github/myfile.qmd” will create the folder github also.\nAdd the file contents in edit mode.\nWhen finished, click “Commit changes…”"
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#making-a-draft-pull-request-learner",
+    "href": "posts/2024-03-12-github-collaboration/index.html#making-a-draft-pull-request-learner",
+    "title": "Collaboration on Github",
+    "section": "Making a draft pull request (Learner)",
+    "text": "Making a draft pull request (Learner)\nAfter making and committing changes as described above, navigate to the Pull requests tab. Click “New pull request” which will produce a “Comparing changes” page with four drop-down lists. The leftmost two drop-down lists refer to the target repository of the pull request and should be set to NBISweden/Training-Tech-shorts, followed by the target branch. The two rightmost drop-down lists refer to the pull request source and should point to your repository and, importantly, the branch that you are editing (and make sure it matches the target branch!). By default, only the branches of the target repository are shown. To find the updated branch from the forked repository, one has to click on “If you need to, you can also compare across forks.”. Once done, change the green drop-down button “Create pull request” to “Create draft pull request”. This will generate a draft pull request page where your review partner can make comments on your PR."
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#code-review-review-partner",
+    "href": "posts/2024-03-12-github-collaboration/index.html#code-review-review-partner",
+    "title": "Collaboration on Github",
+    "section": "Code review (Review partner)",
+    "text": "Code review (Review partner)\n\nnavigate to the top menu and click on Pull requests\nby default all open pull requests are listed, you can further filter down the list. e.g. via clicking on Reviews and afterwards select Awaiting review from you in the drop down menu. This shows then only PRs where you are tagged as reviewer.\nclick on a pull request of your choice\nthe following window has 4 tabs:\n\nConversation: gives an overview about the PR\nCommits: list all commits of the PR\nCheck:\nFiles changed: lists all files which were modified\n\nclick on the Files changed tab and go through the files and changes\n\nyou can comment on a line by hovering over a line and click on the plus symbol\nin case you want to comment on a block of lines: click and hold at the line number of the start of the block and release at the end of the block. Now you need to click on the plus symbol of the last line, in order to comment on the full block of lines\nafterwards you can either:\n\nclick on the Add single comment button which makes your comment or suggestion immediately visible OR\n\nclick on the Start a review button, which keeps your comment or suggestion in a pending state (invisible to anybody). This gives you the chance to add further comments and suggestions.\n\nwhen done with the full review click on the Finish your review button on the top right corner of the page:\n\nyou can comment on your review and choose one of the following options Comment, Approve, Request changes. Select the approprate option and click on Submit review."
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#making-a-ready-for-review-pull-request-learner",
+    "href": "posts/2024-03-12-github-collaboration/index.html#making-a-ready-for-review-pull-request-learner",
+    "title": "Collaboration on Github",
+    "section": "Making a ready for review pull request (Learner)",
+    "text": "Making a ready for review pull request (Learner)\n\nOnce you and your review partner have agreed on the code review (i.e. Your review partner has approved your draft pull request), covert your draft pull request to ready to review.\nOn the right side panel, you should invite the teacher to review your pull request.\nThe teacher will go through the changes that you made on the original file and suggest changes through code review as your review partner did."
+  },
+  {
+    "objectID": "posts/2024-03-12-github-collaboration/index.html#merges-pull-requests-teacher",
+    "href": "posts/2024-03-12-github-collaboration/index.html#merges-pull-requests-teacher",
+    "title": "Collaboration on Github",
+    "section": "Merges pull requests (Teacher)",
+    "text": "Merges pull requests (Teacher)\n\nOnce both teacher and learner are satisfied with the updates, the teacher merges the learner’s pull request into their lesson branch.\nOnce the teacher has updated their lesson branch with the input from all learners, the teacher merges the lesson branch into the main branch, after fixing any consistency or potential rendering issues."
+  },
+  {
+    "objectID": "posts/2024-04-16-quarto-intro/index.html",
+    "href": "posts/2024-04-16-quarto-intro/index.html",
+    "title": "Introduction to Quarto",
+    "section": "",
+    "text": "In order to use Quarto you need to install Quarto first. The easiest way is to get the package for your desired platform directly from https://quarto.org/docs/get-started/. If you need the most recent version you can also get the source code from the quarto-cli git repository.\nAfter Quarto is installed on your system you can get an overview of all subcommonds when you type quarto help (followed by pressing ENTER) in a terminal:\n\n  Usage:   quarto \n  Version: 1.4.553\n\n  Description:\n\n    Quarto CLI\n\n  Options:\n\n    -h, --help     - Show this help.                            \n    -V, --version  - Show the version number for this program.  \n\n  Commands:\n\n    render     [input] [args...]     - Render files or projects to various document types.\n    preview    [file] [args...]      - Render and preview a document or website project.  \n    serve      [input]               - Serve a Shiny interactive document.                \n    create     [type] [commands...]  - Create a Quarto project or extension               \n    use        &lt;type&gt; [target]       - Automate document or project setup tasks.          \n    add        &lt;extension&gt;           - Add an extension to this folder or project         \n    update     [target...]           - Updates an extension or global dependency.         \n    remove     [target...]           - Removes an extension.                              \n    convert    &lt;input&gt;               - Convert documents to alternate representations.    \n    pandoc     [args...]             - Run the version of Pandoc embedded within Quarto.  \n    typst      [args...]             - Run the version of Typst embedded within Quarto.   \n    run        [script] [args...]    - Run a TypeScript, R, Python, or Lua script.        \n    install    [target...]           - Installs a global dependency (TinyTex or Chromium).\n    uninstall  [tool]                - Removes an extension.                              \n    tools                            - Display the status of Quarto installed dependencies\n    publish    [provider] [path]     - Publish a document or project to a provider.       \n    check      [target]              - Verify correct functioning of Quarto installation. \n    help       [command]             - Show this help or the help of a sub-command.       \nThere are many Quarto subcommands available. You can get more details about each subcommand when you type quarto &lt;SUBCOMMAND&gt; help in the terminal: e.g. quarto render help provides detailed information about rendering files or projects to various document types - including some usage examples at the end."
+  },
+  {
+    "objectID": "posts/2024-04-16-quarto-intro/index.html#what-is-quarto",
+    "href": "posts/2024-04-16-quarto-intro/index.html#what-is-quarto",
+    "title": "Introduction to Quarto",
+    "section": "",
+    "text": "In order to use Quarto you need to install Quarto first. The easiest way is to get the package for your desired platform directly from https://quarto.org/docs/get-started/. If you need the most recent version you can also get the source code from the quarto-cli git repository.\nAfter Quarto is installed on your system you can get an overview of all subcommonds when you type quarto help (followed by pressing ENTER) in a terminal:\n\n  Usage:   quarto \n  Version: 1.4.553\n\n  Description:\n\n    Quarto CLI\n\n  Options:\n\n    -h, --help     - Show this help.                            \n    -V, --version  - Show the version number for this program.  \n\n  Commands:\n\n    render     [input] [args...]     - Render files or projects to various document types.\n    preview    [file] [args...]      - Render and preview a document or website project.  \n    serve      [input]               - Serve a Shiny interactive document.                \n    create     [type] [commands...]  - Create a Quarto project or extension               \n    use        &lt;type&gt; [target]       - Automate document or project setup tasks.          \n    add        &lt;extension&gt;           - Add an extension to this folder or project         \n    update     [target...]           - Updates an extension or global dependency.         \n    remove     [target...]           - Removes an extension.                              \n    convert    &lt;input&gt;               - Convert documents to alternate representations.    \n    pandoc     [args...]             - Run the version of Pandoc embedded within Quarto.  \n    typst      [args...]             - Run the version of Typst embedded within Quarto.   \n    run        [script] [args...]    - Run a TypeScript, R, Python, or Lua script.        \n    install    [target...]           - Installs a global dependency (TinyTex or Chromium).\n    uninstall  [tool]                - Removes an extension.                              \n    tools                            - Display the status of Quarto installed dependencies\n    publish    [provider] [path]     - Publish a document or project to a provider.       \n    check      [target]              - Verify correct functioning of Quarto installation. \n    help       [command]             - Show this help or the help of a sub-command.       \nThere are many Quarto subcommands available. You can get more details about each subcommand when you type quarto &lt;SUBCOMMAND&gt; help in the terminal: e.g. quarto render help provides detailed information about rendering files or projects to various document types - including some usage examples at the end."
+  },
+  {
+    "objectID": "posts/2024-04-16-quarto-intro/index.html#authoring",
+    "href": "posts/2024-04-16-quarto-intro/index.html#authoring",
+    "title": "Introduction to Quarto",
+    "section": "Authoring",
+    "text": "Authoring\n\nRender vs preview\nThe quarto render and quarto preview commands are used to generate output from a Quarto (.qmd) document.\nThe quarto render command generates output in all formats specified in your YAML header (e.g., pdf, html, word) or in your command line with the option --to, while the quarto preview command only generates output in a format suitable for viewing in a web browser.\nIn a typical workflow, you would use the quarto preview command to view the output of your document as you are working on it.\nquarto preview my.qmd\nThis command will start a local web server and open a web browser to view the output of the document. The web server will automatically update the output as you make changes to the document.\nOnce you are ready to produce your final output you can use the quarto render command.\nquarto render my.qmd"
+  },
+  {
+    "objectID": "posts/2024-04-16-quarto-intro/index.html#computations",
+    "href": "posts/2024-04-16-quarto-intro/index.html#computations",
+    "title": "Introduction to Quarto",
+    "section": "Computations",
+    "text": "Computations\nQuarto lets you perform computations within your notebook. This is typically done using code blocks denoted by three backticks followed by the language you’re using in curly brackets.\n```{python}\n1 + 1\n```\nQuarto supports computations in several languages:\n\nPython\nR\nJulia\nObservable\n\nAdditional languages can also be supported through other Jupyter kernels (see Engines below). See this page for a list of Jupyter kernels.\nThe languages and packages used in your computations must be available in your render environment, and are often installed through other means, for example using conda or a container platform.\nLoaded packages and variables defined within a code block are also accessible from other code blocks, including inline code blocks. For example, here we create a figure within a div (:::) and reference the x variable in both the figure caption and text body.\n:::{#fig-plot-alt}\n\n```{r}\nx &lt;- 1:10\ny &lt;- x^2\n\nplot(x, y)\n```\n\nA plot of $x$ against it's square (n = `{r} length(x)`).\n:::\n\nThis paragraph refers to @fig-plot-alt for a plot of $y=x^2$ \nbased on `{r} length(x)` points.\nThe output of computations can be controlled using execution options. These can be set for the whole document in the yaml front-matter at the top of the document, e.g.,\n---\ntitle: My Experiment\nexecute:\n  echo: false\n---\nAlternatively, execution options can be specified within each code block, e.g.,\n```{python}\n#| echo: false\n#| output: asis\nprint(\"\"\"\n## Introduction\n\nThis is Markdown text.\n\"\"\")\n```\nComputations can also be used to dynamically generate Markdown or HTML content by using the output format asis. For example, document sections can be dynamically generated from an input file."
+  },
+  {
+    "objectID": "posts/2024-04-16-quarto-intro/index.html#document-types",
+    "href": "posts/2024-04-16-quarto-intro/index.html#document-types",
+    "title": "Introduction to Quarto",
+    "section": "Document types",
+    "text": "Document types\nQuarto can generate a number of document output types, including PDF, HTML, and MS Word. The output format can be set on the command line via the --to option, or by setting the format option in the yaml configuration. For instance, the following header configuration will generate PDF output:\n---\nformat: pdf\n---\n\nPresentation\nIn addition to regular document formats, there is support for formats that will generate presentations, including revealjs (HTML), pptx (PowerPoint) and beamer (LaTeX/PDF)."
+  },
+  {
+    "objectID": "posts/2024-05-14-quarto-to-confluence/index.html",
+    "href": "posts/2024-05-14-quarto-to-confluence/index.html",
+    "title": "Quarto to Confluence",
+    "section": "",
+    "text": "As of Quarto version 1.3 there is support for publishing documents to Confluence. Quarto can be used to publish single pages or entire Quarto projects to Confluence.\n\n\n\n\nBefore publishing a document, you need to create an atlassian wiki token. Save the token as you will be prompted for it upon publication.\n\n\n\n\nTo make a document a target for publication in confluence, add the confluence-html document format to the header:\n---\ntitle: Confluence Demo\nformat: confluence-html\n---\n\n## Overview\n\nWrite your content in Quarto documents and publish to Confluence.\n\n\n\nThis section describes how to render and publish documents from your local client.\n\n\nAssuming the document name is index.qmd, you can first render the document locally to make sure everything looks ok.\nquarto render index.qmd\nThe preview command lets you modify the document and view re-rendered changes in real time:\nquarto preview index.qmd --port 8888\nIt is recommended you manually assign a port number, else Quarto will pick a random number for you.\n\n\n\nTo publish simply run\nquarto publish index.qmd\nUpon first publication, you will be prompted for your Confluence domain, email, login token and publication destination. For SciLifeLab, the domain is https://scilifelab.atlassian.net. The destination is chosen by navigating to the wiki page of interest and pasting it in at the prompt. The document will then be published relative to the chosen wiki page.\n\n\n\n\nTechnically, it should be possible to install Quarto on Uppmax from a Quarto package file. However, Quarto relies on GLIBC version&gt;=2.18 which is currently unavailable on UPPMAX. A workaround is to generate an Apptainer image from which to run Quarto. This requires packaging Quarto with necessary dependencies, including R packages and a recent TeX distribution.\n\n\nWith an Apptainer image /path/to/quarto.simg, the following code will render the document, optionally setting the execution directory:\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto render index.qmd --execute-dir $(pwd)'\n\n\n\nPreviewing could be done by firing up a browser on UPPMAX, but a better alternative is to employ port forwarding to display the output on your client. Run preview as follows:\napptainer exec --env PATH=/conda_env/bin/:$PATH \\\n          $QUARTO_IMAGE quarto preview --no-browser --port 8888 \\\n          --execute-dir $(pwd)/..\nAssuming you are on rackham1, on your client run\nssh -f -N -L 8888:localhost:8888 rackham1.uppmax.uu.se\nto setup port forwarding. Now you can preview your Quarto document by navigating to https://localhost:8888.\n\n\n\nSome Quarto documents run heavy computations and should in these cases be rendered/previewed from a compute node. However, this would require setting up a double port forward. Fortunately, there exists an SSH configuration called JumpHost that eliminates this step.\nEdit your .ssh/config file to contain the following:\nHost r*.uppmax.uu.se\n    User username\n    ProxyJump rackham1.uppmax.uu.se\nThis allows you to access a compute node directly from your client. For instance, if you are running a job on r111, run the preview command as above, and change the port forward command to\nssh -f -N -L 8888:localhost:8888 r111.uppmax.uu.se\n\n\n\nPublishing from UPPMAX is done by running\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto publish index.qmd --execute-dir $(pwd)'"
+  },
+  {
+    "objectID": "posts/2024-05-14-quarto-to-confluence/index.html#introduction",
+    "href": "posts/2024-05-14-quarto-to-confluence/index.html#introduction",
+    "title": "Quarto to Confluence",
+    "section": "",
+    "text": "As of Quarto version 1.3 there is support for publishing documents to Confluence. Quarto can be used to publish single pages or entire Quarto projects to Confluence.\n\n\n\n\nBefore publishing a document, you need to create an atlassian wiki token. Save the token as you will be prompted for it upon publication.\n\n\n\n\nTo make a document a target for publication in confluence, add the confluence-html document format to the header:\n---\ntitle: Confluence Demo\nformat: confluence-html\n---\n\n## Overview\n\nWrite your content in Quarto documents and publish to Confluence.\n\n\n\nThis section describes how to render and publish documents from your local client.\n\n\nAssuming the document name is index.qmd, you can first render the document locally to make sure everything looks ok.\nquarto render index.qmd\nThe preview command lets you modify the document and view re-rendered changes in real time:\nquarto preview index.qmd --port 8888\nIt is recommended you manually assign a port number, else Quarto will pick a random number for you.\n\n\n\nTo publish simply run\nquarto publish index.qmd\nUpon first publication, you will be prompted for your Confluence domain, email, login token and publication destination. For SciLifeLab, the domain is https://scilifelab.atlassian.net. The destination is chosen by navigating to the wiki page of interest and pasting it in at the prompt. The document will then be published relative to the chosen wiki page.\n\n\n\n\nTechnically, it should be possible to install Quarto on Uppmax from a Quarto package file. However, Quarto relies on GLIBC version&gt;=2.18 which is currently unavailable on UPPMAX. A workaround is to generate an Apptainer image from which to run Quarto. This requires packaging Quarto with necessary dependencies, including R packages and a recent TeX distribution.\n\n\nWith an Apptainer image /path/to/quarto.simg, the following code will render the document, optionally setting the execution directory:\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto render index.qmd --execute-dir $(pwd)'\n\n\n\nPreviewing could be done by firing up a browser on UPPMAX, but a better alternative is to employ port forwarding to display the output on your client. Run preview as follows:\napptainer exec --env PATH=/conda_env/bin/:$PATH \\\n          $QUARTO_IMAGE quarto preview --no-browser --port 8888 \\\n          --execute-dir $(pwd)/..\nAssuming you are on rackham1, on your client run\nssh -f -N -L 8888:localhost:8888 rackham1.uppmax.uu.se\nto setup port forwarding. Now you can preview your Quarto document by navigating to https://localhost:8888.\n\n\n\nSome Quarto documents run heavy computations and should in these cases be rendered/previewed from a compute node. However, this would require setting up a double port forward. Fortunately, there exists an SSH configuration called JumpHost that eliminates this step.\nEdit your .ssh/config file to contain the following:\nHost r*.uppmax.uu.se\n    User username\n    ProxyJump rackham1.uppmax.uu.se\nThis allows you to access a compute node directly from your client. For instance, if you are running a job on r111, run the preview command as above, and change the port forward command to\nssh -f -N -L 8888:localhost:8888 r111.uppmax.uu.se\n\n\n\nPublishing from UPPMAX is done by running\nexport QUARTO_IMAGE=/path/to/quarto.simg\napptainer exec --home $(pwd) ${QUARTO_IMAGE} bash -c 'set -euo pipefail;  quarto publish index.qmd --execute-dir $(pwd)'"
+  },
+  {
+    "objectID": "posts/2024-05-14-quarto-to-confluence/index.html#examples",
+    "href": "posts/2024-05-14-quarto-to-confluence/index.html#examples",
+    "title": "Quarto to Confluence",
+    "section": "Examples",
+    "text": "Examples\n\n\nExample upload instructions\n\nUse this link when asked where to put you page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899836938/Quarto+examples\nGive the page a name on this format with your name to make it unique: “Quarto_example-Tomas”\n\n\nPublishing Quarto projects as Confluence pages\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh\nQuarto project code: https://github.com/mahesh-panchal/quarto-confluence-project\n\nThe aim was to test a varied selection of quarto markup and interactive elements as well as raw output to and see what is supported by the Quarto to Confluence conversion.\nPixi was used to create the quarto environment.\npixi init -c conda-forge -c bioconda\npixi add quarto jupyter ipyleaflet plotly pandas statsmodels jupyter-cache\nQuarto was then used to create a confluence project.\npixi shell\nquarto create project confluence .\nThis was then published to Confluence using:\nquarto publish confluence\nwhere I was asked to provide the domain https://scilifelab.atlassian.net, followed by my username, an API token (A link to the page was provided to create one), and finally the url path to where I wanted to publish https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2902917121/Quarto+example+-+Mahesh. As I was unsure if I would overwrite the work of others I created this page first after quarto indicated the folder didn’t exist.\nI was also instructed by quarto to\nquarto install chromium\nAt this point Quarto began rendering, but hung at the second page. The issue was localized to creating the mermaid diagram. After converting the mermaid diagram to a code block {.mermaid} the project successfully published to confluence.\nSeveral things didn’t render although might be achievable in other ways:\n\nMermaid diagram rendering failed locally and didn’t upload as an image.\nInteractive plotting failed. Perhaps this needs to be embedded as an attachment.\nInteractive map did not produce any kind of map, even a static image.\nReferences did not work.\nColumn layout did not work.\n\n\n\nQuarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2901409802/Quarto+example+-+Verena\nQuarto code: quarto-to-confluence/quarto-example-verena\n\n\n\nQuarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2900295730/cormac\nQuarto code: quarto-to-confluence/quarto-example-cormac\n\n\n\nQuarto document\n\nConfluence page: https://scilifelab.atlassian.net/wiki/spaces/EBT/pages/2899869712/Quarto+example+-+Tomas\nQuarto code:"
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html",
+    "href": "posts/2025-01-21-pixi-intro/index.html",
+    "title": "Introduction to Pixi",
+    "section": "",
+    "text": "Pixi is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.\n\n\nPixi is somewhat compatible with Conda. You can:\n\nInstall packages using the same Conda channels (e.g., conda-forge, bioconda).\nInitialise project environments using existing Conda environment files.\n\nHowever, you cannot activate a conda environment using Pixi, or vice-versa.\n\n\n\nIn Pixi, the environment configuration file (pixi.toml) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a pixi.lock file is also written. This should also be committed to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#why-pixi",
+    "href": "posts/2025-01-21-pixi-intro/index.html#why-pixi",
+    "title": "Introduction to Pixi",
+    "section": "",
+    "text": "Pixi is a package management tool that can serve as a replacement for Conda or Mamba. It is designed to be faster, multithreaded, and flexible. Like Conda, Pixi environments are not isolated, which allows you to interact with third-party tools that are available in your system’s PATH, for example, job submission managers like slurm, or container platforms.\n\n\nPixi is somewhat compatible with Conda. You can:\n\nInstall packages using the same Conda channels (e.g., conda-forge, bioconda).\nInitialise project environments using existing Conda environment files.\n\nHowever, you cannot activate a conda environment using Pixi, or vice-versa.\n\n\n\nIn Pixi, the environment configuration file (pixi.toml) lives in the project directory. This ensures that the environment is tied to the project and simplifies reproducibility. When an environment is first created, a pixi.lock file is also written. This should also be committed to the git repository, just like the toml file. This records every package used to make the environment for each platform that should be supported. This differs from Conda, in which lock files must be explicitly generated with a separate command."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#getting-started",
+    "href": "posts/2025-01-21-pixi-intro/index.html#getting-started",
+    "title": "Introduction to Pixi",
+    "section": "Getting Started",
+    "text": "Getting Started\n\nInstallation\n\nInstall Pixi and add it to your shell’s configuration (e.g., .bashrc or .zshrc).\n\ncurl -fsSL https://pixi.sh/install.sh | bash\n\nInitialize a Pixi environment in your project:\n\npixi init -c conda-forge -c bioconda -p linux-64 -p osx-arm64 -p osx-64\nHere:\n\n-c specifies the channels to use (e.g., conda-forge, bioconda)\n-p sets the platforms (linux-64: Intel Linux, osx-64: Intel MacOS, osx-arm64: ARM MacOS)\n\nBy default, Pixi will set the environment for your platform (e.g., linux-64), but you can specify additional platforms as needed.\nThe pixi init command will create a file, pixi.toml, which specifies the environment configuration.\nLater, when using pixi add, pixi run, or pixi shell(explanations below) a second file will be created, the pixi.lock. This file locks down the specific package versions for reproducibility.\nYou should commit both files to your version control system to share the exact environment setup with collaborators and increase reproducibility.\n\n\nAdding Packages\nYou can add packages to your environment using the pixi add command:\npixi add bwa samtools\nYou can add Python packages from PyPI using Pixi:\npixi add python\npixi add --pypi multiqc\nAlternatively, you can directly modify the pixi.toml file in your project directory:\nUnder [dependencies], or platform specific dependencies (such as [target.linux-64.dependencies]) you can add a line for each package you want to include nextflow = \"24.10.4.*\"for example."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#managing-environments",
+    "href": "posts/2025-01-21-pixi-intro/index.html#managing-environments",
+    "title": "Introduction to Pixi",
+    "section": "Managing Environments",
+    "text": "Managing Environments\n\nFiles in the Directory\nWhen you use Pixi, it creates a .pixi folder in your project directory. This folder contains the libraries and binaries needed for the environment. If needed, you can safely delete this folder, and it will be recreated from the pixi.lock file in your project, the next time you use the environment.\nThe command\npixi clean\ndeletes the pixi environment binaries, and the command\npixi clean cache\ndeletes the package archives that were downloaded and unpacked to create the environment.\n\n\nEnvironment features\nUnlike Conda, in which you can define multiple global environments, Pixi handles multi-environment projects in a different way. Packages are installed into Features, which in turn define an Environment. Features are isolated from each other, helping to avoid version clashes between tools. See Pixi docs - Multi Environment for more on defining multiple environments in a TOML."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#tasks-in-pixi",
+    "href": "posts/2025-01-21-pixi-intro/index.html#tasks-in-pixi",
+    "title": "Introduction to Pixi",
+    "section": "Tasks in Pixi",
+    "text": "Tasks in Pixi\nIn addition to being a package manager, Pixi allows you to define and run tasks directly in the .pixi.toml file. For example:\n[tasks]\nname-of-task = \"nextflow run main.nf -profile PDC\"\nOne can also add tasks via the command line:\npixi task add hello python hello_world.py\nSee Pixi Tasks for more information.\n\nTask Features\nTasks can be combined or run conditionally. The example in the documentation is to specify that an application should be complied before being run. The command depends-oncan be used here. With this one can chain tasks for complex workflows."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#working-with-the-shell",
+    "href": "posts/2025-01-21-pixi-intro/index.html#working-with-the-shell",
+    "title": "Introduction to Pixi",
+    "section": "Working with the Shell",
+    "text": "Working with the Shell\nPixi provides a shell environment based on the Deno shell. Many basic Bash commands still work, allowing for:\n\nChaining tools.\nCommand substitution.\n\nSee Advanced Tasks for a more detailed description about the Deno shell supported features.\n\nActivating the Environment\nTo activate the environment:\npixi shell\nTo exit an environment, use exit:\nexit\nwhich also saves your command history."
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#advanced-features",
+    "href": "posts/2025-01-21-pixi-intro/index.html#advanced-features",
+    "title": "Introduction to Pixi",
+    "section": "Advanced Features",
+    "text": "Advanced Features\n\nIntel emulation on ARM Macs\nAlthough packages are increasingly being built for ARM architecture CPUS, not all tools are built for osx-arm64. However, they may have been built for osx-64 (i.e., intel architecture CPUS), in addition to linux-64. MacOS includes the tool Rosetta, which can be used to emulate intel on arm Macs, at the cost of performance.\nBy supporting only linux-64 and osx-64 as platforms, Pixi will automatically run the tools using Rosetta emulation on Mac ARM computers.\npixi init \\\n  --channel \"conda-forge\" \\\n  --channel \"bioconda\" \\\n  --platform \"linux-64\" \\\n  --platform \"osx-64\""
+  },
+  {
+    "objectID": "posts/2025-01-21-pixi-intro/index.html#additional-commands",
+    "href": "posts/2025-01-21-pixi-intro/index.html#additional-commands",
+    "title": "Introduction to Pixi",
+    "section": "Additional Commands",
+    "text": "Additional Commands\n\nUpdating Pixi\nTo update Pixi:\npixi self-update\n\n\nCleaning the cache\nTo clean the cache:\npixi clean cache\n\n\nPackage search\nPixi can search for the latest version of a package, and provide detailed information about using:\npixi search &lt;package_name&gt;\nHowever, unlike Conda, it does not list all available versions of a package. For this purpose, conda search &lt;package_name&gt; is the better option.\n\n\nCommand help\nUse\npixi help\nto get more detailed help on various commands."
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html",
+    "href": "posts/2025-03-18-github-readmes/index.html",
+    "title": "README’s in GitHub",
+    "section": "",
+    "text": "Every repository in GitHub can have an associated README. The README is often the first thing visitors see. It serves as the front page of your project, or your profile, and provides information to visitors and potential contributors. A well-crafted README can increase the accessibility and appeal of your project.\nREADME’s can be initialized at the creation of the repository, or added later. They are by default displayed in the code tab of the repository, underneath the files. They are encoded in Markdown.\n\n\nEvery personal account can have its own README, which is displayed on top of the profile page. This is a place to share information about you and the work you are doing.\nTo initialize the profile README\n\ncreate a repository with a name that matches your GitHub user name\nmake it public\nadd a README\n\nMore information on the GitHub documentation pages GitHub documentation pages."
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#profile-readme",
+    "href": "posts/2025-03-18-github-readmes/index.html#profile-readme",
+    "title": "README’s in GitHub",
+    "section": "",
+    "text": "Every personal account can have its own README, which is displayed on top of the profile page. This is a place to share information about you and the work you are doing.\nTo initialize the profile README\n\ncreate a repository with a name that matches your GitHub user name\nmake it public\nadd a README\n\nMore information on the GitHub documentation pages GitHub documentation pages."
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#add-emojis",
+    "href": "posts/2025-03-18-github-readmes/index.html#add-emojis",
+    "title": "README’s in GitHub",
+    "section": "😎 Add emojis",
+    "text": "😎 Add emojis\nYou can use emojis in the readme to clarify points (and even add them to commits, as I have just learned, use cases are to be determined).\n\n🕰 You can point out deadlines\n📕 Link to documentation\n✏ Or invite them to contribute"
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#here-is-a-cheat-sheet.",
+    "href": "posts/2025-03-18-github-readmes/index.html#here-is-a-cheat-sheet.",
+    "title": "README’s in GitHub",
+    "section": "Here is a cheat-sheet.",
+    "text": "Here is a cheat-sheet."
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#display-top-contributors",
+    "href": "posts/2025-03-18-github-readmes/index.html#display-top-contributors",
+    "title": "README’s in GitHub",
+    "section": "Display Top Contributors",
+    "text": "Display Top Contributors\nYou can add the top contributors of your repo to the README:\n&lt;a href=\"https://github.com/NBISweden/Training-Tech-shorts/graphs/contributors\"&gt;\n  &lt;img src=\"https://contrib.rocks/image?repo=NBISweden/Training-Tech-shorts\" /&gt;\n&lt;/a&gt;"
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#license",
+    "href": "posts/2025-03-18-github-readmes/index.html#license",
+    "title": "README’s in GitHub",
+    "section": "License",
+    "text": "License\nMake it easy for others to know what they can do with your code and add license information into your readme. Often these are placed at the top of the readme for even easier accessibility. They link to the text of the license (not in your repository, but on the web). The badge can be inserted to your repository using basic markdown syntax:\n[![](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\nHere are some markdown license badges you can use."
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#add-images",
+    "href": "posts/2025-03-18-github-readmes/index.html#add-images",
+    "title": "README’s in GitHub",
+    "section": "Add images",
+    "text": "Add images\nYou can add images to break up the text in your README.\n\nTitle banner\nThese you can use for projects, but also for your very own user readme. They are easily generated here. You can then copy them into your repository and add them from their relative position using markdown:\n![](/posts/2025-03-18-github-readmes/github-header-image.png)\n\n\n\nOctocat\nYou can design your very own octocat, or choose an existing one, and display it in your readme. Again, you need to add the file to your repository. As an alternative to the markdown approach above you can also use HTML to embed the image:\n&lt;img align=\"middle\" src=\"/posts/2025-03-18-github-readmes/octocat-1740776211964.png\" width=\"280\"&gt;"
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#display-skills",
+    "href": "posts/2025-03-18-github-readmes/index.html#display-skills",
+    "title": "README’s in GitHub",
+    "section": "Display skills",
+    "text": "Display skills\n\nSkill icons\nAdvertise your skills by listing skill icons:\n\n  \n\nalso in light mode:\n\n  \n\nHere is another set of skill icons, based on the above, but with more icons, and more activity for adding new icons.\n\n  \n\nBelow is an example on how to display skill icons in dark and light mode, depending on the system settings:\n&lt;div align=\"center\"&gt;\n  \n  &lt;!-- Dark Mode --&gt;\n  [![My skills](https://go-skill-icons.vercel.app/api/icons?i=linux,git,apptainer,anaconda,nextflow,md,vscode,latex,r,bash,cpp&theme=dark#gh-dark-mode-only)](https://github.com/LelouchFR/skill-icons#gh-dark-mode-only)\n  &lt;!-- Light Mode --&gt;\n  [![My skills](https://go-skill-icons.vercel.app/api/icons?i=linux,git,apptainer,anaconda,nextflow,md,vscode,latex,r,bash,cpp&theme=light#gh-light-mode-only)](https://github.com/LelouchFR/skill-icons#gh-light-mode-only)\n\n&lt;/div&gt;"
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#add-github-statistics",
+    "href": "posts/2025-03-18-github-readmes/index.html#add-github-statistics",
+    "title": "README’s in GitHub",
+    "section": "Add Github statistics",
+    "text": "Add Github statistics\nThere are several different ways to display your github stats (if you want to). By default, they will take information off your public repositories, but it is possible to gather information from the private ones too. They come pre-defined for several statistics, but some are customizable.\nThe Github Profile Summary Cards, for example, come in a lot of different themes and are easily incorporated. Let’s have a look at Mahesh’s statistics in slate-orange:\n&lt;div class='container'&gt;\n&lt;img style=\"height: auto; width: 93%;\" class=\"img\" src=\"http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=mahesh-panchal&theme=slateorange\" /&gt;\n&lt;/div&gt;\n\n\n\nTo display your stats you only need to exchange his user name with yours.\nThese cards can visualize the programming languages by repository, or even commit:\n\n     \n\nOr summarize your stats, plus the timing of your commits:"
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#github-stats-with-rank",
+    "href": "posts/2025-03-18-github-readmes/index.html#github-stats-with-rank",
+    "title": "README’s in GitHub",
+    "section": "Github stats with rank",
+    "text": "Github stats with rank\nYou can also display your Github readme stats with a rank:\n\n     \n\nAt this point we had a discussion on how including statistics makes sense if they highlight whatever you want to come across in your README (of course the same is true for anything you include). Above, it probably makes sense for Mahesh to include his stats, whereas I might not do it."
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#pin-repositories",
+    "href": "posts/2025-03-18-github-readmes/index.html#pin-repositories",
+    "title": "README’s in GitHub",
+    "section": "Pin repositories",
+    "text": "Pin repositories\nGithub restricts the number of repositories you can pin to six. Using the Readme Cards you can pin as many repositories as you wish. Those can be any repositories, your own, from you organization, or from someone else. I have not tried private repositories, though. These here render nicer in the actual GitHub repository.\nAgain, they can be added using the markdown syntax:\n[![](https://github-readme-stats.vercel.app/api/pin/?username=amrei-bp&repo=readme_playground&show_owner=true)](https://github.com/amrei-bp/github-readme-stats)\n\nYou can specify the information you want to display with description_lines_count, or add the owner of the repository with “show_owner”. The two pinned repositories will render side by side in your repository on Github, and the Training-Tech-shorts will show the owner of the repository.\n[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=SLUBioinformaticsInfrastructure&repo=Three_Bees_Workshop_Series&description_lines_count=3&show_owner=false)](https://github.com/SLUBioinformaticsInfrastructure/Three_Bees_Workshop_Series)\n[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=NBISweden&repo=Training-Tech-shorts&description_lines_count=3&show_owner=true)](https://github.com/NBISweden/Training-Tech-shorts)"
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#make-your-own-badge",
+    "href": "posts/2025-03-18-github-readmes/index.html#make-your-own-badge",
+    "title": "README’s in GitHub",
+    "section": "make your own badge",
+    "text": "make your own badge\nIf you like badges you can make your own here. When testing this within a repository README the left side of the badges does not show the .png.\nAn example of a static badge:\n![](https://img.shields.io/badge/this_is_a_test-badge-blue)\n\nAn example of a dynamic badge (will be rendered without the .png on the GitHub README). Counting the number of files in the repository:\n![](https://img.shields.io/github/directory-file-count/NBISweden/Training-Tech-shorts?label=Number%20of%20files%20in%20repository%3A)\n\nAnd another one, specifying the date of the last commit to the repository:\n![](https://img.shields.io/github/last-commit/NBISweden/Training-Tech-shorts?label=Date%20of%20last%20commit%20to%20the%20repository%3A%20)\n\nAnd another one, counting the number of times a Github profile has been accessed since the tracker was installed:\n[![](https://komarev.com/ghpvc/?username=NBISweden&color=blue&label=GitHub+Profile+Views+NBIS)](https://github.com/NBISweden)"
+  },
+  {
+    "objectID": "posts/2025-03-18-github-readmes/index.html#animated-text",
+    "href": "posts/2025-03-18-github-readmes/index.html#animated-text",
+    "title": "README’s in GitHub",
+    "section": "Animated text",
+    "text": "Animated text\nYou can have text appear on your page, as if it was typed on the spot:\n[![](https://readme-typing-svg.demolab.com/?lines=First+line+of+text;Second+line+of+text)](https://git.io/typing-svg)\n\nCustomizable here."
+  },
+  {
+    "objectID": "posts/2025-05-13-nextflow-when-to-use/index.html",
+    "href": "posts/2025-05-13-nextflow-when-to-use/index.html",
+    "title": "When to use Nextflow?",
+    "section": "",
+    "text": "Nextflow is a workflow manager rapidly gaining popularity in the Bioinformatics community, and is highly recommended for reproducible research. But do you really need to learn it? When should it be used and when not? Let’s take a look at scenarios where Nextflow shines and where other tools might be a better fit."
+  },
+  {
+    "objectID": "posts/2025-05-13-nextflow-when-to-use/index.html#where-nextflow-shines",
+    "href": "posts/2025-05-13-nextflow-when-to-use/index.html#where-nextflow-shines",
+    "title": "When to use Nextflow?",
+    "section": "Where Nextflow shines:",
+    "text": "Where Nextflow shines:\n\nScalability:\nWhen a pipeline is written to process a few samples, it means it’s generally written in a robust enough way that it can process several more without changes to the workflow. Nextflow handles distribution of these tasks, enabling seamless scaling from a handful of samples to hundreds or even thousands without major code changes. This especially important for large-scale genomics projects or growing datasets. Imagine you’ve developed a variant calling pipeline for 10 samples; with Nextflow, running it on 1000 samples becomes a matter of potentially adjusting configuration rather than rewriting the core logic. Importantly, it allows rapid development on a few scaled-down samples, and easy application to a much larger data set.\n\n\nPortability:\nNextflow workflows can run on multiple compute environments - from your local machine to High-Performance Computing (HPC) clusters or Cloud platforms like AWS, Google Cloud, and Azure - thanks to its abstraction layer. Nextflow isolates the workflow definition from the underlying infrastructure. This means you can develop and test your pipeline on a smaller scale and then deploy it to a more powerful environment without worrying about environment-specific commands or resource management details. This portability fosters collaboration and ensures your research is not tied to a specific computing infrastructure.\n\n\nParallelization:\nNextflow efficiently distributes tasks across available compute resources. It automatically schedules and executes processes, maximizing resource utilisation and reducing runtime. Instead of manually managing parallel execution with complex scripts, Nextflow simplifies this process, letting you focus on the scientific logic of your pipeline. This parallelization is a major advantage for computationally intensive bioinformatics workflows.\n\n\nHeterogeneous tool environments:\nWith Nextflow, you can define containerized environments (e.g., using Docker or Singularity) for each process within your workflow, elegantly resolving software dependency conflicts. For instance, one step might require a specific version of Python libraries while another needs a particular version of a bioinformatics tool. By containerizing each process, Nextflow ensures that each tool runs in its isolated and correctly configured environment, leading to more reliable and reproducible results.\n\n\nFeature rich Domain Specific Language:\nBuilt on top of the Groovy programming language, Nextflow provides a powerful and expressive Domain Specific Language (DSL). This DSL allows you to model complex data flows intuitively, define dependencies between processes, and handle various data structures with ease. Furthermore, Nextflow’s extensibility through external Groovy libraries allows you to incorporate advanced functionalities and tailor the language to your specific needs. This rich DSL makes defining sophisticated bioinformatics pipelines more manageable and less error-prone compared to traditional scripting approaches.\n\n\nScripting Language flexibility:\nNextflow doesn’t restrict you to a single scripting language. It seamlessly supports Shell scripts, R, Python, Perl, or any other language that your compute environment can execute. This flexibility allows you to leverage your existing expertise and integrate tools written in different languages into a single cohesive workflow. You can use the best tool for each specific task without being constrained by the workflow manager’s limitations.\n\n\nRapid prototyping:\nNextflow supports reentrancy, allowing workflows to resume from where they failed or were interrupted. Combined with its simple task description language, this feature speeds up pipeline prototyping and debugging.\n\n\nCommunity support:\nNextflow has a large user base, and in particular has the nf-core community based around building scalable pipelines written in Nextflow for public use. There are several forums where one can get help with implementing Nextflow and debugging issues. This allows developers to spend less time struggling with issues.\n\nSeqera Community Forum\nNextflow Slack\nNextflow Discussions\nnf-core Slack\n\nIt’s unclear whether other tools have similar communities, and the primary method of support appears to be through their Github issues and discussions, or Stack Overflow.\nCommunity developed existing pipelines also save time by eliminating the need to reimplement solutions."
+  },
+  {
+    "objectID": "posts/2025-05-13-nextflow-when-to-use/index.html#where-nextflow-is-not-optimal",
+    "href": "posts/2025-05-13-nextflow-when-to-use/index.html#where-nextflow-is-not-optimal",
+    "title": "When to use Nextflow?",
+    "section": "Where Nextflow is not optimal:",
+    "text": "Where Nextflow is not optimal:\nWhile Nextflow is powerful, there are scenarios where it may not be the best choice.\n\nInteractive exploratory analyses:\nFor initial data exploration and interactive analyses, tools like Jupyter or Marimo notebooks or RStudio might offer a more immediate and flexible environment. These tools excel at providing a rapid feedback loop for trying out different approaches, visualizing data, and generating preliminary insights. Nextflow, with its focus on structured and automated workflows, might introduce unnecessary overhead for purely exploratory tasks.\n\n\nEnvironment overhead:\nFor smaller, self-contained workflows primarily using a single language like R (where packages like targets together with renv provide excellent workflow management) or Python (where Snakemake can be a lighter alternative), the full power and complexity of Nextflow might be overkill. If your analysis involves a limited number of steps and dependencies within a single language ecosystem and doesn’t require deployment across diverse environments, a more lightweight workflow manager might be more efficient in terms of setup and execution.\n\n\nClient - Server interaction:\nNextflow’s asynchronous execution model makes it less suitable for workflows that require tight, real-time client-server interactions between processes within the workflow itself. While Nextflow can certainly interact with external services (like databases or web APIs), if two processes within your Nextflow workflow need to continuously communicate and depend on each other’s immediate responses, you might encounter challenges due to the inherent asynchronous nature of task execution. In such scenarios, alternative approaches that offer more direct inter-process communication might be more appropriate. However, if one process acts as a client to an external, independently running server, Nextflow can handle this effectively. The key limitation lies in tightly coupled, synchronous client-server architectures within the Nextflow workflow.\n\n\nLearning curve:\nDespite its advantages, Nextflow has a learning curve that may pose challenges for new users. An arguable difficulty with Nextflow is the DSL is based on Groovy, an uncommon language in Bioinformatics. The primary issue though generally seems to be less about the language, but more the shift in thinking from linear scripts to a more declarative, dataflow-oriented approach. For example, for loops and if statements, which are basic control structures in most scripting languages are handled quite differently in Nextflow.\n\n\nHow to implement sequential processing\n\nIn linear scripts, data is usually processed by functions. The output can then be passed directly to another function or by assigning to a variable.\n\n\nexample.R\n\n# Nested function call: We'll apply add_one to 5, and then multiply the result by 2\nresult &lt;- multiply_by_two(add_one(5))\n# Or sequentially\nadd_one_result &lt;- add_one(5)\nresult &lt;- multiply_by_two(add_one_result)\n\nprint(result) # Output: 12\n\nThe equivalent in Nextflow would be to use a process. Although process calls can be nested, they’re typically written on separate lines, and the special process.out variable is used to access the process output.\n\n\nexample.nf\n\nworkflow {\n    ADD_ONE( Channel.of(5) )\n    MULTIPLY_BY_TWO( ADD_ONE.out )\n    MULTIPLY_BY_TWO.out.view()\n}\n\nFor simple workflows, the alternative pipe syntax can also be used:\n\n\nexample.nf\n\nworkflow {\n    Channel.of(5)\n    | ADD_ONE\n    | MULTIPLY_BY_TWO\n    | view\n}\n\nAdditionally, Channel factories must be used to take user input and pass it into a process.\n\n\n\nHow to implement the for control structure in Nextflow\n\nIteration (for/while loops) is built into Nextflow. Tasks automatically iterate over any input provided in a channel. In this example, the workflow iterates over the numbers 1 to 5. If a channel is empty, the task does not execute.\n\n\nexample.nf\n\nworkflow {\n    TASK_A( Channel.of(1..5) )\n        .view()\n}\n\nprocess TASK_A {\n    input:\n    val num\n\n    script:\n    \"\"\"\n    echo ${num}\n    \"\"\"\n\n    output:\n    stdout\n}\n\n\n\n\nHow to implement the if control structure in Nextflow\n\nAlthough one can use if statements in Nextflow code, often you want to decide the action based on the output of a process. In this case, the Channel operators like filter and branch are the solution. Here is an example of how to optionally execute a process based on the process output.\n\n\n\n\n\ngraph LR\n    A --&gt;|4,5| B --&gt; C\n    A --&gt;|1,2,3| C\n\n\n\n\n\n\n\n\nexample.nf\n\nworkflow {\n    TASK_A( Channel.of(1..5) )\n    TASK_B( TASK_A.out.filter { num -&gt; num.toInteger() &gt; 3 } )\n    TASK_C( TASK_A.out.filter { num -&gt; num.toInteger() &lt;= 3 }.mix(TASK_B.out) )\n        .view()\n}\n\nprocess TASK_A {\n    input:\n    val num\n\n    script:\n    \"\"\"\n    echo ${num}\n    \"\"\"\n\n    output:\n    stdout\n}\n\nprocess TASK_B {\n    input:\n    val num\n\n    script:\n    \"\"\"\n    echo ${num}\n    \"\"\"\n\n    output:\n    stdout\n}\n\nprocess TASK_C {\n    input:\n    val num\n\n    script:\n    \"\"\"\n    echo ${num}\n    \"\"\"\n\n    output:\n    stdout\n}\n\nThis is effectively like using an if within while loop. If the channel only has a single entry, then you’re effectively using just an if statement.\n\nThere is a lot of training material however to help you with learning Nextflow.\n\nNBIS/Elixir Tools for Reproducible Research\nNextflow fundamental and advanced training\nnf-core bytesize"
+  },
+  {
+    "objectID": "posts/2025-05-13-nextflow-when-to-use/index.html#overview",
+    "href": "posts/2025-05-13-nextflow-when-to-use/index.html#overview",
+    "title": "When to use Nextflow?",
+    "section": "Overview",
+    "text": "Overview\nNextflow is a versatile tool for managing bioinformatics workflows, but not everything needs it’s power.\n\nQuarto, Jupyter, and Marimo are better suited to interactive exploratory analyses.\nSingle language workflows may benefit from packages within the language, like targets for R.\nIt can be challenging to go from linear scripting to declarative dataflow-oriented programming."
+  },
+  {
+    "objectID": "posts/2025-06-10-container-registry-intro/index.html",
+    "href": "posts/2025-06-10-container-registry-intro/index.html",
+    "title": "Introduction to Container Registries",
+    "section": "",
+    "text": "Container registries are services for storing and distributing container images. They enable reproducible, portable, and scalable workflows by allowing users to share pre-built environments and applications. Popular registries include Docker Hub, GitHub Container Registry (GHCR), and Quay.io.\nImages are typically docker images that follow the open container image format as they are the most interoperable (i.e. useable with multiple container platforms, e.g. docker, singularity/apptainer, podman, charliecloud, shifter, etc). These images can be pulled and run on any compatible system, ensuring consistent environments across development, testing, and production.\nKey benefits:\n\nCentralized storage for container images\nVersioning and access control\nIntegration with CI/CD pipelines"
+  },
+  {
+    "objectID": "posts/2025-06-10-container-registry-intro/index.html#what-is-a-container-registry",
+    "href": "posts/2025-06-10-container-registry-intro/index.html#what-is-a-container-registry",
+    "title": "Introduction to Container Registries",
+    "section": "",
+    "text": "Container registries are services for storing and distributing container images. They enable reproducible, portable, and scalable workflows by allowing users to share pre-built environments and applications. Popular registries include Docker Hub, GitHub Container Registry (GHCR), and Quay.io.\nImages are typically docker images that follow the open container image format as they are the most interoperable (i.e. useable with multiple container platforms, e.g. docker, singularity/apptainer, podman, charliecloud, shifter, etc). These images can be pulled and run on any compatible system, ensuring consistent environments across development, testing, and production.\nKey benefits:\n\nCentralized storage for container images\nVersioning and access control\nIntegration with CI/CD pipelines"
+  },
+  {
+    "objectID": "posts/2025-06-10-container-registry-intro/index.html#bioinformatic-specific-registries",
+    "href": "posts/2025-06-10-container-registry-intro/index.html#bioinformatic-specific-registries",
+    "title": "Introduction to Container Registries",
+    "section": "Bioinformatic specific registries",
+    "text": "Bioinformatic specific registries\n\nBiocontainers: These are automatically built from bioconda packages as stand-alone containers. Custom images and multi-tool containers (mulled containers) are also buildable, but require learning the system.\nSeqera Container Registry: A much more stream-lined experience to build multi-tool images where images are quickly built and stored in a public registry."
+  },
+  {
+    "objectID": "posts/2025-06-10-container-registry-intro/index.html#building-a-docker-image-from-a-conda-environment.",
+    "href": "posts/2025-06-10-container-registry-intro/index.html#building-a-docker-image-from-a-conda-environment.",
+    "title": "Introduction to Container Registries",
+    "section": "Building a docker image from a conda environment.",
+    "text": "Building a docker image from a conda environment.\nYou can create containers with custom Conda environments by specifying a environment.yml file.\n\n\nenvironment.yml\n\nname: myenv\nchannels:\n  - conda-forge\ndependencies:\n  - python=3.10\n  - numpy\n  - pandas\n\n\n\nDockerfile\n\nFROM mambaorg/micromamba:1.4.9\n\nCOPY environment.yml /tmp/environment.yml\nRUN micromamba create -y -n myenv -f /tmp/environment.yml\nENV PATH=/opt/conda/envs/myenv/bin:$PATH\n\n\n\n\n\n\n\nTip\n\n\n\nExtract the conda lock file from this environment and save it alongside your environment.yml.\ndocker run --rm -it &lt;image&gt; micromamba env export --explicit -n myenv &gt; myenv-conda.lock"
+  },
+  {
+    "objectID": "posts/2025-06-10-container-registry-intro/index.html#uploading-images-to-github-container-registry",
+    "href": "posts/2025-06-10-container-registry-intro/index.html#uploading-images-to-github-container-registry",
+    "title": "Introduction to Container Registries",
+    "section": "Uploading Images to GitHub Container Registry",
+    "text": "Uploading Images to GitHub Container Registry\nGitHub Container Registry (GHCR) allows you to store Docker images alongside your code repositories.\n\nAuthenticate with GHCR. First get a Github token. Ensure that your token has permission to write and manage packages on Github.\necho $GITHUB_TOKEN | docker login ghcr.io -u &lt;your-github-username&gt; --password-stdin\nBuild Your Docker Image\ndocker build -t ghcr.io/&lt;your-github-username&gt;/&lt;image-name&gt;:&lt;tag&gt; .\nPush the Image\ndocker push ghcr.io/&lt;your-github-username&gt;/&lt;image-name&gt;:&lt;tag&gt;\n\n\n\n\n\n\n\nTip\n\n\n\nUse repository or organization names to organize your images.\n\n\n\nUpdate package attributes. When you push an image, it will initially be private. Find the image under the packages tab in your Github profile and select it. Here you can attach the container image to a repository, and what permissions that repository has on the image (for example one could use Github Actions to automatically update the image and version, so write permission is needed).\nSelect “Package settings” in the bottom right, to change the package visibility from private to public (anyone can pull the image).\n\n\n\n\n\n\n\nWarning\n\n\n\nDocker stores your credentials after logging in. If your token expires or is deleted and you receive an error trying to pull a public image like:\ndocker pull ghcr.io/nbisweden/fastk_genescopefk_merquryfk:1.2\nError response from daemon: Head \"https://ghcr.io/v2/nbisweden/fastk_genescopefk_merquryfk/manifests/1.2\": denied: denied\nthen you need to logout again from the ghcr.io registry.\ndocker logout ghcr.io"
+  },
+  {
+    "objectID": "posts/2025-06-10-container-registry-intro/index.html#publishing-to-seqera-container-public-registry",
+    "href": "posts/2025-06-10-container-registry-intro/index.html#publishing-to-seqera-container-public-registry",
+    "title": "Introduction to Container Registries",
+    "section": "Publishing to Seqera Container Public Registry",
+    "text": "Publishing to Seqera Container Public Registry\nSeqera provides a public registry for building and sharing containers, especially for bioinformatics workflows. While the web interface is relatively powerful and easy to use, one can build custom packages and upload them through the wave cli tool.\n\nInstall the wave cli. Make sure the downloaded file is executable.\nchmod 755 wave-1.6.1-macos-arm64\n./wave-1.6.1-macos-arm64 --help\nBuild and upload your container image to the Seqera Container Public Registry using the Wave CLI. The --freeze flag uploads to the public registry, and --await waits for the build to complete. If successful, the CLI will output the image URI.\n./wave-1.6.1-macos-arm64 --conda-file conda-env.yml --freeze --await\nExample output:\ncommunity.wave.seqera.io/library/myenv:70473abb25330df7\nUse the generated container image in your Nextflow process by specifying the image URI in the container directive:\nprocess MY_PROCESS {\n    container 'community.wave.seqera.io/library/myenv:70473abb25330df7'\n\n    // ... rest of process definition ...\n}"
+  },
+  {
+    "objectID": "posts/2025-06-10-container-registry-intro/index.html#summary",
+    "href": "posts/2025-06-10-container-registry-intro/index.html#summary",
+    "title": "Introduction to Container Registries",
+    "section": "Summary",
+    "text": "Summary\n\nContainer registries enable sharing and reuse of container images.\nGHCR and Seqera Container Public Registry are popular options for storing and distributing images.\nCustom Conda environments can be built into containers for reproducible workflows.\nUse these registries to streamline your bioinformatics pipelines and ensure reproducibility."
+  }
+]
