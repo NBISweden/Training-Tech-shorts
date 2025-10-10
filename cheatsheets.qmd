@@ -12,6 +12,8 @@ Quick reference resources for tools related to research software development and
 
 **Links:** [Official cheatsheet](url) | [Official documentation](url) | [Other relevant link](url)
 
+**RSE tools sessions:** [Session title](https://nbisweden.github.io/Training-Tech-shorts/posts/<FILENAME>)
+
 :::
 
 ## Apptainer
@@ -21,6 +23,8 @@ Quick reference resources for tools related to research software development and
 **About:** Open-source fork of Singularity, used to package applications with their dependencies for HPC environments
 
 **Links:** [Official documentation](https://apptainer.org/docs/user/latest/) | [Coderefinery tutorial](https://coderefinery.github.io/hpc-containers/)
+
+**RSE tools sessions:** [Introduction to Apptainer](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/)
 
 ## Docker
 
@@ -38,6 +42,8 @@ Quick reference resources for tools related to research software development and
 
 **Links:** [Official cheatsheet](https://git-scm.com/cheat-sheet) | [Official documentation](https://git-scm.com/book/en/v2) | [Cheatsheet from GitHub](https://education.github.com/git-cheat-sheet-education.pdf)
 
+**RSE tools sessions:** [Introduction to Git](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-03-19-git-intro/)
+
 ## Pixi
 
 **Category:** Package management
@@ -46,6 +52,8 @@ Quick reference resources for tools related to research software development and
 
 **Links:** [Official quick start guide](https://pixi.sh/latest/getting_started/) | [Official documentation](https://pixi.sh/latest/)
 
+**RSE tools sessions:** [Introduction to Pixi](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-01-21-pixi-intro/)
+
 ## VSCode
 
 **Category:** Development environment
@@ -53,3 +61,5 @@ Quick reference resources for tools related to research software development and
 **About:** Powerful and customizable code editor owned and supported by Microsoft
 
 **Links:** [Official cheatsheet Windows](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) | [Official cheatsheet MacOS](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf) | [Official documentation](https://code.visualstudio.com/docs)
+
+**RSE tools sessions:** [Introduction to VSCode](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-02-18-vscode-intro/)
