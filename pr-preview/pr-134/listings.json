@@ -1,0 +1,20 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/2025-06-10-container-registry-intro/index.html",
+      "/posts/2025-05-27-various-tips-and-tricks/index.html",
+      "/posts/2025-05-13-nextflow-when-to-use/index.html",
+      "/posts/2025-04-15-ssh-config-intro/index.html",
+      "/posts/2025-03-18-github-readmes/index.html",
+      "/posts/2025-02-18-vscode-intro/index.html",
+      "/posts/2025-01-21-pixi-intro/index.html",
+      "/posts/2024-06-04-apptainer-intro/index.html",
+      "/posts/2024-05-14-quarto-to-confluence/index.html",
+      "/posts/2024-05-07-gitpod-intro/index.html",
+      "/posts/2024-04-16-quarto-intro/index.html",
+      "/posts/2024-03-19-git-intro/index.html",
+      "/posts/2024-03-12-github-collaboration/index.html"
+    ]
+  }
+]
