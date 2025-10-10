@@ -375,49 +375,7 @@
     "href": "cheatsheets.html",
     "title": "Cheatsheets",
     "section": "",
-    "text": "Quick reference resources for tools related to research software development and bioinformatics.\n\n\n\n\n\n\nTipTemplate for contributing\n\n\n\n\n\n\nCategory: Type of tool\nAbout: One line introduction about the tool\nLinks: Official cheatsheet | Official documentation | Other relevant link\nRSE tools sessions: Session title\n\n\n\n\n\nCategory: Container platform\nAbout: Open-source fork of Singularity, used to package applications with their dependencies for HPC environments\nLinks: Official documentation | Coderefinery tutorial\nRSE tools sessions: Introduction to Apptainer\n\n\n\nCategory: Container platform\nAbout: Package applications with their dependencies\nLinks: Official cheatsheet | Official documentation\n\n\n\nCategory: Version control\nAbout: Make and manage git repositories for version control of code, documentation, and other projects\nLinks: Official cheatsheet | Official documentation | Cheatsheet from GitHub\nRSE tools sessions: Introduction to Git\n\n\n\nCategory: Package management\nAbout: Powerful and fast software environment creator, package manager, and task runner\nLinks: Official quick start guide | Official documentation\nRSE tools sessions: Introduction to Pixi\n\n\n\nCategory: Development environment\nAbout: Powerful and customizable code editor owned and supported by Microsoft\nLinks: Official cheatsheet Windows | Official cheatsheet MacOS | Official documentation\nRSE tools sessions: Introduction to VSCode"
-  },
-  {
-    "objectID": "cheatsheets.html#name-of-the-tool",
-    "href": "cheatsheets.html#name-of-the-tool",
-    "title": "Cheatsheets",
-    "section": "",
-    "text": "Category: Type of tool\nAbout: One line introduction about the tool\nLinks: Official cheatsheet | Official documentation | Other relevant link\nRSE tools sessions: Session title"
-  },
-  {
-    "objectID": "cheatsheets.html#apptainer",
-    "href": "cheatsheets.html#apptainer",
-    "title": "Cheatsheets",
-    "section": "",
-    "text": "Category: Container platform\nAbout: Open-source fork of Singularity, used to package applications with their dependencies for HPC environments\nLinks: Official documentation | Coderefinery tutorial\nRSE tools sessions: Introduction to Apptainer"
-  },
-  {
-    "objectID": "cheatsheets.html#docker",
-    "href": "cheatsheets.html#docker",
-    "title": "Cheatsheets",
-    "section": "",
-    "text": "Category: Container platform\nAbout: Package applications with their dependencies\nLinks: Official cheatsheet | Official documentation"
-  },
-  {
-    "objectID": "cheatsheets.html#git",
-    "href": "cheatsheets.html#git",
-    "title": "Cheatsheets",
-    "section": "",
-    "text": "Category: Version control\nAbout: Make and manage git repositories for version control of code, documentation, and other projects\nLinks: Official cheatsheet | Official documentation | Cheatsheet from GitHub\nRSE tools sessions: Introduction to Git"
-  },
-  {
-    "objectID": "cheatsheets.html#pixi",
-    "href": "cheatsheets.html#pixi",
-    "title": "Cheatsheets",
-    "section": "",
-    "text": "Category: Package management\nAbout: Powerful and fast software environment creator, package manager, and task runner\nLinks: Official quick start guide | Official documentation\nRSE tools sessions: Introduction to Pixi"
-  },
-  {
-    "objectID": "cheatsheets.html#vscode",
-    "href": "cheatsheets.html#vscode",
-    "title": "Cheatsheets",
-    "section": "",
-    "text": "Category: Development environment\nAbout: Powerful and customizable code editor owned and supported by Microsoft\nLinks: Official cheatsheet Windows | Official cheatsheet MacOS | Official documentation\nRSE tools sessions: Introduction to VSCode"
+    "text": "Cheatsheets\nQuick reference resources for tools related to research software development and bioinformatics.\n\n\n\n\n\n\nTipTemplate for contributing\n\n\n\n\n\n\n\nName of the tool\nCategory: Type of tool\n\nAbout\n\nOne line introduction about the tool\n\nLinks\n\nOfficial cheatsheet | Official documentation | Other relevant link\n\nRSE tools sessions\n\nSession title\n\n\n\n\n\n\n\n\n\nApptainer 📦\nCategory: Container platform\n\nAbout\n\nOpen-source fork of Singularity, used to package applications with their dependencies for HPC environments\n\nLinks\n\nOfficial documentation | Coderefinery tutorial\n\nRSE tools sessions\n\nIntroduction to Apptainer\n\n\n\n\n\n\nDocker 🐳\nCategory: Container platform\n\nAbout\n\nPackage applications with their dependencies\n\nLinks\n\nOfficial cheatsheet | Official documentation\n\nRSE tools sessions\n\nNone recorded yet.\n\n\n\n\n\n\nGit 🌲\nCategory: Version control\n\nAbout\n\nMake and manage git repositories for version control of code, documentation, and other projects\n\nLinks\n\nOfficial cheatsheet | Official documentation | Cheatsheet from GitHub\n\nRSE tools sessions\n\nIntroduction to Git\n\n\n\n\n\n\nPixi ✨\nCategory: Package management\n\nAbout\n\nPowerful and fast software environment creator, package manager, and task runner\n\nLinks\n\nOfficial quick start guide | Official documentation\n\nRSE tools sessions\n\nIntroduction to Pixi\n\n\n\n\n\n\nVSCode 💻\nCategory: Development environment\n\nAbout\n\nPowerful and customizable code editor owned and supported by Microsoft\n\nLinks\n\nOfficial cheatsheet Windows | Official cheatsheet MacOS | Official documentation\n\nRSE tools sessions\n\nIntroduction to VSCode"
   },
   {
     "objectID": "contributing.html",

@@ -157,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
 <h1>Cheatsheets</h1>
 <p>Quick reference resources for tools related to research software development and bioinformatics.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Template for contributing">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -166,52 +166,133 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<section id="name-of-the-tool" class="level2 callout-body-container callout-body">
-<h2 class="anchored" data-anchor-id="name-of-the-tool">Name of the tool</h2>
-<p><strong>Category:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/%3CMAIN_CATEGORY%3E">Type of tool</a></p>
-<p><strong>About:</strong> One line introduction about the tool</p>
-<p><strong>Links:</strong> <a href="url">Official cheatsheet</a> | <a href="url">Official documentation</a> | <a href="url">Other relevant link</a></p>
-<p><strong>RSE tools sessions:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/posts/%3CFILENAME%3E">Session title</a></p>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="card mb-4">
+<section id="name-of-the-tool" class="level3 card-body">
+<h3 class="anchored" data-anchor-id="name-of-the-tool">Name of the tool</h3>
+<p><strong>Category</strong>: <a href="https://nbisweden.github.io/Training-Tech-shorts/%3CMAIN_CATEGORY%3E">Type of tool</a></p>
+<dl>
+<dt><strong>About</strong></dt>
+<dd>
+One line introduction about the tool
+</dd>
+<dt><strong>Links</strong></dt>
+<dd>
+<a href="url">Official cheatsheet</a> | <a href="url">Official documentation</a> | <a href="url">Other relevant link</a>
+</dd>
+<dt><strong>RSE tools sessions</strong></dt>
+<dd>
+<a href="https://nbisweden.github.io/Training-Tech-shorts/posts/%3CFILENAME%3E">Session title</a>
+</dd>
+</dl>
 </section>
 </div>
 </div>
-<section id="apptainer" class="level2">
-<h2 class="anchored" data-anchor-id="apptainer">Apptainer</h2>
-<p><strong>Category:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=Containers">Container platform</a></p>
-<p><strong>About:</strong> Open-source fork of Singularity, used to package applications with their dependencies for HPC environments</p>
-<p><strong>Links:</strong> <a href="https://apptainer.org/docs/user/latest/">Official documentation</a> | <a href="https://coderefinery.github.io/hpc-containers/">Coderefinery tutorial</a></p>
-<p><strong>RSE tools sessions:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/">Introduction to Apptainer</a></p>
+</div>
+</div>
+<div class="card mb-4">
+<section id="apptainer" class="level3 card-body">
+<h3 class="anchored" data-anchor-id="apptainer">Apptainer 📦</h3>
+<p><strong>Category</strong>: <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=Containers">Container platform</a></p>
+<dl>
+<dt><strong>About</strong></dt>
+<dd>
+Open-source fork of Singularity, used to package applications with their dependencies for HPC environments
+</dd>
+<dt><strong>Links</strong></dt>
+<dd>
+<a href="https://apptainer.org/docs/user/latest/">Official documentation</a> | <a href="https://coderefinery.github.io/hpc-containers/">Coderefinery tutorial</a>
+</dd>
+<dt><strong>RSE tools sessions</strong></dt>
+<dd>
+<a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/">Introduction to Apptainer</a>
+</dd>
+</dl>
 </section>
-<section id="docker" class="level2">
-<h2 class="anchored" data-anchor-id="docker">Docker</h2>
-<p><strong>Category:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=Containers">Container platform</a></p>
-<p><strong>About:</strong> Package applications with their dependencies</p>
-<p><strong>Links:</strong> <a href="https://docs.docker.com/get-started/docker_cheatsheet.pdf">Official cheatsheet</a> | <a href="https://docs.docker.com/">Official documentation</a></p>
+</div>
+<div class="card mb-4">
+<section id="docker" class="level3 card-body">
+<h3 class="anchored" data-anchor-id="docker">Docker 🐳</h3>
+<p><strong>Category</strong>: <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=Containers">Container platform</a></p>
+<dl>
+<dt><strong>About</strong></dt>
+<dd>
+Package applications with their dependencies
+</dd>
+<dt><strong>Links</strong></dt>
+<dd>
+<a href="https://docs.docker.com/get-started/docker_cheatsheet.pdf">Official cheatsheet</a> | <a href="https://docs.docker.com/">Official documentation</a>
+</dd>
+<dt><strong>RSE tools sessions</strong></dt>
+<dd>
+<em>None recorded yet.</em>
+</dd>
+</dl>
 </section>
-<section id="git" class="level2">
-<h2 class="anchored" data-anchor-id="git">Git</h2>
-<p><strong>Category:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=Version%20control">Version control</a></p>
-<p><strong>About:</strong> Make and manage git repositories for version control of code, documentation, and other projects</p>
-<p><strong>Links:</strong> <a href="https://git-scm.com/cheat-sheet">Official cheatsheet</a> | <a href="https://git-scm.com/book/en/v2">Official documentation</a> | <a href="https://education.github.com/git-cheat-sheet-education.pdf">Cheatsheet from GitHub</a></p>
-<p><strong>RSE tools sessions:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2024-03-19-git-intro/">Introduction to Git</a></p>
+</div>
+<div class="card mb-4">
+<section id="git" class="level3 card-body">
+<h3 class="anchored" data-anchor-id="git">Git 🌲</h3>
+<p><strong>Category</strong>: <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=Version%20control">Version control</a></p>
+<dl>
+<dt><strong>About</strong></dt>
+<dd>
+Make and manage git repositories for version control of code, documentation, and other projects
+</dd>
+<dt><strong>Links</strong></dt>
+<dd>
+<a href="https://git-scm.com/cheat-sheet">Official cheatsheet</a> | <a href="https://git-scm.com/book/en/v2">Official documentation</a> | <a href="https://education.github.com/git-cheat-sheet-education.pdf">Cheatsheet from GitHub</a>
+</dd>
+<dt><strong>RSE tools sessions</strong></dt>
+<dd>
+<a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2024-03-19-git-intro/">Introduction to Git</a>
+</dd>
+</dl>
 </section>
-<section id="pixi" class="level2">
-<h2 class="anchored" data-anchor-id="pixi">Pixi</h2>
-<p><strong>Category:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=Package%20management">Package management</a></p>
-<p><strong>About:</strong> Powerful and fast software environment creator, package manager, and task runner</p>
-<p><strong>Links:</strong> <a href="https://pixi.sh/latest/getting_started/">Official quick start guide</a> | <a href="https://pixi.sh/latest/">Official documentation</a></p>
-<p><strong>RSE tools sessions:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-01-21-pixi-intro/">Introduction to Pixi</a></p>
+</div>
+<div class="card mb-4">
+<section id="pixi" class="level3 card-body">
+<h3 class="anchored" data-anchor-id="pixi">Pixi ✨</h3>
+<p><strong>Category</strong>: <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=Package%20management">Package management</a></p>
+<dl>
+<dt><strong>About</strong></dt>
+<dd>
+Powerful and fast software environment creator, package manager, and task runner
+</dd>
+<dt><strong>Links</strong></dt>
+<dd>
+<a href="https://pixi.sh/latest/getting_started/">Official quick start guide</a> | <a href="https://pixi.sh/latest/">Official documentation</a>
+</dd>
+<dt><strong>RSE tools sessions</strong></dt>
+<dd>
+<a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-01-21-pixi-intro/">Introduction to Pixi</a>
+</dd>
+</dl>
 </section>
-<section id="vscode" class="level2">
-<h2 class="anchored" data-anchor-id="vscode">VSCode</h2>
-<p><strong>Category:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=IDE">Development environment</a></p>
-<p><strong>About:</strong> Powerful and customizable code editor owned and supported by Microsoft</p>
-<p><strong>Links:</strong> <a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf">Official cheatsheet Windows</a> | <a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf">Official cheatsheet MacOS</a> | <a href="https://code.visualstudio.com/docs">Official documentation</a></p>
-<p><strong>RSE tools sessions:</strong> <a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-02-18-vscode-intro/">Introduction to VSCode</a></p>
+</div>
+<div class="card mb-4">
+<section id="vscode" class="level3 card-body">
+<h3 class="anchored" data-anchor-id="vscode">VSCode 💻</h3>
+<p><strong>Category</strong>: <a href="https://nbisweden.github.io/Training-Tech-shorts/#category=IDE">Development environment</a></p>
+<dl>
+<dt><strong>About</strong></dt>
+<dd>
+Powerful and customizable code editor owned and supported by Microsoft
+</dd>
+<dt><strong>Links</strong></dt>
+<dd>
+<a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf">Official cheatsheet Windows</a> | <a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf">Official cheatsheet MacOS</a> | <a href="https://code.visualstudio.com/docs">Official documentation</a>
+</dd>
+<dt><strong>RSE tools sessions</strong></dt>
+<dd>
+<a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-02-18-vscode-intro/">Introduction to VSCode</a>
+</dd>
+</dl>
+</section>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
