@@ -3,3 +3,11 @@ pixi.lock merge=binary linguist-language=YAML linguist-generated=true
 
 # Tag html files as auto-generated
 *.html linguist-generated=true
+
+# Detect Quarto markdown files as Markdown
+*.qmd linguist-documentation=false
+*.qmd linguist-detectable=true
+*.qmd linguist-language=Markdown
+
+# Mark post subfolders as documentation
+posts/*/**/* linguist-documentation=true
