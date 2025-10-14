@@ -2,7 +2,7 @@
 
 Dates for each walkthrough, listed in reverse chronological order.
 Meetings are over Zoom, Thursdays at 10.00. Meeting links are
-provided by the teacher.
+provided in NBIS Slack `#tech-group-rse-tools`.
 
 - 2026/01/22: TBD
 - 2026/01/08: _postponed_
