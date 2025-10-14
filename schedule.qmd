@@ -4,7 +4,13 @@ Dates for each walkthrough, listed in reverse chronological order.
 Meetings are over Zoom, Thursdays at 10.00. Meeting links are
 provided by the teacher.
 
-- 2025/10/23: TBD
+- 2026/01/22: TBD
+- 2026/01/08: _postponed_
+- 2025/12/25: _Holiday_
+- 2025/12/11: Mahesh - Good practices in Nextflow
+- 2025/11/27: Mahesh - Nextflow Foundations
+- 2025/11/13: Richèl - Introduction to Github actions
+- 2025/10/23: Martin + Björn - Introduction to Docker
 - 2025/10/09: Mahesh - Introduction to RSE Tools Tech Group
 - **Renamed to RSE Tools Tech Group**
 - **Break**
