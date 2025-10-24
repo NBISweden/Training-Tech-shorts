@@ -56,3 +56,19 @@ or reach out on the `#tech-group-rse-tools` channel on NBIS Slack.
 ## Further Reading
 
 * [10 things software developers should learn about learning](https://cacm.acm.org/magazines/2024/1/278891-10-things-software-developers-should-learn-about-learning/fulltext)
+
+## Adding and previewing posts locally
+
+To build the site locally to preview changes, run the commands below. This assumes that you already have [pixi installed](https://pixi.sh/latest/installation/).
+
+```bash
+# clone the repo
+git clone git@github.com:NBISweden/Training-Tech-shorts.git
+cd Training-Tech-shorts
+
+# install the dependencies
+pixi install
+
+# build and serve the site
+pixi run quarto preview
+```
