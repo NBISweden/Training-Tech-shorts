@@ -186,6 +186,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <h1 class="title">Introduction to Docker</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Docker</div>
+                <div class="quarto-category">Containers</div>
+                <div class="quarto-category">Package management</div>
               </div>
                   </div>
   </div>
@@ -237,7 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="first-run" class="level2">
 <h2 class="anchored" data-anchor-id="first-run">First run</h2>
 <p>First step is to <a href="https://docs.docker.com/engine/install/">install Docker</a>. After that, let’s start our first container:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> ubuntu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># docker run [options] &lt;image&gt;[:tag] [command] [args...]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> ubuntu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Without the <code>-it</code>, the container will close down as soon as there are no more commands to run, which will be instantly in the example above.</p>
 <p>We can look around inside the container and see that it looks just like a newly installed Ubuntu.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
