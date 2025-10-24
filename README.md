@@ -57,7 +57,7 @@ or reach out on the `#tech-group-rse-tools` channel on NBIS Slack.
 
 * [10 things software developers should learn about learning](https://cacm.acm.org/magazines/2024/1/278891-10-things-software-developers-should-learn-about-learning/fulltext)
 
-## Adding and previewing posts locally
+## Rendering site locally
 
 To build the site locally to preview changes, run the commands below. This assumes that you already have [pixi installed](https://pixi.sh/latest/installation/).
 
