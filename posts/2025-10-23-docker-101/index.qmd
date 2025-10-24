@@ -1,5 +1,5 @@
 ---
-title: "Docker 101"
+title: "Introduction to Docker"
 author:
   - "Martin Dahlö & Björn Viklund"
 date: "2025-10-23"
