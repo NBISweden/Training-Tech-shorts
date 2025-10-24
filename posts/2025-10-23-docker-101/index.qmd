@@ -287,7 +287,7 @@ Once it is pushed, anyone in the world can run `docker run -it yourusername/ngs_
 
 ## Extras
 
-30 minutes is not a lot of time so we skipped a few things to avoid adding too much details which would only clog up peoples attention. Here are a few extra things you can think about whenever you have the time.
+Here are a few extra things you can think about whenever you have the time.
 
 ### Converting to Apptainer
 
