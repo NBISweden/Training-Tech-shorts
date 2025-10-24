@@ -21,6 +21,7 @@ The main parts of docker are *images* and *containers*. The images are much like
 First step is to [install Docker](https://docs.docker.com/engine/install/). After that, let's start our first container:
 
 ```bash
+# docker run [options] <image>[:tag] [command] [args...]
 docker run -it ubuntu
 ```
 
