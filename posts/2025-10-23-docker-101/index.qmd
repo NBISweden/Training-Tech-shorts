@@ -4,7 +4,7 @@ author:
   - "Martin Dahlö & Björn Viklund"
 date: "2025-10-23"
 date-modified: last-modified
-categories: [ "Docker" ]
+categories: [ "Docker", "Containers", "Package management" ]
 ---
 
 ## What is Docker?
