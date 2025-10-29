@@ -68,7 +68,7 @@ exit
 
 ## Run tools
 
-    Let's go and explore [Docker hub](https://hub.docker.com/), the default registry where pre-built images are stored. As you can see, there are many of them. Let's search one that many might be familiar with, [r-base](https://hub.docker.com/search?q=r-base). Open the one [tagged with Docker Official Image](https://hub.docker.com/_/r-base). If you scroll down a bit you will see examples of how to start a R session using docker:
+Let's go and explore [Docker hub](https://hub.docker.com/), the default registry where pre-built images are stored. As you can see, there are many of them. Let's search one that many might be familiar with, [r-base](https://hub.docker.com/search?q=r-base). Open the one [tagged with Docker Official Image](https://hub.docker.com/_/r-base). If you scroll down a bit you will see examples of how to start a R session using docker:
 
 ```bash
 docker run -it r-base
@@ -102,9 +102,7 @@ git clone https://github.com/NBISweden/Training-Tech-shorts.git
 
 # go to the post directory
 cd Training-Tech-shorts/posts/2025-10-23-introduction-to-docker
-```
 
-```bash
 # let's try it out, and tell docker we want to run bash in the container.
 # otherwise it will start the program the creator of the container
 # set as default, which is R in this case
@@ -382,7 +380,7 @@ docker run -it --rm ngs_analysis:latest
 
 When building Dockerfiles you do mostly the same things over and over. You need a base image, you will install dependencies, copy some files, set environment variables etc. Either you can copy an old Dockerfile and modify for your new needs, or you can have a boiler-plate file you start from. Here is an example:
 
-```
+```Dockerfile
 # Start from a base image
 FROM ubuntu:22.04
 
