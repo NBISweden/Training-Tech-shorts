@@ -1,0 +1,414 @@
+---
+title: "Introduction to Docker"
+author:
+  - "Martin Dahlö & Björn Viklund"
+date: "2025-10-23"
+date-modified: last-modified
+categories: [ "Docker", "Containers", "Package management" ]
+---
+
+## What is Docker?
+
+Docker containers are kind of like virtual machines; simulated/virtualised computers inside your physical computer, and you can have many of them running on the same physical computer (host computer). They have their own operating system and all, and they behave like they are normal physical computers.
+
+Unlike traditional virtual machines they don’t simulate the entire computer from the ground up, but rather create a sandboxed (i.e. isolated) environment that pretends to be a virtual machine. Since it reuses the operating system already running on the computer it has almost no start-up time and very low resource usage in itself. 
+
+The main parts of docker are *images* and *containers*. The images are much like virtual disk images, the hard drives in virtual machines. It's what contains all the files that make up the file system of the container, i.e. operating system file, home folders, settings files and such. Containers are what you call it when it is running, i.e. all the processes running and memory in the "virtual machine". You can start multiple containers all running from the same image and they will be completely independent from each other.
+
+
+## First run
+
+First step is to [install Docker](https://docs.docker.com/engine/install/). After that, let's start our first container:
+
+```bash
+# docker run [options] <image>[:tag] [command] [args...]
+docker run -it ubuntu
+```
+
+Without the `-it`, the container will close down as soon as there are no more commands to run, which will be instantly in the example above.
+
+We can look around inside the container and see that it looks just like a newly installed Ubuntu.
+
+```bash
+ls -l
+cd /etc
+cat os-release
+```
+
+You can make changes to files inside the container, but they are reset when you restart it. This is a perfect opportunity to try out that forbidden command, `rm -rf --no-preserve-root /` :) This command should **not** be run on any computer, or a container that has external directories mounted to it. It deletes everything from the root down, with reckless abandon. All data, system files - gone. It's a fast track to a digital ghost town from which return might not be an option.
+
+To make sure we run this command inside the container, we'll add a check that the file `/.dockerenv` exists. The `.dockerenv` file is a simple marker file that exists in the root directory of a Docker container to indicate that the current environment is running inside a Docker container.
+
+```bash
+# WARNING: only run this inside the container
+ls /.dockerenv && rm -rf --no-preserve-root /
+
+# try running some commands
+ls
+bash: /usr/bin/ls: No such file or directory
+
+# oops
+# oh no, it's broken! Anyway, exit the container
+# and start it again and everything will be back
+# to the way it was.
+
+# type exit to close the container
+exit
+
+# and start it again and see that everything is back to normal
+docker run -it ubuntu
+ls
+
+# exit again
+exit
+```
+
+
+
+
+## Run tools
+
+    Let's go and explore [Docker hub](https://hub.docker.com/), the default registry where pre-built images are stored. As you can see, there are many of them. Let's search one that many might be familiar with, [r-base](https://hub.docker.com/search?q=r-base). Open the one [tagged with Docker Official Image](https://hub.docker.com/_/r-base). If you scroll down a bit you will see examples of how to start a R session using docker:
+
+```bash
+docker run -it r-base
+```
+
+If we don't specify a version it will run the latest version, but if you want a specific version you can just add it to the command:
+
+```bash
+docker run -it r-base:3.4.1   # this is an old R-version released 8 years ago
+
+# or for ubuntu
+docker run -it ubuntu:18.04
+```
+
+For the sake of reproducibility, it is wise to always specify which version you use. Go to the [tags](https://hub.docker.com/_/r-base/tags) tab of the `r-base` page to see all available tags.
+
+
+
+
+## Accessing data
+
+Running programs in containers is nice, but it is even better when you can feed it your own data to be processed. Despite sharing most of the operating system with the host computer, the container is by default isolated from the host, so it will not see any files from the host. If we want it to be able to see any files, we can do that by using something called a `bind mount` of a volume.
+
+When running the container, you add the option `--volume or -v` and tell it which directory on the host computer you want to give access to and where to have it appear inside the container. The path to the directory can be either relative or absolute.
+
+Start with cloning this repo and going to this post's folder:
+
+```bash
+# clone repo
+git clone https://github.com/NBISweden/Training-Tech-shorts.git
+
+# go to the post directory
+cd Training-Tech-shorts/posts/2025-10-23-introduction-to-docker
+```
+
+```bash
+# let's try it out, and tell docker we want to run bash in the container.
+# otherwise it will start the program the creator of the container
+# set as default, which is R in this case
+docker run -it \
+    --volume ./r-plot-example:/data \
+    r-base:4.5.1 \
+    bash
+
+# have a look in /data
+ls -l /data
+
+# close the container
+exit
+
+# then start the container normally to end up inside R
+docker run -it \
+    --volume ./r-plot-example:/data \
+    r-base:4.5.1
+
+# and run the example script
+source("/data/example_plot.r")
+```
+
+The `example_plot.r` script will create an `.png` image inside `/data` inside the container, which is `./r-plot-example/` on the host computer.
+
+<details>
+<summary>Show `r-plot-example/example_plot.r`</summary>
+```{.r filename=r-plot-example/example_plot.r}
+# Create a colorful radial pattern
+png("/data/example.png", width = 800, height = 800)
+par(mar = c(0,0,0,0), bg = "black")
+
+# Generate points
+t <- seq(0, 20*pi, length.out = 2000)
+x <- t * cos(t)
+y <- t * sin(t)
+
+# Create color gradient
+colors <- colorRampPalette(c("purple", "blue", "cyan", "green", "yellow", "orange", "red"))(2000)
+
+# Plot
+plot(x, y, type = "l", col = colors[1], lwd = 2, 
+     xlim = range(x), ylim = range(y), axes = FALSE, xlab = "", ylab = "")
+
+# Add points with changing colors
+for(i in 1:length(x)) {
+  points(x[i], y[i], col = colors[i], pch = 16, cex = 0.5)
+}
+
+dev.off()
+```
+</details>
+
+```bash
+$ ls -l r-plot-example/
+total 104
+-rw-r--r-- 1 user user    599 24 okt 14.11 example_plot.r
+-rw-r--r-- 1 root root 100972 29 okt 14.33 example.png
+```
+
+As you can see, the plot file is owned by the `root` user, since inside the container you run as the root user. If you want the files to be owned by your own user instead, you can tell docker to run as your own user inside the container:
+
+```bash
+# remove the old file first
+rm -f r-plot-example/example.png
+
+# id -u and id -g will fetch your user's id and group id number,
+# resulting in something like this, 1000:1001
+docker run -it \
+    --user $(id -u):$(id -g) \
+    --volume ./r-plot-example/:/data \
+    r-base:4.5.1
+```
+
+If you'd rather not type out the `source()` command in the interactive R session that opens, you can tell docker to run `Rscript` instead of starting `R`.
+
+```bash
+docker run -it \
+    --user $(id -u):$(id -g) \
+    --volume ./r-plot-example/:/data \
+    r-base:4.5.1 \
+    Rscript /data/example_plot.r
+```
+
+
+
+
+## Making our own image
+
+The use-case in this demo will be to create an environment where you can run a variant calling analysis, as described in the [Variant calling lab in the NGS-intro course](https://nbisweden.github.io/workshop-ngsintro/2511/topics/vc/lab_vc.html). For that we will need a container that has `bwa`, `samtools` and `gatk` installed.
+
+The vanilla Ubuntu image we ran before is not that useful on its own, but it can be used as a starting point when building our own container. You start by editing a file named `Dockerfile`. We can now start installing the programs inside the container, as you would on any Linux computer.
+
+The great thing about container is that since they are isolated, you only have to care about the other things inside that container. You want to install a software that is really picky about which python version you run? Not a problem, make a system installation of that python version in the container. Unpacking things in `/`? If it works, it works (though structure is recommended if you will share the image with others). 
+
+```{.dockerfile filename="custom-docker-example/Dockerfile"}
+# decide on a base image, can be any existing docker image
+FROM ubuntu:24.04
+
+# install dependencies
+RUN apt update ; apt install -y default-jre samtools bwa wget python3 zip libgomp1 figlet
+
+# get gatk
+RUN wget https://github.com/broadinstitute/gatk/releases/download/4.6.2.0/gatk-4.6.2.0.zip ; \
+    unzip gatk-4.6.2.0.zip ; \
+    ln -s /gatk-4.6.2.0/gatk /bin/ ; \
+    ln -s /bin/python3 /bin/python 
+```
+
+Then to build it you run
+
+```bash
+# tell docker to build the Dockerfile in the subdirectory.
+# image building can take a couple of minutes
+docker build custom-docker-example/
+
+# you can add a name to it so it is easier to run it later on,
+docker build -t ngs_analysis:latest custom-docker-example/
+
+# and you can try starting it and see that it works
+docker run -it ngs_analysis:latest
+```
+
+
+
+### Get test data
+
+We found this repo with some test data we can try out our image with: [https://github.com/roryk/tiny-test-data](https://github.com/roryk/tiny-test-data)
+
+```bash
+# download the test data
+git clone https://github.com/roryk/tiny-test-data.git
+
+# make output dir, otherwise it will be created for you but root will own it
+mkdir -p analysis_output
+
+# start the container and bind mount the data
+docker run -it --user $(id -u):$(id -g) \
+    --volume ./ngs-analysis-example/:/scripts \
+    --volume ./tiny-test-data:/data \
+    --volume ./analysis_output:/output \
+    ngs_analysis:latest \
+    /scripts/ngs_analysis.sh
+```
+
+<details>
+<summary>Show `ngs-analysis-example/ngs_analysis.sh`</summary>
+```{.sh filename=ngs-analysis-example/ngs_analysis.sh}
+#!/bin/bash
+
+echo -e "\n\n"
+figlet ALIGN
+echo -e "align with bwa\n\n"
+bwa mem /data/genomes/Hsapiens/hg19/bwa/hg19.fa /data/wgs/mt_1.fq.gz /data/wgs/mt_2.fq.gz > /output/mt.aligned.sam
+
+echo -e "\n\n"
+figlet SORT
+echo -e "sort and convert to bam\n\n"
+samtools sort /output/mt.aligned.sam > /output/mt.aligned.bam
+
+echo -e "\n\n"
+figlet READ GROUPS
+echo -e "add read groups\n\n"
+gatk AddOrReplaceReadGroups -I /output/mt.aligned.bam -O /output/mt.aligned.rg.bam --RGID rg_HG00097 --RGSM HG00097 --RGPL illumina --RGLB libx --RGPU XXX
+
+echo -e "\n\n"
+figlet INDEX
+echo -e "index new bam file\n\n"
+samtools index /output/mt.aligned.rg.bam
+
+echo -e "\n\n"
+figlet CALL SNPs
+echo -e "call the snps\n\n"
+gatk --java-options -Xmx4g HaplotypeCaller -R /data/genomes/Hsapiens/hg19/seq/hg19.fa -I /output/mt.aligned.rg.bam -O /output/mt.aligned.rg.vcf
+```
+</details>
+
+### Pushing it to Docker hub
+
+Now that we have our own image we should push it to [Docker hub](https://hub.docker.com/) so people can start using it. To do that you first need to [register an account at docker hub](https://app.docker.com/signup). Once you have that you can login to docker hub from the command-line like this:
+
+```bash
+# to login using a web browser
+docker login
+
+# to login using cli only
+docker login -u yourusername
+```
+
+When pushing to docker hub we have to name/tag our image with our docker hub username. To change the tag we will simply run the same build command as before, just updating the tag name. Since nothing has changed inside the `Dockerfile` it will be instant.
+
+```bash
+# update the tag name
+docker build -t yourusername/ngs_analysis:latest custom-docker-example/
+
+# push the image to docker hub
+docker push yourusername/ngs_analysis:latest
+```
+
+Once it is pushed, anyone in the world can run `docker run -it yourusername/ngs_analysis:latest` and your image will start on their computer.
+
+
+
+
+
+
+## Extras
+
+Here are a few extra things you can think about whenever you have the time.
+
+### Converting to Apptainer
+
+[Apptainer](https://apptainer.org/) is another containerization tool that, from a user perspective, works pretty much the same way as Docker. How to use that is another walkthrough session on its own (see the [previous RSE walkthrough](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/) on Apptainer for a more thorough explaination), but we'll mention it here since that is what usually is available at the Swedish HPC centers. The reason they prefer Appatiner is that Apptainer is run as the user who runs it. Docker on the other hand does way more magic behind the scenes and requires a daemon that is running as root. This makes sysadmins of large shared systems nervous.
+
+If you want to run your newly created Docker image at a HPC center that only uses Apptainer, you can convert your Docker image to a Apptainer image quite easily,
+
+```bash
+# convert your docker image to apptainer image
+apptainer build ngs_analysis.sif docker://yourusername/ngs_analysis:latest
+
+# start the container
+apptainer run ngs_analysis.sif
+```
+
+
+
+### Iterative development of Dockerfiles
+
+When we wrote the `Dockerfile` for the `ngs_analysis` image above, we did not know all the commands and dependencies to start with. We just started up the base image and tried out commands until we found the correct ones, then we added only those to the `Dockerfile` and built the image. If you find something missing later on, you can just edit the `Dockerfile`, add the things that are missing, and rebuild it again.
+
+```bash
+### on host ###
+# start base image
+docker run -it ubuntu:24.04
+
+
+### inside container ###
+# install packages inside it
+apt update ; apt install -y default-jre samtools bwa wget python3
+
+
+### on host ###
+# edit the Dockerfile and add the commands you tried out
+vim custom-docker-example/Dockerfile
+
+# build the image
+docker build -t ngs_analysis:latest custom-docker-example/
+
+# try out the image and see if everything works
+docker run -it --volume ./tiny-test-data/:/data ngs_analysis:latest
+
+# discover something is missing, edit Dockerfile and add stuff
+vim custom-docker-example/Dockerfile
+
+# build the image again
+docker build -t ngs_analysis:latest custom-docker-example/
+
+# repeat ad nauseam
+```
+
+Often you can find the tool you want to run already packaged, and if it is not in Docker hub it could exist in other registries. See the [previous RSE walkthrough](http://localhost:6925/posts/2025-06-10-container-registry-intro/) on alternative registries for that.
+
+
+### Add `--rm` to run commands
+
+Docker will remember all containers that you have started, so the list will get quite long after a while (`docker ps -a`). For one-off containers or when developing Dockerfiles, you don't want to litter that list more that you have to. If you add `--rm` to the `docker run` command, docker will not add it to the list.
+
+```bash
+docker run -it --rm ngs_analysis:latest
+```
+
+
+
+### Boiler-plate Dockerfile
+
+When building Dockerfiles you do mostly the same things over and over. You need a base image, you will install dependencies, copy some files, set environment variables etc. Either you can copy an old Dockerfile and modify for your new needs, or you can have a boiler-plate file you start from. Here is an example:
+
+```
+# Start from a base image
+FROM ubuntu:22.04
+
+# Set metadata (optional but good practice)
+LABEL maintainer="your.email@example.com"
+LABEL description="Description of your application"
+
+# Set environment variables (optional)
+ENV APP_HOME=/app \
+    DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create application directory
+WORKDIR /app
+
+# Copy dependency files first (for better caching)
+COPY requirements.txt .
+# or: COPY package.json package-lock.json .
+
+# Install application dependencies
+RUN pip install -r requirements.txt
+# or: RUN npm install
+```
