@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025-10-23-introduction-to-docker/index.html",
       "/posts/2025-06-10-container-registry-intro/index.html",
       "/posts/2025-05-27-various-tips-and-tricks/index.html",
       "/posts/2025-05-13-nextflow-when-to-use/index.html",
