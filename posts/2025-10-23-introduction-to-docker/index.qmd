@@ -43,12 +43,17 @@ ls /.dockerenv && rm -rf --no-preserve-root /
 
 # try running some commands
 ls
+bash: /usr/bin/ls: No such file or directory
 
 # oops
-bash: /usr/bin/ls: No such file or directory
+# oh no, it's broken! Anyway, exit the container
+# and start it again and everything will be back
+# to the way it was.
+
+# type exit to close the container
+exit
 ```
 
-Oh no, it's broken! Anyway, exit the container and start it again and everything will be back to the way it was.
 
 
 
@@ -77,32 +82,47 @@ For the sake of reproducibility, it is wise to always specify which version you 
 
 Running programs in containers is nice, but it is even better when you can feed it your own data to be processed. Despite sharing most of the operating system with the host computer, the container is by default isolated from the host, so it will not see any files from the host. If we want it to be able to see any files, we can do that by using something called a `bind mount` of a volume.
 
-When running the container, you just add the option `--volume or -v` and tell it which directory on the host computer you want to give access to and where to have it appear inside the container.
+When running the container, you add the option `--volume or -v` and tell it which directory on the host computer you want to give access to and where to have it appear inside the container. The path to the directory can be either relative or absolute.
+
+Start with cloning this repo and going to this post's folder:
 
 ```bash
-# let's try it out, and tell docker we want to run bash in the container
+# clone repo
+git clone https://github.com/NBISweden/Training-Tech-shorts.git
+
+# go to the post directory
+cd Training-Tech-shorts/posts/2025-10-23-introduction-to-docker
+```
+
+```bash
+# let's try it out, and tell docker we want to run bash in the container.
+# otherwise it will start the program the creator of the container
+# set as default, which is R in this case
 docker run -it \
-    --volume ~/Training-Tech-shorts/posts/2025-10-23-docker-101/:/data \
+    --volume ./r-plot-example:/data \
     r-base:4.5.1 \
     bash
 
 # have a look in /data
 ls -l /data
 
-# then let's move on to the r-base image
+# close the container
+exit
+
+# then start the container normally to end up inside R
 docker run -it \
-    --volume ~/Training-Tech-shorts/posts/2025-10-23-docker-101/:/data \
+    --volume ./r-plot-example:/data \
     r-base:4.5.1
 
 # and run the example script
 source("/data/example_plot.r")
 ```
 
-The `example_plot.r` script will create an `.png` image inside `/data`, which is `~/Training-Tech-shorts/posts/2025-10-23-docker-101/` on the host computer.
+The `example_plot.r` script will create an `.png` image inside `/data` inside the container, which is `./r-plot-example/` on the host computer.
 
 <details>
-<summary>Show `example_plot.r`</summary>
-```{.r filename=example_plot.r}
+<summary>Show `r-plot-example/example_plot.r`</summary>
+```{.r filename=r-plot-example/example_plot.r}
 # Create a colorful radial pattern
 png("/data/example.png", width = 800, height = 800)
 par(mar = c(0,0,0,0), bg = "black")
@@ -129,26 +149,23 @@ dev.off()
 </details>
 
 ```bash
-$ ls -l
-total 120
--rw-r--r-- 1 user user    364 22 okt 15.26 Dockerfile
--rw-r--r-- 1 user user    599 22 okt 13.42 example_plot.r
--rw-r--r-- 1 root root 100972 22 okt 13.56 example.png
--rw-r--r-- 1 user user   7465 22 okt 17.05 index.qmd
--rwxr-xr-x 1 user user    711 22 okt 15.28 ngs_analysis.sh
+$ ls -l r-plot-example/
+total 104
+-rw-r--r-- 1 user user    599 24 okt 14.11 example_plot.r
+-rw-r--r-- 1 root root 100972 29 okt 14.33 example.png
 ```
 
 As you can see, the plot file is owned by the `root` user, since inside the container you run as the root user. If you want the files to be owned by your own user instead, you can tell docker to run as your own user inside the container:
 
 ```bash
 # remove the old file first
-rm -f example.png
+rm -f r-plot-example/example.png
 
 # id -u and id -g will fetch your user's id and group id number,
 # resulting in something like this, 1000:1001
 docker run -it \
     --user $(id -u):$(id -g) \
-    --volume ~/Training-Tech-shorts/posts/2025-10-23-docker-101/:/data \
+    --volume ./r-plot-example/:/data \
     r-base:4.5.1
 ```
 
@@ -157,7 +174,7 @@ If you'd rather not type out the `source()` command in the interactive R session
 ```bash
 docker run -it \
     --user $(id -u):$(id -g) \
-    --volume ~/Training-Tech-shorts/posts/2025-10-23-docker-101/:/data \
+    --volume ./r-plot-example/:/data \
     r-base:4.5.1 \
     Rscript /data/example_plot.r
 ```
@@ -173,7 +190,7 @@ The vanilla Ubuntu image we ran before is not that useful on its own, but it can
 
 The great thing about container is that since they are isolated, you only have to care about the other things inside that container. You want to install a software that is really picky about which python version you run? Not a problem, make a system installation of that python version in the container. Unpacking things in `/`? If it works, it works (though structure is recommended if you will share the image with others). 
 
-```{.dockerfile filename="Dockerfile"}
+```{.dockerfile filename="custom-docker-example/Dockerfile"}
 # decide on a base image, can be any existing docker image
 FROM ubuntu:24.04
 
@@ -190,10 +207,12 @@ RUN wget https://github.com/broadinstitute/gatk/releases/download/4.6.2.0/gatk-4
 Then to build it you run
 
 ```bash
-docker build .
+# tell docker to build the Dockerfile in the subdirectory.
+# image building can take a couple of minutes
+docker build custom-docker-example/
 
 # you can add a name to it so it is easier to run it later on,
-docker build -t ngs_analysis:latest .
+docker build -t ngs_analysis:latest custom-docker-example/
 
 # and you can try starting it and see that it works
 docker run -it ngs_analysis:latest
@@ -206,27 +225,24 @@ docker run -it ngs_analysis:latest
 We found this repo with some test data we can try out our image with: [https://github.com/roryk/tiny-test-data](https://github.com/roryk/tiny-test-data)
 
 ```bash
-# go to home dir
-cd ~/
-
 # download the test data
 git clone https://github.com/roryk/tiny-test-data.git
 
 # make output dir, otherwise it will be created for you but root will own it
-mkdir -p ~/analysis_output
+mkdir -p analysis_output
 
 # start the container and bind mount the data
 docker run -it --user $(id -u):$(id -g) \
-    --volume ~/Training-Tech-shorts/posts/2025-10-23-docker-101/:/scripts \
-    --volume ~/tiny-test-data:/data \
-    --volume ~/analysis_output:/output \
+    --volume ./ngs-analysis-example/:/scripts \
+    --volume ./tiny-test-data:/data \
+    --volume ./analysis_output:/output \
     ngs_analysis:latest \
     /scripts/ngs_analysis.sh
 ```
 
 <details>
-<summary>Show `ngs_analysis.sh`</summary>
-```{.sh filename=ngs_analysis.sh}
+<summary>Show `ngs-analysis-example/ngs_analysis.sh`</summary>
+```{.sh filename=ngs-analysis-example/ngs_analysis.sh}
 #!/bin/bash
 
 echo -e "\n\n"
@@ -272,7 +288,7 @@ When pushing to docker hub we have to name/tag our image with our docker hub use
 
 ```bash
 # update the tag name
-docker build -t yourusername/ngs_analysis:latest .
+docker build -t yourusername/ngs_analysis:latest custom-docker-example/
 
 # push the image to docker hub
 docker push yourusername/ngs_analysis:latest
@@ -322,19 +338,19 @@ apt update ; apt install -y default-jre samtools bwa wget python3
 
 ### on host ###
 # edit the Dockerfile and add the commands you tried out
-vim Dockerfile
+vim custom-docker-example/Dockerfile
 
 # build the image
-docker build -t ngs_analysis:latest .
+docker build -t ngs_analysis:latest custom-docker-example/
 
 # try out the image and see if everything works
-docker run -it --volume ~/raw_data:/data ngs_analysis:latest
+docker run -it --volume ./tiny-test-data/:/data ngs_analysis:latest
 
 # discover something is missing, edit Dockerfile and add stuff
-vim Dockerfile
+vim custom-docker-example/Dockerfile
 
 # build the image again
-docker build -t ngs_analysis:latest .
+docker build -t ngs_analysis:latest custom-docker-example/
 
 # repeat ad nauseam
 ```
