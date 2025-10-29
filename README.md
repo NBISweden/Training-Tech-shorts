@@ -56,3 +56,26 @@ or reach out on the `#tech-group-rse-tools` channel on NBIS Slack.
 ## Further Reading
 
 * [10 things software developers should learn about learning](https://cacm.acm.org/magazines/2024/1/278891-10-things-software-developers-should-learn-about-learning/fulltext)
+
+## Rendering the website locally
+
+To build the website and preview your changes locally, follow these steps:
+
+**Prerequsite:** You must have [Pixi installed](https://pixi.sh/latest/installation/).
+
+```bash
+# Clone the repo
+git clone git@github.com:NBISweden/Training-Tech-shorts.git
+cd Training-Tech-shorts
+
+# Create a new branch
+# Make and commit your changes
+
+# Install the dependencies (optional)
+pixi install
+
+# Build and serve the website in your local browser
+pixi run quarto preview
+```
+
+`quarto preview` starts a local server and will watch for file changes. Use `Ctrl + C` to stop the server.
