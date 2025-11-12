@@ -4,6 +4,7 @@ Dates for each walkthrough, listed in reverse chronological order.
 Meetings are over Zoom, Thursdays at 10.00. Meeting links are
 provided in NBIS Slack `#tech-group-rse-tools`.
 
+- 2026/02/12: Dania - Working with R packages
 - 2026/01/22: Richèl - Introduction to Github Actions
 - 2026/01/08: _postponed_
 - 2025/12/25: _Holiday_
