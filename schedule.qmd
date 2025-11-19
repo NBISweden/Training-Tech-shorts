@@ -1,9 +1,19 @@
 # Schedule
 
-Dates for each lesson, listed in reverse chronological order.
-Meetings are over Zoom, Tuesdays at 13.00. Meeting links are
-provided by the teacher.
+Dates for each walkthrough, listed in reverse chronological order.
+Meetings are over Zoom, Thursdays at 10.00. Meeting links are
+provided in NBIS Slack `#tech-group-rse-tools`.
 
+- 2026/02/12: Dania - Working with R packages
+- 2026/01/22: Richèl - Introduction to Github Actions
+- 2026/01/08: _postponed_
+- 2025/12/25: _Holiday_
+- 2025/12/11: Mahesh - Good practices in Nextflow
+- 2025/11/27: Mahesh - Nextflow Foundations
+- 2025/11/13: Pavlin - Pixi on HPC
+- 2025/10/23: Martin + Björn - Introduction to Docker
+- 2025/10/09: Mahesh - Introduction to RSE Tools Tech Group
+- **Renamed to RSE Tools Tech Group**
 - **Break**
 - 2025/06/10: Mahesh - Github Container Registry and Seqera Container Registry
 - 2025/05/27: Everyone - Personal tips and tricks

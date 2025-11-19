@@ -1,4 +1,4 @@
-[project]
+[workspace]
 authors = ["Mahesh Binzer-Panchal <mahesh.binzer-panchal@nbis.se>"]
 channels = ["conda-forge", "bioconda"]
 name = "Training-Tech-shorts"
@@ -6,7 +6,8 @@ platforms = ["linux-64", "osx-arm64"]
 version = "0.1.0"
 
 [tasks]
+clean-workspace = "git clean -e .pixi -fxd"
 
 [dependencies]
-quarto = ">=1.6.40,<2"
-gh = ">=2.67.0,<3"
+quarto = ">=1.8.25,<2"
+gh = ">=2.80.0,<3"
