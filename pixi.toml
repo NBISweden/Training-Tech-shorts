@@ -1,4 +1,4 @@
-[project]
+[workspace]
 authors = ["Mahesh Binzer-Panchal <mahesh.binzer-panchal@nbis.se>"]
 channels = ["conda-forge", "bioconda"]
 name = "Training-Tech-shorts"
