@@ -193,7 +193,7 @@ workflow {
 
 process ANALYZE {
     input:
-    path sample_file
+    path sample_file // <1>
     val threshold
 
     script:
@@ -203,7 +203,7 @@ process ANALYZE {
 }
 ```
 
-Input files are "staged" in the work directory using symlinks.
+1. Input files are "staged" in the work directory using symlinks.
 
 ### Outputs
 
@@ -237,7 +237,7 @@ Output files from processes live in their work directories. In order to make the
 in a user-friendly way, they should be published. Since Nextflow version 25, the method of
 publishing files has changed. Previously, the outputs were published using the `publishDir` process
 directive, either defined in the process script or the nextflow config. Now, output files
-are published by using the process channels they're emitted in.
+are published by using the channels they're emitted in.
 
 ```groovy
 workflow {
@@ -291,7 +291,7 @@ nextflow run main.nf --sequences '/new/path/to/sequences/*.fastx' --reference '/
 
 ### Resuming
 
-By default, Nextflow starts from the beginning of a workflow. In order to contine from where you last left off, you
+By default, Nextflow starts from the beginning of a workflow. In order to continue from where you last left off, you
 can either use `-resume` with `nextflow run` or enable it in the config.
 
 ```groovy
@@ -393,7 +393,7 @@ which test if conditions on data are true. The equivalent of `for` or `while`
 loops is simply putting data into channels. When data is put into
 a channel, it's passed as input to a process to spawn a task.
 If a process in the DAG doesn't receive input, it simply doesn't
-spawn a task instance.
+spawn a task.
 
 ## Useful resources
 
