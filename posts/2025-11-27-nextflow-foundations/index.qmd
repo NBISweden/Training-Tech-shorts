@@ -373,6 +373,28 @@ tools on hosted on Conda and Pypi.
 
 :::
 
+## Programming in Nextflow
+
+In many languages we're used to using logic control like
+`if`, `for`, and `while`. Nextflow is however designed on
+a streaming paradigm, and the use of logic control is different.
+
+It's best to think of `nextflow run` as a two step process, compile-time
+and run-time. In the compile-time step, `if` statements are
+used to determine which processes get included into the workflow
+to execute. `for` and `while` loops are never used. There is no
+data flow at this point. Just the building of the Directed Acyclic
+Graph (DAG), the internal representation of the workflow. Once
+the DAG is generated, the run-time step happens, and the data
+flows through the graph. Channel operators are the logic control
+structures now. Since `if` statements cannot test conditions on the data
+in channels (or channels themselves), one should use operators like `filter` or `branch`
+which test if conditions on data are true. The equivalent of `for` or `while`
+loops is simply putting data into channels. When data is put into
+a channel, it's passed as input to a process to spawn a task.
+If a process in the DAG doesn't receive input, it simply doesn't
+spawn a task instance.
+
 ## Useful resources
 
 - Nextflow training material: https://training.nextflow.io/latest/hello_nextflow/01_hello_world/
