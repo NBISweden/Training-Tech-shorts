@@ -2,7 +2,7 @@
 title: "Nextflow foundations"
 author:
   - "Mahesh"
-date: "2025-11-17"
+date: "2025-11-27"
 date-modified: last-modified
 categories: [ "Nextflow" ]
 ---
