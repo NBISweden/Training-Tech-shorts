@@ -373,3 +373,9 @@ tools on hosted on Conda and Pypi.
 
 :::
 
+## Useful resources
+
+- Nextflow training material: https://training.nextflow.io/latest/hello_nextflow/01_hello_world/
+- Nextflow documentation: https://www.nextflow.io/docs/latest/index.html
+- Nextflow Slack help: https://www.nextflow.io/slack-invite.html
+- Nextflow Community forum: https://community.seqera.io/
