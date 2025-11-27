@@ -1,0 +1,375 @@
+---
+title: "Nextflow foundations"
+author:
+  - "Mahesh"
+date: "2025-11-17"
+date-modified: last-modified
+categories: [ "Nextflow" ]
+---
+
+Nextflow is a workflow manager written in Groovy.
+In this post, we'll cover the fundamental concepts you need to get started.
+
+## Core Concepts
+
+### 1. **Processes**
+
+A process is the basic building block of a Nextflow workflow. It represents a single computational task.
+
+```groovy
+process TASK {
+    // directives
+    cpus 1
+
+    input:
+    val thing // <1>
+
+    script:
+    """ // <2>
+    echo "${thing}" // <3>
+    """
+
+    output:
+    stdout // <4>
+}
+```
+
+1. Each line under `input:` corresponds to a channel, and describes the input structure.
+2. The default script language is Bash.
+3. Variables are used with `${var_name}` notation inside scripts.
+4. Each line under `output:` corresponds to an output channel, and describes the captured content structure.
+
+The full description, including all available directives, is on [Nextflow Documentation - Process Reference](https://www.nextflow.io/docs/latest/reference/process.html).
+
+### 2. **Channels**
+
+Channels are the "pipes" that connect processes together, allowing data to flow between them. They can contain
+single values or multiple items.
+
+```groovy
+workflow {
+    main:
+    // Create a channel with multiple values
+    ch_numbers = channel.of( 1, 2, 3, 4, 5 )
+
+    // Use the channel in a process
+    ADD_ONE( ch_numbers )
+}
+```
+
+`channel.of` is a channel factory and they are used to populate channels with data. See [Nextflow Documentation - Channel factories](https://www.nextflow.io/docs/latest/reference/channel.html) for a full list of channel factories.
+
+::: {.callout-note}
+There are two types of channels. Queue type channels, and value type channels. Queue type channels
+"consume" the data (first in, first out). Value type channels can be repeatedly used.
+
+For example:
+```groovy
+process ALIGN_SEQUENCES {
+    input:
+    tuple val(sample_name), path(reads)
+    path reference
+
+    ...
+}
+
+workflow {
+    ch_reads = channel.fromPath('/path/to/*.reads')
+        .map { file -> tuple(file.baseName, file) }
+    ch_reference = channel.fromPath('/path/to/reference')
+
+    ALIGN_SEQUENCES (
+        ch_reads, // queue type channel
+        ch_reference.collect() // queue type channel converted to a value channel using the `collect` channel operator
+    )
+}
+```
+
+If `ch_reference` was not converted, `ALIGN_SEQUENCES` would only run for the first set of reads, because there is only
+one reference file to pair with the first set of reads files.
+
+The [Nextflow Documentation - Operator](https://www.nextflow.io/docs/latest/reference/operator.html) shows the type
+of channel a channel operator (see below) returns. `Returns: channel` means it produces a queue type channel, whereas
+`Returns: dataflow value` means it produces a value type channel.
+:::
+
+### 3. **Workflows**
+
+A workflow orchestrates processes and channels to define the logic of your pipeline.
+
+```groovy
+workflow {
+    main:
+    // Define your pipeline logic here
+    input_ch = Channel.fromPath('file1.txt', 'file2.txt')
+    COUNT_LINES( input_ch )
+}
+```
+
+### 4. **Channel Operators**
+
+Operators transform and manipulate channels, through the use of Closures ( anonymous functions ).
+A Closure is fenced by `{ }`, takes an input variable, and maps it `->` to an expression, e.g. `{ num -> num * 2 }`.
+Common channel operators include:
+
+- **`map`**: Transform each element
+  ```groovy
+  channel.of(1, 2, 3).map { num -> num * 2 }.view() // Output: 2, 4, 6
+  ```
+
+- **`filter`**: Select elements matching a condition
+  ```groovy
+  channel.of(1, 2, 3, 4).filter { num -> num > 2 }.view() // Output: 3, 4
+  ```
+
+- **`collect`**: Gather all elements into a single list
+  ```groovy
+  channel.of(1, 2, 3).collect().view() // Output: [1, 2, 3]
+  ```
+
+- **`view`**: View the contents of the channel
+
+See the full list of operators at [Nextflow Documentation - Operators](https://www.nextflow.io/docs/latest/reference/operator.html).
+
+## A Simple Example
+
+Here's a complete, minimal workflow:
+
+```groovy
+workflow {
+    ch_in = channel.of( 1, 'A', true, [ 2, "B" ] ) // <1>
+    TASK( ch_in )
+    TASK.out.view()
+}
+
+process TASK {
+    input:
+    val thing
+
+    script:
+    """
+    echo "${thing}"
+    """
+
+    output:
+    stdout
+}
+```
+
+1. Channel data does not have to be the same type (Object class). Here is a channel with a number, string, boolean, and a list.
+
+## Key Files and Folders
+
+- **`main.nf`**: Your main workflow script.
+- **`nextflow.config`**: Configuration file for default parameters, resource settings, and execution profiles.
+- **`work`**: Each instance of a process has it's own folder in the work directory. It's used for caching, and troubleshooting.
+- **`.nextflow/`**: Hidden directory containing Nextflow metadata, such as run names, work directory paths, and exit statuses.
+
+## Running a Workflow
+
+```bash
+# Run a basic workflow
+nextflow run main.nf
+```
+
+## Input/Output
+
+### Inputs
+
+Processes receive data through input channels, typically created by channel factories,
+or previous processes:
+
+```groovy
+workflow {
+    main:
+    ch_samples = channel.fromPath('/path/to/*.samples')
+    ch_threshold = channel.value(500)
+
+    ANALYZE(
+        ch_samples,
+        ch_threshold
+    )
+}
+
+process ANALYZE {
+    input:
+    path sample_file
+    val threshold
+
+    script:
+    """
+    analyze_tool ${sample_file} --threshold ${threshold}
+    """
+}
+```
+
+Input files are "staged" in the work directory using symlinks.
+
+### Outputs
+
+Processes emit results that can feed into other processes:
+
+```groovy
+process GENERATE_DATA {
+    script:
+    """
+    echo "Generated data" > output.txt
+    """
+
+    output:
+    path "output.txt", emit: txt
+}
+```
+
+They feed into other processes in the workflow block by using the `.out` keyword.
+
+```groovy
+workflow {
+    main:
+    GENERATE_DATA()
+    CONSUME_DATA( GENERATE_DATA.out.txt )
+}
+```
+
+### Publishing outputs
+
+Output files from processes live in their work directories. In order to make them accessible
+in a user-friendly way, they should be published. Since Nextflow version 25, the method of
+publishing files has changed. Previously, the outputs were published using the `publishDir` process
+directive, either defined in the process script or the nextflow config. Now, output files
+are published by using the process channels they're emitted in.
+
+```groovy
+workflow {
+    main:
+    GENERATE_DATA()
+    CONSUME_DATA( GENERATE_DATA.out.txt )
+
+    publish:
+    my_data = GENERATE_DATA.out.txt
+}
+
+output {
+    my_data {
+        path "my_data"
+    }
+}
+```
+
+which would publish the txt files to the folder `results/my_data`. See
+[Nextflow Documentation - Workflow outputs](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs)
+for more information on how to publish outputs.
+
+## Configuration
+
+Nextflow configuration is stored in the file `nextflow.config`. The full range of scopes
+are documented in [Nextflow Documentation - Configuration Options](https://www.nextflow.io/docs/latest/reference/config.html).
+
+### Default parameters
+
+Nextflow scripts can have parameters. These are defined in the `params` scope of config.
+
+```groovy
+params {
+    sequences = '/path/to/data/sequences'
+    reference = '/path/to/reference'
+}
+```
+
+This could also be written as:
+
+```groovy
+params.sequences = '/path/to/data/sequences'
+params.reference = '/path/to/reference'
+```
+
+The default values can be overridden by using a double dash followed by the parameter name when running a workflow.
+
+```bash
+nextflow run main.nf --sequences '/new/path/to/sequences/*.fastx' --reference '/path/to/alternate/reference'
+```
+
+### Resuming
+
+By default, Nextflow starts from the beginning of a workflow. In order to contine from where you last left off, you
+can either use `-resume` with `nextflow run` or enable it in the config.
+
+```groovy
+resume = true
+```
+
+### Executor
+
+By default, Nextflow runs locally using the `local` executor. You can reconfigure it to use
+a job submission system like SLURM using:
+
+```groovy
+executor {
+    name = 'slurm'
+}
+```
+
+## Using software
+
+If no package manager is used with Nextflow, any command line tool you call is expected to be available from
+your `PATH` environment variable.
+
+### Conda
+
+Nextflow supports conda as a package manager, where you can define conda environments per process
+using the `conda` process directive. This needs to be enabled in the config to activate the environments.
+Simply having the `conda` process directive is not enough to activate an environment.
+
+```groovy
+process SAMTOOLS_VERSION {
+    // directives
+    conda "bioconda::samtools=1.22.1"
+
+    script:
+    """
+    samtools --version
+    """
+}
+```
+
+`nextflow.config`:
+
+```groovy
+conda {
+    enabled = true
+}
+```
+
+### Containers
+
+Nextflow supports multiple container platforms, such as Docker, and Apptainer. Images are
+defined using the `container` process directive, and then the appropriate config scope
+enables the use of that image with the container platform.
+
+```groovy
+process SAMTOOLS_VERSION {
+    // directives
+    container "community.wave.seqera.io/library/samtools:1.22.1--eccb42ff8fb55509"
+
+    script:
+    """
+    samtools --version
+    """
+}
+```
+
+`nextflow.config`:
+
+```groovy
+docker {
+    enabled = true
+}
+```
+
+::: {.callout-tip}
+
+[Seqera Containers](https://seqera.io/containers/) is a useful place to quickly build container images for
+tools on hosted on Conda and Pypi.
+
+:::
+
