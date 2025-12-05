@@ -150,7 +150,7 @@ For nf-core workflows use an existing nf-core config profile:
 
 :::
 
-### Small vs Large processes
+### Small vs large processes
 
 When workflows submit hundreds or thousands of small, fast jobs, the scheduler overhead
 becomes the bottleneck. Each job submission has ~5-15 seconds of overhead (queueing, starting, cleanup).
@@ -244,7 +244,7 @@ nextflow log \
 
 :::
 
-## Nextflow Developer
+## Nextflow developer
 
 ### Use a test data set for development
 
@@ -310,7 +310,7 @@ at that path, otherwise the process will run and fetch it.
 `params.db_cachedir` provides a means for independent workflow
 runs to use the same database.
 
-### Logging Best Practices
+### Logging best practices
 
 - Write messages to standard error
 - Capture error messages from tools in logs through file redirection.
