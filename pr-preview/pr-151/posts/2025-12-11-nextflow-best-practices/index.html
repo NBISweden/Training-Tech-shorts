@@ -403,7 +403,7 @@ Tip
 </div>
 </section>
 <section id="small-vs-large-processes" class="level3">
-<h3 class="anchored" data-anchor-id="small-vs-large-processes">Small vs Large processes</h3>
+<h3 class="anchored" data-anchor-id="small-vs-large-processes">Small vs large processes</h3>
 <p>When workflows submit hundreds or thousands of small, fast jobs, the scheduler overhead becomes the bottleneck. Each job submission has ~5-15 seconds of overhead (queueing, starting, cleanup). Instead of submitting each task as a separate job, book an entire node and let Nextflow manage task execution locally as subprocesses from an <code>sbatch</code> script.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -529,7 +529,7 @@ Tip
 </section>
 </section>
 <section id="nextflow-developer" class="level2">
-<h2 class="anchored" data-anchor-id="nextflow-developer">Nextflow Developer</h2>
+<h2 class="anchored" data-anchor-id="nextflow-developer">Nextflow developer</h2>
 <section id="use-a-test-data-set-for-development" class="level3">
 <h3 class="anchored" data-anchor-id="use-a-test-data-set-for-development">Use a test data set for development</h3>
 <p>When developing a pipeline, use a test data set that you’ve heavily subsampled. This allows you to iterate quickly when developing a pipeline. It’s also beneficial for use in CI tests, and when users want to quickly try out your workflow.</p>
@@ -588,7 +588,7 @@ Tip
 </dl>
 </section>
 <section id="logging-best-practices" class="level3">
-<h3 class="anchored" data-anchor-id="logging-best-practices">Logging Best Practices</h3>
+<h3 class="anchored" data-anchor-id="logging-best-practices">Logging best practices</h3>
 <ul>
 <li>Write messages to standard error</li>
 <li>Capture error messages from tools in logs through file redirection.</li>
