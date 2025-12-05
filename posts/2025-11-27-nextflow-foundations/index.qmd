@@ -7,10 +7,10 @@ date-modified: last-modified
 categories: [ "Nextflow" ]
 ---
 
-Nextflow is a workflow manager written in Groovy.
+[Nextflow](https://www.nextflow.io/) is a workflow manager written in [Groovy](https://groovy-lang.org/).
 In this post, we'll cover the fundamental concepts you need to get started.
 
-## Core Concepts
+## Core concepts
 
 ### 1. **Processes**
 
@@ -106,9 +106,9 @@ workflow {
 }
 ```
 
-### 4. **Channel Operators**
+### 4. **Channel operators**
 
-Operators transform and manipulate channels, through the use of Closures ( anonymous functions ).
+Operators transform and manipulate channels, through the use of Closures (anonymous functions).
 A Closure is fenced by `{ }`, takes an input variable, and maps it `->` to an expression, e.g. `{ num -> num * 2 }`.
 Common channel operators include:
 
@@ -131,7 +131,7 @@ Common channel operators include:
 
 See the full list of operators at [Nextflow Documentation - Operators](https://www.nextflow.io/docs/latest/reference/operator.html).
 
-## A Simple Example
+## A simple example
 
 Here's a complete, minimal workflow:
 
@@ -158,21 +158,50 @@ process TASK {
 
 1. Channel data does not have to be the same type (Object class). Here is a channel with a number, string, boolean, and a list.
 
-## Key Files and Folders
+## Key files and folders
 
 - **`main.nf`**: Your main workflow script.
 - **`nextflow.config`**: Configuration file for default parameters, resource settings, and execution profiles.
 - **`work`**: Each instance of a process has it's own folder in the work directory. It's used for caching, and troubleshooting.
 - **`.nextflow/`**: Hidden directory containing Nextflow metadata, such as run names, work directory paths, and exit statuses.
 
-## Running a Workflow
+```{.console}
+.
+├── .nextflow
+│   ├── cache
+│   │   └── 5db3b1a2-8b3a-4289-805f-983f2c645401
+│   │       ├── db
+│   │       │   ├── 000003.log
+│   │       │   ├── CURRENT
+│   │       │   ├── LOCK
+│   │       │   └── MANIFEST-000002
+│   │       └── index.loving_lovelace
+│   ├── history
+│   └── plr
+├── .nextflow.log
+├── README.md
+├── main.nf
+├── nextflow.config
+└── work
+    └── ec
+        └── eb1c4f518284c5c0e591d6388360ae
+            ├── .command.begin
+            ├── .command.err
+            ├── .command.log
+            ├── .command.out
+            ├── .command.run
+            ├── .command.sh
+            └── .exitcode
+```
+
+## Running a workflow
 
 ```bash
 # Run a basic workflow
 nextflow run main.nf
 ```
 
-## Input/Output
+## Input/output
 
 ### Inputs
 
@@ -397,7 +426,7 @@ spawn a task.
 
 ## Useful resources
 
-- Nextflow training material: https://training.nextflow.io/latest/hello_nextflow/01_hello_world/
-- Nextflow documentation: https://www.nextflow.io/docs/latest/index.html
-- Nextflow Slack help: https://www.nextflow.io/slack-invite.html
-- Nextflow Community forum: https://community.seqera.io/
+- Nextflow training material: <https://training.nextflow.io/latest/hello_nextflow/01_hello_world/>
+- Nextflow documentation: <https://www.nextflow.io/docs/latest/index.html>
+- Nextflow Slack help: <https://www.nextflow.io/slack-invite.html>
+- Nextflow Community forum: <https://community.seqera.io/>
