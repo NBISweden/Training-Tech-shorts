@@ -164,6 +164,8 @@ process TASK {
 - **`nextflow.config`**: Configuration file for default parameters, resource settings, and execution profiles.
 - **`work`**: Each instance of a process has it's own folder in the work directory. It's used for caching, and troubleshooting.
 - **`.nextflow/`**: Hidden directory containing Nextflow metadata, such as run names, work directory paths, and exit statuses.
+- **`.nextflow.log`**: A hidden log file which records what was happening as the workflow was run. It can be an essential file for
+troubleshooting.
 
 ```{.console}
 .
