@@ -125,6 +125,7 @@ Use node local disk space on HPC's when available to improve speed, alleviate ne
 usage, and leave intermediate files out of the work directory.
 
 ```{.groovy filename="nextflow.config"}
+// *Spacer comment to avoid copy button overlap with code annotation*
 process.scratch  = '$SNIC_TMP' // <1>
 process.executor = 'slurm' // <2>
 
@@ -135,7 +136,8 @@ executor {
 }
 ```
 
-1. Use `process.scratch` to run on node local storage.
+1. Use `process.scratch` to specify a path to the node's local storage. The `SNIC_TMP` env is described
+[here](https://docs.uppmax.uu.se/cluster_guides/disk_storage_guide/#local-scratch)
 2. Submit to SLURM.
 3. Submit jobs using your project account ID (`-A naiss...`).
 
@@ -257,7 +259,7 @@ output generally doesn't need to be coherent or make sense.
 
 Files need to be "staged" in a work directory (for `script:` processes). Staging means
 files are part of the `input:` declaration for checkpointing, and are symlinked into the
-working directory. Generally, `path` type `input:`s should be `Path` class objects. `Path` class
+working directory. Generally, `path` type `input:` should be `Path` class objects. `Path` class
 objects are created by processes when emitting data of type `path`, from factory channels
 like `channel.fromPath` and `channel.fromFilePairs`, and from Nextflow functions, such as
 `file`, or `files`. When they're passed as `String` class objects, it can lead to portability

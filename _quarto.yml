@@ -31,3 +31,5 @@ format:
   html:
     theme:
       - minty
+
+code-annotations: hover
