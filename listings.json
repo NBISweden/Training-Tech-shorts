@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025-12-11-nextflow-best-practices/index.html",
       "/posts/2025-11-27-nextflow-foundations/index.html",
       "/posts/2025-11-13-pixi-tools-offline/index.html",
       "/posts/2025-10-23-introduction-to-docker/index.html",
