@@ -1,0 +1,452 @@
+---
+title: "Introduction to Github Actions"
+author:
+  - "Richèl Bilderbeek"
+date: "2026-01-22"
+date-modified: last-modified
+categories: [ "GitHub Actions", "Continuous integration" ]
+---
+
+## Goal
+
+Show how to use GitHub Actions to raise the quality of your online
+repository.
+
+## Problem
+
+You have a GitHub repository. You want it to have a high quality.
+You want to **do** instead of **talk**. You want to show your users
+that you care about the quality of your project.
+
+Every commit, however, you wonder:
+
+- Are all the links pointing to a valid website?
+- Is my new content spellchecked?
+- Is my Markdown style following the recommended style?
+
+## Solution
+
+- Find a GitHub Actions script
+- Put it in your `.github/workflows` folder
+- Commit
+- Watch it in action at the 'Actions' tab
+
+## Example 1: broken link checker
+
+```{.bash filename="check_spelling.yaml"}
+Content here
+Content here # <1>
+Content here
+Content here # <2>
+```
+
+1. This is the second line
+2. This is the fourth line
+
+## Example 2: spellchecker
+
+```{.bash filename="check_links.yaml"}
+Content here
+```
+
+## Example 3: Markdown style checker
+
+```{.bash filename="check_markdown_style.yaml"}
+Content here
+```
+
+## Example 4: Whatever you want!
+
+```{.bash filename="whatever_you_want.yaml"}
+Content here
+```
+
+## Example 5: using a schedule
+
+## Finding GHA scripts
+
+- Link to GHA Marketplace
+
+
+:::{.callout-tip}
+`nf-core pipelines launch` can write a params.json for you.
+:::
+
+### Use a launch script to run Nextflow
+
+It's common practice to run tools directly in the command-line. It can be quite helpful to batch
+commands in a script, which include setting up the environment, and cleaning up after runs to save
+disk space.
+
+```{.bash filename="run_nextflow.sh"}
+#! /usr/bin/env bash
+
+# Exit script when you encounter an error or undefined variable
+set -euo pipefail
+
+# Define some environment Variables
+PROJECT_STORAGE="/proj/naiss-..."
+
+# Activate shared Nextflow environment unless in a Pixi env
+if [ -z "${PIXI_ENVIRONMENT_NAME:-}" ]; then
+    set +u
+    eval "$(conda shell.bash hook)"
+    conda activate "${PROJECT_STORAGE}/conda/nextflow-env"
+    set -u
+fi
+
+# Store apptainer images in shared location
+NXF_APPTAINER_CACHEDIR="${PROJECT_STORAGE}/nobackup/nxf-apptainer-image-cache" # <1>
+
+# Run nextflow
+nextflow run \
+    -ansi-log false \ # <2>
+    -profile uppmax \
+    -params-file params.yml \
+    -r 3.22.0 \
+    nf-core/rnaseq
+
+# Clean up work directory
+nextflow clean -f -before last && find work -type d -empty -delete
+
+# Remind myself to commit files
+git status
+```
+
+1. Using `NXF_APPTAINER_CACHEDIR` is the equivalent of using `apptainer.cacheDir` in the `nextflow.config`.
+2. `-ansi-log false` ensures a readable log in the slurm output.
+
+### Run Nextflow with a fixed revision
+
+Use the `-r` flag to provide a revision tag (either a version, a branch, or commitID).
+
+```{.bash}
+nextflow run -r 3.22.0 nf-core/rnaseq ...
+```
+
+### Override resources using a custom config
+
+Nextflow is able to layer configuration files. By placing a `nextflow.config` in your launch
+directory, it will automatically load configuration, and combine it with the pipeline's
+existing configuration. It can be used to override existing configuration, such as tool resources
+like `cpus`, `memory`, or `time`.
+
+```{.groovy filename="nextflow.config"}
+process {
+    withName: 'WORKFLOW:SUBWORKFLOW:PROCESS_NAME' { // <1>
+        cpus      = 6
+        memory    = 150.GB
+        time      = 1.h
+        container = 'path/to/new/container/image'
+    }
+    resourceLimits = [ time : 3.h ] // <2>
+}
+```
+
+1. Copy the full process name from the error message.
+2. Increase scheduling priority by limiting the maximum allocatable
+time using `process.resourceLimits`.
+
+:::{.callout-tip}
+
+Using the process full name `'WORKFLOW:SUBWORKFLOW:PROCESS_NAME'` makes sure it has the highest
+priority, whereas using the process simple name `'PROCESS_NAME'` may mean your config might not
+be applied due to configuration priority.
+
+:::
+
+### Use local disks for computation when available
+
+Use node local disk space on HPC's when available to improve speed, alleviate network bandwidth
+usage, and leave intermediate files out of the work directory.
+
+```{.groovy filename="nextflow.config"}
+// *Spacer comment to avoid copy button overlap with code annotation*
+process.scratch  = '$SNIC_TMP' // <1>
+process.executor = 'slurm' // <2>
+
+executor {
+    $slurm {
+        account = 'naiss...' // <3>
+    }
+}
+```
+
+1. Use `process.scratch` to specify a path to the node's local storage. The `SNIC_TMP` env is described
+[here](https://docs.uppmax.uu.se/cluster_guides/disk_storage_guide/#local-scratch)
+2. Submit to SLURM.
+3. Submit jobs using your project account ID (`-A naiss...`).
+
+::: {.callout-tip}
+
+For nf-core workflows use an existing nf-core config profile:
+
+- Uppmax (Pelle / Bianca): https://nf-co.re/configs/uppmax/
+- PDC-KTH (Dardel): https://nf-co.re/configs/pdc_kth/
+
+:::
+
+### Small vs large processes
+
+When workflows submit hundreds or thousands of small, fast jobs, the scheduler overhead
+becomes the bottleneck. Each job submission has ~5-15 seconds of overhead (queueing, starting, cleanup).
+Instead of submitting each task as a separate job, book an entire node and let Nextflow
+manage task execution locally as subprocesses from an `sbatch` script.
+
+```{.bash filename="run_nextflow.sh"}
+#! /usr/bin/env bash
+
+#SBATCH -A naiss2026-... # <1>
+#SBATCH -N 1
+#SBATCH -n 50
+#SBATCH --mem 300GB
+#SBATCH -t 2-00:00:00
+#SBATCH -o slurm-%j-nextflow.out
+
+# Exit script when you encounter an error or undefined variable
+set -euo pipefail
+
+# Define some environment Variables
+PROJECT_STORAGE="/proj/naiss-..."
+
+# Activate shared Nextflow environment unless in a Pixi env
+if [ -z "${PIXI_ENVIRONMENT_NAME:-}" ]; then
+    set +u
+    eval "$(conda shell.bash hook)"
+    conda activate "${PROJECT_STORAGE}/conda/nextflow-env"
+    set -u
+fi
+
+# Store apptainer images in shared location
+NXF_APPTAINER_CACHEDIR="${PROJECT_STORAGE}/nobackup/nxf-apptainer-image-cache"
+
+# Run nextflow
+nextflow run \
+    -profile singularity \ # <2>
+    -params-file params.yml \
+    -r 3.22.0 \
+    nf-core/rnaseq
+
+# Clean up work directory
+nextflow clean -f -before last && find work -type d -empty -delete
+
+# Remind myself to commit files
+git status
+```
+
+1. Include SBATCH headers.
+2. Use a local profile if one exists.
+
+### Debug inside the work directory
+
+The task work directory should act as an isolated folder. When a process fails, it won't be used
+further so you're free to explore.
+
+```{.bash}
+cd work/5b/5cefbae05c34d6bdfcf6806ed39c1d # <1>
+ls -la # <2>
+less .command.log # <3>
+vim .command.sh # <4>
+bash .command.run # <5>
+```
+
+1. Change to the task work directory.
+2. List the files in the directory, including hidden files.
+3. View the process log.
+4. Edit the shell file to try and fix the error.
+5. Run the `.command.sh` in the process environment.
+
+Repeat until you've figured out the issue, and then go back and fix the workflow itself.
+
+### Finding the process work directory
+
+Use `nextflow log` to find the work directory for a process.
+
+For example:
+```{.bash}
+nextflow log \
+    -f process,workdir,tag \ # <1>
+    -F "process.endsWith('QC')" \ # <2>
+    last # <3>
+```
+
+1. Use `-f` to list the fields you want to see.
+2. Use `-F` to limit output with Groovy code.
+3. Use the nextflow run name or the keyword `last` to say which run to examine.
+
+:::{.callout-tip}
+
+`nextflow log -l` lists the available displayable fields.
+
+:::
+
+## Nextflow developer
+
+### Use a test data set for development
+
+When developing a pipeline, use a test data set that you've heavily subsampled.
+This allows you to iterate quickly when developing a pipeline. It's also
+beneficial for use in CI tests, and when users want to quickly try out your workflow.
+
+A development test data set only needs to run the workflow to the end. The final
+output generally doesn't need to be coherent or make sense.
+
+### Use the correct object input
+
+Files need to be "staged" in a work directory (for `script:` processes). Staging means
+files are part of the `input:` declaration for checkpointing, and are symlinked into the
+working directory. Generally, `path` type `input:` should be `Path` class objects. `Path` class
+objects are created by processes when emitting data of type `path`, from factory channels
+like `channel.fromPath` and `channel.fromFilePairs`, and from Nextflow functions, such as
+`file`, or `files`. When they're passed as `String` class objects, it can lead to portability
+and reproducibility issues.
+
+```{.groovy filename="main.nf"}
+workflow {
+    ALIGN (
+        channel.fromPath("/path/to/*.dat", checkIfExists: true),
+        file("/path/to/reference", checkIfExists: true)
+    )
+}
+```
+
+### Using and fetching databases in processes
+
+Use a separate process to fetch a flat-file database needed by your workflow. Then pass the output
+of that process to the process that needs the database. This means a database need only be fetched
+once, rather than in each process. When combined with the process directive `storeDir`, it can
+be stored in a central cache for reuse, and as long as it's present, Nextflow will skip execution
+of that fetch-database process. By using a parameter to define where that `storeDir` should be
+means you can reuse the database across independent workflow runs.
+
+```{.groovy filename="main.nf"}
+workflow {
+    main:
+    FETCH_DB() // <1>
+    QUERY_AGAINST_DB(
+        channel.fromPath('/path/to/*.data', checkIfExists: true),
+        FETCH_DB().out.db
+    )
+}
+
+process FETCH_DB {
+    storeDir "${params.db_cachedir}/my_db" // <2>
+
+    script:
+    """
+    echo "Getting DB"
+    ...
+    """
+}
+```
+
+1. `FETCH_DB` does not need to be gated behind an `if` statement.
+2. The `storeDir` directive checks if the database is stored
+at that path, otherwise the process will run and fetch it.
+`params.db_cachedir` provides a means for independent workflow
+runs to use the same database.
+
+### Logging best practices
+
+- Write messages to standard error
+- Capture error messages from tools in logs through file redirection.
+- `tee` captures output from stdin, and writes to both stdout and a file.
+- When running on a `scratch` disk and an error occurs, the output will
+still be in `.command.err`/`.command.log`, and not lost to a relinquished
+allocation.
+
+```groovy
+process ANALYZE {
+    script:
+    """
+    echo "[TASK] Starting analysis for ${meta.id}" >&2
+    echo "[TASK] Using ${task.cpus} CPUs and ${task.memory}" >&2
+
+    analyze.sh ${input} > output.txt 2> >(tee -a analysis.log >&2)
+
+    echo "[TASK] Analysis complete for ${meta.id}" >&2
+    """
+}
+```
+
+### Formatting and linting
+
+- Formatting: Restructure code appearance.
+- Linting: Analyse code to detect errors.
+
+Nextflow recently released a linter and formatter.
+
+```{.bash}
+nextflow lint [--format] -exclude .pixi -exclude results .
+```
+
+This is also included in the Nextflow extension for various IDE's.
+
+### Batch short tasks in processes
+
+As previously mentioned, many short tasks increase scheduling overhead.
+
+If you have short tasks, try to batch them in with existing processes.
+
+```{.groovy filename="main.nf"}
+process BAM_STATS_SAMTOOLS {
+
+    input:
+    tuple val(meta), path(bam), path(index)
+
+    script:
+    """
+    samtools stats --threads $task.cpus $bam > ${bam}.stats
+    samtools flagstat --threads $task.cpus $bam > ${bam}.flagstat
+    samtools idxstats $bam > ${bam}.idxstats
+    """
+
+    output:
+    tuple val(meta), path "*.stats"   , emit: stats
+    tuple val(meta), path "*.flagstat", emit: flagstat
+    tuple val(meta), path "*.idxstats", emit: idxstats
+    tuple val(task.process), val('samtools'), eval("samtools --version |& sed 's/^.*samtools //; s/Using.*\$//'"), emit: versions, topic: versions
+}
+```
+
+Alternatively, implement the processes such that they process files in batches.
+
+```{.groovy filename="main.nf"}
+process BATCH_GUNZIP {
+
+    input:
+    path archives // <1>
+
+    script: // <2>
+    """
+    printf "%s\\n" ${archives} | \\
+        xargs -P ${task.cpus} -I {} \\
+        bash -c 'gzip -cdf {} > \$( basename {} .gz )'
+    """
+}
+```
+
+1. Input lists of files using `collect()`, `buffer()`, or similar channel operators.
+Alternatively file paths can be collected together using `collectFile()` and
+staged as an input file (file of filenames).
+2. Commands could be run serially with `for` or `while`, or could be parallelized
+using `xargs` or `parallel`.
+
+## Summary
+
+- Users:
+    - Use a parameter file.
+    - Use a launch script.
+    - Run with a fixed revision.
+    - Override configuration with a custom config.
+    - Use scratch disks.
+    - Decide to schedule or run locally based on task timing.
+    - Debug processes using the work directory.
+    - Use `nextflow log` and `nextflow clean`.
+- Developers:
+    - Include a test data set.
+    - Be mindful of object types.
+    - Use `storeDir` for databases or other stable files.
+    - Log stdout and stderr with `tee` to a file and their respective output streams.
+    - Format and lint your code.
+    - Batch tasks appropriately for performance.
