@@ -360,28 +360,27 @@ Tip
 <div class="code-with-filename-file">
 <pre><strong>nextflow.config</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7" data-filename="nextflow.config"><pre class="sourceCode groovy code-annotation-code code-with-copy code-annotated"><code class="sourceCode groovy"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// *Spacer comment to avoid copy button overlap with code annotation*</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>scratch  <span class="op">=</span> <span class="st">'$SNIC_TMP'</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>executor <span class="op">=</span> <span class="st">'slurm'</span></span>
-<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5" aria-hidden="true" tabindex="-1"></a>executor <span class="op">{</span></span>
-<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6" aria-hidden="true" tabindex="-1"></a>    $slurm <span class="op">{</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-7-7" class="code-annotation-target"><a href="#annotated-cell-7-7" aria-hidden="true" tabindex="-1"></a>        account <span class="op">=</span> <span class="st">'naiss...'</span></span>
-<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="annotated-cell-7-9"><a href="#annotated-cell-7-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7" data-filename="nextflow.config"><pre class="sourceCode groovy code-annotation-code code-with-copy code-annotated"><code class="sourceCode groovy"><a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>scratch  <span class="op">=</span> <span class="st">'$SNIC_TMP'</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>executor <span class="op">=</span> <span class="st">'slurm'</span></span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a>executor <span class="op">{</span></span>
+<span id="annotated-cell-7-5"><a href="#annotated-cell-7-5" aria-hidden="true" tabindex="-1"></a>    $slurm <span class="op">{</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-7-6" class="code-annotation-target"><a href="#annotated-cell-7-6" aria-hidden="true" tabindex="-1"></a>        account <span class="op">=</span> <span class="st">'naiss...'</span></span>
+<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1">Use <code>process.scratch</code> to specify a path to the node’s local storage. The <code>SNIC_TMP</code> env is described <a href="https://docs.uppmax.uu.se/cluster_guides/disk_storage_guide/#local-scratch">here</a></span>
+<span data-code-cell="annotated-cell-7" data-code-lines="1" data-code-annotation="1">Use <code>process.scratch</code> to specify a path to the node’s local storage. The <code>SNIC_TMP</code> env is described <a href="https://docs.uppmax.uu.se/cluster_guides/disk_storage_guide/#local-scratch">here</a></span>
 </dd>
 <dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="2">Submit to SLURM.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="2">Submit to SLURM.</span>
 </dd>
 <dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-7" data-code-lines="7" data-code-annotation="3">Submit jobs using your project account ID (<code>-A naiss...</code>).</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="6" data-code-annotation="3">Submit jobs using your project account ID (<code>-A naiss...</code>).</span>
 </dd>
 </dl>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -396,8 +395,8 @@ Tip
 <div class="callout-body-container callout-body">
 <p>For nf-core workflows use an existing nf-core config profile:</p>
 <ul>
-<li>Uppmax (Pelle / Bianca): https://nf-co.re/configs/uppmax/</li>
-<li>PDC-KTH (Dardel): https://nf-co.re/configs/pdc_kth/</li>
+<li>Uppmax (Pelle / Bianca): <a href="https://nf-co.re/configs/uppmax/" class="uri">https://nf-co.re/configs/uppmax/</a></li>
+<li>PDC-KTH (Dardel): <a href="https://nf-co.re/configs/pdc_kth/" class="uri">https://nf-co.re/configs/pdc_kth/</a></li>
 </ul>
 </div>
 </div>
