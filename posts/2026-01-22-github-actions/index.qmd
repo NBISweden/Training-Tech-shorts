@@ -61,16 +61,16 @@ You do not think it is fun to check these submissions by hand.
 - Commit
 - Watch it in action at the 'Actions' tab
 
-## 4.1. A general GitHub actions script
+## 4.1. A general GitHub Actions script
 
 ```{.bash filename="check_something.yaml"}
-on: <1>
-  push: <2>
+on: # <1>
+  push: # <2>
 
-jobs: <3>
-  check_something: <4>
-    runs-on: ubuntu-latest <5>
-    steps: <6>
+jobs: # <3>
+  check_something: # <4>
+    runs-on: ubuntu-latest # <5>
+    steps: # <6>
       # Run scripts here
 ```
 
@@ -104,8 +104,8 @@ jobs:
   check_links:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 <1>
-      - uses: gaurav-nelson/github-action-markdown-link-check@v1 <2>
+      - uses: actions/checkout@v4 # <1>
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1 # <2>
 ```
 
 1. Step to clone the GitHub repository to the local virtual machine
@@ -127,8 +127,8 @@ jobs:
   check_spelling:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 <1>
-      - uses: igsekor/pyspelling-any@v1.0.4 <2>
+      - uses: actions/checkout@v4 # <1>
+      - uses: igsekor/pyspelling-any@v1.0.4 # <2>
 ```
 
 1. Step to clone the GitHub repository to the local virtual machine
@@ -144,8 +144,8 @@ jobs:
   check_markdown:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 <1>
-      - uses: articulate/actions-markdownlint@v1 <2>
+      - uses: actions/checkout@v4 # <1>
+      - uses: articulate/actions-markdownlint@v1 # <2>
 ```
 
 1. Step to clone the GitHub repository to the local virtual machine
@@ -161,9 +161,9 @@ jobs:
   run_code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 <1>
-      - run: python --version <2>
-      - run: python hello.py <3>
+      - uses: actions/checkout@v4 # <1>
+      - run: python --version # <2>
+      - run: python hello.py # <3>
 ```
 
 1. Step to clone the GitHub repository to the local virtual machine
