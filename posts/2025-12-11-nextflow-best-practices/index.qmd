@@ -125,7 +125,6 @@ Use node local disk space on HPC's when available to improve speed, alleviate ne
 usage, and leave intermediate files out of the work directory.
 
 ```{.groovy filename="nextflow.config"}
-// *Spacer comment to avoid copy button overlap with code annotation*
 process.scratch  = '$SNIC_TMP' // <1>
 process.executor = 'slurm' // <2>
 
@@ -145,8 +144,8 @@ executor {
 
 For nf-core workflows use an existing nf-core config profile:
 
-- Uppmax (Pelle / Bianca): https://nf-co.re/configs/uppmax/
-- PDC-KTH (Dardel): https://nf-co.re/configs/pdc_kth/
+- Uppmax (Pelle / Bianca): <https://nf-co.re/configs/uppmax/>
+- PDC-KTH (Dardel): <https://nf-co.re/configs/pdc_kth/>
 
 :::
 
