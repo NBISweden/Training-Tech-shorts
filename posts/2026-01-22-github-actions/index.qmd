@@ -21,6 +21,13 @@ format:
 
 -->
 
+:::{.callout-important collapse="true"}
+# Prefer a video?
+
+Watch the ['RSE Tools session: GitHub Actions'](https://youtu.be/Bfd-sk0KjRc)
+YouTube video.
+:::
+
 ## 1.1. How would you ...?
 
 You are the only maintainer of a FOSS ('Free and Open Source Software')
@@ -141,7 +148,91 @@ jobs: # <3>
 5. The image of a virtual machine that this job uses
 6. The steps of this job
 
-## 5.2. How to view an error log
+## 5.2. Example 1: broken link checker
+
+```{.bash filename="check_links.yaml"}
+on:
+  push:
+
+jobs:
+  check_links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # <1>
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1 # <2>
+```
+
+1. Step to clone the GitHub repository to the local virtual machine.
+   The Action can be found at
+   [`https://github.com/actions/checkout`](https://github.com/actions/checkout)
+2. Step to check all the links in the Markdown files in freshly cloned
+   repository.
+   The Action can be found at
+   [`https://github.com/gaurav-nelson/github-action-markdown-link-check`](https://github.com/gaurav-nelson/github-action-markdown-link-check)
+
+
+## 5.3. Example 2: spellchecker
+
+```{.bash filename="check_links.yaml"}
+on:
+  push:
+
+jobs:
+  check_spelling:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # <1>
+      - uses: igsekor/pyspelling-any@v1.0.4 # <2>
+```
+
+1. Step to clone the GitHub repository to the local virtual machine.
+   The Action can be found at
+   [`https://github.com/actions/checkout`](https://github.com/actions/checkout)
+2. Step to check the spelling in the files in the freshly cloned repository.
+   The Action can be found at
+   [`https://github.com/igsekor/pyspelling-any`](https://github.com/igsekor/pyspelling-any)
+
+## 5.4. Example 3: Markdown style checker
+
+```{.bash filename="check_markdown_style.yaml"}
+on:
+  push:
+
+jobs:
+  check_markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # <1>
+      - uses: articulate/actions-markdownlint@v1 # <2>
+```
+
+1. Step to clone the GitHub repository to the local virtual machine.
+   The Action can be found at
+   [`https://github.com/actions/checkout`](https://github.com/actions/checkout)
+2. Step to check the Markdown style in the files in the freshly cloned repository.
+   The Action can be found at
+   [`https://github.com/articulate/actions-markdownlint`](https://github.com/articulate/actions-markdownlint)
+
+## 5.5. Example 4: Whatever you want!
+
+```{.bash filename="run_code.yaml"}
+on:
+  push:
+
+jobs:
+  run_code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # <1>
+      - run: python --version # <2>
+      - run: python hello.py # <3>
+```
+
+1. Step to clone the GitHub repository to the local virtual machine
+2. Check the Python version installed on the virtual machine
+3. Run the Python script
+
+## 6. How to view an error log
 
 :::{.callout-tip collapse="true"}
 # At the GitHub repo page, click on the 'Actions' tab
@@ -193,78 +284,7 @@ jobs: # <3>
 > [the example repo of this session](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
 :::
 
-## 5.3. Example 1: broken link checker
-
-```{.bash filename="check_links.yaml"}
-on:
-  push:
-
-jobs:
-  check_links:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4 # <1>
-      - uses: gaurav-nelson/github-action-markdown-link-check@v1 # <2>
-```
-
-1. Step to clone the GitHub repository to the local virtual machine
-2. Step to check all the links in the Markdown files in freshly cloned repository
-
-
-## 5.4. Example 2: spellchecker
-
-```{.bash filename="check_links.yaml"}
-on:
-  push:
-
-jobs:
-  check_spelling:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4 # <1>
-      - uses: igsekor/pyspelling-any@v1.0.4 # <2>
-```
-
-1. Step to clone the GitHub repository to the local virtual machine
-2. Step to check the spelling in the files in the freshly cloned repository.
-
-## 5.5. Example 3: Markdown style checker
-
-```{.bash filename="check_markdown_style.yaml"}
-on:
-  push:
-
-jobs:
-  check_markdown:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4 # <1>
-      - uses: articulate/actions-markdownlint@v1 # <2>
-```
-
-1. Step to clone the GitHub repository to the local virtual machine
-2. Step to check the Markdown style in the files in the freshly cloned repository.
-
-## 5.6. Example 4: Whatever you want!
-
-```{.bash filename="run_code.yaml"}
-on:
-  push:
-
-jobs:
-  run_code:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4 # <1>
-      - run: python --version # <2>
-      - run: python hello.py # <3>
-```
-
-1. Step to clone the GitHub repository to the local virtual machine
-2. Check the Python version installed on the virtual machine
-3. Run the Python script
-
-## 6. FAQ
+## 7. FAQ
 
 :::{.callout-tip collapse="true"}
 # What are those `@v`s in the GHA scripts?
@@ -413,15 +433,17 @@ These can then be downloaded as artifacts.
 
 Yes.
 
-In [this GitHub Actions script](https://github.com/NBISweden/SCoRe_user_doc/blob/main/.github/workflows/create_website.yaml)
-an MkDocs website is deployed.
+- SCoRe user documentation' MkDocs website uses
+  [this GitHub Actions script](https://github.com/NBISweden/SCoRe_user_doc/blob/main/.github/workflows/create_website.yaml)
+- RSE Tools Quarto websit uses
+  [this GitHub Actions script](https://github.com/NBISweden/Training-Tech-shorts/blob/main/.github/workflows/publish.yml)
 
-This may be a bit more tricky. In this case:
+Deploying a website can be a bit more tricky:
 
-- The GHA bot needs permissions to push
-- GitHub Pages need to be active
+- The GHA bot may need permissions to push
+- GitHub Pages may need to be active and setup correctly
 
-Both can be set in the Settings of the repo.
+Thes settings can be set in the 'Settings' tab of the repo.
 :::
 
 :::{.callout-tip collapse="true"}
@@ -446,7 +468,7 @@ An example is [the SCoRe user documentation](https://github.com/NBISweden/SCoRe_
 
 :::
 
-## 7. Findings in the literature
+## 8. Findings in the literature
 
 A continuous integration service (such as GitHub Actions):
 
@@ -543,9 +565,9 @@ in correlation coefficients in different programs:
 You can use GitHub Actions to check for coding style,
 such as Python's PEP8 `[PEP 8]` and R's Tidyverse `[Wickham, 2019]` style.
 
-## 8. Exercises
+## 9. Exercises
 
-## 8.1. Exercise 1: work with GitHub Actions
+## 9.1. Exercise 1: work with GitHub Actions
 
 - Fork [`https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git`](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
 
@@ -562,14 +584,34 @@ exactly the same.
 - Read the section ['How to view an error log'](#how-to-view-an-error-log)
 - Find the error messages and fix all the errors
 
-## 8.2. Exercise 2: find GitHub Actions
+:::{.callout-tip collapse="true"}
+# How do I fix the false positives spelling errors?
+
+Indeed, there are some words pointed out as spelling errors, when they are not.
+In this repo, `Pelle Svanslös` is a valid name of a fictional character. 
+
+Some repositories, such as
+[the SCoRe user documentation](https://github.com/NBISweden/SCoRe_user_doc?tab=readme-ov-file#files-used-by-continuous-integration-scripts)
+document which files belong to which CI scripts.
+
+From that, one can deduce that `.wordlist.txt` needs to have the following
+two lines added:
+
+```{.text filename=".wordlist.txt"}
+Pelle
+Svanslös
+```
+
+:::
+
+## 9.2. Exercise 2: find GitHub Actions
 
 - Surf to [the GitHub Actions Marketplace](https://github.com/marketplace?type=actions)
 - Find something you would like a GitHub Action to do
 - If you found something, try to make it work by copy-pasting
   an example script from the documentation of your favorite Action.
 
-## 8.3. Exercise 3: literature
+## 9.3. Exercise 3: literature
 
 - Read the section ['Findings in the literature'](#findings-in-the-literature).
   Do you think using GitHub Actions is worth it?
