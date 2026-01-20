@@ -5,63 +5,123 @@ author:
 date: "2026-01-22"
 date-modified: last-modified
 categories: [ "GitHub Actions", "Continuous integration" ]
+format:
+  html:
+    toc: true
+    toc-title: Contents
+    toc-location: left
 ---
 
-## 1. Goal
+![Automate everything](automate_everything.jpg){width=50%}
 
-Show how to use GitHub Actions to:
+<!-- Prior
 
-- raise the quality of an online repository
-- help maintain a coding standard
-- run any Bash command
+- What is GitHub Actions?
+- These 'How would you'-s feel like a Prior too ...
+
+-->
+
+## 1.1. How would you ...?
+
+You are the only maintainer of a FOSS ('Free and Open Source Software')
+GitHub repository.
+
+You want the repo to:
+
+- Have no stupid spelling errors
+- Have no broken hyperlinks
+- Show to the users the status of the repo (e.g. it has yes/no stupid
+  spelling errors at the moment)
+
+How would you do this?
+
+## 1.2. How would you ...?
+
+You are one of the maintainers of a FOSS GitHub repository.
+Your team members have different styles/preferences on how to write Markdown
+(e.g. indent with 2 versus 4 spaces, write image captions yes/no).
+
+You and your team want the repo to have a consistent coding standard.
+
+How would you do this?
+
+## 1.3. How would you ...?
+
+You work on a FOSS coding project that uses a test suite to guarantee quality.
+A user submits code using a GitHub fork and a pull request.
+
+Before accepting the pull request, you want to make sure the submitted
+code indeed passes all tests.
+
+How would you do this?
+
+## 2. Goals
+
+:::{.callout-important collapse="true"}
+# Understand what GitHub Actions is
+
+A free service for FOSS development to run any code upon a `git push`
+:::
+
+:::{.callout-important collapse="true"}
+# Understand why GitHub Actions are important
+
+To guarantee quality, to collaborate better, to interact with users better
+:::
+
+:::{.callout-important collapse="true"}
+# Practice to use GitHub Actions
+
+See the exercises
+:::
+
+<!-- Shorter is better -->
 
 Non-goals:
 
 - Discuss best practices
 - Show and explain a more complex script/setup
+<!-- - Passive teaching -->
+<!-- - Fill 60 minutes -->
 
-## 2. What is GitHub Actions?
+## 3. What is GitHub Actions?
 
-- A service from GitHub that is free for FOSS development
+![GitHub Actions logo](gha_logo.png){width=10%}
+
+- A Continuous Integration service from GitHub,
+  that is free for FOSS development
 - It allows you to run code triggered by a `git` action, e.g. a `git push`
 
-![Automate everything](automate_everything.jpg)
+```{.bash filename="my_gha_script.yaml"}
+on:
+  push:
 
-## 3.1. Problem 1
+jobs:
+  run_my_code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout
+      - run: python hello.py
+```
 
-You are the only maintainer of a GitHub repository.
-You want it to be of high quality.
-You want to **do** instead of **talk**.
-You want to show your users that you care about the quality of your project.
+## 4. Why is GitHub Actions important?
 
-Every commit, however, you wonder:
+- It is free (as in beer) for FOSS development
+- It helps assure quality
+- It helps show that you care about quality
+- It helps collaboration with a team
+- It helps interaction with users
 
-- Does my new content have spelling errors?
-- Are all the links pointing to a valid website?
-
-## 3.2. Problem 2
-
-You are one of the maintainers of a GitHub repository.
-Your team members have different styles/preferences on how to write Markdown
-(e.g. indent with 2 versus 4 spaces).
-You and your team decided to settle on a standard.
-
-## 3.3. Problem 3
-
-You work on a coding project that uses a test suite to guarantee quality.
-The code on the `main` `git` branch must always be a version that passes all tests.
-Team members create pull requests to the `main` branch and/or
-external collaborators submit code via a GitHub fork.
-You do not think it is fun to check these submissions by hand.
-
-## 3.4. Solution
+## 5. How you could ...
 
 - Find a GitHub Actions script from someone else
 - Put it in your `.github/workflows` folder
 - Commit
 - Watch it in action at the 'Actions' tab
 
-## 4.1. A general GitHub Actions script
+Alternatively, fork a repo.
+
+## 5.1. A general GitHub Actions script
 
 ```{.bash filename="check_something.yaml"}
 on: # <1>
@@ -81,20 +141,59 @@ jobs: # <3>
 5. The image of a virtual machine that this job uses
 6. The steps of this job
 
-## 4.2. Where to find the Actions tab
+## 5.2. How to view an error log
 
-![Click 'Actions'](github_click_actions.png)
+:::{.callout-tip collapse="true"}
+# At the GitHub repo page, click on the 'Actions' tab
 
-> Click on 'Actions'
+![At the GitHub repo page, click on the 'Actions' tab](github_click_actions.png)
 
-## 4.3. Where to find the Actions results
+> Click on 'Actions'.
+> Screenshot from
+> [the example repo of this session](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
+:::
+
+
+:::{.callout-tip collapse="true"}
+# View the Actions and their results
 
 ![GitHub Actions](github_actions_annotated.png)
 
 > Overview of the GitHub Actions. In red: the scripts. In blue:
 > the logs of the scripts
+> Screenshot from
+> [the example repo of this session](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
+:::
 
-## 4.4. Example 1: broken link checker
+:::{.callout-tip collapse="true"}
+# Click the Action you want to investigate
+
+![Click the Action you want to investigate, in this case `check_spelling`](gha_click_action_results.png)
+
+> Screenshot from
+> [the example repo of this session](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
+:::
+
+:::{.callout-tip collapse="true"}
+# Of that Action, click on the job
+
+![Click the job you want to investigate, in this case `check_spelling`](gha_click_job.png)
+
+> Screenshot from
+> [the example repo of this session](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
+:::
+
+
+:::{.callout-tip collapse="true"}
+# View the error log
+
+![View the error log](gha_error_log.png)
+
+> Screenshot from
+> [the example repo of this session](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
+:::
+
+## 5.3. Example 1: broken link checker
 
 ```{.bash filename="check_links.yaml"}
 on:
@@ -111,13 +210,8 @@ jobs:
 1. Step to clone the GitHub repository to the local virtual machine
 2. Step to check all the links in the Markdown files in freshly cloned repository
 
-## 4.5. Demonstration
 
-<!-- This is a joke. Not a very good one, but funny enough to me :-) -->
-
-![Demonstration](demonstrate.jpg)
-
-## 4.6. Example 2: spellchecker
+## 5.4. Example 2: spellchecker
 
 ```{.bash filename="check_links.yaml"}
 on:
@@ -134,7 +228,7 @@ jobs:
 1. Step to clone the GitHub repository to the local virtual machine
 2. Step to check the spelling in the files in the freshly cloned repository.
 
-## 4.7. Example 3: Markdown style checker
+## 5.5. Example 3: Markdown style checker
 
 ```{.bash filename="check_markdown_style.yaml"}
 on:
@@ -151,7 +245,7 @@ jobs:
 1. Step to clone the GitHub repository to the local virtual machine
 2. Step to check the Markdown style in the files in the freshly cloned repository.
 
-## 4.8. Example 4: Whatever you want!
+## 5.6. Example 4: Whatever you want!
 
 ```{.bash filename="run_code.yaml"}
 on:
@@ -170,32 +264,350 @@ jobs:
 2. Check the Python version installed on the virtual machine
 3. Run the Python script
 
-## 5.1. Questions so far?
+## 6. FAQ
 
-Questions so far?
+:::{.callout-tip collapse="true"}
+# What are those `@v`s in the GHA scripts?
 
-## 5.2. Try it out
+These are version numbers.
+:::
 
-- Fork [`https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git`](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
-- Fix all the errors
+:::{.callout-tip collapse="true"}
+# How will I know which version to use?
 
-## 6. Discussion
+You use the version that works, until it breaks.
+Then you update it.
+:::
 
-- ...
+:::{.callout-tip collapse="true"}
+# How long may my scripts run?
 
-## 7. The End 
+Two hours.
+:::
 
-## A. Appendix
+:::{.callout-tip collapse="true"}
+# Can I do different things in parallel a GHA script?
 
-## A.1. How to find GitHub Actions scripts
+Yes.
 
-- Colleagues
-- GitHub Marketplace: [`https://github.com/marketplace?type=actions`](https://github.com/marketplace?type=actions)
+In technical terms, this means that your GHA script has multiple jobs.
+:::
 
-## A.2. Misc notes
+:::{.callout-tip collapse="true"}
+# Can I combine multiple GHA scripts into one?
 
-:::{.callout-tip}
-This is a call-out
+Yes.
+
+In technical terms, this means that your GHA script has multiple jobs,
+that will run in parallel.
+:::
+
+:::{.callout-tip collapse="true"}
+# Why don't you combine the multiple GHA scripts into one?
+
+Because I enjoy any piece of code doing one single thing well
+and, due to that, can have a descriptive name.
+
+You preferences may differ, which is fine :-)
+:::
+
+:::{.callout-tip collapse="true"}
+# Can it be made to run on Windows machines too?
+
+Yes, it can be made to run on *virtual* Windows machines.
+
+No, it does not run on Windows hardware: for that, use AppVeyor instead.
+An example is
+[this AppVeyor script to generate the Windows executable of a computer game](https://github.com/richelbilderbeek/conquer_chess/blob/main/.appveyor.yml).
+:::
+
+:::{.callout-tip collapse="true"}
+# Can it be made to run on MacOS machines too?
+
+Yes, it can be made to run on *virtual* MacOS machines.
+
+No, it does not run on MacOS hardware: for that, use CircleCI instead.
+:::
+
+:::{.callout-tip collapse="true"}
+# Does GitLab/Codeberg/CircleCI have this?
+
+Yes.
+
+You will need to provide a 'runner', i.e. a service that
+will run your scripts upon a `git push`.
+As far as I know, these are not free.
+:::
+
+:::{.callout-tip collapse="true"}
+# Can GitHub Actions work with a schedule?
+
+Yes. 
+
+An example is
+[the SCoRe user documentation script `update_content.yaml`](https://github.com/NBISweden/SCoRe_user_doc/blob/main/.github/workflows/update_content.yaml)
+where a website is updated daily
 :::
 
 
+:::{.callout-tip collapse="true"}
+# Can GitHub Actions trigger only on certain file changes?
+
+Yes. 
+
+An example is
+[the SCoRe user documentation script `check_markdown.yaml`](https://github.com/NBISweden/SCoRe_user_doc/blob/main/.github/workflows/check_markdown.yaml)
+which is triggered when a Markdown file is changed,
+or when a configuration file about this is changed.
+:::
+
+:::{.callout-tip collapse="true"}
+# Do I have `sudo` rights?
+
+Yes.
+
+This allows you to install anything you like.
+:::
+
+:::{.callout-tip collapse="true"}
+# Can I use GitHub Actions to create a commit?
+
+Yes.
+
+In [this GitHub Actions script](https://github.com/NBISweden/SCoRe_user_doc/blob/main/.github/workflows/create_website.yaml)
+an HTML website is created from Markdown, where the plain HTML is
+pushed to the `gh-pages` branch.
+
+This may be a bit more tricky. In this case:
+
+- The GHA bot needs permissions to push
+- GitHub Pages need to be active
+
+Both can be set in the Settings of the repo.
+:::
+
+:::{.callout-tip collapse="true"}
+# Can I use GitHub Actions to create an infinite chain of commits?
+
+I assume yes: if one GHA script creates a commit, that triggers
+another script that creates a commit, which triggers
+another script that creates a commit, etc., then I assume yes.
+
+However, I have never tested this. Let me know what you find :-)
+:::
+
+
+:::{.callout-tip collapse="true"}
+# Can I use GitHub Actions to create a file (e.g. the result of a long calculation)?
+
+Yes.
+
+In [this GitHub Actions script](https://github.com/uppsala-makerspace/vevor_vinyl_cutter_to_t_shirt_manual/blob/main/.github/workflows/create_pdfs.yaml#L77)
+some PDFs are created, which are then uploaded.
+
+These can then be downloaded as artifacts.
+:::
+
+:::{.callout-tip collapse="true"}
+# Can I use GitHub Actions to deploy my website?
+
+Yes.
+
+In [this GitHub Actions script](https://github.com/NBISweden/SCoRe_user_doc/blob/main/.github/workflows/create_website.yaml)
+an MkDocs website is deployed.
+
+This may be a bit more tricky. In this case:
+
+- The GHA bot needs permissions to push
+- GitHub Pages need to be active
+
+Both can be set in the Settings of the repo.
+:::
+
+:::{.callout-tip collapse="true"}
+# Can I disable a GitHub Action?
+
+Yes.
+
+![In the 'Actions' menu, click the kebab button at the right, then 'Disable workflow'](gha_disable_workflow.png)
+:::
+
+:::{.callout-tip collapse="true"}
+# How can I get a badge?
+
+![In the 'Actions' menu, click the kebab button at the right, then 'Create status badge'](gha_create_status_badge.png)
+
+This will provide you with the Markdown code you can copy-paste to,
+for example, `README.md`.
+
+An example is [the SCoRe user documentation](https://github.com/NBISweden/SCoRe_user_doc?tab=readme-ov-file#score-user-documentation):
+
+![The badges of the SCoRe user documentation](score_user_doc_badges.png)
+
+:::
+
+## 7. Findings in the literature
+
+A continuous integration service (such as GitHub Actions):
+
+- Bugs are exposed around 20 times faster `[Vasilescu et al., 2015]`
+
+:::{.callout-tip collapse="true"}
+# How did you calculate that number?
+
+From `[Vasilescu et al., 2015]` table 6:
+
+- 0.4 bugs per month are found by by core developers
+- 0.164 bugs per month are found by by external collaborators
+- Hence 0.564 bugs per month are found
+- Per month, projects report 0.026 bug less
+
+This means that 0.564 found by CI per 0.026 'solved' by time,
+`0.564 / 0.026 = 21.692307692`
+:::
+
+- New features are added around 4 times faster `[Vasilescu et al., 2015]`
+
+:::{.callout-tip collapse="true"}
+# How did you calculate that number?
+
+From `[Vasilescu et al., 2015]` table 4:
+
+- 0.049 (intercept) PRs per month are merged by core developers when there is no CI
+- 0.049 (intercept) + 0.187 (slope) = 0.236 per month are merged by core developers when there is CI
+
+This means that (N-O)/O = (0.236 - 0.049) / 0.049 = 3.8 times more PRs merged
+when CI is on.
+:::
+
+You can use GitHub Actions to run your test suite(s).
+
+- Coding errors are extremely common `[Baggerly and Coombes, 2009]`
+
+:::{.callout-tip collapse="true"}
+# How common?
+
+In all of the papers used to illustrate errors in published
+bioinformatics analyses.
+Each of these papers had simple errors, such as using the
+incorrect number of samples (this matters when taking an average :-) ).
+:::
+
+
+- Simple testing can prevent most critical failures `[Yuan et al., 2014]`
+
+:::{.callout-tip collapse="true"}
+# How much?
+
+A 100 percent (!) of the catastrophic failures (i.e. the most problematic
+type of failures)
+would be exposed by using code coverage testing to find
+the error handling logic, after which that logic is tested
+by a simple unit test.
+
+A simple example they show is a developer leaving a `TODO` in
+the error handling code.
+:::
+
+You can use GitHub Actions to measure code coverage, which is
+the percentage of code tested.
+
+- Code coverage correlates, sometimes very strongly, with code quality
+  `[Horgan et al., 1994][Del Frate et al., 1995]`
+
+:::{.callout-tip collapse="true"}
+# How much?
+
+Going from 62% to 92% code coverage means that 227% more faults are detected.
+
+From `[Horgan et al., 1994]` Table 2:
+
+- 1 test, 62% block coverage, 30.2% faults detected
+- 21000 test, 91.8% block coverage, 98.9% faults detected
+
+The change: `(N - O) / O = (98.9 - 30.2) / 30.2 = 2.274834437 = 227%
+
+From `[Del Frate et al., 1995]` Figure 2 we can see the ranges
+in correlation coefficients in different programs:
+
+- Ranges: [0.16 - 0.91], [-0.10 - 0.72],
+  [0.93 - 0.99], [0.89 - 0.91], and [0.98 - 0.99]
+- Middle of these ranges: 0.535, 0.31, 0.96, 0.90, 0.985
+- Average of these: (0.535 + 0.31 + 0.96 + 0.90 + 0.985) / 5 = 74%
+
+:::
+
+- Some communities make 100% code coverage mandatory to pass a code peer-review
+  (e.g. rOpenSci `[Hart et al., 2013]`)
+
+You can use GitHub Actions to check for coding style,
+such as Python's PEP8 `[PEP 8]` and R's Tidyverse `[Wickham, 2019]` style.
+
+## 8. Exercises
+
+## 8.1. Exercise 1: work with GitHub Actions
+
+- Fork [`https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git`](https://github.com/NBISweden/rse_tools_github_actions_example_20260122.git)
+
+:::{.callout-tip collapse="true"}
+# Is forking this repo identical to copy-pasting a fresh repo from scratch?
+
+Yes.
+
+There is no hidden state in the forked GitHub repo:  
+Copy-pasting the scripts to a repo made from scratch works
+exactly the same.
+:::
+
+- Read the section ['How to view an error log'](#how-to-view-an-error-log)
+- Find the error messages and fix all the errors
+
+## 8.2. Exercise 2: find GitHub Actions
+
+- Surf to [the GitHub Actions Marketplace](https://github.com/marketplace?type=actions)
+- Find something you would like a GitHub Action to do
+- If you found something, try to make it work by copy-pasting
+  an example script from the documentation of your favorite Action.
+
+## 8.3. Exercise 3: literature
+
+- Read the section ['Findings in the literature'](#findings-in-the-literature).
+  Do you think using GitHub Actions is worth it?
+
+:::{.callout-note}
+You are always welcome to discuss the finding in the academic literature
+on this with me!
+:::
+
+## References
+
+- `[Baggerly and Coombes, 2009]` Baggerly, Keith A., and Kevin R. Coombes.
+  "Deriving chemosensitivity from cell lines: forensic bioinformatics and
+  reproducible research in high-throughput biology."
+  The Annals of Applied Statistics (2009): 1309-1334.
+- `[Del Frate et al., 1995]` Del Frate, Fabio, et al.
+  "On the correlation between code coverage and software reliability."
+  Proceedings of Sixth International Symposium on Software Reliability
+  Engineering. ISSRE'95. IEEE, 1995.
+- `[Hart et al., 2013]` Hart, Edmumd, et al.
+  "rOpenSci-a collaborative effort to develop R-based tools for facilitating
+  Open Science." figshare (2013): 791569.
+- `[Horgan et al., 1994]` Horgan, Joseph R., Saul London, and Michael R. Lyu.
+  "Achieving software quality with testing coverage measures."
+  Computer 27.9 (1994): 60-69.
+- `[PEP 8]` Van Rossum, Guido, Barry Warsaw, and Nick Coghlan.
+  "PEP 8–style guide for python code." Python. org 1565 (2001): 28.
+- `[Vasilescu et al., 2015]` Vasilescu, Bogdan, et al.
+  "Quality and productivity outcomes relating to continuous integration in
+  GitHub." Proceedings of the 2015 10th joint meeting on foundations of
+  software engineering. 2015.
+- `[Wickham, 2019]` Wickham, Hadley.
+  Advanced R. chapman and hall/CRC, 2019.
+- `[Yuan et al., 2014]`
+  Yuan, Ding, et al.
+  "Simple testing can prevent most critical failures:
+  An analysis of production failures in distributed data-intensive systems."
+  11th USENIX Symposium on Operating Systems Design and Implementation
+  (OSDI 14). 2014.
+
+<!-- Callouts in Quarto: https://quarto.org/docs/authoring/callouts.html -->
