@@ -5,11 +5,6 @@ author:
 date: "2026-01-22"
 date-modified: last-modified
 categories: [ "GitHub Actions", "Continuous integration" ]
-format:
-  html:
-    toc: true
-    toc-title: Contents
-    toc-location: left
 ---
 
 ![Automate everything](automate_everything.jpg){width=50%}
