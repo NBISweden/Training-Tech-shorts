@@ -107,7 +107,7 @@ jobs:
   run_my_code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout
+      - uses: actions/checkout@v4
       - run: python hello.py
 ```
 
@@ -163,11 +163,11 @@ jobs:
 ```
 
 1. Step to clone the GitHub repository to the local virtual machine.
-   The Action can be found at
+   The Action is version `4` of
    [`https://github.com/actions/checkout`](https://github.com/actions/checkout)
 2. Step to check all the links in the Markdown files in freshly cloned
    repository.
-   The Action can be found at
+   The Action is version `1` of
    [`https://github.com/gaurav-nelson/github-action-markdown-link-check`](https://github.com/gaurav-nelson/github-action-markdown-link-check)
 
 
@@ -186,10 +186,10 @@ jobs:
 ```
 
 1. Step to clone the GitHub repository to the local virtual machine.
-   The Action can be found at
+   The Action is version `4` of
    [`https://github.com/actions/checkout`](https://github.com/actions/checkout)
 2. Step to check the spelling in the files in the freshly cloned repository.
-   The Action can be found at
+   The Action is version `1.0.4` of
    [`https://github.com/igsekor/pyspelling-any`](https://github.com/igsekor/pyspelling-any)
 
 ## 5.4. Example 3: Markdown style checker
@@ -207,10 +207,10 @@ jobs:
 ```
 
 1. Step to clone the GitHub repository to the local virtual machine.
-   The Action can be found at
+   The Action is version `4` of
    [`https://github.com/actions/checkout`](https://github.com/actions/checkout)
 2. Step to check the Markdown style in the files in the freshly cloned repository.
-   The Action can be found at
+   The Action is version `1` of
    [`https://github.com/articulate/actions-markdownlint`](https://github.com/articulate/actions-markdownlint)
 
 ## 5.5. Example 4: Whatever you want!
