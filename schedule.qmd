@@ -4,6 +4,10 @@ Dates for each walkthrough, listed in reverse chronological order.
 Meetings are over Zoom, Thursdays at 10.00. Meeting links are
 provided in NBIS Slack `#tech-group-rse-tools`.
 
+- 2026/04/23: TBD
+- 2026/04/09: Jonas - Formatters and Linters
+- 2026/03/26: Mahesh - Introduction to Pixi
+- 2026/03/12: Mahesh - Github Pull Requests and Code Reviews
 - 2026/02/26: Martin - Managing Copilot access in VSCode
 - 2026/02/12: Dania - Working with R packages
 - 2026/01/22: Richèl - Introduction to Github Actions
