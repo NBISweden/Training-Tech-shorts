@@ -17,3 +17,4 @@ results/
 data/
 .Rproj.user
 *.Rproj
+.Rhistory
