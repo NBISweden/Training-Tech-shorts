@@ -40,7 +40,7 @@ BiocManager::valid()
 BiocManager::available()
 ```
 
-To allow for the flexibility of having several Bioconductor versions on the same computer, it is good practice to create a library path for the specific Bioconductor release and R version, and then use `BiocManager::install()`, and set the `version` argument to the desired (current) Bioconductor release, to install all R packages including CRAN packages in this path. This allows for a degree of freedom and flexibility when working interactively, while also version controlling by the Bioconductor release and installing any R (e.g. CRAN) package in this fashion. For example, on a MacBook with arm64 architecture, this library path would be `~/Library/R/arm64/4.5-Bioc-3.21/library`. Of note is also the `BiocArchive` package to install CRAN package versions consistent with older releases of Bioconductor.
+To allow for the flexibility of having several Bioconductor versions on the same computer, it is good practice to create a library path for the specific Bioconductor release and R version, and then use `BiocManager::install()`, and set the `version` argument to the desired (current) Bioconductor release, to install all R packages including CRAN packages in this path. This allows for a degree of freedom and flexibility when working interactively, while also version controlling by the Bioconductor release and installing any R (e.g. CRAN) package in this fashion. For example, on a MacBook with arm64 architecture, this library path would be `~/Library/R/arm64/4.5-Bioc-3.21/library`.
 
 To use the installed packages, one would need to set the environment variable `R_LIBS_USER` to this path, and invoke R. Alternatively, once in R one can also use `.libPaths()` to add the library path. Below is an illustration, within an R session, on how `BiocManager::install()` can be used to to install R packages.
 
@@ -68,6 +68,20 @@ BiocManager::install(pkgs = pkgs,
                      force = FALSE,
                      version = bioc, 
                      lib = libPath)
+```
+
+Of note is also the `BiocArchive` package to install CRAN package versions consistent with older releases of Bioconductor. The example below shows how to install packages compatible with release 3.14.
+
+```{.r}
+## install packages matching previous bioconductor release
+libPath314 <- "~/Library/R/arm64/4.1-Bioc-3.14/library"
+BiocArchive::install(pkgs = pkgs, 
+                     update = FALSE, 
+                     ask = TRUE, 
+                     checkBuilt = FALSE, 
+                     force = FALSE,
+                     version = "3.14", 
+                     lib = libPath314)
 ```
 
 ### To update or not to update?
