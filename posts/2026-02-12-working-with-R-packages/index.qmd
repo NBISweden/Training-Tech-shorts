@@ -40,9 +40,19 @@ BiocManager::valid()
 BiocManager::available()
 ```
 
-To allow for the flexibility of having several Bioconductor versions on the same computer, it is good practice to create a library path for the specific Bioconductor release and R version, and then use `BiocManager::install()`, and set the `version` argument to the desired (current) Bioconductor release, to install all R packages including CRAN packages in this path. This allows for a degree of freedom and flexibility when working interactively, while also version controlling by the Bioconductor release and installing any R (e.g. CRAN) package in this fashion. For example, on a MacBook with arm64 architecture, this library path would be `~/Library/R/arm64/4.5-Bioc-3.21/library`.
+To allow for the flexibility of having several Bioconductor versions on the same computer, it is good practice to create a library path for the specific Bioconductor release and R version, and then use `BiocManager::install()`, and set the `version` argument to the desired (current) Bioconductor release, to install all R packages including CRAN packages in this path. This allows for a degree of freedom and flexibility when working interactively, while also version contr?usessolling by the Bioconductor release and installing any R (e.g. CRAN) package in this fashion. For example, on a MacBook with arm64 architecture, this library path would be `~/Library/R/arm64/4.5-Bioc-3.21/library`.
 
-To use the installed packages, one would need to set the environment variable `R_LIBS_USER` to this path, and invoke R. Alternatively, once in R one can also use `.libPaths()` to add the library path. Below is an illustration, within an R session, on how `BiocManager::install()` can be used to to install R packages. For packages that need to be installed from GitHub, `BiocManager::install()` uses `remotes::install_github()`.
+To use the installed packages, one would need to set the environment variable `R_LIBS_USER` to this path, and invoke R. Alternatively, once in R one can also use `.libPaths()` to add the library path. Another otpion would be to define the environment in the `.Rprofile` file which lives in the user's home directory. The user must keep this in mind if switching between different R versions and library paths to make the necessary edits. The `usethis` package contains a helper function to edit this file.
+
+```{.r}
+## edit the .Rprofile file
+usethis::edit_r_profile(scope = "user")
+
+## add the following line to the opened .Rprofile file and save
+#.libPaths(c("~/Library/R/arm64/4.5-Bioc-3.21/library", .libPaths()))
+```
+
+Below is an illustration, within an R session, on how `BiocManager::install()` can be used to to install R packages. For packages that need to be installed from GitHub, `BiocManager::install()` uses `remotes::install_github()`.
 
 ``` r
 ## set params
