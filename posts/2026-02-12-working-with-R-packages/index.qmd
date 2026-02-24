@@ -153,30 +153,33 @@ knitr:
 It is generally good practice to use a workflow management system in your analyses, to keep track of changes and dependencies. Here we rely on [Snakemake](https://snakemake.readthedocs.io/en/stable/) and illustrate how our `.qmd` script can be rendered there. An example rule in our Snakefile called "qcFromCellranger" is depicted below.
 
 ``` python
-Rscript="/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript"
-RBiocLib="~/Library/R/arm64/4.5-Bioc-3.21/library"
+Rscript="/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript" # <1>
+RBiocLib="~/Library/R/arm64/4.5-Bioc-3.21/library"                                 # <1>
 
-rule qcFromCellranger:
-  input:
-    qmd = "scripts/01_cellrangerQC.qmd"
-  output:
-    html = "scripts/01_cellrangerQC.html", 
-    outMetaFile = "generatedFiles/01_metadata.txt"
-  shell:
-    '''
-    # wdir
-    cd {basedir} && \
-    
-    # setup needed env variables to run quarto with specific R and Rlibs
-    export QUARTO_R={Rscript} && \
-    export R_LIBS_USER={RBiocLib} && \
-    
-    # render with quarto
-    quarto render {input.qmd} -P basedir:{basedir} \
-    -P metaOriginalFile:{originalMetaFile} -P metaExtraFile:{generatedMetaFile} \
-    -P outMetaFile:{output.outMetaFile}
+rule qcFromCellranger:                                                             # <2>
+  input:                                                                           # <2>
+    qmd = "scripts/01_cellrangerQC.qmd"                                            # <2>  
+  output:                                                                          # <2>
+    html = "scripts/01_cellrangerQC.html",                                         # <2>
+    outMetaFile = "generatedFiles/01_metadata.txt"                                 # <2>
+  shell:                                                                           # <2>
+    '''                                                                            # <2>
+    # wdir                                                                         # <2>
+    cd {basedir} && \                                                              # <2>
+                                                                                   # <2>  
+    # setup needed env variables to run quarto with specific R and Rlibs           # <2>  
+    export QUARTO_R={Rscript} && \                                                 # <2>
+    export R_LIBS_USER={RBiocLib} && \                                             # <2>
+                                                                                   # <2>
+    # render with quarto                                                           # <2>
+    quarto render {input.qmd} -P basedir:{basedir} \                               # <2>
+    -P metaOriginalFile:{originalMetaFile} -P metaExtraFile:{generatedMetaFile} \  # <2>
+    -P outMetaFile:{output.outMetaFile}                                            # <2>  
     '''
 ```
+
+1.  This would normally be added to the `config.yaml` file for `Snakemake`.
+2.  This is the "qcFromCellranger" rule defined in the Snakefile.
 
 ## Other mentions
 
