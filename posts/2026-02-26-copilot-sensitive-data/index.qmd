@@ -7,7 +7,7 @@ date-modified: last-modified
 categories: [ "Copilot", "VSCode", "AI", "IDE", "Secure Data Environment", "Tips and Tricks" ]
 ---
 
-**TL;DR**: Don't keep sensitive file anywhere near where VSCode can read them :)
+**TL;DR**: Don't keep sensitive files anywhere near where VSCode can read them :)
 
 # Introduction
 
@@ -91,7 +91,7 @@ Copilot will send the content of the file to the API server, which contains the 
 
 
 
-# The solution(s)
+# Solutions that don't work
 
 ## File type permissions
 
@@ -115,14 +115,17 @@ A "problem" with this list is that it is used as a global setting and that it is
 
 Apart from the risks of misconfiguring the file type permissions and accidentally posting your file, there is another way to mess up. The list of file types and permissions only apply to the inline completion. The Copilot chat in the sidebar completely disregards this list and will happily post any and all files in your project folder.
 
+
 ## `.gitignore` exclusion
 
-Another setting that you should enable is the `Explorer: Exclude Git Ignore` option. This will make VSCode's file browser hide any files you have in your `.gitignore` file. This will make it harder to accidentally open sensitive files in VSCode. The Copilot chat will still be able to read and post the files though.
+Another setting that you could enable is the `Explorer: Exclude Git Ignore` option. This will make VSCode's file browser hide any files you have in your `.gitignore` file. This will make it harder to accidentally open sensitive files in VSCode. The Copilot chat will still be able to read and post the files though, making the option 
 
 
+# Some solutions that does work
 
+Never keep files that contain sensitive information in the workspace folder or any of its subfolders. Copilot will only look at the files in you workspace, and if it tries to access files outside it has to ask for permission (self-government, mind you) to access the files. When you run your script you can supply the path to the file that is far outside of the VSCode workspace folder as an argument.
 
-
+If you are using Docker for deployment you can make use of [Docker Swarm Secrets](https://docs.docker.com/engine/swarm/secrets/), in which you can store your sensitive data (500kb max) in a database that docker manages, and the containers can access the secret as if it was a file inside the container. Various cloud providers have similar solutions, e.g. AWS Secrets Manager, Azure Key Vault, GCP Secrets Manager.
 
 
 
