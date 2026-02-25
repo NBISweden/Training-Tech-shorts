@@ -95,45 +95,52 @@ Copilot will send the content of the file to the AI provider's server, which con
 
 ## File type permissions
 
-This problem can be mitigated a bit by having your API credentials stored in a separate config file (e.g. `.yaml` or a `.env` file) that is read by the script or given as arguments at run time. You better not edit that separate file in VSCode though, as it will again post your credentials as soon as you type a character in the file unless you configure VSCode to not use completion on those file types.
+This problem can be mitigated a bit by having your API credentials stored in a separate config file (e.g. a `yaml` or a `.env` file) that is read by the script or given as arguments at run time. You better not edit that separate file in VSCode though, as it will again post your credentials as soon as you type a character in the file unless you configure VSCode to not use completion on those file types.
 
 By default completion is enabled for all file types except `plaintext`, `markdown` and `scminput` as specified in the VSCode option `GitHub › Copilot: Enable`. Note that none of the common configuration file formats are defined by default. See the [Language identifier list](https://code.visualstudio.com/docs/languages/identifiers) for the complete list of languages you can specify.
 
 ![](./images/vscode-filetypes-default.png)
 
-Try opening any of the `yaml` and `.env` file and see that they are being sent for completion as soon as you start typing in the files. You should add common configuration file formats to the list in `GitHub › Copilot: Enable` and set them as `false`. You should also set the default case, `*`, to `false` and add the file formats you do want completion for as `true`. If you discover that you want completion for a new language you did not think of first, just add it to the list as `true`.
+Try opening any of the `yaml` and `.env` file and see that they are being sent for completion as soon as you start typing in the files. You should add common configuration file formats to the list in `GitHub › Copilot: Enable` and set them as `false`. You should also set the default case, `*`, to `false` and add the file formats you do want completion for as `true`. If you discover that you want completion for a new language you did not think of first, just add it to the list as `true`. An important thing which we'll cover in just a bit, don't use the keyboard shortcut or icon in the bottom-right corner to toggle inline code completion.
 
 ![](./images/vscode-filetypes-curated.png)
 
 A "problem" with this list is that it is used as a global setting and that it is persistent even if you restart VSCode. That sounds like, and most often are, good features but it can get you in trouble.
 
-The main problem is that if you use keyboard shortcuts or the Copilot icon in the bottom-right corner to enable or disable completion, it does not apply only to the file you are editing and it will not reset when you restart VSCode. The shortcuts will change the list in `GitHub › Copilot: Enable` and the changes will be persistent. In some other editors, the list defined in the settings is the default case and using shortcuts to modify behaviour is only used for the specific file you are editing and only until you restart the editor.
+The real issue with this is that if you use keyboard shortcuts or the Copilot icon in the bottom-right corner to toggle completion, it does not apply only to the file or file type you are editing and it will not reset when you restart VSCode. The shortcuts will change the list in `GitHub › Copilot: Enable` and the changes will be persistent. In some other editors, the list defined in the settings is the default values and using shortcuts to modify behaviour is only used for the specific file you are editing and only until you restart the editor.
 
 * If you have the default case `*` set to `true` and define a list of file formats that should be set to `false`, if you open a new config format you did not think of you could accidentally post your credentials.
 
-* If you have a config file format set to `false` and you are editing a non-sensitive file of the same format and you use the Copilot icon in the bottom-right corner to enable completion in the non-sensitive file, that sets that file format to `true` and is remembered. If you forget to turn it off manually after you are done editing the non-sensitive file, a week later when you start editing one of your sensitive config files the setting is still set to `true`, and your sensitive file gets posted.
+* If you have a config file format set to `false` and you are editing a non-sensitive file of the same format and you use the Copilot icon in the bottom-right corner to enable completion in the non-sensitive file, that sets that file format to `true` and it is remembered. If you forget to turn it off manually after you are done editing the non-sensitive file, a week later when you start editing one of your sensitive config files the setting is still set to `true`, and your sensitive file gets posted.
 
  * The trickiest case though is that all file formats that are not explicitly listed in the `GitHub › Copilot: Enable` list are classified as belonging to the default case `*`, even though VSCode very well knows which file format the file is.
 
-    So if you have the default case `*` set to `false`, and you open a shell script file and enable the code completion using the shortcut, it will set `*` to `true`. The next time you open a `dotenv` file it will be posted as soon as you type anything in the file, as the `dotenv` file is not explicitly listed and thus is classified as the default case `*`. A more sane approach by VSCode would have been to automatically create a entry in the list for shell scripts and set that to `true`, leaving the default case value unchanged, or make the setting only for that file until you restart the editor.
+    So if you have the default case `*` set to `false`, and you open a shell script file and enable the code completion using the shortcut, it will set `*` to `true` since you have not specified shell scripts in the list. The next time you open a `dotenv` file it will be posted as soon as you type anything in the file, as the `dotenv` file is not specified in the list either. A more sane approach by VSCode would have been to automatically create a entry in the list for shell scripts and set that to `true`, leaving the default case value unchanged, or make the setting only for that file until you restart the editor.
   
-Apart from the risks of misconfiguring the file type permissions and accidentally posting your file, there is another way to mess up. The list of file types and permissions only apply to the inline completion. The Copilot chat in the sidebar completely disregards this list and will happily post any and all files in your project folder.
+Apart from the risks of misconfiguring the file type permissions and accidentally posting your file, there is another way to mess up that is even . The list of file types and permissions only apply to the inline completion. The Copilot chat in the sidebar completely disregards this list and will happily post any and all files in your project folder.
 
 
 ## `.gitignore` exclusion
 
-Another setting that you could enable is the `Explorer: Exclude Git Ignore` option. This will make VSCode's file browser hide any files you have in your `.gitignore` file. This will make it harder to accidentally open sensitive files in VSCode. The Copilot chat will still be able to read and post the files though, making the option 
+Another setting that you could enable is the `Explorer: Exclude Git Ignore` option. This will make VSCode's file browser hide any files you have in your `.gitignore` file. This will make it harder to accidentally open sensitive files in VSCode, and should keep the inline code completion from posting your sensitive data. The Copilot chat will still be able to read and post the files though, making the option less usefull from a security perspective.
 
 
 # Some solutions that does work
 
+## Sensitive data outside of workspace
+
 Never keep files that contain sensitive information in the workspace folder or any of its subfolders. Copilot will only look at the files in you workspace, and if it tries to access files outside it has to ask for permission (self-government, mind you) to access the files. When you run your script you can supply the path to the file that is far outside of the VSCode workspace folder as an argument.
+
+
+## Secrets managers
 
 If you are using Docker for deployment you can make use of [Docker Swarm Secrets](https://docs.docker.com/engine/swarm/secrets/), in which you can store your sensitive data (500kb max) in a database that docker manages, and the containers can access the secret as if it was a file inside the container. Various cloud providers have similar solutions, e.g. AWS Secrets Manager, Azure Key Vault, GCP Secrets Manager.
 
 
+# Summary
 
+* There is as of now no reliable way to stop Copilot from posting sensitive files if you keep them in your workspace folder. Just keep the sensitive data somewhere else.
 
+* The file type based settings are easy to misconfigure, and using the inline code completion toggle can have unintended consequeses.
 
-
-
+* The chat version of Copilot does not respect the settings of the inline code completion, and does not seem to have any corresponding settings.
