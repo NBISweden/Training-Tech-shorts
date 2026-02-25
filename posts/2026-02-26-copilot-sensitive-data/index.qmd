@@ -7,13 +7,13 @@ date-modified: last-modified
 categories: [ "Copilot", "VSCode", "AI", "IDE", "Secure Data Environment", "Tips and Tricks" ]
 ---
 
-**TL;DR**: Don't keep sensitive files anywhere near where VSCode can read them :)
+**TL;DR**: Don't keep sensitive files anywhere in your VSCode workspace.
 
 # Introduction
 
 For Copilot (any other AI service) to be able to make suggestions for your code it has to look at what code you have so far. It could be when it suggest the next line of code you could write, or if it analyses your entire code base. The computations for making these suggestions are not done locally, so for it to be able to make a suggestion it has to send whatever code you have to the AI service's API where their GPU cluster will crunch the numbers and make a suggestion. This might be fine for your general code, but you don't want to to send things like API keys, login credentials, or other sensitive data you are not supposed to share with anyone.
 
-This tutorial will show you steps you can take to protect sensitive date from being sent, and we will use VSCode and Copilot as our demo setup. It is inspired by the excellent blog post by *Miloslav Homer*, [Cautiously Configuring Copilot](https://code.kiwi.com/articles/cautiously-configuring-copilot/)
+This tutorial will show you steps you can take to protect sensitive date from being sent, and some of the pitfalls you might encounter. We will use VSCode and Copilot as our demo setup. It is inspired by the excellent blog post by *Miloslav Homer*, [Cautiously Configuring Copilot](https://code.kiwi.com/articles/cautiously-configuring-copilot/)
 
 
 # Setting up the tools
@@ -48,7 +48,7 @@ This will open a UI that shows you all traffic that goes through the proxy. Leav
 
 ## VSCode
 
-Install VSCode as usual, https://code.visualstudio.com/ , then open it from the terminal and set an environment variable telling it to not check SSL certificates. 
+Install VSCode as usual, <https://code.visualstudio.com/>, then open it from the terminal and set an environment variable telling it to not check SSL certificates. 
 
 ```bash
 NODE_TLS_REJECT_UNAUTHORIZED=0 code
@@ -65,7 +65,7 @@ Tell it to activate Copilot in the first welcome screen and login using your git
 
 # The problem
 
-Open the folder `Training-Tech-shorts/posts/2026-02-26-copilot-sensitive-data/example_files` in VSCode and start editing any file in there. You should see the traffic in the `mitmproxy` window once you start typing in the file. By default, Copilot will be active on startup and for all file types, and send the content of the file to the server every time you type a character. In the `mitmproxy` terminal, check the lines with `HTTPS POST …ividual.githubcopilot.com /v1/engines/copilot-codex/completions` to see what is sent to the server.
+Open the folder `Training-Tech-shorts/posts/2026-02-26-copilot-sensitive-data/example_files` in VSCode and start editing any file in there. You should see the traffic in the `mitmproxy` window once you start typing in the file. By default, Copilot will be active on startup and for all file types (except `plaintext`, `markdown`, and `scminput`), and send the content of the file to the AI provider's server as soon as you type a character in the file.
 
 With all the tools set up we can start experimenting and seeing what is being sent to the Copilot API. There will be many requests coming through the proxy, but we are only interested in the ones that contain the word `completion` as these are the requests containing our code completions. In the terminal running `mitmproxy` we can tell it to filter the list of requests by pressing `f` and typing `completion`, making it only show requests containing the word `completion` in the url.
 
@@ -85,10 +85,10 @@ data = response.json()
 # Print the response data
 print(data)
 ```
-Copilot will send the content of the file to the API server, which contains the API url and API key. Congratulations, you just shared the credentials for your API.
+
+Copilot will send the content of the file to the AI provider's server, which contains a (fake) API url and API key. Congratulations, you just shared the credentials for your API.
 
 ![](./images/mitmproxy-api-reader-bad.png)
-
 
 
 # Solutions that don't work
@@ -97,7 +97,7 @@ Copilot will send the content of the file to the API server, which contains the 
 
 This problem can be mitigated a bit by having your API credentials stored in a separate config file (e.g. `.yaml` or a `.env` file) that is read by the script or given as arguments at run time. You better not edit that separate file in VSCode though, as it will again post your credentials as soon as you type a character in the file unless you configure VSCode to not use completion on those file types.
 
-By default completion is enabled for all file types except `plaintext`, `markdown` and `scminput` as specified in the VSCode option `GitHub › Copilot: Enable`. Note that none of the common configuration formats are enabled by default. See the [Language identifier list](https://code.visualstudio.com/docs/languages/identifiers) for the complete list of languages you can specify.
+By default completion is enabled for all file types except `plaintext`, `markdown` and `scminput` as specified in the VSCode option `GitHub › Copilot: Enable`. Note that none of the common configuration file formats are defined by default. See the [Language identifier list](https://code.visualstudio.com/docs/languages/identifiers) for the complete list of languages you can specify.
 
 ![](./images/vscode-filetypes-default.png)
 
@@ -105,14 +105,18 @@ Try opening any of the `yaml` and `.env` file and see that they are being sent f
 
 ![](./images/vscode-filetypes-curated.png)
 
-A "problem" with this list is that it is used as a global setting and that it is persistent even if you restart VSCode. That sounds like, and most often are, good features but it can get you in trouble. The main problem is that if you use keyboard shortcuts or the Copilot icon in the bottom-right corner to enable or disable completion, it does not apply only to the file you are editing. The shortcuts will change the list in `GitHub › Copilot: Enable` and the changes will be persistent. In some other editors, the list defined in the settings is the default case and using shortcuts to modify behaviour is only used for the specific file you are editing and only until you restart the editor.
+A "problem" with this list is that it is used as a global setting and that it is persistent even if you restart VSCode. That sounds like, and most often are, good features but it can get you in trouble.
 
-* If you set the default case `*` to `false` you could open any file and feel safe. If you manually enable completion using the Copilot icon in the bottom-right corner you might think it only applies to the file you are doing the enabling in, but that is not the case. It will set the default case to `true` globally, and it will stay that way even if you restart VSCode. It will stay `true` until you manually disable it again.
+The main problem is that if you use keyboard shortcuts or the Copilot icon in the bottom-right corner to enable or disable completion, it does not apply only to the file you are editing and it will not reset when you restart VSCode. The shortcuts will change the list in `GitHub › Copilot: Enable` and the changes will be persistent. In some other editors, the list defined in the settings is the default case and using shortcuts to modify behaviour is only used for the specific file you are editing and only until you restart the editor.
 
 * If you have the default case `*` set to `true` and define a list of file formats that should be set to `false`, if you open a new config format you did not think of you could accidentally post your credentials.
 
-* If you have a config file format set to `false` and you are editing a non-sensitive file of the same format and you use the Copilot icon in the bottom-right corner to enable completion in the non-sensitive file, that sets that file format to `true` in the global settings and is remembered. If you forget to turn it off manually after you are done editing the non-sensitive file, a week later when you start editing one of your sensitive config files the setting is still set to `true`, and your sensitive file gets posted.
+* If you have a config file format set to `false` and you are editing a non-sensitive file of the same format and you use the Copilot icon in the bottom-right corner to enable completion in the non-sensitive file, that sets that file format to `true` and is remembered. If you forget to turn it off manually after you are done editing the non-sensitive file, a week later when you start editing one of your sensitive config files the setting is still set to `true`, and your sensitive file gets posted.
 
+ * The trickiest case though is that all file formats that are not explicitly listed in the `GitHub › Copilot: Enable` list are classified as belonging to the default case `*`, even though VSCode very well knows which file format the file is.
+
+    So if you have the default case `*` set to `false`, and you open a shell script file and enable the code completion using the shortcut, it will set `*` to `true`. The next time you open a `dotenv` file it will be posted as soon as you type anything in the file, as the `dotenv` file is not explicitly listed and thus is classified as the default case `*`. A more sane approach by VSCode would have been to automatically create a entry in the list for shell scripts and set that to `true`, leaving the default case value unchanged, or make the setting only for that file until you restart the editor.
+  
 Apart from the risks of misconfiguring the file type permissions and accidentally posting your file, there is another way to mess up. The list of file types and permissions only apply to the inline completion. The Copilot chat in the sidebar completely disregards this list and will happily post any and all files in your project folder.
 
 
