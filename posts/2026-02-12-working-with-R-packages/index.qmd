@@ -93,27 +93,18 @@ When using packages, it is useful to keep up to date with the latest package rel
 Pros:
 
 -   Bug fixes
-
 -   Performance
-
 -   New features
-
 -   Compatibility
-
 -   Security
-
 -   Documentation
 
 Cons:
 
 -   Code breakage
-
 -   Version conflicts
-
 -   Workflow disruption
-
 -   Learning curve
-
 -   Temporary instability
 
 ### Working as an R Bioconductor package developer
@@ -180,6 +171,73 @@ rule qcFromCellranger:                                                          
 
 1.  This would normally be added to the `config.yaml` file for `Snakemake`.
 2.  This is the "qcFromCellranger" rule defined in the Snakefile.
+
+## Managing packages with the renv package
+
+`renv` is a package manager for R that helps to manage package dependencies. It is a useful tool for ensuring that your R code is reproducible.
+
+::: {.callout-warning}
+If you install R with Conda / Pixi, do not use `renv` to version packages. Instead, use the prebuilt packages that Conda provides.
+They are often labeled as `r-packagename`, e.g. `r-base`, `r-tidyverse`, etc. Trying to use `renv` in a complex R environment will
+likely lead to compilation headaches as architecture strings may mismatch, leading to failures of package installations as packages are
+built from source.
+:::
+
+### Initialization
+
+Install `renv` and initialize it.
+
+```{.r}
+install.packages("renv")
+renv::init(bioconductor = "3.22") # <1>
+```
+
+1. Pins Bioconductor to a specific release. The bioconductor release must be compatible with the current R version, and therefore using `rig` to manage R versions is advantageous. 
+
+This creates the necessary files for `renv` to work, and should be included in your version control system.
+
+:::{.callout-warning}
+Your R session must be restarted for the changes in `.Rprofile` to take effect after `renv::init()`. This is handled automatically in RStudio.
+:::
+
+### Package installation
+
+As you work, install packages with an `renv` compatible method, and then snapshot the environment. This installs
+packages to the renv cache which is then copied to the renv library.
+
+```{.r}
+renv::install("package_name1")
+renv::install("package_name2")
+# If you prefer pacman
+pacman::p_load("package_name1","package_name2", "package_name3")
+# Check your code still works
+# then update the lockfile
+renv::snapshot()
+```
+
+:::{.callout-tip}
+Use `renv::status()` to check if your environment is up to date with the lockfile.
+::: 
+
+### Restoring packages
+
+If you are working on a project for the first time, or if you are working on a project that someone else has shared with you, you can use `renv::restore()` to install the packages that are needed for the project. This will install the packages that are listed in the `renv.lock` file.
+```{.r}
+renv::restore()
+```
+
+### Other dependencies
+
+`renv` doesn't manage non-R dependencies like `pandoc`, for example, or system-level dependencies like `libxml2` or `zlib`. Docker
+is often used to manage these dependencies instead. The `renv.lock` is copied inside the container, and `renv::restore()` is run
+there to produce the same environment as on the host machine.
+
+### Additional resources
+
+- [Introduction to renv](https://rstudio.r-universe.dev/articles/renv/renv.html)
+- [Using renv with Bioconductor](https://rstudio.github.io/renv/articles/bioconductor.html)
+- [How renv restores packages from R-Universe](https://ropensci.org/blog/2022/01/06/runiverse-renv/)
+- [Docker best practices for R developers](https://collabnix.com/10-essential-docker-best-practices-for-r-developers-in-2025/)
 
 ## Other mentions
 
