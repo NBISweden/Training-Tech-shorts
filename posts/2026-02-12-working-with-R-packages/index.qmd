@@ -2,6 +2,7 @@
 title: "Working with R packages"
 author: 
   - "Dania Machlab"
+  - "Mahesh Binzer-Panchal"
 date: "2026-02-12"
 date-modified: last-modified
 categories: ["R", "R packages", "Version controlling with Bioconductor releases"]
@@ -241,4 +242,10 @@ there to produce the same environment as on the host machine.
 
 ## Other mentions
 
-Additional resources to check for managing and using R packages are [renv](https://rstudio.github.io/renv/articles/renv.html), [pixi](https://pixi.prefix.dev/latest/), Bioconductor Docker [containers](https://bioconductor.org/help/docker/), and [Seqera's Wave](https://seqera.io/wave/). It is worth keeping in mind that some of these do not allow for specifying the Bioconductor release version when installing packages and that [Bioconda](https://bioconda.github.io) can be a bit behind in terms of package versions, with some of the most recent versions missing.
+Additional resources to check for managing and using R packages are: 
+
+- [pixi](https://pixi.prefix.dev/latest/)
+- [Bioconductor Docker containers](https://bioconductor.org/help/docker/)
+- [Seqera's Wave](https://seqera.io/wave/)
+
+It is worth keeping in mind that some of these do not allow for specifying the Bioconductor release version when installing packages and that [Bioconda](https://bioconda.github.io) can be a bit behind in terms of package versions, with some of the most recent versions missing.
