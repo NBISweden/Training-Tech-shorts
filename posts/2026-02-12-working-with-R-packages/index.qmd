@@ -1,0 +1,251 @@
+---
+title: "Working with R packages"
+author: 
+  - "Dania Machlab"
+  - "Mahesh Binzer-Panchal"
+date: "2026-02-12"
+date-modified: last-modified
+categories: ["R", "R packages", "Version controlling with Bioconductor releases"]
+---
+
+When working with R packages, it is good practice to version control the R and package versions being used. Doing so with enough flexibility to allow for interactive work when testing and perfecting scripts is useful since a lot of time is spent in that phase, and a degree of freedom is needed to quickly install new packages to try, or to use the latest packages with implemented bug fixes. Working with R in bioinformatics, we often rely on the useful packages and data structures from [Bioconductor](https://bioconductor.org) which facilitate our analyses. This walkthrough goes through recommended practices on how to work with R packages from that point of view, and how to couple installations with specific Bioconductor releases.
+
+## R package sources
+
+R packages can be installed from several sources including CRAN, GitHub, GitLab, R-Universe, and Bioconductor. Packages like `utils`, `devtools`, `remotes` and `BiocManager` offer functions to install packages from these sources. More details on how to install and manage R packages are covered in the next section.
+
+### CRAN
+
+The comprehensive R archive network (CRAN) contains over 23 thousand packages from all kinds of fields and applications, not just bioinformatics. Packages are submitted to CRAN as source tarballs and old source packages are kept in a public archive.
+
+### R-Universe
+
+This software infrastructure project from [rOpenSci](https://docs.r-universe.dev) is recognized by the R Consortium as critical infrastructure since [2024](https://r-consortium.org/posts/r-universe-named-r-consortiums-newest-top-level-project/). R packages which live on git are built continuously so the binaries are always in sync with the source package. This includes CRAN and Bioconductor packages as well.
+
+### Bioconductor
+
+Bioconductor provides a coordinated distribution of packages that are tested, versioned and released together. There are 2 release cycles per year, approximately 6 months apart, and each is tied to a specific R version. Bug fixes are possible on the current release, whereas more active package development happens on the `devel` branch which will be the future release. Build [reports](https://bioconductor.org/checkResults/) are also made available every few days.
+
+## Installing and managing R packages
+
+When working with and [managing](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) Bioconductor packages, it is good practice to make sure they are coming from the same Bioconductor release, to avoid unnecessary problems. It is important to use the right R version suitable for the release being used. The `BiocManager` package offers useful functions to do these checks.
+
+``` r
+## check for the version of Bioconductor currently in use
+BiocManager::version()
+
+## check for packages that are out-of-date or from unexpected versions
+BiocManager::valid()
+
+## check for available packages on Bioconductor
+BiocManager::available()
+```
+
+To allow for the flexibility of having several Bioconductor versions on the same computer, it is good practice to create a library path for the specific Bioconductor release and R version, and then use `BiocManager::install()`, and set the `version` argument to the desired (current) Bioconductor release, to install all R packages including CRAN packages in this path. This allows for a degree of freedom and flexibility when working interactively, while also version controlling by the Bioconductor release and installing any R (e.g. CRAN) package in this fashion. For example, on a MacBook with arm64 architecture, this library path would be `~/Library/R/arm64/4.5-Bioc-3.21/library`.
+
+To later use the installed packages, one would need to set the environment variable `R_LIBS_USER` to this path, and invoke R. Alternatively, once in R one can also use `.libPaths()` to add the library path. `R_LIBS_USER` can also be set in the `.Renviron` file which contains environment variables to be set in R sessions. The `usethis` package contains a helper function called `edit_r_environ()` to edit this file. The user must keep this file in mind if switching between different R versions and library paths and make the necessary edits.
+
+Below is an illustration, within an R session, on how `BiocManager::install()` can be used to to install R packages. For packages that need to be installed from GitHub, `BiocManager::install()` uses `remotes::install_github()`.
+
+``` r
+## set params
+bioc <- "3.21" # with R 4.5
+libPath <- "~/Library/R/arm64/4.5-Bioc-3.21/library"
+
+## first time install BiocManager
+#install.packages("BiocManager", lib = libPath)
+
+## packages (CRAN, Bioconductor and GitHub)
+pkgs <- c("Matrix", "SingleCellExperiment", "scuttle", "tidyverse", 
+          "BiocParallel", "scran", "tidyr", "ggplot2", "patchwork", 
+          "limma", "cowplot", "scater", "JASPAR2024", 
+          "DescTools", "monaLisa", "JASPAR2020", "TFBSTools", 
+          "BSgenome.Mmusculus.UCSC.mm10", "DEXSeq", "GenomicAlignments")
+
+## install pkgs (without updating other packages - 
+##              this may be changed later to apply updates like bug fixes)
+BiocManager::install(pkgs = pkgs, 
+                     update = FALSE, 
+                     ask = TRUE, 
+                     checkBuilt = FALSE, 
+                     force = FALSE,
+                     version = bioc, 
+                     lib = libPath)
+```
+
+Of note is also the `BiocArchive` package to install CRAN package versions consistent with older releases of Bioconductor. The example below shows how to install packages compatible with release 3.14.
+
+```{.r}
+## install packages matching previous bioconductor release
+libPath314 <- "~/Library/R/arm64/4.1-Bioc-3.14/library"
+BiocArchive::install(pkgs = pkgs, 
+                     update = FALSE, 
+                     ask = TRUE, 
+                     checkBuilt = FALSE, 
+                     force = FALSE,
+                     version = "3.14", 
+                     lib = libPath314)
+```
+
+### To update or not to update?
+
+When using packages, it is useful to keep up to date with the latest package releases that address issues and bug fixes. At what point of the project you are in may also influence your decision on whether or not to update your R packages. At later stages one may for example want to avoid updates that could break one's code. Consider reading the release notes if you are worried about big changes affecting your code, as well as a separate environment (e.g. Docker container) for testing. Below are some arguments *for* and *against* updating as presented in the [vignette](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) for the `BiocManager` package:
+
+Pros:
+
+-   Bug fixes
+-   Performance
+-   New features
+-   Compatibility
+-   Security
+-   Documentation
+
+Cons:
+
+-   Code breakage
+-   Version conflicts
+-   Workflow disruption
+-   Learning curve
+-   Temporary instability
+
+### Working as an R Bioconductor package developer
+
+`BiocManager::install()` also allows for the packages that live on the `devel` branch to be downloaded by setting `version=devel`. This is useful when wanting to use a new package from the `devel` branch which is not yet part of an official release. On the other hand, as a package developer and maintainer this also allows you to test modifications to your package with the rest of the packages from the `devel` branch.
+
+## rig
+
+[`rig`](https://github.com/r-lib/rig) may be used to install specific R versions, as well as to launch RStudio with the desired R version. The commands below, which are run from the terminal, illustrate its use on a MacBook with arm64.
+
+``` bash
+## list current R installations
+rig list
+
+## list available R versions under arm64
+rig available --arch arm64
+
+## add R 4.5.2 under arm64
+rig add --arch arm64 4.5.2
+
+## launch RStudio with R-4.5.2
+rig rstudio 4.5-arm64
+```
+
+## Writing R scripts and using `Snakemake`
+
+Once in RStudio, and using the library paths we have created, we can work interactively on our `.R`, `.Rmd` or `.qmd` scripts. We can define a set of parameters to pass on as variables into our scripts. In this framework, we can set those parameters in the Snakefile and pass them on when running or rendering the script. In a `.qmd` file, the `params` YAML option is used to do [this](https://quarto.org/docs/computations/parameters.html). Some additional considerations that are useful are producing both pdf and png versions of your plots and figures, and printing out the date and session information at the end of the script with `date()` and `sessionInfo()`. The code below illustrates how png and pdf versions of the figures can be produced in a `.qmd` file by setting global chunk options as follows in the YAML header :
+
+``` yaml
+knitr:
+  opts_chunk:
+    dev:
+      - png
+      - pdf
+```
+
+It is generally good practice to use a workflow management system in your analyses, to keep track of changes and dependencies. Here we rely on [Snakemake](https://snakemake.readthedocs.io/en/stable/) and illustrate how our `.qmd` script can be rendered there. An example rule in our Snakefile called "qcFromCellranger" is depicted below.
+
+``` python
+Rscript="/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/bin/Rscript" # <1>
+RBiocLib="~/Library/R/arm64/4.5-Bioc-3.21/library"                                 # <1>
+
+rule qcFromCellranger:                                                             # <2>
+  input:                                                                           # <2>
+    qmd = "scripts/01_cellrangerQC.qmd"                                            # <2>  
+  output:                                                                          # <2>
+    html = "scripts/01_cellrangerQC.html",                                         # <2>
+    outMetaFile = "generatedFiles/01_metadata.txt"                                 # <2>
+  shell:                                                                           # <2>
+    '''                                                                            # <2>
+    # wdir                                                                         # <2>
+    cd {basedir} && \                                                              # <2>
+                                                                                   # <2>  
+    # setup needed env variables to run quarto with specific R and Rlibs           # <2>  
+    export QUARTO_R={Rscript} && \                                                 # <2>
+    export R_LIBS_USER={RBiocLib} && \                                             # <2>
+                                                                                   # <2>
+    # render with quarto                                                           # <2>
+    quarto render {input.qmd} -P basedir:{basedir} \                               # <2>
+    -P metaOriginalFile:{originalMetaFile} -P metaExtraFile:{generatedMetaFile} \  # <2>
+    -P outMetaFile:{output.outMetaFile}                                            # <2>  
+    '''
+```
+
+1.  This would normally be added to the `config.yaml` file for `Snakemake`.
+2.  This is the "qcFromCellranger" rule defined in the Snakefile.
+
+## Managing packages with the renv package
+
+`renv` is a package manager for R that helps to manage package dependencies. It is a useful tool for ensuring that your R code is reproducible.
+
+::: {.callout-warning}
+If you install R with Conda / Pixi, do not use `renv` to version packages. Instead, use the prebuilt packages that Conda provides.
+They are often labeled as `r-packagename`, e.g. `r-base`, `r-tidyverse`, etc. Trying to use `renv` in a complex R environment will
+likely lead to compilation headaches as architecture strings may mismatch, leading to failures of package installations as packages are
+built from source.
+:::
+
+### Initialization
+
+Install `renv` and initialize it.
+
+```{.r}
+install.packages("renv")
+renv::init(bioconductor = "3.22") # <1>
+```
+
+1. Pins Bioconductor to a specific release. The bioconductor release must be compatible with the current R version, and therefore using `rig` to manage R versions is advantageous. 
+
+This creates the necessary files for `renv` to work, and should be included in your version control system.
+
+:::{.callout-warning}
+Your R session must be restarted for the changes in `.Rprofile` to take effect after `renv::init()`. This is handled automatically in RStudio.
+:::
+
+### Package installation
+
+As you work, install packages with an `renv` compatible method, and then snapshot the environment. This installs
+packages to the renv cache which is then copied to the renv library.
+
+```{.r}
+renv::install("package_name1")
+renv::install("package_name2")
+# If you prefer pacman
+pacman::p_load("package_name1","package_name2", "package_name3")
+# Check your code still works
+# then update the lockfile
+renv::snapshot()
+```
+
+:::{.callout-tip}
+Use `renv::status()` to check if your environment is up to date with the lockfile.
+::: 
+
+### Restoring packages
+
+If you are working on a project for the first time, or if you are working on a project that someone else has shared with you, you can use `renv::restore()` to install the packages that are needed for the project. This will install the packages that are listed in the `renv.lock` file.
+```{.r}
+renv::restore()
+```
+
+### Other dependencies
+
+`renv` doesn't manage non-R dependencies like `pandoc`, for example, or system-level dependencies like `libxml2` or `zlib`. Docker
+is often used to manage these dependencies instead. The `renv.lock` is copied inside the container, and `renv::restore()` is run
+there to produce the same environment as on the host machine.
+
+### Additional resources
+
+- [Introduction to renv](https://rstudio.r-universe.dev/articles/renv/renv.html)
+- [Using renv with Bioconductor](https://rstudio.github.io/renv/articles/bioconductor.html)
+- [How renv restores packages from R-Universe](https://ropensci.org/blog/2022/01/06/runiverse-renv/)
+- [Docker best practices for R developers](https://collabnix.com/10-essential-docker-best-practices-for-r-developers-in-2025/)
+
+## Other mentions
+
+Additional resources to check for managing and using R packages are: 
+
+- [pixi](https://pixi.prefix.dev/latest/)
+- [Bioconductor Docker containers](https://bioconductor.org/help/docker/)
+- [Seqera's Wave](https://seqera.io/wave/)
+
+It is worth keeping in mind that some of these do not allow for specifying the Bioconductor release version when installing packages and that [Bioconda](https://bioconda.github.io) can be a bit behind in terms of package versions, with some of the most recent versions missing.

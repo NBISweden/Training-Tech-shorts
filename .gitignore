@@ -15,3 +15,6 @@ results/
 
 # Misc
 data/
+.Rproj.user
+*.Rproj
+.Rhistory
