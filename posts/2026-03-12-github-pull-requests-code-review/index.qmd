@@ -1,0 +1,310 @@
+---
+title: "Github Pull Requests and Code Reviews"
+author: 
+  - "Mahesh Binzer-Panchal"
+date: "2026-03-12"
+date-modified: last-modified
+categories: ["Github", "Pull Requests", "Code Reviews"]
+---
+
+## Introduction
+
+Pull requests (PRs) are GitHub's primary mechanism for proposing, reviewing, and integrating code changes. This guide covers the essential workflow for creating and reviewing pull requests - core skills for collaborative bioinformatics development.
+
+**What we'll cover:**
+
+- Creating a branch and making changes
+- Opening a pull request
+- Reviewing code and suggesting changes
+- Addressing feedback and merging
+
+## The Pull Request Workflow
+
+### Step 1: Create a Branch
+
+Branches allow you to develop features or fixes in isolation from the main codebase.
+
+**Using Git commands:**
+```bash
+# Create and switch to a new branch
+git checkout -b feature/add-quality-filter
+
+# Make your changes to files
+# ... edit your code ...
+
+# Stage and commit your changes
+git add .
+git commit -m "Add quality filtering to alignment script"
+
+# Push the branch to GitHub
+git push -u origin feature/add-quality-filter
+```
+
+**Using GitHub web interface:**
+
+1. Navigate to your repository
+2. Click the branch dropdown (usually says "main")
+3. Type a new branch name and select "Create branch"
+
+::: {.callout-tip}
+## Branch Naming Conventions
+Use descriptive names with prefixes:
+
+- `feature/` for new features
+- `fix/` or `bugfix/` for bug fixes
+- `docs/` for documentation updates
+- `refactor/` for code refactoring
+:::
+
+### Step 2: Make Your Changes
+
+Edit your files, add new code, update documentation, etc. Commit your changes with clear, descriptive messages.
+
+**Good commit messages:**
+```bash
+git commit -m "Add PHRED quality score filter to alignment preprocessing"
+```
+
+**Less helpful commit messages:**
+```bash
+git commit -m "update code"  # Too vague
+git commit -m "fix"          # What was fixed?
+```
+
+### Step 3: Open a Pull Request
+
+**From the GitHub web interface:**
+
+1. Navigate to the repository on GitHub
+2. You'll often see a yellow banner suggesting "Compare & pull request" for recently pushed branches
+3. Alternatively, click "Pull requests" tab → "New pull request"
+4. Select your branch to merge **from** and the target branch (usually `main`) to merge **into**
+5. Fill in the PR template:
+
+**Example PR Description:**
+```markdown
+## Description
+Adds quality filtering step to remove low-quality reads before alignment.
+
+## Changes
+- Added `filter_by_quality()` function to preprocessing module
+- Updated alignment pipeline to call filtering step
+- Added unit tests for quality filtering
+
+## Testing
+- [x] Unit tests pass
+- [x] Tested with sample datasets (SRR12345, SRR67890)
+
+## Related Issues
+Closes #42
+```
+
+::: {.callout-important}
+## What Makes a Good Pull Request?
+- **Small and focused**: Addresses one feature/fix, not multiple unrelated changes
+- **Well-described**: Clear title and description of what and why
+- **Tested**: Includes or references tests for the changes
+- **Links to issues**: References related issue numbers (e.g., "Fixes #123")
+:::
+
+### Branch vs Fork: When to Use Which?
+
+**Use a branch when:**
+
+- You're a collaborator on the repository
+- Working within your organization's repos
+- You have write access
+
+**Use a fork when:**
+
+- Contributing to external/open-source projects
+- You don't have write access to the repository
+- You want to experiment without affecting the original repo
+
+**Fork workflow:**
+
+1. Click "Fork" button on the repository
+2. Clone your fork: `git clone https://github.com/YOUR-USERNAME/repo-name.git`
+3. Create a branch in your fork
+4. Make changes and push to your fork
+5. Create a PR from your fork to the original repository
+
+## Code Review
+
+### Step 4: Review a Pull Request
+
+**As a reviewer:**
+
+1. **Navigate to the PR:**
+  
+   - Go to "Pull requests" tab
+   - Click on the PR to review
+
+2. **Review the "Files changed" tab:**
+   
+   - Examine all modified files
+   - Look for:
+     - Logic errors or bugs
+     - Code style consistency
+     - Missing edge cases or error handling
+     - Unclear variable/function names
+     - Missing tests or documentation
+     - Security issues
+
+3. **Leave comments:**
+
+   **Inline comments** (single line):
+
+   - Hover over a line number
+   - Click the blue `+` icon
+   - Write your comment
+   - Click "Add single comment" for immediate posting
+   
+   **Suggestion comments** (suggesting specific code changes):
+
+   - Click the `+` icon on a line
+   - Click the "Insert a suggestion" button (±)
+   - Edit the code in the suggestion block
+   - Add explanation above the suggestion
+   - The author can accept your suggestion with one click!
+
+   **Example:**
+   ````markdown
+   Consider using a more descriptive variable name here:
+
+   ```suggestion
+   quality_threshold = 30  # Minimum PHRED score
+   ```
+   ````
+
+4. **Start a review** (for multiple comments):
+
+   - Click "Start a review" instead of "Add single comment"
+   - Add all your comments
+   - Click "Finish your review" button (top right)
+   - Choose:
+     - **Comment**: General feedback without approval status
+     - **Approve**: Changes look good, ready to merge
+     - **Request changes**: Issues must be addressed before merging
+
+::: {.callout-tip}
+## Code Review Best Practices
+
+- **Be constructive and kind**: "Consider using X because Y" rather than "This is wrong"
+- **Explain the why**: Don't just say what to change, explain why it's important
+- **Distinguish between blockers and suggestions**: Be clear about what must change vs. nice-to-haves
+- **Praise good work**: Call out clever solutions or improvements
+- **Ask questions**: "Could you help me understand why we need this?" is often better than assuming
+:::
+
+### Step 5: Address Review Feedback
+
+**As the PR author:**
+
+1. **Respond to comments:**
+
+   - Answer questions
+   - Discuss suggestions
+   - Explain your reasoning if you disagree
+
+2. **Make requested changes:**
+   ```bash
+   # Make the changes in your local branch
+   # ... edit files ...
+   
+   # Commit the changes
+   git add .
+   git commit -m "Address review feedback: improve variable naming"
+   
+   # Push to the same branch
+   git push
+   ```
+   
+   The PR will automatically update with your new commits!
+
+3. **Accept suggested changes:**
+
+   - If a reviewer used the suggestion feature, you can click "Commit suggestion" to apply it directly (pull changes locally before pushing new changes!)
+
+4. **Request re-review:**
+
+   - Click the refresh icon next to a reviewer's name to notify them you've addressed their feedback.
+
+### Step 6: Merge the Pull Request
+
+Once approved and all checks pass:
+
+1. **Choose merge strategy:**
+
+   - **Create a merge commit**: Preserves all commits and adds a merge commit (default)
+   - **Squash and merge**: Combines all commits into one (cleaner history)
+   - **Rebase and merge**: Replays commits on top of base branch (linear history)
+
+2. **Click the merge button**
+
+3. **Delete the branch** (optional but recommended to keep repo tidy)
+
+::: {.callout-note}
+## Repository Settings
+Repository admins can require:
+
+- Minimum number of approving reviews
+- Passing CI/CD checks before merging
+- Up-to-date branches before merging
+- Specific reviewers (code owners)
+:::
+
+## Common Scenarios
+
+### Scenario 1: PR has merge conflicts
+
+```bash
+# Update your local main branch
+git checkout main
+git pull origin main
+
+# Switch to your feature branch
+git checkout feature/your-branch
+
+# Merge main into your branch
+git merge main
+
+# Resolve conflicts in your editor
+# ... fix conflicts ...
+
+# Commit the resolution
+git add .
+git commit -m "Resolve merge conflicts with main"
+git push
+```
+
+### Scenario 2: Updating your fork
+
+```bash
+# Add the original repo as upstream (one-time setup)
+git remote add upstream https://github.com/ORIGINAL-OWNER/repo-name.git
+
+# Fetch upstream changes
+git fetch upstream
+
+# Merge upstream changes into your branch
+git merge upstream/main
+git push
+```
+
+## Quick Reference
+
+| Task | Command |
+|------|---------|
+| Create branch | `git checkout -b branch-name` |
+| Push branch | `git push -u origin branch-name` |
+| Update branch from main | `git merge main` |
+| View PR locally | `gh pr checkout PR-NUMBER` (requires GitHub CLI) |
+| List open PRs | `gh pr list` |
+
+## Additional Resources
+
+- [GitHub's Pull Request Documentation](https://docs.github.com/en/pull-requests)
+- [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
+- [GitHub CLI](https://cli.github.com/) - Command-line tool for working with PRs
+- [Code Review Best Practices](https://google.github.io/eng-practices/review/)
