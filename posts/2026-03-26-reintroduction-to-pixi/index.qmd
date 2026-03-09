@@ -1,0 +1,706 @@
+---
+title: "Reintroduction to Pixi"
+author:
+  - "Mahesh"
+date: "2026-03-26"
+date-modified: last-modified
+categories: [ Pixi, "Package management", "Command runner" ]
+---
+
+Previous walkthrough: [Introduction to Pixi](../../posts/2025-01-21-pixi-intro/index.qmd)
+
+## Why Pixi?
+
+### Common Conda Pain Points
+
+If you've used Conda/Mamba for bioinformatics, you've probably experienced:
+
+- 😫 **Painful dependency resolution** - Unhelpful error messages
+- 🔄 **Manual lock files** - Need to remember to generate them with `conda list --explicit > spec-file.txt`
+- 📁 **Scattered environments** - Configuration files separate from projects
+- 🐌 **Single-threaded** - Slow package downloads and installations
+- 🤷 **Environment drift** - "Works on my machine" problems, dependency drift over time leading to unresolvable environments, even though they worked 6 months ago.
+
+### How Pixi does it better
+
+- ⚡ **Much faster** - Written in Rust, multithreaded operations, sharded package lists
+- 🔒 **Automatic lock files** - Like uv, no extra steps needed
+- 📦 **Project-local environments** - Everything lives in your project directory
+- 🎯 **Built-in task runner** - Replace Makefiles and shell scripts
+- 🔁 **True reproducibility** - Lock files track exact versions per platform
+- 💻 **Multi-platform support** - One config for Linux/Mac/Windows. Resolves all platforms at once.
+- 🧩 **Multi-environment support** - One config for multiple environments in a project. Solve groups ensure individual packages are identical across environments.
+
+:::{.callout-tip}
+## Supported architectures you might need to cater for
+
+- Linux-64: 64-bit Linux (Intel/AMD)
+- Mac-arm64: 64-bit Apple Silicon (M1/M2/M3/M4/M5)
+- Mac-64: 64-bit Apple (Intel)
+- Linux-aarch64: 64-bit Linux ARM (Devcontainer on Apple Silicon, AWS Graviton, Raspberry Pi)
+- Win-64: 64-bit Windows (Intel/AMD)
+:::
+
+:::{.callout-important}
+## Package Availability vs. Platform Support
+
+Just because a tool supports an architecture doesn't mean a pre-compiled package exists for it. Pixi relies on binaries provided by channels (like conda-forge). A package may be missing for a specific architecture if one of its upstream dependencies hasn't been ported yet.
+
+- Example: While quarto natively supports ARM64, a linux-aarch64 build is unavailable on Conda channels because a required dependency lacks a compatible binary.
+:::
+
+### What Makes Pixi Great for Bioinformatics
+
+- ✅ **Full support for your favourite channels** - All your favorite tools
+- ✅ **Mix conda and PyPI packages** - Best of both worlds
+- ✅ **Access to system tools** - slurm, singularity, modules all work
+- ✅ **Package isolation with system access** - Isolated environments, not isolated from your cluster
+
+### Conda Compatibility
+
+| Feature | Conda | Pixi |
+|---------|-------|------|
+| Package sources | conda-forge, bioconda | ✅ Same channels |
+| Environment location | `~/miniconda3/envs/` | `.pixi/` in project |
+| Lock files | Manual | ✅ Automatic |
+| Package isolation | ✅ Yes | ✅ Yes |
+| System PATH access | ✅ Yes | ✅ Yes |
+| Speed | Slow | ⚡ Fast |
+| Task runner | ❌ No | ✅ Built-in |
+
+:::{.callout-tip}
+## Conda compatibility
+
+Environments created by Pixi are Conda environments, so they can be used with `conda activate` or Nextflow/Snakemake with the conda directives/flags
+
+:::
+
+---
+
+## Getting Started
+
+### Installation
+
+Install Pixi and add it to your shell configuration (`.bashrc` or `.zshrc`):
+
+```bash
+curl -fsSL https://pixi.sh/install.sh | bash
+```
+
+Verify installation:
+
+```bash
+pixi --version
+```
+
+---
+
+## Core Concepts and Commands
+
+### The Essential Pixi Commands
+
+**`pixi init`** 
+
+- Initialize a new project
+
+   ```bash
+   pixi init myproject
+   ```
+
+**`pixi add`** 
+
+- Add packages to your environment
+
+   ```bash
+   pixi add samtools bwa
+   ```
+
+**`pixi install`** 
+
+- Install dependencies from an existing lock file
+
+   ```bash
+   # Run this when cloning a project
+   pixi install
+   ```
+
+**`pixi run`** 
+
+- Run commands/tasks in the environment (preferred for reproducibility)
+
+   ```bash
+   pixi run fastqc sample.fastq.gz
+   ```
+
+**`pixi shell`** 
+
+- Activate interactive shell (for exploration/debugging)
+
+   ```bash
+   pixi shell  # Interactive mode
+   exit        # Deactivate
+   ```
+
+### Project Files
+
+When you use Pixi, you'll see these files:
+
+**`pixi.toml`** - Your environment configuration (like `environment.yml`)
+```toml
+[project]
+name = "rnaseq-qc"
+channels = ["conda-forge", "bioconda"]
+platforms = ["linux-64", "osx-arm64", "osx-64"]
+
+[dependencies]
+fastqc = "*"
+```
+
+**`pixi.lock`** 
+
+- Locked package versions for reproducibility (auto-generated)
+- Records every package for each supported platform
+- Created/updated automatically when you run `pixi add`, `pixi run`, or `pixi shell`
+- **Commit both files to git!**
+
+**`.pixi/`** 
+
+- Directory containing installed packages
+- Can be safely deleted (regenerated from `pixi.lock`)
+- Add to `.gitignore`
+
+--- 
+
+## Task Runner Features
+
+Pixi's built-in task runner replaces Makefiles and shell scripts with a more powerful system.
+
+### Basic Tasks
+
+```toml
+[tasks]
+# Simple command
+hello = "echo 'Hello, Pixi!'"
+
+# Multi-line command
+process = """
+    echo 'Starting analysis...'
+    fastqc data/*.fastq -o results/
+    echo 'Complete!'
+"""
+```
+
+### Task Dependencies
+
+Chain tasks together:
+
+```toml
+[tasks]
+build = "gcc -o myapp main.c"
+test = { cmd = "python test.py", depends-on = ["build"] }
+deploy = { depends-on = ["build", "test"] }
+```
+
+### Task with Arguments
+
+```toml
+# Task with required arguments
+[tasks.greet]
+args = ["name"]
+cmd = "echo Hello, {{ name }}!"
+
+# Task with optional arguments (default values)
+[tasks.build]
+args = [
+  { "arg" = "project", "default" = "my-app" },
+  { "arg" = "mode", "default" = "development" },
+]
+cmd = "echo Building {{ project }} with {{ mode }} mode"
+```
+
+### Platform-Specific Tasks
+
+```toml
+[target.linux-64.tasks]
+submit = "sbatch job.sh"  # Only available on Linux
+
+[target.osx-arm64.tasks]
+submit = "echo 'Slurm not available on Mac'"
+```
+
+### Input/Output Dependencies
+
+```toml
+[tasks]
+index = { cmd = "bwa index reference.fa", outputs = ["reference.fa.bwt"] }
+align = { cmd = "bwa mem reference.fa reads.fq > aligned.sam", inputs = ["reference.fa.bwt"], depends-on = ["index"] }
+```
+
+See [Advanced Tasks](https://pixi.sh/latest/features/advanced_tasks/) for complete feature list.
+
+---
+
+## Hands-On: Build a QC Pipeline
+
+### Step 1: Initialize the Project
+
+Create a new project directory and initialize Pixi:
+
+```bash
+mkdir rnaseq-qc
+cd rnaseq-qc
+pixi init --channel conda-forge --channel bioconda
+```
+
+**For multi-platform support**:
+
+```bash
+pixi init \
+  --channel conda-forge \
+  --channel bioconda \
+  --platform linux-64 \
+  --platform osx-arm64 \
+  --platform osx-64
+```
+
+This creates `pixi.toml` with your project configuration.
+
+### Step 2: Add Bioinformatics Tools
+
+Add packages from conda channels:
+
+```bash
+pixi add fastqc python
+```
+
+Add Python packages from PyPI:
+
+```bash
+pixi add --pypi multiqc
+```
+
+**Alternative:** Edit `pixi.toml` directly:
+
+```toml
+[dependencies]
+fastqc = ">=0.12.1"
+python = ">=3.11"
+
+[pypi-dependencies]
+multiqc = ">=1.21"
+```
+
+Then run:
+```bash
+pixi install
+```
+
+### Step 3: Test Your Environment
+
+Run a command to verify installation:
+
+```bash
+pixi run fastqc --version
+pixi run multiqc --version
+```
+
+Or enter interactive mode:
+
+```bash
+pixi shell
+fastqc --version
+multiqc --version
+exit
+```
+
+### Step 4: Create Sample Data (for demo)
+
+```bash
+mkdir -p data results reports
+
+# Create a dummy fastq file for testing
+cat << EOF > data/sample.fastq
+@read1
+ACGTACGTACGT
++
+IIIIIIIIIIII
+EOF
+```
+
+### Step 5: Define Tasks
+
+Add tasks to automate your workflow. Edit `pixi.toml`:
+
+```toml
+[tasks]
+qc = "fastqc data/*.fastq* -o results/"
+report = "multiqc results/ -o reports/"
+clean = "rm -rf results/* reports/*"
+```
+
+Or add tasks via command line:
+
+```bash
+pixi task add qc "fastqc data/*.fastq* -o results/"
+pixi task add report "multiqc results/ -o reports/"
+pixi task add clean "rm -rf results/* reports/*"
+```
+
+### Step 6: Run Your Pipeline
+
+Execute individual tasks:
+
+```bash
+pixi run qc
+pixi run report
+```
+
+### Step 7: Add Task Dependencies
+
+Create a pipeline task that runs everything in order:
+
+```toml
+[tasks]
+qc = "fastqc data/*.fastq* -o results/"
+report = { cmd = "multiqc results/ -o reports/", depends-on = ["qc"] }
+pipeline = { depends-on = ["qc", "report"] }
+```
+
+Now run the entire pipeline:
+
+```bash
+pixi run pipeline
+```
+
+### Step 8: Share with Collaborators
+
+Commit your configuration to git:
+
+```bash
+git init
+echo ".pixi/" >> .gitignore
+git add pixi.toml pixi.lock .gitignore
+git commit -m "Add reproducible QC pipeline"
+```
+
+**Collaborators can now reproduce your exact environment:**
+
+```bash
+git clone <your-repo>
+cd rnaseq-qc
+pixi install          # Sets up identical environment
+pixi run pipeline     # Runs with exact same tool versions
+```
+
+---
+
+## Environments and Features
+
+### Simple Case: One Environment
+
+Most projects need just one environment:
+
+```bash
+pixi add fastqc samtools bwa multiqc
+pixi run pipeline
+```
+
+### Complex Case: Multiple Environments with Features
+
+When tools have conflicting dependencies, use **features** to create isolated environments:
+
+```toml
+# QC tools feature
+[feature.qc.dependencies]
+fastqc = "*"
+python = ">=3.11"
+
+[feature.qc.pypi-dependencies]
+multiqc = "*"
+
+# Alignment tools feature
+[feature.alignment.dependencies]
+bwa = "*"
+samtools = "*"
+star = "*"
+
+# Python 2 legacy tool (conflicts with QC)
+[feature.legacy.dependencies]
+python = "2.7.*"
+htseq = "*"
+
+# Define environments from features
+[environments]
+qc = ["qc"]                      # Just QC tools
+alignment = ["alignment"]         # Just alignment tools
+legacy = ["legacy"]              # Just Python 2 tools
+default = ["qc", "alignment"]    # Everything except legacy
+```
+
+Run commands in specific environments:
+
+```bash
+pixi run -e qc multiqc results/
+pixi run -e alignment bwa index reference.fa
+pixi run -e legacy htseq-count  # Uses Python 2
+```
+
+### When to Use Features
+
+- ❌ **Not needed** for most simple projects
+- ✅ **Use when:** 
+  - Tools require conflicting versions
+  - Separating dev/prod dependencies
+  - Platform-specific tool requirements
+  - Large monorepos with multiple subprojects
+
+See [Pixi docs - Multi Environment](https://pixi.sh/latest/features/multi_environment/) for more details.
+
+---
+
+## Managing Your Environment
+
+### Viewing Installed Packages
+
+List all packages:
+```bash
+pixi list
+```
+
+Search for a package:
+```bash
+pixi search samtools
+```
+
+**Note:** Unlike `conda search`, Pixi doesn't list all available versions. For that, use:
+```bash
+conda search -c bioconda samtools
+```
+
+### Updating Packages
+
+Update a specific package:
+```bash
+pixi update samtools
+```
+
+Update all packages:
+```bash
+pixi update
+```
+
+Update all packages including dependencies:
+```bash
+pixi upgrade
+```
+
+### Removing Packages
+
+```bash
+pixi remove samtools
+```
+
+### Cleaning Up
+
+Remove environment binaries (will be recreated from lock file):
+```bash
+pixi clean
+```
+
+Remove downloaded package cache:
+```bash
+pixi clean cache
+```
+
+### Project Hygiene
+
+**Safe to delete** (regenerated from `pixi.lock`):
+
+- `.pixi/` directory
+
+**Must keep** (commit to git):
+
+- `pixi.toml` - your configuration
+- `pixi.lock` - exact package versions
+
+---
+
+## Advanced Features
+
+### Global Tool Installation
+
+Install tools globally (like `pipx`), outside any project:
+
+```bash
+pixi global install bat
+pixi global install nvim
+
+# Now available system-wide
+bat <filename>
+```
+
+List global tools:
+```bash
+pixi global list
+```
+
+### Integration with CI/CD
+
+GitHub Actions example:
+
+```yaml
+# .github/workflows/test.yml
+name: Test Pipeline
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.9.4
+        
+      - name: Run tests
+        run: pixi run pipeline
+```
+
+See the [Pixi Github Action](https://github.com/marketplace/actions/setup-pixi) page for the latest version
+
+### Intel Emulation on ARM Macs
+
+Some bioinformatics tools aren't built for `osx-arm64` yet, but are available for `osx-64` (Intel Macs).
+
+MacOS can use Rosetta to emulate Intel binaries (with performance cost):
+
+```bash
+pixi init \
+  --channel conda-forge \
+  --channel bioconda \
+  --platform linux-64 \
+  --platform osx-64        # Intel only, ARM Macs use Rosetta
+```
+
+This ensures Linux and Intel Mac users get native binaries, while ARM Mac users get working (emulated) binaries. Tools may still fail with emulation though.
+
+### Working with Containers
+
+Pixi works great with Docker/Singularity:
+
+```dockerfile
+# Dockerfile
+FROM ghcr.io/prefix-dev/pixi:latest
+
+WORKDIR /app
+COPY pixi.toml pixi.lock ./
+
+RUN pixi install
+COPY . .
+
+CMD ["pixi", "run", "pipeline"]
+```
+
+### Version Constraints
+
+Specify exact versions or ranges:
+
+```toml
+[dependencies]
+samtools = "1.18.*"           # Any patch version of 1.18
+bwa = ">=0.7.17,<0.8"         # Range
+fastqc = "0.12.1"             # Exact version
+star = "*"                    # Latest version
+```
+
+### Platform-Specific Dependencies
+
+```toml
+# Available on all platforms
+[dependencies]
+python = ">=3.11"
+
+# Linux only
+[target.linux-64.dependencies]
+cuda = "11.8.*"
+
+# Mac only
+[target.osx-arm64.dependencies]
+tensorflow-metal = "*"
+```
+
+## Additional Commands Reference
+
+### Updating Pixi Itself
+
+```bash
+pixi self-update
+```
+
+### Getting Help
+
+```bash
+pixi help                 # General help
+pixi help add             # Command-specific help
+pixi --version            # Check version
+```
+
+### Workspace Information
+
+```bash
+pixi info                   # Workspace details
+pixi workspace version get  # Workspace version
+pixi workspace channel list # List channels
+```
+
+### Task Management
+
+```bash
+pixi task list           # List all tasks
+pixi task add <name> <cmd>   # Add task
+pixi task remove <name>      # Remove task
+```
+
+### Advanced Package Management
+
+```bash
+pixi tree                # Show dependency tree
+pixi list --explicit     # Only show directly added packages
+pixi search <name>       # Search for packages
+```
+
+### Resources
+
+**Documentation:** [https://pixi.sh/latest](https://pixi.sh/latest)  
+**GitHub:** [https://github.com/prefix-dev/pixi](https://github.com/prefix-dev/pixi)  
+**Examples:** [https://github.com/prefix-dev/pixi/tree/main/examples](https://github.com/prefix-dev/pixi/tree/main/examples)  
+**Tutorial:** [https://pixi.sh/latest/tutorials/python/](https://pixi.sh/latest/tutorials/python/)
+
+### Quick Reference Card
+
+```bash
+# Project setup
+pixi init                 # Initialize project
+pixi install             # Install from lock file
+
+# Package management
+pixi add <package>       # Add conda package
+pixi add --pypi <pkg>    # Add PyPI package
+pixi remove <package>    # Remove package
+pixi update              # Update all packages
+pixi list                # List installed packages
+
+# Running commands
+pixi run <task>          # Run defined task
+pixi run <command>       # Run command in environment
+pixi shell               # Interactive shell
+
+# Tasks
+pixi task add <name> <cmd>   # Add task
+pixi task list               # List tasks
+
+# Maintenance
+pixi clean               # Remove environment
+pixi clean cache         # Clear package cache
+pixi self-update         # Update Pixi itself
+```
