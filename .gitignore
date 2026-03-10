@@ -13,6 +13,9 @@ results/
 .pixi
 *.egg-info
 
+# Editor
+.vscode/
+
 # Misc
 data/
 .Rproj.user
