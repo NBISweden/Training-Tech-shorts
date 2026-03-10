@@ -1,0 +1,99 @@
+# Writing a blog post
+
+This guide explains how to write up a blog post following a walkthrough. For information on suggesting topics or volunteering to teach, see [CONTRIBUTING](CONTRIBUTING.qmd).
+
+## File Structure
+
+Blog posts are written in [Quarto Markdown](https://quarto.org/docs/authoring/markdown-basics.html) and stored in the following locations:
+
+* **Blog posts:** `posts/YYYY-MM-DD-title-of-walkthrough/index.qmd`
+* **Images:** `posts/YYYY-MM-DD-title-of-walkthrough/images/`
+* **Other assets:** `posts/YYYY-MM-DD-title-of-walkthrough/asset-name/`
+
+## Step-by-Step Guide
+
+1. **Create a new branch** from `main`:
+
+   ```{.bash}
+   git checkout -b walkthrough/descriptive-name
+   ```
+
+2. **Create your post file** in the `posts` directory with the naming convention:
+
+   ```
+   YYYY-MM-DD-title-of-walkthrough/index.qmd
+   ```
+   Example: `2024-01-15-intro-to-docker/index.qmd`
+
+3. **Add front matter** at the top of your Markdown file:
+
+   ```{.yaml filename="index.qmd"}
+   ---
+   title: "Introduction to Docker"
+   date: 2024-01-15
+   date-modified: last-modified
+   author: 
+     - Author Name
+     - Coauthor Name
+   categories: [ "Docker", "Containers", "Package management" ]
+   ---
+   ```
+
+4. **Write your content** using Markdown. Include:
+
+   - Brief introduction
+   - Step-by-step instructions
+   - Code examples
+   - Screenshots or diagrams (if applicable)
+   - Key takeaways
+   - Further resources
+
+5. **Add images** to `posts/YYYY-MM-DD-title-of-walkthrough/images/` and reference them:
+
+   ```{.markdown}
+   ![Alt text](images/screenshot.png)
+   ```
+
+6. **Add assets to ignore list** if Quarto would try to render them:
+
+   If you include assets that Quarto might try to render (e.g., example Quarto projects, quarto page examples), add them to the ignore list in `_quarto.yml`:
+
+   ```{.yaml filename="_quarto.yml"}
+   project:
+   type: website
+   render:
+     - "*.qmd"
+     - "!posts/2024-05-14-quarto-to-confluence/quarto-example*/" # <1>
+     - "!posts/YYYY-MM-DD-your-post/assets-to-ignore/" # <1>
+   ```
+
+   1. Prefix folders with `!` to exclude them. Wildcards (`*`) are supported.
+
+   **Note:** Most posts won't need this step - only add if you encounter rendering issues.
+
+7. **Preview locally**:
+   
+   ```{.bash}
+   quarto preview # or `pixi run preview`
+   ```
+
+   `quarto preview` will automatically open the rendered preview in your browser.
+
+8. **Submit a Pull Request**:
+
+   - Push your branch to GitHub
+   - Open a PR with a clear description
+   - Link to the related Issue (e.g., "Closes #42" in the PR description)
+   - Request review from team members
+
+9. **Address feedback** and merge once approved.
+
+## Writing Tips
+
+- Keep it concise and focused (~30 minute read)
+- Use code blocks with syntax highlighting and [code annotation](https://quarto.org/docs/authoring/code-annotation.html)
+- Include practical examples
+- Add links to relevant documentation
+- Consider adding a "Prerequisites" section if needed
+- **See existing posts** in the `posts/` directory for examples and inspiration
+- Check the [Quarto documentation](https://quarto.org/docs/authoring/markdown-basics.html) for advanced formatting options
