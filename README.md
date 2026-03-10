@@ -75,7 +75,9 @@ cd Training-Tech-shorts
 pixi install
 
 # Build and serve the website in your local browser
-pixi run quarto preview
+pixi run preview
 ```
 
 `quarto preview` starts a local server and will watch for file changes. Use `Ctrl + C` to stop the server.
+
+See [Writing a blog post](https://nbisweden.github.io/Training-Tech-shorts/write-up.html) for more details on where to place files for walkthrough write ups.
