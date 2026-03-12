@@ -71,6 +71,23 @@ git commit -m "update code"  # Too vague
 git commit -m "fix"          # What was fixed?
 ```
 
+::: {.callout-tip}
+## Semantic git commits
+
+[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) provides a specification for adding human and machine readable meaning to commit messages.
+
+Commit messages are generally given the following structure:
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+This can lead to a cleaner git history and gives a reviewers a deeper understanding of the changes made. Continuous Integration can then be used to automate generating changelogs and version updates.
+:::
+
 ### Step 3: Open a Pull Request
 
 **From the GitHub web interface:**
