@@ -13,7 +13,7 @@ categories: [ "Copilot", "VSCode", "AI", "IDE", "Secure Data Environment", "Tips
 
 For Copilot (any other AI service) to be able to make suggestions for your code it has to look at what code you have so far. It could be when it suggest the next line of code you could write, or if it analyses your entire code base. The computations for making these suggestions are not done locally, so for it to be able to make a suggestion it has to send whatever code you have to the AI service's API where their GPU cluster will crunch the numbers and make a suggestion. This might be fine for your general code, but you don't want to to send things like API keys, login credentials, or other sensitive data you are not supposed to share with anyone.
 
-This tutorial will show you steps you can take to protect sensitive date from being sent, and some of the pitfalls you might encounter. We will use VSCode and Copilot as our demo setup. It is inspired by the excellent blog post by *Miloslav Homer*, [Cautiously Configuring Copilot](https://code.kiwi.com/articles/cautiously-configuring-copilot/)
+This tutorial will show you steps you can take to protect sensitive data from being sent, and some of the pitfalls you might encounter. We will use VSCode and Copilot as our demo setup. It is inspired by the excellent blog post by *Miloslav Homer*, [Cautiously Configuring Copilot](https://code.kiwi.com/articles/cautiously-configuring-copilot/)
 
 
 # Setting up the tools
@@ -33,6 +33,11 @@ cd Training-Tech-shorts/posts/2026-02-26-copilot-sensitive-data/example_files
 ## Man-in-the-Middle Proxy
 
 To be able to see what is actually being sent to Copilot we will use a [man-in-the-middle proxy](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) called [mitmproxy](https://hub.docker.com/r/mitmproxy/mitmproxy/). We will configure our Copilot plugin to send all requests through this proxy so that we can spy on what is being sent. We will also disable a security check (`NODE_TLS_REJECT_UNAUTHORIZED`) in VSCode to make this possible, as it will notice that the data is not being sent directly to the Copilot servers.
+
+::: {.callout-warning}
+## Security Warning
+The `NODE_TLS_REJECT_UNAUTHORIZED=0` setting disables SSL certificate validation and should **ONLY** be used for this testing exercise. Never use this in production environments or when handling real sensitive data.
+:::
 
 We'll begin with starting the [mitmproxy](https://hub.docker.com/r/mitmproxy/mitmproxy/) container with the following command:
 
@@ -91,7 +96,9 @@ Copilot will send the content of the file to the AI provider's server, which con
 ![](./images/mitmproxy-api-reader-bad.png)
 
 
-# Solutions that don't work
+# Solutions that might fool you
+
+The settings regarding inline suggestions at the rightmost sidebar chat are a bit confusing, and the default case it to post more or less everything to their API. Here are some settings that should be changed to decrease that risk.
 
 ## File type permissions
 
@@ -105,9 +112,13 @@ Try opening any of the `yaml` and `.env` file and see that they are being sent f
 
 ![](./images/vscode-filetypes-curated.png)
 
-A "problem" with this list is that it is used as a global setting and that it is persistent even if you restart VSCode. That sounds like, and most often are, good features but it can get you in trouble.
+If you use keyboard shortcuts or the brackets icon, `{}`, in the bottom-right corner to toggle inline completion, it applies globally to the file type you are editing and it will not reset when you restart VSCode. The shortcuts will change the list in `GitHub › Copilot: Enable` and the changes will be persistent.
 
-The real issue with this is that if you use keyboard shortcuts or the Copilot icon in the bottom-right corner to toggle completion, it does not apply only to the file or file type you are editing and it will not reset when you restart VSCode. The shortcuts will change the list in `GitHub › Copilot: Enable` and the changes will be persistent. In some other editors, the list defined in the settings is the default values and using shortcuts to modify behaviour is only used for the specific file you are editing and only until you restart the editor.
+![](./images/enable-inline-wrong-00.png) 
+
+![](./images/enable-inline-wrong-01.png)  
+
+![](./images/enable-inline-wrong-02.png)  
 
 * If you have the default case `*` set to `true` and define a list of file formats that should be set to `false`, if you open a new config format you did not think of you could accidentally post your credentials.
 
@@ -117,15 +128,22 @@ The real issue with this is that if you use keyboard shortcuts or the Copilot ic
 
     So if you have the default case `*` set to `false`, and you open a shell script file and enable the code completion using the shortcut, it will set `*` to `true` since you have not specified shell scripts in the list. The next time you open a `dotenv` file it will be posted as soon as you type anything in the file, as the `dotenv` file is not specified in the list either. A more sane approach by VSCode would have been to automatically create a entry in the list for shell scripts and set that to `true`, leaving the default case value unchanged, or make the setting only for that file until you restart the editor.
   
-Apart from the risks of misconfiguring the file type permissions and accidentally posting your file, there is another way to mess up that is even . The list of file types and permissions only apply to the inline completion. The Copilot chat in the sidebar completely disregards this list and will happily post any and all files in your project folder.
-
+Apart from the risks of misconfiguring the file type permissions and accidentally posting your file, there is another way to mess up that is even more serious. The list of file types and permissions only apply to the inline completion. The Copilot chat in the sidebar completely disregards this list and will happily post any and all files in your project folder.
 
 ## `.gitignore` exclusion
 
-Another setting that you could enable is the `Explorer: Exclude Git Ignore` option. This will make VSCode's file browser hide any files you have in your `.gitignore` file. This will make it harder to accidentally open sensitive files in VSCode, and should keep the inline code completion from posting your sensitive data. The Copilot chat will still be able to read and post the files though, making the option less usefull from a security perspective.
+Another setting that you could enable is the `Explorer: Exclude Git Ignore` option. This will make VSCode's file browser hide any files you have in your `.gitignore` file. This will make it harder to accidentally open sensitive files in VSCode, and should keep the inline code completion from posting your sensitive data. The Copilot chat will still be able to read and post the files though, making the option less useful from a security perspective.
 
 
-# Some solutions that does work
+# Some solutions that work better
+
+## File type permissions (a better way)
+
+There is an easier way to toggle inline suggestions per file type that actually works the way it should. If you press the Copilot icon in the bottom right of the screen you can chose to toggle for the current file format. If it is a file format that is not explicitly defined in the settings list, it will automatically be added and the toggle state for inline suggestions only affects that specific file format.
+
+![](./images/enable-inline-correct-00.png) 
+
+![](./images/enable-inline-correct-01.png) 
 
 ## Sensitive data outside of workspace
 
@@ -141,6 +159,6 @@ If you are using Docker for deployment you can make use of [Docker Swarm Secrets
 
 * There is as of now no reliable way to stop Copilot from posting sensitive files if you keep them in your workspace folder. Just keep the sensitive data somewhere else.
 
-* The file type based settings are easy to misconfigure, and using the inline code completion toggle can have unintended consequeses.
+* The file type based settings are easy to misconfigure, and using the inline code completion toggle can have unintended consequences.
 
 * The chat version of Copilot does not respect the settings of the inline code completion, and does not seem to have any corresponding settings.
