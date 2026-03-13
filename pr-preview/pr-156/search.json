@@ -1127,6 +1127,13 @@
     "text": ".gitignore exclusion\nAnother setting that you could enable is the Explorer: Exclude Git Ignore option. This will make VSCode’s file browser hide any files you have in your .gitignore file. This will make it harder to accidentally open sensitive files in VSCode, and should keep the inline code completion from posting your sensitive data. The Copilot chat will still be able to read and post the files though, making the option less useful from a security perspective."
   },
   {
+    "objectID": "posts/2026-02-26-copilot-sensitive-data/index.html#copilotignore-files",
+    "href": "posts/2026-02-26-copilot-sensitive-data/index.html#copilotignore-files",
+    "title": "Copilot and VSCode - protecting sensitive data",
+    "section": ".copilotignore files",
+    "text": ".copilotignore files\n.copilotignore files do not work the same way as .gitignore files, despite the similar name. It will only affect how GitHub uses Copilot on their end, once your files are already commited and pushed to GitHub. Another downside of this is that it is only available for organisations with Copilot Business or Copilot Enterprise plans."
+  },
+  {
     "objectID": "posts/2026-02-26-copilot-sensitive-data/index.html#file-type-permissions-a-better-way",
     "href": "posts/2026-02-26-copilot-sensitive-data/index.html#file-type-permissions-a-better-way",
     "title": "Copilot and VSCode - protecting sensitive data",
@@ -1145,6 +1152,13 @@
     "href": "posts/2026-02-26-copilot-sensitive-data/index.html#secrets-managers",
     "title": "Copilot and VSCode - protecting sensitive data",
     "section": "Secrets managers",
-    "text": "Secrets managers\nIf you are using Docker for deployment you can make use of Docker Swarm Secrets, in which you can store your sensitive data (500kb max) in a database that docker manages, and the containers can access the secret as if it was a file inside the container. Various cloud providers have similar solutions, e.g. AWS Secrets Manager, Azure Key Vault, GCP Secrets Manager."
+    "text": "Secrets managers\nIf you are using Docker for deployment you can make use of Docker Swarm Secrets, in which you can store your sensitive data (500kb max) in a database that docker manages, and the containers can access the secret as if it was a file inside the container. Various cloud providers have similar solutions, e.g. AWS Secrets Manager, Azure Key Vault, GCP Secrets Manager.\nDepending on your operating system there are different secrets managers sometimes built in:\n\nSecretManagement and SecretStore for Windows\nKeychain on Mac\nE.g. Keyrings or GnomeKeyring for Linux\n\nA less secure but more widely used approach is .env files, but as we have seen earlier in this tutorial it has to be stored outside of your VSCode workspace to stop Copilot from accessing it."
+  },
+  {
+    "objectID": "posts/2026-02-26-copilot-sensitive-data/index.html#opening-the-workspace-in-restricted-mode",
+    "href": "posts/2026-02-26-copilot-sensitive-data/index.html#opening-the-workspace-in-restricted-mode",
+    "title": "Copilot and VSCode - protecting sensitive data",
+    "section": "Opening the workspace in restricted mode",
+    "text": "Opening the workspace in restricted mode\nWhen you open a workspace for the first time VSCode will ask you if you trust the author of the files. If you say no, AI features (among other things) will be disabled for file in the workspace."
   }
 ]

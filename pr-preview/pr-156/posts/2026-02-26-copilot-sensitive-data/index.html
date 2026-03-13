@@ -234,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>TL;DR</strong>: Don’t keep sensitive files anywhere in your VSCode workspace.</p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>For Copilot (any other AI service) to be able to make suggestions for your code it has to look at what code you have so far. It could be when it suggest the next line of code you could write, or if it analyses your entire code base. The computations for making these suggestions are not done locally, so for it to be able to make a suggestion it has to send whatever code you have to the AI service’s API where their GPU cluster will crunch the numbers and make a suggestion. This might be fine for your general code, but you don’t want to to send things like API keys, login credentials, or other sensitive data you are not supposed to share with anyone.</p>
+<p>For Copilot (or any other AI service) to be able to make suggestions for your code it has to look at what code you have so far. It could be when it suggests the next line of code you could write, or if it analyses your entire code base. The computations for making these suggestions are not done locally, so for it to be able to make a suggestion it has to send whatever code you have to the AI service’s API where their GPU cluster will crunch the numbers and make a suggestion. This might be fine for your general code, but you don’t want it to to send things like API keys, login credentials, or other sensitive data you are not supposed to share with anyone.</p>
 <p>This tutorial will show you steps you can take to protect sensitive data from being sent, and some of the pitfalls you might encounter. We will use VSCode and Copilot as our demo setup. It is inspired by the excellent blog post by <em>Miloslav Homer</em>, <a href="https://code.kiwi.com/articles/cautiously-configuring-copilot/">Cautiously Configuring Copilot</a></p>
 </section>
 <section id="setting-up-the-tools" class="level1">
@@ -335,6 +335,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="gitignore-exclusion"><code>.gitignore</code> exclusion</h2>
 <p>Another setting that you could enable is the <code>Explorer: Exclude Git Ignore</code> option. This will make VSCode’s file browser hide any files you have in your <code>.gitignore</code> file. This will make it harder to accidentally open sensitive files in VSCode, and should keep the inline code completion from posting your sensitive data. The Copilot chat will still be able to read and post the files though, making the option less useful from a security perspective.</p>
 </section>
+<section id="copilotignore-files" class="level2">
+<h2 class="anchored" data-anchor-id="copilotignore-files"><code>.copilotignore</code> files</h2>
+<p><code>.copilotignore</code> files do not work the same way as <code>.gitignore</code> files, despite the similar name. It will only affect how GitHub uses Copilot on their end, once your files are already commited and pushed to GitHub. Another downside of this is that it is only available for organisations with Copilot Business or Copilot Enterprise plans.</p>
+</section>
 </section>
 <section id="some-solutions-that-work-better" class="level1">
 <h1>Some solutions that work better</h1>
@@ -351,6 +355,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="secrets-managers" class="level2">
 <h2 class="anchored" data-anchor-id="secrets-managers">Secrets managers</h2>
 <p>If you are using Docker for deployment you can make use of <a href="https://docs.docker.com/engine/swarm/secrets/">Docker Swarm Secrets</a>, in which you can store your sensitive data (500kb max) in a database that docker manages, and the containers can access the secret as if it was a file inside the container. Various cloud providers have similar solutions, e.g.&nbsp;AWS Secrets Manager, Azure Key Vault, GCP Secrets Manager.</p>
+<p>Depending on your operating system there are different secrets managers sometimes built in:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/powershell/utility-modules/secretmanagement/overview?view=ps-modules">SecretManagement and SecretStore</a> for Windows</li>
+<li><a href="https://support.apple.com/guide/keychain-access/welcome/mac">Keychain</a> on Mac</li>
+<li>E.g. <a href="https://man7.org/linux/man-pages/man7/keyrings.7.html">Keyrings</a> or <a href="https://wiki.gnome.org/Projects/GnomeKeyring">GnomeKeyring</a> for Linux</li>
+</ul>
+<p>A less secure but more widely used approach is <a href="https://www.dotenv.org/docs/security/env.html">.env files</a>, but as we have seen earlier in this tutorial it has to be stored outside of your VSCode workspace to stop Copilot from accessing it.</p>
+</section>
+<section id="opening-the-workspace-in-restricted-mode" class="level2">
+<h2 class="anchored" data-anchor-id="opening-the-workspace-in-restricted-mode">Opening the workspace in restricted mode</h2>
+<p>When you open a workspace for the first time VSCode will ask you if you trust the author of the files. If you say no, AI features (among other things) will be disabled for file in the workspace.</p>
 </section>
 </section>
 <section id="summary" class="level1">
@@ -360,6 +375,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>The file type based settings are easy to misconfigure, and using the inline code completion toggle can have unintended consequences.</p></li>
 <li><p>The chat version of Copilot does not respect the settings of the inline code completion, and does not seem to have any corresponding settings.</p></li>
 </ul>
+</section>
+<section id="cleaning-up-after-testing" class="level1">
+<h1>Cleaning Up After Testing</h1>
+<p>After completing this tutorial, restore your secure configuration:</p>
+<ol type="1">
+<li>Remove the proxy settings from VSCode (Settings → search “proxy” → clear the Http: Proxy field)</li>
+<li>Close VSCode and reopen it normally (without NODE_TLS_REJECT_UNAUTHORIZED=0)</li>
+<li>Stop the mitmproxy container with Ctrl+C</li>
+</ol>
 
 
 </section>
