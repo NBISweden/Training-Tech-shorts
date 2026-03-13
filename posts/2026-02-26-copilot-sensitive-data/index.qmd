@@ -11,7 +11,7 @@ categories: [ "Copilot", "VSCode", "AI", "IDE", "Secure Data Environment", "Tips
 
 # Introduction
 
-For Copilot (any other AI service) to be able to make suggestions for your code it has to look at what code you have so far. It could be when it suggest the next line of code you could write, or if it analyses your entire code base. The computations for making these suggestions are not done locally, so for it to be able to make a suggestion it has to send whatever code you have to the AI service's API where their GPU cluster will crunch the numbers and make a suggestion. This might be fine for your general code, but you don't want to to send things like API keys, login credentials, or other sensitive data you are not supposed to share with anyone.
+For Copilot (or any other AI service) to be able to make suggestions for your code it has to look at what code you have so far. It could be when it suggests the next line of code you could write, or if it analyses your entire code base. The computations for making these suggestions are not done locally, so for it to be able to make a suggestion it has to send whatever code you have to the AI service's API where their GPU cluster will crunch the numbers and make a suggestion. This might be fine for your general code, but you don't want it to to send things like API keys, login credentials, or other sensitive data you are not supposed to share with anyone.
 
 This tutorial will show you steps you can take to protect sensitive data from being sent, and some of the pitfalls you might encounter. We will use VSCode and Copilot as our demo setup. It is inspired by the excellent blog post by *Miloslav Homer*, [Cautiously Configuring Copilot](https://code.kiwi.com/articles/cautiously-configuring-copilot/)
 
@@ -135,6 +135,12 @@ Apart from the risks of misconfiguring the file type permissions and accidentall
 Another setting that you could enable is the `Explorer: Exclude Git Ignore` option. This will make VSCode's file browser hide any files you have in your `.gitignore` file. This will make it harder to accidentally open sensitive files in VSCode, and should keep the inline code completion from posting your sensitive data. The Copilot chat will still be able to read and post the files though, making the option less useful from a security perspective.
 
 
+## `.copilotignore` files
+
+`.copilotignore` files do not work the same way as `.gitignore` files, despite the similar name. It will only affect how GitHub uses Copilot on their end, once your files are already commited and pushed to GitHub. Another downside of this is that it is only available for organisations with Copilot Business or Copilot Enterprise plans.
+
+
+
 # Some solutions that work better
 
 ## File type permissions (a better way)
@@ -145,6 +151,7 @@ There is an easier way to toggle inline suggestions per file type that actually 
 
 ![](./images/enable-inline-correct-01.png) 
 
+
 ## Sensitive data outside of workspace
 
 Never keep files that contain sensitive information in the workspace folder or any of its subfolders. Copilot will only look at the files in you workspace, and if it tries to access files outside it has to ask for permission (self-government, mind you) to access the files. When you run your script you can supply the path to the file that is far outside of the VSCode workspace folder as an argument.
@@ -154,6 +161,19 @@ Never keep files that contain sensitive information in the workspace folder or a
 
 If you are using Docker for deployment you can make use of [Docker Swarm Secrets](https://docs.docker.com/engine/swarm/secrets/), in which you can store your sensitive data (500kb max) in a database that docker manages, and the containers can access the secret as if it was a file inside the container. Various cloud providers have similar solutions, e.g. AWS Secrets Manager, Azure Key Vault, GCP Secrets Manager.
 
+Depending on your operating system there are different secrets managers sometimes built in:
+
+* [SecretManagement and SecretStore](https://learn.microsoft.com/en-us/powershell/utility-modules/secretmanagement/overview?view=ps-modules) for Windows
+* [Keychain](https://support.apple.com/guide/keychain-access/welcome/mac) on Mac
+* E.g. [Keyrings](https://man7.org/linux/man-pages/man7/keyrings.7.html) or [GnomeKeyring](https://wiki.gnome.org/Projects/GnomeKeyring) for Linux
+
+A less secure but more widely used approach is [.env files](https://www.dotenv.org/docs/security/env.html), but as we have seen earlier in this tutorial it has to be stored outside of your VSCode workspace to stop Copilot from accessing it.
+
+
+## Opening the workspace in restricted mode
+
+When you open a workspace for the first time VSCode will ask you if you trust the author of the files. If you say no, AI features (among other things) will be disabled for file in the workspace.
+
 
 # Summary
 
@@ -162,3 +182,16 @@ If you are using Docker for deployment you can make use of [Docker Swarm Secrets
 * The file type based settings are easy to misconfigure, and using the inline code completion toggle can have unintended consequences.
 
 * The chat version of Copilot does not respect the settings of the inline code completion, and does not seem to have any corresponding settings.
+
+
+# Cleaning Up After Testing
+
+After completing this tutorial, restore your secure configuration:
+
+1. Remove the proxy settings from VSCode (Settings → search "proxy" → clear the Http: Proxy field)
+2. Close VSCode and reopen it normally (without NODE_TLS_REJECT_UNAUTHORIZED=0)
+3. Stop the mitmproxy container with Ctrl+C
+
+
+
+
