@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mahesh">
-<meta name="dcterms.date" content="2025-06-10">
+<meta name="author" content="Mahesh Binzer-Panchal">
+<meta name="dcterms.date" content="2026-03-12">
 
-<title>Introduction to Container Registries – RSE Tools</title>
+<title>GitHub Pull Requests and Code Reviews – RSE Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,6 +78,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-5ed461e1afb6a4e5f5371742e95fc51e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -181,11 +183,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Introduction to Container Registries</h1>
+      <h1 class="title">GitHub Pull Requests and Code Reviews</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Docker</div>
-                <div class="quarto-category">Github</div>
-                <div class="quarto-category">Seqera</div>
+                <div class="quarto-category">GitHub</div>
+                <div class="quarto-category">Pull Requests</div>
+                <div class="quarto-category">Code Reviews</div>
               </div>
                   </div>
   </div>
@@ -196,14 +198,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Mahesh </p>
+               <p>Mahesh Binzer-Panchal </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 10, 2025</p>
+        <p class="date">March 12, 2026</p>
       </div>
     </div>
     
@@ -228,74 +230,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="what-is-a-container-registry" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-a-container-registry">What is a Container Registry?</h2>
-<p>Container registries are services for storing and distributing container images. They enable reproducible, portable, and scalable workflows by allowing users to share pre-built environments and applications. Popular registries include <a href="https://hub.docker.com/">Docker Hub</a>, <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">GitHub Container Registry (GHCR)</a>, and <a href="https://quay.io/">Quay.io</a>.</p>
-<p>Images are typically docker images that follow the <a href="https://github.com/opencontainers/image-spec">open container image format</a> as they are the most interoperable (i.e.&nbsp;useable with multiple container platforms, e.g.&nbsp;<code>docker</code>, <code>singularity</code>/<code>apptainer</code>, <code>podman</code>, <code>charliecloud</code>, <code>shifter</code>, etc). These images can be pulled and run on any compatible system, ensuring consistent environments across development, testing, and production.</p>
-<p><strong>Key benefits:</strong></p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Pull requests (PRs) are GitHub’s primary mechanism for proposing, reviewing, and integrating code changes. This guide covers the essential workflow for creating and reviewing pull requests - core skills for collaborative bioinformatics development.</p>
+<p><strong>What we’ll cover:</strong></p>
 <ul>
-<li>Centralized storage for container images</li>
-<li>Versioning and access control</li>
-<li>Integration with CI/CD pipelines</li>
+<li>Creating a branch and making changes</li>
+<li>Opening a pull request</li>
+<li>Reviewing code and suggesting changes</li>
+<li>Addressing feedback and merging</li>
 </ul>
 </section>
-<section id="bioinformatic-specific-registries" class="level2">
-<h2 class="anchored" data-anchor-id="bioinformatic-specific-registries">Bioinformatic specific registries</h2>
-<ul>
-<li><a href="https://biocontainers.pro/">Biocontainers</a>: These are automatically built from bioconda packages as stand-alone containers. Custom images and multi-tool containers (mulled containers) are also buildable, but require learning the system.</li>
-<li><a href="https://seqera.io/containers/">Seqera Container Registry</a>: A much more stream-lined experience to build multi-tool images where images are quickly built and stored in a public registry.</li>
-</ul>
-</section>
-<section id="building-a-docker-image-from-a-conda-environment." class="level2">
-<h2 class="anchored" data-anchor-id="building-a-docker-image-from-a-conda-environment.">Building a docker image from a conda environment.</h2>
-<p>You can create containers with custom Conda environments by specifying a <code>environment.yml</code> file.</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>environment.yml</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="environment.yml"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> myenv</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.10</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> numpy</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pandas</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Dockerfile</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="Dockerfile"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> mambaorg/micromamba:1.4.9</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> environment.yml /tmp/environment.yml</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">micromamba</span> create <span class="at">-y</span> <span class="at">-n</span> myenv <span class="at">-f</span> /tmp/environment.yml</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> PATH=/opt/conda/envs/myenv/bin:$PATH</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Extract the conda lock file from this environment and save it alongside your <code>environment.yml</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-it</span> <span class="op">&lt;</span>image<span class="op">&gt;</span> micromamba env export <span class="at">--explicit</span> <span class="at">-n</span> myenv <span class="op">&gt;</span> myenv-conda.lock</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</section>
-<section id="uploading-images-to-github-container-registry" class="level2">
-<h2 class="anchored" data-anchor-id="uploading-images-to-github-container-registry">Uploading Images to GitHub Container Registry</h2>
-<p>GitHub Container Registry (GHCR) allows you to store Docker images alongside your code repositories.</p>
+<section id="the-pull-request-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="the-pull-request-workflow">The Pull Request Workflow</h2>
+<section id="step-1-create-a-branch" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-create-a-branch">Step 1: Create a Branch</h3>
+<p>Branches allow you to develop features or fixes in isolation from the main codebase.</p>
+<p><strong>Using Git commands:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and switch to a new branch</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feature/add-quality-filter</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make your changes to files</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ... edit your code ...</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Stage and commit your changes</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add quality filtering to alignment script"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Push the branch to GitHub</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feature/add-quality-filter</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Using GitHub web interface:</strong></p>
 <ol type="1">
-<li><p>Authenticate with GHCR. First get a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">Github token</a>. Ensure that your token has permission to write and manage packages on Github.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$GITHUB_TOKEN</span> <span class="kw">|</span> <span class="ex">docker</span> login ghcr.io <span class="at">-u</span> <span class="op">&lt;</span>your-github-username<span class="op">&gt;</span> --password-stdin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Build Your Docker Image</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> ghcr.io/<span class="op">&lt;</span>your-github-username<span class="op">&gt;</span>/<span class="op">&lt;</span>image-name<span class="op">&gt;</span>:<span class="op">&lt;</span>tag<span class="op">&gt;</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Push the Image</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> push ghcr.io/<span class="op">&lt;</span>your-github-username<span class="op">&gt;</span>/<span class="op">&lt;</span>image-name<span class="op">&gt;</span>:<span class="op">&lt;</span>tag<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li>Navigate to your repository</li>
+<li>Click the branch dropdown (usually says “main”)</li>
+<li>Type a new branch name and select “Create branch”</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -303,61 +271,337 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Branch Naming Conventions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Use repository or organization names to organize your images.</p>
+<p>Use descriptive names with prefixes:</p>
+<ul>
+<li><code>feature/</code> for new features</li>
+<li><code>fix/</code> or <code>bugfix/</code> for bug fixes</li>
+<li><code>docs/</code> for documentation updates</li>
+<li><code>refactor/</code> for code refactoring</li>
+</ul>
 </div>
 </div>
-<ol start="4" type="1">
-<li><p>Update package attributes. When you push an image, it will initially be private. Find the image under the packages tab in your Github profile and select it. Here you can attach the container image to a repository, and what permissions that repository has on the image (for example one could use Github Actions to automatically update the image and version, so write permission is needed).</p>
-<p>Select “Package settings” in the bottom right, to change the package visibility from private to public (anyone can pull the image).</p></li>
-</ol>
-<div class="callout callout-style-default callout-warning callout-titled">
+</section>
+<section id="step-2-make-your-changes" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-make-your-changes">Step 2: Make Your Changes</h3>
+<p>Edit your files, add new code, update documentation, etc. Commit your changes with clear, descriptive messages.</p>
+<p><strong>Good commit messages:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add PHRED quality score filter to alignment preprocessing"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Less helpful commit messages:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"update code"</span>  <span class="co"># Too vague</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"fix"</span>          <span class="co"># What was fixed?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+<span class="screen-reader-only">Tip</span>Semantic git commits
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Docker stores your credentials after logging in. If your token expires or is deleted and you receive an error trying to pull a public image like:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> pull ghcr.io/nbisweden/fastk_genescopefk_merquryfk:1.2</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Error</span> response from daemon: Head <span class="st">"https://ghcr.io/v2/nbisweden/fastk_genescopefk_merquryfk/manifests/1.2"</span>: denied: denied</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>then you need to logout again from the ghcr.io registry.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> logout ghcr.io</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional commits</a> provides a specification for adding human and machine readable meaning to commit messages.</p>
+<p>Commit messages are generally given the following structure:</p>
+<pre><code>&lt;type&gt;[optional scope]: &lt;description&gt;
+
+[optional body]
+
+[optional footer(s)]</code></pre>
+<p>This can lead to a cleaner git history and gives a reviewers a deeper understanding of the changes made. Continuous Integration can then be used to automate generating changelogs and version updates.</p>
 </div>
 </div>
 </section>
-<section id="publishing-to-seqera-container-public-registry" class="level2">
-<h2 class="anchored" data-anchor-id="publishing-to-seqera-container-public-registry">Publishing to Seqera Container Public Registry</h2>
-<p>Seqera provides <a href="https://seqera.io/containers/">a public registry for building and sharing containers</a>, especially for bioinformatics workflows. While the web interface is relatively powerful and easy to use, one can build custom packages and upload them through the wave cli tool.</p>
+<section id="step-3-open-a-pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-open-a-pull-request">Step 3: Open a Pull Request</h3>
+<p><strong>From the GitHub web interface:</strong></p>
 <ol type="1">
-<li><p>Install the <a href="https://github.com/seqeralabs/wave-cli">wave cli</a>. Make sure the downloaded file is executable.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 755 wave-1.6.1-macos-arm64</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./wave-1.6.1-macos-arm64</span> <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Build and upload your container image to the Seqera Container Public Registry using the Wave CLI. The <code>--freeze</code> flag uploads to the public registry, and <code>--await</code> waits for the build to complete. If successful, the CLI will output the image URI.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./wave-1.6.1-macos-arm64</span> <span class="at">--conda-file</span> conda-env.yml <span class="at">--freeze</span> <span class="at">--await</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Example output:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">community.wave.seqera.io/library/myenv:70473abb25330df7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Use the generated container image in your Nextflow process by specifying the image URI in the <code>container</code> directive:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>process MY_PROCESS <span class="op">{</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    container <span class="st">'community.wave.seqera.io/library/myenv:70473abb25330df7'</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... rest of process definition ...</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li>Navigate to the repository on GitHub</li>
+<li>You’ll often see a yellow banner suggesting “Compare &amp; pull request” for recently pushed branches</li>
+<li>Alternatively, click “Pull requests” tab → “New pull request”</li>
+<li>Select your branch to merge <strong>from</strong> and the target branch (usually <code>main</code>) to merge <strong>into</strong></li>
+<li>Fill in the PR template:</li>
+</ol>
+<p><strong>Example PR Description:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Description</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Adds quality filtering step to remove low-quality reads before alignment.</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Changes</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Added <span class="in">`filter_by_quality()`</span> function to preprocessing module</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Updated alignment pipeline to call filtering step</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Added unit tests for quality filtering</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Testing</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> Unit tests pass</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[x]</span> Tested with sample datasets (SRR12345, SRR67890)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Related Issues</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>Closes #42</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>What Makes a Good Pull Request?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Small and focused</strong>: Addresses one feature/fix, not multiple unrelated changes</li>
+<li><strong>Well-described</strong>: Clear title and description of what and why</li>
+<li><strong>Tested</strong>: Includes or references tests for the changes</li>
+<li><strong>Links to issues</strong>: References related issue numbers (e.g., “Fixes #123”)</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="branch-vs-fork-when-to-use-which" class="level3">
+<h3 class="anchored" data-anchor-id="branch-vs-fork-when-to-use-which">Branch vs Fork: When to Use Which?</h3>
+<p><strong>Use a branch when:</strong></p>
+<ul>
+<li>You’re a collaborator on the repository</li>
+<li>Working within your organization’s repos</li>
+<li>You have write access</li>
+</ul>
+<p><strong>Use a fork when:</strong></p>
+<ul>
+<li>Contributing to external/open-source projects</li>
+<li>You don’t have write access to the repository</li>
+<li>You want to experiment without affecting the original repo</li>
+</ul>
+<p><strong>Fork workflow:</strong></p>
+<ol type="1">
+<li>Click “Fork” button on the repository</li>
+<li>Clone your fork: <code>git clone https://github.com/YOUR-USERNAME/repo-name.git</code></li>
+<li>Create a branch in your fork</li>
+<li>Make changes and push to your fork</li>
+<li>Create a PR from your fork to the original repository</li>
 </ol>
 </section>
-<section id="summary" class="level2">
-<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+</section>
+<section id="code-review" class="level2">
+<h2 class="anchored" data-anchor-id="code-review">Code Review</h2>
+<section id="step-4-review-a-pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-review-a-pull-request">Step 4: Review a Pull Request</h3>
+<p><strong>As a reviewer:</strong></p>
+<ol type="1">
+<li><p><strong>Navigate to the PR:</strong></p>
 <ul>
-<li>Container registries enable sharing and reuse of container images.</li>
-<li>GHCR and Seqera Container Public Registry are popular options for storing and distributing images.</li>
-<li>Custom Conda environments can be built into containers for reproducible workflows.</li>
-<li>Use these registries to streamline your bioinformatics pipelines and ensure reproducibility.</li>
+<li>Go to “Pull requests” tab</li>
+<li>Click on the PR to review</li>
+</ul></li>
+<li><p><strong>Review the “Files changed” tab:</strong></p>
+<ul>
+<li>Examine all modified files</li>
+<li>Look for:
+<ul>
+<li>Logic errors or bugs</li>
+<li>Code style consistency</li>
+<li>Missing edge cases or error handling</li>
+<li>Unclear variable/function names</li>
+<li>Missing tests or documentation</li>
+<li>Security issues</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Leave comments:</strong></p>
+<p><strong>Inline comments</strong> (single line):</p>
+<ul>
+<li>Hover over a line number</li>
+<li>Click the blue <code>+</code> icon</li>
+<li>Write your comment</li>
+<li>Click “Add single comment” for immediate posting</li>
+</ul>
+<p><strong>Suggestion comments</strong> (suggesting specific code changes):</p>
+<ul>
+<li>Select the line number you want to comment on and drag down to make a multi-line selection.</li>
+<li>Click the <code>+</code> icon on the bottom most line of your selection.</li>
+<li>Click the “Add a suggestion” button (±) or press <kbd title="linux: Ctrl-G, mac: Command-G, windows: Control-G" aria-hidden="true" data-linux="Ctrl-G" data-mac="Command-G" data-windows="Control-G"></kbd><span class="visually-hidden"></span></li>
+<li>Edit the code in the suggestion block</li>
+<li>Add explanation above the suggestion</li>
+<li>The author can accept your suggestion with one click, or from the files changed tab, add multiple modifications to a single commit.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="an">Consider using a more descriptive variable name here:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">```suggestion</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">quality_threshold = 30  # Minimum PHRED score</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Start a review</strong> (for multiple comments):</p>
+<ul>
+<li>Click “Start a review” instead of “Add single comment”</li>
+<li>Add all your comments</li>
+<li>Click “Finish your review” button (top right)</li>
+<li>Choose:
+<ul>
+<li><strong>Comment</strong>: General feedback without approval status</li>
+<li><strong>Approve</strong>: Changes look good, ready to merge</li>
+<li><strong>Request changes</strong>: Issues must be addressed before merging</li>
+</ul></li>
+</ul></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Code Review Best Practices
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Be constructive and kind</strong>: “Consider using X because Y” rather than “This is wrong”</li>
+<li><strong>Explain the why</strong>: Don’t just say what to change, explain why it’s important</li>
+<li><strong>Distinguish between blockers and suggestions</strong>: Be clear about what must change vs.&nbsp;nice-to-haves</li>
+<li><strong>Praise good work</strong>: Call out clever solutions or improvements</li>
+<li><strong>Ask questions</strong>: “Could you help me understand why we need this?” is often better than assuming</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-5-address-review-feedback" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-address-review-feedback">Step 5: Address Review Feedback</h3>
+<p><strong>As the PR author:</strong></p>
+<ol type="1">
+<li><p><strong>Respond to comments:</strong></p>
+<ul>
+<li>Answer questions</li>
+<li>Discuss suggestions</li>
+<li>Explain your reasoning if you disagree</li>
+</ul></li>
+<li><p><strong>Make requested changes:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the changes in your local branch</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ... edit files ...</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Commit the changes</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Address review feedback: improve variable naming"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Push to the same branch</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The PR will automatically update with your new commits!</p></li>
+<li><p><strong>Accept suggested changes:</strong></p>
+<ul>
+<li>If a reviewer used the suggestion feature, you can click “Commit suggestion” to apply it directly (pull changes locally before pushing new changes!)</li>
+</ul></li>
+<li><p><strong>Request re-review:</strong></p>
+<ul>
+<li>Click the refresh icon next to a reviewer’s name to notify them you’ve addressed their feedback.</li>
+</ul></li>
+</ol>
+</section>
+<section id="step-6-merge-the-pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-merge-the-pull-request">Step 6: Merge the Pull Request</h3>
+<p>Once approved and all checks pass:</p>
+<ol type="1">
+<li><p><strong>Choose merge strategy:</strong></p>
+<ul>
+<li><strong>Create a merge commit</strong>: Preserves all commits and adds a merge commit (default)</li>
+<li><strong>Squash and merge</strong>: Combines all commits into one (cleaner history)</li>
+<li><strong>Rebase and merge</strong>: Replays commits on top of base branch (linear history)</li>
+</ul></li>
+<li><p><strong>Click the merge button</strong></p></li>
+<li><p><strong>Delete the branch</strong> (optional but recommended to keep repo tidy)</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Repository Settings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Repository admins can require:</p>
+<ul>
+<li>Minimum number of approving reviews</li>
+<li>Passing CI/CD checks before merging</li>
+<li>Up-to-date branches before merging</li>
+<li>Specific reviewers (code owners)</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="common-scenarios" class="level2">
+<h2 class="anchored" data-anchor-id="common-scenarios">Common Scenarios</h2>
+<section id="scenario-1-pr-has-merge-conflicts" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-1-pr-has-merge-conflicts">Scenario 1: PR has merge conflicts</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update your local main branch</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Switch to your feature branch</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout feature/your-branch</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge main into your branch</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge main</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Resolve conflicts in your editor</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ... fix conflicts ...</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Commit the resolution</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Resolve merge conflicts with main"</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="scenario-2-updating-your-fork" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-2-updating-your-fork">Scenario 2: Updating your fork</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the original repo as upstream (one-time setup)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream https://github.com/ORIGINAL-OWNER/repo-name.git</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch upstream changes</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch upstream</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge upstream changes into your branch</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge upstream/main</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference">Quick Reference</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Create branch</td>
+<td><code>git checkout -b branch-name</code></td>
+</tr>
+<tr class="even">
+<td>Push branch</td>
+<td><code>git push -u origin branch-name</code></td>
+</tr>
+<tr class="odd">
+<td>Update branch from main</td>
+<td><code>git merge main</code></td>
+</tr>
+<tr class="even">
+<td>View PR locally</td>
+<td><code>gh pr checkout PR-NUMBER</code> (requires GitHub CLI)</td>
+</tr>
+<tr class="odd">
+<td>List open PRs</td>
+<td><code>gh pr list</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="additional-resources" class="level2">
+<h2 class="anchored" data-anchor-id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="https://docs.github.com/en/pull-requests">GitHub’s Pull Request Documentation</a></li>
+<li><a href="https://chris.beams.io/posts/git-commit/">How to Write a Git Commit Message</a></li>
+<li><a href="https://cli.github.com/">GitHub CLI</a> - Command-line tool for working with PRs</li>
+<li><a href="https://google.github.io/eng-practices/review/">Code Review Best Practices</a></li>
 </ul>
 
 
@@ -437,7 +681,7 @@ Warning
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/NBISweden\.github\.io\/Training-Tech-shorts\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -769,4 +1013,4 @@ Warning
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2025-06-10-container-registry-intro/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2025-06-10-container-registry-intro/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2026-03-12-github-pull-requests-code-review/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2026-03-12-github-pull-requests-code-review/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
