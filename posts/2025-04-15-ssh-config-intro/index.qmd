@@ -65,7 +65,7 @@ to automatically add the private key supplied by `IdentityFile`.
 This supplies the path to the SSH key file that should be used for authenticating when
 connecting to a host. There are several types of keys, and the example below uses
 an EdDSA key which is the default ^[https://learning.lpi.org/en/learning-materials/102-500/110/110.3/110.3_01/].
-Github has a [very nice guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+GitHub has a [very nice guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 to generating keys ^[https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent].
 
 ```{.toml}

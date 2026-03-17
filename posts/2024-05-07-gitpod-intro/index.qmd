@@ -3,7 +3,7 @@ title: "Introduction to Gitpod"
 author: "Mahesh"
 date: "2024-05-07"
 date-modified: last-modified
-categories: [ Git, Github, "Version control", Gitpod ]
+categories: [ Git, GitHub, "Version control", Gitpod ]
 ---
 
 :::{.callout-important title="Important Note on Cloud Development Environments"}
@@ -44,10 +44,10 @@ To start a workspace, follow these steps:
     1. The source repository for which the gitpod workspace will be created.
     2. The code editor.
     3. The computing resources required for the workspace.
-- After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user's working directory is a cloned folder of the Github repository located on the Gitpod server, not locally on the computer.
+- After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user's working directory is a cloned folder of the GitHub repository located on the Gitpod server, not locally on the computer.
 - Any changes to the files within that folder can be pushed to the repository using Git commands.
 
-**Note**: If you are editing a public Github public repository, Gitpod requires the "public_repo" permission to push changes. To do it, follow these steps:
+**Note**: If you are editing a public GitHub public repository, Gitpod requires the "public_repo" permission to push changes. To do it, follow these steps:
 
 1. Navigate to gitpod.io.
 2. Click on your user icon
@@ -57,7 +57,7 @@ To start a workspace, follow these steps:
 6. Click "edit permissions"
 7. Check "public_repo"
 8. Click "Update permissions"
-9. You will be redirected to Github for authentication.
+9. You will be redirected to GitHub for authentication.
 
 After granting permissions, the user can push changes to the repository.
 

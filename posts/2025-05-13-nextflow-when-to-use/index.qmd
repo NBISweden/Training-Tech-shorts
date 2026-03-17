@@ -82,7 +82,7 @@ Nextflow and debugging issues. This allows developers to spend less time struggl
 - [nf-core Slack](https://nf-co.re/join)
 
 It's unclear whether other tools have similar communities, and the primary method of support appears to be through their
-Github issues and discussions, or Stack Overflow.
+GitHub issues and discussions, or Stack Overflow.
 
 Community developed existing pipelines also save time by eliminating the need to reimplement solutions.
 

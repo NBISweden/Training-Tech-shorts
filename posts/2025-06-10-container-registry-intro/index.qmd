@@ -4,7 +4,7 @@ author:
   - "Mahesh"
 date: "2025-06-10"
 date-modified: last-modified
-categories: [ "Docker", "Github", "Seqera" ]
+categories: [ "Docker", "GitHub", "Seqera" ]
 ---
 
 ## What is a Container Registry?
@@ -59,8 +59,8 @@ docker run --rm -it <image> micromamba env export --explicit -n myenv > myenv-co
 
 GitHub Container Registry (GHCR) allows you to store Docker images alongside your code repositories.
 
-1. Authenticate with GHCR. First get a [Github token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-Ensure that your token has permission to write and manage packages on Github.
+1. Authenticate with GHCR. First get a [GitHub token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+Ensure that your token has permission to write and manage packages on GitHub.
 
     ```{.bash}
     echo $GITHUB_TOKEN | docker login ghcr.io -u <your-github-username> --password-stdin
@@ -82,9 +82,9 @@ Ensure that your token has permission to write and manage packages on Github.
 Use repository or organization names to organize your images.
 :::
 
-4. Update package attributes. When you push an image, it will initially be private. Find the image under the packages tab in your Github profile and select it.
+4. Update package attributes. When you push an image, it will initially be private. Find the image under the packages tab in your GitHub profile and select it.
 Here you can attach the container image to a repository, and what permissions that repository has on the image (for example one
-could use Github Actions to automatically update the image and version, so write permission is needed).
+could use GitHub Actions to automatically update the image and version, so write permission is needed).
 
     Select "Package settings" in the bottom right, to change the package visibility from private to public (anyone can pull the image).
 

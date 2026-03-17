@@ -1,12 +1,12 @@
 ---
-title: "Collaboration on Github"
+title: "Collaboration on GitHub"
 author: "Mahesh"
 date: "2024-03-12"
 date-modified: last-modified
-categories: [ Git, Github, "Version control", Collaboration ]
+categories: [ Git, GitHub, "Version control", Collaboration ]
 ---
 
-This section is a guide describing one method of collaborating on Github. We focus on 
+This section is a guide describing one method of collaborating on GitHub. We focus on 
 the framework that we use to make reference material for future us and others new to the team. 
 
 ## Making a branch (Teacher)
