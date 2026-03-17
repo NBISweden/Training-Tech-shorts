@@ -213,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 13, 2026</p>
+        <p class="date-modified">March 17, 2026</p>
       </div>
     </div>
       
@@ -311,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="solutions-that-might-fool-you" class="level1">
 <h1>Solutions that might fool you</h1>
-<p>The settings regarding inline suggestions at the rightmost sidebar chat are a bit confusing, and the default case it to post more or less everything to their API. Here are some settings that should be changed to decrease that risk.</p>
+<p>The settings regarding inline suggestions at the rightmost sidebar chat are a bit confusing, and the default case is to post more or less everything to their API. Here are some settings that should be changed to decrease that risk.</p>
 <section id="file-type-permissions" class="level2">
 <h2 class="anchored" data-anchor-id="file-type-permissions">File type permissions</h2>
 <p>This problem can be mitigated a bit by having your API credentials stored in a separate config file (e.g.&nbsp;a <code>yaml</code> or a <code>.env</code> file) that is read by the script or given as arguments at run time. You better not edit that separate file in VSCode though, as it will again post your credentials as soon as you type a character in the file unless you configure VSCode to not use completion on those file types.</p>
@@ -337,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="copilotignore-files" class="level2">
 <h2 class="anchored" data-anchor-id="copilotignore-files"><code>.copilotignore</code> files</h2>
-<p><code>.copilotignore</code> files do not work the same way as <code>.gitignore</code> files, despite the similar name. It will only affect how GitHub uses Copilot on their end, once your files are already commited and pushed to GitHub. Another downside of this is that it is only available for organisations with Copilot Business or Copilot Enterprise plans.</p>
+<p><code>.copilotignore</code> files do not work the same way as <code>.gitignore</code> files, despite the similar name. It will only affect how GitHub uses Copilot on their end, once your files are already committed and pushed to GitHub. Another downside of this is that it is only available for organizations with Copilot Business or Copilot Enterprise plans.</p>
 </section>
 </section>
 <section id="some-solutions-that-work-better" class="level1">
@@ -365,7 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="opening-the-workspace-in-restricted-mode" class="level2">
 <h2 class="anchored" data-anchor-id="opening-the-workspace-in-restricted-mode">Opening the workspace in restricted mode</h2>
-<p>When you open a workspace for the first time VSCode will ask you if you trust the author of the files. If you say no, AI features (among other things) will be disabled for file in the workspace.</p>
+<p>When you open a workspace for the first time VSCode will ask you if you trust the author of the files. If you say no, AI features (among other things) will be disabled for files in the workspace.</p>
 </section>
 </section>
 <section id="summary" class="level1">
