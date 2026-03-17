@@ -5,7 +5,7 @@ author:
   - "Mahesh Binzer-Panchal"
 date: "2026-02-12"
 date-modified: last-modified
-categories: ["R", "R packages", "Version controlling with Bioconductor releases"]
+categories: ["R", "Package management", "Bioconductor", "Version control"]
 ---
 
 When working with R packages, it is good practice to version control the R and package versions being used. Doing so with enough flexibility to allow for interactive work when testing and perfecting scripts is useful since a lot of time is spent in that phase, and a degree of freedom is needed to quickly install new packages to try, or to use the latest packages with implemented bug fixes. Working with R in bioinformatics, we often rely on the useful packages and data structures from [Bioconductor](https://bioconductor.org) which facilitate our analyses. This walkthrough goes through recommended practices on how to work with R packages from that point of view, and how to couple installations with specific Bioconductor releases.
