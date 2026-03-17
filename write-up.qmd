@@ -1,6 +1,6 @@
 # Writing a blog post
 
-This guide explains how to write up a blog post following a walkthrough. For information on suggesting topics or volunteering to teach, see [CONTRIBUTING](CONTRIBUTING.qmd).
+This guide explains how to write up a blog post following a walkthrough. For information on suggesting topics or volunteering to teach, see [CONTRIBUTING](contributing.qmd).
 
 ## File Structure
 
