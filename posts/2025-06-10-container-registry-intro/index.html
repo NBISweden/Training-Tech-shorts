@@ -188,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <h1 class="title">Introduction to Container Registries</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Docker</div>
-                <div class="quarto-category">Github</div>
+                <div class="quarto-category">GitHub</div>
                 <div class="quarto-category">Seqera</div>
               </div>
                   </div>
@@ -294,7 +294,7 @@ Tip
 <h2 class="anchored" data-anchor-id="uploading-images-to-github-container-registry">Uploading Images to GitHub Container Registry</h2>
 <p>GitHub Container Registry (GHCR) allows you to store Docker images alongside your code repositories.</p>
 <ol type="1">
-<li><p>Authenticate with GHCR. First get a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">Github token</a>. Ensure that your token has permission to write and manage packages on Github.</p>
+<li><p>Authenticate with GHCR. First get a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">GitHub token</a>. Ensure that your token has permission to write and manage packages on GitHub.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$GITHUB_TOKEN</span> <span class="kw">|</span> <span class="ex">docker</span> login ghcr.io <span class="at">-u</span> <span class="op">&lt;</span>your-github-username<span class="op">&gt;</span> --password-stdin</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>Build Your Docker Image</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> ghcr.io/<span class="op">&lt;</span>your-github-username<span class="op">&gt;</span>/<span class="op">&lt;</span>image-name<span class="op">&gt;</span>:<span class="op">&lt;</span>tag<span class="op">&gt;</span> .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
@@ -315,7 +315,7 @@ Tip
 </div>
 </div>
 <ol start="4" type="1">
-<li><p>Update package attributes. When you push an image, it will initially be private. Find the image under the packages tab in your Github profile and select it. Here you can attach the container image to a repository, and what permissions that repository has on the image (for example one could use Github Actions to automatically update the image and version, so write permission is needed).</p>
+<li><p>Update package attributes. When you push an image, it will initially be private. Find the image under the packages tab in your GitHub profile and select it. Here you can attach the container image to a repository, and what permissions that repository has on the image (for example one could use GitHub Actions to automatically update the image and version, so write permission is needed).</p>
 <p>Select “Package settings” in the bottom right, to change the package visibility from private to public (anyone can pull the image).</p></li>
 </ol>
 <div class="callout callout-style-default callout-warning callout-titled">
