@@ -98,7 +98,7 @@ Copilot will send the content of the file to the AI provider's server, which con
 
 # Solutions that might fool you
 
-The settings regarding inline suggestions at the rightmost sidebar chat are a bit confusing, and the default case it to post more or less everything to their API. Here are some settings that should be changed to decrease that risk.
+The settings regarding inline suggestions at the rightmost sidebar chat are a bit confusing, and the default case is to post more or less everything to their API. Here are some settings that should be changed to decrease that risk.
 
 ## File type permissions
 
@@ -137,7 +137,7 @@ Another setting that you could enable is the `Explorer: Exclude Git Ignore` opti
 
 ## `.copilotignore` files
 
-`.copilotignore` files do not work the same way as `.gitignore` files, despite the similar name. It will only affect how GitHub uses Copilot on their end, once your files are already commited and pushed to GitHub. Another downside of this is that it is only available for organisations with Copilot Business or Copilot Enterprise plans.
+`.copilotignore` files do not work the same way as `.gitignore` files, despite the similar name. It will only affect how GitHub uses Copilot on their end, once your files are already committed and pushed to GitHub. Another downside of this is that it is only available for organizations with Copilot Business or Copilot Enterprise plans.
 
 
 
@@ -172,7 +172,7 @@ A less secure but more widely used approach is [.env files](https://www.dotenv.o
 
 ## Opening the workspace in restricted mode
 
-When you open a workspace for the first time VSCode will ask you if you trust the author of the files. If you say no, AI features (among other things) will be disabled for file in the workspace.
+When you open a workspace for the first time VSCode will ask you if you trust the author of the files. If you say no, AI features (among other things) will be disabled for files in the workspace.
 
 
 # Summary
