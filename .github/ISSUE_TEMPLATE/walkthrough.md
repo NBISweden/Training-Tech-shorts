@@ -4,21 +4,26 @@ about: Propose a walkthrough
 title: 'Walkthrough: '
 ---
 
-## Tool or concept
+## Proposed Topic
 
-**What specific tool or concept are you proposing a walkthrough for?**
+<!-- What tool, technology, or concept should be covered? -->
 
-## The why
+## Why This Topic?
 
-**Briefly describe the problem this solves**
+<!-- Why would this be valuable for NBIS staff? -->
 
-## Proposed outline
+## Suggested Content
 
-- [Topic 1]
-- [Topic 2]
-- [Topic 3]
+<!-- Any specific aspects or use cases to cover? -->
 
-## Additional information
+## Potential Presenter
 
-* **Prerequisites**
-* **Related issues/links**
+<!-- Do you want to present this yourself, or suggesting for someone else? -->
+
+- [ ] I'd like to present this myself
+- [ ] I'm just suggesting the topic
+
+## Additional Context
+
+<!-- Any relevant links, documentation, or background information -->
+

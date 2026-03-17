@@ -16,6 +16,7 @@ website:
       - schedule.qmd
       - contributing.qmd
       - cheatsheets.qmd
+      - write-up.qmd
     right:
       - icon: github
         menu:
