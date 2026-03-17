@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Cormac">
-<meta name="dcterms.date" content="2025-02-18">
 
-<title>Introduction to VSCode – RSE Tools</title>
+<title>write-up – RSE Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,27 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5ed461e1afb6a4e5f5371742e95fc51e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5ed461e1afb6a4e5f5371742e95fc51e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,11 +110,11 @@ ul.task-list li input[type="checkbox"] {
 <body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">RSE Tools</span>
     </a>
   </div>
@@ -92,19 +125,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../schedule.html"> 
+    <a class="nav-link" href="./schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../contributing.html"> 
+    <a class="nav-link" href="./contributing.html"> 
 <span class="menu-text">Contributing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../cheatsheets.html"> 
+    <a class="nav-link" href="./cheatsheets.html"> 
 <span class="menu-text">Cheatsheets</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../write-up.html"> 
+    <a class="nav-link active" href="./write-up.html" aria-current="page"> 
 <span class="menu-text">Writing a blog post</span></a>
   </li>  
 </ul>
@@ -147,158 +180,105 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Introduction to VSCode</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">VSCode</div>
-                <div class="quarto-category">Remote development</div>
-                <div class="quarto-category">IDE</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Cormac </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">February 18, 2025</p>
-      </div>
-    </div>
-    
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 17, 2026</p>
-      </div>
-    </div>
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
-
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
+<section id="writing-a-blog-post" class="level1">
+<h1>Writing a blog post</h1>
+<p>This guide explains how to write up a blog post following a walkthrough. For information on suggesting topics or volunteering to teach, see <a href="CONTRIBUTING.qmd">CONTRIBUTING</a>.</p>
+<section id="file-structure" class="level2">
+<h2 class="anchored" data-anchor-id="file-structure">File Structure</h2>
+<p>Blog posts are written in <a href="https://quarto.org/docs/authoring/markdown-basics.html">Quarto Markdown</a> and stored in the following locations:</p>
 <ul>
-<li>VSCode is owned by Microsoft, who also own GitHub and Copilot</li>
-<li>What this means for users: regularly updated, and tight integration of GitHub/Copilot features, large community</li>
-<li>Open Source</li>
+<li><strong>Blog posts:</strong> <code>posts/YYYY-MM-DD-title-of-walkthrough/index.qmd</code></li>
+<li><strong>Images:</strong> <code>posts/YYYY-MM-DD-title-of-walkthrough/images/</code></li>
+<li><strong>Other assets:</strong> <code>posts/YYYY-MM-DD-title-of-walkthrough/asset-name/</code></li>
 </ul>
 </section>
-<section id="opening-vscode-in-wsl2" class="level2">
-<h2 class="anchored" data-anchor-id="opening-vscode-in-wsl2">Opening VSCode in WSL2</h2>
+<section id="step-by-step-guide" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-guide">Step-by-Step Guide</h2>
+<ol type="1">
+<li><p><strong>Create a new branch</strong> from <code>main</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> walkthrough/descriptive-name</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Create your post file</strong> in the <code>posts</code> directory with the naming convention:</p>
+<pre><code>YYYY-MM-DD-title-of-walkthrough/index.qmd</code></pre>
+<p>Example: <code>2024-01-15-intro-to-docker/index.qmd</code></p></li>
+<li><p><strong>Add front matter</strong> at the top of your Markdown file:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>index.qmd</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="index.qmd"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Introduction to Docker"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2024-01-15</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date-modified</span><span class="kw">:</span><span class="at"> last-modified</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Author Name</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Coauthor Name</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"Docker"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Containers"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Package management"</span><span class="at"> </span><span class="kw">]</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
+<li><p><strong>Write your content</strong> using Markdown. Include:</p>
 <ul>
-<li>If VSCode is installed in Windows, typing <code>code</code> in the terminal launches a new window in WSL2</li>
-</ul>
-</section>
-<section id="basic-help-for-new-users" class="level2">
-<h2 class="anchored" data-anchor-id="basic-help-for-new-users">Basic help for new users</h2>
-<ul>
-<li>Help -&gt; editor playground</li>
-<li>Help -&gt; keyboard shortcuts reference</li>
-</ul>
-</section>
-<section id="basic-tips" class="level2">
-<h2 class="anchored" data-anchor-id="basic-tips">Basic tips</h2>
-<ul>
-<li>Use settings sync to easily transfer configurations between machines (N.B. GitPod uses a different settings sync server, so VSCode instances on GitPod need to be configured separately, but only once if you turn on sync there also)</li>
-<li>Use user profiles to switch between different configurations</li>
-<li>Set editors to auto-save</li>
-<li>Customise and use keybindings (see the cheatsheet for the commonly used defaults)</li>
-<li>Settings can be changed either via default/user json files or the preferences interface</li>
-<li>Use the command palette with <code>Ctrl+Shift+P</code> (Windows), <code>Cmd+Shift+P</code> (Mac)</li>
-<li>Explore extensions for additional functionality, e.g.:
-<ul>
-<li>Language support</li>
-<li>GitHub Copilot &amp; Chat</li>
-<li>Remote SSH</li>
-<li>Todo highlight</li>
-<li>Rainbow CSV</li>
+<li>Brief introduction</li>
+<li>Step-by-step instructions</li>
+<li>Code examples</li>
+<li>Screenshots or diagrams (if applicable)</li>
+<li>Key takeaways</li>
+<li>Further resources</li>
 </ul></li>
-</ul>
-</section>
-<section id="remote-development-vscode-environment-on-a-remote-server" class="level2">
-<h2 class="anchored" data-anchor-id="remote-development-vscode-environment-on-a-remote-server">Remote development (VSCode environment on a remote server)</h2>
+<li><p><strong>Add images</strong> to <code>posts/YYYY-MM-DD-title-of-walkthrough/images/</code> and reference them:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Alt text](images/screenshot.png)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Add assets to ignore list</strong> if Quarto would try to render them:</p>
+<p>If you include assets that Quarto might try to render (e.g., example Quarto projects, quarto page examples), add them to the ignore list in <code>_quarto.yml</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>_quarto.yml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-6" data-filename="_quarto.yml"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span><span class="kw">:</span></span>
+<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"*.qmd"</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"!posts/2024-05-14-quarto-to-confluence/quarto-example*/"</span></span>
+<span id="annotated-cell-6-6"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"!posts/YYYY-MM-DD-your-post/assets-to-ignore/"</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="5,6" data-code-annotation="1">Prefix folders with <code>!</code> to exclude them. Wildcards (<code>*</code>) are supported.</span>
+</dd>
+</dl>
+<p><strong>Note:</strong> Most posts won’t need this step - only add if you encounter rendering issues.</p></li>
+<li><p><strong>Preview locally</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview <span class="co"># or `pixi run preview`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>quarto preview</code> will automatically open the rendered preview in your browser.</p></li>
+<li><p><strong>Submit a Pull Request</strong>:</p>
 <ul>
-<li>Get the extension: <code>Remote - SSH</code></li>
-<li>Configure the <code>~/.ssh</code> config file on your local machine, e.g.:</li>
-</ul>
-<pre><code>Host dardel
-        Hostname dardel.pdc.kth.se
-        User myname
-        IdentityFile /home/myname/.ssh/id-ed25519-dardel</code></pre>
-<ul>
-<li><p>If using Mac/Linux installation of VSCode, that’s all for setup</p></li>
-<li><p>If using WSL2 within Windows, you also need to copy the contents of the <code>~/.ssh</code> folder (config file and public + private keys) over to <code>C:\Users\myname\.ssh</code>. You additionally must update the Windows <code>config</code> file IdentityFile paths to point to the respective keys, e.g.: <code>IdentityFile C:\Users\myname\.ssh\id-ed25519-dardel</code>. Permissions on this folder are usually automatic, but if necessary ensure the folder and contents are readable (right click -&gt; show more… -&gt; properties -&gt; security)</p></li>
-<li><p>Back in VSCode, open the command palette, type <code>ssh</code>, and select <code>Remote-SSH: Connect to Host...</code></p></li>
-<li><p>The hostnames you configured should now appear and you can connect</p></li>
-</ul>
-</section>
-<section id="copilot" class="level2">
-<h2 class="anchored" data-anchor-id="copilot">Copilot</h2>
-<ul>
-<li>Get the Copilot extensions (<code>GitHub Copilot</code> &amp; <code>GitHub Copilot Chat</code>)</li>
-<li>Link up your GitHub account - ensure you have signed up for the GitHub education program that offers free copilot (https://github.com/education)</li>
-<li>Main features are:
-<ul>
-<li>Inline suggestions</li>
-<li>Inline prompt</li>
-<li>Copilot Chat -&gt; similar to ChatGPT interface and use cases</li>
-<li>Copilot Edit -&gt; large scale direct code editing with AI</li>
+<li>Push your branch to GitHub</li>
+<li>Open a PR with a clear description</li>
+<li>Link to the related Issue (e.g., “Closes #42” in the PR description)</li>
+<li>Request review from team members</li>
 </ul></li>
-</ul>
+<li><p><strong>Address feedback</strong> and merge once approved.</p></li>
+</ol>
 </section>
-<section id="other-tips" class="level2">
-<h2 class="anchored" data-anchor-id="other-tips">Other tips</h2>
-<section id="useful-starter-set-of-shortcuts-keybindings-to-customise-or-learn" class="level3">
-<h3 class="anchored" data-anchor-id="useful-starter-set-of-shortcuts-keybindings-to-customise-or-learn">Useful starter set of shortcuts &amp; keybindings to customise or learn</h3>
-<p><em>NAVIGATION</em></p>
+<section id="writing-tips" class="level2">
+<h2 class="anchored" data-anchor-id="writing-tips">Writing Tips</h2>
 <ul>
-<li>Jumping from editor to terminal</li>
-<li>Opening/closing editors/terminal</li>
-<li>Navigation between open editors or open terminals</li>
-<li>VSCode breadcrumbs</li>
-<li>Fuzzy find to open specific files</li>
-</ul>
-<p><em>CODE</em></p>
-<ul>
-<li>Moving lines</li>
-<li>Deleting lines</li>
-<li>Duplicate lines</li>
-<li>Comment out a line</li>
-<li>Cut/copy lines</li>
-<li>Multi line cursor</li>
-<li>Selecting the whole word, or all occurences of a word</li>
-<li>Converting word case</li>
-<li>Jump to specific code line</li>
-<li>Jump to matching brackets</li>
-</ul>
-<p><em>FEATURES</em></p>
-<ul>
-<li>Opening the command palette</li>
-<li>Opening copilot chat or prompt</li>
-<li>Hiding/showing sidebars/activity bar</li>
-<li>Toggle word wrap for editors</li>
+<li>Keep it concise and focused (~30 minute read)</li>
+<li>Use code blocks with syntax highlighting and <a href="https://quarto.org/docs/authoring/code-annotation.html">code annotation</a></li>
+<li>Include practical examples</li>
+<li>Add links to relevant documentation</li>
+<li>Consider adding a “Prerequisites” section if needed</li>
+<li><strong>See existing posts</strong> in the <code>posts/</code> directory for examples and inspiration</li>
+<li>Check the <a href="https://quarto.org/docs/authoring/markdown-basics.html">Quarto documentation</a> for advanced formatting options</li>
 </ul>
 
 
@@ -711,4 +691,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2025-02-18-vscode-intro/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2025-02-18-vscode-intro/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/write-up.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/write-up.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
