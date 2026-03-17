@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Cormac">
-<meta name="dcterms.date" content="2024-06-04">
+<meta name="author" content="Martin Dahlö">
+<meta name="dcterms.date" content="2026-02-26">
 
-<title>Introduction to Apptainer – RSE Tools</title>
+<title>Copilot and VSCode - protecting sensitive data – RSE Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -181,12 +181,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Introduction to Apptainer</h1>
+      <h1 class="title">Copilot and VSCode - protecting sensitive data</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Apptainer</div>
-                <div class="quarto-category">Singularity</div>
-                <div class="quarto-category">Containers</div>
-                <div class="quarto-category">Package management</div>
+                <div class="quarto-category">Copilot</div>
+                <div class="quarto-category">VSCode</div>
+                <div class="quarto-category">AI</div>
+                <div class="quarto-category">IDE</div>
+                <div class="quarto-category">Secure Data Environment</div>
+                <div class="quarto-category">Tips and Tricks</div>
               </div>
                   </div>
   </div>
@@ -197,21 +199,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Cormac </p>
+               <p>Martin Dahlö </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 4, 2024</p>
+        <p class="date">February 26, 2026</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 10, 2026</p>
+        <p class="date-modified">March 17, 2026</p>
       </div>
     </div>
       
@@ -229,142 +231,159 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>Lesson plan based around materials from <a href="https://coderefinery.github.io/ttt4hpc_containers/basics_running_containers">CodeRefinery</a></p>
-<p>Apptainer is the open source version of Singularity.</p>
-<section id="what-are-containers" class="level2">
-<h2 class="anchored" data-anchor-id="what-are-containers">What are containers?</h2>
-<ul>
-<li>Containers isolate software, dependencies, configurations, and system libraries from the host system</li>
-<li>The naming came from the idea of shipping containers (which are portable &amp; standardized)</li>
-<li>Virtual machines are a similar concept, but these virtualise hardware, contain complete operating systems (including the kernel), and are managed by software known as a hypervisor</li>
-<li>Containers on the other hand share the host OS kernel, so they don’t contain complete operating systems, just user space system libraries</li>
-<li>This makes them lightweight, portable, and fast to start up</li>
-</ul>
+<p><strong>TL;DR</strong>: Don’t keep sensitive files anywhere in your VSCode workspace.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>For Copilot (or any other AI service) to be able to make suggestions for your code it has to look at what code you have so far. It could be when it suggests the next line of code you could write, or if it analyses your entire code base. The computations for making these suggestions are not done locally, so for it to be able to make a suggestion it has to send whatever code you have to the AI service’s API where their GPU cluster will crunch the numbers and make a suggestion. This might be fine for your general code, but you don’t want it to to send things like API keys, login credentials, or other sensitive data you are not supposed to share with anyone.</p>
+<p>This tutorial will show you steps you can take to protect sensitive data from being sent, and some of the pitfalls you might encounter. We will use VSCode and Copilot as our demo setup. It is inspired by the excellent blog post by <em>Miloslav Homer</em>, <a href="https://code.kiwi.com/articles/cautiously-configuring-copilot/">Cautiously Configuring Copilot</a></p>
 </section>
-<section id="docker-vs-apptainer-containers" class="level2">
-<h2 class="anchored" data-anchor-id="docker-vs-apptainer-containers">Docker vs Apptainer containers</h2>
-<ul>
-<li>Apptainer (i.e.&nbsp;Singularity) is intended to run reproducibly across many system types, including HPC systems</li>
-<li>Docker is rarely allowed on clusters, requires root access</li>
-<li>Their images are somewhat different - Docker images are made up of layers (Base image -&gt; launched as container -&gt; edited -&gt; used as new base layer -&gt; launched -&gt; edited -&gt; etc.). Apptainer images squash layers into one file (.sif format)</li>
-<li>These files are easily shared and can be run on any system with Apptainer installed</li>
-</ul>
+<section id="setting-up-the-tools" class="level1">
+<h1>Setting up the tools</h1>
+<section id="clone-this-repo" class="level2">
+<h2 class="anchored" data-anchor-id="clone-this-repo">Clone this repo</h2>
+<p>To follow along in some of the examples you should clone this repo to have access to the example files.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clone the repo</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/NBISweden/Training-Tech-shorts.git</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># go to the example files</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Training-Tech-shorts/posts/2026-02-26-copilot-sensitive-data/example_files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="apptainer-vs-singularity-history-the-.sif-format" class="level2">
-<h2 class="anchored" data-anchor-id="apptainer-vs-singularity-history-the-.sif-format">Apptainer vs Singularity history &amp; the .sif format</h2>
-<ul>
-<li>Singularity was the original name of the open source project from 2015, but this turned partly commercial in 2018</li>
-<li>The open source part forked and joined the Linux foundation in 2021, becoming Apptainer</li>
-<li>The singularity image format (.sif) remains in Apptainer as a legacy of that</li>
-<li>Similarly when you install Apptainer, there are symlinks, so you can use <code>singularity pull</code> rather than <code>apptainer pull</code></li>
-<li>For practical purposes, they are the same</li>
-</ul>
-</section>
-<section id="structure-of-an-apptainer-command" class="level2">
-<h2 class="anchored" data-anchor-id="structure-of-an-apptainer-command">Structure of an apptainer command</h2>
-<ul>
-<li><p><code>apptainer [subcommand] [image] [additional commands]</code></p></li>
-<li><p>Example of <code>pull</code> and <code>shell</code></p></li>
-</ul>
-<pre><code>apptainer pull docker://alpine
-apptainer shell alpine_latest.sif
-cat /etc/alpine-release
-exit
-cat /etc/alpine-release
-cat /etc/debian_version</code></pre>
-<ul>
-<li>Interact with the container from the host system:</li>
-</ul>
-<pre><code>apptainer exec alpine_latest.sif cat /etc/alpine-release
-cat /etc/alpine-release</code></pre>
-</section>
-<section id="building-.sif-from-a-definition-file-.def" class="level2">
-<h2 class="anchored" data-anchor-id="building-.sif-from-a-definition-file-.def">Building .sif from a definition file (.def)</h2>
-<ul>
-<li>Building a custom container requires a .def file, specifying the registry and image for the base image, and <a href="https://apptainer.org/documentation/">various options for the container</a></li>
-</ul>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>example.def</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="example.def"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Bootstrap: docker</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>From: debian:12.5-slim</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>%environment</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        export PATH=$PATH:/root/.pixi/bin</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>%runscript</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                cat /etc/debian_version</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>%post</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        export PATH=$PATH:/root/.pixi/bin</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        apt-get update &amp;&amp; \</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        apt-get install -y curl &amp;&amp; \</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        curl -fsSL https://pixi.sh/install.sh | bash &amp;&amp; \</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        apt-get clean &amp;&amp; \</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        pixi global install -c bioconda -c conda-forge minigraph</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<ul>
-<li><p>Then build the container: <code>apptainer build minigraph.sif example.def</code></p></li>
-<li><p><code>apptainer run</code> executes the runscript inside the container:</p></li>
-</ul>
-<p><code>apptainer run minigraph.sif</code></p>
-</section>
-<section id="portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def" class="level2">
-<h2 class="anchored" data-anchor-id="portability-to-hpc-systems-note-on-reproducibilty-.sif-files-vs-rebuilding-from-a-.def">Portability to HPC systems, &amp; note on reproducibilty (.sif files vs rebuilding from a .def)</h2>
-<ul>
-<li><p>.sif files are portable and will be highly reproducible</p></li>
-<li><p>You can also share a .def file, however consider that some tags on docker hub refer to rolling releases, e.g.&nbsp;<code>latest</code>. If you want future builds of the container to be identical, try to find a static tag, e.g.&nbsp;a github commit tag</p></li>
-<li><p>In addition, using commands from package managers like <code>apt-get update</code> in the .def will make the container less reproducible, as the package versions will change over time</p></li>
-<li><p>By default Apptainer/Singularity loads certain directories such as <code>$HOME</code> (see below), and this means local packages (e.g.&nbsp;Python, R, etc.) can be picked up and loaded instead of the ones in the container. To prevent this, do <a href="https://github.com/nf-core/tools/blob/930ece572bf23b68c7a7c5259e918a878ba6499e/nf_core/pipeline-template/nextflow.config#L212-L221">something like this</a>.</p></li>
-</ul>
-</section>
-<section id="other-useful-things-to-know" class="level2">
-<h2 class="anchored" data-anchor-id="other-useful-things-to-know">Other useful things to know:</h2>
-<section id="mount-binding" class="level3">
-<h3 class="anchored" data-anchor-id="mount-binding">Mount binding</h3>
-<ul>
-<li>Some folders are automatically bound from the host system (e.g., <code>$HOME</code>, <code>$CWD</code>, <code>/tmp</code>)</li>
-<li>Therefore don’t install software to those locations - they’ll install on your host system too</li>
-<li>Use an unmounted folder like <code>/opt</code> or <code>/usr/local</code> instead</li>
-<li>If you need to mount a directory to the container, e.g.&nbsp;a data directory, this is possible, e.g.:</li>
-</ul>
-<p><code>apptainer exec --bind /scratch example.sif ls /scratch</code></p>
-</section>
-<section id="conversion-from-docker" class="level3">
-<h3 class="anchored" data-anchor-id="conversion-from-docker">Conversion from docker</h3>
-<ul>
-<li>It’s possible to convert from docker images to singularity images - not covered today</li>
-</ul>
-</section>
-<section id="sandbox-containers" class="level3">
-<h3 class="anchored" data-anchor-id="sandbox-containers">Sandbox containers</h3>
-<ul>
-<li>Singularity containers are basically uneditable - no so fun if you need to keep rebuilding from scatch during development</li>
-<li>There is a “sandbox container” feature which is editable, and it works like a file system within your file system</li>
-<li>When you are ready for a production container, you can convert the sandbox container to a regular container, though it would be preferable to rebuild from a definition file, so that there is a record of what was done</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
+<section id="man-in-the-middle-proxy" class="level2">
+<h2 class="anchored" data-anchor-id="man-in-the-middle-proxy">Man-in-the-Middle Proxy</h2>
+<p>To be able to see what is actually being sent to Copilot we will use a <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">man-in-the-middle proxy</a> called <a href="https://hub.docker.com/r/mitmproxy/mitmproxy/">mitmproxy</a>. We will configure our Copilot plugin to send all requests through this proxy so that we can spy on what is being sent. We will also disable a security check (<code>NODE_TLS_REJECT_UNAUTHORIZED</code>) in VSCode to make this possible, as it will notice that the data is not being sent directly to the Copilot servers.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Warning</span>Security Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It’s advisable to use many small containers (minimal container for a single process/tool) rather than large inclusive containers.</p>
+<p>The <code>NODE_TLS_REJECT_UNAUTHORIZED=0</code> setting disables SSL certificate validation and should <strong>ONLY</strong> be used for this testing exercise. Never use this in production environments or when handling real sensitive data.</p>
 </div>
 </div>
+<p>We’ll begin with starting the <a href="https://hub.docker.com/r/mitmproxy/mitmproxy/">mitmproxy</a> container with the following command:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-it</span>                                    <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">-v</span> ~/.mitmproxy:/home/mitmproxy/.mitmproxy <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">-p</span> 9999:8080                               <span class="dt">\</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>             mitmproxy/mitmproxy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This will open a UI that shows you all traffic that goes through the proxy. Leave that terminal running and we’ll come back to it later.</p>
+</section>
+<section id="vscode" class="level2">
+<h2 class="anchored" data-anchor-id="vscode">VSCode</h2>
+<p>Install VSCode as usual, <a href="https://code.visualstudio.com/" class="uri">https://code.visualstudio.com/</a>, then open it from the terminal and set an environment variable telling it to not check SSL certificates.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">NODE_TLS_REJECT_UNAUTHORIZED</span><span class="op">=</span>0 <span class="ex">code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tell it to activate Copilot in the first welcome screen and login using your github or google account. Then we have to tell it to use our proxy server for all requests.</p>
+<ol type="1">
+<li>Open the settings with <code>Ctrl + ,</code></li>
+<li>Search for “proxy”</li>
+<li>Enter <code>http://localhost:9999</code> as the <code>Http: Proxy</code> setting</li>
+</ol>
+<p><img src="./images/vscode-proxy-settings.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="seqera-containers-resource" class="level2">
-<h2 class="anchored" data-anchor-id="seqera-containers-resource">Seqera containers resource</h2>
+<section id="the-problem" class="level1">
+<h1>The problem</h1>
+<p>Open the folder <code>Training-Tech-shorts/posts/2026-02-26-copilot-sensitive-data/example_files</code> in VSCode and start editing any file in there. You should see the traffic in the <code>mitmproxy</code> window once you start typing in the file. By default, Copilot will be active on startup and for all file types (except <code>plaintext</code>, <code>markdown</code>, and <code>scminput</code>), and send the content of the file to the AI provider’s server as soon as you type a character in the file.</p>
+<p>With all the tools set up we can start experimenting and seeing what is being sent to the Copilot API. There will be many requests coming through the proxy, but we are only interested in the ones that contain the word <code>completion</code> as these are the requests containing our code completions. In the terminal running <code>mitmproxy</code> we can tell it to filter the list of requests by pressing <code>f</code> and typing <code>completion</code>, making it only show requests containing the word <code>completion</code> in the url.</p>
+<p>To start, we’ll have a look at what could happen if you don’t follow good programming practices and hard-code your credentials in the script, as seen in <code>api-reader-bad.py</code></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>api-reader-bad.py</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="api-reader-bad.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the API endpoint</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>api_url <span class="op">=</span> <span class="st">'https://example-api.com/data'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> <span class="st">'SEUNiTMcpNyXKXnnaNTz70pe0kWu'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Call the API with the Authorization header</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(api_url, headers<span class="op">=</span>{<span class="st">'Authorization'</span>: <span class="ss">f'Bearer </span><span class="sc">{</span>api_key<span class="sc">}</span><span class="ss">'</span>})</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> response.json()</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the response data</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Copilot will send the content of the file to the AI provider’s server, which contains a (fake) API url and API key. Congratulations, you just shared the credentials for your API.</p>
+<p><img src="./images/mitmproxy-api-reader-bad.png" class="img-fluid"></p>
 </section>
-<section id="converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example" class="level2">
-<h2 class="anchored" data-anchor-id="converting-from-docker-if-anyone-uses-docker-regularly---maybe-they-can-take-this-one-as-an-example">Converting from docker: if anyone uses Docker regularly - maybe they can take this one as an example?</h2>
+<section id="solutions-that-might-fool-you" class="level1">
+<h1>Solutions that might fool you</h1>
+<p>The settings regarding inline suggestions at the rightmost sidebar chat are a bit confusing, and the default case is to post more or less everything to their API. Here are some settings that should be changed to decrease that risk.</p>
+<section id="file-type-permissions" class="level2">
+<h2 class="anchored" data-anchor-id="file-type-permissions">File type permissions</h2>
+<p>This problem can be mitigated a bit by having your API credentials stored in a separate config file (e.g.&nbsp;a <code>yaml</code> or a <code>.env</code> file) that is read by the script or given as arguments at run time. You better not edit that separate file in VSCode though, as it will again post your credentials as soon as you type a character in the file unless you configure VSCode to not use completion on those file types.</p>
+<p>By default completion is enabled for all file types except <code>plaintext</code>, <code>markdown</code> and <code>scminput</code> as specified in the VSCode option <code>GitHub › Copilot: Enable</code>. Note that none of the common configuration file formats are defined by default. See the <a href="https://code.visualstudio.com/docs/languages/identifiers">Language identifier list</a> for the complete list of languages you can specify.</p>
+<p><img src="./images/vscode-filetypes-default.png" class="img-fluid"></p>
+<p>Try opening any of the <code>yaml</code> and <code>.env</code> file and see that they are being sent for completion as soon as you start typing in the files. You should add common configuration file formats to the list in <code>GitHub › Copilot: Enable</code> and set them as <code>false</code>. You should also set the default case, <code>*</code>, to <code>false</code> and add the file formats you do want completion for as <code>true</code>. If you discover that you want completion for a new language you did not think of first, just add it to the list as <code>true</code>. An important thing which we’ll cover in just a bit, don’t use the keyboard shortcut or icon in the bottom-right corner to toggle inline code completion.</p>
+<p><img src="./images/vscode-filetypes-curated.png" class="img-fluid"></p>
+<p>If you use keyboard shortcuts or the brackets icon, <code>{}</code>, in the bottom-right corner to toggle inline completion, it applies globally to the file type you are editing and it will not reset when you restart VSCode. The shortcuts will change the list in <code>GitHub › Copilot: Enable</code> and the changes will be persistent.</p>
+<p><img src="./images/enable-inline-wrong-00.png" class="img-fluid"></p>
+<p><img src="./images/enable-inline-wrong-01.png" class="img-fluid"></p>
+<p><img src="./images/enable-inline-wrong-02.png" class="img-fluid"></p>
+<ul>
+<li><p>If you have the default case <code>*</code> set to <code>true</code> and define a list of file formats that should be set to <code>false</code>, if you open a new config format you did not think of you could accidentally post your credentials.</p></li>
+<li><p>If you have a config file format set to <code>false</code> and you are editing a non-sensitive file of the same format and you use the Copilot icon in the bottom-right corner to enable completion in the non-sensitive file, that sets that file format to <code>true</code> and it is remembered. If you forget to turn it off manually after you are done editing the non-sensitive file, a week later when you start editing one of your sensitive config files the setting is still set to <code>true</code>, and your sensitive file gets posted.</p></li>
+<li><p>The trickiest case though is that all file formats that are not explicitly listed in the <code>GitHub › Copilot: Enable</code> list are classified as belonging to the default case <code>*</code>, even though VSCode very well knows which file format the file is.</p>
+<p>So if you have the default case <code>*</code> set to <code>false</code>, and you open a shell script file and enable the code completion using the shortcut, it will set <code>*</code> to <code>true</code> since you have not specified shell scripts in the list. The next time you open a <code>dotenv</code> file it will be posted as soon as you type anything in the file, as the <code>dotenv</code> file is not specified in the list either. A more sane approach by VSCode would have been to automatically create a entry in the list for shell scripts and set that to <code>true</code>, leaving the default case value unchanged, or make the setting only for that file until you restart the editor.</p></li>
+</ul>
+<p>Apart from the risks of misconfiguring the file type permissions and accidentally posting your file, there is another way to mess up that is even more serious. The list of file types and permissions only apply to the inline completion. The Copilot chat in the sidebar completely disregards this list and will happily post any and all files in your project folder.</p>
+</section>
+<section id="gitignore-exclusion" class="level2">
+<h2 class="anchored" data-anchor-id="gitignore-exclusion"><code>.gitignore</code> exclusion</h2>
+<p>Another setting that you could enable is the <code>Explorer: Exclude Git Ignore</code> option. This will make VSCode’s file browser hide any files you have in your <code>.gitignore</code> file. This will make it harder to accidentally open sensitive files in VSCode, and should keep the inline code completion from posting your sensitive data. The Copilot chat will still be able to read and post the files though, making the option less useful from a security perspective.</p>
+</section>
+<section id="copilotignore-files" class="level2">
+<h2 class="anchored" data-anchor-id="copilotignore-files"><code>.copilotignore</code> files</h2>
+<p><code>.copilotignore</code> files do not work the same way as <code>.gitignore</code> files, despite the similar name. It will only affect how GitHub uses Copilot on their end, once your files are already committed and pushed to GitHub. Another downside of this is that it is only available for organizations with Copilot Business or Copilot Enterprise plans.</p>
+</section>
+</section>
+<section id="some-solutions-that-work-better" class="level1">
+<h1>Some solutions that work better</h1>
+<section id="file-type-permissions-a-better-way" class="level2">
+<h2 class="anchored" data-anchor-id="file-type-permissions-a-better-way">File type permissions (a better way)</h2>
+<p>There is an easier way to toggle inline suggestions per file type that actually works the way it should. If you press the Copilot icon in the bottom right of the screen you can chose to toggle for the current file format. If it is a file format that is not explicitly defined in the settings list, it will automatically be added and the toggle state for inline suggestions only affects that specific file format.</p>
+<p><img src="./images/enable-inline-correct-00.png" class="img-fluid"></p>
+<p><img src="./images/enable-inline-correct-01.png" class="img-fluid"></p>
+</section>
+<section id="sensitive-data-outside-of-workspace" class="level2">
+<h2 class="anchored" data-anchor-id="sensitive-data-outside-of-workspace">Sensitive data outside of workspace</h2>
+<p>Never keep files that contain sensitive information in the workspace folder or any of its subfolders. Copilot will only look at the files in you workspace, and if it tries to access files outside it has to ask for permission (self-government, mind you) to access the files. When you run your script you can supply the path to the file that is far outside of the VSCode workspace folder as an argument.</p>
+</section>
+<section id="secrets-managers" class="level2">
+<h2 class="anchored" data-anchor-id="secrets-managers">Secrets managers</h2>
+<p>If you are using Docker for deployment you can make use of <a href="https://docs.docker.com/engine/swarm/secrets/">Docker Swarm Secrets</a>, in which you can store your sensitive data (500kb max) in a database that docker manages, and the containers can access the secret as if it was a file inside the container. Various cloud providers have similar solutions, e.g.&nbsp;AWS Secrets Manager, Azure Key Vault, GCP Secrets Manager.</p>
+<p>Depending on your operating system there are different secrets managers sometimes built in:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/powershell/utility-modules/secretmanagement/overview?view=ps-modules">SecretManagement and SecretStore</a> for Windows</li>
+<li><a href="https://support.apple.com/guide/keychain-access/welcome/mac">Keychain</a> on Mac</li>
+<li>E.g. <a href="https://man7.org/linux/man-pages/man7/keyrings.7.html">Keyrings</a> or <a href="https://wiki.gnome.org/Projects/GnomeKeyring">GnomeKeyring</a> for Linux</li>
+</ul>
+<p>A less secure but more widely used approach is <a href="https://www.dotenv.org/docs/security/env.html">.env files</a>, but as we have seen earlier in this tutorial it has to be stored outside of your VSCode workspace to stop Copilot from accessing it.</p>
+</section>
+<section id="opening-the-workspace-in-restricted-mode" class="level2">
+<h2 class="anchored" data-anchor-id="opening-the-workspace-in-restricted-mode">Opening the workspace in restricted mode</h2>
+<p>When you open a workspace for the first time VSCode will ask you if you trust the author of the files. If you say no, AI features (among other things) will be disabled for files in the workspace.</p>
+</section>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<ul>
+<li><p>There is as of now no reliable way to stop Copilot from posting sensitive files if you keep them in your workspace folder. Just keep the sensitive data somewhere else.</p></li>
+<li><p>The file type based settings are easy to misconfigure, and using the inline code completion toggle can have unintended consequences.</p></li>
+<li><p>The chat version of Copilot does not respect the settings of the inline code completion, and does not seem to have any corresponding settings.</p></li>
+</ul>
+</section>
+<section id="cleaning-up-after-testing" class="level1">
+<h1>Cleaning Up After Testing</h1>
+<p>After completing this tutorial, restore your secure configuration:</p>
+<ol type="1">
+<li>Remove the proxy settings from VSCode (Settings → search “proxy” → clear the Http: Proxy field)</li>
+<li>Close VSCode and reopen it normally (without NODE_TLS_REJECT_UNAUTHORIZED=0)</li>
+<li>Stop the mitmproxy container with Ctrl+C</li>
+</ol>
 
 
 </section>
@@ -443,7 +462,7 @@ Tip
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/NBISweden\.github\.io\/Training-Tech-shorts\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -775,4 +794,4 @@ Tip
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2024-06-04-apptainer-intro/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2024-06-04-apptainer-intro/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2026-02-26-copilot-sensitive-data/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2026-02-26-copilot-sensitive-data/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
