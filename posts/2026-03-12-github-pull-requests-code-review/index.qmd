@@ -1,10 +1,10 @@
 ---
-title: "Github Pull Requests and Code Reviews"
+title: "GitHub Pull Requests and Code Reviews"
 author: 
   - "Mahesh Binzer-Panchal"
 date: "2026-03-12"
 date-modified: last-modified
-categories: ["Github", "Pull Requests", "Code Reviews"]
+categories: ["GitHub", "Pull Requests", "Code Reviews"]
 ---
 
 ## Introduction
@@ -179,11 +179,12 @@ Closes #42
    
    **Suggestion comments** (suggesting specific code changes):
 
-   - Click the `+` icon on a line
-   - Click the "Insert a suggestion" button (±)
+   - Select the line number you want to comment on and drag down to make a multi-line selection.
+   - Click the `+` icon on the bottom most line of your selection.
+   - Click the "Add a suggestion" button (±) or press {{< kbd mac=Command-G linux=Ctrl-G win=Control-G >}}
    - Edit the code in the suggestion block
    - Add explanation above the suggestion
-   - The author can accept your suggestion with one click!
+   - The author can accept your suggestion with one click, or from the files changed tab, add multiple modifications to a single commit.
 
    **Example:**
    ````markdown
