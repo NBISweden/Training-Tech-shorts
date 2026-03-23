@@ -16,7 +16,7 @@ Previous walkthrough: [Introduction to Pixi](../../posts/2025-01-21-pixi-intro/i
 If you've used Conda/Mamba for bioinformatics, you've probably experienced:
 
 - 😫 **Painful dependency resolution** - Unhelpful error messages
-- 🔄 **Manual lock files** - Need to remember to generate them with `conda list --explicit > spec-file.txt`
+- 🔄 **Manual lockfiles** - Need to remember to generate them with `conda list --explicit > spec-file.txt`
 - 📁 **Scattered environments** - Configuration files separate from projects
 - 🐌 **Single-threaded** - Slow package downloads and installations
 - 🤷 **Environment drift** - "Works on my machine" problems, dependency drift over time leading to unresolvable environments, even though they worked 6 months ago.
@@ -24,7 +24,7 @@ If you've used Conda/Mamba for bioinformatics, you've probably experienced:
 ### How Pixi does it better
 
 - ⚡ **Much faster** - Written in Rust, multithreaded operations, sharded package lists
-- 🔒 **Automatic lock files** - Like uv, no extra steps needed
+- 🔒 **Automatic lockfiles** - Like uv, no extra steps needed
 - 📦 **Project-local environments** - Everything lives in your project directory
 - 🎯 **Built-in task runner** - Replace Makefiles and shell scripts
 - 🔁 **True reproducibility** - Lock files track exact versions per platform
@@ -51,7 +51,7 @@ Just because a tool supports an architecture doesn't mean a pre-compiled package
 
 ### What Makes Pixi Great for Bioinformatics
 
-- ✅ **Full support for your favourite channels** - All your favorite tools
+- ✅ **Full support for your favourite channels** - All your favourite tools
 - ✅ **Mix conda and PyPI packages** - Best of both worlds
 - ✅ **Access to system tools** - slurm, singularity, modules all work
 - ✅ **Package isolation with system access** - Isolated environments, not isolated from your cluster
@@ -566,7 +566,7 @@ jobs:
         run: pixi run pipeline
 ```
 
-See the [Pixi Github Action](https://github.com/marketplace/actions/setup-pixi) page for the latest version
+See the [Pixi GitHub Action](https://github.com/marketplace/actions/setup-pixi) page for the latest version
 
 ### Intel Emulation on ARM Macs
 
