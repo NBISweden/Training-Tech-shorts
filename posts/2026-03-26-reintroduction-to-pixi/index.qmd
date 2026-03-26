@@ -472,9 +472,9 @@ Search for a package:
 pixi search samtools
 ```
 
-**Note:** Unlike `conda search`, Pixi doesn't list all available versions. For that, use:
+By default, `pixi search` doesn't list all available versions. To list more package versions, use the `-l <int>` flag
 ```bash
-conda search -c bioconda samtools
+pixi search -l 40 samtools
 ```
 
 ### Updating Packages
@@ -656,7 +656,7 @@ pixi workspace channel list # List channels
 ### Task Management
 
 ```bash
-pixi task list           # List all tasks
+pixi task list               # List all tasks
 pixi task add <name> <cmd>   # Add task
 pixi task remove <name>      # Remove task
 ```
@@ -680,7 +680,7 @@ pixi search <name>       # Search for packages
 
 ```bash
 # Project setup
-pixi init                 # Initialize project
+pixi init                # Initialize project
 pixi install             # Install from lock file
 
 # Package management
