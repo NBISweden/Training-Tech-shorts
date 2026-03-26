@@ -190,7 +190,7 @@ process = """
 """
 ```
 
-Which are run as:
+Once defined, these tasks can be executed from your terminal using the `run` command:
 ```bash
 pixi run hello
 pixi run process
@@ -207,7 +207,7 @@ test = { cmd = "python test.py", depends-on = ["build"] }
 deploy = { depends-on = ["build", "test"] }
 ```
 
-Run as:
+Run using:
 ```bash
 pixi run deploy
 ```
@@ -229,7 +229,7 @@ args = [
 cmd = "echo Building {{ project }} with {{ mode }} mode"
 ```
 
-Run as:
+Run using:
 ```bash
 pixi run greet Mahesh
 pixi run build
@@ -249,12 +249,22 @@ submit = "sbatch job.sh"  # Only available on Linux
 submit = "echo 'Slurm not available on Mac'"
 ```
 
+Run using:
+```bash
+pixi run submit
+```
+
 ### Input/Output Dependencies
 
 ```toml
 [tasks]
 index = { cmd = "bwa index reference.fa", outputs = ["reference.fa.bwt"] }
 align = { cmd = "bwa mem reference.fa reads.fq > aligned.sam", inputs = ["reference.fa.bwt"], depends-on = ["index"] }
+```
+
+Run using:
+```bash
+pixi run align
 ```
 
 See [Advanced Tasks](https://pixi.sh/latest/features/advanced_tasks/) for complete feature list.
