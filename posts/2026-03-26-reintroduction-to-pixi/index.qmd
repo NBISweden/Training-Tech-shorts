@@ -1,7 +1,7 @@
 ---
 title: "Reintroduction to Pixi"
 author:
-  - "Mahesh"
+  - "Mahesh Binzer-Panchal"
 date: "2026-03-26"
 date-modified: last-modified
 categories: [ Pixi, "Package management", "Command runner" ]
@@ -190,6 +190,12 @@ process = """
 """
 ```
 
+Which are run as:
+```bash
+pixi run hello
+pixi run process
+```
+
 ### Task Dependencies
 
 Chain tasks together:
@@ -199,6 +205,11 @@ Chain tasks together:
 build = "gcc -o myapp main.c"
 test = { cmd = "python test.py", depends-on = ["build"] }
 deploy = { depends-on = ["build", "test"] }
+```
+
+Run as:
+```bash
+pixi run deploy
 ```
 
 ### Task with Arguments
@@ -216,6 +227,16 @@ args = [
   { "arg" = "mode", "default" = "development" },
 ]
 cmd = "echo Building {{ project }} with {{ mode }} mode"
+```
+
+Run as:
+```bash
+pixi run greet Mahesh
+pixi run build
+# Or
+pixi run build amazing-project
+# Or
+pixi run build amazing-project production
 ```
 
 ### Platform-Specific Tasks
