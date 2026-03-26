@@ -249,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 <section id="how-pixi-does-it-better" class="level3">
-<h3 class="anchored" data-anchor-id="how-pixi-does-it-better">How Pixi does it better</h3>
+<h3 class="anchored" data-anchor-id="how-pixi-does-it-better">How Pixi Does It Better</h3>
 <ul>
 <li>⚡ <strong>Much faster</strong> - Written in Rust, multithreaded operations, sharded package lists</li>
 <li>🔒 <strong>Automatic lockfiles</strong> - Like uv, no extra steps needed</li>
@@ -440,7 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-runner-features" class="level2">
 <h2 class="anchored" data-anchor-id="task-runner-features">Task Runner Features</h2>
-<p>Pixi’s built-in task runner replaces Makefiles and shell scripts with a more powerful system.</p>
+<p>Pixi’s built-in task runner replaces Makefiles and shell scripts with a more powerful system. Tasks are defined in the <code>[tasks]</code> section of your <code>pixi.toml</code> file.</p>
 <section id="basic-tasks" class="level3">
 <h3 class="anchored" data-anchor-id="basic-tasks">Basic Tasks</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tasks]</span></span>
@@ -834,12 +834,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Tasks</span></span>
 <span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task add <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span>   <span class="co"># Add task</span></span>
-<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task list               <span class="co"># List tasks</span></span>
-<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Maintenance</span></span>
-<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean               <span class="co"># Remove environment</span></span>
-<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean cache         <span class="co"># Clear package cache</span></span>
-<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> self-update         <span class="co"># Update Pixi itself</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task remove <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span>   <span class="co"># Remove task</span></span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task list               <span class="co"># List tasks</span></span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Maintenance</span></span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean               <span class="co"># Remove environment</span></span>
+<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> clean cache         <span class="co"># Clear package cache</span></span>
+<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> self-update         <span class="co"># Update Pixi itself</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
