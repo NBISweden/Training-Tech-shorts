@@ -216,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 23, 2026</p>
+        <p class="date-modified">March 26, 2026</p>
       </div>
     </div>
       
@@ -658,8 +658,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Search for a package:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> search samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Note:</strong> Unlike <code>conda search</code>, Pixi doesn’t list all available versions. For that, use:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> search <span class="at">-c</span> bioconda samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>By default, <code>pixi search</code> doesn’t list all available versions. To list more package versions, use the <code>-l &lt;int&gt;</code> flag</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> search <span class="at">-l</span> 40 samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="updating-packages" class="level3">
 <h3 class="anchored" data-anchor-id="updating-packages">Updating Packages</h3>
@@ -797,7 +797,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-management" class="level3">
 <h3 class="anchored" data-anchor-id="task-management">Task Management</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task list           <span class="co"># List all tasks</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task list               <span class="co"># List all tasks</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task add <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>cmd<span class="op">&gt;</span>   <span class="co"># Add task</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> task remove <span class="op">&lt;</span>name<span class="op">&gt;</span>      <span class="co"># Remove task</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
@@ -817,7 +817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="quick-reference-card" class="level3">
 <h3 class="anchored" data-anchor-id="quick-reference-card">Quick Reference Card</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Project setup</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init                 <span class="co"># Initialize project</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init                <span class="co"># Initialize project</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> install             <span class="co"># Install from lock file</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Package management</span></span>
