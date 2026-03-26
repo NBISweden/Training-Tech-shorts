@@ -21,7 +21,7 @@ If you've used Conda/Mamba for bioinformatics, you've probably experienced:
 - 🐌 **Single-threaded** - Slow package downloads and installations
 - 🤷 **Environment drift** - "Works on my machine" problems, dependency drift over time leading to unresolvable environments, even though they worked 6 months ago.
 
-### How Pixi does it better
+### How Pixi Does It Better
 
 - ⚡ **Much faster** - Written in Rust, multithreaded operations, sharded package lists
 - 🔒 **Automatic lockfiles** - Like uv, no extra steps needed
@@ -173,7 +173,7 @@ fastqc = "*"
 
 ## Task Runner Features
 
-Pixi's built-in task runner replaces Makefiles and shell scripts with a more powerful system.
+Pixi's built-in task runner replaces Makefiles and shell scripts with a more powerful system. Tasks are defined in the `[tasks]` section of your `pixi.toml` file.
 
 ### Basic Tasks
 
@@ -697,6 +697,7 @@ pixi shell               # Interactive shell
 
 # Tasks
 pixi task add <name> <cmd>   # Add task
+pixi task remove <name> <cmd>   # Remove task
 pixi task list               # List tasks
 
 # Maintenance
