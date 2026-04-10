@@ -284,9 +284,12 @@ needs as necessary.
 ## Make it your own
 
 The way you work is your own, and you can make many of the tools work the way
-_you_ prefer. Make a file with your most commonly used Git aliases, explore new
-VSCode plugins that could give you cool new editing options, create a GitHub
-template repository for your support projects, start a dotfiles repository to
-store all your configs in... Your way of working doesn't need to be set in
-stone, but can evolve along with you and the new tools that are bound to come
-along.
+_you_ prefer. Make a file with your most commonly used [Git
+aliases](https://github.com/fasterius/dotfiles/blob/main/bash/bashrc#L146-L167),
+explore new [VSCode extensions](https://marketplace.visualstudio.com/vscode)
+that could give you cool new editing options, create a GitHub [template
+repository](https://github.com/fasterius/nbis-support-template) for your
+projects, start a [dotfiles](https://wiki.archlinux.org/title/Dotfiles)
+[repository](https://github.com/fasterius/dotfiles) to store all your configs
+in... Your way of working doesn't need to be set in stone, but can evolve along
+with you and the new tools that are bound to come along.
