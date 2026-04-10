@@ -258,7 +258,7 @@ place to start. If you've already organised your projects and are using Git but
 are missing environment control, start with Conda. Maybe you already use Quarto
 or Jupyter for notebooks, but you want to combine it with a workflow manager.
 
-It matters less where you currently are, and more where you want to do. Take one
+It matters less where you currently are, and more where you want to go. Take one
 thing at a time if it feels daunting, or dive deep and learn all the tools you
 want in one go and incorporate them all into your daily work - it's all up to
 you.
