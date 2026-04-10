@@ -46,7 +46,7 @@
     "href": "posts/2026-04-09-working-reproducibly/index.html#what-does-reproducibility-mean",
     "title": "Working Reproducibly",
     "section": "What does reproducibility mean?",
-    "text": "What does reproducibility mean?\nIt’s important to know exactly what we mean when we talk about reproducibility, as there are several related concepts that often get mixed up with it:\n\n\n\n\n\n\nData\n\n\n\n\n\n\nSame\n\n\nDifferent\n\n\n\n\nCode\n\n\nSame\n\n\nReproducible\n\n\nReplicable\n\n\n\n\nDifferent\n\n\nRobust\n\n\nGeneralisable\n\n\n\n\nSo, reproducibility is using the same data and the same code to get the same results. This sounds easy in theory, but is often harder in practice."
+    "text": "What does reproducibility mean?\nIt’s important to know exactly what we mean when we talk about reproducibility, as there are several related concepts that often get mixed up with it:\n\n\n\n\n\nData\n\n\n\n\n\n\nSame\n\n\nDifferent\n\n\n\n\nCode\n\n\nSame\n\n\nReproducible\n\n\nReplicable\n\n\n\n\nDifferent\n\n\nRobust\n\n\nGeneralisable\n\n\n\nSo, reproducibility is using the same data and the same code to get the same results. This sounds easy in theory, but is often harder in practice."
   },
   {
     "objectID": "posts/2026-04-09-working-reproducibly/index.html#why-should-you-work-reproducibly",
