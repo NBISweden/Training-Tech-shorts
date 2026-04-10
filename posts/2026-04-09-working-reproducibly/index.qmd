@@ -31,6 +31,7 @@ as there are several related concepts that often get mixed up with it:
   <td colspan="2" bgcolor="#FFFFFF" style="border-bottom: none"></td>
   <td colspan="2" align="center" bgcolor="#77c1ac">Data</td>
 </tr>
+<tr>
   <td colspan="2" bgcolor="#FFFFFF"></td>
   <td align="center" bgcolor="#96cfbf">Same</td>
   <td align="center" bgcolor="#96cfbf">Different</td>
