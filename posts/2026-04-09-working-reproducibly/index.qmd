@@ -213,6 +213,7 @@ compared to package managers.
  - [Containers @ Tool for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/containers.html)
  - [Docker @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-10-23-introduction-to-docker/)
  - [Apptainer @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/)
+ - [Container Registries @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-06-10-container-registry-intro/)
 
 ## Your workflow
 
