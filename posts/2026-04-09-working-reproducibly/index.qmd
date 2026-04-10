@@ -167,13 +167,15 @@ relate to the project somehow. An example is `UF-7235-24-kidney`.
 
 #### Literate programming
 
-[Quarto](https://quarto.org/) and [Jupyter](https://jupyter.org/) are
+[Quarto](https://quarto.org/), [Jupyter](https://jupyter.org/), and [Marimo](https://marimo.io/) are
 _computational notebooks_ that allow you to combine code together with Markdown
 in a seamless way.
 
  - [Quarto @ Tools for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/quarto.html)
  - [Jupyter @ Tools for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/jupyter.html)
  - [Quarto @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-04-16-quarto-intro/)
+ - [Marimo Documentation](https://docs.marimo.io/)
+ - [Marimo via SSH @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-04-15-ssh-config-intro/#run-marimo-using-pixi)
 
 ## Your environment
 
