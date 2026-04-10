@@ -109,7 +109,7 @@
     "href": "posts/2026-04-09-working-reproducibly/index.html#make-it-your-own",
     "title": "Working Reproducibly",
     "section": "Make it your own",
-    "text": "Make it your own\nThe way you work is your own, and you can make many of the tools work the way you prefer. Make a file with your most commonly used Git aliases, explore new VSCode plugins that could give you cool new editing options, create a GitHub template repository for your support projects, start a dotfiles repository to store all your configs in… Your way of working doesn’t need to be set in stone, but can evolve along with you and the new tools that are bound to come along."
+    "text": "Make it your own\nThe way you work is your own, and you can make many of the tools work the way you prefer. Make a file with your most commonly used Git aliases, explore new VSCode extensions that could give you cool new editing options, create a GitHub template repository for your projects, start a dotfiles repository to store all your configs in… Your way of working doesn’t need to be set in stone, but can evolve along with you and the new tools that are bound to come along."
   },
   {
     "objectID": "posts/2026-03-12-github-pull-requests-code-review/index.html",
