@@ -192,7 +192,9 @@ There are many package managers out there that help you install and manage the
 various packages in your environment. Some are for a particular language, while
 others are language-agnostic. Conda could be considered industry standard for
 this, but Pixi is gaining traction as a drop-in replacement and general
-improvement upon it.
+improvement upon it. An important thing that package managers should have is the
+ability to create _lock files_, which are files containing a list of all the
+packages, dependencies and their respective versions that have been installed.
 
  - [Conda @ Tools for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/conda.html)
  - [Pixi @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2026-03-26-reintroduction-to-pixi/)
