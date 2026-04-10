@@ -1,5 +1,5 @@
 ---
-title: "Working reproducibly"
+title: "Working Reproducibly"
 date: 2026-04-09
 date-modified: last-modified
 author:
