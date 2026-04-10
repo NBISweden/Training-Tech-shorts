@@ -158,7 +158,6 @@ standard used in bioinformatics and software engineering at large.
 
  - [Git @ Tools for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/git.html)
  - [Git @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-03-19-git-intro/)
- - [GitHub @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-03-12-github-collaboration/)
  - [GitHub READMEs @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-03-18-github-readmes/)
 
 ::: {.callout-tip title="Using GitHub at NBIS"}
