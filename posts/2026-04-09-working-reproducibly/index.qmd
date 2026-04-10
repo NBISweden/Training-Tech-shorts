@@ -51,7 +51,7 @@ as there are several related concepts that often get mixed up with it:
 </center>
 
 So, reproducibility is using the _same_ data and the _same_ code to get the
-_same_ results. This sounds easy in theory, but is often harder in practise.
+_same_ results. This sounds easy in theory, but is often harder in practice.
 
 ## Why should you work reproducibly?
 
