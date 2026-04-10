@@ -148,7 +148,7 @@ results/          Output from workflows and analyses
 README.md         Project description and instructions
 ```
 
- - [Documentation @ Tools for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/documentation.html)
+It's important to document how your project is structured so that others can also navigate your project. Click here to learn more: [Documentation @ Tools for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/documentation.html)
 
 #### Version control
 
