@@ -232,7 +232,7 @@ project's lifetime, as they remove all manual work related to running scripts
 with the correct inputs, parameters, and so on. Workflow managers are not only
 useful for large, generalised production-level pipelines (such as those
 available at [nf-core](https://nf-co.re/)), but can also be used for more
-bespoke.
+bespoke work.
 
 One great feature that workflow managers have is that they make environment
 control a lot simpler, as each individual step in the workflow can have a
