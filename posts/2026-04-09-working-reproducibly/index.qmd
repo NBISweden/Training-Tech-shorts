@@ -25,30 +25,28 @@ NBIS already has will be given throughout when appropriate.
 It's important to know exactly what we mean when we talk about reproducibility,
 as there are several related concepts that often get mixed up with it:
 
-<center>
-<table>
-<tr>
-  <td colspan="2" bgcolor="#FFFFFF" style="border-bottom: none"></td>
-  <td colspan="2" align="center" bgcolor="#77c1ac">Data</td>
-</tr>
-<tr>
-  <td colspan="2" bgcolor="#FFFFFF"></td>
-  <td align="center" bgcolor="#96cfbf">Same</td>
-  <td align="center" bgcolor="#96cfbf">Different</td>
-</tr>
-<tr>
-  <td rowspan="2" bgcolor="#77c1ac">Code</td>
-  <td align="center" bgcolor="#96cfbf">Same</td>
-  <td align="center" bgcolor="#b9dfd4">Reproducible</td>
-  <td align="center" bgcolor="#b9dfd4">Replicable</td>
-</tr>
-<tr>
-  <td align="center" bgcolor="#96cfbf">Different</td>
-  <td align="center" bgcolor="#b9dfd4">Robust</td>
-  <td align="center" bgcolor="#b9dfd4">Generalisable</td>
-</tr>
+<table style="border-collapse: collapse; width: 100%; font-family: sans-serif;">
+  <tr>
+    <td colspan="2" style="border: none;"></td>
+    <th colspan="2" style="text-align: center; background-color: #77c1ac; border: 1px solid #ddd; padding: 8px;">Data</th>
+  </tr>
+  <tr>
+    <td colspan="2" style="border: none;"></td>
+    <td style="text-align: center; background-color: #96cfbf; border: 1px solid #ddd; padding: 8px;">Same</td>
+    <td style="text-align: center; background-color: #96cfbf; border: 1px solid #ddd; padding: 8px;">Different</td>
+  </tr>
+  <tr>
+    <th rowspan="2" style="background-color: #77c1ac; border: 1px solid #ddd; padding: 8px;">Code</th>
+    <td style="text-align: center; background-color: #96cfbf; border: 1px solid #ddd; padding: 8px;">Same</td>
+    <td style="text-align: center; background-color: #b9dfd4; border: 1px solid #ddd; padding: 8px;">Reproducible</td>
+    <td style="text-align: center; background-color: #b9dfd4; border: 1px solid #ddd; padding: 8px;">Replicable</td>
+  </tr>
+  <tr>
+    <td style="text-align: center; background-color: #96cfbf; border: 1px solid #ddd; padding: 8px;">Different</td>
+    <td style="text-align: center; background-color: #b9dfd4; border: 1px solid #ddd; padding: 8px;">Robust</td>
+    <td style="text-align: center; background-color: #b9dfd4; border: 1px solid #ddd; padding: 8px;">Generalisable</td>
+  </tr>
 </table>
-</center>
 
 So, reproducibility is using the _same_ data and the _same_ code to get the
 _same_ results. This sounds easy in theory, but is often harder in practice.
