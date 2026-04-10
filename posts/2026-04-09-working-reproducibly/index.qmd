@@ -85,7 +85,7 @@ reproducibility guidelines](https://github.com/NBISweden/Reproducibility-Guideli
 
 ## An overview of reproducibility
 
-![](images/reproducibility-overview.png){width=400px fig-align="center"}
+![Overview diagram showing data and code going into a workflow surrounded by the compute environment to produce results](images/reproducibility-overview.png){width=400px fig-align="center"}
 
 There are generally three parts to working reproducibly:
 
