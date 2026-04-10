@@ -128,7 +128,7 @@ which you are working.
 
 #### Get organised
 
-You should _organise_ everything related your project. Stick to one
+You should _organise_ everything related to your project. Stick to one
 self-contained directory per project, where you keep everything related to that
 project. Exactly _which_ organisational structure you pick matters less than
 that you organise in the first place. Be consistent, be descriptive. The
@@ -210,7 +210,7 @@ much more powerful once you do. Indeed, once you've started working with them
 and feel more comfortable with them, they can actually be _easier_ to work with,
 compared to package managers.
 
- - [Containers @ Tool for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/containers.html)
+ - [Containers @ Tools for Reproducible Research](https://nbisweden.github.io/workshop-reproducible-research/pages/containers.html)
  - [Docker @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-10-23-introduction-to-docker/)
  - [Apptainer @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/)
  - [Container Registries @ RSE Tech Group](https://nbisweden.github.io/Training-Tech-shorts/posts/2025-06-10-container-registry-intro/)
