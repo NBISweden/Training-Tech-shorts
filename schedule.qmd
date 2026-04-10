@@ -6,7 +6,7 @@ provided in NBIS Slack `#tech-group-rse-tools`.
 
 - 2026/05/28: Erik - Using nf-core modules
 - 2026/05/14: _Holiday_
-- 2026/04/23: TBD
+- 2026/04/23: Martin + Björn - Introduction to Configure and Make
 - 2026/04/09: Erik - Working Reproducibly
 - 2026/03/26: Mahesh - Introduction to Pixi
 - 2026/03/12: Mahesh - GitHub Pull Requests and Code Reviews
