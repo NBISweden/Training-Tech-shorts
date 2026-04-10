@@ -412,7 +412,7 @@ Generalisable
 <p>Even if you’ve correctly stored and version controlled your code, that’s no guarantee that somebody else (or future you) will be able to actually execute it, or that it yields the same results as when you wrote it. For this you need to control the <em>computational environment</em> within which the code is executed: which packages are installed, with which versions, which dependencies, their versions, and so on.</p>
 <section id="package-managers" class="level4">
 <h4 class="anchored" data-anchor-id="package-managers">Package managers</h4>
-<p>There are many package managers out there that help you install and manage the various packages in your environment. Some are for a particular language, while others are language-agnostic. Conda could be considered industry standard for this, but Pixi is gaining traction as a drop-in replacement and general improvement upon it.</p>
+<p>There are many package managers out there that help you install and manage the various packages in your environment. Some are for a particular language, while others are language-agnostic. Conda could be considered industry standard for this, but Pixi is gaining traction as a drop-in replacement and general improvement upon it. An important thing that package managers should have is the ability to create <em>lock files</em>, which are files containing a list of all the packages, dependencies and their respective versions that have been installed.</p>
 <ul>
 <li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/conda.html">Conda @ Tools for Reproducible Research</a></li>
 <li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2026-03-26-reintroduction-to-pixi/">Pixi @ RSE Tech Group</a></li>
