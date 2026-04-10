@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2026-04-09-working-reproducibly/index.html",
       "/posts/2026-03-26-reintroduction-to-pixi/index.html",
       "/posts/2026-03-12-github-pull-requests-code-review/index.html",
       "/posts/2026-02-26-copilot-sensitive-data/index.html",

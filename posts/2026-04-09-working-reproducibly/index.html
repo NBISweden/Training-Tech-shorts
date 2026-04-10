@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mahesh">
-<meta name="dcterms.date" content="2024-05-07">
+<meta name="author" content="Erik Fasterius">
+<meta name="dcterms.date" content="2026-04-09">
 
-<title>Introduction to Gitpod – RSE Tools</title>
+<title>Working Reproducibly – RSE Tools</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -187,12 +187,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Introduction to Gitpod</h1>
+      <h1 class="title">Working Reproducibly</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">Git</div>
-                <div class="quarto-category">GitHub</div>
+                <div class="quarto-category">Reproducibility</div>
+                <div class="quarto-category">Documentation</div>
                 <div class="quarto-category">Version control</div>
-                <div class="quarto-category">Gitpod</div>
+                <div class="quarto-category">Package management</div>
+                <div class="quarto-category">Workflow management</div>
               </div>
                   </div>
   </div>
@@ -203,14 +204,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Mahesh </p>
+               <p>Erik Fasterius </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 7, 2024</p>
+        <p class="date">April 9, 2026</p>
       </div>
     </div>
     
@@ -235,132 +236,231 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div class="callout callout-style-default callout-important callout-titled" title="Important Note on Cloud Development Environments">
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This material focuses on general information about reproducibility, <em>i.e.</em> why you should work reproducibly, what it means to work reproducibly, how to start, and so on. There will be no practical examples in this material itself, contrary to most other RSE Tech Group write-ups, but links to the plethora of material NBIS already has will be given throughout when appropriate.</p>
+</section>
+<section id="what-does-reproducibility-mean" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-reproducibility-mean">What does reproducibility mean?</h2>
+<p>It’s important to know exactly what we mean when we talk about reproducibility, as there are several related concepts that often get mixed up with it:</p>
+<table style="border-collapse: collapse; width: 100%; font-family: sans-serif;">
+<tbody><tr>
+<td colspan="2" style="border: none;">
+</td>
+<th colspan="2" style="text-align: center; background-color: #77c1ac; border: 1px solid #ddd; padding: 8px;">
+Data
+</th>
+</tr>
+<tr>
+<td colspan="2" style="border: none;">
+</td>
+<td style="text-align: center; background-color: #96cfbf; border: 1px solid #ddd; padding: 8px;">
+Same
+</td>
+<td style="text-align: center; background-color: #96cfbf; border: 1px solid #ddd; padding: 8px;">
+Different
+</td>
+</tr>
+<tr>
+<th rowspan="2" style="background-color: #77c1ac; border: 1px solid #ddd; padding: 8px;">
+Code
+</th>
+<td style="text-align: center; background-color: #96cfbf; border: 1px solid #ddd; padding: 8px;">
+Same
+</td>
+<td style="text-align: center; background-color: #b9dfd4; border: 1px solid #ddd; padding: 8px;">
+Reproducible
+</td>
+<td style="text-align: center; background-color: #b9dfd4; border: 1px solid #ddd; padding: 8px;">
+Replicable
+</td>
+</tr>
+<tr>
+<td style="text-align: center; background-color: #96cfbf; border: 1px solid #ddd; padding: 8px;">
+Different
+</td>
+<td style="text-align: center; background-color: #b9dfd4; border: 1px solid #ddd; padding: 8px;">
+Robust
+</td>
+<td style="text-align: center; background-color: #b9dfd4; border: 1px solid #ddd; padding: 8px;">
+Generalisable
+</td>
+</tr>
+</tbody></table>
+<p>So, reproducibility is using the <em>same</em> data and the <em>same</em> code to get the <em>same</em> results. This sounds easy in theory, but is often harder in practice.</p>
+</section>
+<section id="why-should-you-work-reproducibly" class="level2">
+<h2 class="anchored" data-anchor-id="why-should-you-work-reproducibly">Why should you work reproducibly?</h2>
+<ul>
+<li>It’s <strong>good scientific practice</strong> and something that should go into or be referenced in the <em>Materials &amp; Methods</em> section in the paper.</li>
+<li>It helps you to be <strong>organised and structured</strong> if you aren’t already, which can make the work smoother and have less friction.</li>
+<li>It makes <strong>fixing errors</strong> both easier and quicker.</li>
+<li>It will help both you and your collaborators more <strong>easily understand</strong> the whole of the project’s scope, steps and results - which is more often than you think highly relevant for the <em>future you</em>.</li>
+<li>It will <strong>save you time</strong> by working more efficiently.</li>
+</ul>
+</section>
+<section id="your-time-and-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="your-time-and-reproducibility">Your time and reproducibility</h2>
+<p>Something that is often talked about when it comes to reproducibility is the <em>time</em> it takes. While learning something new always takes time, once you’ve gotten used to working reproducibly you will actually <em>save</em> time, even though you are most likely doing more things. Working reproducibly is, perhaps non-intuitively, more time-efficient than not doing so.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Reproducibility at NBIS">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Important Note on Cloud Development Environments
+<span class="screen-reader-only">Tip</span>Reproducibility at NBIS
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Gitpod</strong> has rebranded to <strong>Ona</strong> and has a very limited free tier. Usage now requires a paid subscription.</p>
-<p>We recommend using <strong>GitHub Codespaces</strong> as a web-based alternative, as it still offers a useful free tier for individual users.</p>
-<p>For local or self-hosted developer environments, please see walkthroughs covering tools like <strong>Pixi</strong> for environment creation.</p>
+<p>In the context of NBIS Support, we are <em>supposed</em> to spend time on working reproducibly, and this time is part of the project’s support hours - <em>i.e.</em> working reproducibly is part of the scientific work we do for the groups we consult for. While we cannot be responsible for the project as a whole, we <em>are</em> responsible for the bioinformatics analyses we perform, and they need to be reproducible. You can find more information about this at the <a href="https://github.com/NBISweden/Reproducibility-Guidelines">NBIS reproducibility guidelines</a>.</p>
 </div>
 </div>
-<section id="what-is-gitpod" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-gitpod">What is Gitpod</h2>
-<p><a href="https://gitpod.io">Gitpod</a> is a developer environment that runs in your browser. In order to use it, you need a Git repository (either on GitHub, GitLab or Bitbucket). Gitpod opens up a container on your Git repository and clones the repository to the developer environment. This developer environment is initialized from the file <code>.gitpod.yml</code> present in the repository.</p>
-<p>There are two offerings of Gitpod, Gitpod Flex, and Gitpod Enterprise. Gitpod Flex is designed to run a container on your laptop, cloud, or on-premises architecture. Gitpod Enterprise, which we discuss here, runs on a cloud environment hosted by Gitpod.</p>
-<p>There are different pricing depending on your needs such as:</p>
-<ul>
-<li>Free plan (50 hours per month)</li>
-<li>Pay-as-you-go</li>
-<li>Company plan (custom)</li>
-</ul>
-<p>Mahesh is on an open source plan (named NBIS). NBIS does not pay for a Gitpod plan or allow Gitpod to push directly to the NBISweden organization. Contributions to repositories on NBISweden must be made by Pull Request from your personal fork of a repository. Gitpod can then be run on your own forked repositories through your personal authentication.</p>
 </section>
-<section id="how-to-login-to-gitpod" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-login-to-gitpod">How to login to Gitpod</h2>
-<ul>
-<li>Go to the <a href="https://gitpod.io">Gitpod site</a>.</li>
-<li>Select your Git hosting service (e.g., GitHub), and authenticate.</li>
-<li>If successful you should land on the workspaces page, with organisation settings at top left, and personal settings at top right.</li>
-<li>Now when you start a Gitpod environment you’ll be connected to your version control system.</li>
-</ul>
-</section>
-<section id="how-to-start-a-gitpod" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-start-a-gitpod">How to start a Gitpod</h2>
-<p>To start a workspace, follow these steps:</p>
-<ul>
-<li>Navigate to your repository on GitHub, GitLab or Bitbucket.</li>
-<li>Add <code>gitpod.io/#</code> before the URL address of your repository. This will create a new URL address that directs you to the Gitpod workspace setup page. On that page, you can make the following choices:
+<section id="an-overview-of-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="an-overview-of-reproducibility">An overview of reproducibility</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/reproducibility-overview.png" class="img-fluid figure-img" width="400"></p>
+<figcaption>Overview diagram showing data and code going into a workflow surrounded by the compute environment to produce results</figcaption>
+</figure>
+</div>
+<p>There are generally three parts to working reproducibly:</p>
 <ol type="1">
-<li>The source repository for which the gitpod workspace will be created.</li>
-<li>The code editor.</li>
-<li>The computing resources required for the workspace.</li>
-</ol></li>
-<li>After making your choices, the code editor will open, allowing the user can start working on the files in the repository. The user’s working directory is a cloned folder of the GitHub repository located on the Gitpod server, not locally on the computer.</li>
-<li>Any changes to the files within that folder can be pushed to the repository using Git commands.</li>
-</ul>
-<p><strong>Note</strong>: If you are editing a public GitHub public repository, Gitpod requires the “public_repo” permission to push changes. To do it, follow these steps:</p>
-<ol type="1">
-<li>Navigate to gitpod.io.</li>
-<li>Click on your user icon</li>
-<li>Click “user settings”</li>
-<li>Navigate to “Git Providers”</li>
-<li>Click the actions icon on the GitHub provider</li>
-<li>Click “edit permissions”</li>
-<li>Check “public_repo”</li>
-<li>Click “Update permissions”</li>
-<li>You will be redirected to GitHub for authentication.</li>
+<li>Your code</li>
+<li>Your environment</li>
+<li>Your workflow</li>
 </ol>
-<p>After granting permissions, the user can push changes to the repository.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Data management">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Data management
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Additionally, there’s your data (which, arguably, should be number zero), but correctly storing this with backups has more to do with <em>data management</em> than reproducibility.</p>
+</div>
+</div>
+<p>There are many different solutions and tools for each of these steps, and which one you choose varies from person to person. The important thing is not exactly <em>which</em> solution or tool you pick, but rather that you pick <em>something</em>. The chosen solutions or tools of one person can differ to both small and large extents to somebody else, and this is totally fine, as long as the end-goal of reproducibility is achieved.</p>
+<p>Another important point is that <strong>reproducibility is not binary</strong>, but rather a gradient: you can, for example, do well in one area and worse (or nothing at all) in another. Maybe you don’t achieve the idealised version of “perfect” reproducibility, but maybe you’ve gotten somewhere along the way there. We should absolutely strive to get all the way there, but don’t be discouraged by feelings of not doing enough at this particular moment, just keep working at it and learn more as you go.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="N.B.">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>N.B.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While this material lists several of the tools that can help you with each of these steps, it is not aimed to go through them in any detail whatsoever. This material talks about reproducibility at a higher level, and links to further reading are instead given for you to delve deeper wherever you deem necessary.</p>
+</div>
+</div>
 </section>
-<section id="how-to-configure-gitpod" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-configure-gitpod">How to configure Gitpod</h2>
-<ul>
-<li><p>A gitpod workspace is configured mainly through the <code>.gitpod.yml</code> file at the root of your repository (e.g.&nbsp;github.com/user/repo/.gitpod.yml).</p></li>
-<li><p>This file is read by Gitpod when the workspace is started, and can be used to specify the base workspace image, and a list of tasks that will be run when the workspace is started.</p></li>
-<li><p>Below is the yml file we use in the Training-tech-shorts repo.</p></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span><span class="at"> nfcore/gitpod:latest</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tasks</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Update Nextflow</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> nextflow self-update</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Pixi</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">    command</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      sudo chown gitpod -R /home/gitpod/</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      curl -fsSL https://pixi.sh/install.sh | bash</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      . /home/gitpod/.bash_profile</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Quarto</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">    command</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      wget https://quarto.org/download/latest/quarto-linux-amd64.deb</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      sudo dpkg -i quarto-linux-amd64.deb</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      rm quarto-linux-amd64.deb</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      quarto check all</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>The <code>image:</code> section of the <code>.gitpod.yml</code> is used to specify the base workspace image, this can be a public or private docker image, or a Dockerfile (in this case the base image must be public).</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># public image</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span><span class="at"> nfcore/gitpod:latest</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># local Dockerfile</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span><span class="kw">:</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">file</span><span class="kw">:</span><span class="at"> .gitpod.Dockerfile</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>The <code>tasks:</code> section of the <code>.gitpod.yml</code> is used to specify a list of tasks that will be run when the workspace is started. Each task should have a <code>name:</code> and a <code>command:</code> section. The <code>command:</code> section specifies one or more shell commands that will be run in the workspace.</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tasks</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Update Nextflow</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> nextflow self-update</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>In order to execute multiple commands in a single task, you can use the <code>|</code> syntax to specify a block of shell commands, each in one line.</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tasks</span><span class="kw">:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Pixi</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">    command</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      sudo chown gitpod -R /home/gitpod/</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      curl -fsSL https://pixi.sh/install.sh | bash</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      . /home/gitpod/.bash_profile</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Optionally, you can also add a <code>ports:</code> section to the <code>.gitpod.yml</code> file to specify a list of ports that should be opened by the workspace. This can be useful when hosting a web server or anything that needs to be accessed from outside the workspace.</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">onOpen</span><span class="kw">:</span><span class="at"> open-preview</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="your-code" class="level2">
+<h2 class="anchored" data-anchor-id="your-code">Your code</h2>
+<p>You need to organise and store your code somehow so that you or somebody else can either re-use or explore it later. Somebody unfamiliar with your code should be able to understand what it is doing, given a familiarity with the field in which you are working.</p>
+<section id="get-organised" class="level4">
+<h4 class="anchored" data-anchor-id="get-organised">Get organised</h4>
+<p>You should <em>organise</em> everything related to your project. Stick to one self-contained directory per project, where you keep everything related to that project. Exactly <em>which</em> organisational structure you pick matters less than that you organise in the first place. Be consistent, be descriptive. The structure will be different depending not only on your tastes, but also on which tools you use.</p>
+<p>An example of a simple project directory structure could look like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code/</span>             Code needed to go from input files to final results</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">data/</span>             Raw data <span class="at">-</span> this should never edited</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">doc/</span>              Documentation of the project</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">env/</span>              Environment-related files</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">results/</span>          Output from workflows and analyses</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">README.md</span>         Project description and instructions</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It’s important to document how your project is structured so that others can also navigate your project. Click here to learn more: <a href="https://nbisweden.github.io/workshop-reproducible-research/pages/documentation.html">Documentation @ Tools for Reproducible Research</a></p>
 </section>
-<section id="uses-for-gitpod" class="level2">
-<h2 class="anchored" data-anchor-id="uses-for-gitpod">Uses for Gitpod</h2>
+<section id="version-control" class="level4">
+<h4 class="anchored" data-anchor-id="version-control">Version control</h4>
+<p><a href="https://git-scm.com/">Git</a> is a <em>version control system</em> that allows you to keep track of your code and changes done to it over time. This is the <em>de facto</em> standard used in bioinformatics and software engineering at large.</p>
 <ul>
-<li>Demonstration: The containerized nature of gitpod makes it useful for serving instances of a program in a standardized environment for demonstration.</li>
-<li>Development: There are many software development tools available in the standard docker container. Pull requests can be managed from within gitpod and explored safely within a container.</li>
-<li>Experimentation: The ephemeral nature of the environment, and its standardized tools make Gitpod excellent for testing code and sandbox experimentation.</li>
-<li>Training: A pre-built environment can be provided to learners and supplies a consistent environment to work in with the necessary lesson requirements.</li>
+<li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/git.html">Git @ Tools for Reproducible Research</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2024-03-19-git-intro/">Git @ RSE Tech Group</a></li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Using GitHub at NBIS">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Using GitHub at NBIS
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you use the NBISweden GitHub organisation to store your projects, you should name the repository on the <code>&lt;PROJECT TYPE&gt;-&lt;REDMINE ISSUE&gt;-YY-&lt;SHORT NAME&gt;</code>, where the project type is <code>UF</code> for user fee projects and <code>PR</code> for peer review projects. The short name should ideally only be a single or two words that relate to the project somehow. An example is <code>UF-7235-24-kidney</code>.</p>
+</div>
+</div>
+</section>
+<section id="literate-programming" class="level4">
+<h4 class="anchored" data-anchor-id="literate-programming">Literate programming</h4>
+<p><a href="https://quarto.org/">Quarto</a>, <a href="https://jupyter.org/">Jupyter</a>, and <a href="https://marimo.io/">Marimo</a> are <em>computational notebooks</em> that allow you to combine code together with Markdown in a seamless way.</p>
+<ul>
+<li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/quarto.html">Quarto @ Tools for Reproducible Research</a></li>
+<li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/jupyter.html">Jupyter @ Tools for Reproducible Research</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2024-04-16-quarto-intro/">Quarto @ RSE Tech Group</a></li>
+<li><a href="https://docs.marimo.io/">Marimo Documentation</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-04-15-ssh-config-intro/#run-marimo-using-pixi">Marimo via SSH @ RSE Tech Group</a></li>
+</ul>
+</section>
+</section>
+<section id="your-environment" class="level2">
+<h2 class="anchored" data-anchor-id="your-environment">Your environment</h2>
+<p>Even if you’ve correctly stored and version controlled your code, that’s no guarantee that somebody else (or future you) will be able to actually execute it, or that it yields the same results as when you wrote it. For this you need to control the <em>computational environment</em> within which the code is executed: which packages are installed, with which versions, which dependencies, their versions, and so on.</p>
+<section id="package-managers" class="level4">
+<h4 class="anchored" data-anchor-id="package-managers">Package managers</h4>
+<p>There are many package managers out there that help you install and manage the various packages in your environment. Some are for a particular language, while others are language-agnostic. Conda could be considered industry standard for this, but Pixi is gaining traction as a drop-in replacement and general improvement upon it. An important thing that package managers should have is the ability to create <em>lock files</em>, which are files containing a list of all the packages, dependencies and their respective versions that have been installed.</p>
+<ul>
+<li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/conda.html">Conda @ Tools for Reproducible Research</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2026-03-26-reintroduction-to-pixi/">Pixi @ RSE Tech Group</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-11-13-pixi-tools-offline/">Pixi on HPC centres @ RSE Tech Group</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2026-02-12-working-with-R-packages/">Working with R packages @ RSE Tech Group</a></li>
+</ul>
+</section>
+<section id="containers" class="level4">
+<h4 class="anchored" data-anchor-id="containers">Containers</h4>
+<p>While package managers control for your packages and their dependencies, they <em>don’t</em> control the entire OS, which can affect portability. Containers solve this, and additionally have a higher level of isolation, making the decoupling from other environments easier. Working with and understanding containers generally have a higher barrier of entry compare to package managers, but are much more powerful once you do. Indeed, once you’ve started working with them and feel more comfortable with them, they can actually be <em>easier</em> to work with, compared to package managers.</p>
+<ul>
+<li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/containers.html">Containers @ Tools for Reproducible Research</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-10-23-introduction-to-docker/">Docker @ RSE Tech Group</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2024-06-04-apptainer-intro/">Apptainer @ RSE Tech Group</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-06-10-container-registry-intro/">Container Registries @ RSE Tech Group</a></li>
+</ul>
+</section>
+</section>
+<section id="your-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="your-workflow">Your workflow</h2>
+<p>The word “workflow” here means “what you do, in what order, with what data”. So, what code are you running, in which environments, with which input data. This can be solved with clear documentation (<em>e.g.</em> listing which scripts are run in which order) or by using <em>workflow managers</em>.</p>
+<section id="workflow-managers" class="level4">
+<h4 class="anchored" data-anchor-id="workflow-managers">Workflow managers</h4>
+<p>While workflow managers can have a similarly high barrier of entry as for containers, they can also greatly facilitate iteration and exploration during a project’s lifetime, as they remove all manual work related to running scripts with the correct inputs, parameters, and so on. Workflow managers are not only useful for large, generalised production-level pipelines (such as those available at <a href="https://nf-co.re/">nf-core</a>), but can also be used for more bespoke work.</p>
+<p>One great feature that workflow managers have is that they make environment control a lot simpler, as each individual step in the workflow can have a separate environment. This means fewer issues with package incompatibilities and simpler dependency management overall. The two most common workflow managers for bioinformatics, Nextflow and Snakemake, allow for using both Conda and containers.</p>
+<ul>
+<li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/nextflow.html">Nextflow @ Tools for Reproducible Research</a></li>
+<li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/snakemake.html">Snakemake @ Tools for Reproducible Research</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-11-27-nextflow-foundations/">Nextflow foundations @ RSE Tech Group</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-05-13-nextflow-when-to-use/">When to use Nextflow @ RSE Tech Group</a></li>
+<li><a href="https://nbisweden.github.io/Training-Tech-shorts/posts/2025-12-11-nextflow-best-practices/">Nextflow best practices</a></li>
+</ul>
+</section>
+</section>
+<section id="where-should-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="where-should-you-start">Where should you start?</h2>
+<p>If you don’t work reproducibly today, or feel you are behind in some areas, it can feel like a huge undertaking to even get started. Instead of feeling bad, try instead to remember that <strong>reproducibility is not binary</strong>, and every little step you take is a step in the right direction. Start with seeing where you have the most to gain: for example, if you don’t use Git, that’s definitely a great place to start. If you’ve already organised your projects and are using Git but are missing environment control, start with Conda. Maybe you already use Quarto or Jupyter for notebooks, but you want to combine it with a workflow manager.</p>
+<p>It matters less where you currently are, and more where you want to go. Take one thing at a time if it feels daunting, or dive deep and learn all the tools you want in one go and incorporate them all into your daily work - it’s all up to you.</p>
+</section>
+<section id="dont-be-afraid-to-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="dont-be-afraid-to-experiment">Don’t be afraid to experiment</h2>
+<p>There are quite a few tools and solutions that can help solve each of the three parts of reproducibility, and it can be hard to know which tool or solution is the best for you. Try them all out and experience them for yourself, and find the one that you prefer.</p>
+<p>Sometimes one tool neatly fits into how you are currently working, and that can make the decision to pick that tool over another easy. Other times you may find that no tool fits your current way or working, and you will have to adapt - if you’re lucky, you’ll find a new way of working that you actually prefer over how you did it before! Don’t be afraid to experiment and take your pick of everything you learn.</p>
+<p>There is great value in seeing what others do, which tools they choose and how they use them, <em>etc.</em> This shows you what you <em>could</em> do, if you want, but it’s important to remember that not every solution a colleague is using may fit you directly. Instead, try to see what others are doing, but adapt that to your own needs as necessary.</p>
+</section>
+<section id="make-it-your-own" class="level2">
+<h2 class="anchored" data-anchor-id="make-it-your-own">Make it your own</h2>
+<p>The way you work is your own, and you can make many of the tools work the way <em>you</em> prefer. Make a file with your most commonly used <a href="https://github.com/fasterius/dotfiles/blob/main/bash/bashrc#L146-L167">Git aliases</a>, explore new <a href="https://marketplace.visualstudio.com/vscode">VSCode extensions</a> that could give you cool new editing options, create a GitHub <a href="https://github.com/fasterius/nbis-support-template">template repository</a> for your projects, start a <a href="https://wiki.archlinux.org/title/Dotfiles">dotfiles</a> <a href="https://github.com/fasterius/dotfiles">repository</a> to store all your configs in… Your way of working doesn’t need to be set in stone, but can evolve along with you and the new tools that are bound to come along.</p>
 
 
 </section>
@@ -439,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/NBISweden\.github\.io\/Training-Tech-shorts\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -771,4 +871,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2024-05-07-gitpod-intro/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2024-05-07-gitpod-intro/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2026-04-09-working-reproducibly/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2026-04-09-working-reproducibly/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
