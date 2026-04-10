@@ -73,7 +73,7 @@ gotten used to working reproducibly you will actually _save_ time, even though
 you are most likely doing more things. Working reproducibly is, perhaps
 non-intuitively, more time-efficient than not doing so.
 
-::: {.callout-tip title="Reprocubility at NBIS"}
+::: {.callout-tip title="Reproducibility at NBIS"}
 In the context of NBIS Support, we are _supposed_ to spend time on working
 reproducibly, and this time is part of the project's support hours - _i.e._
 working reproducibly is part of the scientific work we do for the groups we
