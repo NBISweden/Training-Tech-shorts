@@ -133,47 +133,73 @@ Multiple proxies can be chained in this way.
 Port forwarding, also known as SSH tunneling, is a technique that allows you to redirect network traffic through an SSH connection.
 For example, you can access remote databases, connect to Jupyter/Posit notebooks/servers, and forward web applications locally.
 
+In both examples below, you will need **two terminal sessions**:
+
+- **Terminal 1** runs your interactive session on a **worker node** — this is where you start your server.
+- **Terminal 2** sets up the SSH tunnel from your laptop to the **login node** (not to the worker node) — you don't run anything here.
+
+```{mermaid}
+%%| label: fig-ssh-tunnel
+%%| fig-cap: "Two-terminal SSH tunneling setup"
+flowchart TB
+    subgraph T1["Terminal 1: Interactive"]
+        direction LR
+        A1["💻 Laptop"] -->|"ssh"| B1["Login Node"]
+        B1 -->|"salloc / interactive"| C1["⚙ Worker Node"]
+    end
+    subgraph T2["Terminal 2: SSH tunnel"]
+        direction LR
+        A2["💻 Laptop"] -->|"ssh -L port:node:port"| B2["Login Node"]
+    end
+    T1 ~~~ T2
+```
+
+::::: {.panel-tabset}
+
+## Dardel
+
 In this example, we'll:
 
-1. Connect from our Laptop to Dardel.
-2. Get an allocation.
-3. Connect again from our Laptop to Dardel, but this time specify the port.
-4. Connect from Dardel to our allocation.
-5. Start [Marimo](https://docs.marimo.io/) in headless mode
-6. Open the connection on our browser.
+1. Connect from our Laptop to Dardel and get an allocation (Terminal 1).
+2. SSH into the allocated worker node (Terminal 1).
+3. Set up port forwarding from our Laptop through Dardel's login node (Terminal 2).
+4. Start [Marimo](https://docs.marimo.io/) in headless mode on the worker node (Terminal 1).
+5. Open the connection in our browser.
 
 #### Request an interactive allocation
 
 :::{.callout-tip title="Running interactive jobs on Dardel"}
-
 [PDC Documentation](https://support.pdc.kth.se/doc/run_jobs/run_interactively/)
-
 :::
 
-First connect to dardel
+In **Terminal 1**, connect to Dardel:
 
 ```{.bash}
 ssh dardel
 ```
-Then request an allocation
+
+Then request an allocation:
 
 ```{.bash}
 # Request 4 cpus because of the low memory per core allocation.
 salloc -c 4 -t 1:00:00 -A naiss2024-22-1346 -p shared
 ```
 
-Normally you would then
+Note the node name from the output, then SSH into it:
 
 ```{.bash}
 ssh $SLURM_NODELIST
 ```
-and start with your command-line operations, but not just yet.
 
 :::{.callout-tip}
-
 `SLURM_NODELIST` contains the list of nodes you just reserved. If you've reserved more than one
 node, then `echo $SLURM_NODELIST` followed by `ssh <NODE_ID>` of the node you want to ssh into.
+:::
 
+:::{.callout-warning}
+The `salloc` command in Terminal 1 **holds** the allocation. If you log out of Terminal 1 or the
+connection drops, the allocation is released and the worker node becomes unavailable. Keep this
+session open for the entire duration of your work.
 :::
 
 #### Enable SSH tunneling
@@ -181,15 +207,22 @@ node, then `echo $SLURM_NODELIST` followed by `ssh <NODE_ID>` of the node you wa
 Decide the port you're going to use to tunnel. We'll use 8080, which is a standard in webserver testing, as we'll
 be using Marimo which starts a web-service and runs in the browser.
 
-In a new terminal on your local machine:
+In a **new terminal** (Terminal 2) on your local machine:
 
 ```{.bash}
 ssh -L 8080:<node_id>:8080 dardel
-ssh <node_id>
 ```
 
-Where -L enables port forwarding, the first `8080` is the local port, and the `<node_id>:8080` is the `host:hostport`.
-If you only want to forward from the login node for example, then you might use `-L 8080:localhost:8080` instead.
+Where `-L` enables port forwarding, the first `8080` is the local port, and `<node_id>:8080` is the `host:hostport`.
+If you only want to forward from the login node (e.g., for a service running there), use `-L 8080:localhost:8080` instead.
+
+:::{.callout-important}
+After running this command, you will be on the **login node**, not the worker node. This is expected — the login node acts as a relay for the tunnel. Do **not** run your server here; that belongs in Terminal 1 on the worker node.
+:::
+
+:::{.callout-tip}
+If the node ID were known in advance, both the interactive session and the port forwarding could be set up in a single terminal. In practice, since the node is assigned dynamically, two terminals are needed.
+:::
 
 :::{.callout-caution}
 It's easy to accidentally run commands in the wrong location.
@@ -197,10 +230,9 @@ Use your prompt to identify where you are, e.g. `username@login1` means you're s
 `username@node_id` means you're on the allocated worker node.
 :::
 
-
 #### Run Marimo using Pixi
 
-Once you've ssh'ed in, you'll be put in your home directory. Let's make an
+Back in **Terminal 1** (your interactive session on the worker node), let's make an
 environment using [Pixi](https://pixi.sh).
 
 :::{.callout-tip collapse="true" title="Install Pixi"}
@@ -217,13 +249,13 @@ Make a directory to start a Marimo server, and start one.
 mkdir marimo_test
 cd marimo_test
 pixi init -c conda-forge -c bioconda
-pixi add marimo
+pixi add python marimo
 pixi shell
 marimo edit --headless --host 0.0.0.0 --port 8080
 ```
 
 We use `--headless` so marimo doesn't try to open a browser on the worker node.
-The `--host` listens on all ports, and the `--port` is set to 8080.
+The `--host` listens on all interfaces, and `--port` is set to 8080.
 
 When Marimo starts up, it will display a URL to copy-and-paste into your local browser.
 
@@ -243,14 +275,118 @@ If you get an error message such as,
 ```{.console}
 channel 4: open failed: connect failed: No route to host
 channel 5: open failed: connect failed: No route to host
+```
+
+there may already be a service running on the port you chose, e.g. 8080.
+In this case, select another port and try again, for example, changing ports to 8081.
+:::
+
+## Pelle
+
+In this example, we'll:
+
+1. Connect from our Laptop to Pelle and request an interactive allocation (Terminal 1).
+2. Set up port forwarding from our Laptop through Pelle's login node (Terminal 2).
+3. Start [Marimo](https://docs.marimo.io/) in headless mode on the compute node (Terminal 1).
+4. Open the connection in our browser.
+
+#### Request an interactive allocation
+
+In **Terminal 1**, connect to Pelle:
+
+```{.bash}
+ssh pelle
+```
+
+Then request an interactive allocation. Unlike Dardel, the `interactive` command automatically places you on the allocated compute node — no manual `ssh` to the node is needed.
+
+```{.bash}
+interactive -A <project_id> -n 1 -t 1:00:00
+```
+
+Once resources are allocated, note the node name from the output, e.g.:
+
+```{.console}
+salloc: Nodes p115 are ready for job
+```
+
+:::{.callout-important}
+Direct SSH to worker nodes is **not permitted** on Pelle. The `interactive` command handles this automatically, placing you directly on the compute node once resources are allocated.
+:::
+
+#### Enable SSH tunneling
+
+In a **new terminal** (Terminal 2) on your local machine, set up port forwarding using the node name from the previous step:
+
+```{.bash}
+ssh -L 8080:<node_id>:8080 pelle
+```
+
+:::{.callout-important}
+After running this command, you will be on the **login node**, not the compute node. This is expected — the login node acts as a relay for the tunnel. Do **not** run your server here; that belongs in Terminal 1 on the compute node.
+:::
+
+:::{.callout-tip}
+If the node ID were known in advance, both the interactive session and the port forwarding could be set up in a single terminal. In practice, since the node is assigned dynamically, two terminals are needed.
+:::
+
+:::{.callout-caution}
+It's easy to accidentally run commands in the wrong location.
+Use your prompt to identify where you are, e.g. `username@pelle1` means you're on the login node, and
+`username@p115` means you're on the allocated worker node.
+:::
+
+#### Run Marimo using Pixi
+
+Back in **Terminal 1** (your interactive session on the compute node), set up an environment using [Pixi](https://pixi.sh).
+
+:::{.callout-tip collapse="true" title="Install Pixi"}
+
+```{.bash}
+curl -fsSL https://pixi.sh/install.sh | sh
+```
+
+:::
+
+Make a directory to start a Marimo server, and start one.
+
+```{.bash}
+mkdir marimo_test
+cd marimo_test
+pixi init -c conda-forge -c bioconda
+pixi add python marimo
+pixi shell
+marimo edit --headless --host 0.0.0.0 --port 8080
+```
+
+We use `--headless` so marimo doesn't try to open a browser on the worker node.
+The `--host` listens on all interfaces, and `--port` is set to 8080.
+
+When Marimo starts up, it will display a URL to copy-and-paste into your local browser.
+
+```{.console}
+$ marimo edit --headless --host 0.0.0.0 --port 8080
+
+        Create or edit notebooks in your browser 📝
+
+        ➜  URL: http://0.0.0.0:8080?access_token=sp176ZLLI1vyzjm9HNWfeA
+        ➜  Network: http://172.18.202.115:8080?access_token=sp176ZLLI1vyzjm9HNWfeA
+
+```
+
+:::{.callout-tip}
+If you get an error message such as,
+
+```{.console}
 channel 4: open failed: connect failed: No route to host
 channel 5: open failed: connect failed: No route to host
 ```
 
 there may already be a service running on the port you chose, e.g. 8080.
-In this case, select another port and try again, for example, changing ports to
-8081.
+In this case, select another port and try again, for example, changing ports to 8081.
 :::
+
+:::::
 
 #### Quick play with Marimo
 
@@ -292,4 +428,3 @@ Host nac
 ```
 
 ## References
-
