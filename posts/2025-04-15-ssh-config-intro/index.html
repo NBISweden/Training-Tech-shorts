@@ -107,6 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -214,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">April 10, 2026</p>
+        <p class="date-modified">April 23, 2026</p>
       </div>
     </div>
       
@@ -328,14 +331,49 @@ Tip
 <section id="port-forwarding" class="level3">
 <h3 class="anchored" data-anchor-id="port-forwarding">Port forwarding</h3>
 <p>Port forwarding, also known as SSH tunneling, is a technique that allows you to redirect network traffic through an SSH connection. For example, you can access remote databases, connect to Jupyter/Posit notebooks/servers, and forward web applications locally.</p>
+<p>In both examples below, you will need <strong>two terminal sessions</strong>:</p>
+<ul>
+<li><strong>Terminal 1</strong> runs your interactive session on a <strong>worker node</strong> — this is where you start your server.</li>
+<li><strong>Terminal 2</strong> sets up the SSH tunnel from your laptop to the <strong>login node</strong> (not to the worker node) — you don’t run anything here.</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-ssh-tunnel" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ssh-tunnel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-ssh-tunnel">flowchart TB
+    subgraph T1["Terminal 1: Interactive"]
+        direction LR
+        A1["💻 Laptop"] --&gt;|"ssh"| B1["Login Node"]
+        B1 --&gt;|"salloc / interactive"| C1["⚙ Worker Node"]
+    end
+    subgraph T2["Terminal 2: SSH tunnel"]
+        direction LR
+        A2["💻 Laptop"] --&gt;|"ssh -L port:node:port"| B2["Login Node"]
+    end
+    T1 ~~~ T2
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ssh-tunnel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Two-terminal SSH tunneling setup
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Dardel</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Pelle</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>In this example, we’ll:</p>
 <ol type="1">
-<li>Connect from our Laptop to Dardel.</li>
-<li>Get an allocation.</li>
-<li>Connect again from our Laptop to Dardel, but this time specify the port.</li>
-<li>Connect from Dardel to our allocation.</li>
-<li>Start <a href="https://docs.marimo.io/">Marimo</a> in headless mode</li>
-<li>Open the connection on our browser.</li>
+<li>Connect from our Laptop to Dardel and get an allocation (Terminal 1).</li>
+<li>SSH into the allocated worker node (Terminal 1).</li>
+<li>Set up port forwarding from our Laptop through Dardel’s login node (Terminal 2).</li>
+<li>Start <a href="https://docs.marimo.io/">Marimo</a> in headless mode on the worker node (Terminal 1).</li>
+<li>Open the connection in our browser.</li>
 </ol>
 <section id="request-an-interactive-allocation" class="level4">
 <h4 class="anchored" data-anchor-id="request-an-interactive-allocation">Request an interactive allocation</h4>
@@ -352,14 +390,13 @@ Tip
 <p><a href="https://support.pdc.kth.se/doc/run_jobs/run_interactively/">PDC Documentation</a></p>
 </div>
 </div>
-<p>First connect to dardel</p>
+<p>In <strong>Terminal 1</strong>, connect to Dardel:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> dardel</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then request an allocation</p>
+<p>Then request an allocation:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Request 4 cpus because of the low memory per core allocation.</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">salloc</span> <span class="at">-c</span> 4 <span class="at">-t</span> 1:00:00 <span class="at">-A</span> naiss2024-22-1346 <span class="at">-p</span> shared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Normally you would then</p>
+<p>Note the node name from the output, then SSH into it:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="va">$SLURM_NODELIST</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>and start with your command-line operations, but not just yet.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -373,14 +410,52 @@ Tip
 <p><code>SLURM_NODELIST</code> contains the list of nodes you just reserved. If you’ve reserved more than one node, then <code>echo $SLURM_NODELIST</code> followed by <code>ssh &lt;NODE_ID&gt;</code> of the node you want to ssh into.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>salloc</code> command in Terminal 1 <strong>holds</strong> the allocation. If you log out of Terminal 1 or the connection drops, the allocation is released and the worker node becomes unavailable. Keep this session open for the entire duration of your work.</p>
+</div>
+</div>
 </section>
 <section id="enable-ssh-tunneling" class="level4">
 <h4 class="anchored" data-anchor-id="enable-ssh-tunneling">Enable SSH tunneling</h4>
 <p>Decide the port you’re going to use to tunnel. We’ll use 8080, which is a standard in webserver testing, as we’ll be using Marimo which starts a web-service and runs in the browser.</p>
-<p>In a new terminal on your local machine:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8080:<span class="op">&lt;</span>node_id<span class="op">&gt;</span>:8080 dardel</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="op">&lt;</span>node_id<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Where -L enables port forwarding, the first <code>8080</code> is the local port, and the <code>&lt;node_id&gt;:8080</code> is the <code>host:hostport</code>. If you only want to forward from the login node for example, then you might use <code>-L 8080:localhost:8080</code> instead.</p>
+<p>In a <strong>new terminal</strong> (Terminal 2) on your local machine:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8080:<span class="op">&lt;</span>node_id<span class="op">&gt;</span>:8080 dardel</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Where <code>-L</code> enables port forwarding, the first <code>8080</code> is the local port, and <code>&lt;node_id&gt;:8080</code> is the <code>host:hostport</code>. If you only want to forward from the login node (e.g., for a service running there), use <code>-L 8080:localhost:8080</code> instead.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After running this command, you will be on the <strong>login node</strong>, not the worker node. This is expected — the login node acts as a relay for the tunnel. Do <strong>not</strong> run your server here; that belongs in Terminal 1 on the worker node.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the node ID were known in advance, both the interactive session and the port forwarding could be set up in a single terminal. In practice, since the node is assigned dynamically, two terminals are needed.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -397,9 +472,9 @@ Caution
 </section>
 <section id="run-marimo-using-pixi" class="level4">
 <h4 class="anchored" data-anchor-id="run-marimo-using-pixi">Run Marimo using Pixi</h4>
-<p>Once you’ve ssh’ed in, you’ll be put in your home directory. Let’s make an environment using <a href="https://pixi.sh">Pixi</a>.</p>
+<p>Back in <strong>Terminal 1</strong> (your interactive session on the worker node), let’s make an environment using <a href="https://pixi.sh">Pixi</a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Install Pixi">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -408,7 +483,7 @@ Caution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://pixi.sh/install.sh <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -418,10 +493,10 @@ Caution
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> marimo_test</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> marimo_test</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add marimo</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add python marimo</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> shell</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="ex">marimo</span> edit <span class="at">--headless</span> <span class="at">--host</span> 0.0.0.0 <span class="at">--port</span> 8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>We use <code>--headless</code> so marimo doesn’t try to open a browser on the worker node. The <code>--host</code> listens on all ports, and the <code>--port</code> is set to 8080.</p>
+<p>We use <code>--headless</code> so marimo doesn’t try to open a browser on the worker node. The <code>--host</code> listens on all interfaces, and <code>--port</code> is set to 8080.</p>
 <p>When Marimo starts up, it will display a URL to copy-and-paste into your local browser.</p>
 <pre class="console"><code>$ marimo edit --headless --host 0.0.0.0 --port 8080
 
@@ -442,24 +517,152 @@ Tip
 <div class="callout-body-container callout-body">
 <p>If you get an error message such as,</p>
 <pre class="console"><code>channel 4: open failed: connect failed: No route to host
-channel 5: open failed: connect failed: No route to host
-channel 4: open failed: connect failed: No route to host
 channel 5: open failed: connect failed: No route to host</code></pre>
 <p>there may already be a service running on the port you chose, e.g.&nbsp;8080. In this case, select another port and try again, for example, changing ports to 8081.</p>
 </div>
 </div>
 </section>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>In this example, we’ll:</p>
+<ol type="1">
+<li>Connect from our Laptop to Pelle and request an interactive allocation (Terminal 1).</li>
+<li>Set up port forwarding from our Laptop through Pelle’s login node (Terminal 2).</li>
+<li>Start <a href="https://docs.marimo.io/">Marimo</a> in headless mode on the compute node (Terminal 1).</li>
+<li>Open the connection in our browser.</li>
+</ol>
+<section id="request-an-interactive-allocation-1" class="level4">
+<h4 class="anchored" data-anchor-id="request-an-interactive-allocation-1">Request an interactive allocation</h4>
+<p>In <strong>Terminal 1</strong>, connect to Pelle:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> pelle</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then request an interactive allocation. Unlike Dardel, the <code>interactive</code> command automatically places you on the allocated compute node — no manual <code>ssh</code> to the node is needed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">interactive</span> <span class="at">-A</span> <span class="op">&lt;</span>project_id<span class="op">&gt;</span> -n 1 <span class="at">-t</span> 1:00:00</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Once resources are allocated, note the node name from the output, e.g.:</p>
+<pre class="console"><code>salloc: Nodes p115 are ready for job</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Direct SSH to worker nodes is <strong>not permitted</strong> on Pelle. The <code>interactive</code> command handles this automatically, placing you directly on the compute node once resources are allocated.</p>
+</div>
+</div>
+</section>
+<section id="enable-ssh-tunneling-1" class="level4">
+<h4 class="anchored" data-anchor-id="enable-ssh-tunneling-1">Enable SSH tunneling</h4>
+<p>In a <strong>new terminal</strong> (Terminal 2) on your local machine, set up port forwarding using the node name from the previous step:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8080:<span class="op">&lt;</span>node_id<span class="op">&gt;</span>:8080 pelle</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After running this command, you will be on the <strong>login node</strong>, not the compute node. This is expected — the login node acts as a relay for the tunnel. Do <strong>not</strong> run your server here; that belongs in Terminal 1 on the compute node.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the node ID were known in advance, both the interactive session and the port forwarding could be set up in a single terminal. In practice, since the node is assigned dynamically, two terminals are needed.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It’s easy to accidentally run commands in the wrong location. Use your prompt to identify where you are, e.g.&nbsp;<code>username@pelle1</code> means you’re on the login node, and <code>username@p115</code> means you’re on the allocated worker node.</p>
+</div>
+</div>
+</section>
+<section id="run-marimo-using-pixi-1" class="level4">
+<h4 class="anchored" data-anchor-id="run-marimo-using-pixi-1">Run Marimo using Pixi</h4>
+<p>Back in <strong>Terminal 1</strong> (your interactive session on the compute node), set up an environment using <a href="https://pixi.sh">Pixi</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Install Pixi">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Install Pixi
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://pixi.sh/install.sh <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Make a directory to start a Marimo server, and start one.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> marimo_test</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> marimo_test</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add python marimo</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> shell</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="ex">marimo</span> edit <span class="at">--headless</span> <span class="at">--host</span> 0.0.0.0 <span class="at">--port</span> 8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We use <code>--headless</code> so marimo doesn’t try to open a browser on the worker node. The <code>--host</code> listens on all interfaces, and <code>--port</code> is set to 8080.</p>
+<p>When Marimo starts up, it will display a URL to copy-and-paste into your local browser.</p>
+<pre class="console"><code>$ marimo edit --headless --host 0.0.0.0 --port 8080
+
+        Create or edit notebooks in your browser 📝
+
+        ➜  URL: http://0.0.0.0:8080?access_token=sp176ZLLI1vyzjm9HNWfeA
+        ➜  Network: http://172.18.202.115:8080?access_token=sp176ZLLI1vyzjm9HNWfeA
+</code></pre>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you get an error message such as,</p>
+<pre class="console"><code>channel 4: open failed: connect failed: No route to host
+channel 5: open failed: connect failed: No route to host</code></pre>
+<p>there may already be a service running on the port you chose, e.g.&nbsp;8080. In this case, select another port and try again, for example, changing ports to 8081.</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
 <section id="quick-play-with-marimo" class="level4">
 <h4 class="anchored" data-anchor-id="quick-play-with-marimo">Quick play with Marimo</h4>
 <p>Create a new notebook, and then in the first cell add.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> marimo <span class="im">as</span> mo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Add a new Python cell, and then add the following quick mermaid diagram.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>diagram <span class="op">=</span> <span class="st">'''</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">graph LR</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">    A --&gt; B --&gt; C</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">    A --&gt; C</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="st">'''</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>mo.mermaid(diagram)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>diagram <span class="op">=</span> <span class="st">'''</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="st">graph LR</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="st">    A --&gt; B --&gt; C</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="st">    A --&gt; C</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="st">'''</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>mo.mermaid(diagram)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>and run it.</p>
 </section>
 <section id="cleaning-up" class="level4">
@@ -474,11 +677,11 @@ channel 5: open failed: connect failed: No route to host</code></pre>
 <section id="permanently-configure" class="level4">
 <h4 class="anchored" data-anchor-id="permanently-configure">Permanently configure</h4>
 <p>To configure services permanently, one can add the <code>LocalForward</code> to their config.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Host</span> <span class="dt">nac</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">User</span> <span class="dt">nac_username</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Hostname</span> <span class="dt">nac-login.nbis.se</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Blobtools service on port 8001 on login node</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">LocalForward</span> <span class="dt">8001</span> <span class="dt">localhost</span><span class="er">:</span><span class="dt">8001</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Host</span> <span class="dt">nac</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">User</span> <span class="dt">nac_username</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Hostname</span> <span class="dt">nac-login.nbis.se</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Blobtools service on port 8001 on login node</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">LocalForward</span> <span class="dt">8001</span> <span class="dt">localhost</span><span class="er">:</span><span class="dt">8001</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 </section>
