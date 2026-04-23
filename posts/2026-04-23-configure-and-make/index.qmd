@@ -19,14 +19,35 @@ The good news is that you don't need root access to compile and install software
 
 ## Background
 
+To follow along in these steps, clone the [Training-Tech-shorts](https://github.com/NBISweden/Training-Tech-shorts) repo to get the example files:
+
+```bash
+git clone https://github.com/NBISweden/Training-Tech-shorts
+cd Training-Tech-shorts/posts/2026-04-23-configure-and-make/
+```
+
+You might not have programmed in languages that needs compiling before, and instead used scripting languages like R or Python. Scripting languages requires that the one running the program has the language interpreter installed, i.e. to run a python script, you must have python installed.
+
+```{.py filename="manual-compile/hello.py"}
+#!/bin/env python
+
+print("Hello, World!")
+```
+
+and to run it:
+
+```bash
+python hello.py
+```
+
 First we will cover a couple of basic steps when it comes to programming with compiled languages like C/C++. These basic steps is likely not something you will do when installing software that is created by someone else, but they will show why we will need to do the later steps.
 
 ### How to compile from source code
 
 
-We'll start from scratch with a simple C++ hello world program:
+ We'll start from scratch with a simple C++ hello world program:
 
-```{.cpp filename="hello.cpp"}
+```{.cpp filename="manual-compile/hello.cpp"}
 #include <iostream>
 
 int main() {
@@ -70,8 +91,6 @@ When a project grows to many files, typing every command by hand becomes tedious
 ```{mermaid}
 ---
 config:
-  look: handDrawn
-  theme: neutral
 ---
 flowchart LR
     cpps@{ shape: procs, label: "📄 .cpp files"}
@@ -84,7 +103,7 @@ flowchart LR
 
 Here is an example of how a simple `Makefile` can look:
 
-```{.makefile filename="Makefile"}
+```{.makefile filename="makefile-compile/Makefile"}
 my_program: main.cpp engine.cpp utils.cpp
 	g++ main.cpp engine.cpp utils.cpp -o my_program
 
@@ -126,10 +145,14 @@ flowchart LR
 
 Both Autotools and CMake can be tweaked by giving it options, and the option that controls where the software ends up when it is installed is called `prefix`. It is the path to the directory where all the compiled files will be copied to once the compilation is complete. This could be any folder you have write access to, such as your home directory or project directory.
 
-For the remainder of the tutorial `$PREFIX` will point to a fictive project directory. Adjust it to suit your needs.
+For the remainder of the tutorial `$PREFIX` will point to `~/sw` to keep it short. Adjust it to suit your needs. If there are large programs you install you might fill up the quota in your home directory, so try to put it in project directories. Special consideration for NAISS systems, make sure that continuations of your project use the same *directory name* as the previous project, so that all paths remain the same.
 
 ```bash
-export PREFIX=/proj/naiss2026-99-999/software
+# more realistic example
+#export PREFIX=/proj/naiss2026-99-999/software
+
+# used in this tutorial
+export PREFIX=~/sw
 mkdir -p $PREFIX
 ```
 
@@ -262,7 +285,7 @@ tar -xzf v2.1.9.tar.gz
 cd diamond-2.1.9
 
 # confirm it uses cmake
-ls
+ls -l
 # CMakeLists.txt  <-- yep
 
 # create build dir
@@ -288,6 +311,7 @@ Right now the binaries are in `$PREFIX/bin/`, but your shell doesn't know to loo
 
 ```bash
 # add the bin directory to PATH for this session
+export PREFIX=~/sw
 export PATH=$PREFIX/bin:$PATH
 
 # test that it works
@@ -295,7 +319,7 @@ which samtools
 samtools --version
 
 which diamond
-diamond
+diamond --version
 ```
 
 To make this permanent, add it to your `~/.bashrc`: 
@@ -303,7 +327,7 @@ To make this permanent, add it to your `~/.bashrc`:
 ```bash
 # add these lines to ~/.bashrc and make sure
 # to update the PREFIX to your actual prefix path
-echo 'export PREFIX=/proj/naiss2026-99-999/software' >> ~/.bashrc
+echo 'export PREFIX=~/sw' >> ~/.bashrc
 echo 'export PATH=$PREFIX/bin:$PATH' >> ~/.bashrc
 
 # reload the file to apply the changes in the current session
