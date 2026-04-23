@@ -352,7 +352,7 @@ Build system generators are used to create `Makefiles` that will handle compilat
 # typical autotools workflow
 
 autoreconf -fi  # only if configure is missing
-./configure
+./configure --prefix=$PREFIX
 make -j4
 make install
 ```
