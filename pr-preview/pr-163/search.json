@@ -67,7 +67,7 @@
     "href": "posts/2026-04-23-configure-and-make/index.html#summary",
     "title": "Introduction to Configure and Make",
     "section": "Summary",
-    "text": "Summary\nBuild system generators are used to create Makefiles that will handle compilation of many .cpp files.\nAutotools: will contain a configure or a configure.ac file.\n# typical autotools workflow\n\nautoreconf -fi  # only if configure is missing\n./configure\nmake -j4\nmake install\nCMake: will contain a CMakeLists.txt file.\n# typical cmake workflow\n\nmkdir build && cd build\ncmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release\nmake -j4\nmake install"
+    "text": "Summary\nBuild system generators are used to create Makefiles that will handle compilation of many .cpp files.\nAutotools: will contain a configure or a configure.ac file.\n# typical autotools workflow\n\nautoreconf -fi  # only if configure is missing\n./configure --prefix=$PREFIX\nmake -j4\nmake install\nCMake: will contain a CMakeLists.txt file.\n# typical cmake workflow\n\nmkdir build && cd build\ncmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release\nmake -j4\nmake install"
   },
   {
     "objectID": "posts/2026-04-23-configure-and-make/index.html#extras",
