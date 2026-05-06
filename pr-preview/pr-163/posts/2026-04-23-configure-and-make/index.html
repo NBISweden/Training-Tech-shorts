@@ -254,13 +254,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>manual-compile/hello.py</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="manual-compile/hello.py"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/env python</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="manual-compile/hello.py"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello, World!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>and to run it:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> hello.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>First we will cover a couple of basic steps when it comes to programming with compiled languages like C/C++. These basic steps is likely not something you will do when installing software that is created by someone else, but they will show why we will need to do the later steps.</p>
+<p>First we will cover a couple of basic steps when it comes to programming with compiled languages like C/C++. These basic steps are likely not something you will do when installing software that is created by someone else, but they will show why we will need to do the later steps.</p>
 <section id="how-to-compile-from-source-code" class="level3">
 <h3 class="anchored" data-anchor-id="how-to-compile-from-source-code">How to compile from source code</h3>
 <p>We’ll start from scratch with a simple C++ hello world program:</p>
@@ -315,10 +315,7 @@ flowchart LR
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">---
-config:
----
-flowchart LR
+<pre class="mermaid mermaid-js">flowchart LR
     cpps@{ shape: procs, label: "📄 .cpp files"}
     makefile("📒 Makefile")
     cmd{{"make"}}
