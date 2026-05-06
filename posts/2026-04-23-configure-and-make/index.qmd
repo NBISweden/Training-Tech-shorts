@@ -29,7 +29,7 @@ cd Training-Tech-shorts/posts/2026-04-23-configure-and-make/
 You might not have programmed in languages that needs compiling before, and instead used scripting languages like R or Python. Scripting languages requires that the one running the program has the language interpreter installed, i.e. to run a python script, you must have python installed.
 
 ```{.py filename="manual-compile/hello.py"}
-#!/bin/env python
+#!/usr/bin/env python3
 
 print("Hello, World!")
 ```
