@@ -322,7 +322,7 @@ diamond --version
 To make this permanent, add it to your `~/.bashrc`: 
 
 ```bash
-# add these lines to ~/.bashrc and make sure
+# Run these commands in your terminal to update your `~/.bashrc` file and make sure
 # to update the PREFIX to your actual prefix path
 echo 'export PREFIX=~/sw' >> ~/.bashrc
 echo 'export PATH=$PREFIX/bin:$PATH' >> ~/.bashrc
