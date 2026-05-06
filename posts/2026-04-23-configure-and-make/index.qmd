@@ -40,7 +40,7 @@ and to run it:
 python hello.py
 ```
 
-First we will cover a couple of basic steps when it comes to programming with compiled languages like C/C++. These basic steps is likely not something you will do when installing software that is created by someone else, but they will show why we will need to do the later steps.
+First we will cover a couple of basic steps when it comes to programming with compiled languages like C/C++. These basic steps are likely not something you will do when installing software that is created by someone else, but they will show why we will need to do the later steps.
 
 ### How to compile from source code
 
