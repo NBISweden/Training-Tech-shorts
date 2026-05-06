@@ -82,7 +82,7 @@ g++ hello.cpp -o hello
 Hello, World!
 ```
 
-If it is only a single `cpp` file that needs compiling, this manual approach is fine. However, more complex programs have multiple files that need compiling and some has to be compiled in the right order.
+If it is only a single `cpp` file that needs compiling, this manual approach is fine. However, more complex programs have multiple files that need compiling and some have to be compiled in the right order.
 
 ### Compiling using a Makefile
 
