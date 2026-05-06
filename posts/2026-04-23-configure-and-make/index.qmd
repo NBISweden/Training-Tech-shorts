@@ -89,9 +89,6 @@ If it is only a single `cpp` file that needs compiling, this manual approach is 
 When a project grows to many files, typing every command by hand becomes tedious and error-prone. With a `Makefile` containing all the commands, just type `make` and it handles the rest.
 
 ```{mermaid}
----
-config:
----
 flowchart LR
     cpps@{ shape: procs, label: "📄 .cpp files"}
     makefile("📒 Makefile")
