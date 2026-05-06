@@ -305,7 +305,7 @@ flowchart LR
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># run it from the terminal</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">./hello</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello,</span> World!</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>If it is only a single <code>cpp</code> file that needs compiling, this manual approach is fine. However, more complex programs have multiple files that need compiling and some has to be compiled in the right order.</p>
+<p>If it is only a single <code>cpp</code> file that needs compiling, this manual approach is fine. However, more complex programs have multiple files that need compiling and some have to be compiled in the right order.</p>
 </section>
 <section id="compiling-using-a-makefile" class="level3">
 <h3 class="anchored" data-anchor-id="compiling-using-a-makefile">Compiling using a Makefile</h3>
@@ -377,7 +377,7 @@ flowchart LR
 <p>Both Autotools and CMake can be tweaked by giving it options, and the option that controls where the software ends up when it is installed is called <code>prefix</code>. It is the path to the directory where all the compiled files will be copied to once the compilation is complete. This could be any folder you have write access to, such as your home directory or project directory.</p>
 <p>For the remainder of the tutorial <code>$PREFIX</code> will point to <code>~/sw</code> to keep it short. Adjust it to suit your needs. If there are large programs you install you might fill up the quota in your home directory, so try to put it in project directories. Special consideration for NAISS systems, make sure that continuations of your project use the same <em>directory name</em> as the previous project, so that all paths remain the same.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># more realistic example</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#export PREFIX=/proj/naiss2026-99-999/software</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># export PREFIX=/proj/naiss2026-99-999/software</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># used in this tutorial</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PREFIX</span><span class="op">=</span>~/sw</span>
