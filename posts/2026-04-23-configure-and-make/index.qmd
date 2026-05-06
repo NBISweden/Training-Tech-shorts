@@ -146,7 +146,7 @@ For the remainder of the tutorial `$PREFIX` will point to `~/sw` to keep it shor
 
 ```bash
 # more realistic example
-#export PREFIX=/proj/naiss2026-99-999/software
+# export PREFIX=/proj/naiss2026-99-999/software
 
 # used in this tutorial
 export PREFIX=~/sw
