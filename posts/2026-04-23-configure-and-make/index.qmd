@@ -17,6 +17,8 @@ On a shared HPC system you typically don't have root access, which means you can
 
 The good news is that you don't need root access to compile and install software! You just need to tell the installer to put the files somewhere you own, like your home directory or a project directory.
 
+An alternative to compiling the software is to check if the software is available through Docker, Conda/Pixi, or Apptainer. These approaches are more portable and often easier to get going with. This tutorial is aimed at exploring how to complile software if you have to. It is not because it is simpler than containerized solutions, it is often times not.
+
 ## Background
 
 To follow along in these steps, clone the [Training-Tech-shorts](https://github.com/NBISweden/Training-Tech-shorts) repo to get the example files:
@@ -104,10 +106,15 @@ flowchart LR
 Here is an example of how a simple `Makefile` can look:
 
 ```{.makefile filename="makefile-compile/Makefile"}
+# Rule to build the final executable "my_program"
+# The executable depends on these three source files
 my_program: main.cpp engine.cpp utils.cpp
+	# Compile all source files and output the executable with -o flag
 	g++ main.cpp engine.cpp utils.cpp -o my_program
 
+# Rule to remove the compiled executable, helping to force a fresh build
 clean:
+	# Remove "my_program" if it exists, the -f flag suppresses errors if it doesn't
 	rm -f my_program
 ```
 
