@@ -243,6 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="why-compile-your-own-software">Why compile your own software?</h2>
 <p>On a shared HPC system you typically don’t have root access, which means you can’t install software the usual way (e.g.&nbsp;<code>apt install</code> or <code>yum install</code>). Software that is needed for your research is usually installed centrally by support staff and made available via the module system (<code>module load</code>). This works well for widely used tools, but it can take time, and for more niche software it might never happen.</p>
 <p>The good news is that you don’t need root access to compile and install software! You just need to tell the installer to put the files somewhere you own, like your home directory or a project directory.</p>
+<p>An alternative to compiling the software is to check if the software is available through Docker, Conda/Pixi, or Apptainer. These approaches are more portable and often easier to get going with. This tutorial is aimed at exploring how to complile software if you have to. It is not because it is simpler than containerized solutions, it is often times not.</p>
 </section>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
@@ -333,11 +334,16 @@ flowchart LR
 <div class="code-with-filename-file">
 <pre><strong>makefile-compile/Makefile</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="makefile-compile/Makefile"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">my_program:</span><span class="dt"> main.cpp engine.cpp utils.cpp</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>g++ main.cpp engine.cpp utils.cpp -o my_program</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="er">    </span>rm -f my_program</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="makefile-compile/Makefile"><pre class="sourceCode makefile code-with-copy"><code class="sourceCode makefile"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rule to build the final executable "my_program"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The executable depends on these three source files</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dv">my_program:</span><span class="dt"> main.cpp engine.cpp utils.cpp</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compile all source files and output the executable with -o flag</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    g++ main.cpp engine.cpp utils.cpp -o my_program</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Rule to remove the compiled executable, helping to force a fresh build</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove "my_program" if it exists, the -f flag suppresses errors if it doesn't</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    rm -f my_program</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>and to run it you just type</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
