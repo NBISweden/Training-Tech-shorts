@@ -31,7 +31,7 @@ cd Training-Tech-shorts/posts/2026-04-23-configure-and-make/
 You might not have programmed in languages that needs compiling before, and instead used scripting languages like R or Python. Scripting languages requires that the one running the program has the language interpreter installed, i.e. to run a python script, you must have python installed.
 
 ```{.py filename="manual-compile/hello.py"}
-#!/bin/env python
+#!/usr/bin/env python3
 
 print("Hello, World!")
 ```
@@ -42,7 +42,7 @@ and to run it:
 python hello.py
 ```
 
-First we will cover a couple of basic steps when it comes to programming with compiled languages like C/C++. These basic steps is likely not something you will do when installing software that is created by someone else, but they will show why we will need to do the later steps.
+First we will cover a couple of basic steps when it comes to programming with compiled languages like C/C++. These basic steps are likely not something you will do when installing software that is created by someone else, but they will show why we will need to do the later steps.
 
 ### How to compile from source code
 
@@ -68,7 +68,7 @@ config:
 ---
 flowchart LR
     src("📄 hello.cpp<br/>(your code)")
-    cmd{{"g++ hellp.cpp -o hello"}}
+    cmd{{"g++ hello.cpp -o hello"}}
     bin("⚙️  hello<br/>(runnable!)")
 
     src --> cmd --> bin
@@ -84,16 +84,13 @@ g++ hello.cpp -o hello
 Hello, World!
 ```
 
-If it is only a single `cpp` file that needs compiling, this manual approach is fine. However, more complex programs have multiple files that need compiling and some has to be compiled in the right order.
+If it is only a single `cpp` file that needs compiling, this manual approach is fine. However, more complex programs have multiple files that need compiling and some have to be compiled in the right order.
 
 ### Compiling using a Makefile
 
 When a project grows to many files, typing every command by hand becomes tedious and error-prone. With a `Makefile` containing all the commands, just type `make` and it handles the rest.
 
 ```{mermaid}
----
-config:
----
 flowchart LR
     cpps@{ shape: procs, label: "📄 .cpp files"}
     makefile("📒 Makefile")
@@ -156,7 +153,7 @@ For the remainder of the tutorial `$PREFIX` will point to `~/sw` to keep it shor
 
 ```bash
 # more realistic example
-#export PREFIX=/proj/naiss2026-99-999/software
+# export PREFIX=/proj/naiss2026-99-999/software
 
 # used in this tutorial
 export PREFIX=~/sw
@@ -332,7 +329,7 @@ diamond --version
 To make this permanent, add it to your `~/.bashrc`: 
 
 ```bash
-# add these lines to ~/.bashrc and make sure
+# Run these commands in your terminal to update your `~/.bashrc` file and make sure
 # to update the PREFIX to your actual prefix path
 echo 'export PREFIX=~/sw' >> ~/.bashrc
 echo 'export PATH=$PREFIX/bin:$PATH' >> ~/.bashrc
