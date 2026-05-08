@@ -17,7 +17,11 @@ On a shared HPC system you typically don't have root access, which means you can
 
 The good news is that you don't need root access to compile and install software! You just need to tell the installer to put the files somewhere you own, like your home directory or a project directory.
 
-An alternative to compiling the software is to check if the software is available through Docker, Conda/Pixi, or Apptainer. These approaches are more portable and often easier to get going with. This tutorial is aimed at exploring how to complile software if you have to. It is not because it is simpler than containerized solutions, it is often times not.
+::: {.callout-tip}
+
+Before compiling from source, check if the software is available via Docker, Conda/Pixi, or Apptainer. These containerized/prepackaged approaches are more portable and easier to deploy. This tutorial focuses on the manual compilation process, which is often more complex but sometimes necessary.
+
+:::
 
 ## Background
 
