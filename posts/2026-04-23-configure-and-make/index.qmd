@@ -107,17 +107,25 @@ flowchart LR
 Here is an example of how a simple `Makefile` can look:
 
 ```{.makefile filename="makefile-compile/Makefile"}
+# target_file : source_files 
+# <tab>commands
+
 # Rule to build the final executable "my_program"
-# The executable depends on these three source files
-my_program: main.cpp engine.cpp utils.cpp
+my_program: main.cpp engine.cpp utils.cpp # <1> <2>
 	# Compile all source files and output the executable with -o flag
-	g++ main.cpp engine.cpp utils.cpp -o my_program
+	g++ main.cpp engine.cpp utils.cpp -o my_program # <3> <4>
 
 # Rule to remove the compiled executable, helping to force a fresh build
-clean:
+clean: # <5>
 	# Remove "my_program" if it exists, the -f flag suppresses errors if it doesn't
 	rm -f my_program
 ```
+
+1. The executable `my_program` (target) depends on these three source files
+2. `make my_program` (or `make` since it's the first rule) only runs if `my_program` doesn't exist, or the source files change.
+3. The recipe is indented using a {{< kbd Tab >}} character ( leading spaces cause an error )
+4. Each line runs in it's own subshell ( it doesn't know what's run before - like a directory change ).
+5. The file `clean` doesn't exist, so the command `make clean` always runs the recipe.
 
 and to run it you just type
 
