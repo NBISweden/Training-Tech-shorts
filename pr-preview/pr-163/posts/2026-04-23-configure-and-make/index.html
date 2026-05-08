@@ -243,7 +243,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="why-compile-your-own-software">Why compile your own software?</h2>
 <p>On a shared HPC system you typically don’t have root access, which means you can’t install software the usual way (e.g.&nbsp;<code>apt install</code> or <code>yum install</code>). Software that is needed for your research is usually installed centrally by support staff and made available via the module system (<code>module load</code>). This works well for widely used tools, but it can take time, and for more niche software it might never happen.</p>
 <p>The good news is that you don’t need root access to compile and install software! You just need to tell the installer to put the files somewhere you own, like your home directory or a project directory.</p>
-<p>An alternative to compiling the software is to check if the software is available through Docker, Conda/Pixi, or Apptainer. These approaches are more portable and often easier to get going with. This tutorial is aimed at exploring how to complile software if you have to. It is not because it is simpler than containerized solutions, it is often times not.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before compiling from source, check if the software is available via Docker, Conda/Pixi, or Apptainer. These containerized/prepackaged approaches are more portable and easier to deploy. This tutorial focuses on the manual compilation process, which is often more complex but sometimes necessary.</p>
+</div>
+</div>
 </section>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
