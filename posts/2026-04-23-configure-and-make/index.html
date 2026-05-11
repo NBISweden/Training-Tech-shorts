@@ -352,19 +352,23 @@ flowchart LR
 <span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;tab&gt;commands</span></span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rule to build the final executable "my_program"</span></span>
-<span id="annotated-cell-6-5"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a><span class="dv">my_program:</span><span class="dt"> main.cpp engine.cpp utils.cpp </span><span class="co"># &lt;1&gt; &lt;2&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a><span class="dv">my_program:</span><span class="dt"> main.cpp engine.cpp utils.cpp</span></span>
 <span id="annotated-cell-6-6"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compile all source files and output the executable with -o flag</span></span>
-<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>    g++ main.cpp engine.cpp utils.cpp -o my_program <span class="co"># &lt;3&gt; &lt;4&gt;</span></span>
+<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>    g++ main.cpp engine.cpp utils.cpp -o my_program</span>
 <span id="annotated-cell-6-8"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-6-9"><a href="#annotated-cell-6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Rule to remove the compiled executable, helping to force a fresh build</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-6-10" class="code-annotation-target"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-10" class="code-annotation-target"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a><span class="dv">clean:</span></span>
 <span id="annotated-cell-6-11"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove "my_program" if it exists, the -f flag suppresses errors if it doesn't</span></span>
 <span id="annotated-cell-6-12"><a href="#annotated-cell-6-12" aria-hidden="true" tabindex="-1"></a>    rm -f my_program</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-6" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="10" data-code-annotation="5">The file <code>clean</code> doesn’t exist, so the command <code>make clean</code> always runs the recipe.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="5" data-code-annotation="1">The executable <code>my_program</code> (target) depends on these three source files.<br> - <code>make my_program</code> (or <code>make</code> since it’s the first rule) only runs if <code>my_program</code> doesn’t exist or the source files change.<br> - The recipe is indented using a <kbd title="Tab" aria-hidden="true">Tab</kbd><span class="visually-hidden">Tab</span> character (leading spaces cause an error).<br> - Each line runs in its own subshell (it doesn’t know what’s run before - like a directory change).</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="10" data-code-annotation="2">The file <code>clean</code> doesn’t exist, so the command <code>make clean</code> always runs the recipe.</span>
 </dd>
 </dl>
 <p>and to run it you just type</p>
