@@ -475,7 +475,7 @@ Note
 </section>
 <section id="the-confmodules.config-file" class="level3">
 <h3 class="anchored" data-anchor-id="the-confmodules.config-file">The <code>conf/modules.config</code> file</h3>
-<p>The nf-core modules are made in such a way as to allow granular modification in a per-workflow manner, without needing to change the module code itself. This is done through the <code>conf/modules.config</code> file, and it allows <em>e.g.</em> adding additional command line flags to the command. For example:</p>
+<p>The nf-core modules are made in such a way as to allow granular modification in a per-workflow manner, without needing to change the module code itself. This is done through the <code>conf/modules.config</code> file, and it allows <em>e.g.</em> adding additional command line flags to the command (though not things such as optional input files, which will always be specified in <code>input:</code>). For example:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>modules.config</strong></pre>
