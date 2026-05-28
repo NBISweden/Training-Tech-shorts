@@ -91,7 +91,7 @@ has three separate output tuples: the HTML report, the compressed archive with
 the results, and `versions_fastqc` that stores the `fastqc` version used by the
 module.
 
-Something common for both the inputs and the outputs is the `meta` map: this a
+Something common for both the inputs and the outputs is the `meta` map: this is a
 [Groovy map](https://training.nextflow.io/2.1/basic_training/groovy/#maps) often
 used in both nf-core modules and pipelines to store sample metadata in. For
 example, `meta` usually contains at least `[id: <sample_id>]`, which is how
