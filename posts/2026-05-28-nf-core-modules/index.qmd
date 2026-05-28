@@ -38,7 +38,7 @@ that are useful overall to users and pipeline developers:
 - **Subworkflows:** Multiple modules chained together for common tasks of varied
   size (_e.g._ sorting, indexing and summary statistics of BAM files)
 
-At the time of writing, there are over a 100 pipelines, 120 subworkflows and a
+At the time of writing, there are over 100 pipelines, 120 subworkflows and a
 whopping 1800 modules.
 
 ## Installation
