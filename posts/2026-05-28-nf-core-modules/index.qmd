@@ -15,7 +15,7 @@ code-annotations: hover
 
 If you've been writing Nextflow pipelines for a while, you might have found
 yourself in the situation where you end up either writing the same process
-multiple time, or even just copy-and-pasting processes from your previous
+multiple times, or even just copy-and-pasting processes from your previous
 pipelines. Another way of doing this is through the [nf-core
 community](https://nf-co.re/), which provides a large library of pre-written,
 community-maintained Nextflow _modules_, easily installable through a command
