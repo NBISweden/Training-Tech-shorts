@@ -395,7 +395,7 @@ Note
 <span data-code-cell="annotated-cell-8" data-code-lines="6,7,8" data-code-annotation="1">Add the FASTQC module to the workflow</span>
 </dd>
 </dl>
-<p>If you try to run this workflow using <em>e.g.</em> <code>nextflow run main.nf</code>, you’ll most likely run into an error in the FASTQC module: <code>.command.sh: line 8: fastqc: command not found</code> - this is because <code>fastqc</code> isn’t actually installed. Thankfully, nf-core module already have <em>e.g.</em> Docker images tested for each module, but we’ll need to add some configuration before we can use them.</p>
+<p>If you try to run this workflow using <em>e.g.</em> <code>nextflow run main.nf</code>, you’ll most likely run into an error in the FASTQC module: <code>.command.sh: line 8: fastqc: command not found</code> - this is because <code>fastqc</code> isn’t actually installed. Thankfully, nf-core modules already have <em>e.g.</em> Docker images tested for each module, but we’ll need to add some configuration before we can use them.</p>
 </section>
 <section id="configuring-modules" class="level2">
 <h2 class="anchored" data-anchor-id="configuring-modules">Configuring modules</h2>
@@ -416,7 +416,7 @@ Note
 </section>
 <section id="outputs" class="level3">
 <h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
-<p>If you ran the pipeline you will notice that there are no output files: neither our <code>DOWNLOAD_FASTQ_FILES</code> or the <code>FASTQC</code> specifies <code>publishDir</code> directives (the old way of specifying which files should be published), nor do we specify any <code>output</code> in the <code>main.nf</code> file (the <a href="https://docs.seqera.io/nextflow/workflow#outputs">newer method</a> for the same). Let’s add the <code>main:</code> and <code>publish:</code> directives (<em>i.e.</em> the newer method):</p>
+<p>If you ran the pipeline you will notice that there are no output files: neither our <code>DOWNLOAD_FASTQ_FILES</code> nor the <code>FASTQC</code> specifies <code>publishDir</code> directives (the old way of specifying which files should be published), nor do we specify any <code>output</code> in the <code>main.nf</code> file (the <a href="https://docs.seqera.io/nextflow/workflow#outputs">newer method</a> for the same). Let’s add the <code>main:</code> and <code>publish:</code> directives (<em>i.e.</em> the newer method):</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>main.nf</strong></pre>
@@ -464,7 +464,7 @@ Note
 </dd>
 </dl>
 <p>Using the new workflow outputs method, we specify that our workflow has an output called <code>html</code> that we want to publish (which is itself the <code>html</code> output from the <code>FASTQC</code> module), and we want to publish this output in the <code>fastqc/</code> directory inside the Nextflow <code>outputDir</code> directory (which is <code>results/</code> by default).</p>
-<p>We might also want to change the default publishing mode from the default instead copy the published files, which can be done by adding a single line in the workflow configuration file.</p>
+<p>We might also want to change the default publishing mode from symlinking to copying the published files, which can be done by adding a single line in the workflow configuration file.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>nextflow.config</strong></pre>
@@ -475,7 +475,7 @@ Note
 </section>
 <section id="the-confmodules.config-file" class="level3">
 <h3 class="anchored" data-anchor-id="the-confmodules.config-file">The <code>conf/modules.config</code> file</h3>
-<p>The nf-core modules are made in such a way as to allow granular modification in a per-workflow manner, without needing to change the module code itself. This is done through the <code>conf/modules.config</code> file, and it allows <em>e.g.</em> adding additional command line flags to the command (though not things such as optional input files, which will always be specified in <code>input:</code>). For example:</p>
+<p>The nf-core modules are written in such a way as to allow granular modification in a per-workflow manner, without needing to change the module code itself. This is done through the <code>conf/modules.config</code> file, and it allows <em>e.g.</em> adding additional command line flags to the command (though not things such as optional input files, which will always be specified in <code>input:</code>). For example:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>modules.config</strong></pre>
