@@ -317,7 +317,8 @@ to specify what and where you want to publish.
 The nf-core modules are made in such a way as to allow granular modification in
 a per-workflow manner, without needing to change the module code itself. This is
 done through the `conf/modules.config` file, and it allows _e.g._ adding
-additional command line flags to the command. For example:
+additional command line flags to the command (though not things such as optional
+input files, which will always be specified in `input:`). For example:
 
 ```{.groovy filename="modules.config"}
 process {
