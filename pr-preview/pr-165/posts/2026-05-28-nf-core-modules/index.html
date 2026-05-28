@@ -486,12 +486,12 @@ Note
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We also need to add <code>includeConfig "conf/modules.config"</code> to the <code>nextflow.config</code> file. If you try to run this you’ll get an error, as FastQC the module is no longer actually running the computations and instead just prints the version; we can see that the command now includes the <code>--version</code> flag. Change it to something more useful, like <code>--quiet</code>.</p>
+<p>We also need to add <code>includeConfig "conf/modules.config"</code> to the <code>nextflow.config</code> file. If you try to run this you’ll get an error, as the FastQC module is no longer actually running the computations and instead just prints the version; we can see that the command now includes the <code>--version</code> flag. Change it to something more useful, like <code>--quiet</code>.</p>
 </section>
 </section>
 <section id="patching-modules" class="level2">
 <h2 class="anchored" data-anchor-id="patching-modules">Patching modules</h2>
-<p>There might be cases where you genuinely cannot use an nf-core module as-is, and you definitely need to change the module code itself. Luckily, there’s also a mechanic included to be able to do this: module <em>patches</em>. As a simplified example, let’s say that we want to change the module’s label to a custom label:</p>
+<p>There might be cases where you genuinely cannot use an nf-core module as-is, and you definitely need to change the module code itself. Simply modifying the module is insufficient. If you decide to update the module from nf-core, the changes would be lost. Luckily, there’s also a mechanic included to be able to do this: module <em>patches</em>. As a simplified example, let’s say that we want to change the module’s label to a custom label:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>modules/nf-core/fastqc/main.nf</strong></pre>
