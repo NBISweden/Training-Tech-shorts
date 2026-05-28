@@ -241,13 +241,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="what-is-nf-core" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-nf-core">What is nf-core?</h2>
-<p>While the nf-core community does a lot of things, these are the major offerings that are useful to overall users and pipeline developers:</p>
+<p>While the nf-core community does a lot of things, these are the major offerings that are useful overall to users and pipeline developers:</p>
 <ul>
 <li><strong>Pipelines:</strong> Full, end-to-end pipelines for various data types and technologies (<em>e.g.</em> <code>nf-core/rnaseq</code> or <code>nf-core/sarek</code>)</li>
 <li><strong>Modules:</strong> Individual processes wrapping specific tools (<em>e.g.</em> <code>FASTQC</code> or <code>MULTIQC</code>).</li>
 <li><strong>Subworkflows:</strong> Multiple modules chained together for common tasks of varied size (<em>e.g.</em> sorting, indexing and summary statistics of BAM files)</li>
 </ul>
-<p>At the time of writing, there are over a 100 pipelines, 120 subworkflows and a whopping 1800 modules.</p>
+<p>At the time of writing, there are over 100 pipelines, 120 subworkflows and a whopping 1800 modules.</p>
 </section>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
@@ -270,7 +270,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Both Conda and Pixi relies on the <a href="https://anaconda.org/">Anaconda registry</a>, which has a bit of a delay on it compared to pip when it comes to updates. This mostly matters for pipeline maintainers, who often want the very latest version as soon as it arrives, but matters much less if you just want to be able to install and work with modules and/or subworkflows.</p>
+<p>Both Conda and Pixi rely on the <a href="https://anaconda.org/">Anaconda registry</a>, which has a bit of a delay on it compared to pip when it comes to updates. This mostly matters for pipeline maintainers, who often want the very latest version as soon as it arrives, but matters much less if you just want to be able to install and work with modules and/or subworkflows.</p>
 </div>
 </div>
 </section>
@@ -280,7 +280,7 @@ Note
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nf-core</span> modules list remote</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You can also filter by name:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nf-core</span> modules list remote samtools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>If you want more information that what modules are available you can also check the <a href="https://nf-co.re/modules">nf-core website</a>. There you can find module inputs, outputs, who maintains the module, and other information.</p>
+<p>If you want more information about which modules are available you can also check the <a href="https://nf-co.re/modules">nf-core website</a>. There you can find module inputs, outputs, who maintains the module, and other information.</p>
 <p>Let’s look at the <a href="https://nf-co.re/modules/fastqc/">FASTQC module</a>. It has a very short description; we can see that it takes a single tuple as input, and it has three separate output tuples: the HTML report, the compressed archive with the results, and <code>versions_fastqc</code> that stores the <code>fastqc</code> version used by the module.</p>
 <p>Something common for both the inputs and the outputs is the <code>meta</code> map: this a <a href="https://training.nextflow.io/2.1/basic_training/groovy/#maps">Groovy map</a> often used in both nf-core modules and pipelines to store sample metadata in. For example, <code>meta</code> usually contains at least <code>[id: &lt;sample_id&gt;]</code>, which is how modules get the sample ID from the input through <code>meta.id</code>.</p>
 </section>
