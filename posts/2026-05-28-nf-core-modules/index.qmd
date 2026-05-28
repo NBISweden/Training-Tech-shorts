@@ -336,7 +336,7 @@ flag. Change it to something more useful, like `--quiet`.
 ## Patching modules
 
 There might be cases where you genuinely cannot use an nf-core module as-is, and
-you definitely need to change the module code itself. Luckily, there's also a
+you definitely need to change the module code itself. Simply modifying the module is insufficient. If you decide to update the module from nf-core, the changes would be lost. Luckily, there's also a
 mechanic included to be able to do this: module _patches_. As a simplified
 example, let's say that we want to change the module's label to a custom label:
 
