@@ -230,7 +230,7 @@ it wants:
 If you try to run this workflow using _e.g._ `nextflow run main.nf`, you'll most
 likely run into an error in the FASTQC module: `.command.sh: line 8: fastqc:
 command not found` - this is because `fastqc` isn't actually installed.
-Thankfully, nf-core module already have _e.g._ Docker images tested for each
+Thankfully, nf-core modules already have _e.g._ Docker images tested for each
 module, but we'll need to add some configuration before we can use them.
 
 ## Configuring modules
@@ -254,7 +254,7 @@ run the full pipeline.
 ### Outputs
 
 If you ran the pipeline you will notice that there are no output files: neither
-our `DOWNLOAD_FASTQ_FILES` or the `FASTQC` specifies `publishDir` directives
+our `DOWNLOAD_FASTQ_FILES` nor the `FASTQC` specifies `publishDir` directives
 (the old way of specifying which files should be published), nor do we specify
 any `output` in the `main.nf` file (the [newer
 method](https://docs.seqera.io/nextflow/workflow#outputs) for the same). Let's
@@ -300,8 +300,8 @@ from the `FASTQC` module), and we want to publish this output in the `fastqc/`
 directory inside the Nextflow `outputDir` directory (which is `results/` by
 default).
 
-We might also want to change the default publishing mode from the default
-instead copy the published files, which can be done by adding a single line in
+We might also want to change the default publishing mode from symlinking 
+to copying the published files, which can be done by adding a single line in
 the workflow configuration file.
 
 ```{.groovy filename="nextflow.config"}
@@ -314,7 +314,7 @@ to specify what and where you want to publish.
 
 ### The `conf/modules.config` file
 
-The nf-core modules are made in such a way as to allow granular modification in
+The nf-core modules are written in such a way as to allow granular modification in
 a per-workflow manner, without needing to change the module code itself. This is
 done through the `conf/modules.config` file, and it allows _e.g._ adding
 additional command line flags to the command (though not things such as optional
