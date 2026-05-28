@@ -60,7 +60,7 @@ conda create --name nf-core-env nf-core nextflow
 ```
 
 ::: {.callout-note}
-Both Conda and Pixi relies on the [Anaconda registry](https://anaconda.org/),
+Both Conda and Pixi rely on the [Anaconda registry](https://anaconda.org/),
 which has a bit of a delay on it compared to pip when it comes to updates. This
 mostly matters for pipeline maintainers, who often want the very latest version
 as soon as it arrives, but matters much less if you just want to be able to
