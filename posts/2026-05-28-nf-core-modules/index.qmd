@@ -328,8 +328,8 @@ process {
 ```
 
 We also need to add `includeConfig "conf/modules.config"` to the
-`nextflow.config` file. If you try to run this you'll get an error, as FastQC
-the module is no longer actually running the computations and instead just
+`nextflow.config` file. If you try to run this you'll get an error, as the
+FastQC module is no longer actually running the computations and instead just
 prints the version; we can see that the command now includes the `--version`
 flag. Change it to something more useful, like `--quiet`.
 
