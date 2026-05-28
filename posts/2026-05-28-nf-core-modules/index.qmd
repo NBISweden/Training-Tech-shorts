@@ -81,7 +81,7 @@ You can also filter by name:
 nf-core modules list remote samtools
 ```
 
-If you want more information that what modules are available you can also check
+If you want more information about which modules are available you can also check
 the [nf-core website](https://nf-co.re/modules). There you can find module
 inputs, outputs, who maintains the module, and other information.
 
