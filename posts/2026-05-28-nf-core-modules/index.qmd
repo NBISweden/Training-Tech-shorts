@@ -349,7 +349,7 @@ process FASTQC {
 
  1. Change the module label
 
-Just changing the code is not enough, however, and we also need to apply the
+To register the change with nf-core tools, we also need to apply the
 patch:
 
 ```bash
