@@ -1,0 +1,400 @@
+---
+title: "Working with nf-core modules"
+date: 2026-05-28
+date-modified: last-modified
+author:
+  - Erik Fasterius
+categories:
+  - "Nextflow"
+  - "Workflow management"
+  - "nf-core"
+code-annotations: hover
+---
+
+## Introduction
+
+If you've been writing Nextflow pipelines for a while, you might have found
+yourself in the situation where you end up either writing the same process
+multiple time, or even just copy-and-pasting processes from your previous
+pipelines. Another way of doing this is through the [nf-core
+community](https://nf-co.re/), which provides a large library of pre-written,
+community-maintained Nextflow _modules_, easily installable through a command
+line utility. You may think that nf-core modules are only meant to be used
+inside nf-core pipelines, but this isn't the case; nf-core modules can be used
+in any Nextflow pipeline, and this post will give you an introduction to them.
+
+Please note that a basic understanding and general familiarity of Nextflow is
+recommended in order to fully utilise this introduction.
+
+## What is nf-core?
+
+While the nf-core community does a lot of things, these are the major offerings
+that are useful to overall users and pipeline developers:
+
+- **Pipelines:** Full, end-to-end pipelines for various data types and
+  technologies (_e.g._ `nf-core/rnaseq` or `nf-core/sarek`)
+- **Modules:** Individual processes wrapping specific tools (_e.g._ `FASTQC` or
+  `MULTIQC`).
+- **Subworkflows:** Multiple modules chained together for common tasks of varied
+  size (_e.g._ sorting, indexing and summary statistics of BAM files)
+
+At the time of writing, there are over a 100 pipelines, 120 subworkflows and a
+whopping 1800 modules.
+
+## Installation
+
+If you want to work with nf-core modules, you'll need at the very least a
+Nextflow installation, the [nf-core CLI](https://nf-co.re/docs/nf-core-tools)
+and preferably a container engine (_e.g._ Docker or Apptainer); we'll cover the
+installation of the CLI here.
+
+```bash
+# Pixi global install
+pixi global install nf-core
+
+# Pip install
+pip install nf-core
+
+# Conda install in a new environment
+conda create --name nf-core-env nf-core nextflow
+```
+
+::: {.callout-note}
+Both Conda and Pixi relies on the [Anaconda registry](https://anaconda.org/),
+which has a bit of a delay on it compared to pip when it comes to updates. This
+mostly matters for pipeline maintainers, who often want the very latest version
+as soon as it arrives, but matters much less if you just want to be able to
+install and work with modules and/or subworkflows.
+:::
+
+## Finding modules
+
+You can list modules available for installation using the command line:
+
+```bash
+nf-core modules list remote
+```
+
+You can also filter by name:
+
+```bash
+nf-core modules list remote samtools
+```
+
+If you want more information that what modules are available you can also check
+the [nf-core website](https://nf-co.re/modules). There you can find module
+inputs, outputs, who maintains the module, and other information.
+
+Let's look at the [FASTQC module](https://nf-co.re/modules/fastqc/). It has a
+very short description; we can see that it takes a single tuple as input, and it
+has three separate output tuples: the HTML report, the compressed archive with
+the results, and `versions_fastqc` that stores the `fastqc` version used by the
+module.
+
+Something common for both the inputs and the outputs is the `meta` map: this a
+[Groovy map](https://training.nextflow.io/2.1/basic_training/groovy/#maps) often
+used in both nf-core modules and pipelines to store sample metadata in. For
+example, `meta` usually contains at least `[id: <sample_id>]`, which is how
+modules get the sample ID from the input through `meta.id`.
+
+## Installing modules
+
+To install a module into your pipeline, use the nf-core CLI:
+
+```bash
+nf-core modules install fastqc
+```
+
+The first time you run this in a non-nf-core repo, you'll be prompted whether
+your current directory is a pipeline or a local module repository: you should
+choose the former. You will then also be prompted to create an `.nf-core.yml`
+file. This tracks which modules are installed and at which commit, so you should
+accept the creation of this file.
+
+::: {.callout-warning}
+Depending on what type of directory you're working with you may run into an
+error with the above command. For example, if you try the command in a
+completely empty directory, you'd be missing the `main.nf` and `nextflow.config`
+Nextflow files as well as the nf-core `conf/` directory. Just run `touch` and
+`mkdir` (as appropriate) on all of these and the error should hopefully go away.
+:::
+
+Installed modules can be found in `modules/nf-core`:
+
+```
+modules/
+└── nf-core/
+    └── fastqc/
+        ├── tests/
+        ├── environment.yml
+        ├── main.nf
+        └── meta.yml
+conf/
+└── containers_[conda/docker/singularity].config
+modules.json
+```
+
+The `main.nf` contains the actual Nextflow process; `meta.yml` contains module
+metadata (not to be confused with the `meta` map previously mentioned); the
+`environment.yml` defines a Conda environment; and `tests/` contains the
+module's tests in the [nf-test](https://www.nf-test.com/) framework. The various
+files in `conf/` define which environments should be used for different tools
+(Conda, Docker and Singularity) and architectures (AMD and ARM). There is also a
+`modules.json` file that was just created in the repository root, which contains
+information about all of the modules installed in the pipeline.
+
+For the purposes of using a module you usually don't need to worry about any of
+these files, except the `main.nf` process code, and that only if you want to
+look at the code in more detail.
+
+::: {.callout-note}
+The FastQC software has a single module in nf-core, as it is a single command
+line utility used in one way. Other tools have multiple modules for the _e.g._
+different subcommands of the tool. For example: SAMtools, which has multiple
+`samtools/<subtool>` modules, _e.g._ `samtools/index` and `samtools/sort`. Such
+modules are installed in `modules/nf-core/samtools/<subtool>`.
+:::
+
+If you were to write your own, non-nf-core modules and use them alongside the
+nf-core ones (and _not_ putting them directly in `main.nf`) you'd put them in
+`modules/local/<module>` instead, to signify that they are different from the
+nf-core modules.
+
+## Using modules
+
+Let's build a small example of how using the newly installed nf-core module can
+look. First, let's create a minimal workflow with a single module that downloads
+some FASTQ files:
+
+```{.groovy filename="main.nf"}
+workflow {
+
+    ch_input = channel.of(
+        [ id: 'SRR935090', link: 'https://ndownloader.figshare.com/files/39539767' ],
+        [ id: 'SRR935091', link: 'https://ndownloader.figshare.com/files/39539770' ],
+        [ id: 'SRR935092', link: 'https://ndownloader.figshare.com/files/39539773' ]
+    )
+
+    DOWNLOAD_FASTQ_FILES (
+        ch_input
+    )
+}
+
+process DOWNLOAD_FASTQ_FILES {
+    tag "${id}"
+
+    input:
+    tuple val(id), val(link)
+
+    output:
+    path("*.fastq.gz")
+
+    script:
+    """
+    curl -L ${link} -o ${id}.fastq.gz
+    """
+}
+```
+
+In order to start using our nf-core module, we should first add an `include`
+statement to the beginning of the `main.nf` file:
+
+```{.groovy filename="main.nf"}
+include { FASTQC } from "./modules/nf-core/fastqc"
+
+(...)
+```
+
+We can't simply add the module to the end of our workflow though, since the
+output of `DOWNLOAD_FASTQ_FILES` is just a single path, while the `FASTQC`
+module takes a `[meta, path]` tuple as input (the former could trivially create
+such a tuple in its output since it has the `id` value in its input, but it was
+purposefully written in this sub-par way to make a better example of how to
+create a `meta` map). So, let's add the new module and give it the proper input
+it wants:
+
+```{.groovy filename="main.nf"}
+    (...)
+
+    DOWNLOAD_FASTQ_FILES (
+        ch_input
+    )
+    FASTQC (                                                             // <1>
+        DOWNLOAD_FASTQ_FILES.out.map { it -> [[id: it.simpleName], it] } // <1>
+    )                                                                    // <1>
+}
+```
+
+ 1. Add the FASTQC module to the workflow
+
+If you try to run this workflow using _e.g._ `nextflow run main.nf`, you'll most
+likely run into an error in the FASTQC module: `.command.sh: line 8: fastqc:
+command not found` - this is because `fastqc` isn't actually installed.
+Thankfully, nf-core module already have _e.g._ Docker images tested for each
+module, but we'll need to add some configuration before we can use them.
+
+## Configuring modules
+
+### Containers
+
+In order for us to be able to utilise the Docker images available for the
+modules, we can add the following to the `nextflow.config` file:
+
+```{.groovy filename="nextflow.config"}
+profiles {
+    docker {
+        docker.enabled = true
+    }
+}
+```
+
+We can then run `nextflow run main.nf -profile docker`, which will successfully
+run the full pipeline.
+
+### Outputs
+
+If you ran the pipeline you will notice that there are no output files: neither
+our `DOWNLOAD_FASTQ_FILES` or the `FASTQC` specifies `publishDir` directives
+(the old way of specifying which files should be published), nor do we specify
+any `output` in the `main.nf` file (the [newer
+method](https://docs.seqera.io/nextflow/workflow#outputs) for the same). Let's
+add the `main:` and `publish:` directives (_i.e._ the newer method):
+
+```{.groovy filename="main.nf"}
+workflow {
+
+    main: // <1>
+    ch_input = channel.of(
+        [ id: 'SRR935090', link: 'https://ndownloader.figshare.com/files/39539767' ],
+        [ id: 'SRR935091', link: 'https://ndownloader.figshare.com/files/39539770' ],
+        [ id: 'SRR935092', link: 'https://ndownloader.figshare.com/files/39539773' ]
+    )
+
+    DOWNLOAD_FASTQ_FILES (
+        ch_input
+    )
+    FASTQC (
+        DOWNLOAD_FASTQ_FILES.out.map { it -> [[id: it.simpleName], it] }
+    )
+
+    publish:               // <2>
+    html = FASTQC.out.html // <2>
+}
+
+(...)
+
+output {               // <3>
+    html {             // <3>
+        path "fastqc/" // <3>
+    }                  // <3>
+}                      // <3>
+```
+
+ 1. Add `main:` directive
+ 2. Add `publish:` directive
+ 3. Add workflow `output`
+
+Using the new workflow outputs method, we specify that our workflow has an
+output called `html` that we want to publish (which is itself the `html` output
+from the `FASTQC` module), and we want to publish this output in the `fastqc/`
+directory inside the Nextflow `outputDir` directory (which is `results/` by
+default).
+
+We might also want to change the default publishing mode from the default
+instead copy the published files, which can be done by adding a single line in
+the workflow configuration file.
+
+```{.groovy filename="nextflow.config"}
+workflow.output.mode = "copy"
+```
+
+The reason nf-core modules don't publish any outputs by default is that
+different outputs might be desired in different pipelines, so it is up to you
+to specify what and where you want to publish.
+
+### The `conf/modules.config` file
+
+The nf-core modules are made in such a way as to allow granular modification in
+a per-workflow manner, without needing to change the module code itself. This is
+done through the `conf/modules.config` file, and it allows _e.g._ adding
+additional command line flags to the command. For example:
+
+```{.groovy filename="modules.config"}
+process {
+    withName: FASTQC {
+        ext.args = { "--version" }
+    }
+}
+```
+
+We also need to add `includeConfig "conf/modules.config"` to the
+`nextflow.config` file. If you try to run this you'll get an error, as FastQC
+the module is no longer actually running the computations and instead just
+prints the version; we can see that the command now includes the `--version`
+flag. Change it to something more useful, like `--quiet`.
+
+## Patching modules
+
+There might be cases where you genuinely cannot use an nf-core module as-is, and
+you definitely need to change the module code itself. Luckily, there's also a
+mechanic included to be able to do this: module _patches_. As a simplified
+example, let's say that we want to change the module's label to a custom label:
+
+```{.groovy filename="modules/nf-core/fastqc/main.nf"}
+process FASTQC {
+    tag "${meta.id}"
+    label 'my_custom_label' // <1>
+    (...)
+```
+
+ 1. Change the module label
+
+Just changing the code is not enough, however, and we also need to apply the
+patch:
+
+```bash
+nf-core modules patch fastqc
+```
+
+::: {.callout-warning}
+If you get an error like `ERROR 'manifest.name'` it means you'll need to add a
+[workflow manifest](https://docs.seqera.io/nextflow/reference/config#manifest)
+to your `nextflow.config` file. A minimal manifest could be something like this:
+
+```groovy
+manifest {
+    name          = "Example workflow"
+    description   = "An example of using nf-core modules"
+    version       = "1.0.0"
+}
+```
+:::
+
+This will write a `modules/nf-core/fastqc/fastqc.diff` file containing the
+changes we just added. This diff file allows us to easily update the module in
+the future whenever there is a new version, while still keeping our local
+changes to it.
+
+## The Nextflow module registry
+
+The _Nextflow module registry_ was added in version `26.04.0`, which allows
+installation of modules from multiple sources using only Nextflow itself:
+
+```bash
+nextflow module install nf-core/multiqc
+```
+
+This will not change the `modules.json` file (which is an nf-core-specific
+file), but will add a `.module-info` file in the module directory with similar
+information. At the time of writing, module installation using Nextflow itself
+cannot patch a module. Stick with one way of installing modules per workflow,
+either using nf-core tools or Nextflow itself - don't mix.
+
+## Resources
+
+- The [nf-core tools](https://nf-co.re/docs/nf-core-tools)
+- List of nf-core [modules](https://nf-co.re/modules/) and
+  [subworkflows](https://nf-co.re/subworkflows/)
+- The [Nextflow registry](https://registry.nextflow.io/)
+- The NBIS Tools for Reproducible Research [Nextflow training material](https://nbisweden.github.io/workshop-reproducible-research/pages/nextflow.html)
+- The official [Nextflow training portal](https://training.nextflow.io/latest/)
