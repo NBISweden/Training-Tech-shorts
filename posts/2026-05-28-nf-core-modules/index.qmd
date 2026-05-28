@@ -29,7 +29,7 @@ recommended in order to fully utilise this introduction.
 ## What is nf-core?
 
 While the nf-core community does a lot of things, these are the major offerings
-that are useful to overall users and pipeline developers:
+that are useful overall to users and pipeline developers:
 
 - **Pipelines:** Full, end-to-end pipelines for various data types and
   technologies (_e.g._ `nf-core/rnaseq` or `nf-core/sarek`)
