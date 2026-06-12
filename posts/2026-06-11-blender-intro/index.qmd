@@ -1,0 +1,346 @@
+---
+title: "Introduction to Blender"
+date: 2026-06-11
+date-modified: last-modified
+author: 
+  - Leslie Solorzano
+categories: [ "Blender", "b3d", "visualization" , "computer graphics"]
+
+---
+
+# Introduction
+
+Blender is an open-source free software to do *computer graphics* a.k.a CG, CGI, VFX. Their slogan is **the freedom to create** and you can do anything you want with it, 2D, 3D, scientific visualization, data visualization, art, movies, video editing, architectural visualization, 3D printing etc. On top of that you can use python inside of it.
+
+::: callout-warning
+## A mouse and numpad are recommended
+In Blender it is much more comfortable to use a mouse, we will need the middle mouse button and wheel {{< kbd MMB >}}, and left {{< kbd LMB >}}and right buttons {{< kbd RMB >}}. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.
+
+It is not mandatory, if you don't have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the {{< kbd MMB >}}.
+
+You can go to the `edit > preferences` menu and in the input section select to emmulate the mmb and/or the numpad.
+
+![emulate numpad mmb](images/emulatemmbnumpadh.jpg){width=95%}
+:::
+
+# A 3D world
+
+## Get a feel of the place
+
+In computer graphics, we have a world, a camera, and a light source. We can pan, rotate, and zoom in the world, like walking or flying in a videogame.
+
+To rotate around the world, we press and drag {{< kbd MMB >}}. To pan, we press {{< kbd shift >}}+{{< kbd MMB >}} and drag. To zoom in and out scroll {{< kbd MMB >}}.
+
+### Rotate
+![](http://lesliemachine.se/tech-rse-sol/1_out_resized.gif){width=95%}
+
+### Pan
+![](http://lesliemachine.se/tech-rse-sol//2_out_resized.gif){width=95%}
+
+### Zoom
+![](http://lesliemachine.se/tech-rse-sol//3_out_resized.gif){width=95%}
+
+## Objects and meshes
+
+In blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.
+
+![](http://lesliemachine.se/tech-rse-sol//vef.png){width=95%}
+
+To move, scale and rotate an object in Blender we use:
+- {{< kbd S >}} for scale
+- {{< kbd R >}} for rotate
+- {{< kbd G >}} for grabbing the object
+
+### Scale
+![](http://lesliemachine.se/tech-rse-sol//4_out_resized.gif){width=95%}
+
+### Rotate
+![](http://lesliemachine.se/tech-rse-sol//5_out_resized.gif){width=95%}
+
+### Grab
+![](http://lesliemachine.se/tech-rse-sol//6_out_resized.gif){width=95%}
+
+If we like the change, we click {{< kbd LMB >}}, if we don't like the change and we want to cancel, we press {{< kbd RMB >}} or {{< kbd ESC >}}.
+
+
+
+## Object and Edit modes
+
+In the top left corner in Blender we see a "mode", amongst others, Object and Edit mode. In Object mode we can select all objects in the world. While in edit mode we edit the points, edges and faces of a single object or selected objects.
+
+![](http://lesliemachine.se/tech-rse-sol//modes.png){width=95%}
+
+## Enter Suzanne
+
+Blender has a mascot! A cute monkey called Suzanne. We can add Suzanne to the world by pressing {{< kbd shift >}}+{{< kbd A >}} and selecting the mesh menu and selecting Suzanne. Note that there are more objects, like cubes, spheres, cones and more. Never fear to explore!
+
+![](http://lesliemachine.se/tech-rse-sol//8_out_resized.gif){width=95%}
+
+If you add something you don't like anymore, you can delete it with teh {{< kbd delete >}} key or with {{< kbd X >}} or selecting in the list to the right and pressing {{< kbd delete >}} or {{< kbd X >}} or with {{< kbd RMB >}} and selecting delete.
+
+![](http://lesliemachine.se/tech-rse-sol//7_out_resized.gif){width=95%}
+
+## Punk is not dead
+
+We are going to make Suzanne punk! To do that, we are going to select Suzanne and go into Edit mode. We are going to make sure to select faces (or all the points makeing the faces) of the head. To do this press {{< kbd shift >}} and click on the multiple faces where we will make Suzanne's punk hair.
+
+![](http://lesliemachine.se/tech-rse-sol//9_out_resized.gif){width=95%}
+
+To elongate or extrude the hair upwards, we can press {{< kbd E >}} but you may notice that all the faces grow lumped together. You can press {{< kbd ESC >}} or {{< kbd RMB >}} and then {{< kbd ctrl >}}+{{< kbd Z >}} to cancel the extrusion.
+
+Instead we are going to look at the menu to the left while we are in Edit mode, and look for the extrude option, we press and let the menu open to select "Extrude individual faces". Now we can make each individual "punk hair" from the mesh faces in Suzanne's head. We drag them as high up as we want then click {{< kbd LMB >}}.
+
+![](http://lesliemachine.se/tech-rse-sol//10_out_resized.gif){width=95%}
+
+Now we need to scale, but the same way we extruded each face individually, we will scale each face independently. To do so we go to the top middle menu and select a button called "Transform Pivot Point" and select "individual origins".
+
+Then we can press {{< kbd S >}} to scale the faces and we can tell it to scale it to zero by pressing {{< kbd numpad 0 >}} so Blender knows we want to scale it to zero. And voila, we have punk Suzanne.
+
+![](http://lesliemachine.se/tech-rse-sol//11_out_resized.gif){width=95%}
+
+## Materials and colors
+
+Let's make Suzanne more colorful, it's too gray and neutral. To the menu in the right, we can see the materials tab. This tab allows us to give Suzanne a new color.
+
+We can color it all the same color or also select specific materials for specific faces. Let's start by coloring it with a brown diffuse color.
+
+![](http://lesliemachine.se/tech-rse-sol//12_out_resized.gif){width=95%}
+
+To preview how the world looks in render mode, click in the top right menu the render Viewport shading.
+
+In Edit mode, select faces like the internal part of the ears. Create a new material, make it pink, and then click the "assign" button to put it only in the selected faces. Do this with anything else you want, like the nose, eyes or mouth.
+
+![](http://lesliemachine.se/tech-rse-sol//13_out_resized2.gif){width=95%}
+
+## Let there be light
+
+Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let's delete it and the sun!
+
+Press {{< kbd shift >}}+{{< kbd A >}} and add a light > sun. Position it like any other object by grabbing with {{< kbd G >}}. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.
+
+![](http://lesliemachine.se/tech-rse-sol//15_out_resized2.gif){width=95%}
+
+Now that we're here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.
+
+![](http://lesliemachine.se/tech-rse-sol//14_out_resized.gif){width=95%}
+
+
+## Say cheese!
+
+Now it's time to take a picture! Which in computer graphics is called **rendering**. We are going to click in the camera and pres {{< kbd R >}}x2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with {{< kbd G >}} to move it around as well.
+
+Now you are ready for your first digital picture, go to the render menu in the top and click "render image". You can save the resulting image. 
+
+![](http://lesliemachine.se/tech-rse-sol//16_out_resized.gif){width=95%}
+
+Make sure to share it with us on the slack so we can make a gallery here.
+
+# Now let's get down to business
+
+"I am a serious scientist, I want to do data and scientific visualization, I don't have no time for monkey business!"
+
+Well you're in luck, because if your data has points, and polygons, (vertices and faces) then you can draw them in Blender and make use of their super powerful render engine.
+
+During our `#tech-group-rse` presentation I showed how I displayed Xenium cells and transcripts in Blender.
+
+If your cells or nuclei are descbribed by polygons, you can draw them in Blender
+
+Make sure you have a CSV that looks like this
+
+
+::: {.column width="50%"}
+
+| polygon ID | X | Y    |
+|----|-----------|------|
+| 1  | 313.31    |436.53|
+| 1  | 1534.55   |982.23|
+| 1  | 883.20    |415.36|
+| 1  | 231.44    |752.83|
+| 2  | 734.78    |987.78|
+| 2  | 364.56    |541.84|
+| 2  | 984.77    |865.38|
+| 2  | 256.25    |348.28|
+
+: Example cell or nuclei polygons
+:::
+
+In Xenium, the `cells.csv.gz` file contains exactly this style.
+
+To create them in Blender as meshes we will use the following code in the scripting tab. 
+
+![](http://lesliemachine.se/tech-rse-sol//scripttab.png){width=95%}
+
+```python
+
+import bpy
+import csv
+import os
+import bmesh
+from mathutils import Vector
+import random
+
+# Clear existing objects and collections
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete()
+
+# Remove existing "cells" collection if it exists ----------------------------------
+if "cells" in bpy.data.collections:
+    bpy.data.collections.remove(bpy.data.collections["cells"])
+
+# Create a new collection for cells ------------------------------------------------
+cells_collection = bpy.data.collections.new("cells")
+bpy.context.scene.collection.children.link(cells_collection)
+
+# Path to your CSV filennnn
+csv_path = "/home/USER/Documents/NBIS/Xenium/percell.csv"
+
+# Read CSV and group vertices by label_id ------------------------------------------
+vertices_by_id = {}
+with open(csv_path, 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        label_id = int(row['label_id'])
+        x = float(row['vertex_x'])
+        y = float(row['vertex_y'])
+        if label_id not in vertices_by_id:
+            vertices_by_id[label_id] = []
+        vertices_by_id[label_id].append((x, y, 0))  # z=0 for 2D polygons
+
+# Create a separate mesh object for each polygon -----------------------------------
+for label_id, verts in vertices_by_id.items():
+    # Skip polygons with fewer than 3 vertices (invalid for faces)
+    if len(verts) < 3:
+        continue
+
+    # Create a new mesh and object for this polygon
+    mesh = bpy.data.meshes.new(f"Polygon_{label_id}")
+    obj = bpy.data.objects.new(f"Cell_{label_id}", mesh)
+
+    # Link the object to the "cells" collection
+    cells_collection.objects.link(obj)
+
+    # Create vertices and a single face
+    vertices = verts
+    faces = [tuple(range(len(verts)))]  # Single face for this polygon
+
+    # Assign vertices and faces to the mesh
+    mesh.from_pydata(vertices, [], faces)
+    
+    mesh.update()
+
+# Fix the centers of all objects in "cells" collection -----------------------------
+for obj in cells_collection.objects:
+    if obj.type == 'MESH':
+        # Calculate the centroid in world space
+        world_centroid = Vector()
+        for v in obj.data.vertices:
+            # Convert vertex position to world space
+            world_pos = obj.matrix_world @ v.co
+            world_centroid += world_pos
+        world_centroid /= len(obj.data.vertices)
+
+        # Calculate the offset between the current origin and the new centroid
+        current_origin_world = obj.matrix_world @ Vector()
+        offset = world_centroid - current_origin_world
+
+        # Move the mesh vertices by the inverse of the offset
+        mesh = obj.data
+        bm = bmesh.new()
+        bm.from_mesh(mesh)
+        for v in bm.verts:
+            v.co -= offset
+        bm.to_mesh(mesh)
+        bm.free()
+
+        # Update the object's location to the world centroid
+        obj.location = obj.matrix_world.inverted() @ world_centroid
+
+```
+
+Since each cell is composed of points, they can become vertices in Blender, and we can fill them as a face for a mesh, then we can create the cells in blender, select them, color them, do anything we need, like render a figure for a paper.
+
+Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it become like *killing a mosquito with a canon*. If you really want to give it a shot, feel free to contact me :)
+
+# Drawing a graph
+
+Graphs are defined as nodes and edges. Nodes have coordinates, and we can plot them in Blender, and then we can join nodes as they are indicated in a list of edges. Normally, when we have them as text,  graphs are composed of two files, the nodes and the edges. Nodes are a list of ID, X and Y, and Z, and edges are node ID pairs.
+
+Imagine we have the following graph
+
+![](http://lesliemachine.se/tech-rse-sol//graphlittle.png){width=50%}
+
+Then the tables would look like this.
+
+::: {.column width="50%"}
+| node ID | X | Y    |
+|----|-----------|------|
+| 1  | 314.4454  |31.38746|
+| 2  | 376.7727  |76.99980|
+| 3  | 393.1768  |148.4373|
+| 4  | 312.7435  |152.9352|
+| 5  | 272.2623  |95.25605|
+:::
+
+::: {.column width="50%"}
+| edge n1 | edge n2    |
+|----|------|
+| 1  | 2    |
+| 2  | 4    |
+| 4  | 3    |
+| 5  | 4    |
+:::
+
+I have a graph that has 100,000 nodes and millions of edges. Blender can draw it, but it becomes slow, and it's unnecesary to plot everything, so I plot a percentage of it withthis code:
+
+```python
+
+import bpy
+import numpy as np
+import pandas as pd
+import random
+
+# Load coordinates from CSV
+csv_path = "/path/to/your/coordinates.csv"
+df = pd.read_csv(csv_path)
+coords = df[['ux', 'uy', 'uz']].values
+
+# Load edge pairs from .npy
+npy_path = "/path/to/your/edges.npy"
+edges = np.load(npy_path)
+
+# --- Simplify: Remove a random fraction of nodes ---
+fraction_to_remove = 0.2  # Remove 20% of nodes
+num_nodes = len(coords)
+num_to_remove = int(num_nodes * fraction_to_remove)
+
+# Randomly select nodes to remove
+nodes_to_remove = set(random.sample(range(num_nodes), num_to_remove))
+
+# Create a list of remaining nodes and their new indices
+remaining_nodes = [i for i in range(num_nodes) if i not in nodes_to_remove]
+new_coords = [coords[i] for i in remaining_nodes]
+
+# Create a mapping from old index to new index
+old_to_new_index = {old: new for new, old in enumerate(remaining_nodes)}
+
+# Update edges: only keep edges where both nodes are not removed
+new_edges = []
+for edge in edges:
+    u, v = edge
+    if u not in nodes_to_remove and v not in nodes_to_remove:
+        new_edges.append((old_to_new_index[u], old_to_new_index[v]))
+
+# --- Create mesh in Blender ---
+mesh = bpy.data.meshes.new("SimplifiedEdgeMesh")
+obj = bpy.data.objects.new("SimplifiedEdgeObject", mesh)
+bpy.context.collection.objects.link(obj)
+
+# Add vertices and edges
+mesh.from_pydata(new_coords, new_edges, [])
+mesh.update()
+
+```
+
+In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid addon to draw the dots that represent classes (such as classified cells). The image shows selected edes in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.
+
+![](http://lesliemachine.se/tech-rse-sol//graph.png){width=95%}
