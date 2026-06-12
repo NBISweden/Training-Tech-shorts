@@ -20,7 +20,7 @@ It is not mandatory, if you don't have a mouse or numpad you can ask Blender to 
 
 You can go to the `edit > preferences` menu and in the input section select to emmulate the mmb and/or the numpad.
 
-![emulate numpad mmb](images/emulatemmbnumpadh.jpg){width=95%}
+![emulate numpad mmb](http://lesliemachine.se/tech-rse-sol/emulatemmbnumpadh.jpg){width=95%}
 :::
 
 # A 3D world
@@ -35,16 +35,16 @@ To rotate around the world, we press and drag {{< kbd MMB >}}. To pan, we press 
 ![](http://lesliemachine.se/tech-rse-sol/1_out_resized.gif){width=95%}
 
 ### Pan
-![](http://lesliemachine.se/tech-rse-sol//2_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/2_out_resized.gif){width=95%}
 
 ### Zoom
-![](http://lesliemachine.se/tech-rse-sol//3_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/3_out_resized.gif){width=95%}
 
 ## Objects and meshes
 
 In blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.
 
-![](http://lesliemachine.se/tech-rse-sol//vef.png){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/vef.png){width=95%}
 
 To move, scale and rotate an object in Blender we use:
 - {{< kbd S >}} for scale
@@ -52,13 +52,13 @@ To move, scale and rotate an object in Blender we use:
 - {{< kbd G >}} for grabbing the object
 
 ### Scale
-![](http://lesliemachine.se/tech-rse-sol//4_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/4_out_resized.gif){width=95%}
 
 ### Rotate
-![](http://lesliemachine.se/tech-rse-sol//5_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/5_out_resized.gif){width=95%}
 
 ### Grab
-![](http://lesliemachine.se/tech-rse-sol//6_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/6_out_resized.gif){width=95%}
 
 If we like the change, we click {{< kbd LMB >}}, if we don't like the change and we want to cancel, we press {{< kbd RMB >}} or {{< kbd ESC >}}.
 
@@ -68,35 +68,35 @@ If we like the change, we click {{< kbd LMB >}}, if we don't like the change and
 
 In the top left corner in Blender we see a "mode", amongst others, Object and Edit mode. In Object mode we can select all objects in the world. While in edit mode we edit the points, edges and faces of a single object or selected objects.
 
-![](http://lesliemachine.se/tech-rse-sol//modes.png){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/modes.png){width=95%}
 
 ## Enter Suzanne
 
 Blender has a mascot! A cute monkey called Suzanne. We can add Suzanne to the world by pressing {{< kbd shift >}}+{{< kbd A >}} and selecting the mesh menu and selecting Suzanne. Note that there are more objects, like cubes, spheres, cones and more. Never fear to explore!
 
-![](http://lesliemachine.se/tech-rse-sol//8_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/8_out_resized.gif){width=95%}
 
 If you add something you don't like anymore, you can delete it with teh {{< kbd delete >}} key or with {{< kbd X >}} or selecting in the list to the right and pressing {{< kbd delete >}} or {{< kbd X >}} or with {{< kbd RMB >}} and selecting delete.
 
-![](http://lesliemachine.se/tech-rse-sol//7_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/7_out_resized.gif){width=95%}
 
 ## Punk is not dead
 
 We are going to make Suzanne punk! To do that, we are going to select Suzanne and go into Edit mode. We are going to make sure to select faces (or all the points makeing the faces) of the head. To do this press {{< kbd shift >}} and click on the multiple faces where we will make Suzanne's punk hair.
 
-![](http://lesliemachine.se/tech-rse-sol//9_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/9_out_resized.gif){width=95%}
 
 To elongate or extrude the hair upwards, we can press {{< kbd E >}} but you may notice that all the faces grow lumped together. You can press {{< kbd ESC >}} or {{< kbd RMB >}} and then {{< kbd ctrl >}}+{{< kbd Z >}} to cancel the extrusion.
 
 Instead we are going to look at the menu to the left while we are in Edit mode, and look for the extrude option, we press and let the menu open to select "Extrude individual faces". Now we can make each individual "punk hair" from the mesh faces in Suzanne's head. We drag them as high up as we want then click {{< kbd LMB >}}.
 
-![](http://lesliemachine.se/tech-rse-sol//10_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/10_out_resized.gif){width=95%}
 
 Now we need to scale, but the same way we extruded each face individually, we will scale each face independently. To do so we go to the top middle menu and select a button called "Transform Pivot Point" and select "individual origins".
 
 Then we can press {{< kbd S >}} to scale the faces and we can tell it to scale it to zero by pressing {{< kbd numpad 0 >}} so Blender knows we want to scale it to zero. And voila, we have punk Suzanne.
 
-![](http://lesliemachine.se/tech-rse-sol//11_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/11_out_resized.gif){width=95%}
 
 ## Materials and colors
 
@@ -104,13 +104,13 @@ Let's make Suzanne more colorful, it's too gray and neutral. To the menu in the 
 
 We can color it all the same color or also select specific materials for specific faces. Let's start by coloring it with a brown diffuse color.
 
-![](http://lesliemachine.se/tech-rse-sol//12_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/12_out_resized.gif){width=95%}
 
 To preview how the world looks in render mode, click in the top right menu the render Viewport shading.
 
 In Edit mode, select faces like the internal part of the ears. Create a new material, make it pink, and then click the "assign" button to put it only in the selected faces. Do this with anything else you want, like the nose, eyes or mouth.
 
-![](http://lesliemachine.se/tech-rse-sol//13_out_resized2.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/13_out_resized2.gif){width=95%}
 
 ## Let there be light
 
@@ -118,11 +118,11 @@ Finally, in computer graphics, in order to have a picture, we need light. Blende
 
 Press {{< kbd shift >}}+{{< kbd A >}} and add a light > sun. Position it like any other object by grabbing with {{< kbd G >}}. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.
 
-![](http://lesliemachine.se/tech-rse-sol//15_out_resized2.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/15_out_resized2.gif){width=95%}
 
 Now that we're here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.
 
-![](http://lesliemachine.se/tech-rse-sol//14_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/14_out_resized.gif){width=95%}
 
 
 ## Say cheese!
@@ -131,7 +131,7 @@ Now it's time to take a picture! Which in computer graphics is called **renderin
 
 Now you are ready for your first digital picture, go to the render menu in the top and click "render image". You can save the resulting image. 
 
-![](http://lesliemachine.se/tech-rse-sol//16_out_resized.gif){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/16_out_resized.gif){width=95%}
 
 Make sure to share it with us on the slack so we can make a gallery here.
 
@@ -168,7 +168,7 @@ In Xenium, the `cells.csv.gz` file contains exactly this style.
 
 To create them in Blender as meshes we will use the following code in the scripting tab. 
 
-![](http://lesliemachine.se/tech-rse-sol//scripttab.png){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/scripttab.png){width=95%}
 
 ```python
 
@@ -267,7 +267,7 @@ Graphs are defined as nodes and edges. Nodes have coordinates, and we can plot t
 
 Imagine we have the following graph
 
-![](http://lesliemachine.se/tech-rse-sol//graphlittle.png){width=50%}
+![](http://lesliemachine.se/tech-rse-sol/graphlittle.png){width=50%}
 
 Then the tables would look like this.
 
@@ -343,4 +343,56 @@ mesh.update()
 
 In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid addon to draw the dots that represent classes (such as classified cells). The image shows selected edes in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.
 
-![](http://lesliemachine.se/tech-rse-sol//graph.png){width=95%}
+![](http://lesliemachine.se/tech-rse-sol/graph.png){width=95%}
+
+# More resources
+
+## Main website
+
+<span style="font-size: 200%;"> <a href="https://www.blender.org"> https://www.blender.org</a> </span>
+
+## 3D printing
+
+<a href="https://www.youtube.com/watch?v=JtDuLvJEIyQ&list=PLn3ukorJv4vsVYHvg3rjb6lAz1SvDi5xE" target="_blank"><img src="https://i.ytimg.com/vi/KXyw2ABsZCQ/maxresdefault.jpg" style="width: 100%;"></a>
+
+
+## CAD (computer assisted design)
+
+<a href="https://www.youtube.com/watch?v=CEG316zdd0k&list=PL7bmj43vr2FdKsaS8pT-3CDBOA1S7_U-S" target="_blank"><img src="https://i.ytimg.com/vi/0Sg3MN0fkb4/maxresdefault.jpg" style="width: 100%;"></a>
+
+## Open movies
+
+Blender studio has a purpose of making movies that are professional grade, everything is done using Blender and they serve as example for production of real films, all are open and can be watched at 
+
+<table style="width: 100%; border-collapse: collapse;">
+<tbody>
+<tr>
+   <td><a href="https://studio.blender.org/projects/singularity/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/8c/74/8c742e917d90f735b40a6f9e7c34b91e_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/wing-it/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/5a/7f/5a7f8d34e775b6697359b0b346768b00_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/charge/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/b5/70/b570f74834b1285d3c7d3b0d2931312f_s.webp" style="width: 100%;"></a></td></tr>
+<tr>
+   <td><a href="https://studio.blender.org/projects/sprite-fright/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/0e/ba/0ebafd023db8012c9cf45729aae3f0a3_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/coffee-run/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/e1/61/e16126cd776e07cb2df9984884302271_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/spring/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/b8/49/b84972d44b98524e033df9f2cb031c9d_s.webp" style="width: 100%;"></a></td></tr>
+<tr>
+   <td><a href="https://studio.blender.org/projects/hero/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/47/87/4787fcf7db77c2c751fb052d8313f9df_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/dailydweebs/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/44/3c/443cbbca1b63fd9091deb826ef4fd0f1_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/agent-327/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/9c/6c/9c6c0e494cc2603ec7c67c5ef8cf3e24_s.webp" style="width: 100%;"></a></td></tr>
+<tr>
+   <td><a href="https://studio.blender.org/projects/caminandes-3/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/fe/e4/fee4b4ac994a3876e7fd952988d9ccb9_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/glass-half/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/1d/4e/1d4ee689dd4c0d08ea7357041f040d6b_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/cosmos-laundromat/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/94/55/94559f6e2562bfc8498072adcfa56dfa_s.webp" style="width: 100%;"></a></td></tr>
+<tr>
+   <td><a href="https://studio.blender.org/projects/caminandes-2/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/68/96/68965b9b766cc7b45a50479bc622201e_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/tears-of-steel/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/a9/bc/a9bc1e6f8c771621f1dc7ed06cfbb11c_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/sintel/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/7b/1a/7b1ac6abc0c220d909b02a9c60500cf9_s.webp" style="width: 100%;"></a></td></tr>
+<tr>
+   <td><a href="https://studio.blender.org/projects/big-buck-bunny/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/bd/04/bd0431f8cc0400345741fa9e05036d7e_s.webp" style="width: 100%;"></a></td>
+   <td><a href="https://studio.blender.org/projects/elephants-dream/" target="_blank"><img src="https://studio.blender.org/files/public/thumbnail/18/4e/184ef8780b4449281ed1540a9821d94c_s.webp" style="width: 100%;"></a></td>
+</tr>
+</tbody>
+</table>
+
+## Examples of my art 
+
+![](http://lesliemachine.se/tech-rse-sol/mine2.png){width=95%}
