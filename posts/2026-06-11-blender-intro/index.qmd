@@ -14,7 +14,7 @@ Blender is an open-source free software to do *computer graphics* a.k.a CG, CGI,
 
 ::: callout-warning
 ## A mouse and numpad are recommended
-In Blender it is much more comfortable to use a mouse, we will need the middle mouse button and wheel {{< kbd MMB >}}, and left {{< kbd LMB >}}and right buttons {{< kbd RMB >}}. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.
+In Blender it is much more comfortable to use a mouse. We will need the middle mouse button and wheel {{< kbd MMB >}}, and left {{< kbd LMB >}} and right buttons {{< kbd RMB >}}. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.
 
 It is not mandatory, if you don't have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the {{< kbd MMB >}}.
 
