@@ -88,7 +88,7 @@
     "href": "posts/2026-06-11-blender-intro/index.html#say-cheese",
     "title": "Introduction to Blender",
     "section": "Say cheese!",
-    "text": "Say cheese!\nNow it’s time to take a picture! Which in computer graphics is called rendering. We are going to click in the camera and pres RRx2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with GG to move it around as well.\nNow you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.\nVideo\nMake sure to share it with us on the Slack #tech-group-rse-tools."
+    "text": "Say cheese!\nNow it’s time to take a picture! Which in computer graphics is called rendering. We are going to click in the camera and press RRx2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with GG to move it around as well.\nNow you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.\nVideo\nMake sure to share it with us on the Slack #tech-group-rse-tools."
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#main-website",
