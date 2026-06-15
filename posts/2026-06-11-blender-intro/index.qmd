@@ -141,7 +141,7 @@ Make sure to share it with us on the Slack `#tech-group-rse-tools`.
 
 Well you're in luck, because if your data has points, and polygons, (vertices and faces) then you can draw them in Blender and make use of their super powerful render engine.
 
-During our `#tech-group-rse` presentation I showed how I displayed Xenium cells and transcripts in Blender.
+During our `#tech-group-rse-tools` presentation I showed how I displayed Xenium cells and transcripts in Blender.
 
 If your cells or nuclei are descbribed by polygons, you can draw them in Blender
 
