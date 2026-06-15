@@ -341,7 +341,7 @@ mesh.update()
 
 ```
 
-In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid addon to draw the dots that represent classes (such as classified cells). The image shows selected edes in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.
+In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid add-on to draw the dots that represent classes (such as classified cells). The image shows selected edges in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.
 
 ![](images/graph.png){width=95%}
 
