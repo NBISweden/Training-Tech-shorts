@@ -259,7 +259,7 @@ for obj in cells_collection.objects:
 
 Since each cell is composed of points, they can become vertices in Blender, and we can fill them as a face for a mesh, then we can create the cells in blender, select them, color them, do anything we need, like render a figure for a paper.
 
-Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it become like *killing a mosquito with a canon*. If you really want to give it a shot, feel free to contact me :)
+Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it becomes like *killing a mosquito with a cannon*. If you really want to give it a shot, feel free to contact me :)
 
 # Drawing a graph
 
