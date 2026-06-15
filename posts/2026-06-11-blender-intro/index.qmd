@@ -114,7 +114,7 @@ In Edit mode, select faces like the internal part of the ears. Create a new mate
 
 ## Let there be light
 
-Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let's delete it and the sun!
+Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let's delete it and add the sun!
 
 Press {{< kbd shift >}}+{{< kbd A >}} and add a light > sun. Position it like any other object by grabbing with {{< kbd G >}}. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.
 
