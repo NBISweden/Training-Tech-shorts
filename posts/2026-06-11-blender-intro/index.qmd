@@ -143,7 +143,7 @@ Well you're in luck, because if your data has points, and polygons, (vertices an
 
 During our `#tech-group-rse-tools` presentation I showed how I displayed Xenium cells and transcripts in Blender.
 
-If your cells or nuclei are descbribed by polygons, you can draw them in Blender
+If your cells or nuclei are described by polygons, you can draw them in Blender
 
 Make sure you have a CSV that looks like this
 
