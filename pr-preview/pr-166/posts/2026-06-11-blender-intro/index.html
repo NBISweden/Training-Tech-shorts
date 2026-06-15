@@ -250,8 +250,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In Blender it is much more comfortable to use a mouse, we will need the middle mouse button and wheel <kbd title="MMB" aria-hidden="true">MMB</kbd><span class="visually-hidden">MMB</span>, and left <kbd title="LMB" aria-hidden="true">LMB</kbd><span class="visually-hidden">LMB</span>and right buttons <kbd title="RMB" aria-hidden="true">RMB</kbd><span class="visually-hidden">RMB</span>. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.</p>
-<p>It is not mandatory, if you don’t have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the <kbd title="MMB" aria-hidden="true">MMB</kbd><span class="visually-hidden">MMB</span>.</p>
+<p>In Blender it is much more comfortable to use a mouse. We will need the middle mouse button and wheel <kbd title="MMB" aria-hidden="true">MMB</kbd><span class="visually-hidden">MMB</span>, and left <kbd title="LMB" aria-hidden="true">LMB</kbd><span class="visually-hidden">LMB</span> and right buttons <kbd title="RMB" aria-hidden="true">RMB</kbd><span class="visually-hidden">RMB</span>. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.</p>
+<p>It is not mandatory. If you don’t have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the <kbd title="MMB" aria-hidden="true">MMB</kbd><span class="visually-hidden">MMB</span>.</p>
 <p>You can go to the <code>edit &gt; preferences</code> menu and in the input section select to emulate the mmb and/or the numpad.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -309,12 +309,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="enter-suzanne">Enter Suzanne</h2>
 <p>Blender has a mascot! A cute monkey called Suzanne. We can add Suzanne to the world by pressing <kbd title="shift" aria-hidden="true">shift</kbd><span class="visually-hidden">shift</span>+<kbd title="A" aria-hidden="true">A</kbd><span class="visually-hidden">A</span> and selecting the mesh menu and selecting Suzanne. Note that there are more objects, like cubes, spheres, cones and more. Never fear to explore!</p>
 <p><img src="http://lesliemachine.se/tech-rse-sol/8_out_resized.gif" class="img-fluid" style="width:95.0%"></p>
-<p>If you add something you don’t like anymore, you can delete it with teh <kbd title="delete" aria-hidden="true">delete</kbd><span class="visually-hidden">delete</span> key or with <kbd title="X" aria-hidden="true">X</kbd><span class="visually-hidden">X</span> or selecting in the list to the right and pressing <kbd title="delete" aria-hidden="true">delete</kbd><span class="visually-hidden">delete</span> or <kbd title="X" aria-hidden="true">X</kbd><span class="visually-hidden">X</span> or with <kbd title="RMB" aria-hidden="true">RMB</kbd><span class="visually-hidden">RMB</span> and selecting delete.</p>
+<p>If you add something you don’t like anymore, you can delete it with the <kbd title="delete" aria-hidden="true">delete</kbd><span class="visually-hidden">delete</span> key or with <kbd title="X" aria-hidden="true">X</kbd><span class="visually-hidden">X</span> or selecting in the list to the right and pressing <kbd title="delete" aria-hidden="true">delete</kbd><span class="visually-hidden">delete</span> or <kbd title="X" aria-hidden="true">X</kbd><span class="visually-hidden">X</span> or with <kbd title="RMB" aria-hidden="true">RMB</kbd><span class="visually-hidden">RMB</span> and selecting delete.</p>
 <p><img src="http://lesliemachine.se/tech-rse-sol/7_out_resized.gif" class="img-fluid" style="width:95.0%"></p>
 </section>
 <section id="punk-is-not-dead" class="level2">
 <h2 class="anchored" data-anchor-id="punk-is-not-dead">Punk is not dead</h2>
-<p>We are going to make Suzanne punk! To do that, we are going to select Suzanne and go into Edit mode. We are going to make sure to select faces (or all the points makeing the faces) of the head. To do this press <kbd title="shift" aria-hidden="true">shift</kbd><span class="visually-hidden">shift</span> and click on the multiple faces where we will make Suzanne’s punk hair.</p>
+<p>We are going to make Suzanne punk! To do that, we are going to select Suzanne and go into Edit mode. We are going to make sure to select faces (or all the points making the faces) of the head. To do this press <kbd title="shift" aria-hidden="true">shift</kbd><span class="visually-hidden">shift</span> and click on the multiple faces where we will make Suzanne’s punk hair.</p>
 <p><img src="http://lesliemachine.se/tech-rse-sol/9_out_resized.gif" class="img-fluid" style="width:95.0%"></p>
 <p>To elongate or extrude the hair upwards, we can press <kbd title="E" aria-hidden="true">E</kbd><span class="visually-hidden">E</span> but you may notice that all the faces grow lumped together. You can press <kbd title="ESC" aria-hidden="true">ESC</kbd><span class="visually-hidden">ESC</span> or <kbd title="RMB" aria-hidden="true">RMB</kbd><span class="visually-hidden">RMB</span> and then <kbd title="ctrl" aria-hidden="true">ctrl</kbd><span class="visually-hidden">ctrl</span>+<kbd title="Z" aria-hidden="true">Z</kbd><span class="visually-hidden">Z</span> to cancel the extrusion.</p>
 <p>Instead we are going to look at the menu to the left while we are in Edit mode, and look for the extrude option, we press and let the menu open to select “Extrude individual faces”. Now we can make each individual “punk hair” from the mesh faces in Suzanne’s head. We drag them as high up as we want then click <kbd title="LMB" aria-hidden="true">LMB</kbd><span class="visually-hidden">LMB</span>.</p>
@@ -570,7 +570,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </div>
-<p>I have a graph that has 100,000 nodes and millions of edges. Blender can draw it, but it becomes slow, and it’s unnecesary to plot everything, so I plot a percentage of it withthis code:</p>
+<p>I have a graph that has 100,000 nodes and millions of edges. Blender can draw it, but it becomes slow, and it’s unnecessary to plot everything, so I plot a percentage of it with this code:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bpy</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
