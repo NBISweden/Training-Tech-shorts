@@ -18,7 +18,7 @@ In Blender it is much more comfortable to use a mouse, we will need the middle m
 
 It is not mandatory, if you don't have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the {{< kbd MMB >}}.
 
-You can go to the `edit > preferences` menu and in the input section select to emmulate the mmb and/or the numpad.
+You can go to the `edit > preferences` menu and in the input section select to emulate the mmb and/or the numpad.
 
 ![emulate numpad mmb](http://lesliemachine.se/tech-rse-sol/emulatemmbnumpadh.jpg){width=95%}
 :::
