@@ -133,7 +133,7 @@ Now you are ready for your first digital picture, go to the render menu in the t
 
 ![](http://lesliemachine.se/tech-rse-sol/16_out_resized.gif){width=95%}
 
-Make sure to share it with us on the slack so we can make a gallery here.
+Make sure to share it with us on the Slack `#tech-group-rse-tools`.
 
 # Now let's get down to business
 
