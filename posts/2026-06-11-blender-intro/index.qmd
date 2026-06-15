@@ -82,7 +82,7 @@ If you add something you don't like anymore, you can delete it with teh {{< kbd 
 
 ## Punk is not dead
 
-We are going to make Suzanne punk! To do that, we are going to select Suzanne and go into Edit mode. We are going to make sure to select faces (or all the points makeing the faces) of the head. To do this press {{< kbd shift >}} and click on the multiple faces where we will make Suzanne's punk hair.
+We are going to make Suzanne punk! To do that, we are going to select Suzanne and go into Edit mode. We are going to make sure to select faces (or all the points making the faces) of the head. To do this press {{< kbd shift >}} and click on the multiple faces where we will make Suzanne's punk hair.
 
 ![](http://lesliemachine.se/tech-rse-sol/9_out_resized.gif){width=95%}
 
