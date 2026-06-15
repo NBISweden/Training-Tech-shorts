@@ -39,14 +39,14 @@
     "href": "posts/2026-06-11-blender-intro/index.html#get-a-feel-of-the-place",
     "title": "Introduction to Blender",
     "section": "Get a feel of the place",
-    "text": "Get a feel of the place\nIn computer graphics, we have a world, a camera, and a light source. We can pan, rotate, and zoom in the world, like walking or flying in a videogame.\nTo rotate around the world, we press and drag MMBMMB. To pan, we press shiftshift+MMBMMB and drag. To zoom in and out scroll MMBMMB.\n\nRotate\n\n\n\nPan\n\n\n\nZoom"
+    "text": "Get a feel of the place\nIn computer graphics, we have a world, a camera, and a light source. We can pan, rotate, and zoom in the world, like walking or flying in a videogame.\nTo rotate around the world, we press and drag MMBMMB. To pan, we press shiftshift+MMBMMB and drag. To zoom in and out scroll MMBMMB.\n\nRotate\nVideo\n\n\nPan\nVideo\n\n\nZoom\nVideo"
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#objects-and-meshes",
     "href": "posts/2026-06-11-blender-intro/index.html#objects-and-meshes",
     "title": "Introduction to Blender",
     "section": "Objects and meshes",
-    "text": "Objects and meshes\nIn Blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.\n\nTo move, scale and rotate an object in Blender we use: - SS for scale - RR for rotate - GG for grabbing the object\n\nScale\n\n\n\nRotate\n\n\n\nGrab\n\nIf we like the change, we click LMBLMB, if we don’t like the change and we want to cancel, we press RMBRMB or ESCESC."
+    "text": "Objects and meshes\nIn Blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.\n\nTo move, scale and rotate an object in Blender we use: - SS for scale - RR for rotate - GG for grabbing the object\n\nScale\nVideo\n\n\nRotate\nVideo\n\n\nGrab\nVideo\nIf we like the change, we click LMBLMB, if we don’t like the change and we want to cancel, we press RMBRMB or ESCESC."
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#object-and-edit-modes",
@@ -60,35 +60,35 @@
     "href": "posts/2026-06-11-blender-intro/index.html#enter-suzanne",
     "title": "Introduction to Blender",
     "section": "Enter Suzanne",
-    "text": "Enter Suzanne\nBlender has a mascot! A cute monkey called Suzanne. We can add Suzanne to the world by pressing shiftshift+AA and selecting the mesh menu and selecting Suzanne. Note that there are more objects, like cubes, spheres, cones and more. Never fear to explore!\n\nIf you add something you don’t like anymore, you can delete it with the deletedelete key or with XX or selecting in the list to the right and pressing deletedelete or XX or with RMBRMB and selecting delete."
+    "text": "Enter Suzanne\nBlender has a mascot! A cute monkey called Suzanne. We can add Suzanne to the world by pressing shiftshift+AA and selecting the mesh menu and selecting Suzanne. Note that there are more objects, like cubes, spheres, cones and more. Never fear to explore!\nVideo\nIf you add something you don’t like anymore, you can delete it with the deletedelete key or with XX or selecting in the list to the right and pressing deletedelete or XX or with RMBRMB and selecting delete.\nVideo"
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#punk-is-not-dead",
     "href": "posts/2026-06-11-blender-intro/index.html#punk-is-not-dead",
     "title": "Introduction to Blender",
     "section": "Punk is not dead",
-    "text": "Punk is not dead\nWe are going to make Suzanne punk! To do that, we are going to select Suzanne and go into Edit mode. We are going to make sure to select faces (or all the points making the faces) of the head. To do this press shiftshift and click on the multiple faces where we will make Suzanne’s punk hair.\n\nTo elongate or extrude the hair upwards, we can press EE but you may notice that all the faces grow lumped together. You can press ESCESC or RMBRMB and then ctrlctrl+ZZ to cancel the extrusion.\nInstead we are going to look at the menu to the left while we are in Edit mode, and look for the extrude option, we press and let the menu open to select “Extrude individual faces”. Now we can make each individual “punk hair” from the mesh faces in Suzanne’s head. We drag them as high up as we want then click LMBLMB.\n\nNow we need to scale, but the same way we extruded each face individually, we will scale each face independently. To do so we go to the top middle menu and select a button called “Transform Pivot Point” and select “individual origins”.\nThen we can press SS to scale the faces and we can tell it to scale it to zero by pressing numpadnumpad so Blender knows we want to scale it to zero. And voila, we have punk Suzanne."
+    "text": "Punk is not dead\nWe are going to make Suzanne punk! To do that, we are going to select Suzanne and go into Edit mode. We are going to make sure to select faces (or all the points making the faces) of the head. To do this press shiftshift and click on the multiple faces where we will make Suzanne’s punk hair.\nVideo\nTo elongate or extrude the hair upwards, we can press EE but you may notice that all the faces grow lumped together. You can press ESCESC or RMBRMB and then ctrlctrl+ZZ to cancel the extrusion.\nInstead we are going to look at the menu to the left while we are in Edit mode, and look for the extrude option, we press and let the menu open to select “Extrude individual faces”. Now we can make each individual “punk hair” from the mesh faces in Suzanne’s head. We drag them as high up as we want then click LMBLMB.\nVideo\nNow we need to scale, but the same way we extruded each face individually, we will scale each face independently. To do so we go to the top middle menu and select a button called “Transform Pivot Point” and select “individual origins”.\nThen we can press SS to scale the faces and we can tell it to scale it to zero by pressing numpadnumpad so Blender knows we want to scale it to zero. And voila, we have punk Suzanne.\nVideo"
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#materials-and-colors",
     "href": "posts/2026-06-11-blender-intro/index.html#materials-and-colors",
     "title": "Introduction to Blender",
     "section": "Materials and colors",
-    "text": "Materials and colors\nLet’s make Suzanne more colorful, it’s too gray and neutral. To the menu in the right, we can see the materials tab. This tab allows us to give Suzanne a new color.\nWe can color it all the same color or also select specific materials for specific faces. Let’s start by coloring it with a brown diffuse color.\n\nTo preview how the world looks in render mode, click in the top right menu the render Viewport shading.\nIn Edit mode, select faces like the internal part of the ears. Create a new material, make it pink, and then click the “assign” button to put it only in the selected faces. Do this with anything else you want, like the nose, eyes or mouth."
+    "text": "Materials and colors\nLet’s make Suzanne more colorful, it’s too gray and neutral. To the menu in the right, we can see the materials tab. This tab allows us to give Suzanne a new color.\nWe can color it all the same color or also select specific materials for specific faces. Let’s start by coloring it with a brown diffuse color.\nVideo\nTo preview how the world looks in render mode, click in the top right menu the render Viewport shading.\nIn Edit mode, select faces like the internal part of the ears. Create a new material, make it pink, and then click the “assign” button to put it only in the selected faces. Do this with anything else you want, like the nose, eyes or mouth.\nVideo"
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#let-there-be-light",
     "href": "posts/2026-06-11-blender-intro/index.html#let-there-be-light",
     "title": "Introduction to Blender",
     "section": "Let there be light",
-    "text": "Let there be light\nFinally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and the sun!\nPress shiftshift+AA and add a light &gt; sun. Position it like any other object by grabbing with GG. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.\n\nNow that we’re here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue."
+    "text": "Let there be light\nFinally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and the sun!\nPress shiftshift+AA and add a light &gt; sun. Position it like any other object by grabbing with GG. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.\nVideo\nNow that we’re here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.\nVideo"
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#say-cheese",
     "href": "posts/2026-06-11-blender-intro/index.html#say-cheese",
     "title": "Introduction to Blender",
     "section": "Say cheese!",
-    "text": "Say cheese!\nNow it’s time to take a picture! Which in computer graphics is called rendering. We are going to click in the camera and pres RRx2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with GG to move it around as well.\nNow you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.\n\nMake sure to share it with us on the Slack #tech-group-rse-tools."
+    "text": "Say cheese!\nNow it’s time to take a picture! Which in computer graphics is called rendering. We are going to click in the camera and pres RRx2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with GG to move it around as well.\nNow you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.\nVideo\nMake sure to share it with us on the Slack #tech-group-rse-tools."
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#main-website",
