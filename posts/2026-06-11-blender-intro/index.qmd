@@ -42,7 +42,7 @@ To rotate around the world, we press and drag {{< kbd MMB >}}. To pan, we press 
 
 ## Objects and meshes
 
-In blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.
+In Blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.
 
 ![](http://lesliemachine.se/tech-rse-sol/vef.png){width=95%}
 
