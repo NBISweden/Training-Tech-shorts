@@ -32,7 +32,7 @@
     "href": "posts/2026-06-11-blender-intro/index.html",
     "title": "Introduction to Blender",
     "section": "",
-    "text": "Blender is an open-source free software to do computer graphics a.k.a CG, CGI, VFX. Their slogan is the freedom to create and you can do anything you want with it, 2D, 3D, scientific visualization, data visualization, art, movies, video editing, architectural visualization, 3D printing etc. On top of that you can use python inside of it.\n\n\n\n\n\n\nWarningA mouse and numpad are recommended\n\n\n\nIn Blender it is much more comfortable to use a mouse. We will need the middle mouse button and wheel MMBMMB, and left LMBLMB and right buttons RMBRMB. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.\nIt is not mandatory. If you don’t have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the MMBMMB.\nYou can go to the edit &gt; preferences menu and in the input section select to emulate the mmb and/or the numpad.\n\n\n\nemulate numpad mmb"
+    "text": "Blender is an open-source free software to do computer graphics a.k.a CG, CGI, VFX. Their slogan is the freedom to create and you can do anything you want with it, 2D, 3D, scientific visualization, data visualization, art, movies, video editing, architectural visualization, 3D printing etc. On top of that you can use python inside of it.\nFor this #tech-group-rse-tools presentation we used the latest Blender version 5.1.2. However everything we see here works exactly the same since version 2.8.0 which came out in 2020. The Blender team tries its best to be backwards compatible.\n\n\n\n\n\n\nWarningA mouse and numpad are recommended\n\n\n\nIn Blender it is much more comfortable to use a mouse. We will need the middle mouse button and wheel MMBMMB, and left LMBLMB and right buttons RMBRMB. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.\nIt is not mandatory. If you don’t have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the MMBMMB.\nYou can go to the edit &gt; preferences menu and in the input section select to emulate the mmb and/or the numpad.\n\n\n\nemulate numpad mmb"
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#get-a-feel-of-the-place",
@@ -81,35 +81,14 @@
     "href": "posts/2026-06-11-blender-intro/index.html#let-there-be-light",
     "title": "Introduction to Blender",
     "section": "Let there be light",
-    "text": "Let there be light\nFinally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and add the sun!\nPress shiftshift+AA and add a light &gt; sun. Position it like any other object by grabbing with GG. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.\nVideo\nNow that we’re here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.\nVideo"
+    "text": "Let there be light\nFinally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and the sun!\nPress shiftshift+AA and add a light &gt; sun. Position it like any other object by grabbing with GG. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.\nVideo\nNow that we’re here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.\nVideo"
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#say-cheese",
     "href": "posts/2026-06-11-blender-intro/index.html#say-cheese",
     "title": "Introduction to Blender",
     "section": "Say cheese!",
-    "text": "Say cheese!\nNow it’s time to take a picture! Which in computer graphics is called rendering. We are going to click in the camera and press RRx2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with GG to move it around as well.\nNow you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.\nVideo\nMake sure to share it with us on the Slack #tech-group-rse-tools."
-  },
-  {
-    "objectID": "posts/2026-06-11-blender-intro/index.html#main-website",
-    "href": "posts/2026-06-11-blender-intro/index.html#main-website",
-    "title": "Introduction to Blender",
-    "section": "Main website",
-    "text": "Main website\n  https://www.blender.org"
-  },
-  {
-    "objectID": "posts/2026-06-11-blender-intro/index.html#d-printing",
-    "href": "posts/2026-06-11-blender-intro/index.html#d-printing",
-    "title": "Introduction to Blender",
-    "section": "3D printing",
-    "text": "3D printing"
-  },
-  {
-    "objectID": "posts/2026-06-11-blender-intro/index.html#cad-computer-assisted-design",
-    "href": "posts/2026-06-11-blender-intro/index.html#cad-computer-assisted-design",
-    "title": "Introduction to Blender",
-    "section": "CAD (computer assisted design)",
-    "text": "CAD (computer assisted design)"
+    "text": "Say cheese!\nNow it’s time to take a picture! Which in computer graphics is called rendering. We are going to click in the camera and pres RRx2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with GG to move it around as well.\nNow you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.\nVideo\nMake sure to share it with us on the Slack #tech-group-rse-tools."
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#open-movies",

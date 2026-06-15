@@ -240,6 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>Blender is an open-source free software to do <em>computer graphics</em> a.k.a CG, CGI, VFX. Their slogan is <strong>the freedom to create</strong> and you can do anything you want with it, 2D, 3D, scientific visualization, data visualization, art, movies, video editing, architectural visualization, 3D printing etc. On top of that you can use python inside of it.</p>
+<p>For this <code>#tech-group-rse-tools</code> presentation we used the latest Blender version <strong>5.1.2.</strong> However everything we see here works exactly the same since version 2.8.0 which came out in 2020. The Blender team tries its best to be backwards compatible.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -334,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="let-there-be-light" class="level2">
 <h2 class="anchored" data-anchor-id="let-there-be-light">Let there be light</h2>
-<p>Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and add the sun!</p>
+<p>Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and the sun!</p>
 <p>Press <kbd title="shift" aria-hidden="true">shift</kbd><span class="visually-hidden">shift</span>+<kbd title="A" aria-hidden="true">A</kbd><span class="visually-hidden">A</span> and add a light &gt; sun. Position it like any other object by grabbing with <kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span>. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.</p>
 <p><video src="images/15_video.mp4" class="img-fluid" style="width:95.0%" controls=""><a href="images/15_video.mp4">Video</a></video></p>
 <p>Now that we’re here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.</p>
@@ -342,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="say-cheese" class="level2">
 <h2 class="anchored" data-anchor-id="say-cheese">Say cheese!</h2>
-<p>Now it’s time to take a picture! Which in computer graphics is called <strong>rendering</strong>. We are going to click in the camera and press <kbd title="R" aria-hidden="true">R</kbd><span class="visually-hidden">R</span>x2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with <kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span> to move it around as well.</p>
+<p>Now it’s time to take a picture! Which in computer graphics is called <strong>rendering</strong>. We are going to click in the camera and pres <kbd title="R" aria-hidden="true">R</kbd><span class="visually-hidden">R</span>x2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with <kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span> to move it around as well.</p>
 <p>Now you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.</p>
 <p><video src="images/16_video.mp4" class="img-fluid" style="width:95.0%" controls=""><a href="images/16_video.mp4">Video</a></video></p>
 <p>Make sure to share it with us on the Slack <code>#tech-group-rse-tools</code>.</p>
@@ -360,9 +361,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <caption>Example cell or nuclei polygons</caption>
 <thead>
 <tr class="header">
-<th>polygon ID</th>
-<th>X</th>
-<th>Y</th>
+<th>label_id</th>
+<th>vertex_x</th>
+<th>vertex_y</th>
 </tr>
 </thead>
 <tbody>
@@ -432,7 +433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>cells_collection <span class="op">=</span> bpy.data.collections.new(<span class="st">"cells"</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>bpy.context.scene.collection.children.link(cells_collection)</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to your CSV file</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to your CSV filennnn</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>csv_path <span class="op">=</span> <span class="st">"/home/USER/Documents/NBIS/Xenium/percell.csv"</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV and group vertices by label_id ------------------------------------------</span></span>
@@ -496,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update the object's location to the world centroid</span></span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>        obj.location <span class="op">=</span> obj.matrix_world.inverted() <span class="op">@</span> world_centroid</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Since each cell is composed of points, they can become vertices in Blender, and we can fill them as a face for a mesh, then we can create the cells in blender, select them, color them, do anything we need, like render a figure for a paper.</p>
-<p>Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it becomes like <em>killing a mosquito with a cannon</em>. If you really want to give it a shot, feel free to contact me :)</p>
+<p>Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it become like <em>killing a mosquito with a canon</em>. If you really want to give it a shot, feel free to contact me :)</p>
 </section>
 <section id="drawing-a-graph" class="level1">
 <h1>Drawing a graph</h1>
@@ -509,8 +510,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th>node ID</th>
-<th>X</th>
-<th>Y</th>
+<th>ux</th>
+<th>uy</th>
+<th>uz</th>
 </tr>
 </thead>
 <tbody>
@@ -518,26 +520,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>1</td>
 <td>314.4454</td>
 <td>31.38746</td>
+<td>1.0</td>
 </tr>
 <tr class="even">
 <td>2</td>
 <td>376.7727</td>
 <td>76.99980</td>
+<td>1.0</td>
 </tr>
 <tr class="odd">
 <td>3</td>
 <td>393.1768</td>
 <td>148.4373</td>
+<td>1.0</td>
 </tr>
 <tr class="even">
 <td>4</td>
 <td>312.7435</td>
 <td>152.9352</td>
+<td>1.0</td>
 </tr>
 <tr class="odd">
 <td>5</td>
 <td>272.2623</td>
 <td>95.25605</td>
+<td>1.0</td>
 </tr>
 </tbody>
 </table>
@@ -616,22 +623,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Add vertices and edges</span></span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>mesh.from_pydata(new_coords, new_edges, [])</span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>mesh.update()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid add-on to draw the dots that represent classes (such as classified cells). The image shows selected edges in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.</p>
+<p>In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid addon to draw the dots that represent classes (such as classified cells). The image shows selected edes in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.</p>
 <p><img src="images/graph.png" class="img-fluid" style="width:95.0%"></p>
+</section>
+<section id="summary-and-further-resources" class="level1">
+<h1>Summary and further resources</h1>
+<p>We hope you got a glimpse into the world of Blender and computer graphics. Everything in the 3D world is made of points, edges and faces, so if your data has any of these, you will be able to render it in Blender.</p>
+<p>Blender is a powerful suite. It might be, however, overkill for 2D scatterplots, you can still use matplotlib, seaborn, pandas, or ggplot for R. It is still worth mentioning Blender has a dedicated 2D space as well that uses vectors, like inkscape or Illustrator. In terms of Data Visualization, the true power of Blender can be appreciated when plotting big data that is spatially resolved, with millions of points, such as polygons representing cells and dots for transcripts, which can be done extremely fast in the 3D viewport, as we showed in the previous examples.</p>
+<p>In the world of scientific visualization, Blender is king of free and open-source software. Anything related to simulations with realistic physics, smoke, fire, liquid simulation, geology, flock movements, the sky is the limit.</p>
+<p>Here we add some more ideas of what NBIS and scientists could do with Blender in their RSE toolbelt:</p>
+<section id="structural-biology-macromolecules" class="level3">
+<h3 class="anchored" data-anchor-id="structural-biology-macromolecules">Structural Biology &amp; Macromolecules</h3>
+<p>For those working on structural prediction and molecular dynamics simulations.</p>
+<ul>
+<li><strong>Data Type:</strong> Atomic coordinates and molecular trajectories.</li>
+<li><strong>Blender Application:</strong> 3D meshes of proteins, DNA, and RNA to animate molecular folding, ligand binding, and structural conformation changes.</li>
+<li><strong>Pipeline:</strong> Use the <strong><a href="https://extensions.blender.org/add-ons/molecularnodes/">MolecularNodes</a></strong> add-on to import <code>.pdb</code> or <code>.mmCIF</code> files directly into Blender’s Geometry Nodes.</li>
+</ul>
+</section>
+<section id="bioimage-informatics-cryo-em" class="level3">
+<h3 class="anchored" data-anchor-id="bioimage-informatics-cryo-em">Bioimage Informatics &amp; Cryo-EM</h3>
+<p>For with high-resolution imaging data from confocal microscopes, FIB-SEM, and Cryo-EM.</p>
+<ul>
+<li><strong>Data Type:</strong> Multidimensional segmented meshes and volumetric image stacks.</li>
+<li><strong>Blender Application:</strong> Cinematic fly-throughs of cellular ultrastructures, organelle interactions, and 4D time-series cell division.</li>
+<li><strong>Pipeline:</strong> Use the <strong><a href="https://extensions.blender.org/add-ons/microscopynodes/">Microscopy nodes</a></strong>. Or import segmented surface meshes (STL/OBJ) or use volumetric rendering techniques to map multi-channel TIFF stacks using Blender’s Cycles engine.</li>
+</ul>
+</section>
+<section id="medical-imaging-mri-ct" class="level3">
+<h3 class="anchored" data-anchor-id="medical-imaging-mri-ct">Medical Imaging (MRI &amp; CT)</h3>
+<p>For clinical research requiring advanced tissue and organ segmentation.</p>
+<ul>
+<li><strong>Data Type:</strong> DICOM or NIfTI (<code>.nii</code>) volumetric scans.</li>
+<li><strong>Blender Application:</strong> Hyper-realistic 3D reconstruction of anatomical structures, bone-to-soft-tissue opacity mappings, and surgical planning animations.</li>
+<li><strong>Pipeline:</strong> Convert DICOM/NIfTI data into 3D meshes via software like 3D Slicer or OsiriX, or load the volumes directly into Blender using specialized add-ons like <strong><a href="https://bbbn19.gumroad.com/l/qhldu">Scan visualizer</a></strong>.</li>
+</ul>
+</section>
+<section id="spatial-transcriptomics-tissue-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-transcriptomics-tissue-mapping">Spatial Transcriptomics &amp; Tissue Mapping</h3>
+<p>For visualization of gene expression mapped to physical tissue coordinates.</p>
+<ul>
+<li><strong>Data Type:</strong> Coordinate matrices (X, Y, Z) paired with high-dimensional expression counts (<code>.h5ad</code>, CSV).</li>
+<li><strong>Blender Application:</strong> 3D scatter plots of thousands of single cells, color-coded by gene expression, superimposed over organ or tumor tissue models.</li>
+<li><strong>Pipeline:</strong> Use Blender’s Python API (<code>bpy</code>) to read coordinate CSV files and procedurally instance spheres or particle systems.</li>
+</ul>
+</section>
+<section id="networks-phylogenetics" class="level3">
+<h3 class="anchored" data-anchor-id="networks-phylogenetics">Networks &amp; Phylogenetics</h3>
+<p>To visualize complex evolutionary trees and systems biology interaction networks.</p>
+<ul>
+<li><strong>Data Type:</strong> Newick tree formats or graph matrices.</li>
+<li><strong>Blender Application:</strong> Immersive, multi-layered 3D evolutionary trees and glowing, animated metabolic network graphs.</li>
+<li><strong>Pipeline:</strong> Pre-compute the 3D network coordinates in Python (using NetworkX), then script Blender to generate the connecting curves and node meshes.</li>
+</ul>
+</section>
 </section>
 <section id="more-resources" class="level1">
 <h1>More resources</h1>
-<section id="main-website" class="level2">
-<h2 class="anchored" data-anchor-id="main-website">Main website</h2>
-<p><span style="font-size: 200%;"> <a href="https://www.blender.org"> https://www.blender.org</a> </span></p>
-</section>
-<section id="d-printing" class="level2">
-<h2 class="anchored" data-anchor-id="d-printing">3D printing</h2>
-<p><a href="https://www.youtube.com/watch?v=JtDuLvJEIyQ&amp;list=PLn3ukorJv4vsVYHvg3rjb6lAz1SvDi5xE" target="_blank"><img src="https://i.ytimg.com/vi/KXyw2ABsZCQ/maxresdefault.jpg" style="width: 100%;"></a></p>
-</section>
-<section id="cad-computer-assisted-design" class="level2">
-<h2 class="anchored" data-anchor-id="cad-computer-assisted-design">CAD (computer assisted design)</h2>
-<p><a href="https://www.youtube.com/watch?v=CEG316zdd0k&amp;list=PL7bmj43vr2FdKsaS8pT-3CDBOA1S7_U-S" target="_blank"><img src="https://i.ytimg.com/vi/0Sg3MN0fkb4/maxresdefault.jpg" style="width: 100%;"></a></p>
+<section id="main-website" class="level3">
+<h3 class="anchored" data-anchor-id="main-website">Main website</h3>
+<p><span style="font-size: 150%;"> <a href="https://www.blender.org"> https://www.blender.org</a> </span></p>
+<p>Some people were enthusiastic about other hobbies such as 3D printing or more highly detailed CAD so here are some resources.</p>
+<p><a href="https://www.youtube.com/watch?v=JtDuLvJEIyQ&amp;list=PLn3ukorJv4vsVYHvg3rjb6lAz1SvDi5xE%22">Video list for 3D prining</a></p>
+<p><a href="https://www.youtube.com/watch?v=CEG316zdd0k&amp;list=PL7bmj43vr2FdKsaS8pT-3CDBOA1S7_U-S%22">CAD (computer assisted design)</a></p>
 </section>
 <section id="open-movies" class="level2">
 <h2 class="anchored" data-anchor-id="open-movies">Open movies</h2>
