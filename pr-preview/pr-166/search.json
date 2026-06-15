@@ -46,7 +46,7 @@
     "href": "posts/2026-06-11-blender-intro/index.html#objects-and-meshes",
     "title": "Introduction to Blender",
     "section": "Objects and meshes",
-    "text": "Objects and meshes\nIn blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.\n\nTo move, scale and rotate an object in Blender we use: - SS for scale - RR for rotate - GG for grabbing the object\n\nScale\n\n\n\nRotate\n\n\n\nGrab\n\nIf we like the change, we click LMBLMB, if we don’t like the change and we want to cancel, we press RMBRMB or ESCESC."
+    "text": "Objects and meshes\nIn Blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.\n\nTo move, scale and rotate an object in Blender we use: - SS for scale - RR for rotate - GG for grabbing the object\n\nScale\n\n\n\nRotate\n\n\n\nGrab\n\nIf we like the change, we click LMBLMB, if we don’t like the change and we want to cancel, we press RMBRMB or ESCESC."
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#object-and-edit-modes",
@@ -88,7 +88,7 @@
     "href": "posts/2026-06-11-blender-intro/index.html#say-cheese",
     "title": "Introduction to Blender",
     "section": "Say cheese!",
-    "text": "Say cheese!\nNow it’s time to take a picture! Which in computer graphics is called rendering. We are going to click in the camera and pres RRx2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with GG to move it around as well.\nNow you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.\n\nMake sure to share it with us on the slack so we can make a gallery here."
+    "text": "Say cheese!\nNow it’s time to take a picture! Which in computer graphics is called rendering. We are going to click in the camera and pres RRx2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with GG to move it around as well.\nNow you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.\n\nMake sure to share it with us on the Slack #tech-group-rse-tools."
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#main-website",
