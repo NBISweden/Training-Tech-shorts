@@ -81,7 +81,7 @@
     "href": "posts/2026-06-11-blender-intro/index.html#let-there-be-light",
     "title": "Introduction to Blender",
     "section": "Let there be light",
-    "text": "Let there be light\nFinally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and the sun!\nPress shiftshift+AA and add a light &gt; sun. Position it like any other object by grabbing with GG. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.\nVideo\nNow that we’re here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.\nVideo"
+    "text": "Let there be light\nFinally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and add the sun!\nPress shiftshift+AA and add a light &gt; sun. Position it like any other object by grabbing with GG. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.\nVideo\nNow that we’re here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.\nVideo"
   },
   {
     "objectID": "posts/2026-06-11-blender-intro/index.html#say-cheese",
