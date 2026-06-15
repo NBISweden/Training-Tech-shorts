@@ -76,7 +76,7 @@ Blender has a mascot! A cute monkey called Suzanne. We can add Suzanne to the wo
 
 ![](http://lesliemachine.se/tech-rse-sol/8_out_resized.gif){width=95%}
 
-If you add something you don't like anymore, you can delete it with teh {{< kbd delete >}} key or with {{< kbd X >}} or selecting in the list to the right and pressing {{< kbd delete >}} or {{< kbd X >}} or with {{< kbd RMB >}} and selecting delete.
+If you add something you don't like anymore, you can delete it with the {{< kbd delete >}} key or with {{< kbd X >}} or selecting in the list to the right and pressing {{< kbd delete >}} or {{< kbd X >}} or with {{< kbd RMB >}} and selecting delete.
 
 ![](http://lesliemachine.se/tech-rse-sol/7_out_resized.gif){width=95%}
 
