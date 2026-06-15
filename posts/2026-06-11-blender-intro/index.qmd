@@ -191,7 +191,7 @@ if "cells" in bpy.data.collections:
 cells_collection = bpy.data.collections.new("cells")
 bpy.context.scene.collection.children.link(cells_collection)
 
-# Path to your CSV filennnn
+# Path to your CSV file
 csv_path = "/home/USER/Documents/NBIS/Xenium/percell.csv"
 
 # Read CSV and group vertices by label_id ------------------------------------------
