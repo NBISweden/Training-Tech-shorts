@@ -290,7 +290,7 @@ Then the tables would look like this.
 | 5  | 4    |
 :::
 
-I have a graph that has 100,000 nodes and millions of edges. Blender can draw it, but it becomes slow, and it's unnecesary to plot everything, so I plot a percentage of it withthis code:
+I have a graph that has 100,000 nodes and millions of edges. Blender can draw it, but it becomes slow, and it's unnecessary to plot everything, so I plot a percentage of it with this code:
 
 ```python
 
