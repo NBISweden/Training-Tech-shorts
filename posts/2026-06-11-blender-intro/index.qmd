@@ -12,7 +12,7 @@ categories: [ "Blender", "b3d", "visualization" , "computer graphics"]
 
 Blender is an open-source free software to do *computer graphics* a.k.a CG, CGI, VFX. Their slogan is **the freedom to create** and you can do anything you want with it, 2D, 3D, scientific visualization, data visualization, art, movies, video editing, architectural visualization, 3D printing etc. On top of that you can use python inside of it.
 
-For this `#tech-group-rse-tools` presentation we used the latest Blender version **5.1.2.** However everything we see here works exactly the same since version 2.8.0 which came out in 2020. The Blender team tries its best to be backwards compatible.
+For this `#tech-group-rse-tools` presentation we used the latest Blender version **5.1.2.**, however everything we see here works exactly the same since version 2.8.0 which came out in 2020. The Blender team tries its best to be backwards compatible.
 
 ::: callout-tip
 
@@ -135,7 +135,7 @@ In Edit mode, select faces like the internal part of the ears. Create a new mate
 
 ## Let there be light
 
-Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let's delete it and the sun!
+Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let's delete it and add the sun!
 
 Press {{< kbd shift >}}+{{< kbd A >}} and add a light > sun. Position it like any other object by grabbing with {{< kbd G >}}. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.
 
@@ -148,7 +148,7 @@ Now that we're here, the world is too gray as well. We are going to go to the wo
 
 ## Say cheese!
 
-Now it's time to take a picture! Which in computer graphics is called **rendering**. We are going to click in the camera and pres {{< kbd R >}}x2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with {{< kbd G >}} to move it around as well.
+Now it's time to take a picture! Which in computer graphics is called **rendering**. We are going to click in the camera and press {{< kbd R >}}x2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with {{< kbd G >}} to move it around as well.
 
 Now you are ready for your first digital picture, go to the render menu in the top and click "render image". You can save the resulting image. 
 
@@ -212,7 +212,7 @@ if "cells" in bpy.data.collections:
 cells_collection = bpy.data.collections.new("cells")
 bpy.context.scene.collection.children.link(cells_collection)
 
-# Path to your CSV filennnn
+# Path to your CSV file
 csv_path = "/home/USER/Documents/NBIS/Xenium/percell.csv"
 
 # Read CSV and group vertices by label_id ------------------------------------------
@@ -280,7 +280,7 @@ for obj in cells_collection.objects:
 
 Since each cell is composed of points, they can become vertices in Blender, and we can fill them as a face for a mesh, then we can create the cells in blender, select them, color them, do anything we need, like render a figure for a paper.
 
-Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it become like *killing a mosquito with a canon*. If you really want to give it a shot, feel free to contact me :)
+Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it become like *killing a mosquito with a cannon*. If you really want to give it a shot, feel free to contact me :)
 
 # Drawing a graph
 
@@ -362,7 +362,7 @@ mesh.update()
 
 ```
 
-In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid addon to draw the dots that represent classes (such as classified cells). The image shows selected edes in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.
+In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid add-on to draw the dots that represent classes (such as classified cells). The image shows selected edges in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.
 
 ![](images/graph.png){width=95%}
 
