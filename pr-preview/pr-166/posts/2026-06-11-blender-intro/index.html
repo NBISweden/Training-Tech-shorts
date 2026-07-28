@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>Blender is an open-source free software to do <em>computer graphics</em> a.k.a CG, CGI, VFX. Their slogan is <strong>the freedom to create</strong> and you can do anything you want with it, 2D, 3D, scientific visualization, data visualization, art, movies, video editing, architectural visualization, 3D printing etc. On top of that you can use python inside of it.</p>
-<p>For this <code>#tech-group-rse-tools</code> presentation we used the latest Blender version <strong>5.1.2.</strong> However everything we see here works exactly the same since version 2.8.0 which came out in 2020. The Blender team tries its best to be backwards compatible.</p>
+<p>For this <code>#tech-group-rse-tools</code> presentation we used the latest Blender version <strong>5.1.2.</strong>, however everything we see here works exactly the same since version 2.8.0 which came out in 2020. The Blender team tries its best to be backwards compatible.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -367,7 +367,7 @@ Tip
 </section>
 <section id="let-there-be-light" class="level2">
 <h2 class="anchored" data-anchor-id="let-there-be-light">Let there be light</h2>
-<p>Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and the sun!</p>
+<p>Finally, in computer graphics, in order to have a picture, we need light. Blender adds one by default but it is too weak, let’s delete it and add the sun!</p>
 <p>Press <kbd title="shift" aria-hidden="true">shift</kbd><span class="visually-hidden">shift</span>+<kbd title="A" aria-hidden="true">A</kbd><span class="visually-hidden">A</span> and add a light &gt; sun. Position it like any other object by grabbing with <kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span>. Use the little yellow dot to rotate the sun and point to towards Suzanne. In the light menu to the right, change the color to a light yellow. Increase the strength to a value you like.</p>
 <p><video src="images/15_video.mp4" class="img-fluid" style="width:95.0%" controls=""><a href="images/15_video.mp4">Video</a></video></p>
 <p>Now that we’re here, the world is too gray as well. We are going to go to the world tab, and change the color to a very light blue.</p>
@@ -375,7 +375,7 @@ Tip
 </section>
 <section id="say-cheese" class="level2">
 <h2 class="anchored" data-anchor-id="say-cheese">Say cheese!</h2>
-<p>Now it’s time to take a picture! Which in computer graphics is called <strong>rendering</strong>. We are going to click in the camera and pres <kbd title="R" aria-hidden="true">R</kbd><span class="visually-hidden">R</span>x2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with <kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span> to move it around as well.</p>
+<p>Now it’s time to take a picture! Which in computer graphics is called <strong>rendering</strong>. We are going to click in the camera and press <kbd title="R" aria-hidden="true">R</kbd><span class="visually-hidden">R</span>x2 to rotate the camera in an easier way and try to point it to Suzanne. Grab it with <kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span> to move it around as well.</p>
 <p>Now you are ready for your first digital picture, go to the render menu in the top and click “render image”. You can save the resulting image.</p>
 <p><video src="images/16_video.mp4" class="img-fluid" style="width:95.0%" controls=""><a href="images/16_video.mp4">Video</a></video></p>
 <p>Make sure to share it with us on the Slack <code>#tech-group-rse-tools</code>.</p>
@@ -465,7 +465,7 @@ Tip
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>cells_collection <span class="op">=</span> bpy.data.collections.new(<span class="st">"cells"</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>bpy.context.scene.collection.children.link(cells_collection)</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to your CSV filennnn</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to your CSV file</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>csv_path <span class="op">=</span> <span class="st">"/home/USER/Documents/NBIS/Xenium/percell.csv"</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV and group vertices by label_id ------------------------------------------</span></span>
@@ -529,7 +529,7 @@ Tip
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Update the object's location to the world centroid</span></span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>        obj.location <span class="op">=</span> obj.matrix_world.inverted() <span class="op">@</span> world_centroid</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Since each cell is composed of points, they can become vertices in Blender, and we can fill them as a face for a mesh, then we can create the cells in blender, select them, color them, do anything we need, like render a figure for a paper.</p>
-<p>Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it become like <em>killing a mosquito with a canon</em>. If you really want to give it a shot, feel free to contact me :)</p>
+<p>Unless you are familiar and comfortable with Blender, I would continue to use R or Python to visualize things. Using Blender without being comfortable then it become like <em>killing a mosquito with a cannon</em>. If you really want to give it a shot, feel free to contact me :)</p>
 </section>
 <section id="drawing-a-graph" class="level1">
 <h1>Drawing a graph</h1>
@@ -655,7 +655,7 @@ Tip
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Add vertices and edges</span></span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>mesh.from_pydata(new_coords, new_edges, [])</span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>mesh.update()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid addon to draw the dots that represent classes (such as classified cells). The image shows selected edes in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.</p>
+<p>In the image, the black lines are the edges. The vertices are seen only as black dots, so I use an additional paid add-on to draw the dots that represent classes (such as classified cells). The image shows selected edges in yellow to see how much confusion there is from one class to another. That purple/lila cluster is dense and nicely separated from the rest, so this is a way to evaluate how well separated are the clusters in a model.</p>
 <p><img src="images/graph.png" class="img-fluid" style="width:95.0%"></p>
 </section>
 <section id="summary-and-further-resources" class="level1">
