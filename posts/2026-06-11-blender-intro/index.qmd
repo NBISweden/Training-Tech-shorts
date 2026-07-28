@@ -14,13 +14,31 @@ Blender is an open-source free software to do *computer graphics* a.k.a CG, CGI,
 
 For this `#tech-group-rse-tools` presentation we used the latest Blender version **5.1.2.** However everything we see here works exactly the same since version 2.8.0 which came out in 2020. The Blender team tries its best to be backwards compatible.
 
+::: callout-tip
+
+These keys and buttons are used throughout this article.  
+
+Mouse:
+
+- {{< kbd LMB >}}: Left Mouse Button  
+- {{< kbd MMB >}}: Middle Mouse Button  
+- {{< kbd RMB >}}: Right Mouse Button  
+
+Keyboard:
+
+{{< kbd ESC >}} {{< kbd shift >}} {{< kbd delete >}} {{< kbd numpad >}} 
+
+{{< kbd A >}} {{< kbd E >}} {{< kbd G >}} {{< kbd R >}} {{< kbd S >}} {{< kbd X >}} {{< kbd Z >}} 
+:::  
+
+
 ::: callout-warning
 ## A mouse and numpad are recommended
 In Blender it is much more comfortable to use a mouse. We will need the middle mouse button and wheel {{< kbd MMB >}}, and left {{< kbd LMB >}} and right buttons {{< kbd RMB >}}. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.
 
 It is not mandatory. If you don't have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the {{< kbd MMB >}}.
 
-You can go to the `edit > preferences` menu and in the input section select to emulate the mmb and/or the numpad.
+You can go to the `edit > preferences` menu and in the input section select to emulate the {{< kbd MMB >}} and/or the numpad.
 
 ![emulate numpad mmb](images/emulatemmbnumpadh.jpg){width=95%}
 :::
@@ -49,6 +67,7 @@ In Blender, the objects we can create are called meshes, and they will always be
 ![](images/vef.png){width=95%}
 
 To move, scale and rotate an object in Blender we use:
+
 - {{< kbd S >}} for scale
 - {{< kbd R >}} for rotate
 - {{< kbd G >}} for grabbing the object
@@ -365,7 +384,7 @@ For those working on structural prediction and molecular dynamics simulations.
  - **Pipeline:** Use the **[MolecularNodes](https://extensions.blender.org/add-ons/molecularnodes/)** add-on to import `.pdb` or `.mmCIF` files directly into Blender's Geometry Nodes.
 
 ### Bioimage Informatics & Cryo-EM
-For with high-resolution imaging data from confocal microscopes, FIB-SEM, and Cryo-EM.
+For those working with high-resolution imaging data from confocal microscopes, FIB-SEM, and Cryo-EM. 
 
  - **Data Type:** Multidimensional segmented meshes and volumetric image stacks.
  - **Blender Application:** Cinematic fly-throughs of cellular ultrastructures, organelle interactions, and 4D time-series cell division.
@@ -401,9 +420,9 @@ To visualize complex evolutionary trees and systems biology interaction networks
 
 Some people were enthusiastic about other hobbies such as 3D printing or more highly detailed CAD so here are some resources.
 
-[Video list for 3D prining](https://www.youtube.com/watch?v=JtDuLvJEIyQ&list=PLn3ukorJv4vsVYHvg3rjb6lAz1SvDi5xE")
+[Video list for 3D prining](https://www.youtube.com/watch?v=JtDuLvJEIyQ&list=PLn3ukorJv4vsVYHvg3rjb6lAz1SvDi5xE)
 
-[CAD (computer assisted design)](https://www.youtube.com/watch?v=CEG316zdd0k&list=PL7bmj43vr2FdKsaS8pT-3CDBOA1S7_U-S")
+[CAD (computer assisted design)](https://www.youtube.com/watch?v=CEG316zdd0k&list=PL7bmj43vr2FdKsaS8pT-3CDBOA1S7_U-S)
 
 ## Open movies
 
