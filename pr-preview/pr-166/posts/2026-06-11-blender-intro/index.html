@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -76,10 +79,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-c91e717a3d2047503c4109d3ed380c2d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c6b776b75dc6e2ac09cea91d69bb1775.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
 <link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -219,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">June 15, 2026</p>
+        <p class="date-modified">July 28, 2026</p>
       </div>
     </div>
       
@@ -241,6 +244,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Introduction</h1>
 <p>Blender is an open-source free software to do <em>computer graphics</em> a.k.a CG, CGI, VFX. Their slogan is <strong>the freedom to create</strong> and you can do anything you want with it, 2D, 3D, scientific visualization, data visualization, art, movies, video editing, architectural visualization, 3D printing etc. On top of that you can use python inside of it.</p>
 <p>For this <code>#tech-group-rse-tools</code> presentation we used the latest Blender version <strong>5.1.2.</strong> However everything we see here works exactly the same since version 2.8.0 which came out in 2020. The Blender team tries its best to be backwards compatible.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These keys and buttons are used throughout this article.</p>
+<p>Mouse:</p>
+<ul>
+<li><kbd title="LMB" aria-hidden="true">LMB</kbd><span class="visually-hidden">LMB</span>: Left Mouse Button<br>
+</li>
+<li><kbd title="MMB" aria-hidden="true">MMB</kbd><span class="visually-hidden">MMB</span>: Middle Mouse Button<br>
+</li>
+<li><kbd title="RMB" aria-hidden="true">RMB</kbd><span class="visually-hidden">RMB</span>: Right Mouse Button</li>
+</ul>
+<p>Keyboard:</p>
+<p><kbd title="ESC" aria-hidden="true">ESC</kbd><span class="visually-hidden">ESC</span> <kbd title="shift" aria-hidden="true">shift</kbd><span class="visually-hidden">shift</span> <kbd title="delete" aria-hidden="true">delete</kbd><span class="visually-hidden">delete</span> <kbd title="numpad" aria-hidden="true">numpad</kbd><span class="visually-hidden">numpad</span></p>
+<p><kbd title="A" aria-hidden="true">A</kbd><span class="visually-hidden">A</span> <kbd title="E" aria-hidden="true">E</kbd><span class="visually-hidden">E</span> <kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span> <kbd title="R" aria-hidden="true">R</kbd><span class="visually-hidden">R</span> <kbd title="S" aria-hidden="true">S</kbd><span class="visually-hidden">S</span> <kbd title="X" aria-hidden="true">X</kbd><span class="visually-hidden">X</span> <kbd title="Z" aria-hidden="true">Z</kbd><span class="visually-hidden">Z</span></p>
+</div>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -253,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>In Blender it is much more comfortable to use a mouse. We will need the middle mouse button and wheel <kbd title="MMB" aria-hidden="true">MMB</kbd><span class="visually-hidden">MMB</span>, and left <kbd title="LMB" aria-hidden="true">LMB</kbd><span class="visually-hidden">LMB</span> and right buttons <kbd title="RMB" aria-hidden="true">RMB</kbd><span class="visually-hidden">RMB</span>. It also differentiates between numpad numbers and the row of numbers above the typical QWERTY keyboard.</p>
 <p>It is not mandatory. If you don’t have a mouse or numpad you can ask Blender to use the number row as a numpad and to emulate a click of the <kbd title="MMB" aria-hidden="true">MMB</kbd><span class="visually-hidden">MMB</span>.</p>
-<p>You can go to the <code>edit &gt; preferences</code> menu and in the input section select to emulate the mmb and/or the numpad.</p>
+<p>You can go to the <code>edit &gt; preferences</code> menu and in the input section select to emulate the <kbd title="MMB" aria-hidden="true">MMB</kbd><span class="visually-hidden">MMB</span> and/or the numpad.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/emulatemmbnumpadh.jpg" class="img-fluid figure-img" style="width:95.0%"></p>
@@ -286,7 +313,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="objects-and-meshes">Objects and meshes</h2>
 <p>In Blender, the objects we can create are called meshes, and they will always be composed of: vertices, edges and faces. Vertices are 3D points with x,y and z coordinates. Edges are pairs of vertices, and faces are lists of vertices.</p>
 <p><img src="images/vef.png" class="img-fluid" style="width:95.0%"></p>
-<p>To move, scale and rotate an object in Blender we use: - <kbd title="S" aria-hidden="true">S</kbd><span class="visually-hidden">S</span> for scale - <kbd title="R" aria-hidden="true">R</kbd><span class="visually-hidden">R</span> for rotate - <kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span> for grabbing the object</p>
+<p>To move, scale and rotate an object in Blender we use:</p>
+<ul>
+<li><kbd title="S" aria-hidden="true">S</kbd><span class="visually-hidden">S</span> for scale</li>
+<li><kbd title="R" aria-hidden="true">R</kbd><span class="visually-hidden">R</span> for rotate</li>
+<li><kbd title="G" aria-hidden="true">G</kbd><span class="visually-hidden">G</span> for grabbing the object</li>
+</ul>
 <section id="scale" class="level3">
 <h3 class="anchored" data-anchor-id="scale">Scale</h3>
 <p><video src="images/4_video.mp4" class="img-fluid" style="width:95.0%" controls=""><a href="images/4_video.mp4">Video</a></video></p>
@@ -643,7 +675,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="bioimage-informatics-cryo-em" class="level3">
 <h3 class="anchored" data-anchor-id="bioimage-informatics-cryo-em">Bioimage Informatics &amp; Cryo-EM</h3>
-<p>For with high-resolution imaging data from confocal microscopes, FIB-SEM, and Cryo-EM.</p>
+<p>For those working with high-resolution imaging data from confocal microscopes, FIB-SEM, and Cryo-EM.</p>
 <ul>
 <li><strong>Data Type:</strong> Multidimensional segmented meshes and volumetric image stacks.</li>
 <li><strong>Blender Application:</strong> Cinematic fly-throughs of cellular ultrastructures, organelle interactions, and 4D time-series cell division.</li>
@@ -684,8 +716,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="main-website">Main website</h3>
 <p><span style="font-size: 150%;"> <a href="https://www.blender.org"> https://www.blender.org</a> </span></p>
 <p>Some people were enthusiastic about other hobbies such as 3D printing or more highly detailed CAD so here are some resources.</p>
-<p><a href="https://www.youtube.com/watch?v=JtDuLvJEIyQ&amp;list=PLn3ukorJv4vsVYHvg3rjb6lAz1SvDi5xE%22">Video list for 3D prining</a></p>
-<p><a href="https://www.youtube.com/watch?v=CEG316zdd0k&amp;list=PL7bmj43vr2FdKsaS8pT-3CDBOA1S7_U-S%22">CAD (computer assisted design)</a></p>
+<p><a href="https://www.youtube.com/watch?v=JtDuLvJEIyQ&amp;list=PLn3ukorJv4vsVYHvg3rjb6lAz1SvDi5xE">Video list for 3D prining</a></p>
+<p><a href="https://www.youtube.com/watch?v=CEG316zdd0k&amp;list=PL7bmj43vr2FdKsaS8pT-3CDBOA1S7_U-S">CAD (computer assisted design)</a></p>
 </section>
 <section id="open-movies" class="level2">
 <h2 class="anchored" data-anchor-id="open-movies">Open movies</h2>
