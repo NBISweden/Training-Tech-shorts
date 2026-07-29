@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2026-06-11-blender-intro/index.html",
       "/posts/2026-05-28-nf-core-modules/index.html",
       "/posts/2026-04-23-configure-and-make/index.html",
       "/posts/2026-04-09-working-reproducibly/index.html",
