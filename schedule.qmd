@@ -4,7 +4,7 @@ Dates for each walkthrough, listed in reverse chronological order.
 Meetings are over Zoom, Thursdays at 10.00. Meeting links are
 provided in NBIS Slack `#tech-group-rse-tools`.
 
-- 2026 TBD  : Cormac - dotfile management
+- 2026/08/27: Cormac - dotfile management
 - 2026/06/25: _Break for Summer_
 - 2026/06/11: Leslie - Introduction to Blender
 - 2026/05/28: Erik - Using nf-core modules
