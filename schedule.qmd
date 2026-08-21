@@ -4,7 +4,8 @@ Dates for each walkthrough, listed in reverse chronological order.
 Meetings are over Zoom, Thursdays at 10.00. Meeting links are
 provided in NBIS Slack `#tech-group-rse-tools`.
 
-- 2026/08/27: Cormac - dotfile management
+- 2026/09/10: Maxime - nf-test: A Nextflow testing framework
+- 2026/08/27: Cormac - Dotfile management: Configuring your developer environment.
 - 2026/06/25: _Break for Summer_
 - 2026/06/11: Leslie - Introduction to Blender
 - 2026/05/28: Erik - Using nf-core modules
