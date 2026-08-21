@@ -7,7 +7,7 @@ provided in NBIS Slack `#tech-group-rse-tools`.
 - 2026/12/10: Open
 - 2026/11/26: Open
 - 2026/11/12: Open
-- 2026/10/22: Open
+- 2026/10/22: Jennifer - Targets: A workflow manager in R.
 - 2026/10/08: Open
 - 2026/09/24: Open
 - 2026/09/10: Maxime - nf-test: A Nextflow testing framework
