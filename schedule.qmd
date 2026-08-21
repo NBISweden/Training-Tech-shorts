@@ -4,6 +4,12 @@ Dates for each walkthrough, listed in reverse chronological order.
 Meetings are over Zoom, Thursdays at 10.00. Meeting links are
 provided in NBIS Slack `#tech-group-rse-tools`.
 
+- 2026/12/10: Open
+- 2026/11/26: Open
+- 2026/11/12: Open
+- 2026/10/22: Open
+- 2026/10/08: Open
+- 2026/09/24: Open
 - 2026/09/10: Maxime - nf-test: A Nextflow testing framework
 - 2026/08/27: Cormac - Dotfile management: Configuring your developer environment.
 - 2026/06/25: _Break for Summer_
