@@ -1,6 +1,6 @@
 # Writing a blog post
 
-This guide explains how to write up a blog post following a walkthrough. For information on suggesting topics or volunteering to teach, see [CONTRIBUTING](contributing.qmd).
+This guide explains how to write up a blog post following a walkthrough. For information on suggesting topics or volunteering to teach, see [CONTRIBUTING](contributing.qmd). For the writing-style rules and review checklist applied to drafts (and used by AI coding agents helping with a write-up), see [AGENTS.md](https://github.com/NBISweden/Training-Tech-shorts/blob/main/AGENTS.md) in the repository root.
 
 ## File Structure
 
@@ -32,12 +32,19 @@ Blog posts are written in [Quarto Markdown](https://quarto.org/docs/authoring/ma
    title: "Introduction to Docker"
    date: 2024-01-15
    date-modified: last-modified
-   author: 
+   draft: true
+   author:
      - Author Name
      - Coauthor Name
    categories: [ "Docker", "Containers", "Package management" ]
    ---
    ```
+
+   `draft: true` keeps a post out of the published site's listings while
+   it's still being written or hasn't been scheduled yet — Quarto still
+   renders it in `quarto preview`. Remove the `draft` field once the
+   session has actually been given and the content and date are settled,
+   not just once the writing is finished.
 
 4. **Write your content** using Markdown. Include:
 
@@ -90,10 +97,12 @@ Blog posts are written in [Quarto Markdown](https://quarto.org/docs/authoring/ma
 
 ## Writing Tips
 
-- Keep it concise and focused (~30 minute read)
+- Keep it concise and focused — a post supports a ~30-40 minute talk with a live demo, it's not a reference manual for the tool
+- A post should stand alone: don't assume the reader has seen another still-unpublished walkthrough, and don't forward-reference content later in the same post
 - Use code blocks with syntax highlighting and [code annotation](https://quarto.org/docs/authoring/code-annotation.html)
 - Include practical examples
 - Add links to relevant documentation
 - Consider adding a "Prerequisites" section if needed
 - **See existing posts** in the `posts/` directory for examples and inspiration
 - Check the [Quarto documentation](https://quarto.org/docs/authoring/markdown-basics.html) for advanced formatting options
+- See [AGENTS.md](https://github.com/NBISweden/Training-Tech-shorts/blob/main/AGENTS.md) for the fuller style and review checklist (prose style, scope, and independence rules with their reasoning)
