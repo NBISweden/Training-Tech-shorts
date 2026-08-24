@@ -9,7 +9,7 @@ provided in NBIS Slack `#tech-group-rse-tools`.
 - 2026/11/12: Leslie - Data Visualisation for Publication using Python
 - 2026/10/22: Jennifer - Targets: A workflow manager in R
 - 2026/10/08: Open
-- 2026/09/24: Open
+- 2026/09/24: John - An introduction to the Snakemake workflow manager. 
 - 2026/09/10: Maxime - nf-test: A Nextflow testing framework
 - 2026/08/27: Cormac - Dotfile management: Configuring your developer environment
 - 2026/06/25: _Break for Summer_
