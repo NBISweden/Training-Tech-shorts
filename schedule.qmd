@@ -5,7 +5,7 @@ Meetings are over Zoom, Thursdays at 10.00. Meeting links are
 provided in NBIS Slack `#tech-group-rse-tools`.
 
 - 2026/12/10: Open
-- 2026/11/26: Open
+- 2026/11/26: Henrike - Best practices in Software Development
 - 2026/11/12: Leslie - Data Visualisation for Publication using Python
 - 2026/10/22: Jennifer - Targets: A workflow manager in R
 - 2026/10/08: By signup - 5 minute tool tip showcase
