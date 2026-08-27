@@ -8,7 +8,6 @@ categories:
   - "Git"
   - "Version control"
   - "Terminal"
-code-annotations: hover
 ---
 
 ## Introduction
@@ -25,7 +24,7 @@ Note, this is not the only method to do this. Another popular method is [GNU Sto
 
 Remember that some configuration files contain sensitive information. Never track secrets, SSH keys, passwords, etc.
 
-As a second layer, you can choose to keep your dotfiles repository private on GitHub, though then you need to deal with git authentication when cloning on a new machine. 
+As a second layer, you can choose to keep your dotfiles repository private on GitHub, though then you need to deal with git authentication when cloning on a new machine.
 
 ## What are dotfiles?
 
@@ -75,7 +74,7 @@ $ cat .git/config
         logallrefupdates = true
 ```
 
-The `.git` directory contains the version control history of every committed file. It documents branches and tags that can reference specific commits. 
+The `.git` directory contains the version control history of every committed file. It documents branches and tags that can reference specific commits.
 
 The files and directories you actually see and edit in the project root are called the **working tree**. You edit, stage, and commit them, writing new objects to the `.git` directory.
 
@@ -250,7 +249,7 @@ $ git init --bare .dotfiles
 # Create an alias to work with the bare repository
 # This saves typing --git-dir and --work-tree all the time
 # This alias replaces git, specifically for managing dotfiles
-$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+$ alias dotfiles='$(command -v git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Ensures that untracked files are not shown in the status output
 $ dotfiles config --local status.showUntrackedFiles no
@@ -269,14 +268,14 @@ $ dotfiles push -u origin main
 
 ```bash
 $ git clone --bare https://github.com/<user>/dotfiles.git "$HOME/.dotfiles"
-$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+$ alias dotfiles='$(command -v git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 $ dotfiles config --local status.showUntrackedFiles no
 
 # Backup files that would be overwritten by checkout
 $ mkdir -p "$HOME/.dotfiles_backup"
 $ git --git-dir="$HOME/.dotfiles/" read-tree HEAD
-$ BACKUP_FILES=$(/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" status -uno --porcelain | awk '{print $2}')
-$ for FILE in "$BACKUP_FILES"; do
+$ BACKUP_FILES=$(git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" status -uno --porcelain | awk '{print $2}')
+$ while IFS= read -r FILE; do
     if [ -e "$FILE" ]; then
         DIR_PATH=$(dirname "$FILE")
         BASENAME=$(basename "$FILE")
@@ -284,7 +283,7 @@ $ for FILE in "$BACKUP_FILES"; do
         mv "$FILE" "$HOME/.dotfiles_backup/$DIR_PATH/$BASENAME"
         echo "Moved $FILE to $HOME/.dotfiles_backup/$DIR_PATH/$BASENAME"
     fi
-done
+done <<< "$BACKUP_FILES"
 
 # Checkout the repository to get the working tree files
 $ git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" checkout --force
@@ -316,7 +315,7 @@ shopt -s checkwinsize
 
 - Save the dotfiles alias itself into `.aliases`
 
-- Track a `bin` directory in the dotfiles repository with helper scripts to automate setup or syncing tasks, e.g.:
+- Track a `bin` directory in the dotfiles repository with helper scripts to automate setup or syncing tasks. The file list below is one example setup, not a template — replace it with your own tracked files:
 
 ```bash
 #!/usr/bin/env bash
@@ -325,7 +324,9 @@ shopt -s checkwinsize
 
 cd "$HOME"
 
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add \
+GIT="$(command -v git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+$GIT add \
         .aliases \
         .bash_logout \
         .bash_profile \
@@ -344,10 +345,9 @@ cd "$HOME"
         bin/dotfiles_sync.sh \
         README.md
 
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit \
-        -m "Auto sync dotfiles repository"
+$GIT commit -m "Auto sync dotfiles repository"
 
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push
+$GIT push
 ```
 
 - Manual steps for setting up a new machine can also be automated using a bootstrap script.
