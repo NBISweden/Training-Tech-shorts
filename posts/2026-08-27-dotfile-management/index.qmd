@@ -1,0 +1,353 @@
+---
+title: "Dotfile Management with Git"
+date: 2026-08-27
+date-modified: last-modified
+author:
+  - Cormac Kinsella
+categories:
+  - "Git"
+  - "Version control"
+  - "Terminal"
+code-annotations: hover
+---
+
+## Introduction
+
+Working in a terminal environment, we inevitably accumulate configuration files in the `$HOME` directory.
+
+When setting up on a new machine or HPC system — or regularly switching between them — having a reliable way to apply and synchronise those settings saves significant time. Manual file transfer is tedious, and if the original machine is lost, untracked configuration files go with it.
+
+This walkthrough will cover managing configuration files with a bare git repository. This makes configuring a new computer or HPC system seamless, and means you'll never lose your settings.
+
+Note, this is not the only method to do this. Another popular method is [GNU Stow](https://www.gnu.org/software/stow/).
+
+## Note on security
+
+Remember that some configuration files contain sensitive information. Never track secrets, SSH keys, passwords, etc.
+
+As a second layer, you can choose to keep your dotfiles repository private on GitHub, though then you need to deal with git authentication when cloning on a new machine. 
+
+## What are dotfiles?
+
+Dotfiles are hidden files on a Unix-like system. They are ignored by `ls` (unless the `-a` flag is used).
+
+```bash
+$ ls
+file.txt
+
+$ ls -a
+.  ..  .dotfile  file.txt
+```
+
+Configuration files are often stored as dotfiles across the file system. User configuration dotfiles usually live in the `$HOME` directory, common examples are `.aliases`, `.bashrc`, `.functions`, and `.gitconfig`.
+
+## What issue do we want to solve?
+
+Most of us are comfortable with version control using `git`, so why does this need a dedicated walkthrough?
+
+The issue is that we want to track files in the `$HOME` directory, and turning this into a regular `git` repository has several potential pitfalls.
+
+We will go through these pitfalls and show how to avoid them with a bare git repository.
+
+## What a regular git repository (bare = false) looks like
+
+Running `git init` in a directory creates a `.git` directory at the root of the project.
+
+```bash
+$ cd ~/sandbox/my_project
+$ git init
+Initialized empty Git repository in /home/corma/sandbox/my_project/.git/
+
+$ ls -1 .git
+HEAD
+config
+description
+hooks
+info
+objects
+refs
+
+$ cat .git/config
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+```
+
+The `.git` directory contains the version control history of every committed file. It documents branches and tags that can reference specific commits. 
+
+The files and directories you actually see and edit in the project root are called the **working tree**. You edit, stage, and commit them, writing new objects to the `.git` directory.
+
+When you check out a specific commit or change branches, git replaces the working tree files on disk to match the repository state for that specific commit.
+
+::: {.callout-note}
+### The key difference between bare and non-bare git repositories:
+
+A non-bare git repository implicitly assumes it has a checked out working tree, located in the parent directory of `.git`. A bare git repository does not make this assumption. It is just the git directory on its own.
+:::
+
+## Implicit discovery of the git directory
+
+No matter where you are in your file system, `git` will implicitly look for the `.git` directory in your current directory, and then in any of the parent directories. We can run the following commands to see what `git` finds by default:
+
+```bash
+$ cd ~/sandbox/my_project/subdir
+# Shows the location of the discovered .git directory
+$ git rev-parse --git-dir
+/home/corma/sandbox/my_project/.git
+# Shows the root of the assumed working tree
+$ git rev-parse --show-toplevel
+/home/corma/sandbox/my_project
+
+$ cd $HOME
+$ git rev-parse --show-toplevel
+fatal: not a git repository (or any of the parent directories): .git
+$ git rev-parse --git-dir
+fatal: not a git repository (or any of the parent directories): .git
+```
+
+We can also be explicit about the location of the `.git` directory and/or the working tree using the `--git-dir` and `--work-tree` options. Then there is no implicit lookup, for example:
+
+```bash
+$ cd $HOME
+$ git --git-dir=/home/corma/sandbox/my_project/.git --work-tree=/home/corma/sandbox/my_project status
+On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+```
+
+## Why we don't use a regular git repository for dotfiles
+
+Imagine you initialize a git repository in your `$HOME` directory to track dotfiles. For the sake of the example, we will discover all untracked files.
+
+```bash
+$ cd $HOME
+$ git init
+Initialized empty Git repository in /home/corma/.git/
+$ git status -u
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .aliases
+        .apptainer/cache/blob/blobs/sha256/01007420e9b005dc14a8c8b0f996a2ad8e0d4af6c3d01e62f123be14fe48eec7
+        .apptainer/cache/blob/blobs/sha256/0140ab6cbadf0c17caec310565fc0cb794fb29213ad7760932b246ea39b53068
+
+        ... # Many thousands more files discovered...
+
+It took 8.64 seconds to enumerate untracked files.
+See 'git help status' for information on how to improve this.
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+Discovery of untracked files is not what we want. We can configure git to ignore untracked files.
+
+```bash
+$ git config status.showUntrackedFiles no
+$ git status
+On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+```
+
+But this is only a cosmetic fix - a deeper problem is that `git` will still implicitly find the `$HOME/.git/` directory from any subdirectory that lacks it's own git repository.
+
+```bash
+$ cd /home/corma/sandbox/
+$ mkdir new_project && cd new_project
+$ git rev-parse --git-dir
+/home/corma/.git
+```
+
+This has potential negative consequences.
+
+If you mistakenly think you are working in a project repository (e.g., you forgot to initialize one, or are in the wrong working directory), the commands will affect the `$HOME/.git` repository instead.
+
+This could leads to wiping out entire directories of files by misuse of `git clean`, or making accidental commits to the wrong repository.
+
+We could break implicit discovery by renaming the `.git` directory in `$HOME` to something else, e.g., `.dotfiles`. Then our git command would look something like:
+
+```bash
+$ git --git-dir=/home/corma/.dotfiles --work-tree=/home/corma add .aliases
+```
+
+We're getting closer to what a solution should do, but this setup also has an issue. Even though we now **must be explicit** (via `--git-dir`) about the location of the git directory (as implicit discovery won't work), `git` will still assume the repo has a working tree. If this is not specified with `--work-tree`, it will default to using the current directory, leading to confusing and unintended behaviour.
+
+For example:
+
+```bash
+$ cd /home/corma/sandbox/test
+$ git init
+
+# Implicit discovery of .git and assumption of the working tree from there
+$ git status
+On branch main
+
+# Implicit discovery broken by renaming .git
+$ mv .git/ .no_discovery/
+$ git status
+fatal: not a git repository (or any of the parent directories): .git
+
+# We set the git-dir explicitly, and it assumes the working tree is the current directory
+$ touch file.txt
+$ git --git-dir=/home/corma/sandbox/test/.no_discovery status
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .no_discovery/
+        file.txt
+
+# If we change location, it will now miss the files (it still assumes the working tree is current directory)
+$ mkdir subdir && cd subdir
+$ git --git-dir=/home/corma/sandbox/test/.no_discovery status
+On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+```
+
+## A bare git repository never assumes the working tree
+
+A bare git repository consists only of the git directory, and has no implicit working tree.
+
+```bash
+$ git init --bare .dotfiles
+$ ls -1 .dotfiles/
+HEAD
+config
+description
+hooks
+info
+objects
+refs
+```
+
+Any git operation that needs a working tree will fail without one.
+
+```bash
+$ git --git-dir .dotfiles/ status
+fatal: this operation must be run in a work tree
+```
+By putting together these incremental improvements, we have a good solution.
+
+## Git workflow for setting up the dotfiles repository
+
+```bash
+# Go to $HOME
+$ cd
+
+# Create a bare git repository in $HOME/.dotfiles
+$ git init --bare .dotfiles
+
+# Create an alias to work with the bare repository
+# This saves typing --git-dir and --work-tree all the time
+# This alias replaces git, specifically for managing dotfiles
+$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# Ensures that untracked files are not shown in the status output
+$ dotfiles config --local status.showUntrackedFiles no
+
+# Add, commit
+$ echo "an alias" > .aliases
+$ dotfiles add .aliases
+$ dotfiles commit -m "Add .aliases"
+
+# Create GitHub repo and set it as the remote origin
+$ gh repo create
+$ dotfiles push -u origin main
+```
+
+## Workflow for importing dotfiles to another machine
+
+```bash
+$ git clone --bare https://github.com/<user>/dotfiles.git "$HOME/.dotfiles"
+$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+$ dotfiles config --local status.showUntrackedFiles no
+
+# Backup files that would be overwritten by checkout
+$ mkdir -p "$HOME/.dotfiles_backup"
+$ git --git-dir="$HOME/.dotfiles/" read-tree HEAD
+$ BACKUP_FILES=$(/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" status -uno --porcelain | awk '{print $2}')
+$ for FILE in "$BACKUP_FILES"; do
+    if [ -e "$FILE" ]; then
+        DIR_PATH=$(dirname "$FILE")
+        BASENAME=$(basename "$FILE")
+        mkdir -p "$HOME/.dotfiles_backup/$DIR_PATH"
+        mv "$FILE" "$HOME/.dotfiles_backup/$DIR_PATH/$BASENAME"
+        echo "Moved $FILE to $HOME/.dotfiles_backup/$DIR_PATH/$BASENAME"
+    fi
+done
+
+# Checkout the repository to get the working tree files
+$ git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" checkout --force
+
+# Restart the shell or source to ensure the new configuration is loaded
+$ source "$HOME/.bash_profile"
+```
+
+## Some further tips and tricks
+
+- Organise your dotfiles into particular categories. The name doesn't matter as long as they are correctly sourced by e.g.: `.bashrc`.
+
+```bash
+[ -z "$PS1" ] && return
+
+# Source dotfiles
+
+for file in $HOME/.{aliases,bash_prompt,cluster_config,exports,functions,path,tool_extension}
+        do
+                [ -r "$file" ] && [ -f "$file" ] && source "$file"
+        done
+unset file
+
+# Shell options
+
+shopt -s histappend
+shopt -s checkwinsize
+```
+
+- Save the dotfiles alias itself into `.aliases`
+
+- Track a `bin` directory in the dotfiles repository with helper scripts to automate setup or syncing tasks, e.g.:
+
+```bash
+#!/usr/bin/env bash
+
+# This script pushes changes to the dotfiles repository
+
+cd "$HOME"
+
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME add \
+        .aliases \
+        .bash_logout \
+        .bash_profile \
+        .bash_prompt \
+        .bashrc \
+        .cluster_config \
+        .exports \
+        .functions \
+        .gitconfig \
+        .hushlogin \
+        .path \
+        .wslconfig \
+        .tool_extension \
+        bin/bootstrap.sh \
+        bin/bootstrap_cluster.sh \
+        bin/dotfiles_sync.sh \
+        README.md
+
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME commit \
+        -m "Auto sync dotfiles repository"
+
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push
+```
+
+- Manual steps for setting up a new machine can also be automated using a bootstrap script.
