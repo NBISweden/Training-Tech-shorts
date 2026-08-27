@@ -162,6 +162,16 @@ self-review, since check 10 above specifically requires it:
 Then run a **scope pass** over the result specifically for checks 1, 4,
 5, and 12.
 
+### Posting review comments
+
+Standing rule 1 (terse prose) [[10]](#references) applies to PR review
+comments and descriptions, not just post prose. State the finding or
+recommendation directly. Don't narrate your own reasoning process or
+explain why you're mentioning something — that's meta-commentary the
+reader doesn't need to act on the finding. If new context changes a
+finding, edit the existing comment in place instead of posting a
+follow-up correction.
+
 ## References
 
 1. Cognitive load theory (Sweller) — working memory capacity is limited,
