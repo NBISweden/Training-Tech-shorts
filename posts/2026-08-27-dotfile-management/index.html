@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an alias to work with the bare repository</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This saves typing --git-dir and --work-tree all the time</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># This alias replaces git, specifically for managing dotfiles</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> alias dotfiles=<span class="st">'/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> alias dotfiles=<span class="st">'$(command -v git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</span></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures that untracked files are not shown in the status output</span></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> dotfiles config <span class="at">--local</span> status.showUntrackedFiles no</span>
@@ -446,14 +446,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="workflow-for-importing-dotfiles-to-another-machine" class="level2">
 <h2 class="anchored" data-anchor-id="workflow-for-importing-dotfiles-to-another-machine">Workflow for importing dotfiles to another machine</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git clone <span class="at">--bare</span> https://github.com/<span class="op">&lt;</span>user<span class="op">&gt;</span>/dotfiles.git <span class="st">"</span><span class="va">$HOME</span><span class="st">/.dotfiles"</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> alias dotfiles=<span class="st">'/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> alias dotfiles=<span class="st">'$(command -v git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> dotfiles config <span class="at">--local</span> status.showUntrackedFiles no</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Backup files that would be overwritten by checkout</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> <span class="st">"</span><span class="va">$HOME</span><span class="st">/.dotfiles_backup"</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git <span class="at">--git-dir</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.dotfiles/"</span> read-tree HEAD</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> BACKUP_FILES=<span class="va">$(</span><span class="ex">/usr/bin/git</span> <span class="at">--git-dir</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.dotfiles/"</span> <span class="at">--work-tree</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">"</span> status <span class="at">-uno</span> <span class="at">--porcelain</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span><span class="va">)</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> for FILE in <span class="st">"</span><span class="va">$BACKUP_FILES</span><span class="st">"</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> BACKUP_FILES=<span class="va">$(</span><span class="fu">git</span> <span class="at">--git-dir</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.dotfiles/"</span> <span class="at">--work-tree</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">"</span> status <span class="at">-uno</span> <span class="at">--porcelain</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2}'</span><span class="va">)</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> while IFS= read <span class="at">-r</span> FILE<span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="ot">-e</span> <span class="st">"</span><span class="va">$FILE</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">DIR_PATH</span><span class="op">=</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">"</span><span class="va">$FILE</span><span class="st">"</span><span class="va">)</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">BASENAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$FILE</span><span class="st">"</span><span class="va">)</span></span>
@@ -461,7 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mv</span> <span class="st">"</span><span class="va">$FILE</span><span class="st">"</span> <span class="st">"</span><span class="va">$HOME</span><span class="st">/.dotfiles_backup/</span><span class="va">$DIR_PATH</span><span class="st">/</span><span class="va">$BASENAME</span><span class="st">"</span></span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Moved </span><span class="va">$FILE</span><span class="st"> to </span><span class="va">$HOME</span><span class="st">/.dotfiles_backup/</span><span class="va">$DIR_PATH</span><span class="st">/</span><span class="va">$BASENAME</span><span class="st">"</span></span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;&lt;&lt;</span> <span class="st">"</span><span class="va">$BACKUP_FILES</span><span class="st">"</span></span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Checkout the repository to get the working tree files</span></span>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git <span class="at">--git-dir</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.dotfiles/"</span> <span class="at">--work-tree</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">"</span> checkout <span class="at">--force</span></span>
@@ -490,7 +490,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="bu">shopt</span> <span class="at">-s</span> checkwinsize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><p>Save the dotfiles alias itself into <code>.aliases</code></p></li>
-<li><p>Track a <code>bin</code> directory in the dotfiles repository with helper scripts to automate setup or syncing tasks, e.g.:</p></li>
+<li><p>Track a <code>bin</code> directory in the dotfiles repository with helper scripts to automate setup or syncing tasks. The file list below is one example setup, not a template — replace it with your own tracked files:</p></li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -498,29 +498,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"</span><span class="va">$HOME</span><span class="st">"</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/bin/git</span> <span class="at">--git-dir</span><span class="op">=</span><span class="va">$HOME</span>/.dotfiles/ <span class="at">--work-tree</span><span class="op">=</span><span class="va">$HOME</span> add <span class="dt">\</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        .aliases <span class="dt">\</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        .bash_logout <span class="dt">\</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        .bash_profile <span class="dt">\</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        .bash_prompt <span class="dt">\</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        .bashrc <span class="dt">\</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        .cluster_config <span class="dt">\</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        .exports <span class="dt">\</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        .functions <span class="dt">\</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        .gitconfig <span class="dt">\</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        .hushlogin <span class="dt">\</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        .path <span class="dt">\</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        .wslconfig <span class="dt">\</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        .tool_extension <span class="dt">\</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        bin/bootstrap.sh <span class="dt">\</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        bin/bootstrap_cluster.sh <span class="dt">\</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        bin/dotfiles_sync.sh <span class="dt">\</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        README.md</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/bin/git</span> <span class="at">--git-dir</span><span class="op">=</span><span class="va">$HOME</span>/.dotfiles/ <span class="at">--work-tree</span><span class="op">=</span><span class="va">$HOME</span> commit <span class="dt">\</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">-m</span> <span class="st">"Auto sync dotfiles repository"</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="ex">/usr/bin/git</span> <span class="at">--git-dir</span><span class="op">=</span><span class="va">$HOME</span>/.dotfiles/ <span class="at">--work-tree</span><span class="op">=</span><span class="va">$HOME</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="va">GIT</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="bu">command</span> <span class="at">-v</span> git<span class="va">)</span><span class="st"> --git-dir=</span><span class="va">$HOME</span><span class="st">/.dotfiles/ --work-tree=</span><span class="va">$HOME</span><span class="st">"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="va">$GIT</span> add <span class="dt">\</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        .aliases <span class="dt">\</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        .bash_logout <span class="dt">\</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        .bash_profile <span class="dt">\</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        .bash_prompt <span class="dt">\</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        .bashrc <span class="dt">\</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        .cluster_config <span class="dt">\</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        .exports <span class="dt">\</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        .functions <span class="dt">\</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        .gitconfig <span class="dt">\</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>        .hushlogin <span class="dt">\</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        .path <span class="dt">\</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        .wslconfig <span class="dt">\</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        .tool_extension <span class="dt">\</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        bin/bootstrap.sh <span class="dt">\</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        bin/bootstrap_cluster.sh <span class="dt">\</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        bin/dotfiles_sync.sh <span class="dt">\</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>        README.md</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="va">$GIT</span> commit <span class="at">-m</span> <span class="st">"Auto sync dotfiles repository"</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="va">$GIT</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Manual steps for setting up a new machine can also be automated using a bootstrap script.</li>
 </ul>
@@ -870,64 +871,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           }
         };
       }
-        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
-        for (let i=0; i<annoteTargets.length; i++) {
-          const annoteTarget = annoteTargets[i];
-          const targetCell = annoteTarget.getAttribute("data-target-cell");
-          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
-          const contentFn = () => {
-            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-            if (content) {
-              const tipContent = content.cloneNode(true);
-              tipContent.classList.add("code-annotation-tip-content");
-              return tipContent.outerHTML;
-            }
-          }
-          const config = {
-            allowHTML: true,
-            content: contentFn,
-            onShow: (instance) => {
-              selectCodeLines(instance.reference);
-              instance.reference.classList.add('code-annotation-active');
-              window.tippy.hideAll();
-            },
-            onHide: (instance) => {
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
               unselectCodeLines();
-              instance.reference.classList.remove('code-annotation-active');
-            },
-            maxWidth: 300,
-            delay: [50, 0],
-            duration: [200, 0],
-            offset: [5, 10],
-            arrow: true,
-            appendTo: function(el) {
-              return el.parentElement.parentElement.parentElement;
-            },
-            interactive: true,
-            interactiveBorder: 10,
-            theme: 'quarto',
-            placement: 'right',
-            popperOptions: {
-              modifiers: [
-              {
-                name: 'flip',
-                options: {
-                  flipVariations: false, // true by default
-                  allowedAutoPlacements: ['right'],
-                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
-                },
-              },
-              {
-                name: 'preventOverflow',
-                options: {
-                  mainAxis: false,
-                  altAxis: false
-                }
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
               }
-              ]        
-            }      
-          };
-          window.tippy(annoteTarget, config); 
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
         }
     const findCites = (el) => {
       const parentEl = el.parentElement;
