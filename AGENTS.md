@@ -34,7 +34,7 @@ complete beginners to it, others already use it daily.
   [write-up.qmd](write-up.qmd).
 - **Preview locally** with `quarto preview` (or `pixi run preview`).
 
-## Writing and reviewing walkthrough posts
+## Writing a walkthrough post
 
 These are standing rules for this repo's posts, in addition to whatever
 the human author asks for on a given draft. They're grounded in
@@ -42,6 +42,12 @@ learning-science and technical-writing research — see
 [References](#references) — not house-style opinion, so don't relax
 them without a reason that would also count as a reason in that
 literature.
+
+This section applies when drafting a post, or self-reviewing one before
+it's opened as a PR. For reviewing a PR someone else has already
+submitted, see [Reviewing a submitted walkthrough
+PR](#reviewing-a-submitted-walkthrough-pr) instead — a narrower set of
+rules applies there.
 
 ### Standing rules
 
@@ -162,7 +168,53 @@ self-review, since check 10 above specifically requires it:
 Then run a **scope pass** over the result specifically for checks 1, 4,
 5, and 12.
 
-### Posting review comments
+## Reviewing a submitted walkthrough PR
+
+A PR always follows an already-given talk, and is usually the
+presenter's rough draft — not written against the checklist above. The
+point of reviewing it is to get the post merged so readers have it.
+
+- **Merge condition.** The only requirement for merging is that the post
+  renders correctly (`quarto preview`/render succeeds — valid
+  frontmatter, no broken includes, images and links resolve).
+- **Merging is manual.** A human merges the PR, or gives explicit
+  go-ahead first — never merge automatically as part of this process,
+  even once the render check passes.
+- **Scope test.** A fix or suggestion confined to a single paragraph is
+  in scope, whichever checklist principle motivates it (tightening a
+  sentence, cutting one redundant clause, moving a code block next to
+  its explanation). A change spanning multiple paragraphs or sections —
+  reordering sections, cutting/expanding whole paragraphs, reworking a
+  section's scope or depth — is out of scope; don't suggest it here, not
+  even as an optional "nice to have." The size of the change decides
+  borderline cases, not which checklist principle it comes from.
+- **In scope:** technical accuracy (commands/config/behaviour/output
+  against current docs — checklist item 14); broken links/images;
+  repo-convention compliance (required frontmatter fields, correct
+  `draft` flag handling, file/branch naming, categories); mechanical
+  style (British spelling, obvious typos/grammar); any single-paragraph-
+  scoped edit from the drafting checklist (e.g. one coherence,
+  redundancy, justification-clause, or signaling fix within a
+  paragraph).
+- **Out of scope:** multi-paragraph or section-level structural
+  changes — narrative-arc reordering, mode-check rewrites or
+  scope-to-session trims spanning more than one paragraph, artifact-vs-
+  narration restructuring across a section, curse-of-knowledge or
+  expertise-reversal rewrites touching many sentences throughout.
+
+Process:
+
+1. Post one PR comment listing the in-scope items found, once a human
+   has approved its exact text.
+2. Merge once the post renders correctly and a human gives the
+   go-ahead.
+3. After merge, open a separate PR that applies the listed items, plus
+   any other in-scope issue noticed while editing (correctness,
+   convention, mechanical style, or a single-paragraph-scoped
+   improvement) — never a multi-paragraph or section-level rewrite,
+   even if it would clearly improve the post.
+
+## Posting review comments
 
 Standing rule 1 (terse prose) [[10]](#references) applies to PR review
 comments and descriptions, not just post prose. State the finding or
@@ -171,6 +223,10 @@ explain why you're mentioning something — that's meta-commentary the
 reader doesn't need to act on the finding. If new context changes a
 finding, edit the existing comment in place instead of posting a
 follow-up correction.
+
+Every comment, review, or PR description needs a human's explicit
+approval of its exact text before it reaches GitHub. This is never an
+automated step, however routine the finding.
 
 ## References
 
