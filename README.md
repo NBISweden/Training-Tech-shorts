@@ -27,7 +27,7 @@ These people are responsible for organizing the sessions and maintaining this re
 
 ## How It Works
 
-Walkthroughs are short (~30 minutes) demonstrations, taught by volunteers from within the Tech group.
+Walkthroughs are short (~30-40 minutes) demonstrations, taught by volunteers from within the Tech group.
 The sessions are then written up and shared here for future reference as blog posts.
 
 ### Target Audience
