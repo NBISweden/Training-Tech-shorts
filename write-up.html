@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="writing-a-blog-post" class="level1">
 <h1>Writing a blog post</h1>
-<p>This guide explains how to write up a blog post following a walkthrough. For information on suggesting topics or volunteering to teach, see <a href="./contributing.html">CONTRIBUTING</a>.</p>
+<p>This guide explains how to write up a blog post following a walkthrough. For information on suggesting topics or volunteering to teach, see <a href="./contributing.html">CONTRIBUTING</a>. For the writing-style rules and review checklist applied to drafts (and used by AI coding agents helping with a write-up), see <a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/AGENTS.md">AGENTS.md</a> in the repository root.</p>
 <section id="file-structure" class="level2">
 <h2 class="anchored" data-anchor-id="file-structure">File Structure</h2>
 <p>Blog posts are written in <a href="https://quarto.org/docs/authoring/markdown-basics.html">Quarto Markdown</a> and stored in the following locations:</p>
@@ -224,12 +224,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Introduction to Docker"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2024-01-15</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date-modified</span><span class="kw">:</span><span class="at"> last-modified</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Author Name</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Coauthor Name</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"Docker"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Containers"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Package management"</span><span class="at"> </span><span class="kw">]</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></li>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Author Name</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Coauthor Name</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> </span><span class="st">"Docker"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Containers"</span><span class="kw">,</span><span class="at"> </span><span class="st">"Package management"</span><span class="at"> </span><span class="kw">]</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>draft: true</code> keeps a post out of the published site’s listings while it’s still being written or hasn’t been scheduled yet — Quarto still renders it in <code>quarto preview</code>. Remove the <code>draft</code> field once the session has actually been given and the content and date are settled, not just once the writing is finished.</p></li>
 <li><p><strong>Write your content</strong> using Markdown. Include:</p>
 <ul>
 <li>Brief introduction</li>
@@ -277,13 +279,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="writing-tips" class="level2">
 <h2 class="anchored" data-anchor-id="writing-tips">Writing Tips</h2>
 <ul>
-<li>Keep it concise and focused (~30 minute read)</li>
+<li>Keep it concise and focused — a post supports a ~30-40 minute talk with a live demo, it’s not a reference manual for the tool</li>
+<li>A post should stand alone: don’t assume the reader has seen another still-unpublished walkthrough, and don’t forward-reference content later in the same post</li>
 <li>Use code blocks with syntax highlighting and <a href="https://quarto.org/docs/authoring/code-annotation.html">code annotation</a></li>
 <li>Include practical examples</li>
 <li>Add links to relevant documentation</li>
 <li>Consider adding a “Prerequisites” section if needed</li>
 <li><strong>See existing posts</strong> in the <code>posts/</code> directory for examples and inspiration</li>
 <li>Check the <a href="https://quarto.org/docs/authoring/markdown-basics.html">Quarto documentation</a> for advanced formatting options</li>
+<li>See <a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/AGENTS.md">AGENTS.md</a> for the fuller style and review checklist (prose style, scope, and independence rules with their reasoning)</li>
 </ul>
 
 
