@@ -1,0 +1,610 @@
+---
+title: "An introduction to the Snakemake workflow manager"
+date: 2026-09-24
+date-modified: last-modified
+draft: false
+author:
+  - John Sundh
+categories: [ "Snakemake", "Workflow management", "Reproducibility" ]
+format:
+    html:
+        include-in-header:
+            text: |
+                <style>
+                div.sourceCode {
+                max-height: 600px;
+                overflow-y: auto;
+                }
+                </style>
+---
+
+
+## Introduction
+
+[Snakemake](https://snakemake.github.io/) is a workflow manager written in Python. 
+
+## Installation
+
+The recommended way to install Snakemake is with [Pixi](https://pixi.prefix.dev/).
+
+
+```{.toml filename="pixi.toml"}
+[workspace]
+authors = ["John Sundh <john.sundh@scilifelab.se>"]
+channels = ["conda-forge", "bioconda"]
+name = "myworkflow"
+platforms = ["osx-arm64", "osx-64", "linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+snakemake = ">=9.27.0,<10"
+```
+
+Activate the environment with `pixi shell`.
+
+## Core concepts
+
+Snakemake workflows are built around files. Rules take one or more input files and create one or more output files. Rule dependencies are handled by matching filenames.
+
+```{.python filename="Snakefile"}
+rule convert_to_upper_case: # <1>
+    input: # <2>
+        "a.txt", # <2>
+    output: # <3>
+        "a.uppercase.txt", # <3>
+    shell: # <4>
+        """ # <4>
+        tr [a-z] [A-Z] <{input} > {output} # <4>
+        """ # <4>
+
+rule word_count:
+    input:
+        "a.uppercase.txt",
+    output:
+        "a.uppercase.wc.txt",
+    shell:
+        """
+        wc {input} > {output} # <5>
+        """
+```
+
+1. Rule definition start, with descriptive name
+2. `input:` defines the input file(s)
+3. `output:` defines the output file(s)
+4. `shell:` defines what command(s) to run. Here the `tr` tool is used to translate text to uppercase.
+5. The input and output are referred to with `{input}`/`{output}`. Here the `wc` utility counts lines, words and bytes in the input.
+
+## Running a workflow
+
+Run a Snakemake workflow by executing `snakemake` from the command line:
+
+```{.bash}
+snakemake -s Snakefile -c 1
+```
+
+The `-c/--cores` flag sets the upper bound for CPUs used and has to be specified (run with `-c all` to use available CPU cores). The `-s/--snakefile` flag points to the workflow definition file. This can be omitted if your definition file is any of `Snakefile`, `snakefile`, `workflow/Snakefile`, `workflow/snakefile` in the current working directory.
+
+By default, Snakemake executes the first rule in the workflow (`convert_to_upper_case` in this toy example). To use a different 'target', specify it on the command line, _e.g._:
+
+```{.bash}
+snakemake -s Snakefile -c 1 a.uppercase.wc.txt
+```
+
+A Snakemake convention is to use a __pseudo__ rule named `all` at the top of your workflow which specifies the default targets:
+
+```{.python filename="Snakefile"}
+rule all:
+    input: # <1>
+        "a.uppercase.wc.txt", # <1>
+
+rule convert_to_upper_case:
+    input:
+        "a.txt",
+    output:
+        "a.uppercase.txt",
+    shell:
+        """
+        tr [a-z] [A-Z] <{input} > {output}
+        """
+
+rule word_count:
+    input:
+        "a.uppercase.txt",
+    output:
+        "a.uppercase.wc.txt",
+    shell:
+        """
+        wc {input} > {output}
+        """
+```
+
+1. The `all` rule requires an input file which now becomes the default target of the workflow.
+
+Snakemake also decides *when* to rerun a rule. By default a job is
+skipped if its output is already up to date — newer than every input,
+and produced with the same code, `params:`, and software environment.
+Change any one of those and only the affected jobs rerun, not the whole
+workflow.
+
+`--rerun-triggers` picks which of these count: `mtime`, `input`,
+`params`, `code`, `software-env` — all five by default.
+
+```{.bash}
+snakemake --rerun-triggers mtime
+```
+
+Switching to `mtime` alone falls back to plain timestamp comparison.
+
+## Rule directives
+
+A rule's `input:` and `output:` are enough to chain rules together, but a
+real rule usually needs more: where to log its output, which software
+environment to run in, and how many resources to ask for. Take trimming a
+FASTQ file with [fastp](https://github.com/OpenGene/fastp):
+
+```{.python filename="workflow/Snakefile"}
+rule trim_reads:
+    input:
+        "data/sample1.fastq.gz", # <1>
+    output:
+        fastq="results/sample1.trimmed.fastq.gz", # <2>
+        html="results/sample1.fastp.html", # <2>
+        json="results/sample1.fastp.json", # <2>
+    log:
+        "logs/sample1.trim.log", # <3>
+    conda:
+        "envs/fastp.yaml" # <4>
+    container:
+        "docker://quay.io/biocontainers/fastp:1.3.6--h43da1c4_0" # <5>
+    threads: 4 # <6>
+    params: # <7>
+        quality_cutoff=20, # <7>
+    shell:
+        """
+        fastp --thread {threads} -i {input} -o {output.fastq} \
+            --html {output.html} --json {output.json} \
+            --qualified_quality_phred {params.quality_cutoff} \
+            >{log} 2>&1 # <8>
+        """
+```
+
+1. A single fixed input file, for now.
+2. Named outputs — `output.fastq`, `output.html` and `output.json` are referenced
+   individually in `shell:`.
+3. `log:` is a dedicated log file, kept even if the rule fails.
+4. `conda:` points to an environment YAML; Snakemake creates and
+   activates it when run with `--deployment conda`.
+5. `container:` names a Docker/Apptainer image Snakemake runs instead, with
+   `--deployment apptainer`.
+6. `threads:` is a per-rule maximum, clamped to `min(threads, --cores)`
+   at runtime.
+7. `params:` defines rule-specific values that aren't files — available
+   in `shell:` as `{params.name}`, the same way as `{input}`/`{output}`.
+8. `log:` doesn't redirect anything by itself — `2>&1` here is what sends
+   fastp's output to the log file. Forget it and the log stays empty
+   while errors go straight to the terminal instead.
+
+::: {.callout-note}
+`resources:` (e.g. `mem_mb=4000`) is the directive for memory,
+set the same way as `threads:`. See the [docs](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#resources)
+for details on how to set resources.
+:::
+
+## Rule dependencies
+
+A workflow rarely stops at one step. Snakemake chains rules by matching
+one rule's `output:` to another's `input:`. Classifying the trimmed reads
+with [Kraken2](https://github.com/DerrickWood/kraken2) takes the output
+from `trim_reads`:
+
+```{.python filename="workflow/Snakefile"}
+rule classify_reads:
+    input:
+        fastq="results/sample1.trimmed.fastq.gz",  # <1>
+        db="resources/k2_standard",  # <2>
+    output:
+        report="results/sample1.kraken2.report",
+        classified="results/sample1.kraken2.out",
+    log:
+        "logs/sample1.classify.log",
+    conda:
+        "envs/kraken2.yaml"
+    container:
+        "docker://quay.io/biocontainers/kraken2:2.17.1--pl5321h077b44d_0"
+    threads: 8
+    shell:
+        """
+        kraken2 --db {input.db} --threads {threads} \
+            --report {output.report} --output {output.classified} \
+            {input.fastq} >{log} 2>&1
+        """
+```
+
+1. This is exactly `trim_reads`'s `output.fastq` path — Snakemake
+   resolves the dependency by matching that filename, no explicit link
+   between the two rules needed.
+2. This rule also requires a kraken2 database. Here the directory is assumed to contain the necessary kraken files.
+
+Rule dependencies can also be specified using the `rules.some_rule.output` syntax. For our example workflow it would be:
+
+```{.python filename="workflow/Snakefile"}
+rule trim_reads:
+    input:
+        "data/sample1.fastq.gz",
+    output:
+        fastq="results/{sample}.trimmed.fastq.gz",
+        html="results/{sample}.fastp.html",
+        json="results/{sample}.fastp.json",
+...
+
+rule classify_reads:
+    input:
+        fastq=rules.trim_reads.output.fastq,  # <1>
+        db="resources/k2_standard",
+...
+```
+
+1. The input to `classify_reads` is explicitly set to the `fastq` output from `trim_reads`.
+
+::: {.callout-important}
+This explicit syntax requires that the referenced rule is defined before the rule referencing it.
+:::
+
+Both rules are still hard-coded to one sample, and `quality_cutoff` 
+is hard-coded too. Configuration and wildcards fix each of those in
+turn.
+
+## Configuration
+
+Hard-coding `quality_cutoff=20` means editing the Snakefile for every
+parameter change. A configfile moves values like this out of the
+workflow logic:
+
+```{.yaml filename="config/config.yaml"}
+quality_cutoff: 20
+```
+
+Inside the workflow the global `config` dictionary holds all configuration values.
+
+```{.python filename="workflow/Snakefile"}
+    params:
+        quality_cutoff=config["quality_cutoff"], # <1>
+```
+
+1. `params:` now reads that dict instead of a literal `20`.
+
+Running Snakemake with `--configfile config/config.yaml` supplies values to the `config` dictionary. You can also use `--config key=value` on the command line to supply/override values without editing the config file itself — useful for a one-off change (but be careful about the loss in reproducibility).
+
+## Wildcards
+
+A wildcard generalises a rule across many files by turning part of a
+filename into a variable. Rewriting both rules with `{sample}` runs the
+same two-step pipeline for every sample we define:
+
+::: {.panel-tabset}
+
+## with expand
+
+```{.python filename="workflow/Snakefile"}
+SAMPLES = ["sample1", "sample2", "sample3"] # <1>
+
+
+rule all: # <2>
+    input:
+        expand("results/{sample}.kraken2.report", sample=SAMPLES), # <3>
+
+
+rule trim_reads:
+    input:
+        "data/{sample}.fastq.gz", # <4>
+    output:
+        fastq="results/{sample}.trimmed.fastq.gz",
+        html="results/{sample}.fastp.html",
+        json="results/{sample}.fastp.json",
+    log:
+        "logs/{sample}.trim.log",
+    conda:
+        "envs/fastp.yaml"
+    container:
+        "docker://quay.io/biocontainers/fastp:1.3.6--h43da1c4_0"
+    threads: 4
+    params:
+        quality_cutoff=config["quality_cutoff"],
+    shell:
+        """
+        fastp --thread {threads} -i {input} -o {output.fastq} \
+            --html {output.html} --json {output.json} \
+            --qualified_quality_phred {params.quality_cutoff} \
+            >{log} 2>&1
+        """
+
+
+rule classify_reads:
+    input:
+        fastq="results/{sample}.trimmed.fastq.gz", # <5>
+        db="resources/k2_standard",
+    output:
+        report="results/{sample}.kraken2.report",
+        classified="results/{sample}.kraken2.out",
+    log:
+        "logs/{sample}.classify.log",
+    conda:
+        "envs/kraken2.yaml"
+    container:
+        "docker://quay.io/biocontainers/kraken2:2.17.1--pl5321h077b44d_0"
+    threads: 8
+    shell:
+        """
+        kraken2 --db {input.db} --threads {threads} \
+            --report {output.report} --output {output.classified} \
+            {input.fastq} >{log} 2>&1
+        """
+```
+
+1. A sample list — it could equally come from a config file or from an external sample sheet.
+2. The `all` rule at the top defines the workflow's default target list.
+3. The `expand()` [helper function](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#helpers-for-defining-rules) turns the sample list into concrete target filenames —
+   here, the final `kraken2.report` per sample, so `all` pulls
+   both steps through for every sample.
+4. The `{sample}` wildcard is used to match any file starting with `data/`, followed by at least one character (`.+`), and ending with `.fastq.gz`.
+5. `classify_reads`'s `input:` resolves against whichever sample
+   `trim_reads` already produced, using the same wildcard value
+   throughout.
+
+## with list comprehension
+
+```{.python filename="workflow/Snakefile"}
+SAMPLES = ["sample1", "sample2", "sample3"]
+
+rule all:
+    input:
+        [f"results/{sample}.kraken2.report" for sample in SAMPLES] # <1>
+```
+
+1. Here python list comprehension is used to define the input files.
+
+:::
+
+::: {.callout-note}
+If filenames would collide, `wildcard_constraints` narrows what
+a wildcard is allowed to match (e.g. digits only). See the [wildcards
+docs](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#wildcards)
+for details.
+:::
+
+::: {.callout-important}
+Two important things to keep in mind when it comes to Wildcards:
+
+1. Wildcards used in the `input:` directive of a rule **must** be present in the `output:` directive in order for Snakemake to resolve them.
+2. All output and log files of a rule **must** contain the same wildcards.
+:::
+
+Our example workflow is now generalised to use any number of input files matching `data/{sample}.fastq.gz` and allows the jobs to be parallelised.
+
+## Specifying workflow input
+
+Most of the time a workflow has to start from one or more files. A typical example being the `*.fastq.gz` files used as input to `trim_reads` in the example above. Instead of hard-coding the samples (with the `SAMPLES` list) and the input directory (with `data/{sample}.fastq.gz`) we can supply a samplesheet that is read at runtime.
+
+```{.default filename="config/samples.csv"}
+sample_id,file_path
+sample1,data/sample1.fastq.gz
+sample2,data/sample2.fastq.gz
+sample3,data/sample3.fastq.gz
+```
+
+Adding a `sample_list` parameter to the configfile lets you point Snakemake to a file where the workflow input is defined:
+
+```{.yaml filename="config/config.yaml"}
+sample_list: config/samples.csv
+```
+
+A Snakefile can contain any python code in addition to the rule definitions. So the samplesheet can be wired into the workflow with for example:
+
+```{.python filename="workflow/Snakefile"}
+import pandas as pd # <1>
+df = pd.read_csv(config["sample_list"], index_col=0) # <1>
+SAMPLES = df.to_dict(orient="index") # <2>
+
+rule all:
+    input:
+        expand("results/{sample}.kraken2.report", sample=SAMPLES), # <3>
+
+def get_input_fastq(wildcards): # <4>
+    return SAMPLES[wildcards.sample]["file_path"] # <5>
+
+rule trim_reads:
+    input:
+        get_input_fastq, # <6>
+```
+
+1. Import the `pandas` package and read the samplesheet.
+2. Convert the dataframe to a nested dictionary (`{'sample1': {'file_path': 'data/sample1.fastq.gz'}` etc.)
+3. The workflow targets are generated with the `expand` helper function.
+4. Define a python function `get_input_fastq` which takes a single argument `wildcards`.
+5. Return the file path for a given sample by doing a look-up in the `SAMPLES` dictionary.
+6. The `trim_reads` rule evaluates the `get_input_fastq` function once the wildcard values of a job are determined.
+
+```{.bash}
+snakemake --configfile config/config.yaml -c 1
+```
+
+## Dry runs
+
+Before running anything for real — locally or on a cluster — `--dry-run`
+(`-n`) shows the jobs Snakemake would run, without touching a
+single file:
+
+```{.bash}
+snakemake --configfile config/config.yaml -n
+```
+
+## Visualising workflows
+
+To visualise a workflow, run with `--dag` to print out the DAG in dot language:
+
+
+::: {.panel-tabset}
+
+## Rendered DAG
+
+```{dot}
+digraph snakemake_dag {
+    graph[bgcolor=white, margin=0];
+    node[shape=box, style=rounded, fontname=sans, fontsize=6, penwidth=1];
+    edge[penwidth=1, color=grey];
+        0[label = "all", color = "0.00 0.6 0.85", style="rounded"];
+        1[label = "classify_reads", color = "0.22 0.6 0.85", style="rounded"];
+        2[label = "trim_reads\nsample: sample1", color = "0.44 0.6 0.85", style="rounded"];
+        3[label = "classify_reads", color = "0.22 0.6 0.85", style="rounded"];
+        4[label = "trim_reads\nsample: sample2", color = "0.44 0.6 0.85", style="rounded"];
+        5[label = "classify_reads", color = "0.22 0.6 0.85", style="rounded"];
+        6[label = "trim_reads\nsample: sample3", color = "0.44 0.6 0.85", style="rounded"];
+        1 -> 0
+        3 -> 0
+        5 -> 0
+        2 -> 1
+        4 -> 3
+        6 -> 5
+}
+```
+
+## Raw dot code
+
+```{.dot}
+digraph snakemake_dag {
+    graph[bgcolor=white, margin=0];
+    node[shape=box, style=rounded, fontname=sans, fontsize=6, penwidth=1];
+    edge[penwidth=1, color=grey];
+        0[label = "all", color = "0.00 0.6 0.85", style="rounded"];
+        1[label = "classify_reads", color = "0.22 0.6 0.85", style="rounded"];
+        2[label = "trim_reads\nsample: sample1", color = "0.44 0.6 0.85", style="rounded"];
+        3[label = "classify_reads", color = "0.22 0.6 0.85", style="rounded"];
+        4[label = "trim_reads\nsample: sample2", color = "0.44 0.6 0.85", style="rounded"];
+        5[label = "classify_reads", color = "0.22 0.6 0.85", style="rounded"];
+        6[label = "trim_reads\nsample: sample3", color = "0.44 0.6 0.85", style="rounded"];
+        1 -> 0
+        3 -> 0
+        5 -> 0
+        2 -> 1
+        4 -> 3
+        6 -> 5
+}
+```
+
+:::
+
+The `--rulegraph` flag is similar but shows a graph of _rules_ rather than of every _job_:
+
+```{dot}
+digraph snakemake_dag {
+    graph[bgcolor=white, margin=0];
+    node[shape=box, style=rounded, fontname=sans, fontsize=6, penwidth=1];
+    edge[penwidth=1, color=grey];
+        0[label = "all", color = "0.00 0.6 0.85", style="rounded"];
+        1[label = "classify_reads", color = "0.22 0.6 0.85", style="rounded"];
+        2[label = "trim_reads", color = "0.44 0.6 0.85", style="rounded"];
+        1 -> 0
+        2 -> 1
+}
+```
+
+The [snakevision](https://github.com/OpenOmics/snakevision/) python package generates more advanced visualisations. Below is an example of this shown for a dummy-workflow.
+
+![](images/snakevision_dag.svg)
+
+## Configuration profiles
+
+Snakemake comes with a large set of [command line arguments](https://snakemake.readthedocs.io/en/stable/executing/cli.html) which allow you to customise a workflow run, for example:
+
+* `-c/--cores`: Number of CPUs.
+* `-p/--printshellcmds`: Print out the shell commands that will be executed.
+* `-k/--keep-going`: Go on with independent jobs if a job fails during execution.
+* `--deployment`: Specify software environment deployment method [`conda`, `apptainer`, `env-modules`]
+* `-e/--executor`: Use a custom executor, _e.g._ for cluster execution.
+
+Typing `--cores 1 --printshellcmds --keep-going --deployment conda` on every run
+gets old fast. A configuration profile stores default CLI flags in a YAML file
+instead:
+
+```{.yaml filename="workflow/profiles/default/profile.yaml"}
+cores: 1
+printshellcmds: true
+keep-going: true
+deployment: conda
+```
+
+Snakemake auto-discovers `profiles/default/profile.yaml` relative to the `Snakefile` or working directory so:
+
+```{.bash}
+snakemake --configfile config/config.yaml
+```
+
+picks this up with no flags at all; `--workflow-profile <name>` points at a different one, and `--workflow-profile none` skips auto-discovery entirely.
+
+A profile isn't limited to convenience flags — it's the same mechanism a
+compute cluster's settings live in.
+
+## Running on a cluster
+
+Snakemake can submit jobs through an **executor plugin** rather than
+running it locally. For SLURM, install
+[`snakemake-executor-plugin-slurm`](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html)
+and create a profile for the cluster:
+
+```{.yaml filename="workflow/profiles/dardel/profile.yaml"}
+local-cores: 1 # <1>
+printshellcmds: true
+keep-going: true
+deployment: apptainer
+executor: slurm
+default-resources: # <2>
+    slurm_account: "naiss2026-1-100" # <3>
+    slurm_partition: shared # <4>
+    mem_mb: 4000 # <5>
+    runtime: 30 # <6>
+jobs: 20 # <7>
+set-resources: # <8>
+    classify_reads:
+        mem_mb: 32000
+        runtime: 600
+```
+
+1. Sets the maximum number of cores to use on the **host machine**. The cores are used to execute local rules.
+2. Set default resources (applied to all jobs). These can be overridden with `set-resources:` for individual rules.
+3. The compute account.
+4. The default slurm partition.
+5. Maximum total memory in MB.
+6. Runtime in minutes.
+7. The number of jobs you want to run in parallel.
+8. Override default resources on a per-rule basis.
+
+Running `snakemake --configfile config/config.yaml --workflow-profile workflow/profiles/dardel` now submits every job via `sbatch`.
+
+## Best practices
+
+Two commands catch most style and correctness issues before a workflow is
+shared:
+
+```{.bash}
+snakemake --lint    # <1>
+snakefmt Snakefile  # <2>
+```
+
+1. Checks the code quality of your workflow and that it conforms to best practices.
+2. Reformats the Snakefile in place, Black-style.
+
+The [Snakemake Language](https://github.com/snakemake/snakemake-lang-vscode-plugin)
+VS Code extension adds syntax highlighting and snippets for Snakefiles.
+
+The [Snakefmt](https://github.com/tfehlmann/vscode-snakefmt-provider) VS Code extension gives you format-on-save for Snakefiles.
+
+## Further resources
+
+- [Snakemake documentation](https://snakemake.readthedocs.io/)
+- [Snakemake Best Practices](https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html)
+- [NBIS Tools for Reproducible Research Snakemake tutorial](https://nbisweden.github.io/workshop-reproducible-research/pages/snakemake.html)
+- [Configuration](https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html)
+- [Command line interface, incl. rerun triggers and profiles](https://snakemake.readthedocs.io/en/stable/executing/cli.html)
+- [SLURM executor plugin](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html)
