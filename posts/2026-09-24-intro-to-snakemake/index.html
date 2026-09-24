@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-3f68e3761999f75b0fd8faf9fa20daed.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-95e700bef72d2880c277d2cb84c9764b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -264,7 +264,9 @@ overflow-y: auto;
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">[tasks]</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">[dependencies]</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">snakemake</span> <span class="op">=</span> <span class="st">"&gt;=9.27.0,&lt;10"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">snakemake</span> <span class="op">=</span> <span class="st">"&gt;=9.27.0,&lt;10"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="dt">conda</span> <span class="op">=</span> <span class="st">"&gt;=26.7.2,&lt;27"</span> <span class="co"># for --deployment conda</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="dt">snakefmt</span> <span class="op">=</span> <span class="st">"&gt;=2.0.3,&lt;3"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Activate the environment with <code>pixi shell</code>.</p>
 </section>
@@ -282,7 +284,7 @@ overflow-y: auto;
 <span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.txt"</span>,</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>    shell:</span>
 <span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
-<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a><span class="co">        tr [a-z] [A-Z] &lt;{input} &gt; {output}</span></span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a><span class="co">        tr a-z A-Z &lt;{input} &gt; {output}</span></span>
 <span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
 <span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-2-11"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a>rule word_count:</span>
@@ -341,7 +343,7 @@ overflow-y: auto;
 <span id="annotated-cell-5-9"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.txt"</span>,</span>
 <span id="annotated-cell-5-10"><a href="#annotated-cell-5-10" aria-hidden="true" tabindex="-1"></a>    shell:</span>
 <span id="annotated-cell-5-11"><a href="#annotated-cell-5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
-<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a><span class="co">        tr [a-z] [A-Z] &lt;{input} &gt; {output}</span></span>
+<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a><span class="co">        tr a-z A-Z &lt;{input} &gt; {output}</span></span>
 <span id="annotated-cell-5-13"><a href="#annotated-cell-5-13" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
 <span id="annotated-cell-5-14"><a href="#annotated-cell-5-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-5-15"><a href="#annotated-cell-5-15" aria-hidden="true" tabindex="-1"></a>rule word_count:</span>
@@ -491,9 +493,9 @@ Note
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
 <span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">"data/sample1.fastq.gz"</span>,</span>
 <span id="annotated-cell-9-4"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a>    output:</span>
-<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>        fastq<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.trimmed.fastq.gz"</span>,</span>
-<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a>        html<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.fastp.html"</span>,</span>
-<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>        json<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.fastp.json"</span>,</span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>        fastq<span class="op">=</span><span class="st">"results/sample1.trimmed.fastq.gz"</span>,</span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a>        html<span class="op">=</span><span class="st">"results/sample1.fastp.html"</span>,</span>
+<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>        json<span class="op">=</span><span class="st">"results/sample1.fastp.json"</span>,</span>
 <span id="annotated-cell-9-8"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a>...</span>
 <span id="annotated-cell-9-9"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-9-10"><a href="#annotated-cell-9-10" aria-hidden="true" tabindex="-1"></a>rule classify_reads:</span>
@@ -521,7 +523,7 @@ Important
 <p>This explicit syntax requires that the referenced rule is defined before the rule referencing it.</p>
 </div>
 </div>
-<p>Both rules are still hard-coded to one sample, and <code>quality_cutoff</code> is hard-coded too. Configuration and wildcards fix each of those in turn.</p>
+<p>Both rules are still hard-coded to one sample, and <code>quality_cutoff</code> is hard-coded too.</p>
 </section>
 <section id="configuration" class="level2">
 <h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
@@ -628,7 +630,7 @@ Important
 </dd>
 <dt data-target-cell="annotated-cell-23" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-23" data-code-lines="11" data-code-annotation="4">The <code>{sample}</code> wildcard is used to match any file starting with <code>data/</code>, followed by at least one character (<code>.+</code>), and ending with <code>.fastq.gz</code>.</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="11" data-code-annotation="4"><code>{sample}</code> takes its value from the requested output (default pattern <code>.+</code>), then fills it into the input path.</span>
 </dd>
 <dt data-target-cell="annotated-cell-23" data-target-annotation="5">5</dt>
 <dd>
@@ -650,7 +652,7 @@ Important
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-24" data-code-lines="5" data-code-annotation="1">Here python list comprehension is used to define the input files.</span>
+<span data-code-cell="annotated-cell-24" data-code-lines="5" data-code-annotation="1">Here a Python list comprehension is used to define the input files.</span>
 </dd>
 </dl>
 </div>
@@ -707,7 +709,7 @@ Important
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="config/config.yaml"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_list</span><span class="kw">:</span><span class="at"> config/samples.csv</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>A Snakefile can contain any python code in addition to the rule definitions. So the samplesheet can be wired into the workflow with for example:</p>
+<p>A Snakefile can contain any Python code in addition to the rule definitions. So the samplesheet can be wired into the workflow with for example:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>workflow/Snakefile</strong></pre>
@@ -734,7 +736,7 @@ Important
 </dd>
 <dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-14" data-code-lines="3" data-code-annotation="2">Convert the dataframe to a nested dictionary (<code>{'sample1': {'file_path': 'data/sample1.fastq.gz'}</code> etc.)</span>
+<span data-code-cell="annotated-cell-14" data-code-lines="3" data-code-annotation="2">Convert the dataframe to a nested dictionary (<code>{'sample1': {'file_path': 'data/sample1.fastq.gz'}, ...}</code>)</span>
 </dd>
 <dt data-target-cell="annotated-cell-14" data-target-annotation="3">3</dt>
 <dd>
@@ -934,8 +936,13 @@ Important
 </div>
 </div>
 </div>
-<p>The <a href="https://github.com/OpenOmics/snakevision/">snakevision</a> python package generates more advanced visualisations. Below is an example of this shown for a dummy-workflow.</p>
-<p><img src="images/snakevision_dag.svg" class="img-fluid"></p>
+<p>The <a href="https://github.com/OpenOmics/snakevision/">snakevision</a> Python package generates more advanced visualisations, such as this one for a dummy workflow:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snakevision_dag.svg" class="img-fluid figure-img"></p>
+<figcaption>snakevision DAG of a dummy workflow</figcaption>
+</figure>
+</div>
 </section>
 <section id="configuration-profiles" class="level2">
 <h2 class="anchored" data-anchor-id="configuration-profiles">Configuration profiles</h2>
@@ -1000,7 +1007,7 @@ Important
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-19" data-code-lines="8" data-code-annotation="4">The default slurm partition.</span>
+<span data-code-cell="annotated-cell-19" data-code-lines="8" data-code-annotation="4">The default Slurm partition.</span>
 </dd>
 <dt data-target-cell="annotated-cell-19" data-target-annotation="5">5</dt>
 <dd>
