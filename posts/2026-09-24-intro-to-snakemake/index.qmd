@@ -2,7 +2,6 @@
 title: "An introduction to the Snakemake workflow manager"
 date: 2026-09-24
 date-modified: last-modified
-draft: false
 author:
   - John Sundh
 categories: [ "Snakemake", "Workflow management", "Reproducibility" ]
