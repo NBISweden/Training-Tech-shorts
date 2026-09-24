@@ -375,7 +375,7 @@ for details.
 :::
 
 ::: {.callout-important}
-Two important things to keep in mind when it comes to Wildcards:
+Wildcards have two requirements:
 
 1. Wildcards used in the `input:` directive of a rule **must** be present in the `output:` directive in order for Snakemake to resolve them.
 2. All output and log files of a rule **must** contain the same wildcards.
@@ -599,6 +599,13 @@ The [Snakemake Language](https://github.com/snakemake/snakemake-lang-vscode-plug
 VS Code extension adds syntax highlighting and snippets for Snakefiles.
 
 The [Snakefmt](https://github.com/tfehlmann/vscode-snakefmt-provider) VS Code extension gives you format-on-save for Snakefiles.
+
+## Key takeaways
+
+- Rules are connected by matching filenames between one rule's `output:` and another's `input:`.
+- Snakemake only reruns jobs whose input, code, `params:`, or software environment actually changed, not the whole workflow, unless `--rerun-triggers` says otherwise.
+- Wildcards generalise rules to work with any number of input files (_e.g._ samples).
+- Configuration profiles let you move CLI flags and resource definitions from the command line to YAML files.
 
 ## Further resources
 
