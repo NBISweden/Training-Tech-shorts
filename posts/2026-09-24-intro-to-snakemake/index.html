@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="John Sundh">
+<meta name="dcterms.date" content="2026-09-24">
+
+<title>An introduction to the Snakemake workflow manager – RSE Tools</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-95e700bef72d2880c277d2cb84c9764b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+div.sourceCode {
+max-height: 600px;
+overflow-y: auto;
+}
+</style>
+
+
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">RSE Tools</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contributing.html"> 
+<span class="menu-text">Contributing</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../cheatsheets.html"> 
+<span class="menu-text">Cheatsheets</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../write-up.html"> 
+<span class="menu-text">Writing a blog post</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-github" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-github">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts">
+ <span class="dropdown-text">Source Code</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/issues">
+ <span class="dropdown-text">Report an issue</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/issues">
+ <span class="dropdown-text">Suggest a walkthrough</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/NBISweden/Training-Tech-shorts/discussions">
+ <span class="dropdown-text">Discuss a post</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">An introduction to the Snakemake workflow manager</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Snakemake</div>
+                <div class="quarto-category">Workflow management</div>
+                <div class="quarto-category">Reproducibility</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>John Sundh </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 24, 2026</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 24, 2026</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p><a href="https://snakemake.github.io/">Snakemake</a> is a workflow manager written in Python.</p>
+</section>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>The recommended way to install Snakemake is with <a href="https://pixi.prefix.dev/">Pixi</a>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>pixi.toml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="pixi.toml"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[workspace]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">authors</span> <span class="op">=</span> <span class="op">[</span><span class="st">"John Sundh &lt;john.sundh@scilifelab.se&gt;"</span><span class="op">]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">channels</span> <span class="op">=</span> <span class="op">[</span><span class="st">"conda-forge"</span><span class="op">,</span> <span class="st">"bioconda"</span><span class="op">]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"myworkflow"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">platforms</span> <span class="op">=</span> <span class="op">[</span><span class="st">"osx-arm64"</span><span class="op">,</span> <span class="st">"osx-64"</span><span class="op">,</span> <span class="st">"linux-64"</span><span class="op">]</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">[tasks]</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">[dependencies]</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">snakemake</span> <span class="op">=</span> <span class="st">"&gt;=9.27.0,&lt;10"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Activate the environment with <code>pixi shell</code>.</p>
+</section>
+<section id="core-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="core-concepts">Core concepts</h2>
+<p>Snakemake workflows are built around files. Rules take one or more input files and create one or more output files. Rule dependencies are handled by matching filenames.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-2" data-filename="Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>rule convert_to_upper_case:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.txt"</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.txt"</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>    shell:</span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a><span class="co">        tr [a-z] [A-Z] &lt;{input} &gt; {output}</span></span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-11"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a>rule word_count:</span>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="annotated-cell-2-13"><a href="#annotated-cell-2-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.txt"</span>,</span>
+<span id="annotated-cell-2-14"><a href="#annotated-cell-2-14" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<span id="annotated-cell-2-15"><a href="#annotated-cell-2-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.wc.txt"</span>,</span>
+<span id="annotated-cell-2-16"><a href="#annotated-cell-2-16" aria-hidden="true" tabindex="-1"></a>    shell:</span>
+<span id="annotated-cell-2-17"><a href="#annotated-cell-2-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-2-18" class="code-annotation-target"><a href="#annotated-cell-2-18" aria-hidden="true" tabindex="-1"></a><span class="co">        wc {input} &gt; {output}</span></span>
+<span id="annotated-cell-2-19"><a href="#annotated-cell-2-19" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">Rule definition start, with descriptive name</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2,3" data-code-annotation="2"><code>input:</code> defines the input file(s)</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4,5" data-code-annotation="3"><code>output:</code> defines the output file(s)</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="6,7,8,9" data-code-annotation="4"><code>shell:</code> defines what command(s) to run. Here the <code>tr</code> tool is used to translate text to uppercase.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="18" data-code-annotation="5">The input and output are referred to with <code>{input}</code>/<code>{output}</code>. Here the <code>wc</code> utility counts lines, words and bytes in the input.</span>
+</dd>
+</dl>
+</section>
+<section id="running-a-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="running-a-workflow">Running a workflow</h2>
+<p>Run a Snakemake workflow by executing <code>snakemake</code> from the command line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">-s</span> Snakefile <span class="at">-c</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>-c/--cores</code> flag sets the upper bound for CPUs used and has to be specified (run with <code>-c all</code> to use available CPU cores). The <code>-s/--snakefile</code> flag points to the workflow definition file. This can be omitted if your definition file is any of <code>Snakefile</code>, <code>snakefile</code>, <code>workflow/Snakefile</code>, <code>workflow/snakefile</code> in the current working directory.</p>
+<p>By default, Snakemake executes the first rule in the workflow (<code>convert_to_upper_case</code> in this toy example). To use a different ‘target’, specify it on the command line, <em>e.g.</em>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">-s</span> Snakefile <span class="at">-c</span> 1 a.uppercase.wc.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A Snakemake convention is to use a <strong>pseudo</strong> rule named <code>all</code> at the top of your workflow which specifies the default targets:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-5" data-filename="Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>rule <span class="bu">all</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.wc.txt"</span>,</span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>rule convert_to_upper_case:</span>
+<span id="annotated-cell-5-6"><a href="#annotated-cell-5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="annotated-cell-5-7"><a href="#annotated-cell-5-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.txt"</span>,</span>
+<span id="annotated-cell-5-8"><a href="#annotated-cell-5-8" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<span id="annotated-cell-5-9"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.txt"</span>,</span>
+<span id="annotated-cell-5-10"><a href="#annotated-cell-5-10" aria-hidden="true" tabindex="-1"></a>    shell:</span>
+<span id="annotated-cell-5-11"><a href="#annotated-cell-5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a><span class="co">        tr [a-z] [A-Z] &lt;{input} &gt; {output}</span></span>
+<span id="annotated-cell-5-13"><a href="#annotated-cell-5-13" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="annotated-cell-5-14"><a href="#annotated-cell-5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-5-15"><a href="#annotated-cell-5-15" aria-hidden="true" tabindex="-1"></a>rule word_count:</span>
+<span id="annotated-cell-5-16"><a href="#annotated-cell-5-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="annotated-cell-5-17"><a href="#annotated-cell-5-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.txt"</span>,</span>
+<span id="annotated-cell-5-18"><a href="#annotated-cell-5-18" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<span id="annotated-cell-5-19"><a href="#annotated-cell-5-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">"a.uppercase.wc.txt"</span>,</span>
+<span id="annotated-cell-5-20"><a href="#annotated-cell-5-20" aria-hidden="true" tabindex="-1"></a>    shell:</span>
+<span id="annotated-cell-5-21"><a href="#annotated-cell-5-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="annotated-cell-5-22"><a href="#annotated-cell-5-22" aria-hidden="true" tabindex="-1"></a><span class="co">        wc {input} &gt; {output}</span></span>
+<span id="annotated-cell-5-23"><a href="#annotated-cell-5-23" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2,3" data-code-annotation="1">The <code>all</code> rule requires an input file which now becomes the default target of the workflow.</span>
+</dd>
+</dl>
+<p>Snakemake also decides <em>when</em> to rerun a rule. By default a job is skipped if its output is already up to date — newer than every input, and produced with the same code, <code>params:</code>, and software environment. Change any one of those and only the affected jobs rerun, not the whole workflow.</p>
+<p><code>--rerun-triggers</code> picks which of these count: <code>mtime</code>, <code>input</code>, <code>params</code>, <code>code</code>, <code>software-env</code> — all five by default.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--rerun-triggers</span> mtime</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Switching to <code>mtime</code> alone falls back to plain timestamp comparison.</p>
+</section>
+<section id="rule-directives" class="level2">
+<h2 class="anchored" data-anchor-id="rule-directives">Rule directives</h2>
+<p>A rule’s <code>input:</code> and <code>output:</code> are enough to chain rules together, but a real rule usually needs more: where to log its output, which software environment to run in, and how many resources to ask for. Take trimming a FASTQ file with <a href="https://github.com/OpenGene/fastp">fastp</a>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-7" data-filename="workflow/Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a>rule trim_reads:</span>
+<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">"data/sample1.fastq.gz"</span>,</span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-7-5" class="code-annotation-target"><a href="#annotated-cell-7-5" aria-hidden="true" tabindex="-1"></a>        fastq<span class="op">=</span><span class="st">"results/sample1.trimmed.fastq.gz"</span>,</span>
+<span id="annotated-cell-7-6"><a href="#annotated-cell-7-6" aria-hidden="true" tabindex="-1"></a>        html<span class="op">=</span><span class="st">"results/sample1.fastp.html"</span>,</span>
+<span id="annotated-cell-7-7"><a href="#annotated-cell-7-7" aria-hidden="true" tabindex="-1"></a>        json<span class="op">=</span><span class="st">"results/sample1.fastp.json"</span>,</span>
+<span id="annotated-cell-7-8"><a href="#annotated-cell-7-8" aria-hidden="true" tabindex="-1"></a>    log:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-7-9" class="code-annotation-target"><a href="#annotated-cell-7-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">"logs/sample1.trim.log"</span>,</span>
+<span id="annotated-cell-7-10"><a href="#annotated-cell-7-10" aria-hidden="true" tabindex="-1"></a>    conda:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-7-11" class="code-annotation-target"><a href="#annotated-cell-7-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"envs/fastp.yaml"</span></span>
+<span id="annotated-cell-7-12"><a href="#annotated-cell-7-12" aria-hidden="true" tabindex="-1"></a>    container:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-7-13" class="code-annotation-target"><a href="#annotated-cell-7-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">"docker://quay.io/biocontainers/fastp:1.3.6--h43da1c4_0"</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-7-14" class="code-annotation-target"><a href="#annotated-cell-7-14" aria-hidden="true" tabindex="-1"></a>    threads: <span class="dv">4</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-7-15" class="code-annotation-target"><a href="#annotated-cell-7-15" aria-hidden="true" tabindex="-1"></a>    params:</span>
+<span id="annotated-cell-7-16"><a href="#annotated-cell-7-16" aria-hidden="true" tabindex="-1"></a>        quality_cutoff<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="annotated-cell-7-17"><a href="#annotated-cell-7-17" aria-hidden="true" tabindex="-1"></a>    shell:</span>
+<span id="annotated-cell-7-18"><a href="#annotated-cell-7-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="annotated-cell-7-19"><a href="#annotated-cell-7-19" aria-hidden="true" tabindex="-1"></a><span class="co">        fastp --thread {threads} -i {input} -o {output.fastq} </span><span class="op">\</span></span>
+<span id="annotated-cell-7-20"><a href="#annotated-cell-7-20" aria-hidden="true" tabindex="-1"></a><span class="co">            --html {output.html} --json {output.json} </span><span class="op">\</span></span>
+<span id="annotated-cell-7-21"><a href="#annotated-cell-7-21" aria-hidden="true" tabindex="-1"></a><span class="co">            --qualified_quality_phred {params.quality_cutoff} </span><span class="op">\</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-7-22" class="code-annotation-target"><a href="#annotated-cell-7-22" aria-hidden="true" tabindex="-1"></a><span class="co">            &gt;{log} 2&gt;&amp;1</span></span>
+<span id="annotated-cell-7-23"><a href="#annotated-cell-7-23" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="1">A single fixed input file, for now.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="5,6,7" data-code-annotation="2">Named outputs — <code>output.fastq</code>, <code>output.html</code> and <code>output.json</code> are referenced individually in <code>shell:</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="9" data-code-annotation="3"><code>log:</code> is a dedicated log file, kept even if the rule fails.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="11" data-code-annotation="4"><code>conda:</code> points to an environment YAML; Snakemake creates and activates it when run with <code>--deployment conda</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="13" data-code-annotation="5"><code>container:</code> names a Docker/Apptainer image Snakemake runs instead, with <code>--deployment apptainer</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="14" data-code-annotation="6"><code>threads:</code> is a per-rule maximum, clamped to <code>min(threads, --cores)</code> at runtime.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="15,16" data-code-annotation="7"><code>params:</code> defines rule-specific values that aren’t files — available in <code>shell:</code> as <code>{params.name}</code>, the same way as <code>{input}</code>/<code>{output}</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="22" data-code-annotation="8"><code>log:</code> doesn’t redirect anything by itself — <code>2&gt;&amp;1</code> here is what sends fastp’s output to the log file. Forget it and the log stays empty while errors go straight to the terminal instead.</span>
+</dd>
+</dl>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>resources:</code> (e.g.&nbsp;<code>mem_mb=4000</code>) is the directive for memory, set the same way as <code>threads:</code>. See the <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#resources">docs</a> for details on how to set resources.</p>
+</div>
+</div>
+</section>
+<section id="rule-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="rule-dependencies">Rule dependencies</h2>
+<p>A workflow rarely stops at one step. Snakemake chains rules by matching one rule’s <code>output:</code> to another’s <code>input:</code>. Classifying the trimmed reads with <a href="https://github.com/DerrickWood/kraken2">Kraken2</a> takes the output from <code>trim_reads</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-8" data-filename="workflow/Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a>rule classify_reads:</span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>        fastq<span class="op">=</span><span class="st">"results/sample1.trimmed.fastq.gz"</span>,</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-8-4" class="code-annotation-target"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a>        db<span class="op">=</span><span class="st">"resources/k2_standard"</span>,</span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a>        report<span class="op">=</span><span class="st">"results/sample1.kraken2.report"</span>,</span>
+<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a>        classified<span class="op">=</span><span class="st">"results/sample1.kraken2.out"</span>,</span>
+<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a>    log:</span>
+<span id="annotated-cell-8-9"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">"logs/sample1.classify.log"</span>,</span>
+<span id="annotated-cell-8-10"><a href="#annotated-cell-8-10" aria-hidden="true" tabindex="-1"></a>    conda:</span>
+<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"envs/kraken2.yaml"</span></span>
+<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12" aria-hidden="true" tabindex="-1"></a>    container:</span>
+<span id="annotated-cell-8-13"><a href="#annotated-cell-8-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">"docker://quay.io/biocontainers/kraken2:2.17.1--pl5321h077b44d_0"</span></span>
+<span id="annotated-cell-8-14"><a href="#annotated-cell-8-14" aria-hidden="true" tabindex="-1"></a>    threads: <span class="dv">8</span></span>
+<span id="annotated-cell-8-15"><a href="#annotated-cell-8-15" aria-hidden="true" tabindex="-1"></a>    shell:</span>
+<span id="annotated-cell-8-16"><a href="#annotated-cell-8-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="annotated-cell-8-17"><a href="#annotated-cell-8-17" aria-hidden="true" tabindex="-1"></a><span class="co">        kraken2 --db {input.db} --threads {threads} </span><span class="op">\</span></span>
+<span id="annotated-cell-8-18"><a href="#annotated-cell-8-18" aria-hidden="true" tabindex="-1"></a><span class="co">            --report {output.report} --output {output.classified} </span><span class="op">\</span></span>
+<span id="annotated-cell-8-19"><a href="#annotated-cell-8-19" aria-hidden="true" tabindex="-1"></a><span class="co">            {input.fastq} &gt;{log} 2&gt;&amp;1</span></span>
+<span id="annotated-cell-8-20"><a href="#annotated-cell-8-20" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="1">This is exactly <code>trim_reads</code>’s <code>output.fastq</code> path — Snakemake resolves the dependency by matching that filename, no explicit link between the two rules needed.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="4" data-code-annotation="2">This rule also requires a kraken2 database. Here the directory is assumed to contain the necessary kraken files.</span>
+</dd>
+</dl>
+<p>Rule dependencies can also be specified using the <code>rules.some_rule.output</code> syntax. For our example workflow it would be:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-9" data-filename="workflow/Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a>rule trim_reads:</span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">"data/sample1.fastq.gz"</span>,</span>
+<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>        fastq<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.trimmed.fastq.gz"</span>,</span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a>        html<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.fastp.html"</span>,</span>
+<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>        json<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.fastp.json"</span>,</span>
+<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="annotated-cell-9-9"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-9-10"><a href="#annotated-cell-9-10" aria-hidden="true" tabindex="-1"></a>rule classify_reads:</span>
+<span id="annotated-cell-9-11"><a href="#annotated-cell-9-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-12" class="code-annotation-target"><a href="#annotated-cell-9-12" aria-hidden="true" tabindex="-1"></a>        fastq<span class="op">=</span>rules.trim_reads.output.fastq,</span>
+<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13" aria-hidden="true" tabindex="-1"></a>        db<span class="op">=</span><span class="st">"resources/k2_standard"</span>,</span>
+<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14" aria-hidden="true" tabindex="-1"></a>...</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="12" data-code-annotation="1">The input to <code>classify_reads</code> is explicitly set to the <code>fastq</code> output from <code>trim_reads</code>.</span>
+</dd>
+</dl>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This explicit syntax requires that the referenced rule is defined before the rule referencing it.</p>
+</div>
+</div>
+<p>Both rules are still hard-coded to one sample, and <code>quality_cutoff</code> is hard-coded too. Configuration and wildcards fix each of those in turn.</p>
+</section>
+<section id="configuration" class="level2">
+<h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
+<p>Hard-coding <code>quality_cutoff=20</code> means editing the Snakefile for every parameter change. A configfile moves values like this out of the workflow logic:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>config/config.yaml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-filename="config/config.yaml"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quality_cutoff</span><span class="kw">:</span><span class="at"> </span><span class="dv">20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Inside the workflow the global <code>config</code> dictionary holds all configuration values.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-11" data-filename="workflow/Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a>    params:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-2" class="code-annotation-target"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>        quality_cutoff<span class="op">=</span>config[<span class="st">"quality_cutoff"</span>],</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="2" data-code-annotation="1"><code>params:</code> now reads that dict instead of a literal <code>20</code>.</span>
+</dd>
+</dl>
+<p>Running Snakemake with <code>--configfile config/config.yaml</code> supplies values to the <code>config</code> dictionary. You can also use <code>--config key=value</code> on the command line to supply/override values without editing the config file itself — useful for a one-off change (but be careful about the loss in reproducibility).</p>
+</section>
+<section id="wildcards" class="level2">
+<h2 class="anchored" data-anchor-id="wildcards">Wildcards</h2>
+<p>A wildcard generalises a rule across many files by turning part of a filename into a variable. Rewriting both rules with <code>{sample}</code> runs the same two-step pipeline for every sample we define:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">with expand</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">with list comprehension</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-23" data-filename="workflow/Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-23-1" class="code-annotation-target"><a href="#annotated-cell-23-1" aria-hidden="true" tabindex="-1"></a>SAMPLES <span class="op">=</span> [<span class="st">"sample1"</span>, <span class="st">"sample2"</span>, <span class="st">"sample3"</span>]</span>
+<span id="annotated-cell-23-2"><a href="#annotated-cell-23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-23-3"><a href="#annotated-cell-23-3" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-23-4" class="code-annotation-target"><a href="#annotated-cell-23-4" aria-hidden="true" tabindex="-1"></a>rule <span class="bu">all</span>:</span>
+<span id="annotated-cell-23-5"><a href="#annotated-cell-23-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-23-6" class="code-annotation-target"><a href="#annotated-cell-23-6" aria-hidden="true" tabindex="-1"></a>        expand(<span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.kraken2.report"</span>, sample<span class="op">=</span>SAMPLES),</span>
+<span id="annotated-cell-23-7"><a href="#annotated-cell-23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-23-8"><a href="#annotated-cell-23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-23-9"><a href="#annotated-cell-23-9" aria-hidden="true" tabindex="-1"></a>rule trim_reads:</span>
+<span id="annotated-cell-23-10"><a href="#annotated-cell-23-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-23-11" class="code-annotation-target"><a href="#annotated-cell-23-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"data/{sample}.fastq.gz"</span>,</span>
+<span id="annotated-cell-23-12"><a href="#annotated-cell-23-12" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<span id="annotated-cell-23-13"><a href="#annotated-cell-23-13" aria-hidden="true" tabindex="-1"></a>        fastq<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.trimmed.fastq.gz"</span>,</span>
+<span id="annotated-cell-23-14"><a href="#annotated-cell-23-14" aria-hidden="true" tabindex="-1"></a>        html<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.fastp.html"</span>,</span>
+<span id="annotated-cell-23-15"><a href="#annotated-cell-23-15" aria-hidden="true" tabindex="-1"></a>        json<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.fastp.json"</span>,</span>
+<span id="annotated-cell-23-16"><a href="#annotated-cell-23-16" aria-hidden="true" tabindex="-1"></a>    log:</span>
+<span id="annotated-cell-23-17"><a href="#annotated-cell-23-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">"logs/{sample}.trim.log"</span>,</span>
+<span id="annotated-cell-23-18"><a href="#annotated-cell-23-18" aria-hidden="true" tabindex="-1"></a>    conda:</span>
+<span id="annotated-cell-23-19"><a href="#annotated-cell-23-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">"envs/fastp.yaml"</span></span>
+<span id="annotated-cell-23-20"><a href="#annotated-cell-23-20" aria-hidden="true" tabindex="-1"></a>    container:</span>
+<span id="annotated-cell-23-21"><a href="#annotated-cell-23-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">"docker://quay.io/biocontainers/fastp:1.3.6--h43da1c4_0"</span></span>
+<span id="annotated-cell-23-22"><a href="#annotated-cell-23-22" aria-hidden="true" tabindex="-1"></a>    threads: <span class="dv">4</span></span>
+<span id="annotated-cell-23-23"><a href="#annotated-cell-23-23" aria-hidden="true" tabindex="-1"></a>    params:</span>
+<span id="annotated-cell-23-24"><a href="#annotated-cell-23-24" aria-hidden="true" tabindex="-1"></a>        quality_cutoff<span class="op">=</span>config[<span class="st">"quality_cutoff"</span>],</span>
+<span id="annotated-cell-23-25"><a href="#annotated-cell-23-25" aria-hidden="true" tabindex="-1"></a>    shell:</span>
+<span id="annotated-cell-23-26"><a href="#annotated-cell-23-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="annotated-cell-23-27"><a href="#annotated-cell-23-27" aria-hidden="true" tabindex="-1"></a><span class="co">        fastp --thread {threads} -i {input} -o {output.fastq} </span><span class="op">\</span></span>
+<span id="annotated-cell-23-28"><a href="#annotated-cell-23-28" aria-hidden="true" tabindex="-1"></a><span class="co">            --html {output.html} --json {output.json} </span><span class="op">\</span></span>
+<span id="annotated-cell-23-29"><a href="#annotated-cell-23-29" aria-hidden="true" tabindex="-1"></a><span class="co">            --qualified_quality_phred {params.quality_cutoff} </span><span class="op">\</span></span>
+<span id="annotated-cell-23-30"><a href="#annotated-cell-23-30" aria-hidden="true" tabindex="-1"></a><span class="co">            &gt;{log} 2&gt;&amp;1</span></span>
+<span id="annotated-cell-23-31"><a href="#annotated-cell-23-31" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="annotated-cell-23-32"><a href="#annotated-cell-23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-23-33"><a href="#annotated-cell-23-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-23-34"><a href="#annotated-cell-23-34" aria-hidden="true" tabindex="-1"></a>rule classify_reads:</span>
+<span id="annotated-cell-23-35"><a href="#annotated-cell-23-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-23-36" class="code-annotation-target"><a href="#annotated-cell-23-36" aria-hidden="true" tabindex="-1"></a>        fastq<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.trimmed.fastq.gz"</span>,</span>
+<span id="annotated-cell-23-37"><a href="#annotated-cell-23-37" aria-hidden="true" tabindex="-1"></a>        db<span class="op">=</span><span class="st">"resources/k2_standard"</span>,</span>
+<span id="annotated-cell-23-38"><a href="#annotated-cell-23-38" aria-hidden="true" tabindex="-1"></a>    output:</span>
+<span id="annotated-cell-23-39"><a href="#annotated-cell-23-39" aria-hidden="true" tabindex="-1"></a>        report<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.kraken2.report"</span>,</span>
+<span id="annotated-cell-23-40"><a href="#annotated-cell-23-40" aria-hidden="true" tabindex="-1"></a>        classified<span class="op">=</span><span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.kraken2.out"</span>,</span>
+<span id="annotated-cell-23-41"><a href="#annotated-cell-23-41" aria-hidden="true" tabindex="-1"></a>    log:</span>
+<span id="annotated-cell-23-42"><a href="#annotated-cell-23-42" aria-hidden="true" tabindex="-1"></a>        <span class="co">"logs/{sample}.classify.log"</span>,</span>
+<span id="annotated-cell-23-43"><a href="#annotated-cell-23-43" aria-hidden="true" tabindex="-1"></a>    conda:</span>
+<span id="annotated-cell-23-44"><a href="#annotated-cell-23-44" aria-hidden="true" tabindex="-1"></a>        <span class="co">"envs/kraken2.yaml"</span></span>
+<span id="annotated-cell-23-45"><a href="#annotated-cell-23-45" aria-hidden="true" tabindex="-1"></a>    container:</span>
+<span id="annotated-cell-23-46"><a href="#annotated-cell-23-46" aria-hidden="true" tabindex="-1"></a>        <span class="co">"docker://quay.io/biocontainers/kraken2:2.17.1--pl5321h077b44d_0"</span></span>
+<span id="annotated-cell-23-47"><a href="#annotated-cell-23-47" aria-hidden="true" tabindex="-1"></a>    threads: <span class="dv">8</span></span>
+<span id="annotated-cell-23-48"><a href="#annotated-cell-23-48" aria-hidden="true" tabindex="-1"></a>    shell:</span>
+<span id="annotated-cell-23-49"><a href="#annotated-cell-23-49" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="annotated-cell-23-50"><a href="#annotated-cell-23-50" aria-hidden="true" tabindex="-1"></a><span class="co">        kraken2 --db {input.db} --threads {threads} </span><span class="op">\</span></span>
+<span id="annotated-cell-23-51"><a href="#annotated-cell-23-51" aria-hidden="true" tabindex="-1"></a><span class="co">            --report {output.report} --output {output.classified} </span><span class="op">\</span></span>
+<span id="annotated-cell-23-52"><a href="#annotated-cell-23-52" aria-hidden="true" tabindex="-1"></a><span class="co">            {input.fastq} &gt;{log} 2&gt;&amp;1</span></span>
+<span id="annotated-cell-23-53"><a href="#annotated-cell-23-53" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="1" data-code-annotation="1">A sample list — it could equally come from a config file or from an external sample sheet.</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="4" data-code-annotation="2">The <code>all</code> rule at the top defines the workflow’s default target list.</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="6" data-code-annotation="3">The <code>expand()</code> <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#helpers-for-defining-rules">helper function</a> turns the sample list into concrete target filenames — here, the final <code>kraken2.report</code> per sample, so <code>all</code> pulls both steps through for every sample.</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="11" data-code-annotation="4">The <code>{sample}</code> wildcard is used to match any file starting with <code>data/</code>, followed by at least one character (<code>.+</code>), and ending with <code>.fastq.gz</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="36" data-code-annotation="5"><code>classify_reads</code>’s <code>input:</code> resolves against whichever sample <code>trim_reads</code> already produced, using the same wildcard value throughout.</span>
+</dd>
+</dl>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-24" data-filename="workflow/Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-24-1"><a href="#annotated-cell-24-1" aria-hidden="true" tabindex="-1"></a>SAMPLES <span class="op">=</span> [<span class="st">"sample1"</span>, <span class="st">"sample2"</span>, <span class="st">"sample3"</span>]</span>
+<span id="annotated-cell-24-2"><a href="#annotated-cell-24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-24-3"><a href="#annotated-cell-24-3" aria-hidden="true" tabindex="-1"></a>rule <span class="bu">all</span>:</span>
+<span id="annotated-cell-24-4"><a href="#annotated-cell-24-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-24-5" class="code-annotation-target"><a href="#annotated-cell-24-5" aria-hidden="true" tabindex="-1"></a>        [<span class="ss">f"results/</span><span class="sc">{</span>sample<span class="sc">}</span><span class="ss">.kraken2.report"</span> <span class="cf">for</span> sample <span class="kw">in</span> SAMPLES]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-24" data-code-lines="5" data-code-annotation="1">Here python list comprehension is used to define the input files.</span>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If filenames would collide, <code>wildcard_constraints</code> narrows what a wildcard is allowed to match (e.g.&nbsp;digits only). See the <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#wildcards">wildcards docs</a> for details.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wildcards have two requirements:</p>
+<ol type="1">
+<li>Wildcards used in the <code>input:</code> directive of a rule <strong>must</strong> be present in the <code>output:</code> directive in order for Snakemake to resolve them.</li>
+<li>All output and log files of a rule <strong>must</strong> contain the same wildcards.</li>
+</ol>
+</div>
+</div>
+<p>Our example workflow is now generalised to use any number of input files matching <code>data/{sample}.fastq.gz</code> and allows the jobs to be parallelised.</p>
+</section>
+<section id="specifying-workflow-input" class="level2">
+<h2 class="anchored" data-anchor-id="specifying-workflow-input">Specifying workflow input</h2>
+<p>Most of the time a workflow has to start from one or more files. A typical example being the <code>*.fastq.gz</code> files used as input to <code>trim_reads</code> in the example above. Instead of hard-coding the samples (with the <code>SAMPLES</code> list) and the input directory (with <code>data/{sample}.fastq.gz</code>) we can supply a samplesheet that is read at runtime.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>config/samples.csv</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="config/samples.csv"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_id,file_path</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sample1,data/sample1.fastq.gz</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sample2,data/sample2.fastq.gz</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sample3,data/sample3.fastq.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Adding a <code>sample_list</code> parameter to the configfile lets you point Snakemake to a file where the workflow input is defined:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>config/config.yaml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="config/config.yaml"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_list</span><span class="kw">:</span><span class="at"> config/samples.csv</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A Snakefile can contain any python code in addition to the rule definitions. So the samplesheet can be wired into the workflow with for example:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/Snakefile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-14" data-filename="workflow/Snakefile"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(config[<span class="st">"sample_list"</span>], index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-14-3" class="code-annotation-target"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a>SAMPLES <span class="op">=</span> df.to_dict(orient<span class="op">=</span><span class="st">"index"</span>)</span>
+<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-14-5"><a href="#annotated-cell-14-5" aria-hidden="true" tabindex="-1"></a>rule <span class="bu">all</span>:</span>
+<span id="annotated-cell-14-6"><a href="#annotated-cell-14-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-14-7" class="code-annotation-target"><a href="#annotated-cell-14-7" aria-hidden="true" tabindex="-1"></a>        expand(<span class="st">"results/</span><span class="sc">{sample}</span><span class="st">.kraken2.report"</span>, sample<span class="op">=</span>SAMPLES),</span>
+<span id="annotated-cell-14-8"><a href="#annotated-cell-14-8" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-14-9" class="code-annotation-target"><a href="#annotated-cell-14-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_input_fastq(wildcards):</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-14-10" class="code-annotation-target"><a href="#annotated-cell-14-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> SAMPLES[wildcards.sample][<span class="st">"file_path"</span>]</span>
+<span id="annotated-cell-14-11"><a href="#annotated-cell-14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-14-12"><a href="#annotated-cell-14-12" aria-hidden="true" tabindex="-1"></a>rule trim_reads:</span>
+<span id="annotated-cell-14-13"><a href="#annotated-cell-14-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span>:</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-14-14" class="code-annotation-target"><a href="#annotated-cell-14-14" aria-hidden="true" tabindex="-1"></a>        get_input_fastq,</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="1,2" data-code-annotation="1">Import the <code>pandas</code> package and read the samplesheet.</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="3" data-code-annotation="2">Convert the dataframe to a nested dictionary (<code>{'sample1': {'file_path': 'data/sample1.fastq.gz'}</code> etc.)</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="7" data-code-annotation="3">The workflow targets are generated with the <code>expand</code> helper function.</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="9" data-code-annotation="4">Define a python function <code>get_input_fastq</code> which takes a single argument <code>wildcards</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="10" data-code-annotation="5">Return the file path for a given sample by doing a look-up in the <code>SAMPLES</code> dictionary.</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="14" data-code-annotation="6">The <code>trim_reads</code> rule evaluates the <code>get_input_fastq</code> function once the wildcard values of a job are determined.</span>
+</dd>
+</dl>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--configfile</span> config/config.yaml <span class="at">-c</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="dry-runs" class="level2">
+<h2 class="anchored" data-anchor-id="dry-runs">Dry runs</h2>
+<p>Before running anything for real — locally or on a cluster — <code>--dry-run</code> (<code>-n</code>) shows the jobs Snakemake would run, without touching a single file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--configfile</span> config/config.yaml <span class="at">-n</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="visualising-workflows" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-workflows">Visualising workflows</h2>
+<p>To visualise a workflow, run with <code>--dag</code> to print out the DAG in dot language:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Rendered DAG</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Raw dot code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 212.16 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
+<title>snakemake_dag</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-184 208.16,-184 208.16,4 -4,4"></polygon>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<path fill="none" stroke="#d85656" d="M117.08,-36C117.08,-36 87.08,-36 87.08,-36 81.08,-36 75.08,-30 75.08,-24 75.08,-24 75.08,-12 75.08,-12 75.08,-6 81.08,0 87.08,0 87.08,0 117.08,0 117.08,0 123.08,0 129.08,-6 129.08,-12 129.08,-12 129.08,-24 129.08,-24 129.08,-30 123.08,-36 117.08,-36"></path>
+<text text-anchor="middle" x="102.08" y="-16.2" font-family="sans" font-size="6.00">all</text>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<path fill="none" stroke="#afd856" d="M44.08,-108C44.08,-108 14.08,-108 14.08,-108 8.08,-108 2.08,-102 2.08,-96 2.08,-96 2.08,-84 2.08,-84 2.08,-78 8.08,-72 14.08,-72 14.08,-72 44.08,-72 44.08,-72 50.08,-72 56.08,-78 56.08,-84 56.08,-84 56.08,-96 56.08,-96 56.08,-102 50.08,-108 44.08,-108"></path>
+<text text-anchor="middle" x="29.08" y="-88.2" font-family="sans" font-size="6.00">classify_reads</text>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge1" class="edge">
+<title>1-&gt;0</title>
+<path fill="none" stroke="grey" d="M47.12,-71.7C56.14,-63.05 67.2,-52.45 77.02,-43.03"></path>
+<polygon fill="grey" stroke="grey" points="79.45,-45.55 84.24,-36.1 74.6,-40.5 79.45,-45.55"></polygon>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<path fill="none" stroke="#56d8a9" d="M44.24,-180C44.24,-180 11.92,-180 11.92,-180 5.92,-180 -0.08,-174 -0.08,-168 -0.08,-168 -0.08,-156 -0.08,-156 -0.08,-150 5.92,-144 11.92,-144 11.92,-144 44.24,-144 44.24,-144 50.24,-144 56.24,-150 56.24,-156 56.24,-156 56.24,-168 56.24,-168 56.24,-174 50.24,-180 44.24,-180"></path>
+<text text-anchor="middle" x="28.08" y="-163.8" font-family="sans" font-size="6.00">trim_reads</text>
+<text text-anchor="middle" x="28.08" y="-156.6" font-family="sans" font-size="6.00">sample: sample1</text>
+</g>
+<!-- 2&#45;&gt;1 -->
+<g id="edge4" class="edge">
+<title>2-&gt;1</title>
+<path fill="none" stroke="grey" d="M28.33,-143.7C28.44,-135.98 28.57,-126.71 28.69,-118.11"></path>
+<polygon fill="grey" stroke="grey" points="32.19,-118.15 28.83,-108.1 25.19,-118.05 32.19,-118.15"></polygon>
+</g>
+<!-- 3 -->
+<g id="node4" class="node">
+<title>3</title>
+<path fill="none" stroke="#afd856" d="M117.08,-108C117.08,-108 87.08,-108 87.08,-108 81.08,-108 75.08,-102 75.08,-96 75.08,-96 75.08,-84 75.08,-84 75.08,-78 81.08,-72 87.08,-72 87.08,-72 117.08,-72 117.08,-72 123.08,-72 129.08,-78 129.08,-84 129.08,-84 129.08,-96 129.08,-96 129.08,-102 123.08,-108 117.08,-108"></path>
+<text text-anchor="middle" x="102.08" y="-88.2" font-family="sans" font-size="6.00">classify_reads</text>
+</g>
+<!-- 3&#45;&gt;0 -->
+<g id="edge2" class="edge">
+<title>3-&gt;0</title>
+<path fill="none" stroke="grey" d="M102.08,-71.7C102.08,-63.98 102.08,-54.71 102.08,-46.11"></path>
+<polygon fill="grey" stroke="grey" points="105.58,-46.1 102.08,-36.1 98.58,-46.1 105.58,-46.1"></polygon>
+</g>
+<!-- 4 -->
+<g id="node5" class="node">
+<title>4</title>
+<path fill="none" stroke="#56d8a9" d="M118.24,-180C118.24,-180 85.92,-180 85.92,-180 79.92,-180 73.92,-174 73.92,-168 73.92,-168 73.92,-156 73.92,-156 73.92,-150 79.92,-144 85.92,-144 85.92,-144 118.24,-144 118.24,-144 124.24,-144 130.24,-150 130.24,-156 130.24,-156 130.24,-168 130.24,-168 130.24,-174 124.24,-180 118.24,-180"></path>
+<text text-anchor="middle" x="102.08" y="-163.8" font-family="sans" font-size="6.00">trim_reads</text>
+<text text-anchor="middle" x="102.08" y="-156.6" font-family="sans" font-size="6.00">sample: sample2</text>
+</g>
+<!-- 4&#45;&gt;3 -->
+<g id="edge5" class="edge">
+<title>4-&gt;3</title>
+<path fill="none" stroke="grey" d="M102.08,-143.7C102.08,-135.98 102.08,-126.71 102.08,-118.11"></path>
+<polygon fill="grey" stroke="grey" points="105.58,-118.1 102.08,-108.1 98.58,-118.1 105.58,-118.1"></polygon>
+</g>
+<!-- 5 -->
+<g id="node6" class="node">
+<title>5</title>
+<path fill="none" stroke="#afd856" d="M190.08,-108C190.08,-108 160.08,-108 160.08,-108 154.08,-108 148.08,-102 148.08,-96 148.08,-96 148.08,-84 148.08,-84 148.08,-78 154.08,-72 160.08,-72 160.08,-72 190.08,-72 190.08,-72 196.08,-72 202.08,-78 202.08,-84 202.08,-84 202.08,-96 202.08,-96 202.08,-102 196.08,-108 190.08,-108"></path>
+<text text-anchor="middle" x="175.08" y="-88.2" font-family="sans" font-size="6.00">classify_reads</text>
+</g>
+<!-- 5&#45;&gt;0 -->
+<g id="edge3" class="edge">
+<title>5-&gt;0</title>
+<path fill="none" stroke="grey" d="M157.03,-71.7C148.02,-63.05 136.96,-52.45 127.14,-43.03"></path>
+<polygon fill="grey" stroke="grey" points="129.56,-40.5 119.92,-36.1 124.71,-45.55 129.56,-40.5"></polygon>
+</g>
+<!-- 6 -->
+<g id="node7" class="node">
+<title>6</title>
+<path fill="none" stroke="#56d8a9" d="M192.24,-180C192.24,-180 159.92,-180 159.92,-180 153.92,-180 147.92,-174 147.92,-168 147.92,-168 147.92,-156 147.92,-156 147.92,-150 153.92,-144 159.92,-144 159.92,-144 192.24,-144 192.24,-144 198.24,-144 204.24,-150 204.24,-156 204.24,-156 204.24,-168 204.24,-168 204.24,-174 198.24,-180 192.24,-180"></path>
+<text text-anchor="middle" x="176.08" y="-163.8" font-family="sans" font-size="6.00">trim_reads</text>
+<text text-anchor="middle" x="176.08" y="-156.6" font-family="sans" font-size="6.00">sample: sample3</text>
+</g>
+<!-- 6&#45;&gt;5 -->
+<g id="edge6" class="edge">
+<title>6-&gt;5</title>
+<path fill="none" stroke="grey" d="M175.83,-143.7C175.72,-135.98 175.59,-126.71 175.47,-118.11"></path>
+<polygon fill="grey" stroke="grey" points="178.97,-118.05 175.32,-108.1 171.97,-118.15 178.97,-118.05"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode dot code-with-copy"><code class="sourceCode dot"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">digraph</span> <span class="va">snakemake_dag</span> <span class="ot">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">    </span><span class="va">graph</span><span class="ot">[</span><span class="at">bgcolor</span><span class="ot">=</span><span class="va">white</span><span class="co">, </span><span class="at">margin</span><span class="ot">=</span><span class="dv">0</span><span class="ot">];</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span><span class="kw">node</span><span class="ot">[</span><span class="at">shape</span><span class="ot">=</span><span class="va">box</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="va">rounded</span><span class="co">, </span><span class="at">fontname</span><span class="ot">=</span><span class="va">sans</span><span class="co">, </span><span class="at">fontsize</span><span class="ot">=</span><span class="dv">6</span><span class="co">, </span><span class="va">penwidth</span><span class="ot">=</span><span class="dv">1</span><span class="ot">];</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span><span class="kw">edge</span><span class="ot">[</span><span class="va">penwidth</span><span class="ot">=</span><span class="dv">1</span><span class="co">, </span><span class="at">color</span><span class="ot">=</span><span class="va">grey</span><span class="ot">];</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">0</span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"all"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"0.00 0.6 0.85"</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="st">"rounded"</span><span class="ot">];</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">1</span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"classify_reads"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"0.22 0.6 0.85"</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="st">"rounded"</span><span class="ot">];</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">2</span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"trim_reads\nsample: sample1"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"0.44 0.6 0.85"</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="st">"rounded"</span><span class="ot">];</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">3</span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"classify_reads"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"0.22 0.6 0.85"</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="st">"rounded"</span><span class="ot">];</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">4</span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"trim_reads\nsample: sample2"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"0.44 0.6 0.85"</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="st">"rounded"</span><span class="ot">];</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">5</span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"classify_reads"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"0.22 0.6 0.85"</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="st">"rounded"</span><span class="ot">];</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">6</span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"trim_reads\nsample: sample3"</span><span class="co">, </span><span class="at">color</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">"0.44 0.6 0.85"</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="st">"rounded"</span><span class="ot">];</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">1</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="dv">0</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">3</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="dv">0</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">5</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="dv">0</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">2</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="dv">1</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">4</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="dv">3</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">        </span><span class="dv">6</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="dv">5</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="ot">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>The <code>--rulegraph</code> flag is similar but shows a graph of <em>rules</em> rather than of every <em>job</em>:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 62.00 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
+<title>snakemake_dag</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-184 58,-184 58,4 -4,4"></polygon>
+<!-- 0 -->
+<g id="node1" class="node">
+<title>0</title>
+<path fill="none" stroke="#d85656" d="M42,-36C42,-36 12,-36 12,-36 6,-36 0,-30 0,-24 0,-24 0,-12 0,-12 0,-6 6,0 12,0 12,0 42,0 42,0 48,0 54,-6 54,-12 54,-12 54,-24 54,-24 54,-30 48,-36 42,-36"></path>
+<text text-anchor="middle" x="27" y="-16.2" font-family="sans" font-size="6.00">all</text>
+</g>
+<!-- 1 -->
+<g id="node2" class="node">
+<title>1</title>
+<path fill="none" stroke="#afd856" d="M42,-108C42,-108 12,-108 12,-108 6,-108 0,-102 0,-96 0,-96 0,-84 0,-84 0,-78 6,-72 12,-72 12,-72 42,-72 42,-72 48,-72 54,-78 54,-84 54,-84 54,-96 54,-96 54,-102 48,-108 42,-108"></path>
+<text text-anchor="middle" x="27" y="-88.2" font-family="sans" font-size="6.00">classify_reads</text>
+</g>
+<!-- 1&#45;&gt;0 -->
+<g id="edge1" class="edge">
+<title>1-&gt;0</title>
+<path fill="none" stroke="grey" d="M27,-71.7C27,-63.98 27,-54.71 27,-46.11"></path>
+<polygon fill="grey" stroke="grey" points="30.5,-46.1 27,-36.1 23.5,-46.1 30.5,-46.1"></polygon>
+</g>
+<!-- 2 -->
+<g id="node3" class="node">
+<title>2</title>
+<path fill="none" stroke="#56d8a9" d="M42,-180C42,-180 12,-180 12,-180 6,-180 0,-174 0,-168 0,-168 0,-156 0,-156 0,-150 6,-144 12,-144 12,-144 42,-144 42,-144 48,-144 54,-150 54,-156 54,-156 54,-168 54,-168 54,-174 48,-180 42,-180"></path>
+<text text-anchor="middle" x="27" y="-160.2" font-family="sans" font-size="6.00">trim_reads</text>
+</g>
+<!-- 2&#45;&gt;1 -->
+<g id="edge2" class="edge">
+<title>2-&gt;1</title>
+<path fill="none" stroke="grey" d="M27,-143.7C27,-135.98 27,-126.71 27,-118.11"></path>
+<polygon fill="grey" stroke="grey" points="30.5,-118.1 27,-108.1 23.5,-118.1 30.5,-118.1"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>The <a href="https://github.com/OpenOmics/snakevision/">snakevision</a> python package generates more advanced visualisations. Below is an example of this shown for a dummy-workflow.</p>
+<p><img src="images/snakevision_dag.svg" class="img-fluid"></p>
+</section>
+<section id="configuration-profiles" class="level2">
+<h2 class="anchored" data-anchor-id="configuration-profiles">Configuration profiles</h2>
+<p>Snakemake comes with a large set of <a href="https://snakemake.readthedocs.io/en/stable/executing/cli.html">command line arguments</a> which allow you to customise a workflow run, for example:</p>
+<ul>
+<li><code>-c/--cores</code>: Number of CPUs.</li>
+<li><code>-p/--printshellcmds</code>: Print out the shell commands that will be executed.</li>
+<li><code>-k/--keep-going</code>: Go on with independent jobs if a job fails during execution.</li>
+<li><code>--deployment</code>: Specify software environment deployment method [<code>conda</code>, <code>apptainer</code>, <code>env-modules</code>]</li>
+<li><code>-e/--executor</code>: Use a custom executor, <em>e.g.</em> for cluster execution.</li>
+</ul>
+<p>Typing <code>--cores 1 --printshellcmds --keep-going --deployment conda</code> on every run gets old fast. A configuration profile stores default CLI flags in a YAML file instead:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/profiles/default/profile.yaml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-filename="workflow/profiles/default/profile.yaml"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cores</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">printshellcmds</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">keep-going</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">deployment</span><span class="kw">:</span><span class="at"> conda</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Snakemake auto-discovers <code>profiles/default/profile.yaml</code> relative to the <code>Snakefile</code> or working directory so:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--configfile</span> config/config.yaml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>picks this up with no flags at all; <code>--workflow-profile &lt;name&gt;</code> points at a different one, and <code>--workflow-profile none</code> skips auto-discovery entirely.</p>
+<p>A profile isn’t limited to convenience flags — it’s the same mechanism a compute cluster’s settings live in.</p>
+</section>
+<section id="running-on-a-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="running-on-a-cluster">Running on a cluster</h2>
+<p>Snakemake can submit jobs through an <strong>executor plugin</strong> rather than running it locally. For SLURM, install <a href="https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html"><code>snakemake-executor-plugin-slurm</code></a> and create a profile for the cluster:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>workflow/profiles/dardel/profile.yaml</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-19" data-filename="workflow/profiles/dardel/profile.yaml"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-19-1" class="code-annotation-target"><a href="#annotated-cell-19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">local-cores</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="annotated-cell-19-2"><a href="#annotated-cell-19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">printshellcmds</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="annotated-cell-19-3"><a href="#annotated-cell-19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">keep-going</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="annotated-cell-19-4"><a href="#annotated-cell-19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">deployment</span><span class="kw">:</span><span class="at"> apptainer</span></span>
+<span id="annotated-cell-19-5"><a href="#annotated-cell-19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">executor</span><span class="kw">:</span><span class="at"> slurm</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-19-6" class="code-annotation-target"><a href="#annotated-cell-19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">default-resources</span><span class="kw">:</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-19-7" class="code-annotation-target"><a href="#annotated-cell-19-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">slurm_account</span><span class="kw">:</span><span class="at"> </span><span class="st">"naiss2026-1-100"</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-19-8" class="code-annotation-target"><a href="#annotated-cell-19-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">slurm_partition</span><span class="kw">:</span><span class="at"> shared</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-19-9" class="code-annotation-target"><a href="#annotated-cell-19-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">mem_mb</span><span class="kw">:</span><span class="at"> </span><span class="dv">4000</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-19-10" class="code-annotation-target"><a href="#annotated-cell-19-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runtime</span><span class="kw">:</span><span class="at"> </span><span class="dv">30</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="7" onclick="event.preventDefault();">7</a><span id="annotated-cell-19-11" class="code-annotation-target"><a href="#annotated-cell-19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span><span class="at"> </span><span class="dv">20</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-19" data-target-annotation="8" onclick="event.preventDefault();">8</a><span id="annotated-cell-19-12" class="code-annotation-target"><a href="#annotated-cell-19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set-resources</span><span class="kw">:</span></span>
+<span id="annotated-cell-19-13"><a href="#annotated-cell-19-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">classify_reads</span><span class="kw">:</span></span>
+<span id="annotated-cell-19-14"><a href="#annotated-cell-19-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">mem_mb</span><span class="kw">:</span><span class="at"> </span><span class="dv">32000</span></span>
+<span id="annotated-cell-19-15"><a href="#annotated-cell-19-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">runtime</span><span class="kw">:</span><span class="at"> </span><span class="dv">600</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-19" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="1" data-code-annotation="1">Sets the maximum number of cores to use on the <strong>host machine</strong>. The cores are used to execute local rules.</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="6" data-code-annotation="2">Set default resources (applied to all jobs). These can be overridden with <code>set-resources:</code> for individual rules.</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="7" data-code-annotation="3">The compute account.</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="8" data-code-annotation="4">The default slurm partition.</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="9" data-code-annotation="5">Maximum total memory in MB.</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="10" data-code-annotation="6">Runtime in minutes.</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="11" data-code-annotation="7">The number of jobs you want to run in parallel.</span>
+</dd>
+<dt data-target-cell="annotated-cell-19" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-19" data-code-lines="12" data-code-annotation="8">Override default resources on a per-rule basis.</span>
+</dd>
+</dl>
+<p>Running <code>snakemake --configfile config/config.yaml --workflow-profile workflow/profiles/dardel</code> now submits every job via <code>sbatch</code>.</p>
+</section>
+<section id="best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-practices">Best practices</h2>
+<p>Two commands catch most style and correctness issues before a workflow is shared:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-20"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-20-1" class="code-annotation-target"><a href="#annotated-cell-20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--lint</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-20-2" class="code-annotation-target"><a href="#annotated-cell-20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">snakefmt</span> Snakefile</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-20" data-code-lines="1" data-code-annotation="1">Checks the code quality of your workflow and that it conforms to best practices.</span>
+</dd>
+<dt data-target-cell="annotated-cell-20" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-20" data-code-lines="2" data-code-annotation="2">Reformats the Snakefile in place, Black-style.</span>
+</dd>
+</dl>
+<p>The <a href="https://github.com/snakemake/snakemake-lang-vscode-plugin">Snakemake Language</a> VS Code extension adds syntax highlighting and snippets for Snakefiles.</p>
+<p>The <a href="https://github.com/tfehlmann/vscode-snakefmt-provider">Snakefmt</a> VS Code extension gives you format-on-save for Snakefiles.</p>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<ul>
+<li>Rules are connected by matching filenames between one rule’s <code>output:</code> and another’s <code>input:</code>.</li>
+<li>Snakemake only reruns jobs whose input, code, <code>params:</code>, or software environment actually changed, not the whole workflow, unless <code>--rerun-triggers</code> says otherwise.</li>
+<li>Wildcards generalise rules to work with any number of input files (<em>e.g.</em> samples).</li>
+<li>Configuration profiles let you move CLI flags and resource definitions from the command line to YAML files.</li>
+</ul>
+</section>
+<section id="further-resources" class="level2">
+<h2 class="anchored" data-anchor-id="further-resources">Further resources</h2>
+<ul>
+<li><a href="https://snakemake.readthedocs.io/">Snakemake documentation</a></li>
+<li><a href="https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html">Snakemake Best Practices</a></li>
+<li><a href="https://nbisweden.github.io/workshop-reproducible-research/pages/snakemake.html">NBIS Tools for Reproducible Research Snakemake tutorial</a></li>
+<li><a href="https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html">Configuration</a></li>
+<li><a href="https://snakemake.readthedocs.io/en/stable/executing/cli.html">Command line interface, incl.&nbsp;rerun triggers and profiles</a></li>
+<li><a href="https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html">SLURM executor plugin</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/NBISweden\.github\.io\/Training-Tech-shorts\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/NBISweden/Training-Tech-shorts/edit/main/posts/2026-09-24-intro-to-snakemake/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/blob/main/posts/2026-09-24-intro-to-snakemake/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/NBISweden/Training-Tech-shorts/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
