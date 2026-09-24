@@ -20,7 +20,7 @@ format:
 
 ## Introduction
 
-[Snakemake](https://snakemake.github.io/) is a workflow manager written in Python. 
+[Snakemake](https://snakemake.github.io/) is a workflow manager written in Python.
 
 ## Installation
 
@@ -39,6 +39,8 @@ version = "0.1.0"
 
 [dependencies]
 snakemake = ">=9.27.0,<10"
+conda = ">=26.7.2,<27" # for --deployment conda
+snakefmt = ">=2.0.3,<3"
 ```
 
 Activate the environment with `pixi shell`.
@@ -55,7 +57,7 @@ rule convert_to_upper_case: # <1>
         "a.uppercase.txt", # <3>
     shell: # <4>
         """ # <4>
-        tr [a-z] [A-Z] <{input} > {output} # <4>
+        tr a-z A-Z <{input} > {output} # <4>
         """ # <4>
 
 rule word_count:
@@ -105,7 +107,7 @@ rule convert_to_upper_case:
         "a.uppercase.txt",
     shell:
         """
-        tr [a-z] [A-Z] <{input} > {output}
+        tr a-z A-Z <{input} > {output}
         """
 
 rule word_count:
@@ -233,9 +235,9 @@ rule trim_reads:
     input:
         "data/sample1.fastq.gz",
     output:
-        fastq="results/{sample}.trimmed.fastq.gz",
-        html="results/{sample}.fastp.html",
-        json="results/{sample}.fastp.json",
+        fastq="results/sample1.trimmed.fastq.gz",
+        html="results/sample1.fastp.html",
+        json="results/sample1.fastp.json",
 ...
 
 rule classify_reads:
@@ -251,9 +253,8 @@ rule classify_reads:
 This explicit syntax requires that the referenced rule is defined before the rule referencing it.
 :::
 
-Both rules are still hard-coded to one sample, and `quality_cutoff` 
-is hard-coded too. Configuration and wildcards fix each of those in
-turn.
+Both rules are still hard-coded to one sample, and `quality_cutoff`
+is hard-coded too.
 
 ## Configuration
 
@@ -347,7 +348,7 @@ rule classify_reads:
 3. The `expand()` [helper function](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#helpers-for-defining-rules) turns the sample list into concrete target filenames —
    here, the final `kraken2.report` per sample, so `all` pulls
    both steps through for every sample.
-4. The `{sample}` wildcard is used to match any file starting with `data/`, followed by at least one character (`.+`), and ending with `.fastq.gz`.
+4. `{sample}` takes its value from the requested output (default pattern `.+`), then fills it into the input path.
 5. `classify_reads`'s `input:` resolves against whichever sample
    `trim_reads` already produced, using the same wildcard value
    throughout.
@@ -362,7 +363,7 @@ rule all:
         [f"results/{sample}.kraken2.report" for sample in SAMPLES] # <1>
 ```
 
-1. Here python list comprehension is used to define the input files.
+1. Here a Python list comprehension is used to define the input files.
 
 :::
 
@@ -399,7 +400,7 @@ Adding a `sample_list` parameter to the configfile lets you point Snakemake to a
 sample_list: config/samples.csv
 ```
 
-A Snakefile can contain any python code in addition to the rule definitions. So the samplesheet can be wired into the workflow with for example:
+A Snakefile can contain any Python code in addition to the rule definitions. So the samplesheet can be wired into the workflow with for example:
 
 ```{.python filename="workflow/Snakefile"}
 import pandas as pd # <1>
@@ -419,7 +420,7 @@ rule trim_reads:
 ```
 
 1. Import the `pandas` package and read the samplesheet.
-2. Convert the dataframe to a nested dictionary (`{'sample1': {'file_path': 'data/sample1.fastq.gz'}` etc.)
+2. Convert the dataframe to a nested dictionary (`{'sample1': {'file_path': 'data/sample1.fastq.gz'}, ...}`)
 3. The workflow targets are generated with the `expand` helper function.
 4. Define a python function `get_input_fastq` which takes a single argument `wildcards`.
 5. Return the file path for a given sample by doing a look-up in the `SAMPLES` dictionary.
@@ -509,9 +510,9 @@ digraph snakemake_dag {
 }
 ```
 
-The [snakevision](https://github.com/OpenOmics/snakevision/) python package generates more advanced visualisations. Below is an example of this shown for a dummy-workflow.
+The [snakevision](https://github.com/OpenOmics/snakevision/) Python package generates more advanced visualisations, such as this one for a dummy workflow:
 
-![](images/snakevision_dag.svg)
+![snakevision DAG of a dummy workflow](images/snakevision_dag.svg)
 
 ## Configuration profiles
 
@@ -573,7 +574,7 @@ set-resources: # <8>
 1. Sets the maximum number of cores to use on the **host machine**. The cores are used to execute local rules.
 2. Set default resources (applied to all jobs). These can be overridden with `set-resources:` for individual rules.
 3. The compute account.
-4. The default slurm partition.
+4. The default Slurm partition.
 5. Maximum total memory in MB.
 6. Runtime in minutes.
 7. The number of jobs you want to run in parallel.
