@@ -104,9 +104,12 @@ citations in [References](#references).
    the complete config) — a live demo is bad at leaving attendees
    something to copy afterward, so that part earns its place in prose.
    But cut narration of internal branches, alternate paths, or edge
-   cases; show those live instead of enumerating them.
+   cases; show those live instead of enumerating them. Once the talk
+   has been given, the post is the only record: keep an edge case
+   readers need, as one example or a link, rather than cutting it as
+   "shown live."
 5. **Coherence check.** Per Mayer's coherence principle
-   [[3]](#references) — the largest-effect-size of his multimedia
+   [[3]](#references) — among the largest-effect-size of his multimedia
    learning principles — if deleting a sentence doesn't weaken the point
    it sits in, delete it, regardless of whether it's true or
    interesting.
