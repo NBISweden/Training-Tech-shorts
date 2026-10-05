@@ -1,0 +1,121 @@
+---
+title: "5-Minute Tool Tips Showcase"
+date: 2026-10-08
+date-modified: last-modified
+draft: true
+author:
+  - Mahesh Binzer-Panchal
+  - Erik Fasterius
+  - Martin Dahlö
+categories:
+  - "Containers"
+  - "Pixi"
+  - "Wave"
+  - "SSH"
+  - "Terminal"
+  - "Git"
+---
+
+<!-- Source: discussion #169. Each presenter owns their section. Slots are unconfirmed beyond the sign-ups; add or remove sections to match what is given. -->
+
+Short, practical tips from NBIS staff, each shown as a 5-minute demo.
+
+- [Building ARM containers with Pixi and Wave](#building-arm-containers-with-pixi-and-wave) (Mahesh Binzer-Panchal, intermediate)
+- [Fuzzy file finders](#fuzzy-file-finders) (Erik Fasterius, beginner)
+- [SSH port forwarding, proxies and jump hosts](#ssh-port-forwarding-proxies-and-jump-hosts) (Martin Dahlö, beginner to intermediate)
+
+## Building ARM containers with Pixi and Wave
+
+*Mahesh Binzer-Panchal*
+
+Some HPC GPU nodes use ARM CPUs (`aarch64`), not x86-64. A container built for x86-64 does not run there, and most biocontainers images are x86-64 only.
+
+You can build an ARM container without an ARM machine:
+
+1. Search for ARM packages and validate an `environment.yml` with [Pixi](https://pixi.sh).
+2. Build the image from that file with [Seqera Wave](https://docs.seqera.io/wave/cli).
+
+### Check ARM packages with Pixi
+
+A failed container build costs minutes. Pixi answers in seconds and installs nothing. Add `-p linux-aarch64` so Pixi checks ARM Linux even when you run it on a machine with another architecture.
+
+Search for a package:
+
+```bash
+pixi search -c conda-forge -c bioconda -p linux-aarch64 samtools
+```
+
+A match shows `Subdir linux-aarch64` and the package URL. No match means no ARM build.
+
+Write the environment you want in an `environment.yml`:
+
+```{.yaml filename="environment.yml"}
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - samtools
+  - bcftools
+```
+
+Import it into a throwaway Pixi workspace for ARM, then solve it with a dry run:
+
+```bash
+pixi init --import environment.yml -p linux-aarch64 check
+cd check
+pixi lock --dry-run
+```
+
+`--dry-run` solves the environment without writing `pixi.lock` or installing anything. Exit code `0` and a package list mean the build will find every package. A failure names the conflicting or missing package. Fix `environment.yml` here, not in a build log.
+
+### Build the image with Wave
+
+Wave builds the image remotely, so the architecture of your machine does not matter. Pass it the validated file:
+
+```bash
+wave \
+  --conda-file environment.yml \
+  --build-template conda/pixi:v1 \
+  --platform linux/arm64 \
+  --freeze \
+  --await \
+  -o json
+```
+
+- `--build-template conda/pixi:v1` builds with Pixi.
+- `--platform linux/arm64` targets ARM.
+- `--freeze` returns a permanent `community.wave.seqera.io` URI. Without it, the URI expires after about 48 hours.
+
+`-o json` prints the result as JSON:
+
+```json
+{"containerImage":"community.wave.seqera.io/library/samtools_bcftools:8dbd583e7b71dfec","succeeded":true, ...}
+```
+
+Use the URI as the `container` in your Nextflow process, or `apptainer pull` it on the cluster. Check `succeeded` in the output: `wave` can exit `0` when the build failed.
+
+### Key takeaways
+
+- Which two Pixi commands tell you, in seconds, whether a package exists for ARM and whether your environment solves?
+- Which flag makes a Wave image URI permanent?
+
+### Further resources
+
+- [Wave CLI](https://docs.seqera.io/wave/cli)
+- [Pixi documentation](https://pixi.sh)
+
+## Fuzzy file finders
+
+*Erik Fasterius*
+
+<!-- TODO (Erik): Erik offered four topics in the sign-up: fuzzy file finders (beginner), snippets (intermediate), local rebases (intermediate), Vim motions (beginner). Keep this section and add or swap sections for the ones given. -->
+
+Finding files with a fuzzy finder.
+
+## SSH port forwarding, proxies and jump hosts
+
+*Martin Dahlö*
+
+<!-- TODO (Martin): Access web servers on remote hosts. Cover port forwarding, proxy servers and jump hosts over ssh. -->
+
+Accessing web servers and other services on remote hosts over SSH.
