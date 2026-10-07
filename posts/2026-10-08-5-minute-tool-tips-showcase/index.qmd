@@ -112,10 +112,117 @@ Use the URI as the `container` in your Nextflow process, or `apptainer pull` it 
 
 Finding files with a fuzzy finder.
 
-## SSH port forwarding, proxies and jump hosts
+
+
+## SSH port forwarding and jump hosts
 
 *Martin Dahlö*
 
-<!-- TODO (Martin): Access web servers on remote hosts. Cover port forwarding, proxy servers and jump hosts over ssh. -->
+Jupyter and other web apps running on a HPC cluster (or any other server) listen on a port on a remote machine. Unless the server's firewall is configured to allow traffic to that port, your browser cannot reach that port directly. SSH can carry the traffic for you using the `-L` argument.
 
-Accessing web servers and other services on remote hosts over SSH.
+`ssh -L local_port:target_host:target_port` forwards a port on your computer to `target_host:target_port`. The ssh server you log in to resolves `target_host`.
+
+The demo setup: Jupyter runs on port `8888`, first on the login node and then on compute node `p53` of Pelle.
+
+
+### 1. `-L`: notebook on the login node
+
+On the login node:
+
+```bash
+jupyter lab --no-browser --port 8888
+```
+
+On your computer:
+
+```bash
+ssh -L 8888:localhost:8888 username@pelle.uppmax.uu.se
+```
+
+Open `http://localhost:8888` and paste the token from the Jupyter output.
+
+`localhost` in `-L` means "localhost *as seen from the login node*", not your computer.
+
+::: {.callout-warning}
+Do not run heavy work on the login node. Other users may already use port `8888`. Pick a less common port, for example `8890`–`9999`.
+:::
+
+
+### 2. `-L`: let the login node reach the compute node
+
+```bash
+ssh -L 8888:p53:8888 username@pelle.uppmax.uu.se
+```
+
+The login node opens the connection to `p53:8888` for you.
+
+This only works if Jupyter listens on the network interface of `p53`, not only on `localhost`:
+
+```bash
+jupyter lab --no-browser --ip 0.0.0.0 --port 8888
+```
+
+::: {.callout-warning}
+With `--ip 0.0.0.0`, anyone on the cluster can reach the notebook. Only the token protects it.
+:::
+
+
+### 2.5. `-J`: ssh straight to the compute node
+
+Using  `ssh -J user@jump_host user@final_host` connects to the `final_host` *through* `jump_host`. This saves you from having to ssh first to the login node and then to the compute node.
+
+```bash
+ssh -J username@pelle.uppmax.uu.se username@p53
+```
+
+SSH connects to the login node, then from there to `p53`. You get a shell on `p53` in one command. The login node resolves the name `p53`, so the short name works.
+
+
+### 3. `-J` + `-L`: forward a port on the compute node
+
+On `p53`:
+
+```bash
+jupyter lab --no-browser --port 8888
+```
+
+On your computer:
+
+```bash
+ssh -J username@pelle.uppmax.uu.se -L 8888:localhost:8888 username@p53
+```
+
+The final ssh server is now `p53`, so `localhost` means `p53`. Jupyter can keep its default and listen only on `localhost`, which no other user can reach over the network.
+
+
+### Bonus: view an HTML report without downloading it
+
+MultiQC, FastQC and Quarto reports are just HTML files. Serve the folder on the compute node:
+
+```bash
+# on the login node or p53, in the folder with the report
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+Forward the port as in option 1 or 3:
+
+```bash
+# option 1
+ssh -L 8000:localhost:8000 username@pelle.uppmax.uu.se
+
+# option 3
+ssh -J username@pelle.uppmax.uu.se -L 8000:localhost:8000 username@p53
+```
+
+Open `http://localhost:8000/multiqc_report.html`.
+
+The same pattern works for any web app on the login node or a compute node, such as Shiny or RStudio Server. Only the port changes.
+
+### Key takeaways
+
+- In `-L A:host:B`, which machine resolves `host`?
+- Why must Jupyter use `--ip 0.0.0.0` in option 2 but not in option 3?
+
+### Further resources
+
+- [`man ssh`](https://man.openbsd.org/ssh), see `-L` and `-J`
