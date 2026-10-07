@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2026-10-08-5-minute-tool-tips-showcase/index.html",
       "/posts/2026-09-24-intro-to-snakemake/index.html",
       "/posts/2026-09-10-nf-test-nextflow-testing-framework/index.html",
       "/posts/2026-08-27-dotfile-management/index.html",
