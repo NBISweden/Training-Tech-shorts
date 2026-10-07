@@ -119,7 +119,9 @@ Finding files with a fuzzy finder.
 
 Jupyter and other web apps running on a HPC cluster (or any other server) listen on a port on a remote machine. Unless the server's firewall is configured to allow traffic to that port, your browser cannot reach that port directly. SSH can carry the traffic for you using the `-L` argument.
 
-`ssh -L local_port:target_host:target_port` forwards a `local_port` on your computer to `target_host:target_port`. The ssh server you log in to resolves `target_host`. The forwarding lasts as long as this ssh connection is running.
+`ssh -L local_port:target_host:target_port`
+
+forwards a `local_port` on your computer to `target_host:target_port`. The ssh server you log in to resolves `target_host`. The forwarding lasts as long as this ssh connection is running.
 
 The demo setup: Jupyter runs on port `8888`, first on the login node and then on compute node `p53` of the UPPMAX HPC cluster Pelle.
 
@@ -150,6 +152,8 @@ Do not run heavy work on the login node. Other users may already use port `8888`
 
 
 ### 2. `-L`: let the login node reach the compute node
+
+If you want to run Jupyter on a compute node, the login node must reach that node. The login node can reach `p53`, so you can forward a port from your computer to `p53` through the login node.
 
 On your computer:
 
@@ -184,7 +188,9 @@ ssh -J username@pelle.uppmax.uu.se username@p53
 SSH connects to the login node, then from there to `p53`. You get a shell on `p53` in one command. The login node resolves the name `p53`, so the short name works.
 
 
-### 3. `-J` + `-L`: forward a port on the compute node
+### 3. `-J` + `-L`: forward a port to the compute node
+
+Ok, both of them together. Forward a port from your computer to `p53` through the login node.
 
 On your computer:
 
@@ -200,7 +206,7 @@ jupyter notebook --no-browser --port 8888
 ```
 
 
-The final ssh server is now `p53`, so `localhost` means `p53`. Jupyter can keep its default and listen only on `localhost`, which no other user can reach over the network.
+The final ssh server is now `p53`, so `localhost` is resolved by `p53`. Jupyter can keep its default and listen only on `localhost`, which no other user can reach over the network.
 
 
 ### Bonus: view an HTML report without downloading it
