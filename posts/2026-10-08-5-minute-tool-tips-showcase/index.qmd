@@ -21,7 +21,7 @@ Short, practical tips from NBIS staff, each shown as a 5-minute demo.
 
 - [Building ARM containers with Pixi and Wave](#building-arm-containers-with-pixi-and-wave) (Mahesh Binzer-Panchal, intermediate)
 - [Fuzzy file finders](#fuzzy-file-finders) (Erik Fasterius, beginner)
-- [SSH port forwarding, proxies and jump hosts](#ssh-port-forwarding-proxies-and-jump-hosts) (Martin Dahlö, beginner to intermediate)
+- [SSH port forwarding and jump hosts](#ssh-port-forwarding-and-jump-hosts) (Martin Dahlö, beginner to intermediate)
 
 ## Building ARM containers with Pixi and Wave
 
