@@ -328,7 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="ssh-port-forwarding-and-jump-hosts">SSH port forwarding and jump hosts</h2>
 <p><em>Martin Dahlö</em></p>
 <p>Jupyter and other web apps running on a HPC cluster (or any other server) listen on a port on a remote machine. Unless the server’s firewall is configured to allow traffic to that port, your browser cannot reach that port directly. SSH can carry the traffic for you using the <code>-L</code> argument.</p>
-<p><code>ssh -L local_port:target_host:target_port</code> forwards a <code>local_port</code> on your computer to <code>target_host:target_port</code>. The ssh server you log in to resolves <code>target_host</code>. The forwarding lasts as long as this ssh connection is running.</p>
+<p><code>ssh -L local_port:target_host:target_port</code></p>
+<p>forwards a <code>local_port</code> on your computer to <code>target_host:target_port</code>. The ssh server you log in to resolves <code>target_host</code>. The forwarding lasts as long as this ssh connection is running.</p>
 <p>The demo setup: Jupyter runs on port <code>8888</code>, first on the login node and then on compute node <code>p53</code> of the UPPMAX HPC cluster Pelle.</p>
 <section id="l-notebook-on-the-login-node" class="level3">
 <h3 class="anchored" data-anchor-id="l-notebook-on-the-login-node">1. <code>-L</code>: notebook on the login node</h3>
@@ -355,6 +356,7 @@ Warning
 </section>
 <section id="l-let-the-login-node-reach-the-compute-node" class="level3">
 <h3 class="anchored" data-anchor-id="l-let-the-login-node-reach-the-compute-node">2. <code>-L</code>: let the login node reach the compute node</h3>
+<p>If you want to run Jupyter on a compute node, the login node must reach that node. The login node can reach <code>p53</code>, so you can forward a port from your computer to <code>p53</code> through the login node.</p>
 <p>On your computer:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:p53:8888 username@pelle.uppmax.uu.se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The login node opens the connection to <code>p53:8888</code> for you.</p>
@@ -382,14 +384,15 @@ Warning
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>SSH connects to the login node, then from there to <code>p53</code>. You get a shell on <code>p53</code> in one command. The login node resolves the name <code>p53</code>, so the short name works.</p>
 </section>
-<section id="j--l-forward-a-port-on-the-compute-node" class="level3">
-<h3 class="anchored" data-anchor-id="j--l-forward-a-port-on-the-compute-node">3. <code>-J</code> + <code>-L</code>: forward a port on the compute node</h3>
+<section id="j--l-forward-a-port-to-the-compute-node" class="level3">
+<h3 class="anchored" data-anchor-id="j--l-forward-a-port-to-the-compute-node">3. <code>-J</code> + <code>-L</code>: forward a port to the compute node</h3>
+<p>Ok, both of them together. Forward a port from your computer to <code>p53</code> through the login node.</p>
 <p>On your computer:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se <span class="at">-L</span> 8888:localhost:8888 username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>On <code>p53</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load JupyterNotebook</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook <span class="at">--no-browser</span> <span class="at">--port</span> 8888</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The final ssh server is now <code>p53</code>, so <code>localhost</code> means <code>p53</code>. Jupyter can keep its default and listen only on <code>localhost</code>, which no other user can reach over the network.</p>
+<p>The final ssh server is now <code>p53</code>, so <code>localhost</code> is resolved by <code>p53</code>. Jupyter can keep its default and listen only on <code>localhost</code>, which no other user can reach over the network.</p>
 </section>
 <section id="bonus-view-an-html-report-without-downloading-it" class="level3">
 <h3 class="anchored" data-anchor-id="bonus-view-an-html-report-without-downloading-it">Bonus: view an HTML report without downloading it</h3>
