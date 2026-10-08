@@ -255,7 +255,9 @@ If you regularly find yourself typing out full git commands, or complex commands
 
 For example, instead of typing `git status`, you can create an alias `git st` to run the same command. This would be done by running:
 
-`git config --global alias.st status`
+```
+$ git config --global alias.st status
+```
 
 Or by editing the `~/.gitconfig` file directly.
 
@@ -280,7 +282,9 @@ You can modify the output of `git log` to show a more concise, readable view of 
 If you find yourself needing a command that doesn't exist, you can create it as an alias.
 The example from git's [own documentation](https://git-scm.com/book/ms/v2/Git-Basics-Git-Aliases) is `git unstage`. 
 
-`git config --global alias.unstage 'reset HEAD --'`
+```
+$ git config --global alias.unstage 'reset HEAD --'
+```
 
 Which makes these two commands equivalent:
 
@@ -293,9 +297,11 @@ $ git reset HEAD -- fileA
 
 You can even store git itself as a shell alias, so that you can type `g` instead of `git`. Add this line to your `~/.bashrc` or `~/.aliases` dotfile so it persists across sessions:
 
-`alias g=git`
+```
+$ alias g=git
+```
 
-One note on this - tab completion of branch names and git commands/aliases doesn't work for `g` by default. To restore it in bash, add this to your `~/.bashrc` too:
+*NOTE*: tab completion of branch names and git commands/aliases doesn't work for `g` by default. To restore it in bash, add this to your `~/.bashrc` also:
 
 ```
 if ! type __git_complete &>/dev/null; then
