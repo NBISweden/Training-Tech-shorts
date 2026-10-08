@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">October 7, 2026</p>
+        <p class="date-modified">October 8, 2026</p>
       </div>
     </div>
       
@@ -422,6 +422,46 @@ Warning
 <ul>
 <li><a href="https://man.openbsd.org/ssh"><code>man ssh</code></a>, see <code>-L</code> and <code>-J</code></li>
 </ul>
+</section>
+</section>
+<section id="git-aliases" class="level2">
+<h2 class="anchored" data-anchor-id="git-aliases">Git aliases</h2>
+<p><em>Cormac Kinsella</em></p>
+<p>If you regularly find yourself typing out full git commands, or complex commands, save time by creating git aliases.</p>
+<section id="basic-aliases" class="level3">
+<h3 class="anchored" data-anchor-id="basic-aliases">Basic aliases</h3>
+<p>For example, instead of typing <code>git status</code>, you can create an alias <code>git st</code> to run the same command. This would be done by running:</p>
+<p><code>git config --global alias.st status</code></p>
+<p>Or by editing the <code>~/.gitconfig</code> file directly.</p>
+<pre><code>[alias]
+    st = status</code></pre>
+</section>
+<section id="simplifying-complex-commands" class="level3">
+<h3 class="anchored" data-anchor-id="simplifying-complex-commands">Simplifying complex commands</h3>
+<p>As an example, <code>git log</code> output gives a lot of information which we may not want every time.</p>
+<p>You can modify the output of <code>git log</code> to show a more concise, readable view of the commit history, and store that as an alias.</p>
+<pre><code>[alias]
+    l = log --oneline --graph -n 20</code></pre>
+</section>
+<section id="create-missing-commands" class="level3">
+<h3 class="anchored" data-anchor-id="create-missing-commands">Create missing commands</h3>
+<p>If you find yourself needing a command that doesn’t exist, you can create it as an alias. The example from git’s <a href="https://git-scm.com/book/ms/v2/Git-Basics-Git-Aliases">own documentation</a> is <code>git unstage</code>.</p>
+<p><code>git config --global alias.unstage 'reset HEAD --'</code></p>
+<p>Which makes these two commands equivalent:</p>
+<pre><code>$ git unstage fileA
+$ git reset HEAD -- fileA</code></pre>
+</section>
+<section id="store-git-itself-as-an-alias" class="level3">
+<h3 class="anchored" data-anchor-id="store-git-itself-as-an-alias">Store git itself as an alias</h3>
+<p>You can even store git itself as a shell alias, so that you can type <code>g</code> instead of <code>git</code>. Add this line to your <code>~/.bashrc</code> or <code>~/.aliases</code> dotfile so it persists across sessions:</p>
+<p><code>alias g=git</code></p>
+<p>One note on this - tab completion of branch names and git commands/aliases doesn’t work for <code>g</code> by default. To restore it in bash, add this to your <code>~/.bashrc</code> too:</p>
+<pre><code>if ! type __git_complete &amp;&gt;/dev/null; then
+    source /usr/share/bash-completion/completions/git 2&gt;/dev/null # Eager load git completion
+fi
+
+type __git_complete &amp;&gt;/dev/null &amp;&amp; __git_complete g __git_main # Allow g alias to tab complete</code></pre>
+<p>The completion script path above is for Ubuntu/Debian. Other systems install it elsewhere (e.g.&nbsp;Homebrew on macOS uses <code>$(brew --prefix)/etc/bash_completion.d/git-completion.bash</code>).</p>
 
 
 </section>
