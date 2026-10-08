@@ -70,7 +70,24 @@ pixi lock --dry-run
 
 ### Build the image with Wave
 
-Wave builds the image remotely, so the architecture of your machine does not matter. Pass it the validated file:
+Wave builds the image remotely, so the architecture of your machine does not matter. Install the `wave` CLI with Homebrew:
+
+```bash
+brew install seqeralabs/tap/wave-cli
+```
+
+Or download a binary for your platform from the [`wave-cli` releases](https://github.com/seqeralabs/wave-cli/releases) and make it executable:
+
+```bash
+gh release download v1.9.0 -R seqeralabs/wave-cli -p 'wave-1.9.0-macos-arm64'
+chmod +x wave-1.9.0-macos-arm64
+```
+
+::: {.callout-note}
+The `wave-cli` repository is archived. The tool has been merged into [seqeralabs/wave](https://github.com/seqeralabs/wave). Installation and the `wave` command options may change in future releases. Check the Wave repository for the current instructions.
+:::
+
+Pass it the validated file:
 
 ```bash
 wave \
@@ -140,6 +157,16 @@ wave \
   --await \
   -o json
 ```
+
+::: {.callout-tip}
+If you can build images locally with Docker, you do not need Wave for a Dockerfile build:
+
+```bash
+docker build --platform linux/arm64 -t gpu-image .
+```
+
+On an x86-64 machine Docker emulates ARM, which is slower. Wave builds natively and has no setup, but limits a build to 15 minutes.
+:::
 
 ### Key takeaways
 
