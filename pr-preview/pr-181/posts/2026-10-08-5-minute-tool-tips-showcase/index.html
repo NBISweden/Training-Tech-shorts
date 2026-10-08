@@ -286,30 +286,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="build-the-image-with-wave" class="level3">
 <h3 class="anchored" data-anchor-id="build-the-image-with-wave">Build the image with Wave</h3>
-<p>Wave builds the image remotely, so the architecture of your machine does not matter. Pass it the validated file:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-4"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wave</span> <span class="dt">\</span></span>
-<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--conda-file</span> environment.yml <span class="dt">\</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--build-template</span> conda/pixi:v1 <span class="dt">\</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-4-4" class="code-annotation-target"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> linux/arm64 <span class="dt">\</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--freeze</span> <span class="dt">\</span></span>
-<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--await</span> <span class="dt">\</span></span>
-<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-o</span> json</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wave builds the image remotely, so the architecture of your machine does not matter. Install the <code>wave</code> CLI with Homebrew:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install seqeralabs/tap/wave-cli</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or download a binary for your platform from the <a href="https://github.com/seqeralabs/wave-cli/releases"><code>wave-cli</code> releases</a> and make it executable:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> release download v1.9.0 <span class="at">-R</span> seqeralabs/wave-cli <span class="at">-p</span> <span class="st">'wave-1.9.0-macos-arm64'</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x wave-1.9.0-macos-arm64</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>wave-cli</code> repository is archived. The tool has been merged into <a href="https://github.com/seqeralabs/wave">seqeralabs/wave</a>. Installation and the <code>wave</code> command options may change in future releases. Check the Wave repository for the current instructions.</p>
+</div>
+</div>
+<p>Pass it the validated file:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-6"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wave</span> <span class="dt">\</span></span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--conda-file</span> environment.yml <span class="dt">\</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--build-template</span> conda/pixi:v1 <span class="dt">\</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-4" class="code-annotation-target"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> linux/arm64 <span class="dt">\</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--freeze</span> <span class="dt">\</span></span>
+<span id="annotated-cell-6-6"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--await</span> <span class="dt">\</span></span>
+<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-o</span> json</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="1">Build with Pixi.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="1">Build with Pixi.</span>
 </dd>
-<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="4" data-code-annotation="2">Target ARM.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="4" data-code-annotation="2">Target ARM.</span>
 </dd>
-<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="3">Return a permanent <code>community.wave.seqera.io</code> URI. Without it, the URI expires after about 48 hours.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="5" data-code-annotation="3">Return a permanent <code>community.wave.seqera.io</code> URI. Without it, the URI expires after about 48 hours.</span>
 </dd>
 </dl>
 <p><code>-o json</code> prints the result as JSON:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">"containerImage"</span><span class="fu">:</span><span class="st">"community.wave.seqera.io/library/samtools_bcftools:8dbd583e7b71dfec"</span><span class="fu">,</span><span class="dt">"succeeded"</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span> <span class="er">...</span><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">"containerImage"</span><span class="fu">:</span><span class="st">"community.wave.seqera.io/library/samtools_bcftools:8dbd583e7b71dfec"</span><span class="fu">,</span><span class="dt">"succeeded"</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span> <span class="er">...</span><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Use the URI as the <code>container</code> in your Nextflow process, or <code>apptainer pull</code> it on the cluster. Check <code>succeeded</code> in the output: <code>wave</code> can exit <code>0</code> when the build failed.</p>
 </section>
 <section id="gpu-packages" class="level3">
@@ -323,40 +341,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>pixi.toml</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-filename="pixi.toml"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[workspace]</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"gpu"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">channels</span> <span class="op">=</span> <span class="op">[</span><span class="st">"conda-forge"</span><span class="op">]</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">platforms</span> <span class="op">=</span> <span class="op">[{ </span><span class="dt">name</span><span class="op"> =</span> <span class="st">"linux-aarch64-cuda"</span><span class="op">, </span><span class="dt">platform</span><span class="op"> =</span> <span class="st">"linux-aarch64"</span><span class="op">, </span><span class="dt">cuda</span><span class="op"> =</span> <span class="st">"12"</span><span class="op"> }]</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[dependencies]</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dt">pytorch-gpu</span> <span class="op">=</span> <span class="st">"*"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="pixi.toml"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[workspace]</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"gpu"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">channels</span> <span class="op">=</span> <span class="op">[</span><span class="st">"conda-forge"</span><span class="op">]</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dt">platforms</span> <span class="op">=</span> <span class="op">[{ </span><span class="dt">name</span><span class="op"> =</span> <span class="st">"linux-aarch64-cuda"</span><span class="op">, </span><span class="dt">platform</span><span class="op"> =</span> <span class="st">"linux-aarch64"</span><span class="op">, </span><span class="dt">cuda</span><span class="op"> =</span> <span class="st">"12"</span><span class="op"> }]</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[dependencies]</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">pytorch-gpu</span> <span class="op">=</span> <span class="st">"*"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Wave’s <code>--conda-file</code> build cannot set this, and its Pixi template fails on <code>__cuda</code>. Build from a Dockerfile instead, next to the validated <code>pixi.toml</code>:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Dockerfile</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-8" data-filename="Dockerfile"><pre class="sourceCode dockerfile code-annotation-code code-with-copy code-annotated"><code class="sourceCode dockerfile"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> ghcr.io/prefix-dev/pixi:latest</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> CONDA_OVERRIDE_CUDA=12</span>
-<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
-<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> pixi.toml .</span>
-<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pixi</span> install</span>
-<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pixi</span> shell-hook <span class="op">&gt;</span> /shell-hook.sh <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">'exec "$@"'</span> <span class="op">&gt;&gt;</span> /shell-hook.sh</span>
-<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ENTRYPOINT</span> [<span class="st">"/bin/bash"</span>, <span class="st">"/shell-hook.sh"</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-10" data-filename="Dockerfile"><pre class="sourceCode dockerfile code-annotation-code code-with-copy code-annotated"><code class="sourceCode dockerfile"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> ghcr.io/prefix-dev/pixi:latest</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ENV</span> CONDA_OVERRIDE_CUDA=12</span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> pixi.toml .</span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pixi</span> install</span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">pixi</span> shell-hook <span class="op">&gt;</span> /shell-hook.sh <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">'exec "$@"'</span> <span class="op">&gt;&gt;</span> /shell-hook.sh</span>
+<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ENTRYPOINT</span> [<span class="st">"/bin/bash"</span>, <span class="st">"/shell-hook.sh"</span>]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="1">Let <code>pixi install</code> run on a build host without a GPU.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="2" data-code-annotation="1">Let <code>pixi install</code> run on a build host without a GPU.</span>
 </dd>
 </dl>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wave</span> <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-f</span> Dockerfile <span class="dt">\</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--context</span> . <span class="dt">\</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> linux/arm64 <span class="dt">\</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--freeze</span> <span class="dt">\</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--await</span> <span class="dt">\</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-o</span> json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wave</span> <span class="dt">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-f</span> Dockerfile <span class="dt">\</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--context</span> . <span class="dt">\</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> linux/arm64 <span class="dt">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--freeze</span> <span class="dt">\</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--await</span> <span class="dt">\</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-o</span> json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you can build images locally with Docker, you do not need Wave for a Dockerfile build:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">--platform</span> linux/arm64 <span class="at">-t</span> gpu-image .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On an x86-64 machine Docker emulates ARM, which is slower. Wave builds natively and has no setup, but limits a build to 15 minutes.</p>
+</div>
+</div>
 </section>
 <section id="key-takeaways" class="level3">
 <h3 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h3>
@@ -391,10 +424,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="l-notebook-on-the-login-node" class="level3">
 <h3 class="anchored" data-anchor-id="l-notebook-on-the-login-node">1. <code>-L</code>: notebook on the login node</h3>
 <p>On your computer:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:localhost:8888 username@pelle.uppmax.uu.se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:localhost:8888 username@pelle.uppmax.uu.se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>On the login node:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load JupyterNotebook</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook <span class="at">--no-browser</span> <span class="at">--port</span> 8888</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load JupyterNotebook</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook <span class="at">--no-browser</span> <span class="at">--port</span> 8888</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Open <code>http://localhost:8888</code> and paste the token from the Jupyter output.</p>
 <p><code>localhost</code> in <code>-L</code> means “localhost <em>as seen from the login node</em>”, not your computer.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -415,12 +448,12 @@ Warning
 <h3 class="anchored" data-anchor-id="l-let-the-login-node-forward-to-the-compute-node">2. <code>-L</code>: let the login node forward to the compute node</h3>
 <p>If you want to run Jupyter on a compute node, you have to forward the port to that node. The login node can reach <code>p53</code>, so you can forward a port from your computer to <code>p53</code> through the login node.</p>
 <p>On your computer:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:p53:8888 username@pelle.uppmax.uu.se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:p53:8888 username@pelle.uppmax.uu.se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The login node opens the connection to <code>p53:8888</code> for you.</p>
 <p>This only works if Jupyter listens on the network interface of <code>p53</code>, not only on <code>localhost</code>:</p>
 <p>On <code>p53</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load JupyterNotebook</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook <span class="at">--no-browser</span> <span class="at">--ip</span> 0.0.0.0 <span class="at">--port</span> 8888</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load JupyterNotebook</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook <span class="at">--no-browser</span> <span class="at">--ip</span> 0.0.0.0 <span class="at">--port</span> 8888</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -438,32 +471,32 @@ Warning
 <section id="j-ssh-straight-to-the-compute-node" class="level3">
 <h3 class="anchored" data-anchor-id="j-ssh-straight-to-the-compute-node">2.5. <code>-J</code>: ssh straight to the compute node</h3>
 <p>Using <code>ssh -J user@jump_host user@final_host</code> connects to the <code>final_host</code> <em>through</em> <code>jump_host</code>. This saves you from having to ssh first to the login node and then to the compute node.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>SSH connects to the login node, then from there to <code>p53</code>. You get a shell on <code>p53</code> in one command. The login node resolves the name <code>p53</code>, so the short name works.</p>
 </section>
 <section id="j--l-forward-a-port-to-the-compute-node" class="level3">
 <h3 class="anchored" data-anchor-id="j--l-forward-a-port-to-the-compute-node">3. <code>-J</code> + <code>-L</code>: forward a port to the compute node</h3>
 <p>Ok, both of them together. Forward a port from your computer to <code>p53</code> through the login node.</p>
 <p>On your computer:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se <span class="at">-L</span> 8888:localhost:8888 username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se <span class="at">-L</span> 8888:localhost:8888 username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>On <code>p53</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load JupyterNotebook</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook <span class="at">--no-browser</span> <span class="at">--port</span> 8888</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load JupyterNotebook</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> notebook <span class="at">--no-browser</span> <span class="at">--port</span> 8888</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The final ssh server is now <code>p53</code>, so <code>localhost</code> is resolved by <code>p53</code>. Jupyter can keep its default and listen only on <code>localhost</code>, which no other user can reach over the network.</p>
 </section>
 <section id="bonus-view-an-html-report-without-downloading-it" class="level3">
 <h3 class="anchored" data-anchor-id="bonus-view-an-html-report-without-downloading-it">Bonus: view an HTML report without downloading it</h3>
 <p>MultiQC, FastQC and Quarto reports are just HTML files. Serve the folder using Python’s small web server.</p>
 <p>On the login node or <code>p53</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in the folder with the report</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8888 <span class="at">--bind</span> 127.0.0.1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in the folder with the report</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8888 <span class="at">--bind</span> 127.0.0.1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Forward the port as in option 1 (login node) or 3 (p53).</p>
 <p>On your computer:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># option 1 (web server on login node)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:localhost:8888 username@pelle.uppmax.uu.se</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># option 3 (web server on p53)</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se <span class="at">-L</span> 8888:localhost:8888 username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># option 1 (web server on login node)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:localhost:8888 username@pelle.uppmax.uu.se</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># option 3 (web server on p53)</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se <span class="at">-L</span> 8888:localhost:8888 username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Open <code>http://localhost:8888/multiqc_report.html</code>.</p>
 <p>The same pattern works for any web app on the login node or a compute node, such as Shiny or RStudio Server. Only the port changes.</p>
 </section>
@@ -519,9 +552,121 @@ fi
 
 type __git_complete &amp;&gt;/dev/null &amp;&amp; __git_complete g __git_main # Allow g alias to tab complete</code></pre>
 <p>The completion script path above is for Ubuntu/Debian. Other systems install it elsewhere (e.g.&nbsp;Homebrew on macOS uses <code>$(brew --prefix)/etc/bash_completion.d/git-completion.bash</code>).</p>
-
-
 </section>
+</section>
+<section id="re-use-code-with-snippets" class="level2">
+<h2 class="anchored" data-anchor-id="re-use-code-with-snippets">Re-use code with snippets</h2>
+<p>When you find yourself having to re-type similar or even identical code, that’s a good time to think about converting it into a <em>snippet</em>: a piece of code that you can easily re-use without having to type it all out. It can be anything you desire: a function, a skeleton for some particular file type, or a module import. A snippet is a sort of template, triggered by a keyword or prefix, which expands into the full code. Snippets are available in different formats and styles for a lot of editors, and most let you define your own in addition to having built-in ones. For example, the following defines a snippet named <code>chunk</code> for use in Quarto documents:</p>
+<pre><code>snippet chunk "Create an empty Quarto code chunk"
+    ```${1:r}
+    ${2}
+    ```</code></pre>
+<p>When triggered, it expands into this:</p>
+<pre><code>```{r}
+
+```</code></pre>
+<p>After expansion, the cursor will be on the <code>r</code>, which was the first placeholder (<code>$1</code>), for which the default value was <code>r</code>. The second placeholder had no default value; it’s usually possible to move between placeholders with a key, like TAB and Shift + TAB.</p>
+<p>There’s no limit to how big a snippet can be; the following is a skeleton for writing a multi-stage, Pixi-based Dockerfile:</p>
+<pre><code>snippet dockerfile-pixi "Initialise a new Dockerfile with Pixi"
+    #
+    # First stage: Build Pixi environment
+    #
+    FROM ghcr.io/prefix-dev/pixi:0.53.0 AS build
+    LABEL org.opencontainers.image.authors="name.surname@google.com"
+    LABEL org.opencontainers.image.description="Dockerfile for my_project"
+
+    # Copy the environment toml
+    COPY pixi.toml pixi.lock /
+
+    # Install the Pixi environment as 'default'
+    RUN pixi install
+
+    # Create the shell-hook bash script that will activate the environment
+    RUN pixi shell-hook &gt; /shell-hook.sh
+
+    # Extend the shell-hook script to run the command passed to at run-time
+    RUN echo 'exec "\$@"' &gt;&gt; /shell-hook.sh
+
+    #
+    # Second stage: final image
+    #
+    FROM ubuntu:22.04 AS work
+    WORKDIR /work
+
+    # Copy over environment and shell-hook script from build stage
+    COPY --from=build /.pixi/envs/default /.pixi/envs/default
+    COPY --from=build /shell-hook.sh /shell-hook.sh
+
+    # Activate the Pixi environment when running the container
+    ENTRYPOINT ["/bin/bash", "/shell-hook.sh"]
+    CMD /bin/bash</code></pre>
+</section>
+<section id="finding-files-with-a-fuzzy-finder" class="level2">
+<h2 class="anchored" data-anchor-id="finding-files-with-a-fuzzy-finder">Finding files with a fuzzy finder</h2>
+<p>Clicking around in a file tree or typing an exact path from memory is slow, especially in a large repository. A <em>fuzzy finder</em> (like <a href="https://github.com/junegunn/fzf">fzf</a>) matches a search string against a list of candidates (<em>e.g.</em> files, shell history, branches, running processes) by how well the characters fit, not by exact substring position. For example, launching <code>fzf</code> will provide you with a prompt:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-09-10-nf-test-nextflow-testing-framework/index.qmd</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> .quarto/idx/posts/2026-03-12-github-pull-requests-code-review/index.qmd.json</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-03-12-github-pull-requests-code-review/index.qmd</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> .quarto/idx/posts/2026-02-12-working-with-R-packages/index.qmd.json</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-02-12-working-with-R-packages/index.qmd</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-06-11-blender-intro/index.qmd</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> .quarto/idx/posts/2026-01-22-github-actions/index.qmd.json</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-01-22-github-actions/index.qmd</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">8/289</span> ──────────────────────────────────────────────────────────────────────</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 202601qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>As the typing happens, the results will get more and more narrow: when <code>2026</code> is finished you’ll only see files with <code>2026</code> in the name; adding <code>01</code> narrows it down to January, and the <code>qmd</code> gets us the final result shown above. We could even skip some characters: doing <code>2601qmd</code> gets us the same results.</p>
+<p>Selecting a result sends it to the standard output, so you usually want to combine it with a command:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$(</span><span class="ex">fzf</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Additionally the <code>fzf</code> software easily plugs into the history search in bash (which is <code>Ctrl + R</code> by default), which makes searching through your bash history even easier.</p>
+<p>A lot of editors already have fuzzy search functionality built-in: for example, in VSCode you can type <code>[Cmd/Ctrl] + P</code> to jump straight into the fuzzy finding prompt and type away.</p>
+</section>
+<section id="cleaning-up-commits-with-a-local-rebase" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning-up-commits-with-a-local-rebase">Cleaning up commits with a local rebase</h2>
+<p>Git histories can get a bit messy when one is solving a problem, possibly with experimentation, “WIP” messages and commits that only fix spelling mistakes or formatting. For example, a small history from a feature branch:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0abf162</span> First feature commit</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="ex">befc682</span> A minor change on the first commit</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="ex">c9d1426</span> A commit with an incomplete commit message</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="ex">2e0cb97</span> A commit with a spelling mitake</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Some of these are highly related to each other and might actually be better suited as a single commit. Let’s say that you’ve also spotted a spelling error in one commit message, and realised that you missed important information in another. We can actually solve all of these issues with an <em>interactive rebase</em>!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git rebase <span class="at">-i</span> HEAD~4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This command initiates an interactive rebase using the four commits back from HEAD. This will open your default editor with something like the following:</p>
+<pre class="vim"><code>pick 0abf162 First feature commit
+pick befc682 A minor change on the first commit
+pick c9d1426 A commit with an uncomplete commit message
+pick 2e0cb97 A commit with a spelling mitake
+
+# Rebase 879ddcc..0abf162 onto 879ddcc (4 commands)
+#
+# Commands:
+# p, pick &lt;commit&gt; = use commit
+# r, reword &lt;commit&gt; = use commit, but edit the commit message
+# e, edit &lt;commit&gt; = use commit, but stop for amending
+# s, squash &lt;commit&gt; = use commit, but meld into previous commit
+# f, fixup [-C | -c] &lt;commit&gt; = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+
+(... more instructions ...)</code></pre>
+<p>The commits are ordered with the most recent one at the bottom. The commented instructions (all of which are not shown here) show you what alternatives you have to work with; all you have to do is to change the <code>pick</code> keyword next to the commit hashes to whatever keyword you need from the list, save and exit.</p>
+<p>In order to solve the toy example here we might decide that the four keywords should be <code>pick</code>, <code>squash</code>, <code>reword</code> and <code>reword</code>, from top to bottom; if just want to add the second commits’ content to the first one while using only the first one’s commit message we could use <code>fixup</code> instead. Once that’s done simply save and exit, and another instance of your default text editor will open for you to complete the specified changes. In the case above we’d get two separate new instances where we can change the commit message - these work the same as any normal commit.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Rebasing rewrites commit hashes. Only rebase commits that haven’t been pushed yet, or that no one else has already built work on - otherwise your history and theirs diverge.</p>
+</div>
+</div>
+<p>Interactive rebasing is thus well-suited for fixing and cleaning of local changes you have yet to push anywhere. This can make your Git history both cleaner and more concise, which is great when you’re collaborating with others.</p>
+
+
 </section>
 
 </main> <!-- /main -->
