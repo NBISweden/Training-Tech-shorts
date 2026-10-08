@@ -404,7 +404,7 @@ for use in Quarto documents:
 
 ````
 snippet chunk "Create an empty Quarto code chunk"
-	```{${1:r}}
+	```${1:r}
 	${2}
 	```
 ````
