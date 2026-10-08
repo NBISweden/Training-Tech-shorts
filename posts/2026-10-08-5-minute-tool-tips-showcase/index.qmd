@@ -74,16 +74,16 @@ Wave builds the image remotely, so the architecture of your machine does not mat
 ```bash
 wave \
   --conda-file environment.yml \
-  --build-template conda/pixi:v1 \
-  --platform linux/arm64 \
-  --freeze \
+  --build-template conda/pixi:v1 \ # <1>
+  --platform linux/arm64 \ # <2>
+  --freeze \ # <3>
   --await \
   -o json
 ```
 
-- `--build-template conda/pixi:v1` builds with Pixi.
-- `--platform linux/arm64` targets ARM.
-- `--freeze` returns a permanent `community.wave.seqera.io` URI. Without it, the URI expires after about 48 hours.
+1. Build with Pixi.
+2. Target ARM.
+3. Return a permanent `community.wave.seqera.io` URI. Without it, the URI expires after about 48 hours.
 
 `-o json` prints the result as JSON:
 
@@ -93,15 +93,64 @@ wave \
 
 Use the URI as the `container` in your Nextflow process, or `apptainer pull` it on the cluster. Check `succeeded` in the output: `wave` can exit `0` when the build failed.
 
+### GPU packages
+
+GPU builds of packages such as PyTorch depend on `__cuda`, a virtual package that conda creates from the NVIDIA driver on the machine running the solve. Pixi on a laptop and Wave's build hosts have no GPU, so the solve fails:
+
+```
+pytorch 2.1.2 would require
+  └─ __cuda *, for which no candidates were found.
+```
+
+The CUDA libraries are ordinary conda packages and go in the image. The driver comes from the host at run time (`apptainer --nv`).
+
+Declare the CUDA version on the platform to make the dry run pass. Replace `check/pixi.toml` with:
+
+```{.toml filename="pixi.toml"}
+[workspace]
+name = "gpu"
+channels = ["conda-forge"]
+platforms = [{ name = "linux-aarch64-cuda", platform = "linux-aarch64", cuda = "12" }]
+
+[dependencies]
+pytorch-gpu = "*"
+```
+
+Wave's `--conda-file` build cannot set this, and its Pixi template fails on `__cuda`. Build from a Dockerfile instead, next to the validated `pixi.toml`:
+
+```{.dockerfile filename="Dockerfile"}
+FROM ghcr.io/prefix-dev/pixi:latest
+ENV CONDA_OVERRIDE_CUDA=12 # <1>
+WORKDIR /app
+COPY pixi.toml .
+RUN pixi install
+RUN pixi shell-hook > /shell-hook.sh && echo 'exec "$@"' >> /shell-hook.sh
+ENTRYPOINT ["/bin/bash", "/shell-hook.sh"]
+```
+
+1. Let `pixi install` run on a build host without a GPU.
+
+```bash
+wave \
+  -f Dockerfile \
+  --context . \
+  --platform linux/arm64 \
+  --freeze \
+  --await \
+  -o json
+```
+
 ### Key takeaways
 
-- Which two Pixi commands tell you, in seconds, whether a package exists for ARM and whether your environment solves?
-- Which flag makes a Wave image URI permanent?
+- `pixi search -p linux-aarch64` shows whether a package exists for ARM, and `pixi lock --dry-run` shows whether your environment solves, in seconds and without installing anything.
+- `--freeze` makes a Wave image URI permanent.
+- GPU environments fail to solve on a machine without a GPU because the `__cuda` virtual package is missing. Declare `cuda` on the Pixi platform to fix the solve.
 
 ### Further resources
 
 - [Wave CLI](https://docs.seqera.io/wave/cli)
 - [Pixi documentation](https://pixi.sh)
+- [Fast, reproducible CUDA development and packaging with Pixi](https://prefix.dev/blog/cuda-pixi)
 
 ## Fuzzy file finders
 
