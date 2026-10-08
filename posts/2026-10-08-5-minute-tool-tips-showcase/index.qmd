@@ -244,3 +244,71 @@ The same pattern works for any web app on the login node or a compute node, such
 ### Further resources
 
 - [`man ssh`](https://man.openbsd.org/ssh), see `-L` and `-J`
+
+## Git aliases
+
+*Cormac Kinsella*
+
+If you regularly find yourself typing out full git commands, or complex commands, save time by creating git aliases.
+
+### Basic aliases
+
+For example, instead of typing `git status`, you can create an alias `git st` to run the same command. This would be done by running:
+
+```
+$ git config --global alias.st status
+```
+
+Or by editing the `~/.gitconfig` file directly.
+
+```
+[alias]
+    st = status
+```
+
+### Simplifying complex commands
+
+As an example, `git log` output gives a lot of information which we may not want every time.
+
+You can modify the output of `git log` to show a more concise, readable view of the commit history, and store that as an alias.
+
+```
+[alias]
+    l = log --oneline --graph -n 20
+```
+
+### Create missing commands
+
+If you find yourself needing a command that doesn't exist, you can create it as an alias.
+The example from git's [own documentation](https://git-scm.com/book/ms/v2/Git-Basics-Git-Aliases) is `git unstage`. 
+
+```
+$ git config --global alias.unstage 'reset HEAD --'
+```
+
+Which makes these two commands equivalent:
+
+```
+$ git unstage fileA
+$ git reset HEAD -- fileA
+```
+
+### Store git itself as an alias
+
+You can even store git itself as a shell alias, so that you can type `g` instead of `git`. Add this line to your `~/.bashrc` or `~/.aliases` dotfile so it persists across sessions:
+
+```
+$ alias g=git
+```
+
+*NOTE*: tab completion of branch names and git commands/aliases doesn't work for `g` by default. To restore it in bash, add this to your `~/.bashrc` also:
+
+```
+if ! type __git_complete &>/dev/null; then
+    source /usr/share/bash-completion/completions/git 2>/dev/null # Eager load git completion
+fi
+
+type __git_complete &>/dev/null && __git_complete g __git_main # Allow g alias to tab complete
+```
+
+The completion script path above is for Ubuntu/Debian. Other systems install it elsewhere (e.g. Homebrew on macOS uses `$(brew --prefix)/etc/bash_completion.d/git-completion.bash`).
