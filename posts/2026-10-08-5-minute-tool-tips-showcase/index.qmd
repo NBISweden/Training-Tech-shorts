@@ -13,6 +13,7 @@ categories:
   - "SSH"
   - "Terminal"
   - "Git"
+engine: markdown
 ---
 
 <!-- Source: discussion #169. Each presenter owns their section. Slots are unconfirmed beyond the sign-ups; add or remove sections to match what is given. -->
