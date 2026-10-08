@@ -327,7 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ssh-port-forwarding-and-jump-hosts" class="level2">
 <h2 class="anchored" data-anchor-id="ssh-port-forwarding-and-jump-hosts">SSH port forwarding and jump hosts</h2>
 <p><em>Martin Dahlö</em></p>
-<p>Jupyter and other web apps running on a HPC cluster (or any other server) listen on a port on a remote machine. Unless the server’s firewall is configured to allow traffic to that port, your browser cannot reach that port directly. SSH can carry the traffic for you using the <code>-L</code> argument.</p>
+<p>Jupyter and other web apps running on a HPC cluster (or any other server) listen on a port on a remote machine. Unless the server’s firewall is configured to allow traffic to that port, your browser cannot reach that port directly. You can use either ThinLinc or X11 forwarding to run a browser on the server, but that is slow and clunky. Using port forwarding over SSH solves this problem by carrying the traffic for you using the <code>-L</code> argument.</p>
 <p><code>ssh -L local_port:target_host:target_port</code></p>
 <p>forwards a <code>local_port</code> on your computer to <code>target_host:target_port</code>. The ssh server you log in to resolves <code>target_host</code>. The forwarding lasts as long as this ssh connection is running.</p>
 <p>The demo setup: Jupyter runs on port <code>8888</code>, first on the login node and then on compute node <code>p53</code> of the UPPMAX HPC cluster Pelle.</p>
@@ -354,9 +354,9 @@ Warning
 </div>
 </div>
 </section>
-<section id="l-let-the-login-node-reach-the-compute-node" class="level3">
-<h3 class="anchored" data-anchor-id="l-let-the-login-node-reach-the-compute-node">2. <code>-L</code>: let the login node reach the compute node</h3>
-<p>If you want to run Jupyter on a compute node, the login node must reach that node. The login node can reach <code>p53</code>, so you can forward a port from your computer to <code>p53</code> through the login node.</p>
+<section id="l-let-the-login-node-forward-to-the-compute-node" class="level3">
+<h3 class="anchored" data-anchor-id="l-let-the-login-node-forward-to-the-compute-node">2. <code>-L</code>: let the login node forward to the compute node</h3>
+<p>If you want to run Jupyter on a compute node, you have to forward the port to that node. The login node can reach <code>p53</code>, so you can forward a port from your computer to <code>p53</code> through the login node.</p>
 <p>On your computer:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:p53:8888 username@pelle.uppmax.uu.se</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The login node opens the connection to <code>p53:8888</code> for you.</p>
@@ -374,7 +374,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>With <code>--ip 0.0.0.0</code>, anyone on the cluster can reach the notebook. Only the token protects it.</p>
+<p>With <code>--ip 0.0.0.0</code>, anyone on the cluster can reach the notebook. Only the token protects it. Without this option (the default case) only users who are logged in on the compute node can reach the port.</p>
 </div>
 </div>
 </section>
@@ -399,15 +399,15 @@ Warning
 <p>MultiQC, FastQC and Quarto reports are just HTML files. Serve the folder using Python’s small web server.</p>
 <p>On the login node or <code>p53</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in the folder with the report</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8000 <span class="at">--bind</span> 127.0.0.1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8888 <span class="at">--bind</span> 127.0.0.1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Forward the port as in option 1 (login node) or 3 (p53).</p>
 <p>On your computer:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># option 1 (web server on login node)</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8000:localhost:8000 username@pelle.uppmax.uu.se</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-L</span> 8888:localhost:8888 username@pelle.uppmax.uu.se</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># option 3 (web server on p53)</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se <span class="at">-L</span> 8000:localhost:8000 username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Open <code>http://localhost:8000/multiqc_report.html</code>.</p>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-J</span> username@pelle.uppmax.uu.se <span class="at">-L</span> 8888:localhost:8888 username@p53</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Open <code>http://localhost:8888/multiqc_report.html</code>.</p>
 <p>The same pattern works for any web app on the login node or a compute node, such as Shiny or RStudio Server. Only the port changes.</p>
 </section>
 <section id="key-takeaways-1" class="level3">
