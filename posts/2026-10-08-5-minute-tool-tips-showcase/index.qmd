@@ -6,6 +6,7 @@ author:
   - Mahesh Binzer-Panchal
   - Erik Fasterius
   - Martin Dahlö
+  - Cormac Kinsella
 categories:
   - "Containers"
   - "Pixi"
@@ -21,8 +22,11 @@ engine: markdown
 Short, practical tips from NBIS staff, each shown as a 5-minute demo.
 
 - [Building ARM containers with Pixi and Wave](#building-arm-containers-with-pixi-and-wave) (Mahesh Binzer-Panchal, intermediate)
-- [Fuzzy file finders](#fuzzy-file-finders) (Erik Fasterius, beginner)
 - [SSH port forwarding and jump hosts](#ssh-port-forwarding-and-jump-hosts) (Martin Dahlö, beginner to intermediate)
+- [Git aliases](#git-aliases) (Cormac Kinsella, beginner)
+- [Re-use code with snippets](#re-use-code-with-snippets) (Erik Fasterius, beginner)
+- [Fuzzy file finders](#finding-files-with-a-fuzzy-finder) (Erik Fasterius, beginner)
+- [Cleaning up commits with a local rebase](#cleaning-up-commits-with-a-local-rebase) (Erik Fasterius, intermediate)
 
 ## Building ARM containers with Pixi and Wave
 
@@ -179,16 +183,6 @@ On an x86-64 machine Docker emulates ARM, which is slower. Wave builds natively 
 - [Wave CLI](https://docs.seqera.io/wave/cli)
 - [Pixi documentation](https://pixi.sh)
 - [Fast, reproducible CUDA development and packaging with Pixi](https://prefix.dev/blog/cuda-pixi)
-
-## Fuzzy file finders
-
-*Erik Fasterius*
-
-<!-- TODO (Erik): Erik offered four topics in the sign-up: fuzzy file finders (beginner), snippets (intermediate), local rebases (intermediate), Vim motions (beginner). Keep this section and add or swap sections for the ones given. -->
-
-Finding files with a fuzzy finder.
-
-
 
 ## SSH port forwarding and jump hosts
 
