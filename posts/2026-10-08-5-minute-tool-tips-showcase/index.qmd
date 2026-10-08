@@ -329,7 +329,7 @@ You can modify the output of `git log` to show a more concise, readable view of 
 ### Create missing commands
 
 If you find yourself needing a command that doesn't exist, you can create it as an alias.
-The example from git's [own documentation](https://git-scm.com/book/ms/v2/Git-Basics-Git-Aliases) is `git unstage`. 
+The example from git's [own documentation](https://git-scm.com/book/ms/v2/Git-Basics-Git-Aliases) is `git unstage`.
 
 ```
 $ git config --global alias.unstage 'reset HEAD --'
@@ -361,3 +361,187 @@ type __git_complete &>/dev/null && __git_complete g __git_main # Allow g alias t
 ```
 
 The completion script path above is for Ubuntu/Debian. Other systems install it elsewhere (e.g. Homebrew on macOS uses `$(brew --prefix)/etc/bash_completion.d/git-completion.bash`).
+
+## Re-use code with snippets
+
+When you find yourself having to re-type similar or even identical code, that's
+a good time to think about converting it into a _snippet_: a piece of code that
+you can easily re-use without having to type it all out. It can be anything you
+desire: a function, a skeleton for some particular file type, or a module
+import. A snippet is a sort of template, triggered by a keyword or prefix, which
+expands into the full code. Snippets are available in different formats and
+styles for a lot of editors, and most let you define your own in addition to
+having built-in ones. For example, the following defines a snippet named `chunk`
+for use in Quarto documents:
+
+````
+snippet chunk "Create an empty Quarto code chunk"
+	```{${1:r}}
+	${2}
+	```
+````
+
+When triggered, it expands into this:
+
+````
+```{r}
+
+```
+````
+
+After expansion, the cursor will be on the `r`, which was the first placeholder
+(`$1`), for which the default value was `r`. The second placeholder had no
+default value; it's usually possible to move between placeholders with a key,
+like TAB and Shift + TAB.
+
+There's no limit to how big a snippet can be; the following is a skeleton for
+writing a multi-stage, Pixi-based Dockerfile:
+
+```
+snippet dockerfile-pixi "Initialise a new Dockerfile with Pixi"
+	#
+	# First stage: Build Pixi environment
+	#
+	FROM ghcr.io/prefix-dev/pixi:0.53.0 AS build
+	LABEL org.opencontainers.image.authors="name.surname@google.com"
+	LABEL org.opencontainers.image.description="Dockerfile for my_project"
+
+	# Copy the environment toml
+	COPY pixi.toml pixi.lock /
+
+	# Install the Pixi environment as 'default'
+	RUN pixi install
+
+	# Create the shell-hook bash script that will activate the environment
+	RUN pixi shell-hook > /shell-hook.sh
+
+	# Extend the shell-hook script to run the command passed to at run-time
+	RUN echo 'exec "\$@"' >> /shell-hook.sh
+
+	#
+	# Second stage: final image
+	#
+	FROM ubuntu:22.04 AS work
+	WORKDIR /work
+
+	# Copy over environment and shell-hook script from build stage
+	COPY --from=build /.pixi/envs/default /.pixi/envs/default
+	COPY --from=build /shell-hook.sh /shell-hook.sh
+
+	# Activate the Pixi environment when running the container
+	ENTRYPOINT ["/bin/bash", "/shell-hook.sh"]
+	CMD /bin/bash
+```
+
+## Finding files with a fuzzy finder
+
+Clicking around in a file tree or typing an exact path from memory is slow,
+especially in a large repository. A _fuzzy finder_ (like
+[fzf](https://github.com/junegunn/fzf)) matches a search string against a list
+of candidates (_e.g._ files, shell history, branches, running processes) by how
+well the characters fit, not by exact substring position. For example, launching
+`fzf` will provide you with a prompt:
+
+```bash
+▌ posts/2026-09-10-nf-test-nextflow-testing-framework/index.qmd
+▌ .quarto/idx/posts/2026-03-12-github-pull-requests-code-review/index.qmd.json
+▌ posts/2026-03-12-github-pull-requests-code-review/index.qmd
+▌ .quarto/idx/posts/2026-02-12-working-with-R-packages/index.qmd.json
+▌ posts/2026-02-12-working-with-R-packages/index.qmd
+▌ posts/2026-06-11-blender-intro/index.qmd
+▌ .quarto/idx/posts/2026-01-22-github-actions/index.qmd.json
+▌ posts/2026-01-22-github-actions/index.qmd
+  8/289 ──────────────────────────────────────────────────────────────────────
+> 202601qmd
+```
+
+As the typing happens, the results will get more and more narrow: when `2026` is
+finished you'll only see files with `2026` in the name; adding `01` narrows it
+down to January, and the `qmd` gets us the final result shown above. We could
+even skip some characters: doing `2601qmd` gets us the same results.
+
+Selecting a result sends it to the standard output, so you usually want to
+combine it with a command:
+
+```bash
+cat $(fzf)
+```
+
+Additionally the `fzf` software easily plugs into the history search in bash
+(which is `Ctrl + R` by default), which makes searching through your bash
+history even easier.
+
+A lot of editors already have fuzzy search functionality built-in: for example,
+in VSCode you can type `[Cmd/Ctrl] + P` to jump straight into the fuzzy finding
+prompt and type away.
+
+## Cleaning up commits with a local rebase
+
+Git histories can get a bit messy when one is solving a problem, possibly with
+experimentation, "WIP" messages and commits that only fix spelling mistakes or
+formatting. For example, a small history from a feature branch:
+
+```bash
+$ git log --oneline
+0abf162 First feature commit
+befc682 A minor change on the first commit
+c9d1426 A commit with an incomplete commit message
+2e0cb97 A commit with a spelling mitake
+```
+
+Some of these are highly related to each other and might actually be better
+suited as a single commit. Let's say that you've also spotted a spelling error
+in one commit message, and realised that you missed important information in
+another. We can actually solve all of these issues with an _interactive rebase_!
+
+```bash
+$ git rebase -i HEAD~4
+```
+
+This command initiates an interactive rebase using the four commits back from
+HEAD. This will open your default editor with something like the following:
+
+```vim
+pick 0abf162 First feature commit
+pick befc682 A minor change on the first commit
+pick c9d1426 A commit with an uncomplete commit message
+pick 2e0cb97 A commit with a spelling mitake
+
+# Rebase 879ddcc..0abf162 onto 879ddcc (4 commands)
+#
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup [-C | -c] <commit> = like "squash" but keep only the previous
+#                    commit's log message, unless -C is used, in which case
+#                    keep only this commit's message; -c is same as -C but
+#                    opens the editor
+
+(... more instructions ...)
+```
+
+The commits are ordered with the most recent one at the bottom. The commented
+instructions (all of which are not shown here) show you what alternatives you
+have to work with; all you have to do is to change the `pick` keyword next to
+the commit hashes to whatever keyword you need from the list, save and exit.
+
+In order to solve the toy example here we might decide that the four keywords
+should be `pick`, `squash`, `reword` and `reword`, from top to bottom; if just
+want to add the second commits' content to the first one while using only the
+first one's commit message we could use `fixup` instead. Once that’s done simply
+save and exit, and another instance of your default text editor will open for
+you to complete the specified changes. In the case above we'd get two separate
+new instances where we can change the commit message - these work the same as
+any normal commit.
+
+:::{.callout-note}
+Rebasing rewrites commit hashes. Only rebase commits that haven't been pushed
+yet, or that no one else has already built work on - otherwise your history and
+theirs diverge.
+:::
+
+Interactive rebasing is thus well-suited for fixing and cleaning of local
+changes you have yet to push anywhere. This can make your Git history both
+cleaner and more concise, which is great when you’re collaborating with others.
