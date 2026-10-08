@@ -117,7 +117,7 @@ Finding files with a fuzzy finder.
 
 *Martin Dahlö*
 
-Jupyter and other web apps running on a HPC cluster (or any other server) listen on a port on a remote machine. Unless the server's firewall is configured to allow traffic to that port, your browser cannot reach that port directly. SSH can carry the traffic for you using the `-L` argument.
+Jupyter and other web apps running on a HPC cluster (or any other server) listen on a port on a remote machine. Unless the server's firewall is configured to allow traffic to that port, your browser cannot reach that port directly. You can use either ThinLinc or X11 forwarding to run a browser on the server, but that is slow and clunky. Using port forwarding over SSH solves this problem by carrying the traffic for you using the `-L` argument.
 
 `ssh -L local_port:target_host:target_port`
 
@@ -151,9 +151,9 @@ Do not run heavy work on the login node. Other users may already use port `8888`
 :::
 
 
-### 2. `-L`: let the login node reach the compute node
+### 2. `-L`: let the login node forward to the compute node
 
-If you want to run Jupyter on a compute node, the login node must reach that node. The login node can reach `p53`, so you can forward a port from your computer to `p53` through the login node.
+If you want to run Jupyter on a compute node, you have to forward the port to that node. The login node can reach `p53`, so you can forward a port from your computer to `p53` through the login node.
 
 On your computer:
 
@@ -173,7 +173,7 @@ jupyter notebook --no-browser --ip 0.0.0.0 --port 8888
 ```
 
 ::: {.callout-warning}
-With `--ip 0.0.0.0`, anyone on the cluster can reach the notebook. Only the token protects it.
+With `--ip 0.0.0.0`, anyone on the cluster can reach the notebook. Only the token protects it. Without this option (the default case) only users who are logged in on the compute node can reach the port.
 :::
 
 
@@ -217,7 +217,7 @@ On the login node or `p53`:
 
 ```bash
 # in the folder with the report
-python3 -m http.server 8000 --bind 127.0.0.1
+python3 -m http.server 8888 --bind 127.0.0.1
 ```
 
 Forward the port as in option 1 (login node) or 3 (p53).
@@ -226,13 +226,13 @@ On your computer:
 
 ```bash
 # option 1 (web server on login node)
-ssh -L 8000:localhost:8000 username@pelle.uppmax.uu.se
+ssh -L 8888:localhost:8888 username@pelle.uppmax.uu.se
 
 # option 3 (web server on p53)
-ssh -J username@pelle.uppmax.uu.se -L 8000:localhost:8000 username@p53
+ssh -J username@pelle.uppmax.uu.se -L 8888:localhost:8888 username@p53
 ```
 
-Open `http://localhost:8000/multiqc_report.html`.
+Open `http://localhost:8888/multiqc_report.html`.
 
 The same pattern works for any web app on the login node or a compute node, such as Shiny or RStudio Server. Only the port changes.
 
