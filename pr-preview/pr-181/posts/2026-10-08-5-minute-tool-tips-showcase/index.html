@@ -622,8 +622,19 @@ Warning
 </section>
 <section id="log-your-time-in-a-daily-note" class="level3">
 <h3 class="anchored" data-anchor-id="log-your-time-in-a-daily-note">Log your time in a daily note</h3>
-<p>A daily note template holds a journal entry, the projects you worked on, the time spent on each and a to-do list. The <a href="https://blacksmithgu.github.io/obsidian-dataview/">Dataview</a> plugin tabulates the week’s entries into a weekly report. The template took about ten minutes to set up.</p>
-<!-- TODO (Jason): add the daily note template and the Dataview query shown in the demo. -->
+<p>A daily note template holds a journal, a to-do list and a task log. Each journal entry records its project and hours as inline fields:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Journal Entries</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Annotate the genome <span class="co">[</span><span class="ot">project:: Conifers</span><span class="co">] [hours:: 2]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <a href="https://blacksmithgu.github.io/obsidian-dataview/">Dataview</a> plugin reads these fields. A weekly report note sums the hours per project for the current week:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="in">```dataview</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="in">TABLE sum(rows.L.hours) AS "Total Hours"</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="in">FROM "01_Daily"</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="in">FLATTEN file.lists AS L</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="in">WHERE L.project AND L.hours</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="in">WHERE file.day &gt;= date(sow)</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="in">GROUP BY L.project</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>01_Daily</code> is the folder that holds the daily notes. The template took about ten minutes to set up.</p>
 </section>
 <section id="key-takeaways-3" class="level3">
 <h3 class="anchored" data-anchor-id="key-takeaways-3">Key takeaways</h3>
@@ -652,9 +663,9 @@ Warning
     ${2}
     ```</code></pre>
 <p>When triggered, it expands into this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>After expansion, the cursor will be on the <code>r</code>, which was the first placeholder (<code>$1</code>), for which the default value was <code>r</code>. The second placeholder had no default value; it’s usually possible to move between placeholders with a key, like TAB and Shift + TAB.</p>
 <p>There’s no limit to how big a snippet can be; the following is a skeleton for writing a multi-stage, Pixi-based Dockerfile:</p>
 <pre><code>snippet dockerfile-pixi "Initialise a new Dockerfile with Pixi"
@@ -720,7 +731,7 @@ Warning
 &gt; 202601qmd</code></pre>
 <p>As the typing happens, the results will get more and more narrow: when <code>2026</code> is finished you’ll only see files with <code>2026</code> in the name; adding <code>01</code> narrows it down to January, and the <code>qmd</code> gets us the final result shown above. We could even skip some characters: doing <code>2601qmd</code> gets us the same results.</p>
 <p>Selecting a result sends it to the standard output, so you usually want to combine it with a command:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$(</span><span class="ex">fzf</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$(</span><span class="ex">fzf</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Additionally the <code>fzf</code> software easily plugs into the history search in bash (which is <code>Ctrl + R</code> by default), which makes searching through your bash history even easier.</p>
 <p>A lot of editors already have fuzzy search functionality built-in: for example, in VSCode you can type <code>[Cmd/Ctrl] + P</code> to jump straight into the fuzzy finding prompt and type away.</p>
 <section id="key-takeaways-5" class="level3">
@@ -741,13 +752,13 @@ Warning
 <h2 class="anchored" data-anchor-id="cleaning-up-commits-with-a-local-rebase">Cleaning up commits with a local rebase</h2>
 <p><em>Erik Fasterius</em></p>
 <p>Git histories can get a bit messy when one is solving a problem, possibly with experimentation, “WIP” messages and commits that only fix spelling mistakes or formatting. For example, a small history from a feature branch:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>0abf162 First feature commit
 befc682 A minor change on the first commit
 c9d1426 A commit with an incomplete commit message
 2e0cb97 A commit with a spelling mitake</code></pre>
 <p>Some of these are highly related to each other and might actually be better suited as a single commit. Let’s say that you’ve also spotted a spelling error in one commit message, and realised that you missed important information in another. We can actually solve all of these issues with an <em>interactive rebase</em>!</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rebase <span class="at">-i</span> HEAD~4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rebase <span class="at">-i</span> HEAD~4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This command initiates an interactive rebase using the four commits back from HEAD. This will open your default editor with something like the following:</p>
 <pre class="vim"><code>pick 0abf162 First feature commit
 pick befc682 A minor change on the first commit
