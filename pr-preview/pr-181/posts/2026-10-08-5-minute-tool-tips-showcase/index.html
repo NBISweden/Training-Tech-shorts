@@ -9,6 +9,7 @@
 <meta name="author" content="Mahesh Binzer-Panchal">
 <meta name="author" content="Cormac Kinsella">
 <meta name="author" content="Martin Dahlö">
+<meta name="author" content="Jason Hill">
 <meta name="author" content="Erik Fasterius">
 <meta name="dcterms.date" content="2026-10-08">
 
@@ -201,6 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                 <div class="quarto-category">SSH</div>
                 <div class="quarto-category">Terminal</div>
                 <div class="quarto-category">Git</div>
+                <div class="quarto-category">Obsidian</div>
               </div>
                   </div>
   </div>
@@ -214,6 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                <p>Mahesh Binzer-Panchal </p>
                <p>Cormac Kinsella </p>
                <p>Martin Dahlö </p>
+               <p>Jason Hill </p>
                <p>Erik Fasterius </p>
             </div>
     </div>
@@ -228,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">October 8, 2026</p>
+        <p class="date-modified">October 9, 2026</p>
       </div>
     </div>
       
@@ -246,12 +249,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<!-- Source: discussion #169. Each presenter owns their section. Slots are unconfirmed beyond the sign-ups; add or remove sections to match what is given. -->
+<!-- Source: discussion #169. Each presenter owns their section. -->
 <p>Short, practical tips from NBIS staff, each shown as a 5-minute demo.</p>
 <ul>
 <li><a href="#building-arm-containers-with-pixi-and-wave">Building ARM containers with Pixi and Wave</a> (Mahesh Binzer-Panchal, intermediate)</li>
 <li><a href="#git-aliases">Git aliases</a> (Cormac Kinsella, beginner)</li>
 <li><a href="#ssh-port-forwarding-and-jump-hosts">SSH port forwarding and jump hosts</a> (Martin Dahlö, beginner to intermediate)</li>
+<li><a href="#note-taking-and-time-logging-with-obsidian">Note taking and time logging with Obsidian</a> (Jason Hill, beginner)</li>
 <li><a href="#re-use-code-with-snippets">Re-use code with snippets</a> (Erik Fasterius, beginner)</li>
 <li><a href="#finding-files-with-a-fuzzy-finder">Fuzzy file finders</a> (Erik Fasterius, beginner)</li>
 <li><a href="#cleaning-up-commits-with-a-local-rebase">Cleaning up commits with a local rebase</a> (Erik Fasterius, intermediate)</li>
@@ -263,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You can build an ARM container without an ARM machine:</p>
 <ol type="1">
 <li>Search for ARM packages and validate an <code>environment.yml</code> with <a href="https://pixi.sh">Pixi</a>.</li>
-<li>Build the image from that file with <a href="https://docs.seqera.io/wave/cli">Seqera Wave</a>.</li>
+<li>Build the image from that file with <a href="https://github.com/seqeralabs/wave-cli">Seqera Wave</a>.</li>
 </ol>
 <section id="check-arm-packages-with-pixi" class="level3">
 <h3 class="anchored" data-anchor-id="check-arm-packages-with-pixi">Check ARM packages with Pixi</h3>
@@ -306,7 +310,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The <code>wave-cli</code> repository is archived. The tool has been merged into <a href="https://github.com/seqeralabs/wave">seqeralabs/wave</a>. Installation and the <code>wave</code> command options may change in future releases. Check the Wave repository for the current instructions.</p>
+<p>The <code>wave-cli</code> repository was archived on 7 October 2026. The tool has been merged into <a href="https://github.com/seqeralabs/wave">seqeralabs/wave</a>. Installation and the <code>wave</code> command options may change in future releases. Check the Wave repository for the current instructions.</p>
 </div>
 </div>
 <p>Pass it the validated file:</p>
@@ -407,7 +411,7 @@ Tip
 <section id="further-resources" class="level3">
 <h3 class="anchored" data-anchor-id="further-resources">Further resources</h3>
 <ul>
-<li><a href="https://docs.seqera.io/wave/cli">Wave CLI</a></li>
+<li><a href="https://github.com/seqeralabs/wave-cli">Wave CLI</a> (archived; README and releases)</li>
 <li><a href="https://pixi.sh">Pixi documentation</a></li>
 <li><a href="https://prefix.dev/blog/cuda-pixi">Fast, reproducible CUDA development and packaging with Pixi</a></li>
 </ul>
@@ -420,37 +424,73 @@ Tip
 <section id="basic-aliases" class="level3">
 <h3 class="anchored" data-anchor-id="basic-aliases">Basic aliases</h3>
 <p>For example, instead of typing <code>git status</code>, you can create an alias <code>git st</code> to run the same command. This would be done by running:</p>
-<pre><code>$ git config --global alias.st status</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> alias.st status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Or by editing the <code>~/.gitconfig</code> file directly.</p>
-<pre><code>[alias]
-    st = status</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>~/.gitconfig</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-filename="~/.gitconfig"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[alias]</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">    st </span><span class="ot">=</span><span class="st"> status</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="simplifying-complex-commands" class="level3">
 <h3 class="anchored" data-anchor-id="simplifying-complex-commands">Simplifying complex commands</h3>
 <p>As an example, <code>git log</code> output gives a lot of information which we may not want every time.</p>
 <p>You can modify the output of <code>git log</code> to show a more concise, readable view of the commit history, and store that as an alias.</p>
-<pre><code>[alias]
-    l = log --oneline --graph -n 20</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>~/.gitconfig</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13" data-filename="~/.gitconfig"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[alias]</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dt">    l </span><span class="ot">=</span><span class="st"> log --oneline --graph -n 20</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="create-missing-commands" class="level3">
 <h3 class="anchored" data-anchor-id="create-missing-commands">Create missing commands</h3>
-<p>If you find yourself needing a command that doesn’t exist, you can create it as an alias. The example from git’s <a href="https://git-scm.com/book/ms/v2/Git-Basics-Git-Aliases">own documentation</a> is <code>git unstage</code>.</p>
-<pre><code>$ git config --global alias.unstage 'reset HEAD --'</code></pre>
+<p>If you find yourself needing a command that doesn’t exist, you can create it as an alias. The example from git’s <a href="https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases">own documentation</a> is <code>git unstage</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> alias.unstage <span class="st">'reset HEAD --'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Which makes these two commands equivalent:</p>
-<pre><code>$ git unstage fileA
-$ git reset HEAD -- fileA</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> unstage fileA</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reset HEAD <span class="at">--</span> fileA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="store-git-itself-as-an-alias" class="level3">
 <h3 class="anchored" data-anchor-id="store-git-itself-as-an-alias">Store git itself as an alias</h3>
 <p>You can even store git itself as a shell alias, so that you can type <code>g</code> instead of <code>git</code>. Add this line to your <code>~/.bashrc</code> or <code>~/.aliases</code> dotfile so it persists across sessions:</p>
-<pre><code>$ alias g=git</code></pre>
-<p><em>NOTE</em>: tab completion of branch names and git commands/aliases doesn’t work for <code>g</code> by default. To restore it in bash, add this to your <code>~/.bashrc</code> also:</p>
-<pre><code>if ! type __git_complete &amp;&gt;/dev/null; then
-    source /usr/share/bash-completion/completions/git 2&gt;/dev/null # Eager load git completion
-fi
-
-type __git_complete &amp;&gt;/dev/null &amp;&amp; __git_complete g __git_main # Allow g alias to tab complete</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> g=git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tab completion of branch names and git commands/aliases doesn’t work for <code>g</code> by default.</p>
+</div>
+</div>
+<p>To restore it in bash, add this to your <code>~/.bashrc</code> also:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="ot">! </span><span class="bu">type</span> __git_complete <span class="op">&amp;&gt;</span>/dev/null<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">source</span> /usr/share/bash-completion/completions/git <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="co"># Eager load git completion</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> __git_complete <span class="op">&amp;&gt;</span>/dev/null <span class="kw">&amp;&amp;</span> <span class="ex">__git_complete</span> g __git_main <span class="co"># Allow g alias to tab complete</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The completion script path above is for Ubuntu/Debian. Other systems install it elsewhere (e.g.&nbsp;Homebrew on macOS uses <code>$(brew --prefix)/etc/bash_completion.d/git-completion.bash</code>).</p>
+</section>
+<section id="key-takeaways-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways-1">Key takeaways</h3>
+<ul>
+<li><code>git config --global alias.&lt;name&gt; '&lt;command&gt;'</code> saves a git command under a shorter name in <code>~/.gitconfig</code>.</li>
+<li><code>alias g=git</code> in a dotfile shortens <code>git</code> itself, but you must add the completion lines to keep tab completion.</li>
+</ul>
+</section>
+<section id="further-resources-1" class="level3">
+<h3 class="anchored" data-anchor-id="further-resources-1">Further resources</h3>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases">Git aliases</a> in the Pro Git book</li>
+</ul>
 </section>
 </section>
 <section id="ssh-port-forwarding-and-jump-hosts" class="level2">
@@ -539,31 +579,82 @@ Warning
 <p>Open <code>http://localhost:8888/multiqc_report.html</code>.</p>
 <p>The same pattern works for any web app on the login node or a compute node, such as Shiny or RStudio Server. Only the port changes.</p>
 </section>
-<section id="key-takeaways-1" class="level3">
-<h3 class="anchored" data-anchor-id="key-takeaways-1">Key takeaways</h3>
+<section id="key-takeaways-2" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways-2">Key takeaways</h3>
 <ul>
-<li>In <code>-L A:host:B</code>, which machine resolves <code>host</code>?</li>
-<li>Why must Jupyter use <code>--ip 0.0.0.0</code> in option 2 but not in option 3?</li>
+<li>In <code>-L A:host:B</code>, the machine you ssh to resolves <code>host</code>, so <code>localhost</code> means that machine, not yours.</li>
+<li>In option 2, Jupyter needs <code>--ip 0.0.0.0</code> so the login node can reach it. In option 3 the final ssh server resolves <code>localhost</code>, so Jupyter keeps its default and no other user can reach it.</li>
 </ul>
 </section>
-<section id="further-resources-1" class="level3">
-<h3 class="anchored" data-anchor-id="further-resources-1">Further resources</h3>
+<section id="further-resources-2" class="level3">
+<h3 class="anchored" data-anchor-id="further-resources-2">Further resources</h3>
 <ul>
 <li><a href="https://man.openbsd.org/ssh"><code>man ssh</code></a>, see <code>-L</code> and <code>-J</code></li>
 </ul>
 </section>
 </section>
+<section id="note-taking-and-time-logging-with-obsidian" class="level2">
+<h2 class="anchored" data-anchor-id="note-taking-and-time-logging-with-obsidian">Note taking and time logging with Obsidian</h2>
+<p><em>Jason Hill</em></p>
+<p><a href="https://obsidian.md">Obsidian</a> is a free, proprietary editor for a folder of Markdown files. Markdown is plain-text formatting (<code>#</code> for headings, <code>*</code> for emphasis) that you will know from GitHub READMEs. Your notes stay on your machine. If Obsidian disappears, you keep plain-text files that any other tool can read.</p>
+<section id="link-your-notes" class="level3">
+<h3 class="anchored" data-anchor-id="link-your-notes">Link your notes</h3>
+<p>Link to a note with double brackets, <code>[[SSH port forwarding]]</code>. Clicking a link to a note that does not exist yet creates it.</p>
+<p>Each note also lists the notes that link to it (backlinks), shown in the right-hand panel.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/obsidianmd/obsidian-help/master/en/Attachments/Backlinks.png" class="img-fluid figure-img" alt="An Obsidian note on the left. The right-hand panel lists Linked mentions and Unlinked mentions of the note."></p>
+<figcaption>Backlinks panel. Image from the <a href="https://help.obsidian.md/plugins/backlinks">Obsidian Help</a>.</figcaption>
+</figure>
+</div>
+<p>Graph view draws all your notes and their links as a network. Linking a concept, such as a single-cell analysis step, lets you jump to every project that used it.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://raw.githubusercontent.com/obsidianmd/obsidian-help/master/en/Attachments/obsidian-graph-view.png" class="img-fluid figure-img" alt="Obsidian graph view. Notes appear as dots joined by lines, with one note and its links highlighted."></p>
+<figcaption>Graph view. Image from the <a href="https://help.obsidian.md/plugins/graph">Obsidian Help</a>.</figcaption>
+</figure>
+</div>
+<p>Obsidian suggests one folder of notes organised by links. Folders work too.</p>
+</section>
+<section id="extend-with-plugins" class="level3">
+<h3 class="anchored" data-anchor-id="extend-with-plugins">Extend with plugins</h3>
+<p>Thousands of community plugins add features, from local LLM integration to plotting. The core features cover most daily use.</p>
+</section>
+<section id="log-your-time-in-a-daily-note" class="level3">
+<h3 class="anchored" data-anchor-id="log-your-time-in-a-daily-note">Log your time in a daily note</h3>
+<p>A daily note template holds a journal entry, the projects you worked on, the time spent on each and a to-do list. The <a href="https://blacksmithgu.github.io/obsidian-dataview/">Dataview</a> plugin tabulates the week’s entries into a weekly report. The template took about ten minutes to set up.</p>
+<!-- TODO (Jason): add the daily note template and the Dataview query shown in the demo. -->
+</section>
+<section id="key-takeaways-3" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways-3">Key takeaways</h3>
+<ul>
+<li>Obsidian keeps notes as local Markdown files, so you own your data and can move it to another tool.</li>
+<li><code>[[double brackets]]</code> link notes, and backlinks and graph view show how they connect.</li>
+<li>A daily note template plus the Dataview plugin turns time logging into a weekly report.</li>
+</ul>
+</section>
+<section id="further-resources-3" class="level3">
+<h3 class="anchored" data-anchor-id="further-resources-3">Further resources</h3>
+<ul>
+<li><a href="https://obsidian.md">Obsidian</a></li>
+<li><a href="https://help.obsidian.md/links">Internal links</a></li>
+<li><a href="https://help.obsidian.md/plugins/graph">Graph view</a></li>
+<li><a href="https://blacksmithgu.github.io/obsidian-dataview/">Dataview</a></li>
+</ul>
+</section>
+</section>
 <section id="re-use-code-with-snippets" class="level2">
 <h2 class="anchored" data-anchor-id="re-use-code-with-snippets">Re-use code with snippets</h2>
+<p><em>Erik Fasterius</em></p>
 <p>When you find yourself having to re-type similar or even identical code, that’s a good time to think about converting it into a <em>snippet</em>: a piece of code that you can easily re-use without having to type it all out. It can be anything you desire: a function, a skeleton for some particular file type, or a module import. A snippet is a sort of template, triggered by a keyword or prefix, which expands into the full code. Snippets are available in different formats and styles for a lot of editors, and most let you define your own in addition to having built-in ones. For example, the following defines a snippet named <code>chunk</code> for use in Quarto documents:</p>
 <pre><code>snippet chunk "Create an empty Quarto code chunk"
     ```${1:r}
     ${2}
     ```</code></pre>
 <p>When triggered, it expands into this:</p>
-<pre><code>```{r}
-
-```</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>After expansion, the cursor will be on the <code>r</code>, which was the first placeholder (<code>$1</code>), for which the default value was <code>r</code>. The second placeholder had no default value; it’s usually possible to move between placeholders with a key, like TAB and Shift + TAB.</p>
 <p>There’s no limit to how big a snippet can be; the following is a skeleton for writing a multi-stage, Pixi-based Dockerfile:</p>
 <pre><code>snippet dockerfile-pixi "Initialise a new Dockerfile with Pixi"
@@ -599,40 +690,68 @@ Warning
     # Activate the Pixi environment when running the container
     ENTRYPOINT ["/bin/bash", "/shell-hook.sh"]
     CMD /bin/bash</code></pre>
+<section id="key-takeaways-4" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways-4">Key takeaways</h3>
+<ul>
+<li>A snippet expands a short keyword into a template, and placeholders let you tab through the parts to fill in.</li>
+<li>A snippet can be as small as a code chunk or as large as a whole Dockerfile.</li>
+</ul>
+</section>
+<section id="further-resources-4" class="level3">
+<h3 class="anchored" data-anchor-id="further-resources-4">Further resources</h3>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/editing/userdefinedsnippets">VS Code user-defined snippets</a></li>
+</ul>
+</section>
 </section>
 <section id="finding-files-with-a-fuzzy-finder" class="level2">
 <h2 class="anchored" data-anchor-id="finding-files-with-a-fuzzy-finder">Finding files with a fuzzy finder</h2>
+<p><em>Erik Fasterius</em></p>
 <p>Clicking around in a file tree or typing an exact path from memory is slow, especially in a large repository. A <em>fuzzy finder</em> (like <a href="https://github.com/junegunn/fzf">fzf</a>) matches a search string against a list of candidates (<em>e.g.</em> files, shell history, branches, running processes) by how well the characters fit, not by exact substring position. For example, launching <code>fzf</code> will provide you with a prompt:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-09-10-nf-test-nextflow-testing-framework/index.qmd</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> .quarto/idx/posts/2026-03-12-github-pull-requests-code-review/index.qmd.json</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-03-12-github-pull-requests-code-review/index.qmd</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> .quarto/idx/posts/2026-02-12-working-with-R-packages/index.qmd.json</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-02-12-working-with-R-packages/index.qmd</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-06-11-blender-intro/index.qmd</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> .quarto/idx/posts/2026-01-22-github-actions/index.qmd.json</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="ex">▌</span> posts/2026-01-22-github-actions/index.qmd</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="ex">8/289</span> ──────────────────────────────────────────────────────────────────────</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> 202601qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>▌ posts/2026-09-10-nf-test-nextflow-testing-framework/index.qmd
+▌ .quarto/idx/posts/2026-03-12-github-pull-requests-code-review/index.qmd.json
+▌ posts/2026-03-12-github-pull-requests-code-review/index.qmd
+▌ .quarto/idx/posts/2026-02-12-working-with-R-packages/index.qmd.json
+▌ posts/2026-02-12-working-with-R-packages/index.qmd
+▌ posts/2026-06-11-blender-intro/index.qmd
+▌ .quarto/idx/posts/2026-01-22-github-actions/index.qmd.json
+▌ posts/2026-01-22-github-actions/index.qmd
+  8/289 ──────────────────────────────────────────────────────────────────────
+&gt; 202601qmd</code></pre>
 <p>As the typing happens, the results will get more and more narrow: when <code>2026</code> is finished you’ll only see files with <code>2026</code> in the name; adding <code>01</code> narrows it down to January, and the <code>qmd</code> gets us the final result shown above. We could even skip some characters: doing <code>2601qmd</code> gets us the same results.</p>
 <p>Selecting a result sends it to the standard output, so you usually want to combine it with a command:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="va">$(</span><span class="ex">fzf</span><span class="va">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Additionally the <code>fzf</code> software easily plugs into the history search in bash (which is <code>Ctrl + R</code> by default), which makes searching through your bash history even easier.</p>
 <p>A lot of editors already have fuzzy search functionality built-in: for example, in VSCode you can type <code>[Cmd/Ctrl] + P</code> to jump straight into the fuzzy finding prompt and type away.</p>
+<section id="key-takeaways-5" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways-5">Key takeaways</h3>
+<ul>
+<li><code>fzf</code> narrows a list as you type and matches characters that are not next to each other, so partial and misspelled input still finds the file.</li>
+<li><code>fzf</code> plugs into bash history search (<code>Ctrl + R</code>), and many editors have a built-in fuzzy finder.</li>
+</ul>
+</section>
+<section id="further-resources-5" class="level3">
+<h3 class="anchored" data-anchor-id="further-resources-5">Further resources</h3>
+<ul>
+<li><a href="https://github.com/junegunn/fzf">fzf</a></li>
+</ul>
+</section>
 </section>
 <section id="cleaning-up-commits-with-a-local-rebase" class="level2">
 <h2 class="anchored" data-anchor-id="cleaning-up-commits-with-a-local-rebase">Cleaning up commits with a local rebase</h2>
+<p><em>Erik Fasterius</em></p>
 <p>Git histories can get a bit messy when one is solving a problem, possibly with experimentation, “WIP” messages and commits that only fix spelling mistakes or formatting. For example, a small history from a feature branch:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git log <span class="at">--oneline</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0abf162</span> First feature commit</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="ex">befc682</span> A minor change on the first commit</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="ex">c9d1426</span> A commit with an incomplete commit message</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="ex">2e0cb97</span> A commit with a spelling mitake</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>0abf162 First feature commit
+befc682 A minor change on the first commit
+c9d1426 A commit with an incomplete commit message
+2e0cb97 A commit with a spelling mitake</code></pre>
 <p>Some of these are highly related to each other and might actually be better suited as a single commit. Let’s say that you’ve also spotted a spelling error in one commit message, and realised that you missed important information in another. We can actually solve all of these issues with an <em>interactive rebase</em>!</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git rebase <span class="at">-i</span> HEAD~4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rebase <span class="at">-i</span> HEAD~4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This command initiates an interactive rebase using the four commits back from HEAD. This will open your default editor with something like the following:</p>
 <pre class="vim"><code>pick 0abf162 First feature commit
 pick befc682 A minor change on the first commit
-pick c9d1426 A commit with an uncomplete commit message
+pick c9d1426 A commit with an incomplete commit message
 pick 2e0cb97 A commit with a spelling mitake
 
 # Rebase 879ddcc..0abf162 onto 879ddcc (4 commands)
@@ -664,8 +783,21 @@ Note
 </div>
 </div>
 <p>Interactive rebasing is thus well-suited for fixing and cleaning of local changes you have yet to push anywhere. This can make your Git history both cleaner and more concise, which is great when you’re collaborating with others.</p>
+<section id="key-takeaways-6" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways-6">Key takeaways</h3>
+<ul>
+<li><code>git rebase -i HEAD~N</code> lets you reword, squash or fix up the last N commits.</li>
+<li>Rebase only commits you have not pushed. Rebasing rewrites commit hashes.</li>
+</ul>
+</section>
+<section id="further-resources-6" class="level3">
+<h3 class="anchored" data-anchor-id="further-resources-6">Further resources</h3>
+<ul>
+<li><a href="https://git-scm.com/docs/git-rebase#_interactive_mode"><code>git rebase</code>: interactive mode</a></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
