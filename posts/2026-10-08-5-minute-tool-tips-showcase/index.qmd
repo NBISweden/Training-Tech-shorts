@@ -399,6 +399,7 @@ The same pattern works for any web app on the login node or a compute node, such
 ### Further resources
 
 - [`man ssh`](https://man.openbsd.org/ssh), see `-L` and `-J`
+- [Introduction to SSH Config and Tunneling](../2025-04-15-ssh-config-intro/index.qmd), to save these options in `~/.ssh/config`
 
 ## Note taking and time logging with Obsidian
 
