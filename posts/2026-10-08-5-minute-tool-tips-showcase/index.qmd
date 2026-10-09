@@ -426,9 +426,27 @@ Thousands of community plugins add features, from local LLM integration to plott
 
 ### Log your time in a daily note
 
-A daily note template holds a journal entry, the projects you worked on, the time spent on each and a to-do list. The [Dataview](https://blacksmithgu.github.io/obsidian-dataview/) plugin tabulates the week's entries into a weekly report. The template took about ten minutes to set up.
+A daily note template holds a journal, a to-do list and a task log. Each journal entry records its project and hours as inline fields:
 
-<!-- TODO (Jason): add the daily note template and the Dataview query shown in the demo. -->
+```markdown
+## Journal Entries
+- Annotate the genome [project:: Conifers] [hours:: 2]
+```
+
+The [Dataview](https://blacksmithgu.github.io/obsidian-dataview/) plugin reads these fields. A weekly report note sums the hours per project for the current week:
+
+````markdown
+```dataview
+TABLE sum(rows.L.hours) AS "Total Hours"
+FROM "01_Daily"
+FLATTEN file.lists AS L
+WHERE L.project AND L.hours
+WHERE file.day >= date(sow)
+GROUP BY L.project
+```
+````
+
+`01_Daily` is the folder that holds the daily notes. The template took about ten minutes to set up.
 
 ### Key takeaways
 
