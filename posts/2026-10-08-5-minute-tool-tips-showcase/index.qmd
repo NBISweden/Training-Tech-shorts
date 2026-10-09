@@ -6,6 +6,7 @@ author:
   - Mahesh Binzer-Panchal
   - Cormac Kinsella
   - Martin Dahlö
+  - Jason Hill
   - Erik Fasterius
 categories:
   - "Containers"
@@ -14,16 +15,18 @@ categories:
   - "SSH"
   - "Terminal"
   - "Git"
+  - "Obsidian"
 engine: markdown
 ---
 
-<!-- Source: discussion #169. Each presenter owns their section. Slots are unconfirmed beyond the sign-ups; add or remove sections to match what is given. -->
+<!-- Source: discussion #169. Each presenter owns their section. -->
 
 Short, practical tips from NBIS staff, each shown as a 5-minute demo.
 
 - [Building ARM containers with Pixi and Wave](#building-arm-containers-with-pixi-and-wave) (Mahesh Binzer-Panchal, intermediate)
 - [Git aliases](#git-aliases) (Cormac Kinsella, beginner)
 - [SSH port forwarding and jump hosts](#ssh-port-forwarding-and-jump-hosts) (Martin Dahlö, beginner to intermediate)
+- [Note taking and time logging with Obsidian](#note-taking-and-time-logging-with-obsidian) (Jason Hill, beginner)
 - [Re-use code with snippets](#re-use-code-with-snippets) (Erik Fasterius, beginner)
 - [Fuzzy file finders](#finding-files-with-a-fuzzy-finder) (Erik Fasterius, beginner)
 - [Cleaning up commits with a local rebase](#cleaning-up-commits-with-a-local-rebase) (Erik Fasterius, intermediate)
@@ -37,7 +40,7 @@ Some HPC GPU nodes use ARM CPUs (`aarch64`), not x86-64. A container built for x
 You can build an ARM container without an ARM machine:
 
 1. Search for ARM packages and validate an `environment.yml` with [Pixi](https://pixi.sh).
-2. Build the image from that file with [Seqera Wave](https://docs.seqera.io/wave/cli).
+2. Build the image from that file with [Seqera Wave](https://github.com/seqeralabs/wave-cli).
 
 ### Check ARM packages with Pixi
 
@@ -88,7 +91,7 @@ chmod +x wave-1.9.0-macos-arm64
 ```
 
 ::: {.callout-note}
-The `wave-cli` repository is archived. The tool has been merged into [seqeralabs/wave](https://github.com/seqeralabs/wave). Installation and the `wave` command options may change in future releases. Check the Wave repository for the current instructions.
+The `wave-cli` repository was archived on 7 October 2026. The tool has been merged into [seqeralabs/wave](https://github.com/seqeralabs/wave). Installation and the `wave` command options may change in future releases. Check the Wave repository for the current instructions.
 :::
 
 Pass it the validated file:
@@ -180,7 +183,7 @@ On an x86-64 machine Docker emulates ARM, which is slower. Wave builds natively 
 
 ### Further resources
 
-- [Wave CLI](https://docs.seqera.io/wave/cli)
+- [Wave CLI](https://github.com/seqeralabs/wave-cli) (archived; README and releases)
 - [Pixi documentation](https://pixi.sh)
 - [Fast, reproducible CUDA development and packaging with Pixi](https://prefix.dev/blog/cuda-pixi)
 
@@ -194,13 +197,13 @@ If you regularly find yourself typing out full git commands, or complex commands
 
 For example, instead of typing `git status`, you can create an alias `git st` to run the same command. This would be done by running:
 
-```
-$ git config --global alias.st status
+```bash
+git config --global alias.st status
 ```
 
 Or by editing the `~/.gitconfig` file directly.
 
-```
+```{.ini filename="~/.gitconfig"}
 [alias]
     st = status
 ```
@@ -211,7 +214,7 @@ As an example, `git log` output gives a lot of information which we may not want
 
 You can modify the output of `git log` to show a more concise, readable view of the commit history, and store that as an alias.
 
-```
+```{.ini filename="~/.gitconfig"}
 [alias]
     l = log --oneline --graph -n 20
 ```
@@ -219,30 +222,34 @@ You can modify the output of `git log` to show a more concise, readable view of 
 ### Create missing commands
 
 If you find yourself needing a command that doesn't exist, you can create it as an alias.
-The example from git's [own documentation](https://git-scm.com/book/ms/v2/Git-Basics-Git-Aliases) is `git unstage`.
+The example from git's [own documentation](https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases) is `git unstage`.
 
-```
-$ git config --global alias.unstage 'reset HEAD --'
+```bash
+git config --global alias.unstage 'reset HEAD --'
 ```
 
 Which makes these two commands equivalent:
 
-```
-$ git unstage fileA
-$ git reset HEAD -- fileA
+```bash
+git unstage fileA
+git reset HEAD -- fileA
 ```
 
 ### Store git itself as an alias
 
 You can even store git itself as a shell alias, so that you can type `g` instead of `git`. Add this line to your `~/.bashrc` or `~/.aliases` dotfile so it persists across sessions:
 
-```
-$ alias g=git
+```bash
+alias g=git
 ```
 
-*NOTE*: tab completion of branch names and git commands/aliases doesn't work for `g` by default. To restore it in bash, add this to your `~/.bashrc` also:
+::: {.callout-warning}
+Tab completion of branch names and git commands/aliases doesn't work for `g` by default.
+:::
 
-```
+To restore it in bash, add this to your `~/.bashrc` also:
+
+```bash
 if ! type __git_complete &>/dev/null; then
     source /usr/share/bash-completion/completions/git 2>/dev/null # Eager load git completion
 fi
@@ -251,6 +258,15 @@ type __git_complete &>/dev/null && __git_complete g __git_main # Allow g alias t
 ```
 
 The completion script path above is for Ubuntu/Debian. Other systems install it elsewhere (e.g. Homebrew on macOS uses `$(brew --prefix)/etc/bash_completion.d/git-completion.bash`).
+
+### Key takeaways
+
+- `git config --global alias.<name> '<command>'` saves a git command under a shorter name in `~/.gitconfig`.
+- `alias g=git` in a dotfile shortens `git` itself, but you must add the completion lines to keep tab completion.
+
+### Further resources
+
+- [Git aliases](https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases) in the Pro Git book
 
 ## SSH port forwarding and jump hosts
 
@@ -318,7 +334,7 @@ With `--ip 0.0.0.0`, anyone on the cluster can reach the notebook. Only the toke
 
 ### 2.5. `-J`: ssh straight to the compute node
 
-Using  `ssh -J user@jump_host user@final_host` connects to the `final_host` *through* `jump_host`. This saves you from having to ssh first to the login node and then to the compute node.
+Using `ssh -J user@jump_host user@final_host` connects to the `final_host` *through* `jump_host`. This saves you from having to ssh first to the login node and then to the compute node.
 
 ```bash
 ssh -J username@pelle.uppmax.uu.se username@p53
@@ -377,14 +393,59 @@ The same pattern works for any web app on the login node or a compute node, such
 
 ### Key takeaways
 
-- In `-L A:host:B`, which machine resolves `host`?
-- Why must Jupyter use `--ip 0.0.0.0` in option 2 but not in option 3?
+- In `-L A:host:B`, the machine you ssh to resolves `host`, so `localhost` means that machine, not yours.
+- In option 2, Jupyter needs `--ip 0.0.0.0` so the login node can reach it. In option 3 the final ssh server resolves `localhost`, so Jupyter keeps its default and no other user can reach it.
 
 ### Further resources
 
 - [`man ssh`](https://man.openbsd.org/ssh), see `-L` and `-J`
 
+## Note taking and time logging with Obsidian
+
+*Jason Hill*
+
+[Obsidian](https://obsidian.md) is a free, proprietary editor for a folder of Markdown files. Markdown is plain-text formatting (`#` for headings, `*` for emphasis) that you will know from GitHub READMEs. Your notes stay on your machine. If Obsidian disappears, you keep plain-text files that any other tool can read.
+
+### Link your notes
+
+Link to a note with double brackets, `[[SSH port forwarding]]`. Clicking a link to a note that does not exist yet creates it.
+
+Each note also lists the notes that link to it (backlinks), shown in the right-hand panel.
+
+![Backlinks panel. Image from the [Obsidian Help](https://help.obsidian.md/plugins/backlinks).](https://raw.githubusercontent.com/obsidianmd/obsidian-help/master/en/Attachments/Backlinks.png){fig-alt="An Obsidian note on the left. The right-hand panel lists Linked mentions and Unlinked mentions of the note."}
+
+Graph view draws all your notes and their links as a network. Linking a concept, such as a single-cell analysis step, lets you jump to every project that used it.
+
+![Graph view. Image from the [Obsidian Help](https://help.obsidian.md/plugins/graph).](https://raw.githubusercontent.com/obsidianmd/obsidian-help/master/en/Attachments/obsidian-graph-view.png){fig-alt="Obsidian graph view. Notes appear as dots joined by lines, with one note and its links highlighted."}
+
+Obsidian suggests one folder of notes organised by links. Folders work too.
+
+### Extend with plugins
+
+Thousands of community plugins add features, from local LLM integration to plotting. The core features cover most daily use.
+
+### Log your time in a daily note
+
+A daily note template holds a journal entry, the projects you worked on, the time spent on each and a to-do list. The [Dataview](https://blacksmithgu.github.io/obsidian-dataview/) plugin tabulates the week's entries into a weekly report. The template took about ten minutes to set up.
+
+<!-- TODO (Jason): add the daily note template and the Dataview query shown in the demo. -->
+
+### Key takeaways
+
+- Obsidian keeps notes as local Markdown files, so you own your data and can move it to another tool.
+- `[[double brackets]]` link notes, and backlinks and graph view show how they connect.
+- A daily note template plus the Dataview plugin turns time logging into a weekly report.
+
+### Further resources
+
+- [Obsidian](https://obsidian.md)
+- [Internal links](https://help.obsidian.md/links)
+- [Graph view](https://help.obsidian.md/plugins/graph)
+- [Dataview](https://blacksmithgu.github.io/obsidian-dataview/)
+
 ## Re-use code with snippets
+
+*Erik Fasterius*
 
 When you find yourself having to re-type similar or even identical code, that's
 a good time to think about converting it into a _snippet_: a piece of code that
@@ -405,7 +466,7 @@ snippet chunk "Create an empty Quarto code chunk"
 
 When triggered, it expands into this:
 
-````
+````markdown
 ```{r}
 
 ```
@@ -455,7 +516,18 @@ snippet dockerfile-pixi "Initialise a new Dockerfile with Pixi"
 	CMD /bin/bash
 ```
 
+### Key takeaways
+
+- A snippet expands a short keyword into a template, and placeholders let you tab through the parts to fill in.
+- A snippet can be as small as a code chunk or as large as a whole Dockerfile.
+
+### Further resources
+
+- [VS Code user-defined snippets](https://code.visualstudio.com/docs/editing/userdefinedsnippets)
+
 ## Finding files with a fuzzy finder
+
+*Erik Fasterius*
 
 Clicking around in a file tree or typing an exact path from memory is slow,
 especially in a large repository. A _fuzzy finder_ (like
@@ -464,7 +536,7 @@ of candidates (_e.g._ files, shell history, branches, running processes) by how
 well the characters fit, not by exact substring position. For example, launching
 `fzf` will provide you with a prompt:
 
-```bash
+```
 ▌ posts/2026-09-10-nf-test-nextflow-testing-framework/index.qmd
 ▌ .quarto/idx/posts/2026-03-12-github-pull-requests-code-review/index.qmd.json
 ▌ posts/2026-03-12-github-pull-requests-code-review/index.qmd
@@ -497,14 +569,28 @@ A lot of editors already have fuzzy search functionality built-in: for example,
 in VSCode you can type `[Cmd/Ctrl] + P` to jump straight into the fuzzy finding
 prompt and type away.
 
+### Key takeaways
+
+- `fzf` narrows a list as you type and matches characters that are not next to each other, so partial and misspelled input still finds the file.
+- `fzf` plugs into bash history search (`Ctrl + R`), and many editors have a built-in fuzzy finder.
+
+### Further resources
+
+- [fzf](https://github.com/junegunn/fzf)
+
 ## Cleaning up commits with a local rebase
+
+*Erik Fasterius*
 
 Git histories can get a bit messy when one is solving a problem, possibly with
 experimentation, "WIP" messages and commits that only fix spelling mistakes or
 formatting. For example, a small history from a feature branch:
 
 ```bash
-$ git log --oneline
+git log --oneline
+```
+
+```
 0abf162 First feature commit
 befc682 A minor change on the first commit
 c9d1426 A commit with an incomplete commit message
@@ -517,7 +603,7 @@ in one commit message, and realised that you missed important information in
 another. We can actually solve all of these issues with an _interactive rebase_!
 
 ```bash
-$ git rebase -i HEAD~4
+git rebase -i HEAD~4
 ```
 
 This command initiates an interactive rebase using the four commits back from
@@ -526,7 +612,7 @@ HEAD. This will open your default editor with something like the following:
 ```vim
 pick 0abf162 First feature commit
 pick befc682 A minor change on the first commit
-pick c9d1426 A commit with an uncomplete commit message
+pick c9d1426 A commit with an incomplete commit message
 pick 2e0cb97 A commit with a spelling mitake
 
 # Rebase 879ddcc..0abf162 onto 879ddcc (4 commands)
@@ -567,3 +653,12 @@ theirs diverge.
 Interactive rebasing is thus well-suited for fixing and cleaning of local
 changes you have yet to push anywhere. This can make your Git history both
 cleaner and more concise, which is great when you’re collaborating with others.
+
+### Key takeaways
+
+- `git rebase -i HEAD~N` lets you reword, squash or fix up the last N commits.
+- Rebase only commits you have not pushed. Rebasing rewrites commit hashes.
+
+### Further resources
+
+- [`git rebase`: interactive mode](https://git-scm.com/docs/git-rebase#_interactive_mode)
