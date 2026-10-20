@@ -1,0 +1,196 @@
+---
+title: "Targets: A workflow manager in R"
+date: 2026-10-22
+date-modified: last-modified
+draft: true
+author:
+  - Jennifer Fransson
+categories: [ "R", "Targets", "Workflow management", "Reproducibility" ]
+---
+
+## Introduction
+
+R analyses often grow into a numbered series of scripts, or one long script, that you rerun from the top after every change. [targets](https://docs.ropensci.org/targets/) is a workflow manager for R: change one function and only the steps that depend on it rerun.
+
+You describe the analysis as a list of *targets*. Each `tar_target(name, command)` is one step, and its result is stored under `name`. `targets` finds the dependencies between steps by reading your code, runs them in order, and skips any whose code and inputs haven't changed. (Like Snakemake or Nextflow, but the unit of work is an R function and its result is an R object, not a shell command that writes a file.)
+
+## Installation
+
+Install R and the packages with [Pixi](https://pixi.prefix.dev/).
+
+```{.bash}
+pixi init targets-demo
+cd targets-demo
+pixi add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork
+```
+
+Outside Pixi, `install.packages("targets")` from CRAN works.
+
+::: {.callout-note}
+On `osx-arm64`, the conda-forge `r-base64url` package (a dependency of `targets`) ships without its compiled library, and loading `targets` fails with ``shared object ‘base64url.so’ not found``. Fix it with `pixi run Rscript -e 'install.packages("base64url")'`. `linux-64` is unaffected.
+:::
+
+## Project layout
+
+```
+targets-demo/
+├── _targets.R        # the pipeline definition
+├── R/functions.R     # functions the targets call
+└── data/iris.csv
+```
+
+`tar_make()` looks for a file named `_targets.R` in the project root. Create the input data from R's built-in `iris` dataset:
+
+```{.r}
+dir.create("data")
+write.csv(iris, "data/iris.csv", row.names = FALSE)
+```
+
+Functions live in `R/`, so each step is a function you can test and reuse on its own. This example fits a linear model per species and reports its R².
+
+```{.r filename="R/functions.R"}
+read_data <- function(path) {
+  readr::read_csv(path, show_col_types = FALSE)
+}
+
+fit_model <- function(data, species) {
+  fit <- lm(Sepal.Length ~ Petal.Length, data = data[data$Species == species, ])
+  data.frame(species = species, r_squared = summary(fit)$r.squared)
+}
+
+plot_data <- function(data) {
+  ggplot2::ggplot(data, ggplot2::aes(Petal.Length, Sepal.Length, colour = Species)) +
+    ggplot2::geom_point()
+}
+```
+
+```{.r filename="_targets.R"}
+library(targets)
+
+tar_option_set(packages = "ggplot2") # <1>
+tar_source() # <2>
+
+list(
+  tar_target(raw_file, "data/iris.csv", format = "file"), # <3>
+  tar_target(iris_data, read_data(raw_file)), # <4>
+  tar_target(species, unique(iris_data$Species)),
+  tar_target(fits, fit_model(iris_data, species), pattern = map(species)), # <5>
+  tar_target(scatter, plot_data(iris_data))
+)
+```
+
+1. Packages each target loads before it runs.
+2. Sources every script in `R/`.
+3. `format = "file"` tracks the file's contents, so editing `iris.csv` reruns everything downstream.
+4. `iris_data` uses `raw_file`, so `targets` runs `raw_file` first.
+5. Dynamic branching: `species` has three values, so `fits` becomes three targets (branches), one per species. `targets` combines the branches into one data frame.
+
+## Running the pipeline
+
+From the project root in an R session (for example `pixi run R`):
+
+```{.r}
+targets::tar_make()
+```
+
+```
+✔ raw_file completed [365ms, 4.03 kB]
+✔ iris_data completed [253ms, 1.24 kB]
+✔ scatter completed [14ms, 109.26 kB]
+✔ species completed [0ms, 81 B]
+✔ fits completed [196ms, 467 B]
+✔ ended pipeline [1.2s, 7 completed, 0 skipped]
+```
+
+The 7 completed are the four plain targets plus the three branches of `fits`. `tar_make()` runs the pipeline in a fresh R process, so objects in your current session can't affect the results. Run it again and nothing executes:
+
+```
+✔ skipped pipeline [67ms, 7 skipped]
+```
+
+Results are stored in `_targets/`. Read them back into your session:
+
+```{.r}
+targets::tar_read(fits)      # return the value
+targets::tar_load(iris_data) # assign it to `iris_data` in the global environment
+```
+
+## Rerunning only what changed
+
+Without a workflow manager, this edit means rerunning the whole analysis. Add `Petal.Width` as a second predictor in `fit_model()`:
+
+```{.r filename="R/functions.R"}
+fit <- lm(Sepal.Length ~ Petal.Length + Petal.Width, data = data[data$Species == species, ])
+```
+
+`targets` tracks the code of your functions, so the edit marks the targets that depend on `fit_model()` as outdated:
+
+```{.r}
+targets::tar_outdated()
+#> [1] "fits"
+```
+
+```{.r}
+targets::tar_make()
+#> ✔ ended pipeline [783ms, 3 completed, 4 skipped]
+```
+
+The three `fits` branches rerun. `raw_file`, `iris_data`, `species` and `scatter` stay skipped.
+
+View the dependency graph with `targets::tar_visnetwork()` (interactive, needs a browser) or `targets::tar_mermaid()` (Mermaid text, works over SSH). A simplified version of the graph:
+
+```{mermaid}
+graph LR
+  raw_file --> iris_data
+  iris_data --> species
+  iris_data --> fits
+  species --> fits
+  iris_data --> scatter
+```
+
+## Running in parallel
+
+[`crew`](https://wlandau.github.io/crew/) is the R package that provides workers for `targets`. A *controller* decides where the workers run. Set one in `tar_option_set()`:
+
+```{.r filename="_targets.R"}
+tar_option_set(
+  packages = "ggplot2",
+  controller = crew::crew_controller_local(workers = 3)
+)
+```
+
+`tar_make()` then runs independent targets, including branches, on three local R processes. On a SLURM cluster, swap in a controller from [`crew.cluster`](https://wlandau.github.io/crew.cluster/) (`install.packages("crew.cluster")`, or `pixi add r-crew.cluster`):
+
+```{.r filename="_targets.R"}
+tar_option_set(
+  packages = "ggplot2",
+  controller = crew.cluster::crew_controller_slurm(
+    workers = 10,
+    options_cluster = crew.cluster::crew_options_slurm(
+      partition = "core", # <1>
+      cpus_per_task = 2,
+      time_minutes = 60,
+      log_output = "logs/crew_%A.out" # <2>
+    )
+  )
+)
+```
+
+1. An example partition name. Use one from your cluster.
+2. Worker logs are discarded unless you set this. Create `logs/` first (`mkdir -p logs`); SLURM does not create it.
+
+Each worker is a SLURM job. `tar_make()` itself runs where you start it and launches the workers, so start it in a `tmux` session on a login node or in its own small `sbatch` job, following your site's rules for login nodes.
+
+## Key takeaways
+
+- What decides whether a target reruns? Its code, its dependencies, or its input files changing. (`tar_outdated()` lists them.)
+- Write each step as a function, and keep `_targets.R` as the wiring.
+- `pattern = map(x)` replaces a loop with one tracked target per element.
+- What changes when you move from laptop to HPC? The controller, not the pipeline.
+
+## Further resources
+
+- [The targets R package user manual](https://books.ropensci.org/targets/)
+- [targets reference](https://docs.ropensci.org/targets/)
+- [tarchetypes](https://docs.ropensci.org/tarchetypes/): helpers such as `tar_quarto()` to render a report as a target
+- [crew.cluster](https://wlandau.github.io/crew.cluster/): SLURM, PBS, SGE and LSF controllers
