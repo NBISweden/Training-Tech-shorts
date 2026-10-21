@@ -10,9 +10,9 @@ categories: [ "R", "Targets", "Workflow management", "Reproducibility" ]
 
 ## Introduction
 
-[`targets`](https://docs.ropensci.org/targets/) is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun.  
+[`targets`](https://docs.ropensci.org/targets/) is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as nextflow are more established and robust, they are quite clunky to use while still developing the analysis. `targets` requires a restructuring of how your analysis is run, but automatically keeps track of the components in your pipeline on a much more detailed level.
 
-`targets` keep track of input files, intermediate R objects, functions and reports using hashes and time stamps. It builds a pipeline using the file `_targets.R`, which is the primary file for editing your workflow. In this file, *targets* are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualized or run. Individual *targets* are saved and metadata is written to enable tracking whether they have changed since the last run.
+`targets` keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file `_targets.R`, which is the primary file for editing your workflow. In this file, *targets* are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualized or run. Individual *targets* are saved and metadata is written to enable tracking whether they have changed since the last run.
 
 ## Demo repository
 
@@ -125,18 +125,24 @@ Edit _targets.R as you wish and examine the results using `tar_visnetwork` and `
 
 ## `targets` outputs
 
-All *targets* defined with tar_target() are stored in `_targets/objects` after creation <sup>1</sup>. The format of the output can be defined in the tar_target() function but is RDS by default. In addition, metadata including the hash of the object is stored in `_targets/meta/meta`. Changing or removing the files or editing the corresponding metadata will cause the *target* to be considered outdated and force it to be rerun in the next run.
+All *targets* defined with `tar_target()` are stored in `_targets/objects` after creation <sup>1</sup>. The format of the output can be defined in the `tar_target()` function but is RDS by default. In addition, metadata including the hash of the object is stored in `_targets/meta/meta`. Changing or removing the files or editing the corresponding metadata will cause the *target* to be considered outdated and force it to be rerun in the next run.
 
 
 ## Reports
 
-.Rmd- and .qmd-files can be included in your pipeline by using the [`tarchetypes` package](https://docs.ropensci.org/tarchetypes/) and functions `tar_render*()` and `tar_quarto*()`. Include these functions in the target-defining list in `_targets.R` and provide the `path` to your .Rmd- or .qmd-file. In the reports, include `library(targets)` and use `tar_read()` and `tar_load()` to refer to targets defined in your pipeline. During `tar_make()`, the dependencies will be established and the reports will only be re-rendered if 
+.Rmd- and .qmd-files can be included in your pipeline by using the [`tarchetypes` package](https://docs.ropensci.org/tarchetypes/) and functions `tar_render*()` and `tar_quarto*()`. Include these functions in the target-defining list in `_targets.R` and provide the `path` to your .Rmd- or .qmd-file. In the reports, include `library(targets)` and use `tar_read()` and `tar_load()` to refer to targets defined in your pipeline. During `tar_make()`, the dependencies will be established and the reports will only be re-rendered if they are outdated. 
 
 ## Branching
 
 Branches can be used to e.g. test different analysis parameters or run the same pipeline on multiple datasets separately. Branches can be created in a static or dynamic fashion (documentation [here](https://books.ropensci.org/targets/static.html) and [here](https://books.ropensci.org/targets/dynamic.html).
 
 I won't go into details here, but there is an example in the [repository's sc_example subdirectory] of how to define dynamic branches using `pattern = map(...)` and creating separate reports from the different branches using `tar_quarto_rep()`.
+
+
+
+
+
+
 
 
 ## Footnotes
