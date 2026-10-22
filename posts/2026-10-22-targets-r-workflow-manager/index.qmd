@@ -21,6 +21,7 @@ I have made a repository for use during the RSE tech group presentation. It can 
 <https://github.com/jenfransson/rse_targets/>
 
 The repository contains two directories:
+
 * `demo` : A nearly empty directory with instructions on how to get started
 * `sc_example` : A directory with a more complicated pipeline. It illustrates a very simple scenario in which a scRNA-seq dataset needs to be filtered and processed. It contains examples of functions, branching and reports.
 
@@ -145,6 +146,8 @@ I won't go into details here, but there is an example in the [repository's sc_ex
 * Each *target* is defined as a command with inputs
 * By default, only outdated *targets* will be recreated during a run
 
+
+## Further resources
 
 - [The targets R package user manual](https://books.ropensci.org/targets/)
 - [targets reference](https://docs.ropensci.org/targets/)
