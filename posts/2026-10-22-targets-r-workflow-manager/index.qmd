@@ -13,6 +13,21 @@ categories: [ "R", "Targets", "Workflow management", "Reproducibility" ]
 
 `targets` keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file `_targets.R`, which is the primary file for editing your workflow. In this file, *targets* are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualised or run. Individual *targets* are saved and metadata is written to enable tracking whether they have changed since the last run.
 
+## Motivation
+
+In a single-cell RNA-seq analysis, each step (QC, dimensionality reduction, clustering) is heavy because of the number of samples. Rerunning the whole analysis after every change is not feasible. Without a workflow manager, each script saves an intermediate object for the next script to load:
+
+```
+data file → QC script → filtered object → dimensionality reduction script → normalised object with PCA and UMAP → clustering script
+```
+
+This breaks down when you analyse interactively rather than run a fixed pipeline with fixed parameters. If clustering shows that low-quality cells should have been removed earlier, you change the QC filter and rerun everything after it. Two things go wrong:
+
+* **Human error.** You forget a step and the final result no longer matches your code. The more complex the analysis, the more likely this is.
+* **Unnecessary work.** Changing a late step reruns the whole script. Splitting it into more scripts avoids this but gives you more files to track.
+
+Workflow managers such as Nextflow solve this, but tuning which small parts rerun means managing many files. `targets` keeps the pipeline definition in R, in one file.
+
 ## Demo repository
 
 I have made a repository for use during the RSE tech group presentation. It can be cloned for testing `targets` on your own computer. The demo is performed using a Docker container which is available at jenfransson/rse_targets:latest and was built using the files in the repository.
@@ -27,7 +42,19 @@ The repository contains two directories:
 
 ## Installation
 
-### Installation with pixi (written by Claude, verified)
+::: {.panel-tabset}
+
+## Docker
+
+The demo uses the container `jenfransson/rse_targets:latest`, built from `rocker/rstudio` with the R packages restored from the repository's `renv.lock` file. Run it and open <http://localhost:8787> (user `rstudio`):
+
+```{.bash}
+docker run --rm -p 8787:8787 -e PASSWORD=choose-a-password jenfransson/rse_targets:latest
+```
+
+The image is built for `linux/amd64`. On Apple silicon, add `--platform=linux/amd64`.
+
+## Pixi
 
 Install R and the packages with [Pixi](https://pixi.prefix.dev/).
 
@@ -41,10 +68,9 @@ pixi add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork
 On `osx-arm64`, the conda-forge `r-base64url` package (a dependency of `targets`) ships without its compiled library, and loading `targets` fails with ``shared object ‘base64url.so’ not found``. Fix it with `install.packages("base64url")` in R. `linux-64` is unaffected.
 :::
 
+:::
 
-### Other options
-
-`targets` can also be installed from CRAN (`install.packages("targets")`) or renv (`renv::install("targets")`). In the demo repository, I installed it using renv in the rocker/rstudio based on the repository's `renv.lock` file.
+`targets` can also be installed from CRAN (`install.packages("targets")`) or renv (`renv::install("targets")`).
 
 
 ## Getting started
