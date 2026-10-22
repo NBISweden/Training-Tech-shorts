@@ -10,13 +10,13 @@ categories: [ "R", "Targets", "Workflow management", "Reproducibility" ]
 
 ## Introduction
 
-[`targets`](https://docs.ropensci.org/targets/) is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as nextflow are more established and robust, they are quite clunky to use while still developing the analysis. `targets` requires a restructuring of how your analysis is run, but automatically keeps track of the components in your pipeline on a much more detailed level.
+[`targets`](https://docs.ropensci.org/targets/) is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. `targets` requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.
 
 `targets` keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file `_targets.R`, which is the primary file for editing your workflow. In this file, *targets* are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualized or run. Individual *targets* are saved and metadata is written to enable tracking whether they have changed since the last run.
 
 ## Demo repository
 
-I have made a repository for use during the RSE tech group presentation. It can be cloned for testing `targets` on your own computer. The demo is performed using a Docker container which is available at jenfransson/rse_targets:latest, which was built using the files in the repository.
+I have made a repository for use during the RSE tech group presentation. It can be cloned for testing `targets` on your own computer. The demo is performed using a Docker container which is available at jenfransson/rse_targets:latest and was built using the files in the repository.
 
 <https://github.com/jenfransson/rse_targets/>
 
@@ -27,7 +27,7 @@ The repository contains two directories:
 
 ## Installation
 
-### Installation with pixi (written by Claude)
+### Installation with pixi (written by Claude, verified)
 
 Install R and the packages with [Pixi](https://pixi.prefix.dev/).
 
@@ -38,7 +38,7 @@ pixi add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork
 ```
 
 ::: {.callout-note}
-On `osx-arm64`, the conda-forge `r-base64url` package (a dependency of `targets`) ships without its compiled library, and loading `targets` fails with ``shared object ‘base64url.so’ not found``. Fix it with `pixi run Rscript -e 'install.packages("base64url")'`. `linux-64` is unaffected.
+On `osx-arm64`, the conda-forge `r-base64url` package (a dependency of `targets`) ships without its compiled library, and loading `targets` fails with ``shared object ‘base64url.so’ not found``. Fix it with `install.packages("base64url")` in R. `linux-64` is unaffected.
 :::
 
 
@@ -139,11 +139,17 @@ Branches can be used to e.g. test different analysis parameters or run the same 
 I won't go into details here, but there is an example in the [repository's sc_example subdirectory] of how to define dynamic branches using `pattern = map(...)` and creating separate reports from the different branches using `tar_quarto_rep()`.
 
 
+## Key takeaways
+
+* `targets` keeps track of all steps and dependencies within a pipeline
+* Each *target* is defined as a command with inputs
+* By default, only outdated *targets* will be recreated during a run
 
 
-
-
-
+- [The targets R package user manual](https://books.ropensci.org/targets/)
+- [targets reference](https://docs.ropensci.org/targets/)
+- [tarchetypes](https://docs.ropensci.org/tarchetypes/): helpers such as `tar_quarto()` to render a report as a target
+- [crew.cluster](https://wlandau.github.io/crew.cluster/): SLURM, PBS, SGE and LSF controllers
 
 ## Footnotes
 
@@ -151,38 +157,10 @@ I won't go into details here, but there is an example in the [repository's sc_ex
 
 
 
+## Acknowlegdments
+
+The structure of this write-up as well as some text was created with Claude.
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Key takeaways
-
-- What decides whether a target reruns? Its code, its dependencies, or its input files changing. (`tar_outdated()` lists them.)
-- Write each step as a function, and keep `_targets.R` as the wiring.
-- `pattern = map(x)` replaces a loop with one tracked target per element.
-- What changes when you move from laptop to HPC? The controller, not the pipeline.
-
-## Further resources
-
-- [The targets R package user manual](https://books.ropensci.org/targets/)
-- [targets reference](https://docs.ropensci.org/targets/)
-- [tarchetypes](https://docs.ropensci.org/tarchetypes/): helpers such as `tar_quarto()` to render a report as a target
-- [crew.cluster](https://wlandau.github.io/crew.cluster/): SLURM, PBS, SGE and LSF controllers
