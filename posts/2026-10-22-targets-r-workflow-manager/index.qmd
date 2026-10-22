@@ -82,7 +82,7 @@ This creates a new file called `_targets.R`, which is the main home for your pip
 
 ### `tar_make()`
 
-`tar_make()` is the function called to evaluate and run the pipeline. Once started, the pipeline will be constructed from `_targets.R` and all input files and dependencies will be checked. If the pipeline can be constructed without errors, all outdated targets will be regenerated. During the run, the progress will be printed, but the verbosity can be adjusted using the `reporter` parameter. 
+`tar_make()` is the function called to evaluate and run the pipeline. Once started, the pipeline will be constructed from `_targets.R` and all input files and dependencies will be checked. If the pipeline can be constructed without errors, all outdated targets will be regenerated. During the run, the progress will be printed, but the verbosity can be adjusted using the `reporter` parameter. To build only one target and its upstream dependencies, pass its name, for example `tar_make(report_qc)`.
 
 Note: Whether a target should be rerun or not is finally evaluated once all upstream targets have been checked and rerun (if needed). This means that in a default run, if a target was rerun due to e.g. a change to the command but the final object has the same hash, the downstream targets will not be rerun.
 
@@ -116,23 +116,27 @@ tar_load(data)
 head(data)
 ```
 
-Edit _targets.R as you wish and examine the results using `tar_visnetwork` and `tar_make`
+Then edit `_targets.R` and check the result with `tar_visnetwork()` and `tar_make()`:
+
+* Change the command of `data`: both targets are outdated.
+* Change the command of `model`: only `model` is outdated.
+* Rewrite a command without changing its result: the edited target is outdated, but once rebuilt its hash is unchanged, so downstream targets stay up to date.
 
 
 ## `targets` outputs
 
-All *targets* defined with `tar_target()` are stored in `_targets/objects` after creation <sup>1</sup>. The format of the output can be defined in the `tar_target()` function but is RDS by default. In addition, metadata including the hash of the object is stored in `_targets/meta/meta`. Changing or removing the files or editing the corresponding metadata will cause the *target* to be considered outdated and force it to be rerun in the next run.
+All *targets* defined with `tar_target()` are stored in `_targets/objects` after creation <sup>1</sup>. The format of the output can be defined in the `tar_target()` function but is RDS by default. In addition, metadata including the hash of the object is stored in `_targets/meta/meta`. Changing or removing the files or editing the corresponding metadata will cause the *target* to be considered outdated and force it to be rerun in the next run. Each command stores one object, its last value, so a long script needs to be wrapped in a function. Large objects take disk space, so decide which intermediate results are worth storing as separate targets.
 
 
 ## Reports
 
-.Rmd- and .qmd-files can be included in your pipeline by using the [`tarchetypes` package](https://docs.ropensci.org/tarchetypes/) and functions `tar_render*()` and `tar_quarto*()`. Include these functions in the target-defining list in `_targets.R` and provide the `path` to your .Rmd- or .qmd-file. In the reports, include `library(targets)` and use `tar_read()` and `tar_load()` to refer to targets defined in your pipeline. During `tar_make()`, the dependencies will be established and the reports will only be re-rendered if they are outdated. 
+.Rmd- and .qmd-files can be included in your pipeline by using the [`tarchetypes` package](https://docs.ropensci.org/tarchetypes/) and functions `tar_render*()` and `tar_quarto*()`. Include these functions in the target-defining list in `_targets.R` and provide the `path` to your .Rmd- or .qmd-file. In the reports, include `library(targets)` and use `tar_read()` and `tar_load()` to refer to targets defined in your pipeline. During `tar_make()`, the dependencies will be established and the reports will only be re-rendered if they are outdated. The rendered report shows what is loaded from the pipeline, not the code that created it.
 
 ## Branching
 
 Branches can be used to e.g. test different analysis parameters or run the same pipeline on multiple datasets separately. Branches can be created in a static or dynamic fashion (documentation [here](https://books.ropensci.org/targets/static.html) and [here](https://books.ropensci.org/targets/dynamic.html)).
 
-I won't go into details here, but there is an example in the [repository's `sc_example` subdirectory](https://github.com/jenfransson/rse_targets/tree/main/sc_example) of how to define dynamic branches using `pattern = map(...)` and creating separate reports from the different branches using `tar_quarto_rep()`.
+In the [repository's `sc_example` subdirectory](https://github.com/jenfransson/rse_targets/tree/main/sc_example), one target holds two values for the number of highly variable genes (`n_hvg`). The target that uses it sets `pattern = map(n_hvg)`, so it is created once per value. `tar_load()` returns the branches as a list. The example also shows how to create a separate report per branch using `tar_quarto_rep()`.
 
 
 ## Key takeaways
@@ -140,6 +144,8 @@ I won't go into details here, but there is an example in the [repository's `sc_e
 * `targets` keeps track of all steps and dependencies within a pipeline
 * Each *target* is defined as a command with inputs
 * By default, only outdated *targets* will be recreated during a run
+* If a rebuilt *target* is identical to before (same hash), its downstream *targets* are not rerun
+* `targets` tracks your code, not your R environment: all *targets* run in one R environment, which you manage with renv or a container
 
 
 ## Further resources
