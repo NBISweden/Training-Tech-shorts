@@ -24,7 +24,7 @@ jobs:
       pull-requests: write  # required by https://github.com/marocchino/sticky-pull-request-comment
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
       - name: Render Quarto Project
