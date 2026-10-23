@@ -32,14 +32,21 @@
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html",
     "title": "Targets: A workflow manager in R",
     "section": "",
-    "text": "targets is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as Nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. targets requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.\ntargets keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file _targets.R, which is the primary file for editing your workflow. In this file, targets are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualised or run. Individual targets are saved and metadata is written to enable tracking whether they have changed since the last run."
+    "text": "targets is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as Nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. targets requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.\ntargets keeps track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file _targets.R, which is the primary file for editing your workflow. In this file, targets are defined as individual commands, and the dependency between commands is evaluated when the pipeline is visualised or run. Individual targets are saved and metadata is written to enable tracking whether they have changed since the last run."
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#introduction",
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#introduction",
     "title": "Targets: A workflow manager in R",
     "section": "",
-    "text": "targets is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as Nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. targets requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.\ntargets keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file _targets.R, which is the primary file for editing your workflow. In this file, targets are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualised or run. Individual targets are saved and metadata is written to enable tracking whether they have changed since the last run."
+    "text": "targets is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as Nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. targets requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.\ntargets keeps track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file _targets.R, which is the primary file for editing your workflow. In this file, targets are defined as individual commands, and the dependency between commands is evaluated when the pipeline is visualised or run. Individual targets are saved and metadata is written to enable tracking whether they have changed since the last run."
+  },
+  {
+    "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#motivation-with-example",
+    "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#motivation-with-example",
+    "title": "Targets: A workflow manager in R",
+    "section": "Motivation with example",
+    "text": "Motivation with example\nIn a single-cell RNA-seq analysis, each step can require large computational resources due to the size of the data and complexity of the analysis. In addition, one must often go back and change parameters in earlier steps after seeing the results of later steps. To reduce running of heavy tasks, analyses are often split into multiple scripts that generate intermediate files, which are loaded in the subsequent script. For example, the analyses may be split up as follows:\ndata file → QC script → filtered object → dimensionality reduction script → normalised object with PCA and UMAP → integration → integrated object → clustering script → clustered object → cell type annotation script → annotated object → differential expression script\nThe number of files and the cyclical aspect of the analysis introduce risk for human error when trying to avoid repeating steps unnecessarily."
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#demo-repository",
@@ -53,7 +60,7 @@
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#installation",
     "title": "Targets: A workflow manager in R",
     "section": "Installation",
-    "text": "Installation\n\nInstallation with pixi (written by Claude, verified)\nInstall R and the packages with Pixi.\npixi init targets-demo\ncd targets-demo\npixi add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork\n\n\n\n\n\n\nNote\n\n\n\nOn osx-arm64, the conda-forge r-base64url package (a dependency of targets) ships without its compiled library, and loading targets fails with shared object ‘base64url.so’ not found. Fix it with install.packages(\"base64url\") in R. linux-64 is unaffected.\n\n\n\n\nOther options\ntargets can also be installed from CRAN (install.packages(\"targets\")) or renv (renv::install(\"targets\")). In the demo repository, I installed it using renv in the rocker/rstudio based on the repository’s renv.lock file."
+    "text": "Installation\n\nDockerPixi\n\n\nThe demo uses the container jenfransson/rse_targets:latest, built from rocker/rstudio with the R packages restored from the repository’s renv.lock file. Run it and open http://localhost:8787 (user rstudio):\ndocker run --rm -p 8787:8787 -e PASSWORD=choose-a-password jenfransson/rse_targets:latest\nThe image is built for linux/amd64. On Apple silicon, add --platform=linux/amd64.\n\n\nInstall R and the packages with Pixi.\npixi init targets-demo\ncd targets-demo\npixi add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork\n\n\n\n\n\n\nNote\n\n\n\nOn osx-arm64, the conda-forge r-base64url package (a dependency of targets) ships without its compiled library, and loading targets fails with shared object ‘base64url.so’ not found. Fix it with install.packages(\"base64url\") in R. linux-64 is unaffected.\n\n\n\n\n\ntargets can also be installed from CRAN (install.packages(\"targets\")) or renv (renv::install(\"targets\"))."
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#getting-started",
@@ -67,49 +74,77 @@
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#targets.r",
     "title": "Targets: A workflow manager in R",
     "section": "_targets.R",
-    "text": "_targets.R\n_targets.R has four main parts:\n\nNormal R code\n\nLoad any packages that are required to read the pipeline (not to run it), including targets\nSet any global R options\n\ntar_option_set()\n\nDefine options for targets, such as packages needed to run the targets’ commands and parallel computing options\n\ntar_source()\n\nSource all .R-scripts in R/ as well as any other specified files\n\nTarget list\n\nThe file ends with a list of tar_target() calls or other similar functions\n\ntarchetypes provides other useful target-defining functions such as tar_quarto* and tar_render*\n\nThis list defines all of the targets that will be considered when building the pipeline\nAny target defined in this list can be accessed in other targets’ commands\nThe order of the targets does not matter"
+    "text": "_targets.R\n_targets.R has four main parts:\n\nNormal R code\n\nLoad any packages that are required to read the pipeline (not to run it), including targets\nSet any global R options\n\ntar_option_set()\n\nDefine options for targets, such as packages needed to run the targets’ commands and parallel computing options\n\ntar_source()\n\nSource all .R-scripts in R/ as well as any other specified files\nThis is typically used to define functions to use in your pipeline. These will also be tracked by targets\n\nTarget list\n\nThe file ends with a list of tar_target() calls or other similar functions\n\ntarchetypes provides other useful target-defining functions such as tar_quarto* and tar_render*\n\nThis list defines all of the targets that will be considered when building the pipeline\nAny target defined in this list can be accessed in other targets’ commands\nThe order of the targets does not matter\nA target built with tar_target() must have a name and a command\n\nThe command is simple R code, and the final output of the last line becomes the value of the target\nYou can use functions to keep the commands short, or to reuse the same code in multiple targets"
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#testing-and-running-the-pipeline",
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#testing-and-running-the-pipeline",
     "title": "Targets: A workflow manager in R",
     "section": "Testing and running the pipeline",
-    "text": "Testing and running the pipeline\ntargets includes functions to visualise and run the pipeline. This is done outside of the _targets.R file, such as in the console or another script.\n\ntar_make()\ntar_make() is the function called to evaluate and run the pipeline. Once started, the pipeline will be constructed from _targets.R and all input files and dependencies will be checked. If the pipeline can be constructed without errors, all outdated targets will be regenerated. During the run, the progress will be printed, but the verbosity can be adjusted using the reporter parameter.\nNote: Whether a target should be rerun or not is finally evaluated once all upstream targets have been checked and rerun (if needed). This means that in a default run, if a target was rerun due to e.g. a change to the command but the final object has the same hash, the downstream targets will not be rerun.\n\n\ntar_visnetwork()\ntar_visnetwork() is the main function that I use for checking the status of my pipeline. It generates a DAG, with each function and target coloured according to whether they are outdated or not, or if they have errored. This graph quickly becomes messy once you have a decent number of targets, but it is interactive so you can zoom and highlight individual targets."
+    "text": "Testing and running the pipeline\ntargets includes functions to visualise and run the pipeline. This is done outside of the _targets.R file, such as in the console or another script.\n\ntar_make()\ntar_make() is the function called to evaluate and run the pipeline. Once started, the pipeline will be constructed from _targets.R and all input files and dependencies will be checked. If the pipeline can be constructed without errors, all outdated targets will be regenerated. During the run, the progress will be printed, but the verbosity can be adjusted using the reporter parameter. To build only one target and its upstream dependencies, pass its name, for example tar_make(report_qc).\nNote: Whether a target should be rerun or not is finally evaluated once all upstream targets have been checked and rerun (if needed). This means that in a default run, if a target was rerun due to e.g. a change to the command but the final object has the same hash, the downstream targets will not be rerun.\n\n\ntar_visnetwork()\ntar_visnetwork() is the main function that I use for checking the status of my pipeline. It generates a DAG, with each function and target coloured according to whether they are outdated or not, or if they have errored. This graph quickly becomes messy once you have a decent number of targets, but it is interactive so you can zoom and highlight individual targets."
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#example",
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#example",
     "title": "Targets: A workflow manager in R",
     "section": "Example",
-    "text": "Example\n# Load packages\nlibrary(targets)\n\n# Set up targets\nuse_targets()\n\n# Visualize pipeline\ntar_visnetwork()\n\n# Run pipeline\ntar_make()\n\n# Visualize pipeline\ntar_visnetwork()\n\n# Read the target \"model\"\ntar_read(model)\n\n# Load the target \"data\" and examine it\ntar_load(data)\nhead(data)\nEdit _targets.R as you wish and examine the results using tar_visnetwork and tar_make"
+    "text": "Example\n# Load packages\nlibrary(targets)\n\n# Set up targets\nuse_targets()\n\n# Visualize pipeline\ntar_visnetwork()\n\n# Run pipeline\ntar_make()\n\n# Visualize pipeline\ntar_visnetwork()\n\n# Read the target \"model\"\ntar_read(model)\n\n# Load the target \"data\" and examine it\ntar_load(data)\nhead(data)\nThen edit _targets.R and check the result with tar_visnetwork() and tar_make():\n\nChange the command of data: both targets are outdated.\nChange the command of model: only model is outdated.\nRewrite a command without changing its result: the edited target is outdated, but once rebuilt its hash is unchanged, so downstream targets stay up to date."
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#targets-outputs",
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#targets-outputs",
     "title": "Targets: A workflow manager in R",
     "section": "targets outputs",
-    "text": "targets outputs\nAll targets defined with tar_target() are stored in _targets/objects after creation 1. The format of the output can be defined in the tar_target() function but is RDS by default. In addition, metadata including the hash of the object is stored in _targets/meta/meta. Changing or removing the files or editing the corresponding metadata will cause the target to be considered outdated and force it to be rerun in the next run."
+    "text": "targets outputs\nAll targets defined with tar_target() are stored in _targets/objects after creation 1. The format of the output can be defined in the tar_target() function but is RDS by default. In addition, metadata including the hash of the object is stored in _targets/meta/meta. Changing or removing the files or editing the corresponding metadata will cause the target to be considered outdated and force it to be rerun in the next run. Remember that the output of the target command will be stored on disk, so decide which intermediate results are worth storing as separate targets."
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#reports",
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#reports",
     "title": "Targets: A workflow manager in R",
     "section": "Reports",
-    "text": "Reports\n.Rmd- and .qmd-files can be included in your pipeline by using the tarchetypes package and functions tar_render*() and tar_quarto*(). Include these functions in the target-defining list in _targets.R and provide the path to your .Rmd- or .qmd-file. In the reports, include library(targets) and use tar_read() and tar_load() to refer to targets defined in your pipeline. During tar_make(), the dependencies will be established and the reports will only be re-rendered if they are outdated."
+    "text": "Reports\n.Rmd- and .qmd-files can be included in your pipeline by using the tarchetypes package and functions tar_render*() and tar_quarto*(). Include these functions in the target-defining list in _targets.R and provide the path to your .Rmd- or .qmd-file. In the reports, include library(targets) and use tar_read() and tar_load() to refer to targets defined in your pipeline. During tar_make(), the dependencies will be established and the reports will only be re-rendered if they are outdated. Note: The rendered report only shows the code used for the report itself, not the underlying commands of the loaded targets."
+  },
+  {
+    "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#file-targets",
+    "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#file-targets",
+    "title": "Targets: A workflow manager in R",
+    "section": "File targets",
+    "text": "File targets\nA target can refer to a file by using the parameter format = \"file\" in tar_target(). This means that the output of the target is a reference to the file rather than just the string of the path, and the metadata saves the hash for this file. If the file changes, the target is outdated. This can also be used to keep track of contents of directories. The repository’s sc_example subdirectory shows an example of this."
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#branching",
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#branching",
     "title": "Targets: A workflow manager in R",
     "section": "Branching",
-    "text": "Branching\nBranches can be used to e.g. test different analysis parameters or run the same pipeline on multiple datasets separately. Branches can be created in a static or dynamic fashion (documentation here and here).\nI won’t go into details here, but there is an example in the repository’s sc_example subdirectory of how to define dynamic branches using pattern = map(...) and creating separate reports from the different branches using tar_quarto_rep()."
+    "text": "Branching\nBranches can be used to e.g. test different analysis parameters or run the same pipeline on multiple datasets separately. Branches can be created in a static or dynamic fashion (documentation here and here).\nIn the repository’s sc_example subdirectory, the target n_hvg is a vector with two values. The target dimred_data uses n_hvg in its command, and includes pattern = map(n_hvg) and iteration = \"list\". This results in the command being run once for each item in the vector n_hvg (i.e. twice). Each version of this target is saved as a separate object, but they are loaded as a list of objects when tar_load(dimred_data) is called.\nIf you want to produce reports using the same script but using data from different branches, use tar_render_rep() or tar_quarto_rep()."
+  },
+  {
+    "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#parallel-computing",
+    "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#parallel-computing",
+    "title": "Targets: A workflow manager in R",
+    "section": "Parallel computing",
+    "text": "Parallel computing\ntargets is designed to allow running the pipeline across separate sessions, see https://books.ropensci.org/targets/crew.html."
+  },
+  {
+    "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#r-environments",
+    "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#r-environments",
+    "title": "Targets: A workflow manager in R",
+    "section": "R environments",
+    "text": "R environments\n\n\n\n\n\n\nImportant\n\n\n\ntargets does not manage your R environment. All targets run in the same R environment, including across parallel sessions, so there is no per-target environment as in Nextflow. Start R with the same R and package versions each time, using renv or a container."
+  },
+  {
+    "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#limitations",
+    "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#limitations",
+    "title": "Targets: A workflow manager in R",
+    "section": "Limitations",
+    "text": "Limitations\n\n\n\n\n\n\nWarning\n\n\n\n\nSlow. There is quite a lot of overhead. Weigh the time that this adds against the time it takes to rerun the full script.\nLess established than other workflow tools. It is harder to find out how to do something, and harder to work out what went wrong when it fails. The package is however actively maintained.\nReadability. Pipelines are less intuitive to read than standard scripts, which makes them harder to share with people who don’t use targets."
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#key-takeaways",
     "href": "posts/2026-10-22-targets-r-workflow-manager/index.html#key-takeaways",
     "title": "Targets: A workflow manager in R",
     "section": "Key takeaways",
-    "text": "Key takeaways\n\ntargets keeps track of all steps and dependencies within a pipeline\nEach target is defined as a command with inputs\nBy default, only outdated targets will be recreated during a run"
+    "text": "Key takeaways\n\ntargets keeps track of all steps and dependencies within a pipeline\nEach target is defined as a command with inputs\nBy default, only outdated targets will be recreated during a run\nIf a rebuilt target is identical to before (same hash), its downstream targets are not rerun\ntargets tracks your code, not your R environment: all targets run in one R environment, which you manage with renv or a container"
   },
   {
     "objectID": "posts/2026-10-22-targets-r-workflow-manager/index.html#further-resources",

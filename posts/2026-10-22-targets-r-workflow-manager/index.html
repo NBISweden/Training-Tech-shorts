@@ -241,7 +241,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p><a href="https://docs.ropensci.org/targets/"><code>targets</code></a> is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as Nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. <code>targets</code> requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.</p>
-<p><code>targets</code> keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file <code>_targets.R</code>, which is the primary file for editing your workflow. In this file, <em>targets</em> are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualised or run. Individual <em>targets</em> are saved and metadata is written to enable tracking whether they have changed since the last run.</p>
+<p><code>targets</code> keeps track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file <code>_targets.R</code>, which is the primary file for editing your workflow. In this file, <em>targets</em> are defined as individual commands, and the dependency between commands is evaluated when the pipeline is visualised or run. Individual <em>targets</em> are saved and metadata is written to enable tracking whether they have changed since the last run.</p>
+</section>
+<section id="motivation-with-example" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-with-example">Motivation with example</h2>
+<p>In a single-cell RNA-seq analysis, each step can require large computational resources due to the size of the data and complexity of the analysis. In addition, one must often go back and change parameters in earlier steps after seeing the results of later steps. To reduce running of heavy tasks, analyses are often split into multiple scripts that generate intermediate files, which are loaded in the subsequent script. For example, the analyses may be split up as follows:</p>
+<p><strong>data file</strong> → <em>QC script</em> → <strong>filtered object</strong> → <em>dimensionality reduction script</em> → <strong>normalised object with PCA and UMAP</strong> → <em>integration</em> → <strong>integrated object</strong> → <em>clustering script</em> → <strong>clustered object</strong> → <em>cell type annotation script</em> → <strong>annotated object</strong> → <em>differential expression script</em></p>
+<p>The number of files and the cyclical aspect of the analysis introduce risk for human error when trying to avoid repeating steps unnecessarily.</p>
 </section>
 <section id="demo-repository" class="level2">
 <h2 class="anchored" data-anchor-id="demo-repository">Demo repository</h2>
@@ -255,12 +261,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<section id="installation-with-pixi-written-by-claude-verified" class="level3">
-<h3 class="anchored" data-anchor-id="installation-with-pixi-written-by-claude-verified">Installation with pixi (written by Claude, verified)</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Docker</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Pixi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>The demo uses the container <code>jenfransson/rse_targets:latest</code>, built from <code>rocker/rstudio</code> with the R packages restored from the repository’s <code>renv.lock</code> file. Run it and open <a href="http://localhost:8787" class="uri">http://localhost:8787</a> (user <code>rstudio</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-p</span> 8787:8787 <span class="at">-e</span> PASSWORD=choose-a-password jenfransson/rse_targets:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The image is built for <code>linux/amd64</code>. On Apple silicon, add <code>--platform=linux/amd64</code>.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Install R and the packages with <a href="https://pixi.prefix.dev/">Pixi</a>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init targets-demo</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> targets-demo</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init targets-demo</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> targets-demo</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -274,17 +287,16 @@ Note
 <p>On <code>osx-arm64</code>, the conda-forge <code>r-base64url</code> package (a dependency of <code>targets</code>) ships without its compiled library, and loading <code>targets</code> fails with <code>shared object ‘base64url.so’ not found</code>. Fix it with <code>install.packages("base64url")</code> in R. <code>linux-64</code> is unaffected.</p>
 </div>
 </div>
-</section>
-<section id="other-options" class="level3">
-<h3 class="anchored" data-anchor-id="other-options">Other options</h3>
-<p><code>targets</code> can also be installed from CRAN (<code>install.packages("targets")</code>) or renv (<code>renv::install("targets")</code>). In the demo repository, I installed it using renv in the rocker/rstudio based on the repository’s <code>renv.lock</code> file.</p>
-</section>
+</div>
+</div>
+</div>
+<p><code>targets</code> can also be installed from CRAN (<code>install.packages("targets")</code>) or renv (<code>renv::install("targets")</code>).</p>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
 <p>To create a new targets project, navigate to a new folder (or <code>demo</code> in the repository) and start R. Then run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_targets</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_targets</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This creates a new file called <code>_targets.R</code>, which is the main home for your pipeline-generating code<sup>1</sup>. The one generated by this function contains example code as well as comments about how to edit it.</p>
 </section>
 <section id="targets.r" class="level2">
@@ -303,16 +315,22 @@ Note
 <li><code>tar_source()</code>
 <ul>
 <li>Source all .R-scripts in R/ as well as any other specified files</li>
+<li>This is typically used to define functions to use in your pipeline. These will also be tracked by <code>targets</code></li>
 </ul></li>
-<li>Target list
+<li><em>Target</em> list
 <ul>
 <li>The file ends with a list of <code>tar_target()</code> calls or other similar functions
 <ul>
 <li><code>tarchetypes</code> provides other useful target-defining functions such as <code>tar_quarto*</code> and <code>tar_render*</code></li>
 </ul></li>
-<li>This list defines all of the targets that will be considered when building the pipeline</li>
-<li>Any target defined in this list can be accessed in other targets’ commands</li>
-<li>The order of the targets does not matter</li>
+<li>This list defines all of the <em>targets</em> that will be considered when building the pipeline</li>
+<li>Any <em>target</em> defined in this list can be accessed in other <em>targets’</em> commands</li>
+<li>The order of the <em>targets</em> does not matter</li>
+<li>A <em>target</em> built with <code>tar_target()</code> must have a name and a command
+<ul>
+<li>The command is simple R code, and the final output of the last line becomes the value of the <em>target</em></li>
+<li>You can use functions to keep the commands short, or to reuse the same code in multiple targets</li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
@@ -321,7 +339,7 @@ Note
 <p><code>targets</code> includes functions to visualise and run the pipeline. This is done outside of the <code>_targets.R</code> file, such as in the console or another script.</p>
 <section id="tar_make" class="level3">
 <h3 class="anchored" data-anchor-id="tar_make"><code>tar_make()</code></h3>
-<p><code>tar_make()</code> is the function called to evaluate and run the pipeline. Once started, the pipeline will be constructed from <code>_targets.R</code> and all input files and dependencies will be checked. If the pipeline can be constructed without errors, all outdated targets will be regenerated. During the run, the progress will be printed, but the verbosity can be adjusted using the <code>reporter</code> parameter.</p>
+<p><code>tar_make()</code> is the function called to evaluate and run the pipeline. Once started, the pipeline will be constructed from <code>_targets.R</code> and all input files and dependencies will be checked. If the pipeline can be constructed without errors, all outdated targets will be regenerated. During the run, the progress will be printed, but the verbosity can be adjusted using the <code>reporter</code> parameter. To build only one target and its upstream dependencies, pass its name, for example <code>tar_make(report_qc)</code>.</p>
 <p>Note: Whether a target should be rerun or not is finally evaluated once all upstream targets have been checked and rerun (if needed). This means that in a default run, if a target was rerun due to e.g.&nbsp;a change to the command but the final object has the same hash, the downstream targets will not be rerun.</p>
 </section>
 <section id="tar_visnetwork" class="level3">
@@ -331,41 +349,91 @@ Note
 </section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up targets</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">use_targets</span>()</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pipeline</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>()</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run pipeline</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>()</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pipeline</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>()</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the target "model"</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(model)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the target "data" and examine it</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(data)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Edit _targets.R as you wish and examine the results using <code>tar_visnetwork</code> and <code>tar_make</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up targets</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">use_targets</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pipeline</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run pipeline</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>()</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pipeline</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>()</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the target "model"</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(model)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the target "data" and examine it</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(data)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then edit <code>_targets.R</code> and check the result with <code>tar_visnetwork()</code> and <code>tar_make()</code>:</p>
+<ul>
+<li>Change the command of <code>data</code>: both targets are outdated.</li>
+<li>Change the command of <code>model</code>: only <code>model</code> is outdated.</li>
+<li>Rewrite a command without changing its result: the edited target is outdated, but once rebuilt its hash is unchanged, so downstream targets stay up to date.</li>
+</ul>
 </section>
 <section id="targets-outputs" class="level2">
 <h2 class="anchored" data-anchor-id="targets-outputs"><code>targets</code> outputs</h2>
-<p>All <em>targets</em> defined with <code>tar_target()</code> are stored in <code>_targets/objects</code> after creation <sup>1</sup>. The format of the output can be defined in the <code>tar_target()</code> function but is RDS by default. In addition, metadata including the hash of the object is stored in <code>_targets/meta/meta</code>. Changing or removing the files or editing the corresponding metadata will cause the <em>target</em> to be considered outdated and force it to be rerun in the next run.</p>
+<p>All <em>targets</em> defined with <code>tar_target()</code> are stored in <code>_targets/objects</code> after creation <sup>1</sup>. The format of the output can be defined in the <code>tar_target()</code> function but is RDS by default. In addition, metadata including the hash of the object is stored in <code>_targets/meta/meta</code>. Changing or removing the files or editing the corresponding metadata will cause the <em>target</em> to be considered outdated and force it to be rerun in the next run. Remember that the output of the <em>target</em> command will be stored on disk, so decide which intermediate results are worth storing as separate targets.</p>
 </section>
 <section id="reports" class="level2">
 <h2 class="anchored" data-anchor-id="reports">Reports</h2>
-<p>.Rmd- and .qmd-files can be included in your pipeline by using the <a href="https://docs.ropensci.org/tarchetypes/"><code>tarchetypes</code> package</a> and functions <code>tar_render*()</code> and <code>tar_quarto*()</code>. Include these functions in the target-defining list in <code>_targets.R</code> and provide the <code>path</code> to your .Rmd- or .qmd-file. In the reports, include <code>library(targets)</code> and use <code>tar_read()</code> and <code>tar_load()</code> to refer to targets defined in your pipeline. During <code>tar_make()</code>, the dependencies will be established and the reports will only be re-rendered if they are outdated.</p>
+<p>.Rmd- and .qmd-files can be included in your pipeline by using the <a href="https://docs.ropensci.org/tarchetypes/"><code>tarchetypes</code> package</a> and functions <code>tar_render*()</code> and <code>tar_quarto*()</code>. Include these functions in the target-defining list in <code>_targets.R</code> and provide the <code>path</code> to your .Rmd- or .qmd-file. In the reports, include <code>library(targets)</code> and use <code>tar_read()</code> and <code>tar_load()</code> to refer to targets defined in your pipeline. During <code>tar_make()</code>, the dependencies will be established and the reports will only be re-rendered if they are outdated. Note: The rendered report only shows the code used for the report itself, not the underlying commands of the loaded <em>targets</em>.</p>
+</section>
+<section id="file-targets" class="level2">
+<h2 class="anchored" data-anchor-id="file-targets">File targets</h2>
+<p>A <em>target</em> can refer to a file by using the parameter <code>format = "file"</code> in <code>tar_target()</code>. This means that the output of the <em>target</em> is a reference to the file rather than just the string of the path, and the metadata saves the hash for this file. If the file changes, the <em>target</em> is outdated. This can also be used to keep track of contents of directories. The <a href="https://github.com/jenfransson/rse_targets/tree/main/sc_example">repository’s <code>sc_example</code> subdirectory</a> shows an example of this.</p>
 </section>
 <section id="branching" class="level2">
 <h2 class="anchored" data-anchor-id="branching">Branching</h2>
 <p>Branches can be used to e.g.&nbsp;test different analysis parameters or run the same pipeline on multiple datasets separately. Branches can be created in a static or dynamic fashion (documentation <a href="https://books.ropensci.org/targets/static.html">here</a> and <a href="https://books.ropensci.org/targets/dynamic.html">here</a>).</p>
-<p>I won’t go into details here, but there is an example in the <a href="https://github.com/jenfransson/rse_targets/tree/main/sc_example">repository’s <code>sc_example</code> subdirectory</a> of how to define dynamic branches using <code>pattern = map(...)</code> and creating separate reports from the different branches using <code>tar_quarto_rep()</code>.</p>
+<p>In the <a href="https://github.com/jenfransson/rse_targets/tree/main/sc_example">repository’s <code>sc_example</code> subdirectory</a>, the <em>target</em> <code>n_hvg</code> is a vector with two values. The <em>target</em> <code>dimred_data</code> uses <code>n_hvg</code> in its command, and includes <code>pattern = map(n_hvg)</code> and <code>iteration = "list"</code>. This results in the command being run once for each item in the vector <code>n_hvg</code> (i.e.&nbsp;twice). Each version of this <em>target</em> is saved as a separate object, but they are loaded as a list of objects when <code>tar_load(dimred_data)</code> is called.</p>
+<p>If you want to produce reports using the same script but using data from different branches, use <code>tar_render_rep()</code> or <code>tar_quarto_rep()</code>.</p>
+</section>
+<section id="parallel-computing" class="level2">
+<h2 class="anchored" data-anchor-id="parallel-computing">Parallel computing</h2>
+<p><code>targets</code> is designed to allow running the pipeline across separate sessions, see <a href="https://books.ropensci.org/targets/crew.html" class="uri">https://books.ropensci.org/targets/crew.html</a>.</p>
+</section>
+<section id="r-environments" class="level2">
+<h2 class="anchored" data-anchor-id="r-environments">R environments</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>targets</code> does not manage your R environment. All targets run in the same R environment, including across parallel sessions, so there is no per-target environment as in Nextflow. Start R with the same R and package versions each time, using renv or a container.</p>
+</div>
+</div>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Slow.</strong> There is quite a lot of overhead. Weigh the time that this adds against the time it takes to rerun the full script.</li>
+<li><strong>Less established than other workflow tools.</strong> It is harder to find out how to do something, and harder to work out what went wrong when it fails. The package is however actively maintained.</li>
+<li><strong>Readability.</strong> Pipelines are less intuitive to read than standard scripts, which makes them harder to share with people who don’t use <code>targets</code>.</li>
+</ul>
+</div>
+</div>
 </section>
 <section id="key-takeaways" class="level2">
 <h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
@@ -373,6 +441,8 @@ Note
 <li><code>targets</code> keeps track of all steps and dependencies within a pipeline</li>
 <li>Each <em>target</em> is defined as a command with inputs</li>
 <li>By default, only outdated <em>targets</em> will be recreated during a run</li>
+<li>If a rebuilt <em>target</em> is identical to before (same hash), its downstream <em>targets</em> are not rerun</li>
+<li><code>targets</code> tracks your code, not your R environment: all <em>targets</em> run in one R environment, which you manage with renv or a container</li>
 </ul>
 </section>
 <section id="further-resources" class="level2">
