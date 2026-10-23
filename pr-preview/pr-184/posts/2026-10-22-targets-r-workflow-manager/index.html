@@ -246,8 +246,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="motivation-with-example" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-with-example">Motivation with example</h2>
 <p>In a single-cell RNA-seq analysis, each step can require large computational resources due to the size of the data and complexity of the analysis. In addition, one must often go back and change parameters in earlier steps after seeing the results of later steps. To reduce running of heavy tasks, analyses are often split into multiple scripts that generate intermediate files, which are loaded in the subsequent script. For example, the analyses may be split up as follows:</p>
-<pre><code>**data file** → *QC script* → **filtered object** → *dimensionality reduction script* → **normalised object with PCA and UMAP** → *integration* → **integrated object** → *clustering script* → **clustered object** → *cell type annotation script* → **annotated object** → *differential expression script*</code></pre>
-<p>The number of files and the cyclical aspect of the analysis introduces risk for human error when trying to reduce repeating steps unnecessarily.</p>
+<p><strong>data file</strong> → <em>QC script</em> → <strong>filtered object</strong> → <em>dimensionality reduction script</em> → <strong>normalised object with PCA and UMAP</strong> → <em>integration</em> → <strong>integrated object</strong> → <em>clustering script</em> → <strong>clustered object</strong> → <em>cell type annotation script</em> → <strong>annotated object</strong> → <em>differential expression script</em></p>
+<p>The number of files and the cyclical aspect of the analysis introduces risk for human error when trying to avoid repeating steps unnecessarily.</p>
 </section>
 <section id="demo-repository" class="level2">
 <h2 class="anchored" data-anchor-id="demo-repository">Demo repository</h2>
@@ -266,14 +266,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>The demo uses the container <code>jenfransson/rse_targets:latest</code>, built from <code>rocker/rstudio</code> with the R packages restored from the repository’s <code>renv.lock</code> file. Run it and open <a href="http://localhost:8787" class="uri">http://localhost:8787</a> (user <code>rstudio</code>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-p</span> 8787:8787 <span class="at">-e</span> PASSWORD=choose-a-password jenfransson/rse_targets:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-p</span> 8787:8787 <span class="at">-e</span> PASSWORD=choose-a-password jenfransson/rse_targets:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The image is built for <code>linux/amd64</code>. On Apple silicon, add <code>--platform=linux/amd64</code>.</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Install R and the packages with <a href="https://pixi.prefix.dev/">Pixi</a>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init targets-demo</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> targets-demo</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> init targets-demo</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> targets-demo</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -295,8 +295,8 @@ Note
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
 <p>To create a new targets project, navigate to a new folder (or <code>demo</code> in the repository) and start R. Then run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_targets</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_targets</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This creates a new file called <code>_targets.R</code>, which is the main home for your pipeline-generating code<sup>1</sup>. The one generated by this function contains example code as well as comments about how to edit it.</p>
 </section>
 <section id="targets.r" class="level2">
@@ -325,10 +325,10 @@ Note
 </ul></li>
 <li>This list defines all of the <em>targets</em> that will be considered when building the pipeline</li>
 <li>Any <em>target</em> defined in this list can be accessed in other <em>targets’</em> commands</li>
-<li>The <em>order</em> of the targets does not matter</li>
+<li>The order of the <em>targets</em> does not matter</li>
 <li>A <em>target</em> built with tar_target() must have a name and a command
 <ul>
-<li>The command is simple R code, and the final value of the <em>target</em> is the output of this command</li>
+<li>The command is simple R code, and the final output of the last line becomes the value of the <em>target</em></li>
 <li>You can use functions to keep the commands short, or to reuse the same code in multiple targets</li>
 </ul></li>
 </ul></li>
@@ -349,27 +349,27 @@ Note
 </section>
 <section id="example" class="level2">
 <h2 class="anchored" data-anchor-id="example">Example</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up targets</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">use_targets</span>()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pipeline</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>()</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run pipeline</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>()</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pipeline</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>()</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the target "model"</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(model)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the target "data" and examine it</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(data)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up targets</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">use_targets</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pipeline</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run pipeline</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>()</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize pipeline</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>()</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the target "model"</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(model)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the target "data" and examine it</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_load</span>(data)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Then edit <code>_targets.R</code> and check the result with <code>tar_visnetwork()</code> and <code>tar_make()</code>:</p>
 <ul>
 <li>Change the command of <code>data</code>: both targets are outdated.</li>
@@ -429,8 +429,8 @@ Warning
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Slow.</strong> There is quite a lot of overhead. Weigh the time that this adds against the time it takes to rerun the full script.</li>
-<li><strong>Less established.</strong> It is harder to find out how to do something, and harder to work out what went wrong when it fails. It is however actively maintained.</li>
-<li><strong>Readability.</strong> Pipelines are less intuitive to read than scripts, which makes them harder to share with people who don’t use <code>targets</code>.</li>
+<li><strong>Less established than other workflow tools.</strong> It is harder to find out how to do something, and harder to work out what went wrong when it fails. The package is however actively maintained.</li>
+<li><strong>Readability.</strong> Pipelines are less intuitive to read than standard scripts, which makes them harder to share with people who don’t use <code>targets</code>.</li>
 </ul>
 </div>
 </div>
