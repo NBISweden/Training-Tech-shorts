@@ -11,7 +11,15 @@ categories: [ "R", "Targets", "Workflow management", "Reproducibility" ]
 
 [`targets`](https://docs.ropensci.org/targets/) is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as Nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. `targets` requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.
 
-`targets` keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file `_targets.R`, which is the primary file for editing your workflow. In this file, *targets* are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualised or run. Individual *targets* are saved and metadata is written to enable tracking whether they have changed since the last run.
+`targets` keeps track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file `_targets.R`, which is the primary file for editing your workflow. In this file, *targets* are defined as individual commands, and the dependency between commands is evaluated when the pipeline is visualised or run. Individual *targets* are saved and metadata is written to enable tracking whether they have changed since the last run.
+
+## Motivation with example
+
+In a single-cell RNA-seq analysis, each step can require large computational resources due to the size of the data and complexity of the analysis. In addition, one must often go back and change parameters in earlier steps after seeing the results of later steps. To reduce running of heavy tasks, analyses are often split into multiple scripts that generate intermediate files, which are loaded in the subsequent script. For example, the analyses may be split up as follows:
+
+**data file** → *QC script* → **filtered object** → *dimensionality reduction script* → **normalised object with PCA and UMAP** → *integration* → **integrated object** → *clustering script* → **clustered object** → *cell type annotation script* → **annotated object** → *differential expression script*
+
+The number of files and the cyclical aspect of the analysis introduce risk for human error when trying to avoid repeating steps unnecessarily.
 
 ## Demo repository
 
@@ -27,7 +35,19 @@ The repository contains two directories:
 
 ## Installation
 
-### Installation with pixi (written by Claude, verified)
+::: {.panel-tabset}
+
+## Docker
+
+The demo uses the container `jenfransson/rse_targets:latest`, built from `rocker/rstudio` with the R packages restored from the repository's `renv.lock` file. Run it and open <http://localhost:8787> (user `rstudio`):
+
+```{.bash}
+docker run --rm -p 8787:8787 -e PASSWORD=choose-a-password jenfransson/rse_targets:latest
+```
+
+The image is built for `linux/amd64`. On Apple silicon, add `--platform=linux/amd64`.
+
+## Pixi
 
 Install R and the packages with [Pixi](https://pixi.prefix.dev/).
 
@@ -41,10 +61,9 @@ pixi add r-base r-targets r-tarchetypes r-crew r-readr r-ggplot2 r-visnetwork
 On `osx-arm64`, the conda-forge `r-base64url` package (a dependency of `targets`) ships without its compiled library, and loading `targets` fails with ``shared object ‘base64url.so’ not found``. Fix it with `install.packages("base64url")` in R. `linux-64` is unaffected.
 :::
 
+:::
 
-### Other options
-
-`targets` can also be installed from CRAN (`install.packages("targets")`) or renv (`renv::install("targets")`). In the demo repository, I installed it using renv in the rocker/rstudio based on the repository's `renv.lock` file.
+`targets` can also be installed from CRAN (`install.packages("targets")`) or renv (`renv::install("targets")`).
 
 
 ## Getting started
@@ -69,12 +88,16 @@ This creates a new file called `_targets.R`, which is the main home for your pip
     * Define options for targets, such as packages needed to run the targets' commands and parallel computing options
 * `tar_source()`
     * Source all .R-scripts in R/ as well as any other specified files
-* Target list
+    * This is typically used to define functions to use in your pipeline. These will also be tracked by `targets`
+* *Target* list
     * The file ends with a list of `tar_target()` calls or other similar functions
         * `tarchetypes` provides other useful target-defining functions such as `tar_quarto*` and `tar_render*`
-    * This list defines all of the targets that will be considered when building the pipeline
-    * Any target defined in this list can be accessed in other targets' commands
-    * The order of the targets does not matter
+    * This list defines all of the *targets* that will be considered when building the pipeline
+    * Any *target* defined in this list can be accessed in other *targets'* commands
+    * The order of the *targets* does not matter
+    * A *target* built with `tar_target()` must have a name and a command
+        * The command is simple R code, and the final output of the last line becomes the value of the *target*
+        * You can use functions to keep the commands short, or to reuse the same code in multiple targets
 
 ## Testing and running the pipeline
 
@@ -82,7 +105,7 @@ This creates a new file called `_targets.R`, which is the main home for your pip
 
 ### `tar_make()`
 
-`tar_make()` is the function called to evaluate and run the pipeline. Once started, the pipeline will be constructed from `_targets.R` and all input files and dependencies will be checked. If the pipeline can be constructed without errors, all outdated targets will be regenerated. During the run, the progress will be printed, but the verbosity can be adjusted using the `reporter` parameter. 
+`tar_make()` is the function called to evaluate and run the pipeline. Once started, the pipeline will be constructed from `_targets.R` and all input files and dependencies will be checked. If the pipeline can be constructed without errors, all outdated targets will be regenerated. During the run, the progress will be printed, but the verbosity can be adjusted using the `reporter` parameter. To build only one target and its upstream dependencies, pass its name, for example `tar_make(report_qc)`.
 
 Note: Whether a target should be rerun or not is finally evaluated once all upstream targets have been checked and rerun (if needed). This means that in a default run, if a target was rerun due to e.g. a change to the command but the final object has the same hash, the downstream targets will not be rerun.
 
@@ -116,30 +139,59 @@ tar_load(data)
 head(data)
 ```
 
-Edit _targets.R as you wish and examine the results using `tar_visnetwork` and `tar_make`
+Then edit `_targets.R` and check the result with `tar_visnetwork()` and `tar_make()`:
+
+* Change the command of `data`: both targets are outdated.
+* Change the command of `model`: only `model` is outdated.
+* Rewrite a command without changing its result: the edited target is outdated, but once rebuilt its hash is unchanged, so downstream targets stay up to date.
 
 
 ## `targets` outputs
 
-All *targets* defined with `tar_target()` are stored in `_targets/objects` after creation <sup>1</sup>. The format of the output can be defined in the `tar_target()` function but is RDS by default. In addition, metadata including the hash of the object is stored in `_targets/meta/meta`. Changing or removing the files or editing the corresponding metadata will cause the *target* to be considered outdated and force it to be rerun in the next run.
+All *targets* defined with `tar_target()` are stored in `_targets/objects` after creation <sup>1</sup>. The format of the output can be defined in the `tar_target()` function but is RDS by default. In addition, metadata including the hash of the object is stored in `_targets/meta/meta`. Changing or removing the files or editing the corresponding metadata will cause the *target* to be considered outdated and force it to be rerun in the next run. Remember that the output of the *target* command will be stored on disk, so decide which intermediate results are worth storing as separate targets.
 
 
 ## Reports
 
-.Rmd- and .qmd-files can be included in your pipeline by using the [`tarchetypes` package](https://docs.ropensci.org/tarchetypes/) and functions `tar_render*()` and `tar_quarto*()`. Include these functions in the target-defining list in `_targets.R` and provide the `path` to your .Rmd- or .qmd-file. In the reports, include `library(targets)` and use `tar_read()` and `tar_load()` to refer to targets defined in your pipeline. During `tar_make()`, the dependencies will be established and the reports will only be re-rendered if they are outdated. 
+.Rmd- and .qmd-files can be included in your pipeline by using the [`tarchetypes` package](https://docs.ropensci.org/tarchetypes/) and functions `tar_render*()` and `tar_quarto*()`. Include these functions in the target-defining list in `_targets.R` and provide the `path` to your .Rmd- or .qmd-file. In the reports, include `library(targets)` and use `tar_read()` and `tar_load()` to refer to targets defined in your pipeline. During `tar_make()`, the dependencies will be established and the reports will only be re-rendered if they are outdated. Note: The rendered report only shows the code used for the report itself, not the underlying commands of the loaded *targets*.
+
+## File targets
+
+A *target* can refer to a file by using the parameter `format = "file"` in `tar_target()`. This means that the output of the *target* is a reference to the file rather than just the string of the path, and the metadata saves the hash for this file. If the file changes, the *target* is outdated. This can also be used to keep track of contents of directories. The [repository's `sc_example` subdirectory](https://github.com/jenfransson/rse_targets/tree/main/sc_example) shows an example of this.
 
 ## Branching
 
 Branches can be used to e.g. test different analysis parameters or run the same pipeline on multiple datasets separately. Branches can be created in a static or dynamic fashion (documentation [here](https://books.ropensci.org/targets/static.html) and [here](https://books.ropensci.org/targets/dynamic.html)).
 
-I won't go into details here, but there is an example in the [repository's `sc_example` subdirectory](https://github.com/jenfransson/rse_targets/tree/main/sc_example) of how to define dynamic branches using `pattern = map(...)` and creating separate reports from the different branches using `tar_quarto_rep()`.
+In the [repository's `sc_example` subdirectory](https://github.com/jenfransson/rse_targets/tree/main/sc_example), the *target* `n_hvg` is a vector with two values. The *target* `dimred_data` uses `n_hvg` in its command, and includes `pattern = map(n_hvg)` and `iteration = "list"`. This results in the command being run once for each item in the vector `n_hvg` (i.e. twice). Each version of this *target* is saved as a separate object, but they are loaded as a list of objects when `tar_load(dimred_data)` is called.
 
+If you want to produce reports using the same script but using data from different branches, use `tar_render_rep()` or `tar_quarto_rep()`.
+
+## Parallel computing
+
+`targets` is designed to allow running the pipeline across separate sessions, see <https://books.ropensci.org/targets/crew.html>.
+
+## R environments
+
+::: {.callout-important}
+`targets` does not manage your R environment. All targets run in the same R environment, including across parallel sessions, so there is no per-target environment as in Nextflow. Start R with the same R and package versions each time, using renv or a container.
+:::
+
+## Limitations
+
+::: {.callout-warning}
+* **Slow.** There is quite a lot of overhead. Weigh the time that this adds against the time it takes to rerun the full script.
+* **Less established than other workflow tools.** It is harder to find out how to do something, and harder to work out what went wrong when it fails. The package is however actively maintained.
+* **Readability.** Pipelines are less intuitive to read than standard scripts, which makes them harder to share with people who don't use `targets`.
+:::
 
 ## Key takeaways
 
 * `targets` keeps track of all steps and dependencies within a pipeline
 * Each *target* is defined as a command with inputs
 * By default, only outdated *targets* will be recreated during a run
+* If a rebuilt *target* is identical to before (same hash), its downstream *targets* are not rerun
+* `targets` tracks your code, not your R environment: all *targets* run in one R environment, which you manage with renv or a container
 
 
 ## Further resources
