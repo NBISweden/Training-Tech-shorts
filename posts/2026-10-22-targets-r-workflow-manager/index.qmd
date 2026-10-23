@@ -17,11 +17,9 @@ categories: [ "R", "Targets", "Workflow management", "Reproducibility" ]
 
 In a single-cell RNA-seq analysis, each step can require large computational resources due to the size of the data and complexity of the analysis. In addition, one must often go back and change parameters in earlier steps after seeing the results of later steps. To reduce running of heavy tasks, analyses are often split into multiple scripts that generate intermediate files, which are loaded in the subsequent script. For example, the analyses may be split up as follows:
 
-```
 **data file** → *QC script* → **filtered object** → *dimensionality reduction script* → **normalised object with PCA and UMAP** → *integration* → **integrated object** → *clustering script* → **clustered object** → *cell type annotation script* → **annotated object** → *differential expression script*
-```
 
-The number of files and the cyclical aspect of the analysis introduces risk for human error when trying to reduce repeating steps unnecessarily.
+The number of files and the cyclical aspect of the analysis introduces risk for human error when trying to avoid repeating steps unnecessarily.
 
 ## Demo repository
 
@@ -96,9 +94,9 @@ This creates a new file called `_targets.R`, which is the main home for your pip
         * `tarchetypes` provides other useful target-defining functions such as `tar_quarto*` and `tar_render*`
     * This list defines all of the *targets* that will be considered when building the pipeline
     * Any *target* defined in this list can be accessed in other *targets'* commands
-    * The *order* of the targets does not matter
+    * The order of the *targets* does not matter
     * A *target* built with tar_target() must have a name and a command
-        * The command is simple R code, and the final value of the *target* is the output of this command
+        * The command is simple R code, and the final output of the last line becomes the value of the *target*
         * You can use functions to keep the commands short, or to reuse the same code in multiple targets
 
 ## Testing and running the pipeline
@@ -183,8 +181,8 @@ If you want to produce reports using the same script but using data from differe
 
 ::: {.callout-warning}
 * **Slow.** There is quite a lot of overhead. Weigh the time that this adds against the time it takes to rerun the full script.
-* **Less established.** It is harder to find out how to do something, and harder to work out what went wrong when it fails. It is however actively maintained.
-* **Readability.** Pipelines are less intuitive to read than scripts, which makes them harder to share with people who don't use `targets`.
+* **Less established than other workflow tools.** It is harder to find out how to do something, and harder to work out what went wrong when it fails. The package is however actively maintained.
+* **Readability.** Pipelines are less intuitive to read than standard scripts, which makes them harder to share with people who don't use `targets`.
 :::
 
 ## Key takeaways
