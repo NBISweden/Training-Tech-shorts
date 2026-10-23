@@ -11,7 +11,7 @@ categories: [ "R", "Targets", "Workflow management", "Reproducibility" ]
 
 [`targets`](https://docs.ropensci.org/targets/) is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as Nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. `targets` requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.
 
-`targets` keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file `_targets.R`, which is the primary file for editing your workflow. In this file, *targets* are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualised or run. Individual *targets* are saved and metadata is written to enable tracking whether they have changed since the last run.
+`targets` keeps track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file `_targets.R`, which is the primary file for editing your workflow. In this file, *targets* are defined as individual commands, and the dependency between commands is evaluated when the pipeline is visualised or run. Individual *targets* are saved and metadata is written to enable tracking whether they have changed since the last run.
 
 ## Motivation with example
 
@@ -19,7 +19,7 @@ In a single-cell RNA-seq analysis, each step can require large computational res
 
 **data file** → *QC script* → **filtered object** → *dimensionality reduction script* → **normalised object with PCA and UMAP** → *integration* → **integrated object** → *clustering script* → **clustered object** → *cell type annotation script* → **annotated object** → *differential expression script*
 
-The number of files and the cyclical aspect of the analysis introduces risk for human error when trying to avoid repeating steps unnecessarily.
+The number of files and the cyclical aspect of the analysis introduce risk for human error when trying to avoid repeating steps unnecessarily.
 
 ## Demo repository
 
@@ -95,7 +95,7 @@ This creates a new file called `_targets.R`, which is the main home for your pip
     * This list defines all of the *targets* that will be considered when building the pipeline
     * Any *target* defined in this list can be accessed in other *targets'* commands
     * The order of the *targets* does not matter
-    * A *target* built with tar_target() must have a name and a command
+    * A *target* built with `tar_target()` must have a name and a command
         * The command is simple R code, and the final output of the last line becomes the value of the *target*
         * You can use functions to keep the commands short, or to reuse the same code in multiple targets
 
@@ -163,7 +163,7 @@ A *target* can refer to a file by using the parameter `format = "file"` in `tar_
 
 Branches can be used to e.g. test different analysis parameters or run the same pipeline on multiple datasets separately. Branches can be created in a static or dynamic fashion (documentation [here](https://books.ropensci.org/targets/static.html) and [here](https://books.ropensci.org/targets/dynamic.html)).
 
-In the [repository's `sc_example` subdirectory](https://github.com/jenfransson/rse_targets/tree/main/sc_example), the *target* `n_hvg` is a vector with two values. The *target* `dimred_data` uses `n_hvg` in its command, and includes `pattern = map(n_hvg)` and `iteration = "list"`. This results in the command being run once for each item in the vector `n_hvg` (i.e. twice). Each version of this *target* is saved as a separate object, but are loaded as a list of objects when `tar_load(dimred_data)` is called.
+In the [repository's `sc_example` subdirectory](https://github.com/jenfransson/rse_targets/tree/main/sc_example), the *target* `n_hvg` is a vector with two values. The *target* `dimred_data` uses `n_hvg` in its command, and includes `pattern = map(n_hvg)` and `iteration = "list"`. This results in the command being run once for each item in the vector `n_hvg` (i.e. twice). Each version of this *target* is saved as a separate object, but they are loaded as a list of objects when `tar_load(dimred_data)` is called.
 
 If you want to produce reports using the same script but using data from different branches, use `tar_render_rep()` or `tar_quarto_rep()`.
 
