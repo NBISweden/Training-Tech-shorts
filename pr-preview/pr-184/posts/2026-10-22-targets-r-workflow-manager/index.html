@@ -246,10 +246,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="motivation-with-example" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-with-example">Motivation with example</h2>
 <p>In a single-cell RNA-seq analysis, each step can require large computational resources due to the size of the data and complexity of the analysis. In addition, one must often go back and change parameters in earlier steps after seeing the results of later steps. To reduce running of heavy tasks, analyses are often split into multiple scripts that generate intermediate files, which are loaded in the subsequent script. For example, the analyses may be split up as follows:</p>
-<blockquote class="blockquote">
 <p><strong>data file</strong> → <em>QC script</em> → <strong>filtered object</strong> → <em>dimensionality reduction script</em> → <strong>normalised object with PCA and UMAP</strong> → <em>integration</em> → <strong>integrated object</strong> → <em>clustering script</em> → <strong>clustered object</strong> → <em>cell type annotation script</em> → <strong>annotated object</strong> → <em>differential expression script</em></p>
-</blockquote>
-<p>The number of files and the cyclical aspect of the analysis introduce risk for human error when trying to reduce repeating steps unnecessarily.</p>
+<p>The number of files and the cyclical aspect of the analysis introduce risk for human error when trying to avoid repeating steps unnecessarily.</p>
 </section>
 <section id="demo-repository" class="level2">
 <h2 class="anchored" data-anchor-id="demo-repository">Demo repository</h2>
@@ -327,10 +325,10 @@ Note
 </ul></li>
 <li>This list defines all of the <em>targets</em> that will be considered when building the pipeline</li>
 <li>Any <em>target</em> defined in this list can be accessed in other <em>targets’</em> commands</li>
-<li>The <em>order</em> of the targets does not matter</li>
+<li>The order of the <em>targets</em> does not matter</li>
 <li>A <em>target</em> built with <code>tar_target()</code> must have a name and a command
 <ul>
-<li>The command is simple R code, and the final value of the <em>target</em> is the output of this command</li>
+<li>The command is simple R code, and the final output of the last line becomes the value of the <em>target</em></li>
 <li>You can use functions to keep the commands short, or to reuse the same code in multiple targets</li>
 </ul></li>
 </ul></li>
@@ -431,8 +429,8 @@ Warning
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Slow.</strong> There is quite a lot of overhead. Weigh the time that this adds against the time it takes to rerun the full script.</li>
-<li><strong>Less established.</strong> It is harder to find out how to do something, and harder to work out what went wrong when it fails. It is however actively maintained.</li>
-<li><strong>Readability.</strong> Pipelines are less intuitive to read than scripts, which makes them harder to share with people who don’t use <code>targets</code>.</li>
+<li><strong>Less established than other workflow tools.</strong> It is harder to find out how to do something, and harder to work out what went wrong when it fails. The package is however actively maintained.</li>
+<li><strong>Readability.</strong> Pipelines are less intuitive to read than standard scripts, which makes them harder to share with people who don’t use <code>targets</code>.</li>
 </ul>
 </div>
 </div>
