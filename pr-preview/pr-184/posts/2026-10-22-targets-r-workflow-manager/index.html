@@ -241,13 +241,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p><a href="https://docs.ropensci.org/targets/"><code>targets</code></a> is a package for R that manages a workflow in an R-native manner. It reduces the unnecessary rerunning of computationally heavy analyses after editing code, while ensuring that all affected downstream analyses are rerun. While other workflow managers such as Nextflow are more established and robust, I find them quite clunky to use while still developing the analysis. <code>targets</code> requires a restructuring of how your R code is written, but automatically keeps track of the components in your pipeline on a much more detailed level.</p>
-<p><code>targets</code> keep track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file <code>_targets.R</code>, which is the primary file for editing your workflow. In this file, <em>targets</em> are defined as individual commands, and the dependency between commands are evaluated when the pipeline is visualised or run. Individual <em>targets</em> are saved and metadata is written to enable tracking whether they have changed since the last run.</p>
+<p><code>targets</code> keeps track of input files, intermediate R objects, functions and reports using hashes. It builds a pipeline using the file <code>_targets.R</code>, which is the primary file for editing your workflow. In this file, <em>targets</em> are defined as individual commands, and the dependency between commands is evaluated when the pipeline is visualised or run. Individual <em>targets</em> are saved and metadata is written to enable tracking whether they have changed since the last run.</p>
 </section>
 <section id="motivation-with-example" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-with-example">Motivation with example</h2>
 <p>In a single-cell RNA-seq analysis, each step can require large computational resources due to the size of the data and complexity of the analysis. In addition, one must often go back and change parameters in earlier steps after seeing the results of later steps. To reduce running of heavy tasks, analyses are often split into multiple scripts that generate intermediate files, which are loaded in the subsequent script. For example, the analyses may be split up as follows:</p>
+<blockquote class="blockquote">
 <p><strong>data file</strong> → <em>QC script</em> → <strong>filtered object</strong> → <em>dimensionality reduction script</em> → <strong>normalised object with PCA and UMAP</strong> → <em>integration</em> → <strong>integrated object</strong> → <em>clustering script</em> → <strong>clustered object</strong> → <em>cell type annotation script</em> → <strong>annotated object</strong> → <em>differential expression script</em></p>
-<p>The number of files and the cyclical aspect of the analysis introduces risk for human error when trying to avoid repeating steps unnecessarily.</p>
+</blockquote>
+<p>The number of files and the cyclical aspect of the analysis introduce risk for human error when trying to reduce repeating steps unnecessarily.</p>
 </section>
 <section id="demo-repository" class="level2">
 <h2 class="anchored" data-anchor-id="demo-repository">Demo repository</h2>
@@ -325,10 +327,10 @@ Note
 </ul></li>
 <li>This list defines all of the <em>targets</em> that will be considered when building the pipeline</li>
 <li>Any <em>target</em> defined in this list can be accessed in other <em>targets’</em> commands</li>
-<li>The order of the <em>targets</em> does not matter</li>
-<li>A <em>target</em> built with tar_target() must have a name and a command
+<li>The <em>order</em> of the targets does not matter</li>
+<li>A <em>target</em> built with <code>tar_target()</code> must have a name and a command
 <ul>
-<li>The command is simple R code, and the final output of the last line becomes the value of the <em>target</em></li>
+<li>The command is simple R code, and the final value of the <em>target</em> is the output of this command</li>
 <li>You can use functions to keep the commands short, or to reuse the same code in multiple targets</li>
 </ul></li>
 </ul></li>
@@ -392,7 +394,7 @@ Note
 <section id="branching" class="level2">
 <h2 class="anchored" data-anchor-id="branching">Branching</h2>
 <p>Branches can be used to e.g.&nbsp;test different analysis parameters or run the same pipeline on multiple datasets separately. Branches can be created in a static or dynamic fashion (documentation <a href="https://books.ropensci.org/targets/static.html">here</a> and <a href="https://books.ropensci.org/targets/dynamic.html">here</a>).</p>
-<p>In the <a href="https://github.com/jenfransson/rse_targets/tree/main/sc_example">repository’s <code>sc_example</code> subdirectory</a>, the <em>target</em> <code>n_hvg</code> is a vector with two values. The <em>target</em> <code>dimred_data</code> uses <code>n_hvg</code> in its command, and includes <code>pattern = map(n_hvg)</code> and <code>iteration = "list"</code>. This results in the command being run once for each item in the vector <code>n_hvg</code> (i.e.&nbsp;twice). Each version of this <em>target</em> is saved as a separate object, but are loaded as a list of objects when <code>tar_load(dimred_data)</code> is called.</p>
+<p>In the <a href="https://github.com/jenfransson/rse_targets/tree/main/sc_example">repository’s <code>sc_example</code> subdirectory</a>, the <em>target</em> <code>n_hvg</code> is a vector with two values. The <em>target</em> <code>dimred_data</code> uses <code>n_hvg</code> in its command, and includes <code>pattern = map(n_hvg)</code> and <code>iteration = "list"</code>. This results in the command being run once for each item in the vector <code>n_hvg</code> (i.e.&nbsp;twice). Each version of this <em>target</em> is saved as a separate object, but they are loaded as a list of objects when <code>tar_load(dimred_data)</code> is called.</p>
 <p>If you want to produce reports using the same script but using data from different branches, use <code>tar_render_rep()</code> or <code>tar_quarto_rep()</code>.</p>
 </section>
 <section id="parallel-computing" class="level2">
@@ -429,8 +431,8 @@ Warning
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Slow.</strong> There is quite a lot of overhead. Weigh the time that this adds against the time it takes to rerun the full script.</li>
-<li><strong>Less established than other workflow tools.</strong> It is harder to find out how to do something, and harder to work out what went wrong when it fails. The package is however actively maintained.</li>
-<li><strong>Readability.</strong> Pipelines are less intuitive to read than standard scripts, which makes them harder to share with people who don’t use <code>targets</code>.</li>
+<li><strong>Less established.</strong> It is harder to find out how to do something, and harder to work out what went wrong when it fails. It is however actively maintained.</li>
+<li><strong>Readability.</strong> Pipelines are less intuitive to read than scripts, which makes them harder to share with people who don’t use <code>targets</code>.</li>
 </ul>
 </div>
 </div>
