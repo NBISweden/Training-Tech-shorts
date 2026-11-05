@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -40,14 +40,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-95e700bef72d2880c277d2cb84c9764b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-eed7a3b0b280c4a981be701f049d0e6b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -98,12 +99,6 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
   </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -138,19 +133,18 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">RSE Tools</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -207,6 +201,7 @@ window.Quarto = {
   </div>
 </a>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -218,7 +213,7 @@ window.Quarto = {
         
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(31)</span></div><div class="category" data-category="QUk=">AI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QXBwdGFpbmVy">Apptainer <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YjNk">b3d <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmlvY29uZHVjdG9y">Bioconductor <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmlvaW5mb3JtYXRpY3M=">Bioinformatics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QmxlbmRlcg==">Blender <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29kZSUyMFJldmlld3M=">Code Reviews <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29sbGFib3JhdGlvbg==">Collaboration <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29tbWFuZCUyMHJ1bm5lcg==">Command runner <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y29tcHV0ZXIlMjBncmFwaGljcw==">computer graphics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29uZGE=">Conda <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29uZmx1ZW5jZQ==">Confluence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29udGFpbmVycw==">Containers <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Q29udGludW91cyUyMGludGVncmF0aW9u">Continuous integration <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29waWxvdA==">Copilot <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGFyZGVs">Dardel <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RG9ja2Vy">Docker <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RG9jdW1lbnRhdGlvbg==">Documentation <span class="quarto-category-count">(2)</span></div><div class="category" data-category="R2l0">Git <span class="quarto-category-count">(5)</span></div><div class="category" data-category="R2l0SHVi">GitHub <span class="quarto-category-count">(5)</span></div><div class="category" data-category="R2l0SHViJTIwQWN0aW9ucw==">GitHub Actions <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R2l0cG9k">Gitpod <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SFBD">HPC <span class="quarto-category-count">(2)</span></div><div class="category" data-category="SURF">IDE <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TGl0ZXJhdGUlMjBwcm9ncmFtbWluZw==">Literate programming <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TWFjT1M=">MacOS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmFubw==">Nano <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmV4dGZsb3c=">Nextflow <span class="quarto-category-count">(6)</span></div><div class="category" data-category="bmYtY29yZQ==">nf-core <span class="quarto-category-count">(2)</span></div><div class="category" data-category="T2JzaWRpYW4=">Obsidian <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UGFja2FnZSUyMG1hbmFnZW1lbnQ=">Package management <span class="quarto-category-count">(6)</span></div><div class="category" data-category="UGFjTWFu">PacMan <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UGl4aQ==">Pixi <span class="quarto-category-count">(4)</span></div><div class="category" data-category="UHVsbCUyMFJlcXVlc3Rz">Pull Requests <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UXVhcnRv">Quarto <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(3)</span></div><div class="category" data-category="UmVtb3RlJTIwZGV2ZWxvcG1lbnQ=">Remote development <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVwcm9kdWNpYmlsaXR5">Reproducibility <span class="quarto-category-count">(3)</span></div><div class="category" data-category="U2VjdXJlJTIwRGF0YSUyMEVudmlyb25tZW50">Secure Data Environment <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U2VsZi1wcm9tb3Rpb24=">Self-promotion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2VxZXJh">Seqera <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2luZ3VsYXJpdHk=">Singularity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U25ha2VtYWtl">Snakemake <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U29mdHdhcmUlMjBpbnN0YWxsYXRpb24=">Software installation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U1NI">SSH <span class="quarto-category-count">(2)</span></div><div class="category" data-category="VGFyZ2V0cw==">Targets <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGVybWluYWw=">Terminal <span class="quarto-category-count">(4)</span></div><div class="category" data-category="VGVzdGluZw==">Testing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGlwcyUyMGFuZCUyMFRyaWNrcw==">Tips and Tricks <span class="quarto-category-count">(3)</span></div><div class="category" data-category="VmVyc2lvbiUyMGNvbnRyb2w=">Version control <span class="quarto-category-count">(6)</span></div><div class="category" data-category="dmlzdWFsaXphdGlvbg==">visualization <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VlNDb2Rl">VSCode <span class="quarto-category-count">(3)</span></div><div class="category" data-category="V2F2ZQ==">Wave <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V29ya2Zsb3clMjBtYW5hZ2VtZW50">Workflow management <span class="quarto-category-count">(4)</span></div></div></div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -251,14 +246,11 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="UiUyQ1RhcmdldHMlMkNXb3JrZmxvdyUyMG1hbmFnZW1lbnQlMkNSZXByb2R1Y2liaWxpdHk=" data-listing-date-sort="1792627200000" data-listing-file-modified-sort="1792757461723" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1784">
+<div class="quarto-post image-right" data-index="0" data-categories="UiUyQ1RhcmdldHMlMkNXb3JrZmxvdyUyMG1hbmFnZW1lbnQlMkNSZXByb2R1Y2liaWxpdHk=" data-listing-date-sort="1792627200000" data-listing-file-modified-sort="1793864302994" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1784">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-10-22-targets-r-workflow-manager/index.html" class="no-external">Targets: A workflow manager in R</a>
+<a href="./posts/2026-10-22-targets-r-workflow-manager/index.html" class="no-external-icon">Targets: A workflow manager in R</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-10-22-targets-r-workflow-manager/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
@@ -272,7 +264,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-10-22-targets-r-workflow-manager/index.html" class="no-external">
+<a href="./posts/2026-10-22-targets-r-workflow-manager/index.html" class="no-external-icon">
 <div class="listing-date">
 Oct 22, 2026
 </div>
@@ -282,14 +274,11 @@ Jennifer Fransson
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Q29udGFpbmVycyUyQ1BpeGklMkNXYXZlJTJDU1NIJTJDVGVybWluYWwlMkNHaXQlMkNPYnNpZGlhbg==" data-listing-date-sort="1791417600000" data-listing-file-modified-sort="1792757461723" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3205">
+<div class="quarto-post image-right" data-index="1" data-categories="Q29udGFpbmVycyUyQ1BpeGklMkNXYXZlJTJDU1NIJTJDVGVybWluYWwlMkNHaXQlMkNPYnNpZGlhbg==" data-listing-date-sort="1791417600000" data-listing-file-modified-sort="1793864302994" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3205">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-10-08-5-minute-tool-tips-showcase/index.html" class="no-external">5-Minute Tool Tips Showcase</a>
+<a href="./posts/2026-10-08-5-minute-tool-tips-showcase/index.html" class="no-external-icon">5-Minute Tool Tips Showcase</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-10-08-5-minute-tool-tips-showcase/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('Q29udGFpbmVycw=='); return false;">Containers</div>
@@ -309,7 +298,7 @@ Jennifer Fransson
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-10-08-5-minute-tool-tips-showcase/index.html" class="no-external">
+<a href="./posts/2026-10-08-5-minute-tool-tips-showcase/index.html" class="no-external-icon">
 <div class="listing-date">
 Oct 8, 2026
 </div>
@@ -319,14 +308,11 @@ Mahesh Binzer-Panchal, Cormac Kinsella, Martin Dahlö, Jason Hill, Erik Fasteriu
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="U25ha2VtYWtlJTJDV29ya2Zsb3clMjBtYW5hZ2VtZW50JTJDUmVwcm9kdWNpYmlsaXR5" data-listing-date-sort="1790208000000" data-listing-file-modified-sort="1792757461723" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3299">
+<div class="quarto-post image-right" data-index="2" data-categories="U25ha2VtYWtlJTJDV29ya2Zsb3clMjBtYW5hZ2VtZW50JTJDUmVwcm9kdWNpYmlsaXR5" data-listing-date-sort="1790208000000" data-listing-file-modified-sort="1793864302994" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3299">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-09-24-intro-to-snakemake/index.html" class="no-external">An introduction to the Snakemake workflow manager</a>
+<a href="./posts/2026-09-24-intro-to-snakemake/index.html" class="no-external-icon">An introduction to the Snakemake workflow manager</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-09-24-intro-to-snakemake/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('U25ha2VtYWtl'); return false;">Snakemake</div>
@@ -338,7 +324,7 @@ Mahesh Binzer-Panchal, Cormac Kinsella, Martin Dahlö, Jason Hill, Erik Fasteriu
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-09-24-intro-to-snakemake/index.html" class="no-external">
+<a href="./posts/2026-09-24-intro-to-snakemake/index.html" class="no-external-icon">
 <div class="listing-date">
 Sep 24, 2026
 </div>
@@ -348,14 +334,11 @@ John Sundh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="TmV4dGZsb3clMkNUZXN0aW5nJTJDbmYtY29yZQ==" data-listing-date-sort="1788998400000" data-listing-file-modified-sort="1792757461722" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2588">
+<div class="quarto-post image-right" data-index="3" data-categories="TmV4dGZsb3clMkNUZXN0aW5nJTJDbmYtY29yZQ==" data-listing-date-sort="1788998400000" data-listing-file-modified-sort="1793864302993" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2588">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-09-10-nf-test-nextflow-testing-framework/index.html" class="no-external">nf-test: A Nextflow testing framework</a>
+<a href="./posts/2026-09-10-nf-test-nextflow-testing-framework/index.html" class="no-external-icon">nf-test: A Nextflow testing framework</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-09-10-nf-test-nextflow-testing-framework/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
@@ -367,7 +350,7 @@ John Sundh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-09-10-nf-test-nextflow-testing-framework/index.html" class="no-external">
+<a href="./posts/2026-09-10-nf-test-nextflow-testing-framework/index.html" class="no-external-icon">
 <div class="listing-date">
 Sep 10, 2026
 </div>
@@ -377,14 +360,11 @@ Maxime Garcia
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="R2l0JTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNUZXJtaW5hbA==" data-listing-date-sort="1787788800000" data-listing-file-modified-sort="1792757461722" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1750">
+<div class="quarto-post image-right" data-index="4" data-categories="R2l0JTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNUZXJtaW5hbA==" data-listing-date-sort="1787788800000" data-listing-file-modified-sort="1793864302993" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1750">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-08-27-dotfile-management/index.html" class="no-external">Dotfile Management with Git</a>
+<a href="./posts/2026-08-27-dotfile-management/index.html" class="no-external-icon">Dotfile Management with Git</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-08-27-dotfile-management/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('R2l0'); return false;">Git</div>
@@ -396,7 +376,7 @@ Maxime Garcia
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-08-27-dotfile-management/index.html" class="no-external">
+<a href="./posts/2026-08-27-dotfile-management/index.html" class="no-external-icon">
 <div class="listing-date">
 Aug 27, 2026
 </div>
@@ -406,14 +386,11 @@ Cormac Kinsella
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="QmxlbmRlciUyQ2IzZCUyQ3Zpc3VhbGl6YXRpb24lMkNjb21wdXRlciUyMGdyYXBoaWNz" data-listing-date-sort="1781136000000" data-listing-file-modified-sort="1792757461722" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3258">
+<div class="quarto-post image-right" data-index="5" data-categories="QmxlbmRlciUyQ2IzZCUyQ3Zpc3VhbGl6YXRpb24lMkNjb21wdXRlciUyMGdyYXBoaWNz" data-listing-date-sort="1781136000000" data-listing-file-modified-sort="1793864302993" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3258">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-06-11-blender-intro/index.html" class="no-external">Introduction to Blender</a>
+<a href="./posts/2026-06-11-blender-intro/index.html" class="no-external-icon">Introduction to Blender</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-06-11-blender-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('QmxlbmRlcg=='); return false;">Blender</div>
@@ -427,7 +404,7 @@ Cormac Kinsella
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-06-11-blender-intro/index.html" class="no-external">
+<a href="./posts/2026-06-11-blender-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 Jun 11, 2026
 </div>
@@ -437,14 +414,11 @@ Leslie Solorzano
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="TmV4dGZsb3clMkNXb3JrZmxvdyUyMG1hbmFnZW1lbnQlMkNuZi1jb3Jl" data-listing-date-sort="1779926400000" data-listing-file-modified-sort="1792757461624" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2245">
+<div class="quarto-post image-right" data-index="6" data-categories="TmV4dGZsb3clMkNXb3JrZmxvdyUyMG1hbmFnZW1lbnQlMkNuZi1jb3Jl" data-listing-date-sort="1779926400000" data-listing-file-modified-sort="1793864302909" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2245">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-05-28-nf-core-modules/index.html" class="no-external">Working with nf-core modules</a>
+<a href="./posts/2026-05-28-nf-core-modules/index.html" class="no-external-icon">Working with nf-core modules</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-05-28-nf-core-modules/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
@@ -456,7 +430,7 @@ Leslie Solorzano
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-05-28-nf-core-modules/index.html" class="no-external">
+<a href="./posts/2026-05-28-nf-core-modules/index.html" class="no-external-icon">
 <div class="listing-date">
 May 28, 2026
 </div>
@@ -466,14 +440,11 @@ Erik Fasterius
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="SFBDJTJDU29mdHdhcmUlMjBpbnN0YWxsYXRpb24lMkNCaW9pbmZvcm1hdGljcyUyQ1Rlcm1pbmFsJTJDVGlwcyUyMGFuZCUyMFRyaWNrcw==" data-listing-date-sort="1776902400000" data-listing-file-modified-sort="1792757461623" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2091">
+<div class="quarto-post image-right" data-index="7" data-categories="SFBDJTJDU29mdHdhcmUlMjBpbnN0YWxsYXRpb24lMkNCaW9pbmZvcm1hdGljcyUyQ1Rlcm1pbmFsJTJDVGlwcyUyMGFuZCUyMFRyaWNrcw==" data-listing-date-sort="1776902400000" data-listing-file-modified-sort="1793864302908" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2091">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-04-23-configure-and-make/index.html" class="no-external">Introduction to Configure and Make</a>
+<a href="./posts/2026-04-23-configure-and-make/index.html" class="no-external-icon">Introduction to Configure and Make</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-04-23-configure-and-make/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('SFBD'); return false;">HPC</div>
@@ -489,7 +460,7 @@ Erik Fasterius
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-04-23-configure-and-make/index.html" class="no-external">
+<a href="./posts/2026-04-23-configure-and-make/index.html" class="no-external-icon">
 <div class="listing-date">
 Apr 23, 2026
 </div>
@@ -499,14 +470,11 @@ Martin Dahlö
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="UmVwcm9kdWNpYmlsaXR5JTJDRG9jdW1lbnRhdGlvbiUyQ1ZlcnNpb24lMjBjb250cm9sJTJDUGFja2FnZSUyMG1hbmFnZW1lbnQlMkNXb3JrZmxvdyUyMG1hbmFnZW1lbnQ=" data-listing-date-sort="1775692800000" data-listing-file-modified-sort="1792757461623" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2073">
+<div class="quarto-post image-right" data-index="8" data-categories="UmVwcm9kdWNpYmlsaXR5JTJDRG9jdW1lbnRhdGlvbiUyQ1ZlcnNpb24lMjBjb250cm9sJTJDUGFja2FnZSUyMG1hbmFnZW1lbnQlMkNXb3JrZmxvdyUyMG1hbmFnZW1lbnQ=" data-listing-date-sort="1775692800000" data-listing-file-modified-sort="1793864302908" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2073">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-04-09-working-reproducibly/index.html" class="no-external">Working Reproducibly</a>
+<a href="./posts/2026-04-09-working-reproducibly/index.html" class="no-external-icon">Working Reproducibly</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-04-09-working-reproducibly/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('UmVwcm9kdWNpYmlsaXR5'); return false;">Reproducibility</div>
@@ -522,7 +490,7 @@ Martin Dahlö
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-04-09-working-reproducibly/index.html" class="no-external">
+<a href="./posts/2026-04-09-working-reproducibly/index.html" class="no-external-icon">
 <div class="listing-date">
 Apr 9, 2026
 </div>
@@ -532,14 +500,11 @@ Erik Fasterius
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="UGl4aSUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50JTJDQ29tbWFuZCUyMHJ1bm5lcg==" data-listing-date-sort="1774483200000" data-listing-file-modified-sort="1792757461622" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2226">
+<div class="quarto-post image-right" data-index="9" data-categories="UGl4aSUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50JTJDQ29tbWFuZCUyMHJ1bm5lcg==" data-listing-date-sort="1774483200000" data-listing-file-modified-sort="1793864302906" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2226">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-03-26-reintroduction-to-pixi/index.html" class="no-external">Reintroduction to Pixi</a>
+<a href="./posts/2026-03-26-reintroduction-to-pixi/index.html" class="no-external-icon">Reintroduction to Pixi</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-03-26-reintroduction-to-pixi/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('UGl4aQ=='); return false;">Pixi</div>
@@ -551,7 +516,7 @@ Erik Fasterius
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-03-26-reintroduction-to-pixi/index.html" class="no-external">
+<a href="./posts/2026-03-26-reintroduction-to-pixi/index.html" class="no-external-icon">
 <div class="listing-date">
 Mar 26, 2026
 </div>
@@ -561,14 +526,11 @@ Mahesh Binzer-Panchal
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="R2l0SHViJTJDUHVsbCUyMFJlcXVlc3RzJTJDQ29kZSUyMFJldmlld3M=" data-listing-date-sort="1773273600000" data-listing-file-modified-sort="1792757461622" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1377">
+<div class="quarto-post image-right" data-index="10" data-categories="R2l0SHViJTJDUHVsbCUyMFJlcXVlc3RzJTJDQ29kZSUyMFJldmlld3M=" data-listing-date-sort="1773273600000" data-listing-file-modified-sort="1793864302906" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1377">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-03-12-github-pull-requests-code-review/index.html" class="no-external">GitHub Pull Requests and Code Reviews</a>
+<a href="./posts/2026-03-12-github-pull-requests-code-review/index.html" class="no-external-icon">GitHub Pull Requests and Code Reviews</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-03-12-github-pull-requests-code-review/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('R2l0SHVi'); return false;">GitHub</div>
@@ -580,7 +542,7 @@ Mahesh Binzer-Panchal
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-03-12-github-pull-requests-code-review/index.html" class="no-external">
+<a href="./posts/2026-03-12-github-pull-requests-code-review/index.html" class="no-external-icon">
 <div class="listing-date">
 Mar 12, 2026
 </div>
@@ -590,14 +552,11 @@ Mahesh Binzer-Panchal
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="Q29waWxvdCUyQ1ZTQ29kZSUyQ0FJJTJDSURFJTJDU2VjdXJlJTIwRGF0YSUyMEVudmlyb25tZW50JTJDVGlwcyUyMGFuZCUyMFRyaWNrcw==" data-listing-date-sort="1772064000000" data-listing-file-modified-sort="1792757461621" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2070">
+<div class="quarto-post image-right" data-index="11" data-categories="Q29waWxvdCUyQ1ZTQ29kZSUyQ0FJJTJDSURFJTJDU2VjdXJlJTIwRGF0YSUyMEVudmlyb25tZW50JTJDVGlwcyUyMGFuZCUyMFRyaWNrcw==" data-listing-date-sort="1772064000000" data-listing-file-modified-sort="1793864302906" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2070">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-02-26-copilot-sensitive-data/index.html" class="no-external">Copilot and VSCode - protecting sensitive data</a>
+<a href="./posts/2026-02-26-copilot-sensitive-data/index.html" class="no-external-icon">Copilot and VSCode - protecting sensitive data</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-02-26-copilot-sensitive-data/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('Q29waWxvdA=='); return false;">Copilot</div>
@@ -615,7 +574,7 @@ Mahesh Binzer-Panchal
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-02-26-copilot-sensitive-data/index.html" class="no-external">
+<a href="./posts/2026-02-26-copilot-sensitive-data/index.html" class="no-external-icon">
 <div class="listing-date">
 Feb 26, 2026
 </div>
@@ -625,14 +584,11 @@ Martin Dahlö
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="UiUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50JTJDQmlvY29uZHVjdG9yJTJDVmVyc2lvbiUyMGNvbnRyb2w=" data-listing-date-sort="1770854400000" data-listing-file-modified-sort="1792757461619" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3175">
+<div class="quarto-post image-right" data-index="12" data-categories="UiUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50JTJDQmlvY29uZHVjdG9yJTJDVmVyc2lvbiUyMGNvbnRyb2w=" data-listing-date-sort="1770854400000" data-listing-file-modified-sort="1793864302904" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3175">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-02-12-working-with-R-packages/index.html" class="no-external">Working with R packages</a>
+<a href="./posts/2026-02-12-working-with-R-packages/index.html" class="no-external-icon">Working with R packages</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-02-12-working-with-R-packages/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
@@ -646,7 +602,7 @@ Martin Dahlö
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-02-12-working-with-R-packages/index.html" class="no-external">
+<a href="./posts/2026-02-12-working-with-R-packages/index.html" class="no-external-icon">
 <div class="listing-date">
 Feb 12, 2026
 </div>
@@ -656,14 +612,11 @@ Dania Machlab, Mahesh Binzer-Panchal
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="R2l0SHViJTIwQWN0aW9ucyUyQ0NvbnRpbnVvdXMlMjBpbnRlZ3JhdGlvbg==" data-listing-date-sort="1769040000000" data-listing-file-modified-sort="1792757461618" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2429">
+<div class="quarto-post image-right" data-index="13" data-categories="R2l0SHViJTIwQWN0aW9ucyUyQ0NvbnRpbnVvdXMlMjBpbnRlZ3JhdGlvbg==" data-listing-date-sort="1769040000000" data-listing-file-modified-sort="1793864302904" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2429">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2026-01-22-github-actions/index.html" class="no-external">Introduction to GitHub Actions</a>
+<a href="./posts/2026-01-22-github-actions/index.html" class="no-external-icon">Introduction to GitHub Actions</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2026-01-22-github-actions/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('R2l0SHViJTIwQWN0aW9ucw=='); return false;">GitHub Actions</div>
@@ -673,7 +626,7 @@ Dania Machlab, Mahesh Binzer-Panchal
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2026-01-22-github-actions/index.html" class="no-external">
+<a href="./posts/2026-01-22-github-actions/index.html" class="no-external-icon">
 <div class="listing-date">
 Jan 22, 2026
 </div>
@@ -683,14 +636,11 @@ Richèl Bilderbeek
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="TmV4dGZsb3c=" data-listing-date-sort="1765411200000" data-listing-file-modified-sort="1792757461612" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1856">
+<div class="quarto-post image-right" data-index="14" data-categories="TmV4dGZsb3c=" data-listing-date-sort="1765411200000" data-listing-file-modified-sort="1793864302899" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1856">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-12-11-nextflow-best-practices/index.html" class="no-external">Nextflow best practices</a>
+<a href="./posts/2025-12-11-nextflow-best-practices/index.html" class="no-external-icon">Nextflow best practices</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-12-11-nextflow-best-practices/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
@@ -698,7 +648,7 @@ Richèl Bilderbeek
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-12-11-nextflow-best-practices/index.html" class="no-external">
+<a href="./posts/2025-12-11-nextflow-best-practices/index.html" class="no-external-icon">
 <div class="listing-date">
 Dec 11, 2025
 </div>
@@ -708,14 +658,11 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="TmV4dGZsb3c=" data-listing-date-sort="1764201600000" data-listing-file-modified-sort="1792757461612" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1811">
+<div class="quarto-post image-right" data-index="15" data-categories="TmV4dGZsb3c=" data-listing-date-sort="1764201600000" data-listing-file-modified-sort="1793864302899" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1811">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-11-27-nextflow-foundations/index.html" class="no-external">Nextflow foundations</a>
+<a href="./posts/2025-11-27-nextflow-foundations/index.html" class="no-external-icon">Nextflow foundations</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-11-27-nextflow-foundations/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
@@ -723,7 +670,7 @@ Mahesh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-11-27-nextflow-foundations/index.html" class="no-external">
+<a href="./posts/2025-11-27-nextflow-foundations/index.html" class="no-external-icon">
 <div class="listing-date">
 Nov 27, 2025
 </div>
@@ -733,14 +680,11 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="UGl4aSUyQ0hQQyUyQ1NlY3VyZSUyMERhdGElMjBFbnZpcm9ubWVudA==" data-listing-date-sort="1762992000000" data-listing-file-modified-sort="1792757461612" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="2" data-listing-word-count-sort="382">
+<div class="quarto-post image-right" data-index="16" data-categories="UGl4aSUyQ0hQQyUyQ1NlY3VyZSUyMERhdGElMjBFbnZpcm9ubWVudA==" data-listing-date-sort="1762992000000" data-listing-file-modified-sort="1793864302899" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="2" data-listing-word-count-sort="382">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-11-13-pixi-tools-offline/index.html" class="no-external">Pixi tools on HPC centers</a>
+<a href="./posts/2025-11-13-pixi-tools-offline/index.html" class="no-external-icon">Pixi tools on HPC centers</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-11-13-pixi-tools-offline/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('UGl4aQ=='); return false;">Pixi</div>
@@ -752,7 +696,7 @@ Mahesh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-11-13-pixi-tools-offline/index.html" class="no-external">
+<a href="./posts/2025-11-13-pixi-tools-offline/index.html" class="no-external-icon">
 <div class="listing-date">
 Nov 13, 2025
 </div>
@@ -762,14 +706,11 @@ Pavlin
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-categories="RG9ja2VyJTJDQ29udGFpbmVycyUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50" data-listing-date-sort="1761177600000" data-listing-file-modified-sort="1792757461612" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2284">
+<div class="quarto-post image-right" data-index="17" data-categories="RG9ja2VyJTJDQ29udGFpbmVycyUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50" data-listing-date-sort="1761177600000" data-listing-file-modified-sort="1793864302899" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2284">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-10-23-introduction-to-docker/index.html" class="no-external">Introduction to Docker</a>
+<a href="./posts/2025-10-23-introduction-to-docker/index.html" class="no-external-icon">Introduction to Docker</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-10-23-introduction-to-docker/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('RG9ja2Vy'); return false;">Docker</div>
@@ -781,7 +722,7 @@ Pavlin
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-10-23-introduction-to-docker/index.html" class="no-external">
+<a href="./posts/2025-10-23-introduction-to-docker/index.html" class="no-external-icon">
 <div class="listing-date">
 Oct 23, 2025
 </div>
@@ -791,14 +732,11 @@ Martin Dahlö &amp; Björn Viklund
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-categories="RG9ja2VyJTJDR2l0SHViJTJDU2VxZXJh" data-listing-date-sort="1749513600000" data-listing-file-modified-sort="1792757461611" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="4" data-listing-word-count-sort="709">
+<div class="quarto-post image-right" data-index="18" data-categories="RG9ja2VyJTJDR2l0SHViJTJDU2VxZXJh" data-listing-date-sort="1749513600000" data-listing-file-modified-sort="1793864302898" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="4" data-listing-word-count-sort="709">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-06-10-container-registry-intro/index.html" class="no-external">Introduction to Container Registries</a>
+<a href="./posts/2025-06-10-container-registry-intro/index.html" class="no-external-icon">Introduction to Container Registries</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-06-10-container-registry-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('RG9ja2Vy'); return false;">Docker</div>
@@ -810,7 +748,7 @@ Martin Dahlö &amp; Björn Viklund
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-06-10-container-registry-intro/index.html" class="no-external">
+<a href="./posts/2025-06-10-container-registry-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 Jun 10, 2025
 </div>
@@ -820,14 +758,11 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-categories="VGVybWluYWwlMkNRdWFydG8lMkNOYW5vJTJDTWFjT1MlMkNOZXh0ZmxvdyUyQ0NvbmRhJTJDUGFjTWFuJTJDUiUyQ0RhcmRlbCUyQ1ZTQ29kZSUyQ1RpcHMlMjBhbmQlMjBUcmlja3M=" data-listing-date-sort="1748304000000" data-listing-file-modified-sort="1792757461611" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1687">
+<div class="quarto-post image-right" data-index="19" data-categories="VGVybWluYWwlMkNRdWFydG8lMkNOYW5vJTJDTWFjT1MlMkNOZXh0ZmxvdyUyQ0NvbmRhJTJDUGFjTWFuJTJDUiUyQ0RhcmRlbCUyQ1ZTQ29kZSUyQ1RpcHMlMjBhbmQlMjBUcmlja3M=" data-listing-date-sort="1748304000000" data-listing-file-modified-sort="1793864302898" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1687">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-05-27-various-tips-and-tricks/index.html" class="no-external">Various Tips and Tricks</a>
+<a href="./posts/2025-05-27-various-tips-and-tricks/index.html" class="no-external-icon">Various Tips and Tricks</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-05-27-various-tips-and-tricks/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('VGVybWluYWw='); return false;">Terminal</div>
@@ -855,7 +790,7 @@ Mahesh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-05-27-various-tips-and-tricks/index.html" class="no-external">
+<a href="./posts/2025-05-27-various-tips-and-tricks/index.html" class="no-external-icon">
 <div class="listing-date">
 May 27, 2025
 </div>
@@ -865,14 +800,11 @@ Miguel , Lucile , Lizel , Abu , Amrei , André , Matilda , Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-categories="TmV4dGZsb3c=" data-listing-date-sort="1747094400000" data-listing-file-modified-sort="1792757461610" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1532">
+<div class="quarto-post image-right" data-index="20" data-categories="TmV4dGZsb3c=" data-listing-date-sort="1747094400000" data-listing-file-modified-sort="1793864302898" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1532">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-05-13-nextflow-when-to-use/index.html" class="no-external">When to use Nextflow?</a>
+<a href="./posts/2025-05-13-nextflow-when-to-use/index.html" class="no-external-icon">When to use Nextflow?</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-05-13-nextflow-when-to-use/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
@@ -880,7 +812,7 @@ Miguel , Lucile , Lizel , Abu , Amrei , André , Matilda , Mahesh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-05-13-nextflow-when-to-use/index.html" class="no-external">
+<a href="./posts/2025-05-13-nextflow-when-to-use/index.html" class="no-external-icon">
 <div class="listing-date">
 May 13, 2025
 </div>
@@ -890,14 +822,11 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-categories="U1NI" data-listing-date-sort="1744675200000" data-listing-file-modified-sort="1792757461610" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1824">
+<div class="quarto-post image-right" data-index="21" data-categories="U1NI" data-listing-date-sort="1744675200000" data-listing-file-modified-sort="1793864302898" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1824">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-04-15-ssh-config-intro/index.html" class="no-external">Introduction to SSH Config and Tunneling</a>
+<a href="./posts/2025-04-15-ssh-config-intro/index.html" class="no-external-icon">Introduction to SSH Config and Tunneling</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-04-15-ssh-config-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('U1NI'); return false;">SSH</div>
@@ -905,7 +834,7 @@ Mahesh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-04-15-ssh-config-intro/index.html" class="no-external">
+<a href="./posts/2025-04-15-ssh-config-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 Apr 15, 2025
 </div>
@@ -915,14 +844,11 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="22" data-categories="R2l0SHViJTJDRG9jdW1lbnRhdGlvbiUyQ1NlbGYtcHJvbW90aW9u" data-listing-date-sort="1742256000000" data-listing-file-modified-sort="1792757461609" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1014">
+<div class="quarto-post image-right" data-index="22" data-categories="R2l0SHViJTJDRG9jdW1lbnRhdGlvbiUyQ1NlbGYtcHJvbW90aW9u" data-listing-date-sort="1742256000000" data-listing-file-modified-sort="1793864302897" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1014">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-03-18-github-readmes/index.html" class="no-external">README’s in GitHub</a>
+<a href="./posts/2025-03-18-github-readmes/index.html" class="no-external-icon">README’s in GitHub</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-03-18-github-readmes/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('R2l0SHVi'); return false;">GitHub</div>
@@ -934,7 +860,7 @@ Mahesh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-03-18-github-readmes/index.html" class="no-external">
+<a href="./posts/2025-03-18-github-readmes/index.html" class="no-external-icon">
 <div class="listing-date">
 Mar 18, 2025
 </div>
@@ -944,14 +870,11 @@ Amrei
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="23" data-categories="VlNDb2RlJTJDUmVtb3RlJTIwZGV2ZWxvcG1lbnQlMkNJREU=" data-listing-date-sort="1739836800000" data-listing-file-modified-sort="1792757461608" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="3" data-listing-word-count-sort="476">
+<div class="quarto-post image-right" data-index="23" data-categories="VlNDb2RlJTJDUmVtb3RlJTIwZGV2ZWxvcG1lbnQlMkNJREU=" data-listing-date-sort="1739836800000" data-listing-file-modified-sort="1793864302896" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="3" data-listing-word-count-sort="476">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-02-18-vscode-intro/index.html" class="no-external">Introduction to VSCode</a>
+<a href="./posts/2025-02-18-vscode-intro/index.html" class="no-external-icon">Introduction to VSCode</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-02-18-vscode-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('VlNDb2Rl'); return false;">VSCode</div>
@@ -963,7 +886,7 @@ Amrei
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-02-18-vscode-intro/index.html" class="no-external">
+<a href="./posts/2025-02-18-vscode-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 Feb 18, 2025
 </div>
@@ -973,14 +896,11 @@ Cormac
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="24" data-categories="UGl4aSUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50JTJDQ29tbWFuZCUyMHJ1bm5lcg==" data-listing-date-sort="1737417600000" data-listing-file-modified-sort="1792757461608" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="4" data-listing-word-count-sort="800">
+<div class="quarto-post image-right" data-index="24" data-categories="UGl4aSUyQ1BhY2thZ2UlMjBtYW5hZ2VtZW50JTJDQ29tbWFuZCUyMHJ1bm5lcg==" data-listing-date-sort="1737417600000" data-listing-file-modified-sort="1793864302896" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="4" data-listing-word-count-sort="800">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external">Introduction to Pixi</a>
+<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external-icon">Introduction to Pixi</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('UGl4aQ=='); return false;">Pixi</div>
@@ -992,7 +912,7 @@ Cormac
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external">
+<a href="./posts/2025-01-21-pixi-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 Jan 21, 2025
 </div>
@@ -1002,14 +922,11 @@ Mahesh , Amrei
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="25" data-categories="QXBwdGFpbmVyJTJDU2luZ3VsYXJpdHklMkNDb250YWluZXJzJTJDUGFja2FnZSUyMG1hbmFnZW1lbnQ=" data-listing-date-sort="1717459200000" data-listing-file-modified-sort="1792757461608" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="4" data-listing-word-count-sort="776">
+<div class="quarto-post image-right" data-index="25" data-categories="QXBwdGFpbmVyJTJDU2luZ3VsYXJpdHklMkNDb250YWluZXJzJTJDUGFja2FnZSUyMG1hbmFnZW1lbnQ=" data-listing-date-sort="1717459200000" data-listing-file-modified-sort="1793864302896" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="4" data-listing-word-count-sort="776">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external">Introduction to Apptainer</a>
+<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external-icon">Introduction to Apptainer</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('QXBwdGFpbmVy'); return false;">Apptainer</div>
@@ -1023,7 +940,7 @@ Mahesh , Amrei
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external">
+<a href="./posts/2024-06-04-apptainer-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 Jun 4, 2024
 </div>
@@ -1033,14 +950,11 @@ Cormac
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="26" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZyUyQ0NvbmZsdWVuY2U=" data-listing-date-sort="1715644800000" data-listing-file-modified-sort="1792757461601" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="4" data-listing-word-count-sort="788">
+<div class="quarto-post image-right" data-index="26" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZyUyQ0NvbmZsdWVuY2U=" data-listing-date-sort="1715644800000" data-listing-file-modified-sort="1793864302891" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="4" data-listing-word-count-sort="788">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external">Quarto to Confluence</a>
+<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external-icon">Quarto to Confluence</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('UXVhcnRv'); return false;">Quarto</div>
@@ -1052,7 +966,7 @@ Cormac
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external">
+<a href="./posts/2024-05-14-quarto-to-confluence/index.html" class="no-external-icon">
 <div class="listing-date">
 May 14, 2024
 </div>
@@ -1062,14 +976,11 @@ Tomas
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="27" data-categories="R2l0JTJDR2l0SHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNHaXRwb2Q=" data-listing-date-sort="1715040000000" data-listing-file-modified-sort="1792757461601" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="5" data-listing-word-count-sort="977">
+<div class="quarto-post image-right" data-index="27" data-categories="R2l0JTJDR2l0SHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNHaXRwb2Q=" data-listing-date-sort="1715040000000" data-listing-file-modified-sort="1793864302891" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="5" data-listing-word-count-sort="977">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external">Introduction to Gitpod</a>
+<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external-icon">Introduction to Gitpod</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('R2l0'); return false;">Git</div>
@@ -1083,7 +994,7 @@ Tomas
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external">
+<a href="./posts/2024-05-07-gitpod-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 May 7, 2024
 </div>
@@ -1093,14 +1004,11 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="28" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZw==" data-listing-date-sort="1713225600000" data-listing-file-modified-sort="1792757461601" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1281">
+<div class="quarto-post image-right" data-index="28" data-categories="UXVhcnRvJTJDTGl0ZXJhdGUlMjBwcm9ncmFtbWluZw==" data-listing-date-sort="1713225600000" data-listing-file-modified-sort="1793864302891" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1281">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external">Introduction to Quarto</a>
+<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external-icon">Introduction to Quarto</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('UXVhcnRv'); return false;">Quarto</div>
@@ -1110,7 +1018,7 @@ Mahesh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external">
+<a href="./posts/2024-04-16-quarto-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 Apr 16, 2024
 </div>
@@ -1120,14 +1028,11 @@ Per
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="29" data-categories="R2l0JTJDVmVyc2lvbiUyMGNvbnRyb2w=" data-listing-date-sort="1710806400000" data-listing-file-modified-sort="1792757461601" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
+<div class="quarto-post image-right" data-index="29" data-categories="R2l0JTJDVmVyc2lvbiUyMGNvbnRyb2w=" data-listing-date-sort="1710806400000" data-listing-file-modified-sort="1793864302891" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1104">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2024-03-19-git-intro/index.html" class="no-external">Introduction to Git</a>
+<a href="./posts/2024-03-19-git-intro/index.html" class="no-external-icon">Introduction to Git</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2024-03-19-git-intro/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('R2l0'); return false;">Git</div>
@@ -1137,7 +1042,7 @@ Per
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2024-03-19-git-intro/index.html" class="no-external">
+<a href="./posts/2024-03-19-git-intro/index.html" class="no-external-icon">
 <div class="listing-date">
 Mar 19, 2024
 </div>
@@ -1147,14 +1052,11 @@ Mahesh
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="30" data-categories="R2l0JTJDR2l0SHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNDb2xsYWJvcmF0aW9u" data-listing-date-sort="1710201600000" data-listing-file-modified-sort="1792757461601" data-listing-date-modified-sort="1792757461000" data-listing-reading-time-sort="5" data-listing-word-count-sort="883">
+<div class="quarto-post image-right" data-index="30" data-categories="R2l0JTJDR2l0SHViJTJDVmVyc2lvbiUyMGNvbnRyb2wlMkNDb2xsYWJvcmF0aW9u" data-listing-date-sort="1710201600000" data-listing-file-modified-sort="1793864302891" data-listing-date-modified-sort="1793864302000" data-listing-reading-time-sort="5" data-listing-word-count-sort="883">
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external">Collaboration on GitHub</a>
+<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external-icon">Collaboration on GitHub</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('R2l0'); return false;">Git</div>
@@ -1168,7 +1070,7 @@ Mahesh
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external">
+<a href="./posts/2024-03-12-github-collaboration/index.html" class="no-external-icon">
 <div class="listing-date">
 Mar 12, 2024
 </div>
@@ -1262,7 +1164,8 @@ Mahesh
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1271,8 +1174,69 @@ Mahesh
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1286,6 +1250,7 @@ Mahesh
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1448,44 +1413,54 @@ Mahesh
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1583,6 +1558,9 @@ Mahesh
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 
