@@ -4,6 +4,8 @@ Dates for each walkthrough, listed in reverse chronological order.
 Meetings are over Zoom, Thursdays at 10.00. Meeting links are
 provided in NBIS Slack `#tech-group-rse-tools`.
 
+- 2027/01/28: Amrei - Closeread: Scrollytelling with Quarto
+- 2026/12/24: _Break for Winter_
 - 2026/12/10: Andrei - Introduction to Tidy Models
 - 2026/11/26: Henrike - Best practices in Software Development
 - 2026/11/12: Leslie - Data Visualisation for Publication using Python
